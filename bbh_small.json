@@ -1,0 +1,118 @@
+{
+  "template": "w4_r1000_e10",
+  "world": {
+    "chunkEdgeLengthMeters": 50,
+    "snapshots": {
+      "snapshotWritePeriodSeconds": 0
+    },
+    "dimensions": {
+      "xMeters": 300,
+      "zMeters": 300
+    }
+  },
+  "load_balancing": {
+    "layer_configurations": [
+      {
+        "layer": "UnityGameLogic",
+        "rectangle_grid": {
+          "cols": 1,
+          "rows": 1
+        }
+      }
+    ]
+  },
+  "workers": [
+    {
+      "worker_type": "UnityGameLogic",
+      "connection_capacity_limit": {
+        "max_capacity": 100
+      },"login_rate_limit": {
+      "duration": "1s",
+      "requests_per_duration": 10
+      },
+      "flags": [
+        {
+          "name": "world_size",
+          "value": "4"
+        },
+        {
+          "name": "auction_seconds",
+          "value": "180"
+        },
+        {
+          "name": "run_auctions",
+          "value": "false"
+        },
+        {
+          "name": "spawns_per_auction",
+          "value": "6"
+        },
+        {
+          "name": "bounty_per_tick",
+          "value": "0.05"
+        },
+        {
+          "name": "time_per_bountyTick",
+          "value": "5"
+        },
+        {
+          "name": "subsidize_game",
+          "value": "false"
+        },
+        {
+          "name": "subsidy_per_min",
+          "value": "100"
+        },
+        {
+          "name": "ln_channel_cost",
+          "value": "1000"
+        },
+        {
+          "name": "ln_target_conf",
+          "value": "2"
+        },
+        {
+          "name": "ln_channel_size",
+          "value": "25000"
+        }
+      ],
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
+    },
+    {
+      "worker_type": "UnityClient",
+      "flags": [
+        {
+          "name": "world_size",
+          "value": "4"
+        },
+        {
+          "name": "ln_channel_cost",
+          "value": "1000"
+        }
+      ],
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
+    },
+    {
+      "worker_type": "MobileClient",
+      "flags": [
+        {
+          "name": "world_size",
+          "value": "4"
+        }
+      ],
+      "permissions": [
+        {
+          "all": {}
+        }
+      ]
+    }
+  ]
+}
