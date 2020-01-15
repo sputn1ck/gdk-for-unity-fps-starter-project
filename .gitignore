@@ -48,3 +48,17 @@ schema/from_gdk_packages
 _ReSharper.Caches
 
 .shared-ci/
+
+
+workers/unity/[Ll]ibrary/*
+!workers/unity/[Ll]ibrary/
+!workers/unity/[Ll]ibrary/.gitkeep
+!workers/unity/Library/PackageCache/
+workers/unity/Library/PackageCache/*
+!workers/unity/Library/PackageCache/.gitkeep
+workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/*
+!workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/
+!workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/.gitkeep
+
+!workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/System.Runtime.CompilerServices.Unsafe.dll
+!workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/System.Runtime.CompilerServices.Unsafe.dll.meta

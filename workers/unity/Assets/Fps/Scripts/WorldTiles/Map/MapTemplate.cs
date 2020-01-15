@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Fps.WorldTiles;
 using UnityEngine;
@@ -9,10 +9,11 @@ namespace Fps.WorldTiles
     [CreateAssetMenu(fileName = "MapTemplate", menuName = "Improbable/Map Template")]
     public class MapTemplate : ScriptableObject
     {
-        [SerializeField] internal Texture2D templateBitmap;
-        [SerializeField] internal TileTypeCollection[] tileCollections;
-        [SerializeField] internal TileTypeCollection defaultTileCollection;
-        [SerializeField] internal float unitSize = 1;
+        [SerializeField] public Texture2D templateBitmap;
+        [SerializeField] public TileTypeCollection[] tileCollections;
+        [SerializeField] public TileTypeCollection defaultTileCollection;
+        [SerializeField] public float unitSize = 1;
+        
 
         private readonly Dictionary<Color32, TileTypeCollection> tileLookup =
             new Dictionary<Color32, TileTypeCollection>();
