@@ -1,7 +1,7 @@
-using Fps.WorkerConnectors;
 using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FlagManager : MonoBehaviour
@@ -17,7 +17,11 @@ public class FlagManager : MonoBehaviour
     public long defaultChannelCost;
     public long defaultChannelSize;
     public int defaultTargetConf;
-    
+    public string defaultMonitoringPassword;
+    public int defaultMinCubesPerSpawn;
+    public int defaultMaxCubesPerSpawn;
+    public long defaultMinSatsForDonationAnnouncement;
+
     private Worker worker;
 
     private const string auctionSeconds = "auction_seconds";
@@ -30,11 +34,25 @@ public class FlagManager : MonoBehaviour
     private const string lnChannelCostFlag = "ln_channel_cost";
     private const string lnTargetConfFlag = "ln_target_conf";
     private const string lnChannelSizeFlag = "ln_channel_size";
+    private const string prometheusPasswordFlag = "monitoring_password";
+
+    private const string minCubesPerSpawnFlag = "min_cubes";
+    private const string maxCubesPerSpawnFlag = "max_cubes";
+    private const string minSatsForDonationAnnouncementFlag = "min_sats_for_donation_announcement";
+
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
-        GetComponent<GameLogicWorkerConnector>().OnWorkerCreationFinished += FlagManager_OnWorkerCreationFinished;
+       
         instance = this;
+        var tmp = GetComponent<GameLogicWorkerConnector>();
+        if(tmp == null)
+        {
+            Debug.Log("no worker connector");
+        }else
+        {
+            tmp.OnWorkerCreationFinished += FlagManager_OnWorkerCreationFinished;
+        }
     }
 
     private void FlagManager_OnWorkerCreationFinished(Worker obj)
@@ -115,5 +133,33 @@ public class FlagManager : MonoBehaviour
         if (long.TryParse(worker.GetWorkerFlag(lnChannelSizeFlag), out channelSize))
             return channelSize;
         return defaultChannelSize;
+    }
+    public string GetMonitoringPassword()
+    {
+        string password = worker.GetWorkerFlag(prometheusPasswordFlag);
+        if (password != null)
+            return password;
+        return defaultMonitoringPassword;
+    }
+    public int GetMinSpawns()
+    {
+        int minSpawns;
+        if (int.TryParse(worker.GetWorkerFlag(minCubesPerSpawnFlag), out minSpawns))
+            return minSpawns;
+        return defaultMinCubesPerSpawn;
+    }
+    public int GetMaxSpawns()
+    {
+        int maxSpawns;
+        if (int.TryParse(worker.GetWorkerFlag(maxCubesPerSpawnFlag), out maxSpawns))
+            return maxSpawns;
+        return defaultMaxCubesPerSpawn;
+    }
+    public long GetMinSatsForDonationAnnouncement()
+    {
+        long minSatsForDonationAnnouncement;
+        if (long.TryParse(worker.GetWorkerFlag(minSatsForDonationAnnouncementFlag), out minSatsForDonationAnnouncement))
+            return minSatsForDonationAnnouncement;
+        return defaultMinSatsForDonationAnnouncement;
     }
 }

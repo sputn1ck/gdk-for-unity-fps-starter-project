@@ -13,7 +13,7 @@ namespace Fps.WorkerConnectors
 
         [SerializeField] protected MapTemplate mapTemplate;
 
-        [NonSerialized] internal GameObject LevelInstance;
+        [NonSerialized] public GameObject LevelInstance;
 
         protected abstract IConnectionHandlerBuilder GetConnectionHandlerBuilder();
 

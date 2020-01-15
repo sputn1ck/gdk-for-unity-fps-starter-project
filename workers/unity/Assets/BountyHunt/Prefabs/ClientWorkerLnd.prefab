@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2466744334126222726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2466744334126222728}
+  - component: {fileID: 2170151326913480154}
+  - component: {fileID: 812099622420160741}
+  - component: {fileID: 6155843011314803828}
+  - component: {fileID: 3231388491131628992}
+  - component: {fileID: 8317162651777497984}
+  - component: {fileID: 8932650709854373229}
+  - component: {fileID: 6882851908204537564}
+  - component: {fileID: 3756189763960350964}
+  m_Layer: 0
+  m_Name: ClientWorkerLnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2466744334126222728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 912.5, y: 762.22217, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2170151326913480154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d92a39143020348b87a37667db658e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsValid: 0
+--- !u!114 &812099622420160741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de307f2f2561c249b4f93dc94b974c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunId: 0
+  connectLocal: 0
+  host: http://167.172.175.172:5111
+  playername: bob
+  pit: 
+  deploymentId: 
+  loginToken: 
+  getPitTrigger: 0
+  listDeploymentsTrigger: 0
+  loginTokenTrigger: 0
+  connectTrigger: 0
+  spawnPlayerTrigger: 0
+  doAllTrigger: 0
+  ClientWorkerConnectorPrefab: {fileID: 2049478701278950836, guid: 4394a34e02f6d0a4e8ca0b613fd1cc97,
+    type: 3}
+  Manager: {fileID: 0}
+  pubkey: 
+  mainMenu: {fileID: 0}
+  uiManager: {fileID: 0}
+  clientConnector: {fileID: 0}
+  deploymentList:
+    deployments: []
+--- !u!114 &6155843011314803828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78dad89147db8834b82734b95ef62e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confName: 
+  UseDummy: 0
+  UseApdata: 0
+--- !u!114 &3231388491131628992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a84c961d4330e42b2023bd97637017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMapLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onGameJoined:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onNewAuctionStarted:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &8317162651777497984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730717b5b7f0719428991bd30e2dbec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  command: 
+  commandTrigger: 0
+--- !u!114 &8932650709854373229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aad95931e099fa438ca3e047629a0be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChannelCost: 1000
+--- !u!114 &6882851908204537564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa9dc67ccfd7004e918f803704504b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bountyPickupMaterialSettings: {fileID: 11400000, guid: b51c515cb2c889b45a49a4b2ff47a40a,
+    type: 2}
+--- !u!114 &3756189763960350964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d177fe8fd6b0ed44bbdd5275c37e222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genericIRC: 0
+  oauth: 
+  nickName: 
+  channelName: 
+  server: irc.twitch.tv
+  connectTrigger: 0
+  isConnected: 0
