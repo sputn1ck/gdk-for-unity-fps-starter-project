@@ -1,11 +1,11 @@
 package bountyhunt;
 
-import "bountyhunt/common.schema"
+import "bountyhunt/common.schema";
 
 component BountyComponent {
     id = 420001;
     int64 bounty = 1;
-    command bountyhunt.empty add_bounty(AddBountyRequest)
+    command bountyhunt.Empty add_bounty(AddBountyRequest);
 }
 
 type AddBountyRequest {
