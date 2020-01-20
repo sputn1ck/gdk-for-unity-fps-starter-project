@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -70,6 +70,7 @@ namespace Fps.WorldTiles
             root.GetComponentsInChildren<MeshFilter>(cachedFilters);
             foreach (var meshFilter in cachedFilters)
             {
+                if (meshFilter.gameObject.tag == "IgnoreMeshCollapse") continue;
                 var meshRenderer = meshFilter.GetComponent<MeshRenderer>();
                 if (meshFilter.sharedMesh == null)
                 {

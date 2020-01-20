@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -31,18 +31,34 @@ namespace Fps.WorldTiles
         private void DestroyMeshRenderers(GameObject tile)
         {
             tile.GetComponentsInChildren<MeshRenderer>(renderComponentsCache);
+
+            for (int i = renderComponentsCache.Count - 1; i >= 0; i--)
+            {
+                if (renderComponentsCache[i].gameObject.tag == "IgnoreMeshCollapse")
+                {
+                    renderComponentsCache.RemoveAt(i);
+                }
+            }
             foreach (var meshRenderer in renderComponentsCache)
             {
                 Object.DestroyImmediate(meshRenderer);
             }
 
             tile.GetComponentsInChildren<MeshFilter>(filterComponentsCache);
+
+            for (int i = filterComponentsCache.Count - 1; i >= 0; i--)
+            {
+                if (filterComponentsCache[i].gameObject.tag == "IgnoreMeshCollapse")
+                {
+                    filterComponentsCache.RemoveAt(i);
+                }
+            }
+
             foreach (var meshFilter in filterComponentsCache)
             {
                 Object.DestroyImmediate(meshFilter);
             }
         }
-
         private void ApplyCollapsed(GameObject tile)
         {
             var mf = tile.gameObject.AddComponent<MeshFilter>();
