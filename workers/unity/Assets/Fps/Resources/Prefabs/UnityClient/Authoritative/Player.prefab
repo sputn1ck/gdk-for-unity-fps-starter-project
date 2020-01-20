@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114775314640606656}
   - component: {fileID: 114781168066614706}
   - component: {fileID: 114668275430029928}
-  - component: {fileID: 6189359447376685454}
+  - component: {fileID: 7344274461009030805}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -437,19 +437,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8882a78e7c8b4134d9c24eed88fc7167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6189359447376685454
+--- !u!114 &7344274461009030805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627949407420470}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f43b5754d83d55b4faf9857f360335c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e74b3a8f035dcb49a0dd1f5d5f2dbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitmarkerSound: {fileID: 8300000, guid: 5893d5274d2be024d87acdfdcd10971f, type: 3}
 --- !u!1001 &898400276755741151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -516,6 +515,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000210505865880527, guid: 2a8d33357edd45e48a205097b34fc6e0,
+        type: 3}
+      propertyPath: m_AfterStackBundles.Array.data[0].assemblyQualifiedName
+      value: Fps.UI.LowHealthVignette, Improbable.Fps, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a8d33357edd45e48a205097b34fc6e0, type: 3}
