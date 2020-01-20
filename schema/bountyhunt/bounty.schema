@@ -8,6 +8,12 @@ component BountyComponent {
     command bountyhunt.Empty add_bounty(AddBountyRequest);
 }
 
+component BountyPickup {
+    id = 420002;
+    bool is_active = 1;
+    int64 bounty_value = 2;
+}
+
 type AddBountyRequest {
     int64 amount = 1;
     BountyReason reason = 2;
