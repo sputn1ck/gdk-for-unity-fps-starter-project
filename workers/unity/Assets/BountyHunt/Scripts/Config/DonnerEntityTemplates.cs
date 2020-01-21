@@ -81,6 +81,17 @@ public class DonnerEntityTemplates
 
         var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery);
         var interestComponent = interestTemplate.ToSnapshot();
+
+        // NEW STUFF
+
+        var bountyComponent = new BountyComponent.Snapshot()
+        {
+            Bounty = 0
+        };
+        var hunterComponent = new HunterComponent.Snapshot()
+        {
+            Earnings = 0
+        };
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
@@ -115,6 +126,11 @@ public class DonnerEntityTemplates
         template.AddComponent(healthComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(healthRegenComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(interestComponent, WorkerUtils.UnityGameLogic);
+
+        // NEW STUFF
+
+        template.AddComponent(bountyComponent, WorkerUtils.UnityGameLogic);
+        template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);
@@ -196,4 +212,19 @@ public class DonnerEntityTemplates
 
         return entityTemplate;
     }*/
+
+    public static EntityTemplate GameManager(Vector3 position)
+    {
+        var boutySpawnerComponent = new BountySpawner.Snapshot();
+
+        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(boutySpawnerComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
+        entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
+
+        return entityTemplate;
+    }
 }

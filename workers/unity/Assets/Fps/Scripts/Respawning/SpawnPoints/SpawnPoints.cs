@@ -79,7 +79,7 @@ namespace Fps.Respawning
             return gameObjects;
         }
 
-        private Vector3 SnapToGround(Vector3 position)
+        public static Vector3 SnapToGround(Vector3 position)
         {
             LayerMask allLayerMask = ~0;
             if (Physics.Raycast(new Ray(position, Vector3.down), out var hitInfo, 100f,

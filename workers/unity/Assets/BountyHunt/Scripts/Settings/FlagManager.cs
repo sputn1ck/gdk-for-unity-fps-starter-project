@@ -45,7 +45,7 @@ public class FlagManager : MonoBehaviour
     {
        
         instance = this;
-        var tmp = GetComponent<GameLogicWorkerConnector>();
+        var tmp = GetComponent<BBHGameLogicWorkerConnector>();
         if(tmp == null)
         {
             Debug.Log("no worker connector");

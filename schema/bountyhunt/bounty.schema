@@ -14,9 +14,19 @@ component BountyPickup {
     int64 bounty_value = 2;
 }
 
+component BountySpawner {
+    id = 420003;
+     command bountyhunt.Empty spawn_bounty_pickup(SpawnBountyPickupRequest);
+}
+
 type AddBountyRequest {
     int64 amount = 1;
     BountyReason reason = 2;
+}
+
+type SpawnBountyPickupRequest {
+    int64 bounty_value = 1;
+    bountyhunt.Vector3Float position = 2;
 }
 
 
