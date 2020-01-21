@@ -2,6 +2,7 @@ using Fps.SchemaExtensions;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Fps.Guns
 {
@@ -20,6 +21,15 @@ namespace Fps.Guns
         private Vector3 workerOrigin;
 
         private bool IsOnCooldown => nextShotTime > Time.time;
+
+        //BBH
+        public static ClientShooting instance;
+        public UnityEvent OnPlayerHit;
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         private void OnEnable()
         {
@@ -83,6 +93,10 @@ namespace Fps.Guns
                 if (spatialEntity != null)
                 {
                     entityId = spatialEntity.EntityId;
+                    if (spatialEntity.CompareTag("Player"))
+                    {
+                        OnPlayerHit.Invoke();
+                    }
                 }
             }
 

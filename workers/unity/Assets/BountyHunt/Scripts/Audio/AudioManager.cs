@@ -7,9 +7,9 @@ public class AudioManager : MonoBehaviour
 {
 
     public AudioObject audioObjectPrefab;
+    public AudioObject audioObject2DPrefab;
     public static AudioManager instance;
     public AudioMixer mixer;
-    public AudioSource hitMarkerAS;
 
     Dictionary<VolumeType, VolumeKeys> keys;
 
@@ -50,6 +50,12 @@ public class AudioManager : MonoBehaviour
         ao.Play(clip);
     }
 
+    public void spawn2DSound(AudioClip clip)
+    {
+        AudioObject ao = Instantiate(audioObject2DPrefab);
+        ao.Play(clip);
+    }
+
     public void SetVolume(VolumeType type, float value)
     {
         PlayerPrefs.SetFloat(keys[type].playerPrefsKey, value);
@@ -74,12 +80,6 @@ public class AudioManager : MonoBehaviour
     void OnGameJoined()
     {
         Destroy(GetComponent<AudioListener>());
-        //ClientShooting.instance.OnHitEnemy.AddListener(PlayHitmarkerSound);
-    }
-
-    public void PlayHitmarkerSound()
-    {
-        hitMarkerAS.Play();
     }
 
 
