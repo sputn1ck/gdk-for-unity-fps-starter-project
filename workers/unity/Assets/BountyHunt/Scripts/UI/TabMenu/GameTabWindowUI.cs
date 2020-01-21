@@ -31,6 +31,8 @@ public class GameTabWindowUI : TabMenuWindowUI
     DateTime AuctionEndTime;
     Auction currentAuction = null;
     AuctionEntry currentBid = null;
+
+    //TODO
     /*
     public void Start()
     {

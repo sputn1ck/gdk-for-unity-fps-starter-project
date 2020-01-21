@@ -28,6 +28,7 @@ public class QuitTabWindowUI : TabMenuWindowUI
 
     public void payOutAllEarnings()
     {
+        //TODO
         //PlayerNode.instance.TryPayoutAll();
     }
 }
