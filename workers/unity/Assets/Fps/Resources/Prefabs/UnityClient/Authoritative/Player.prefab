@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114775314640606656}
   - component: {fileID: 114781168066614706}
   - component: {fileID: 114668275430029928}
-  - component: {fileID: 6189359447376685454}
+  - component: {fileID: 7344274461009030805}
   - component: {fileID: 8152197903544058549}
   m_Layer: 11
   m_Name: Player
@@ -450,7 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e74b3a8f035dcb49a0dd1f5d5f2dbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitmarkerSound: {fileID: 8300000, guid: 5893d5274d2be024d87acdfdcd10971f, type: 3}
 --- !u!114 &8152197903544058549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,11 +469,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4323650176391204}
     m_Modifications:
-    - target: {fileID: 896626365763983101, guid: 2a8d33357edd45e48a205097b34fc6e0,
-        type: 3}
-      propertyPath: m_Name
-      value: FirstPersonCamera
-      objectReference: {fileID: 0}
     - target: {fileID: 893921381858113093, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -530,6 +524,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 896626365763983101, guid: 2a8d33357edd45e48a205097b34fc6e0,
+        type: 3}
+      propertyPath: m_Name
+      value: FirstPersonCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 1000210505865880527, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
       propertyPath: m_AfterStackBundles.Array.data[0].assemblyQualifiedName
@@ -557,11 +556,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4620716434285874}
     m_Modifications:
-    - target: {fileID: 1620896566736479575, guid: 99c1c836e4262284d9b458f03442a4f6,
-        type: 3}
-      propertyPath: m_Name
-      value: FirstPersonModel
-      objectReference: {fileID: 0}
     - target: {fileID: 1371366245061083600, guid: 99c1c836e4262284d9b458f03442a4f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,6 +610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620896566736479575, guid: 99c1c836e4262284d9b458f03442a4f6,
+        type: 3}
+      propertyPath: m_Name
+      value: FirstPersonModel
       objectReference: {fileID: 0}
     - target: {fileID: 6108130638274169511, guid: 99c1c836e4262284d9b458f03442a4f6,
         type: 3}
