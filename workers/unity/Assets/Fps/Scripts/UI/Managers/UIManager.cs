@@ -29,7 +29,6 @@ namespace Fps.UI
         private void Start()
         {
             ShowFrontEnd();
-            InGameManager.QuitButton.onClick.AddListener(Quit);
             ScreenManager.QuitButton.onClick.AddListener(Quit);
         }
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Fps.UI
@@ -9,7 +9,6 @@ namespace Fps.UI
         public GameObject Reticle;
         public GameObject Hud;
         public GameObject EscapeScreen;
-        public Button QuitButton;
 
         public bool InEscapeMenu { private set; get; }
 
@@ -37,10 +36,6 @@ namespace Fps.UI
                 throw new MissingReferenceException("Missing reference to the escape screen.");
             }
 
-            if (QuitButton == null)
-            {
-                throw new MissingReferenceException("Missing reference to the quit button.");
-            }
         }
 
         public void OnEnable()
