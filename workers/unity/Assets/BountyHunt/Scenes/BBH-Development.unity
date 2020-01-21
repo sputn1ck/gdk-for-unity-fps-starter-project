@@ -908,28 +908,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 244b0c6fb6f9bd74f8dde89e1b03630c, type: 3}
---- !u!1 &1667369310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1455626031769568, guid: 75d29a39b8a626e42bdfc2e1d7af6746,
-    type: 3}
-  m_PrefabInstance: {fileID: 2047321256}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1667369311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667369310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a19172fbdfb8ab409828286e8f1c1df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxConnectionAttempts: 3
-  TargetFrameRate: 30
-  mapTemplate: {fileID: 0}
-  DisableRenderers: 1
 --- !u!1001 &2007593797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1036,11 +1014,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1813844307, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
-      propertyPath: defaultRunAuction
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1813844308, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
-    - {fileID: 114219126016241412, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
