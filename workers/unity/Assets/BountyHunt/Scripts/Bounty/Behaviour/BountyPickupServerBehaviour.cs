@@ -13,7 +13,7 @@ namespace Fps
     {
         [Require] private BountyPickupWriter bountyPickupWriter;
 
-        [Require] private BountyComponentCommandSender donnerInfoCommandSender;
+        [Require] private HunterComponentCommandSender hunterComponentCommandSender;
 
         [Require] private WorldCommandSender commandSender;
         [Require] private EntityId entityId;
@@ -83,7 +83,7 @@ namespace Fps
                 return;
             }
             
-            donnerInfoCommandSender.SendAddBountyCommand(playerSpatialOsComponent.EntityId, new AddBountyRequest {
+            hunterComponentCommandSender.SendAddBountyCommand(playerSpatialOsComponent.EntityId, new AddBountyRequest {
                 Reason = BountyReason.PICKUP,
                 Amount = bountyPickupWriter.Data.BountyValue,
             });

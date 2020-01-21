@@ -10,7 +10,6 @@ using Fps.Config;
 public class BountyPlayerAuthorative : MonoBehaviour
 {
 
-    [Require] BountyComponentReader BountyComponentReader;
     [Require] HunterComponentReader HunterComponentReader;
 
     private long lastBounty;
@@ -18,32 +17,30 @@ public class BountyPlayerAuthorative : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        BountyComponentReader.OnUpdate += BountyComponentReader_OnUpdate;
+        HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
         lastBounty = 0;
         lastEarnings = 0;
     }
 
-    private void HunterComponentReader_OnEarningsUpdate(long obj)
+    private void HunterComponentReader_OnEarningsUpdate(long earnings)
     {
         ClientEvents.instance.onEarningsUpdate.Invoke(new EarningsUpdateEventArgs()
         {
-            NewAmount = obj,
+            NewAmount = earnings,
             OldAmount = lastEarnings
         });
-        lastEarnings = obj;
+        lastEarnings = earnings;
     }
 
-    private void BountyComponentReader_OnUpdate(BountyComponent.Update obj)
+    private void HunterComponentReader_OnBountyUpdate(long bounty)
     {
-        if (obj.Bounty.HasValue)
-        {
             ClientEvents.instance.onBountyUpdate.Invoke(new BountyUpdateEventArgs() {
-                NewAmount = obj.Bounty.Value,
+                NewAmount = bounty,
                 OldAmount = lastBounty,
                 Reason = BountyReason.PICKUP });
-            lastBounty = obj.Bounty.Value;
-        }
+            lastBounty = bounty;
+        
         
     }
 

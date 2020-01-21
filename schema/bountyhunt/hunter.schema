@@ -4,11 +4,27 @@ import "bountyhunt/common.schema";
 
 component HunterComponent {
     id = 430001;
-    int64 earnings = 1;
+    int64 bounty = 1;
+    int64 earnings = 2;
+    command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
+}
+
+
+type AddBountyRequest {
+    int64 amount = 1;
+    BountyReason reason = 2;
 }
 
 type IncreaseEarningsRequest {
     int64 amount = 1;
 }
+
+enum BountyReason {
+    PICKUP = 0;
+    DONATION = 1;
+    GAMEMODE = 2;
+    OTHER = 3;
+}
+
 

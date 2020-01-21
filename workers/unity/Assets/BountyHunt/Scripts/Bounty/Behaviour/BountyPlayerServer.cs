@@ -10,9 +10,8 @@ using Fps.Config;
 public class BountyPlayerServer : MonoBehaviour
 {
 
-    [Require] public BountyComponentWriter BountyComponentWriter;
-    [Require] public BountyComponentCommandReceiver BountyComponentCommandReceiver;
     [Require] public HunterComponentWriter HunterComponentWriter;
+    [Require] public HunterComponentCommandReceiver HunterComponentCommandReceiver;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -22,17 +21,17 @@ public class BountyPlayerServer : MonoBehaviour
     void OnEnable()
     {
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
+        HunterComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
         ct = new CancellationTokenSource();
 
         //StartCoroutine(BountyTick());
     }
 
-    private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(BountyComponent.AddBounty.ReceivedRequest obj)
+    private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        BountyComponentWriter.SendUpdate(new BountyComponent.Update { Bounty = BountyComponentWriter.Data.Bounty + obj.Payload.Amount });
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + obj.Payload.Amount });
     }
 
 }

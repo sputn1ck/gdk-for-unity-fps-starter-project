@@ -2,12 +2,6 @@ package bountyhunt;
 
 import "bountyhunt/common.schema";
 
-component BountyComponent {
-    id = 420001;
-    int64 bounty = 1;
-    command bountyhunt.Empty add_bounty(AddBountyRequest);
-}
-
 component BountyPickup {
     id = 420002;
     bool is_active = 1;
@@ -19,22 +13,9 @@ component BountySpawner {
      command bountyhunt.Empty spawn_bounty_pickup(SpawnBountyPickupRequest);
 }
 
-type AddBountyRequest {
-    int64 amount = 1;
-    BountyReason reason = 2;
-}
-
 type SpawnBountyPickupRequest {
     int64 bounty_value = 1;
     bountyhunt.Vector3Float position = 2;
-}
-
-
-enum BountyReason {
-    PICKUP = 0;
-    DONATION = 1;
-    GAMEMODE = 2;
-    OTHER = 3;
 }
 
 

@@ -26,7 +26,6 @@ public class BountyConversionSystem : ComponentSystem
 
         conversionGroup = GetEntityQuery(
                 ComponentType.ReadWrite<HunterComponent.Component>(),
-                ComponentType.ReadWrite<BountyComponent.Component>(),
                 ComponentType.ReadOnly<SpatialEntityId>()
             );
 
@@ -51,13 +50,12 @@ public class BountyConversionSystem : ComponentSystem
         var percentage = FlagManager.instance.defaultBountyPerTick;
         Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
-            ref BountyComponent.Component bountyComponent,
             ref HunterComponent.Component hunterComponent) =>
             {
-                if (bountyComponent.Bounty == 0)
+                if (hunterComponent.Bounty == 0)
                     return;
-                var tick = calculateTick(bountyComponent.Bounty, percentage);
-                bountyComponent.Bounty = bountyComponent.Bounty - tick;
+                var tick = calculateTick(hunterComponent.Bounty, percentage);
+                hunterComponent.Bounty = hunterComponent.Bounty - tick;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;
             });
 

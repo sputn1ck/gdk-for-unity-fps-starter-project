@@ -84,13 +84,10 @@ public class DonnerEntityTemplates
 
         // NEW STUFF
 
-        var bountyComponent = new BountyComponent.Snapshot()
-        {
-            Bounty = 100
-        };
         var hunterComponent = new HunterComponent.Snapshot()
         {
-            Earnings = 0
+            Earnings = 0,
+            Bounty = 0
         };
         /*
          * OLD STUFF
@@ -128,8 +125,6 @@ public class DonnerEntityTemplates
         template.AddComponent(interestComponent, WorkerUtils.UnityGameLogic);
 
         // NEW STUFF
-
-        template.AddComponent(bountyComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
         /*
          * OLD STUFF
