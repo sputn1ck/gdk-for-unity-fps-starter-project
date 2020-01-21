@@ -26,7 +26,6 @@ namespace Fps
         }
         private void OnEnable()
         {
-            
             // If the pickup is inactive on initial checkout - turn off collisions and start the respawning process.
             if (!bountyPickupWriter.Data.IsActive)
             {

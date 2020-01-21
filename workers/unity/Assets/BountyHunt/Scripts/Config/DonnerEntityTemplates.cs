@@ -86,7 +86,7 @@ public class DonnerEntityTemplates
 
         var bountyComponent = new BountyComponent.Snapshot()
         {
-            Bounty = 0
+            Bounty = 100
         };
         var hunterComponent = new HunterComponent.Snapshot()
         {

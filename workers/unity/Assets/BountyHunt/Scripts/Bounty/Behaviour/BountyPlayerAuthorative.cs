@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
 using System.Threading;
+using Fps.Config;
 
+[WorkerType(WorkerUtils.UnityClient)]
 public class BountyPlayerAuthorative : MonoBehaviour
 {
 
@@ -42,11 +44,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
                 Reason = BountyReason.PICKUP });
             lastBounty = obj.Bounty.Value;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
+
 }
