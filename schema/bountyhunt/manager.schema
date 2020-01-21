@@ -1,0 +1,13 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component GameStats{
+    id = 440001;
+    event KillInfo gained_kill_event;
+}
+
+type KillInfo {
+    EntityId killer = 1;
+    EntityId victim = 2;
+}

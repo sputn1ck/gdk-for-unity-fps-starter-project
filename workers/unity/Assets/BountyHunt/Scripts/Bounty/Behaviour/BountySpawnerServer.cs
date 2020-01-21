@@ -6,10 +6,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Bountyhunt;
+using Fps.Config;
 
+[WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountySpawnerServer : MonoBehaviour
 {
     [Require] WorldCommandSender WorldCommandSender;
+    [Require] BountySpawnerCommandReceiver BountySpawnerCommandReceiver;
+    
 
     public int spawnAmount;
     public bool spawnTrigger;
@@ -18,7 +23,18 @@ public class BountySpawnerServer : MonoBehaviour
     void OnEnable()
     {
         cancellationToken = new CancellationTokenSource();
+        BountySpawnerCommandReceiver.OnSpawnBountyPickupRequestReceived += OnSpawnBountyPickupRequestReceived;
     }
+
+    private void OnSpawnBountyPickupRequestReceived(BountySpawner.SpawnBountyPickup.ReceivedRequest obj)
+    {
+        if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
+            return;
+        var v3 = obj.Payload.Position;
+        var pos = new Vector3(v3.X, v3.Y, v3.Z);
+        SpawnPickup(pos, obj.Payload.BountyValue);
+    }
+
     private void Start()
     {
 

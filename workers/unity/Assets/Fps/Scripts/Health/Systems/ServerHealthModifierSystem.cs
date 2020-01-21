@@ -1,6 +1,7 @@
 using Improbable.Gdk.Core;
 using Unity.Entities;
 using UnityEngine;
+using Bountyhunt;
 
 namespace Fps.Health
 {
@@ -29,6 +30,7 @@ namespace Fps.Health
             }
 
             var healthComponentData = GetComponentDataFromEntity<HealthComponent.Component>();
+            var hunterData = GetComponentDataFromEntity<HunterComponent.Component>();
             for (var i = 0; i < requests.Count; i++)
             {
                 ref readonly var request = ref requests[i];
@@ -39,7 +41,7 @@ namespace Fps.Health
                 }
 
                 var health = healthComponentData[entity];
-
+                var hunter = hunterData[entity];
                 // Skip if already dead
                 if (health.Health <= 0)
                 {
@@ -59,6 +61,7 @@ namespace Fps.Health
                 if (health.Health <= 0)
                 {
                     healthModifiedInfo.Died = true;
+                    componentUpdateSystem.SendEvent<GameStats.GainedKillEvent.Event>(new GameStats.GainedKillEvent.Event(new KillInfo(modifier.Owner, entityId)), new EntityId(2));
                 }
 
                 componentUpdateSystem.SendEvent(new HealthComponent.HealthModified.Event(healthModifiedInfo), entityId);

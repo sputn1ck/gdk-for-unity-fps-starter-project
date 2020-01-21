@@ -87,7 +87,7 @@ public class DonnerEntityTemplates
         var hunterComponent = new HunterComponent.Snapshot()
         {
             Earnings = 0,
-            Bounty = 0
+            Bounty = 100
         };
         /*
          * OLD STUFF
@@ -211,11 +211,13 @@ public class DonnerEntityTemplates
     public static EntityTemplate GameManager(Vector3 position)
     {
         var boutySpawnerComponent = new BountySpawner.Snapshot();
+        var gameStatsComponent = new GameStats.Snapshot();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(boutySpawnerComponent, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(gameStatsComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
