@@ -15,9 +15,9 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public StringEvent onUpdateSyncedState = new StringEvent();
     [HideInInspector] public StringEvent onUpdateHasChannelState = new StringEvent();
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
-    public BountyUpdateEvent onBountyUpdate;
+    [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
+    [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
 
-    public bool testTrigger;
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -30,24 +30,30 @@ public class ClientEvents : MonoBehaviour
     {
         onMapLoaded.Invoke();
     }
-    public void Update()
-    {
 
-        if (testTrigger)
-        {
-            testTrigger = false;
-            onBountyUpdate.Invoke(1, 2, Bountyhunt.BountyReason.OTHER);
-        }
-    }
 
-    public void TestEvent(long a, long b, Bountyhunt.BountyReason reason)
-    {
-        Debug.Log(a + ";" + b + ";" + reason);
-    }
 
 
 
 }
 
 [Serializable]
-public class BountyUpdateEvent : UnityEvent<long,long,Bountyhunt.BountyReason> { }
+public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
+
+[Serializable]
+public struct BountyUpdateEventArgs
+{
+    public long NewAmount;
+    public long OldAmount;
+    public Bountyhunt.BountyReason Reason;
+}
+
+[Serializable]
+public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
+
+[Serializable]
+public struct EarningsUpdateEventArgs
+{
+    public long NewAmount;
+    public long OldAmount;
+}

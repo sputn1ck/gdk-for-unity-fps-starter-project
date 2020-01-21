@@ -1,0 +1,14 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component HunterComponent {
+    id = 430001;
+    int64 earnings = 1;
+    command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
+}
+
+type IncreaseEarningsRequest {
+    int64 amount = 1;
+}
+

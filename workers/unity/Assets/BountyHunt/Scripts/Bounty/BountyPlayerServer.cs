@@ -10,6 +10,7 @@ public class BountyPlayerServer : MonoBehaviour
 
     [Require] public BountyComponentWriter BountyComponentWriter;
     [Require] public BountyComponentCommandReceiver BountyComponentCommandReceiver;
+    [Require] public HunterComponentWriter HunterComponentWriter;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -29,7 +30,7 @@ public class BountyPlayerServer : MonoBehaviour
     {
         BountyComponentWriter.SendUpdate(new BountyComponent.Update { Bounty = BountyComponentWriter.Data.Bounty + obj.Payload.Amount });
     }
-
+    //TODO UPDATE BOUNTYTICK WITH NEW STUFF
     IEnumerator BountyTick()
     {
         yield return new WaitForSeconds(5f);
@@ -44,6 +45,7 @@ public class BountyPlayerServer : MonoBehaviour
             {
                 var tick = calculateTick(state.Bounty, FlagManager.instance.defaultBountyPerTick);
                 BountyComponentWriter.SendUpdate(new BountyComponent.Update { Bounty = state.Bounty - tick});
+                HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = HunterComponentWriter.Data.Earnings + tick });
                 //PrometheusManager.TotalEarnings.Inc(tick);
             }
             yield return new WaitForSeconds(FlagManager.instance.defualtTimePerBountyTick);
