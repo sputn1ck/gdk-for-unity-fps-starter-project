@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixer mixer;
 
+
     Dictionary<VolumeType, VolumeKeys> keys;
 
     private void Awake()

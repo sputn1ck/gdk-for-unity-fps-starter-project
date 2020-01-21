@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Fps.Animation;
 using Fps.Guns;
@@ -36,7 +36,7 @@ namespace Fps.Movement
         private GunManager currentGun;
 
         [SerializeField] private Transform pitchTransform;
-        [SerializeField] private new Camera camera;
+        public new Camera camera;
 
         [SerializeField] private CameraSettings cameraSettings = new CameraSettings
         {

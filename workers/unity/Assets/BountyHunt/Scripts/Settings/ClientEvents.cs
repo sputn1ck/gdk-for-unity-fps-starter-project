@@ -15,6 +15,9 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public StringEvent onUpdateSyncedState = new StringEvent();
     [HideInInspector] public StringEvent onUpdateHasChannelState = new StringEvent();
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
+    [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
+    [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
+       
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
     [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
 

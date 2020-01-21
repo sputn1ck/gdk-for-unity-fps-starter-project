@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 893921381858113093}
   - component: {fileID: 882533396211205869}
   - component: {fileID: 1000210505865880527}
-  - component: {fileID: 960892282380535105}
   - component: {fileID: 693404368483823210}
   m_Layer: 11
   m_Name: FirstPersonCamera_pc
@@ -46,9 +45,10 @@ Camera:
   m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -138,14 +138,6 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: Fps.LowHealthVignette, Improbable.Fps, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!81 &960892282380535105
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896626365763983101}
-  m_Enabled: 1
 --- !u!114 &693404368483823210
 MonoBehaviour:
   m_ObjectHideFlags: 0
