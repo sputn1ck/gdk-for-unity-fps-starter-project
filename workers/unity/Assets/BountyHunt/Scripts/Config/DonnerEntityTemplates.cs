@@ -39,8 +39,8 @@ public class DonnerEntityTemplates
         var client = EntityTemplate.GetWorkerAccessAttribute(workerId);
         // checks login
         // todo reaadd
-        //var loginData = UnityEngine.JsonUtility.FromJson<LoginData>(Encoding.ASCII.GetString(args));
-        //var playerName = loginData.PlayerName;
+        var loginData = UnityEngine.JsonUtility.FromJson<LoginData>(Encoding.ASCII.GetString(args));
+        var playerName = loginData.PlayerName;
         var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
 
         var serverResponse = new ServerResponse
@@ -87,7 +87,8 @@ public class DonnerEntityTemplates
         var hunterComponent = new HunterComponent.Snapshot()
         {
             Earnings = 0,
-            Bounty = 100
+            Bounty = 0,
+            Name = playerName
         };
         /*
          * OLD STUFF
