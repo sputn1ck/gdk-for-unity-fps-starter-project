@@ -5,13 +5,14 @@ using UnityEngine;
 using Bountyhunt;
 using System.Threading;
 using Fps.Config;
-
+using Improbable.Gdk.Core;
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountyPlayerServer : MonoBehaviour
 {
 
     [Require] public HunterComponentWriter HunterComponentWriter;
     [Require] public HunterComponentCommandReceiver BountyComponentCommandReceiver;
+    [Require] public GameStatsCommandSender GameStatsCommandSender;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -24,9 +25,15 @@ public class BountyPlayerServer : MonoBehaviour
         BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
         ct = new CancellationTokenSource();
 
+        Invoke("SetName", 1f);
         //StartCoroutine(BountyTick());
     }
 
+    void SetName()
+    {
+        
+        GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(HunterComponentWriter.Data.Name, LinkedEntityComponent.EntityId));
+    }
     private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)

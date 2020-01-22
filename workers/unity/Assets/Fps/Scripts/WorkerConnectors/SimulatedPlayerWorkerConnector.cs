@@ -49,6 +49,10 @@ namespace Fps.WorkerConnectors
         public void SpawnPlayer(int number)
         {
 
+
+
+
+
             var loginData = new LoginData($"Donnerbot {number}", "valid", 0);
             var serializedArgs = Encoding.ASCII.GetBytes(UnityEngine.JsonUtility.ToJson(loginData));
             var sendSystem = Worker.World.GetExistingSystem<SendCreatePlayerRequestSystem>();

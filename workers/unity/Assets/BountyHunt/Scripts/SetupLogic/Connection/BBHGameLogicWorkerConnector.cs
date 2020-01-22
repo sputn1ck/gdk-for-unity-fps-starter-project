@@ -71,6 +71,7 @@ public class BBHGameLogicWorkerConnector : WorkerConnectorBase
         world.GetOrCreateSystem<BountyConversionSystem>();
         world.GetOrCreateSystem<BountyKillSystem>();
         world.GetOrCreateSystem<ServerScoreboardSystem>();
+        world.GetOrCreateSystem<ServerDisconnectSystem>();
 
         base.HandleWorkerConnectionEstablished();
     }

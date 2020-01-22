@@ -46,7 +46,7 @@ public class ServerScoreboardSystem : ComponentSystem
         List<ScoreboardItem> scoreboardItems = new List<ScoreboardItem>();
         Entities.With(hunterGroup).ForEach((ref SpatialEntityId entityId, ref HunterComponent.Component hunter) =>
         {
-            var item = new ScoreboardItem(entityId.EntityId, hunter.Name, hunter.Bounty, hunter.Kills, hunter.Deaths);
+            var item = new ScoreboardItem(entityId.EntityId, hunter.Bounty, hunter.Kills, hunter.Deaths);
             scoreboardItems.Add(item);
         });
         componentUpdateSystem.SendUpdate(new GameStats.Update() { Scoreboard = new Scoreboard(scoreboardItems) }, new EntityId(2));
