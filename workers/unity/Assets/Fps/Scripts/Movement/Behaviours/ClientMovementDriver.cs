@@ -18,6 +18,7 @@ namespace Fps.Movement
         [SerializeField] [HideInInspector] private float transformUpdateDelta;
         [SerializeField] [HideInInspector] private float rotationUpdateDelta;
 
+
         [SerializeField] private MovementSettings movementSettings = new MovementSettings
         {
             MovementSpeed = new MovementSpeedSettings
@@ -102,6 +103,8 @@ namespace Fps.Movement
 
         public bool HasSprintedRecently => Time.time < sprintCooldownExpires;
 
+        public static ClientMovementDriver instance;
+
         // Cache the update delta values.
         private void OnValidate()
         {
@@ -129,6 +132,7 @@ namespace Fps.Movement
         protected override void Awake()
         {
             base.Awake();
+            instance = this;
             // There will only be one client movement driver, but there will always be one.
             // Therefore it should be safe to set shared movement settings here.
             MovementSpeedSettings.SharedSettings = movementSettings.MovementSpeed;

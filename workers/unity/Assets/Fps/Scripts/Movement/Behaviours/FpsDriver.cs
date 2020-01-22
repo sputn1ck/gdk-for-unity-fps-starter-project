@@ -50,10 +50,11 @@ namespace Fps.Movement
         private Coroutine requestingRespawnCoroutine;
 
         private IControlProvider controller;
-        private InGameScreenManager inGameManager;
 
+        public static FpsDriver instance;
         private void Awake()
         {
+            instance = this;
             movement = GetComponent<ClientMovementDriver>();
             shooting = GetComponent<ClientShooting>();
             shotRayProvider = GetComponent<ShotRayProvider>();
@@ -68,11 +69,6 @@ namespace Fps.Movement
                 throw new NullReferenceException("Was not able to find the OnScreenUI prefab in the scene.");
             }
 
-            inGameManager = uiManager.InGameManager;
-            if (inGameManager == null)
-            {
-                throw new NullReferenceException("Was not able to find the in-game manager in the scene.");
-            }
         }
 
         private void OnEnable()
@@ -87,16 +83,7 @@ namespace Fps.Movement
         {
             if (controller.MenuPressed)
             {
-                inGameManager.TryOpenSettingsMenu();
-            }
-
-            // Don't allow controls if in the menu.
-            if (inGameManager.InEscapeMenu)
-            {
-                // Still apply physics.
-                movement.ApplyMovement(Vector3.zero, transform.rotation, MovementSpeed.Run, false);
-                Animations(false);
-                return;
+                UIManager.instance.ToggleEscapeMenu();
             }
 
             if (isRequestingRespawn)
@@ -224,7 +211,7 @@ namespace Fps.Movement
             }
         }
 
-        private void Animations(bool isJumping)
+        public void Animations(bool isJumping)
         {
             fpsAnimator.SetAiming(gunState.Data.IsAiming);
             fpsAnimator.SetGrounded(movement.IsGrounded);

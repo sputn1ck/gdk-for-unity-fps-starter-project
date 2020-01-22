@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EscapeMenuUI : MonoBehaviour
+public class EscapeMenuUI : ScreenUI
 {
     [SerializeField] List<TabWindowInfo> tabWindowsInfo;
     public int firstSelectedTabID;
