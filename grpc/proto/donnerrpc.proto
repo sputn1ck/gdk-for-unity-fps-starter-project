@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package donnerrpc;
+
+
+service DonnerDaemon {
+    rpc Lncli(LncliRequest) returns (LncliResponse);
+}
+
+message LncliRequest {
+    string command = 1;
+}
+
+message LncliResponse {
+    string text_response = 2;
+}

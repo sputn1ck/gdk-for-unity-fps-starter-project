@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package grpc;
+
+service AdminService {
+    rpc CreateVoucher(CreateVoucherRequest) returns (CreateVoucherResponse)
+}
+
+message CreateVoucherRequest {
+    uint32 amount = 1;
+    uint32 value = 2;
+}
+
+message CreateVoucherResponse {
+    repeated Voucher vouchers = 1;
+}
+
+message Voucher {
+    string id = 1;
+    google.protobuf.Timestamp expiry = 2;
+}

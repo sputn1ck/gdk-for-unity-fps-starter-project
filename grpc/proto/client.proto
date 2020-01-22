@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package bbh;
+
+service ClientService {
+    rpc GetUsername(GetUsernameRequest) returns (GetUsernameReponse);
+    rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse);
+}
+
+message GetUsernameRequest {}
+
+message GetUsernameReponse {
+    string name = 1;
+}
+
+message SetUsernameRequest {
+    string name = 1;
+}
+
+message SetUsernameResponse {
+    string name = 1;
+}

@@ -1,0 +1,673 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/stashes": {
+      "get": {
+        "operationId": "ListStashes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcListStashesResponse"
+            }
+          }
+        },
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/transaction/create": {
+      "post": {
+        "operationId": "NewTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcNewTransactionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/grpcNewTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/transaction/settle": {
+      "post": {
+        "operationId": "SettleTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcSettleTransactionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/grpcSettleTransactionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/transaction/{id}": {
+      "get": {
+        "operationId": "LookupTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcLookupTransactionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "operationId": "ListTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcListTransactionsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "OPEN",
+              "SETTLED"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "filter.role",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BOTH",
+              "PAYER",
+              "RECEIVER"
+            ],
+            "default": "BOTH"
+          },
+          {
+            "name": "filter.worldID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/transactions/subscribe": {
+      "get": {
+        "operationId": "SubscribeTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "$ref": "#/x-stream-definitions/grpcSubscribeTransactionsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "OPEN",
+              "SETTLED"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "filter.role",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BOTH",
+              "PAYER",
+              "RECEIVER"
+            ],
+            "default": "BOTH"
+          },
+          {
+            "name": "filter.worldID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/user": {
+      "get": {
+        "operationId": "GetCurrentUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcGetCurrentUserResponse"
+            }
+          }
+        },
+        "tags": [
+          "DonnerService"
+        ]
+      },
+      "post": {
+        "operationId": "EditUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcEditUserResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/grpcEditUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/world/join/{id}": {
+      "get": {
+        "operationId": "JoinWorld",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcJoinWorldResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    },
+    "/api/v1/worlds": {
+      "get": {
+        "operationId": "ListWorlds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grpcListWorldsResponse"
+            }
+          }
+        },
+        "tags": [
+          "DonnerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "TransactionFilterRole": {
+      "type": "string",
+      "enum": [
+        "BOTH",
+        "PAYER",
+        "RECEIVER"
+      ],
+      "default": "BOTH"
+    },
+    "TransactionFilterStatus": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "OPEN",
+        "SETTLED"
+      ],
+      "default": "ALL"
+    },
+    "grpcCreateWorldResponse": {
+      "type": "object",
+      "properties": {
+        "world": {
+          "$ref": "#/definitions/grpcWorld"
+        }
+      }
+    },
+    "grpcEditUserRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "grpcEditUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/grpcUser"
+        }
+      }
+    },
+    "grpcGetCurrentUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/grpcUser"
+        },
+        "worlds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grpcWorld"
+          }
+        }
+      },
+      "title": "Responses"
+    },
+    "grpcJoinWorldResponse": {
+      "type": "object",
+      "properties": {
+        "world": {
+          "$ref": "#/definitions/grpcWorld"
+        }
+      }
+    },
+    "grpcListStashesResponse": {
+      "type": "object",
+      "properties": {
+        "stashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grpcStash"
+          }
+        }
+      }
+    },
+    "grpcListTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grpcTransaction"
+          }
+        }
+      }
+    },
+    "grpcListWorldsResponse": {
+      "type": "object",
+      "properties": {
+        "worlds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/grpcWorld"
+          }
+        }
+      }
+    },
+    "grpcLookupTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/grpcTransaction"
+        }
+      }
+    },
+    "grpcNewTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/grpcNewTransactionRequestKind"
+        },
+        "payerID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "receiverID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "callbackUrl": {
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "lightningParams": {
+          "$ref": "#/definitions/grpcToLightningParams"
+        },
+        "stashParams": {
+          "$ref": "#/definitions/grpcToStashParams"
+        }
+      }
+    },
+    "grpcNewTransactionRequestKind": {
+      "type": "string",
+      "enum": [
+        "STASH",
+        "LIGHTNING"
+      ],
+      "default": "STASH"
+    },
+    "grpcNewTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/grpcTransaction"
+        }
+      }
+    },
+    "grpcSettleTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/grpcSettleTransactionRequestKind"
+        },
+        "transactionID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "withStash": {
+          "$ref": "#/definitions/grpcWithStashParams"
+        },
+        "withLightning": {
+          "$ref": "#/definitions/grpcWithLightningParams"
+        }
+      }
+    },
+    "grpcSettleTransactionRequestKind": {
+      "type": "string",
+      "enum": [
+        "STASH",
+        "LIGHTNING"
+      ],
+      "default": "STASH"
+    },
+    "grpcSettleTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/grpcTransaction"
+        }
+      }
+    },
+    "grpcStash": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "balance": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "world": {
+          "$ref": "#/definitions/grpcWorld"
+        }
+      }
+    },
+    "grpcSubscribeTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/grpcTransaction"
+        }
+      }
+    },
+    "grpcToLightningParams": {
+      "type": "object",
+      "properties": {
+        "invoice": {
+          "type": "string"
+        }
+      }
+    },
+    "grpcToStashParams": {
+      "type": "object",
+      "properties": {
+        "worldID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "grpcTransaction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "descripton": {
+          "type": "string"
+        },
+        "payerID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "receiverID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fullfilled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "invoice": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fullfilledAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "grpcTransactionFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TransactionFilterStatus"
+        },
+        "role": {
+          "$ref": "#/definitions/TransactionFilterRole"
+        },
+        "worldID": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "grpcUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "Models"
+    },
+    "grpcWithLightningParams": {
+      "type": "object",
+      "properties": {
+        "preImage": {
+          "type": "string"
+        }
+      }
+    },
+    "grpcWithStashParams": {
+      "type": "object",
+      "properties": {
+        "worldID": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "grpcWorld": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeStreamError": {
+      "type": "object",
+      "properties": {
+        "grpc_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "http_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "http_status": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "x-stream-definitions": {
+    "grpcSubscribeTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/grpcSubscribeTransactionsResponse"
+        },
+        "error": {
+          "$ref": "#/definitions/runtimeStreamError"
+        }
+      },
+      "title": "Stream result of grpcSubscribeTransactionsResponse"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+type: google.api.Service
+config_version: 3
+name: platform.donnerlab.com
+title: donner-platform
+
+apis:
+  - platform: grpc.DonnerService
+authentication:
+  providers:
+    - id: Oauth
+      jwks_uri: https://donnerlab.eu.auth0.com/.well-known/jwks.json
+      issuer: https://donnerlab.eu.auth0.com/
+  rules:
+    - selector: "*"
+      requirements:
+        provider_id: Oauth
+http:
+  rules:
+    - selector: grpc.DonnerService.GetCurrentUser
+      get: /api/v1/user
+    - selector: grpc.DonnerService.UpdateUserName
+      post: /api/v1/user
+      body: "*"
+    - selector: grpc.DonnerService.ListStashes
+      get: /api/v1/stashes
+    - selector: grpc.DonnerService.ListTransactions
+      get: /api/v1/transactions
+    - selector: grpc.DonnerService.LookupTransaction
+      get: /api/v1/transaction/{id}
+    - selector: grpc.DonnerService.NewTransaction
+      post: /api/v1/transaction/create
+      body: "*"
+    - selector: grpc.DonnerService.SettleTransaction
+      post: /api/v1/transaction/settle
+      body: "*"
+    - selector: grpc.DonnerService.ListWorlds
+      get: /api/v1/worlds
+    - selector: grpc.DonnerService.JoinWorld
+      get: /api/v1/world/join/{id}
+    - selector: grpc.DonnService.CreateWorld
+      post: /api/v1/world
+      body: "*"
+    - selector: grpc.DonnerService.SubscribeTransactions
+      get: /api/v1/transactions/subscribe
