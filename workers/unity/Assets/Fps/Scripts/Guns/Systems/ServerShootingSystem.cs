@@ -59,7 +59,7 @@ namespace Fps.Guns
                         Amount = -damage,
                         Origin = shotInfo.HitOrigin,
                         AppliedLocation = shotInfo.HitLocation,
-                        Owner = shotInfo.EntityId,
+                        Owner = shotEvent.EntityId,
                     }
                 );
 

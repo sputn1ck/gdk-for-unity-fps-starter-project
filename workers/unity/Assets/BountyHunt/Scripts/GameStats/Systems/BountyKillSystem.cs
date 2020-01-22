@@ -30,6 +30,12 @@ public class BountyKillSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameStats.GainedKillEvent.Event>();
         if (events.Count == 0)
             return;
+        HandleKills(events);
+        SendBountyBoardUpdate();
+    }
+
+    private void HandleKills(MessagesSpan<ComponentEventReceived<GameStats.GainedKillEvent.Event>> events)
+    {
         var hunters = GetComponentDataFromEntity<HunterComponent.Component>();
         for (var i = 0; i < events.Count; i++)
         {
@@ -47,15 +53,15 @@ public class BountyKillSystem : ComponentSystem
             var killerDonnerInfo = hunters[killer];
             var victimDonnerInfo = hunters[victim];
 
-            
+
             var killerModifiedInfo = new HunterComponent.Update()
             {
-                Kills = killerDonnerInfo.Kills+1
+                Kills = killerDonnerInfo.Kills + 1
             };
             var victimModifiedInfo = new HunterComponent.Update()
             {
                 Bounty = 0,
-                Deaths = victimDonnerInfo.Deaths+1
+                Deaths = victimDonnerInfo.Deaths + 1
             };
             var posSpatial = componentUpdateSystem.GetComponent<Position.Snapshot>(victimId);
             componentUpdateSystem.SendUpdate(killerModifiedInfo, killerId);
@@ -70,4 +76,10 @@ public class BountyKillSystem : ComponentSystem
             //PrometheusManager.TotalKills.Inc(1);
         }
     }
+    private void SendBountyBoardUpdate()
+    {
+        componentUpdateSystem.SendEvent(new GameStats.UpdateScoreboardEvent.Event(new Bountyhunt.Empty()), new EntityId(2));
+
+    }
+
 }

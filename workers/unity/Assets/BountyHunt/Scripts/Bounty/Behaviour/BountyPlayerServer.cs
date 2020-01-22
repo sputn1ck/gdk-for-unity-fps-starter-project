@@ -11,7 +11,7 @@ public class BountyPlayerServer : MonoBehaviour
 {
 
     [Require] public HunterComponentWriter HunterComponentWriter;
-    [Require] public HunterComponentCommandReceiver HunterComponentCommandReceiver;
+    [Require] public HunterComponentCommandReceiver BountyComponentCommandReceiver;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -21,7 +21,7 @@ public class BountyPlayerServer : MonoBehaviour
     void OnEnable()
     {
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        HunterComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
+        BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
         ct = new CancellationTokenSource();
 
         //StartCoroutine(BountyTick());

@@ -63,7 +63,7 @@ public class BountyConversionSystem : ComponentSystem
 
     private void SendBountyBoardUpdate()
     {
-        //TODO implement me
+        componentUpdateSystem.SendEvent(new GameStats.UpdateScoreboardEvent.Event(new Bountyhunt.Empty()), new EntityId(2));
 
     }
 

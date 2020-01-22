@@ -4,9 +4,23 @@ import "bountyhunt/common.schema";
 
 component GameStats{
     id = 440001;
+    Scoreboard scoreboard = 1;
     event KillInfo gained_kill_event;
+    event bountyhunt.Empty update_scoreboard_event;
 }
 
+
+type Scoreboard {
+    list<ScoreboardItem> board = 1;
+}
+
+type ScoreboardItem {
+    EntityId entity = 1;
+    string name = 2;
+    int64 bounty = 3;
+    int32 kills = 4;
+    int32 deaths = 5;
+}
 type KillInfo {
     EntityId killer = 1;
     EntityId victim = 2;

@@ -212,7 +212,7 @@ public class DonnerEntityTemplates
     {
         var boutySpawnerComponent = new BountySpawner.Snapshot();
         var gameStatsComponent = new GameStats.Snapshot();
-
+        gameStatsComponent.Scoreboard = new Scoreboard(new System.Collections.Generic.List<ScoreboardItem>());
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
