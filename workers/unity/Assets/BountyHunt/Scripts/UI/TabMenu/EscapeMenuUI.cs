@@ -8,8 +8,9 @@ public class EscapeMenuUI : ScreenUI
     [SerializeField] List<TabWindowInfo> tabWindowsInfo;
     public int firstSelectedTabID;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         firstSelectedTabID = Mathf.Clamp(firstSelectedTabID, 0, tabWindowsInfo.Count - 1);
 
         for(int  i = 0; i<tabWindowsInfo.Count;i++)

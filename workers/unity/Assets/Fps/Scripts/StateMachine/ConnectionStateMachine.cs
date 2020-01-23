@@ -11,7 +11,7 @@ namespace Fps.StateMachine
         public State StartState;
 
         public GameObject ClientWorkerConnectorPrefab;
-        [SerializeField] private UIManager uiManager;
+        [SerializeField] private BBHUIManager uiManager;
 
         private State currentState;
         private State nextState;

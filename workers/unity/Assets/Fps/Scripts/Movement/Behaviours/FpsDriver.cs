@@ -63,7 +63,7 @@ namespace Fps.Movement
             currentGun = GetComponent<GunManager>();
             controller = GetComponent<IControlProvider>();
 
-            var uiManager = GameObject.FindGameObjectWithTag("OnScreenUI")?.GetComponent<UIManager>();
+            var uiManager = GameObject.FindGameObjectWithTag("OnScreenUI")?.GetComponent<BBHUIManager>();
             if (uiManager == null)
             {
                 throw new NullReferenceException("Was not able to find the OnScreenUI prefab in the scene.");
@@ -83,10 +83,10 @@ namespace Fps.Movement
         {
             if (controller.MenuPressed)
             {
-                UIManager.instance.ToggleEscapeMenu();
+                BBHUIManager.instance.inGame.ToggleEscapeScreen();
             }
 
-            if (UIManager.inEscapeMenu)
+            if (BBHUIManager.instance.inGame.EscapeScreen.activated)
             {
                 movement.ApplyMovement(Vector3.zero, transform.rotation, MovementSpeed.Run, false);
                 Animations(false);

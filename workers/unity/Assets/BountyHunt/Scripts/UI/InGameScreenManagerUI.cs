@@ -40,7 +40,6 @@ public class InGameScreenManagerUI : MonoBehaviour
 
     public void OnEnable()
     {
-        
         RespawnScreen.gameObject.SetActive(true);
         EscapeScreen.gameObject.SetActive(true);
         ScoreBoardScreen.gameObject.SetActive(true);
@@ -81,14 +80,12 @@ public class InGameScreenManagerUI : MonoBehaviour
     {
         EscapeScreen.activated = !EscapeScreen.activated;
         UpdateScreens();
-        UIManager.inEscapeMenu = EscapeScreen.activated;
     }
 
     public void SetEscapeScreen(bool active)
     {
         EscapeScreen.activated = active;
         UpdateScreens();
-        UIManager.inEscapeMenu = EscapeScreen.activated;
 
     }
     public void SetRespawnScreen(bool active)

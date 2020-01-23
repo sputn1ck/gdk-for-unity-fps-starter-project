@@ -26,7 +26,7 @@ public class BBHHud : MonoBehaviour
     private void Awake()
     {
 
-        inGameScreenManager = RootScreenManagerUI.instance.inGame;
+        inGameScreenManager = BBHUIManager.instance.inGame;
 
         healthBarController = inGameScreenManager.GetComponentInChildren<HealthBarController>(true);
 

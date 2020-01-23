@@ -22,7 +22,7 @@ public class ScreenUI : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         activated = false;
         showing = false;

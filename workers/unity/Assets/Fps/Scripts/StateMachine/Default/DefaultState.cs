@@ -6,11 +6,11 @@ namespace Fps.StateMachine
     public abstract class DefaultState : State
     {
         protected readonly ConnectionStateMachine Owner;
-        protected readonly UIManager Manager;
+        protected readonly BBHUIManager Manager;
         protected readonly ScreenManager ScreenManager;
         protected readonly Animator Animator;
 
-        protected DefaultState(UIManager manager, ConnectionStateMachine owner)
+        protected DefaultState(BBHUIManager manager, ConnectionStateMachine owner)
         {
             Manager = manager;
             ScreenManager = Manager.ScreenManager;

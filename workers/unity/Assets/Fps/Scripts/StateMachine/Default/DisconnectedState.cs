@@ -5,7 +5,7 @@ namespace Fps.StateMachine
 {
     public class DisconnectedState : DefaultState
     {
-        public DisconnectedState(UIManager manager, ConnectionStateMachine owner) : base(manager, owner)
+        public DisconnectedState(BBHUIManager manager, ConnectionStateMachine owner) : base(manager, owner)
         {
         }
 

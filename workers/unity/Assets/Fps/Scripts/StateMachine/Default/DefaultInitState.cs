@@ -4,7 +4,7 @@ namespace Fps.StateMachine
 {
     public class DefaultInitState : DefaultState
     {
-        public DefaultInitState(UIManager manager, ConnectionStateMachine owner) : base(manager, owner)
+        public DefaultInitState(BBHUIManager manager, ConnectionStateMachine owner) : base(manager, owner)
         {
         }
 

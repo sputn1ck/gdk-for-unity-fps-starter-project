@@ -4,7 +4,7 @@ namespace Fps.StateMachine
 {
     public class DefaultPlayState : DefaultState
     {
-        public DefaultPlayState(UIManager manager, ConnectionStateMachine owner) : base(manager, owner)
+        public DefaultPlayState(BBHUIManager manager, ConnectionStateMachine owner) : base(manager, owner)
         {
         }
 

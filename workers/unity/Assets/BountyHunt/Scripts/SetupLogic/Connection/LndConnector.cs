@@ -28,10 +28,9 @@ public class LndConnector : MonoBehaviour
     public bool spawnPlayerTrigger;
     public bool doAllTrigger;
     public GameObject ClientWorkerConnectorPrefab;
-    public UIManager Manager;
     public string pubkey;
     public GameObject mainMenu;
-    public UIManager uiManager;
+    public BBHUIManager uiManager;
 
     public ClientWorkerConnectorLnd clientConnector;
 
@@ -109,7 +108,7 @@ public class LndConnector : MonoBehaviour
     {
         clientConnector.DisconnectPlayer();
         mainMenu.SetActive(true);
-        uiManager.ShowFrontEnd();
+        BBHUIManager.instance.ShowFrontEnd();
         mainMenu.GetComponent<MenuUI>().Reset();
     }
     public IEnumerator DoStep1Enumerator()
@@ -216,7 +215,7 @@ public class LndConnector : MonoBehaviour
     {
         Debug.Log("Disconnected");
         mainMenu.SetActive(true);
-        uiManager.ShowFrontEnd();
+        BBHUIManager.instance.ShowFrontEnd();
         mainMenu.GetComponent<MenuUI>().Reset();
     }
 
@@ -231,7 +230,7 @@ public class LndConnector : MonoBehaviour
     private void OnPlayerResponse(PlayerCreator.CreatePlayer.ReceivedResponse response)
     {
         //Manager.InGameManager.Timer.SetActive(false);
-        Manager.ShowGameView();
+        BBHUIManager.instance.ShowGameView();
 
         ClientEvents.instance.onGameJoined.Invoke();
     }
