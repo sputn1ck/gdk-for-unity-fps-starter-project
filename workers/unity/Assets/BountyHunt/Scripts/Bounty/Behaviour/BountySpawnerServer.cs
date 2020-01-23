@@ -30,6 +30,8 @@ public class BountySpawnerServer : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
+        if(obj.Payload.BountyValue < 1)
+            return;
         var v3 = obj.Payload.Position;
         var pos = new Vector3(v3.X, v3.Y, v3.Z);
         SpawnPickup(pos, obj.Payload.BountyValue);
