@@ -1,3 +1,5 @@
+using Bountyhunt;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,3 +12,25 @@ public class LongEvent : UnityEvent<long> { }
 public class StringEvent : UnityEvent<string> { }
 public class Vector2Event : UnityEvent<Vector2> { }
 public class GameObjectEvent : UnityEvent<GameObject> { }
+public class ScoreboardItemListEvent : UnityEvent<List<ScoreboardItem>> { }
+[Serializable]public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
+[Serializable] public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
+
+
+
+
+
+[Serializable]
+public struct BountyUpdateEventArgs
+{
+    public long NewAmount;
+    public long OldAmount;
+    public Bountyhunt.BountyReason Reason;
+}
+
+[Serializable]
+public struct EarningsUpdateEventArgs
+{
+    public long NewAmount;
+    public long OldAmount;
+}

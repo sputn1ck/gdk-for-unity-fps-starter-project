@@ -20,6 +20,8 @@ public class ClientEvents : MonoBehaviour
        
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
     [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
+    [HideInInspector] public ScoreboardItemListEvent onScoreboardUpdate = new ScoreboardItemListEvent();
+
 
     private void Awake()
     {
@@ -40,23 +42,3 @@ public class ClientEvents : MonoBehaviour
 
 }
 
-[Serializable]
-public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
-
-[Serializable]
-public struct BountyUpdateEventArgs
-{
-    public long NewAmount;
-    public long OldAmount;
-    public Bountyhunt.BountyReason Reason;
-}
-
-[Serializable]
-public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
-
-[Serializable]
-public struct EarningsUpdateEventArgs
-{
-    public long NewAmount;
-    public long OldAmount;
-}

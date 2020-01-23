@@ -145,8 +145,17 @@ public class InGameScreenManagerUI : MonoBehaviour
         }
 
         Hud.Show(true);
+
     }
 
+    private void Update()
+    {
+        //TODO custom Inputsystem
+        if (Input.GetKey(KeyCode.Tab)!=ScoreBoardScreen.activated){
+            ScoreBoardScreen.activated = Input.GetKey(KeyCode.Tab);
+            UpdateScreens();
+        }
+    }
 
     IEnumerator SetCursorLockstateAtFrameEnd(CursorLockMode mode)
     {

@@ -8,7 +8,13 @@ using Improbable.Gdk.Core;
 public class ClientGameStats : MonoBehaviour
 {
     [Require] GameStatsReader GameStatsReader;
-    
+    public static ClientGameStats instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void OnEnable()
     {
         GameStatsReader.OnScoreboardUpdate += OnScoreboardUpdate;
@@ -25,7 +31,8 @@ public class ClientGameStats : MonoBehaviour
 
     private void OnScoreboardUpdate(Scoreboard obj)
     {
-        //TODO implement UI
+        ClientEvents.instance.onScoreboardUpdate.Invoke(obj.Board);
+
     }
 
     // Update is called once per frame
@@ -34,7 +41,7 @@ public class ClientGameStats : MonoBehaviour
         
     }
 
-    private string idToName(EntityId id)
+    public string idToName(EntityId id)
     {
         if (GameStatsReader.Data.PlayerNames.ContainsKey(id))
         {

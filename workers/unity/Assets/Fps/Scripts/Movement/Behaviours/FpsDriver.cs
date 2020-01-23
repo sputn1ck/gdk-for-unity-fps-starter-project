@@ -255,5 +255,10 @@ namespace Fps.Movement
                 -cameraSettings.MinPitch);
             pitchTransform.localRotation = Quaternion.Euler(newPitch, 0, 0);
         }
+
+        public EntityId getEntityID()
+        {
+            return entityId;
+        }
     }
 }
