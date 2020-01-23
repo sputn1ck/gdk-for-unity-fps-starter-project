@@ -4,6 +4,7 @@ using UnityEngine;
 using Fps;
 using Fps.Guns;
 using Fps.Movement;
+using Fps.UI;
 
 public class InGameScreenManagerUI : MonoBehaviour
 {
@@ -32,7 +33,9 @@ public class InGameScreenManagerUI : MonoBehaviour
 
     private void Start()
     {
-        ClientShooting.instance.OnPlayerHit.AddListener(ShowHitmarker);
+        ClientEvents.instance.onPlayerSpawn.AddListener(OnPlayerSpawn);
+        ClientEvents.instance.onPlayerDie.AddListener(OnPlayerDie);
+
     }
 
     public void OnEnable()
@@ -53,6 +56,15 @@ public class InGameScreenManagerUI : MonoBehaviour
         Reticle.SetActive(true);
     }
 
+    void OnPlayerSpawn(GameObject player)
+    {
+        ClientShooting.instance.OnPlayerHit.AddListener(ShowHitmarker);
+    }
+
+    void OnPlayerDie()
+    {
+        ClientShooting.instance.OnPlayerHit.RemoveListener(ShowHitmarker);
+    }
 
     public void OnDisable()
     {
@@ -69,13 +81,14 @@ public class InGameScreenManagerUI : MonoBehaviour
     {
         EscapeScreen.activated = !EscapeScreen.activated;
         UpdateScreens();
-
+        UIManager.inEscapeMenu = EscapeScreen.activated;
     }
 
     public void SetEscapeScreen(bool active)
     {
         EscapeScreen.activated = active;
         UpdateScreens();
+        UIManager.inEscapeMenu = EscapeScreen.activated;
 
     }
     public void SetRespawnScreen(bool active)
@@ -142,16 +155,6 @@ public class InGameScreenManagerUI : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         Cursor.lockState = mode;
-    }
-
-    private void Update()
-    {
-        Debug.Log("esc:" + EscapeScreen.activated + " rspwn:" + RespawnScreen.activated + " sb:" + ScoreBoardScreen.activated + " hud" + Hud.activated);
-
-        if (EscapeScreen.activated){
-            ClientMovementDriver.instance.ApplyMovement(Vector3.zero, transform.rotation, MovementSpeed.Run, false);
-            FpsDriver.instance.Animations(false);
-        }
     }
 
 }

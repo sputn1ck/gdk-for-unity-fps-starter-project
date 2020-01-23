@@ -11,6 +11,8 @@ namespace Fps.UI
         public static UnityEvent onShowFrontEnd = new UnityEvent();
         public static UnityEvent onToggleEscapeMenu = new UnityEvent();
 
+        public static bool inEscapeMenu = false;
+
         private void Awake()
         {
             instance = this;

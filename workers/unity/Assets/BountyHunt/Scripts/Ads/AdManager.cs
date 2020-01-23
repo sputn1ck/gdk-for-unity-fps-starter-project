@@ -36,7 +36,7 @@ public class AdManager : MonoBehaviour
     void InitializeAllAds()
     {
         AdBillboard[] banners = FindObjectsOfType<AdBillboard>();
-        Debug.Log("Total ad banners Count: " + banners.Length);
+        Debug.Log("Total ad billboards Count: " + banners.Length);
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
@@ -132,7 +132,7 @@ public class Advertiser
         List<Material> mats = GetMaterials(type);
         if (mats.Count == 0)
         {
-            Debug.LogError(name + " has Material of type " + type);
+            Debug.LogError(name + " has no Material of type " + type);
             return null;
         }
 

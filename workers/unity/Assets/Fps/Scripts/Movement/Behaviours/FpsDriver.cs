@@ -86,6 +86,13 @@ namespace Fps.Movement
                 UIManager.instance.ToggleEscapeMenu();
             }
 
+            if (UIManager.inEscapeMenu)
+            {
+                movement.ApplyMovement(Vector3.zero, transform.rotation, MovementSpeed.Run, false);
+                Animations(false);
+                return;
+            }
+
             if (isRequestingRespawn)
             {
                 return;
