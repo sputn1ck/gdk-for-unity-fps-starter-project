@@ -13,6 +13,7 @@ using Fps.Health;
 using Fps.Guns;
 using Fps.SchemaExtensions;
 using Bountyhunt;
+using System.Collections.Generic;
 
 public class DonnerEntityTemplates
 {
@@ -90,6 +91,10 @@ public class DonnerEntityTemplates
             Bounty = 0,
             Name = playerName
         };
+        var skillComponent = new PlayerSkillComponent.Snapshot()
+        {
+            Skills = new List<int>() { 0 },
+        };
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
@@ -127,6 +132,7 @@ public class DonnerEntityTemplates
 
         // NEW STUFF
         template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
+        template.AddComponent(skillComponent, WorkerUtils.UnityGameLogic);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);

@@ -38,7 +38,6 @@ public class ServerScoreboardSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameStats.UpdateScoreboardEvent.Event>();
         if (events.Count == 0)
             return;
-        Debug.Log("events=" + events.Count);
         if (hunterGroup.IsEmptyIgnoreFilter)
         {
             return;

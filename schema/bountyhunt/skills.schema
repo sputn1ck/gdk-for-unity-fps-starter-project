@@ -1,0 +1,13 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component PlayerSkillComponent {
+    id = 450001;
+    list<int32> skills = 1;
+    command bountyhunt.Empty activate_skill(ActivateSkillRequest);
+}
+
+type ActivateSkillRequest{
+    int32 id = 1;
+}
