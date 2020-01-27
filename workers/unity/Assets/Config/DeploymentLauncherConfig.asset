@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssemblyConfig:
     ProjectName: beta_spring_september_495
-    AssemblyName: beta_spring_september_495_0122_1333
+    AssemblyName: beta_spring_september_495_0127_1404
     ShouldForceUpload: 0
   DeploymentConfigs:
   - ProjectName: beta_spring_september_495
-    AssemblyName: beta_spring_september_495_0122_1333
+    AssemblyName: beta_spring_september_495_0127_1404
     Deployment:
       Name: live_new
       SnapshotPath: snapshots/cloud.snapshot
@@ -27,3 +27,22 @@ MonoBehaviour:
       Tags:
       - dev_login
     SimulatedPlayerDeploymentConfigs: []
+  - ProjectName: beta_spring_september_495
+    AssemblyName: beta_spring_september_495_0127_1404
+    Deployment:
+      Name: live_newsim
+      SnapshotPath: snapshots/cloud.snapshot
+      LaunchJson: bbh_small.json
+      Region: 1
+      Tags:
+      - dev_login
+    SimulatedPlayerDeploymentConfigs:
+    - Name: live_newsim_sim1
+      SnapshotPath: 
+      LaunchJson: cloud_launch_small_sim_players.json
+      Region: 1
+      Tags: []
+      TargetDeploymentName: live_newsim
+      FlagPrefix: fps
+      WorkerType: SimulatedPlayerCoordinator
+      WorkerTypeId: 1
