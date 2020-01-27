@@ -5,6 +5,7 @@ package bbh;
 service ClientService {
     rpc GetUsername(GetUsernameRequest) returns (GetUsernameReponse);
     rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse);
+    rpc GetHighscore(GetHighscoreRequest) returns (GetHighscoreResponse);
 }
 
 message GetUsernameRequest {}
@@ -19,4 +20,17 @@ message SetUsernameRequest {
 
 message SetUsernameResponse {
     string name = 1;
+}
+
+message GetHighscoreRequest {}
+
+message GetHighscoreResponse {
+    repeated Highscore highscores = 1;
+}
+
+message Highscore {
+    string name = 1;
+    int32 kills = 2;
+    int32 deaths = 3;
+    int64 earnings = 4;
 }

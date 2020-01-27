@@ -26,17 +26,17 @@ namespace Bbh {
           string.Concat(
             "ChBnYW1lc2VydmVyLnByb3RvEgNiYmgiZQoSRXZlbnRTdHJlYW1SZXF1ZXN0",
             "Eh4KBGtpbGwYASABKAsyDi5iYmguS2lsbEV2ZW50SAASJgoIZWFybmluZ3MY",
-            "AiABKAsyEi5iYmguRWFybmluZ3NFdmVudEgAQgcKBWV2ZW50IisKCUtpbGxF",
-            "dmVudBIOCgZraWxsZXIYASABKAkSDgoGdmljdGltGAIgASgJIioKDUVhcm5p",
-            "bmdzRXZlbnQSDAoEdXNlchgBIAEoCRILCgNhbXQYAiABKAMiFQoTRXZlbnRT",
-            "dHJlYW1SZXNwb25zZTJRCgtHYW1lU2VydmljZRJCCgtFdmVudFN0cmVhbRIX",
-            "LmJiaC5FdmVudFN0cmVhbVJlcXVlc3QaGC5iYmguRXZlbnRTdHJlYW1SZXNw",
-            "b25zZSgBYgZwcm90bzM="));
+            "AiABKAsyEi5iYmguRWFybmluZ3NFdmVudEgAQgcKBWV2ZW50IjoKCUtpbGxF",
+            "dmVudBIOCgZraWxsZXIYASABKAkSDgoGdmljdGltGAIgASgJEg0KBWNhdXNl",
+            "GAMgASgJIioKDUVhcm5pbmdzRXZlbnQSDAoEdXNlchgBIAEoCRILCgNhbXQY",
+            "AiABKAMiFQoTRXZlbnRTdHJlYW1SZXNwb25zZTJRCgtHYW1lU2VydmljZRJC",
+            "CgtFdmVudFN0cmVhbRIXLmJiaC5FdmVudFN0cmVhbVJlcXVlc3QaGC5iYmgu",
+            "RXZlbnRTdHJlYW1SZXNwb25zZSgBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamRequest), global::Bbh.EventStreamRequest.Parser, new[]{ "Kill", "Earnings" }, new[]{ "Event" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.KillEvent), global::Bbh.KillEvent.Parser, new[]{ "Killer", "Victim" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.KillEvent), global::Bbh.KillEvent.Parser, new[]{ "Killer", "Victim", "Cause" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EarningsEvent), global::Bbh.EarningsEvent.Parser, new[]{ "User", "Amt" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamResponse), global::Bbh.EventStreamResponse.Parser, null, null, null, null)
           }));
@@ -276,6 +276,7 @@ namespace Bbh {
     public KillEvent(KillEvent other) : this() {
       killer_ = other.killer_;
       victim_ = other.victim_;
+      cause_ = other.cause_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -306,6 +307,17 @@ namespace Bbh {
       }
     }
 
+    /// <summary>Field number for the "cause" field.</summary>
+    public const int CauseFieldNumber = 3;
+    private string cause_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Cause {
+      get { return cause_; }
+      set {
+        cause_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as KillEvent);
@@ -321,6 +333,7 @@ namespace Bbh {
       }
       if (Killer != other.Killer) return false;
       if (Victim != other.Victim) return false;
+      if (Cause != other.Cause) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -329,6 +342,7 @@ namespace Bbh {
       int hash = 1;
       if (Killer.Length != 0) hash ^= Killer.GetHashCode();
       if (Victim.Length != 0) hash ^= Victim.GetHashCode();
+      if (Cause.Length != 0) hash ^= Cause.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -350,6 +364,10 @@ namespace Bbh {
         output.WriteRawTag(18);
         output.WriteString(Victim);
       }
+      if (Cause.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Cause);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -363,6 +381,9 @@ namespace Bbh {
       }
       if (Victim.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Victim);
+      }
+      if (Cause.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Cause);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -381,6 +402,9 @@ namespace Bbh {
       if (other.Victim.Length != 0) {
         Victim = other.Victim;
       }
+      if (other.Cause.Length != 0) {
+        Cause = other.Cause;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -398,6 +422,10 @@ namespace Bbh {
           }
           case 18: {
             Victim = input.ReadString();
+            break;
+          }
+          case 26: {
+            Cause = input.ReadString();
             break;
           }
         }

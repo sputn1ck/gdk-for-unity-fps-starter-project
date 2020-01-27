@@ -16,6 +16,7 @@ message EventStreamRequest {
 message KillEvent {
     string killer = 1;
     string victim = 2;
+    string cause = 3;
 }
 
 message EarningsEvent {

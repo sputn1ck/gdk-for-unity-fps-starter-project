@@ -16,6 +16,8 @@ namespace Bbh {
     static readonly grpc::Marshaller<global::Bbh.GetUsernameReponse> __Marshaller_bbh_GetUsernameReponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetUsernameReponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.SetUsernameRequest> __Marshaller_bbh_SetUsernameRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.SetUsernameRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.SetUsernameResponse> __Marshaller_bbh_SetUsernameResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.SetUsernameResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetHighscoreRequest> __Marshaller_bbh_GetHighscoreRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetHighscoreRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetHighscoreResponse> __Marshaller_bbh_GetHighscoreResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetHighscoreResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse> __Method_GetUsername = new grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse>(
         grpc::MethodType.Unary,
@@ -30,6 +32,13 @@ namespace Bbh {
         "SetUsername",
         __Marshaller_bbh_SetUsernameRequest,
         __Marshaller_bbh_SetUsernameResponse);
+
+    static readonly grpc::Method<global::Bbh.GetHighscoreRequest, global::Bbh.GetHighscoreResponse> __Method_GetHighscore = new grpc::Method<global::Bbh.GetHighscoreRequest, global::Bbh.GetHighscoreResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetHighscore",
+        __Marshaller_bbh_GetHighscoreRequest,
+        __Marshaller_bbh_GetHighscoreResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -47,6 +56,11 @@ namespace Bbh {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbh.SetUsernameResponse> SetUsername(global::Bbh.SetUsernameRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbh.GetHighscoreResponse> GetHighscore(global::Bbh.GetHighscoreRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -108,6 +122,22 @@ namespace Bbh {
       {
         return CallInvoker.AsyncUnaryCall(__Method_SetUsername, null, options, request);
       }
+      public virtual global::Bbh.GetHighscoreResponse GetHighscore(global::Bbh.GetHighscoreRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetHighscore(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbh.GetHighscoreResponse GetHighscore(global::Bbh.GetHighscoreRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetHighscore, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetHighscoreResponse> GetHighscoreAsync(global::Bbh.GetHighscoreRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetHighscoreAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetHighscoreResponse> GetHighscoreAsync(global::Bbh.GetHighscoreRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetHighscore, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ClientServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -121,7 +151,8 @@ namespace Bbh {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetUsername, serviceImpl.GetUsername)
-          .AddMethod(__Method_SetUsername, serviceImpl.SetUsername).Build();
+          .AddMethod(__Method_SetUsername, serviceImpl.SetUsername)
+          .AddMethod(__Method_GetHighscore, serviceImpl.GetHighscore).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -132,6 +163,7 @@ namespace Bbh {
     {
       serviceBinder.AddMethod(__Method_GetUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse>(serviceImpl.GetUsername));
       serviceBinder.AddMethod(__Method_SetUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.SetUsernameRequest, global::Bbh.SetUsernameResponse>(serviceImpl.SetUsername));
+      serviceBinder.AddMethod(__Method_GetHighscore, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetHighscoreRequest, global::Bbh.GetHighscoreResponse>(serviceImpl.GetHighscore));
     }
 
   }
