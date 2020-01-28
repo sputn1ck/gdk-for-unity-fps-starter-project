@@ -366,6 +366,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cb7a25282753d4084924a04551b79b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1050586127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1777683590433377067, guid: d52364553e6842940944c62b73e5e1b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345553512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f120075a52fe7074ba4b5a1f8c2fcc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1173687591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -948,6 +960,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462247450331177244, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1050586127}
+    - target: {fileID: 3462247450331177244, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectRifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462247450331177244, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462247450331177244, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472417235679009317, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1050586127}
+    - target: {fileID: 6472417235679009317, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectShotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472417235679009317, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497102236633243450, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1050586127}
+    - target: {fileID: 8497102236633243450, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectSniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497102236633243450, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497102236633243450, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 417031352150435035, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 417031352150435035, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 417031352150435035, guid: d52364553e6842940944c62b73e5e1b1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5660378
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7635716197871840528, guid: d52364553e6842940944c62b73e5e1b1, type: 3}
