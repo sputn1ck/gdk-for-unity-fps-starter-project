@@ -10,7 +10,6 @@ public class ClientPlayerSkillBehaviour : MonoBehaviour
 {
     [Require] private PlayerSkillComponentCommandSender PlayerSkillComponentCommandSender;
     private LinkedEntityComponent LinkedEntityComponent;
-
     public bool castTeleport;
     private void OnEnable()
     {
@@ -37,12 +36,17 @@ public class ClientPlayerSkillBehaviour : MonoBehaviour
         PlayerSkillComponentCommandSender.SendActivateSkillCommand(LinkedEntityComponent.EntityId, new ActivateSkillRequest(0), ActivateSkillCallback);
     }
 
+
     void ActivateSkillCallback(PlayerSkillComponent.ActivateSkill.ReceivedResponse response)
     {
         // TODO show cooldown in UI;
         if(response.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
-
+            var skill = SkillDictionary.Get(response.ResponsePayload.Value.Id);
+            if (skill != null)
+            {
+                skill.ClientCastSkill(this);
+            }
         } else
         {
             // TODO blink ui button in red or something

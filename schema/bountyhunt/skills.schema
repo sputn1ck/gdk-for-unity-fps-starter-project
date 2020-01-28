@@ -5,9 +5,18 @@ import "bountyhunt/common.schema";
 component PlayerSkillComponent {
     id = 450001;
     list<int32> skills = 1;
-    command bountyhunt.Empty activate_skill(ActivateSkillRequest);
+    command ActivateSkillResponse activate_skill(ActivateSkillRequest);
+    event ActivatedSkillEvent activated_skill_event;
 }
 
 type ActivateSkillRequest{
+    int32 id = 1;
+}
+
+type ActivateSkillResponse {
+    int32 id = 1;
+}
+
+type ActivatedSkillEvent {
     int32 id = 1;
 }

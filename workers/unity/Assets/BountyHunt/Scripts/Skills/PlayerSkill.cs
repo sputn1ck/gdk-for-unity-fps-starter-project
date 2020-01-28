@@ -10,16 +10,38 @@ using Fps.SchemaExtensions;
 public abstract class PlayerSkill : ScriptableObject
 {
     public float Cooldown;
+    public abstract void ServerCastSkill(ServerPlayerSkillBehaviour player);
+    public abstract void ClientCastSkill(ClientPlayerSkillBehaviour player);
 
-    public abstract void CastSkill(ServerPlayerSkillBehaviour player);
+    public abstract void NonAuthorativeCastSkill(NonAuthorativePlayerSkillBehaviour player);
 }
 
+public abstract class PayloadSkill : PlayerSkill
+{
+    public abstract string GetPayloadString();
+    
+}
+public abstract class TimedSkill : PlayerSkill
+{
+    public float castTime;
+    public override void ServerCastSkill(ServerPlayerSkillBehaviour player)
+    {
+        player.StartCoroutine(CastTime(player));
+    }
+    private IEnumerator CastTime(ServerPlayerSkillBehaviour player)
+    {
+        yield return new WaitForSeconds(castTime);
+        RealCast(player);
+    }
+    public abstract void RealCast(ServerPlayerSkillBehaviour player);
+}
 [CreateAssetMenu(menuName = "BBH/Skills/Teleport", order = 1)]
 public class TeleportSkill : PlayerSkill
 {
     public float Distance;
-    public override void CastSkill(ServerPlayerSkillBehaviour player)
+    public override void ServerCastSkill(ServerPlayerSkillBehaviour player)
     {
+        JsonUtility.FromJson("", typeof(TeleportPayload));
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
         var pos = new Vector3(teleport.x, 75, teleport.y);
@@ -52,5 +74,20 @@ public class TeleportSkill : PlayerSkill
             Coords = Coordinates.FromUnityVector(pos)
         };
         player.spatialPosition.SendUpdate(spatialPositionUpdate);
+    }
+
+    public override void ClientCastSkill(ClientPlayerSkillBehaviour player)
+    {
+        Debug.Log("casted teleport");
+    }
+
+    public override void NonAuthorativeCastSkill(NonAuthorativePlayerSkillBehaviour player)
+    {
+        Debug.LogError("other player casted teleport");
+    }
+
+    public struct TeleportPayload
+    {
+        public float distance { get; set; }
     }
 }
