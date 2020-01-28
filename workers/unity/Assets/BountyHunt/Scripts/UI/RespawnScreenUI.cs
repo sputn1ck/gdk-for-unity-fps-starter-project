@@ -1,3 +1,4 @@
+using Fps.Movement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,8 +40,7 @@ public class RespawnScreenUI : ScreenUI
     {
         if (doIt)
         {
-            //TODO
-            //DonnerPlayerAuthorative.instance.changeGunId(0);
+            FpsDriver.instance.ChangeGunId(0);
         }
     }
 
@@ -48,16 +48,14 @@ public class RespawnScreenUI : ScreenUI
     {
         if (doIt)
         {
-            //TODO
-            //DonnerPlayerAuthorative.instance.changeGunId(1);
+            FpsDriver.instance.ChangeGunId(1);
         }
     }
     public void SelectShotgun(bool doIt)
     {
         if (doIt)
         {
-            //TODO
-            //DonnerPlayerAuthorative.instance.changeGunId(2);
+            FpsDriver.instance.ChangeGunId(2);
         }
     }
 }

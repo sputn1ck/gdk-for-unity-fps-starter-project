@@ -26,6 +26,6 @@ namespace Fps.Guns
             return Instance.gunsList[index];
         }
 
-        private static int Count => Instance.gunsList.Length;
+        public static int Count => Instance.gunsList.Length;
     }
 }

@@ -60,7 +60,7 @@ public class DonnerEntityTemplates
         var clientMovement = new ClientMovement.Snapshot { Latest = new ClientRequest() };
         var clientRotation = new ClientRotation.Snapshot { Latest = rotationUpdate };
         var shootingComponent = new ShootingComponent.Snapshot();
-        var gunComponent = new GunComponent.Snapshot { GunId = PlayerGunSettings.DefaultGunIndex };
+        var gunComponent = new GunComponent.Snapshot { GunId = loginData.RequestedWeapon};
         var gunStateComponent = new GunStateComponent.Snapshot { IsAiming = false };
         var healthComponent = new HealthComponent.Snapshot
         {

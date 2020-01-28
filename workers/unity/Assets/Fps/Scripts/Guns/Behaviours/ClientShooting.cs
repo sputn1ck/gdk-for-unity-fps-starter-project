@@ -51,6 +51,7 @@ namespace Fps.Guns
         {
             shotTrigger.Fire();
         }
+      
 
         // Returns true if the player can shoot.
         // (If shooting is held for an automatic gun, or if a shot has been buffered for a non-automatic.)

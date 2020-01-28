@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
+using Fps.Guns;
 using Fps.SchemaExtensions;
 using Improbable;
 using Improbable.Gdk.Core;
@@ -13,6 +14,8 @@ namespace Fps.Respawning
         [Require] private HealthComponentWriter health;
         [Require] private ServerMovementWriter serverMovement;
         [Require] private PositionWriter spatialPosition;
+        [Require] private GunStateComponentReader gunState;
+        [Require] private GunComponentWriter gun;
 
         private LinkedEntityComponent spatial;
 
@@ -61,6 +64,12 @@ namespace Fps.Respawning
                 TimeDelta = 0
             };
             serverMovement.SendForcedRotationEvent(forceRotationRequest);
+
+            // Set new Gun
+            var newGunId = gunState.Data.NewGunId;
+            if (newGunId > GunDictionary.Count - 1 || newGunId < 0)
+                newGunId = 0;
+            gun.SendUpdate(new GunComponent.Update() { GunId = newGunId });
 
             // Trigger the respawn event.
             health.SendRespawnEvent(new Empty());

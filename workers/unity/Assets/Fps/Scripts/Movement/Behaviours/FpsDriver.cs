@@ -245,7 +245,10 @@ namespace Fps.Movement
                 fpsAnimator.Jump();
             }
         }
-
+        public void ChangeGunId(int newGunId)
+        {
+            gunState.SendUpdate(new GunStateComponent.Update() {  NewGunId= newGunId });
+        }
         private void OnForcedRotation(RotationUpdate forcedRotation)
         {
             var newPitch = Mathf.Clamp(forcedRotation.Pitch.ToFloat1k(), -cameraSettings.MaxPitch,
