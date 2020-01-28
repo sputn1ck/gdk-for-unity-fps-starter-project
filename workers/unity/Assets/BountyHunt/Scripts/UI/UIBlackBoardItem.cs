@@ -7,11 +7,13 @@ using Bountyhunt;
 
 public class UIBlackBoardItem : MonoBehaviour
 {
+    public TextMeshProUGUI rankText;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI bountyText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI deathsText;
     public Image backGround;
+    Color defaultBackgroundColor;
 
     //public TextMeshProUGUI lastSeenText;
     //public TextMeshProUGUI costText;
@@ -34,15 +36,61 @@ public class UIBlackBoardItem : MonoBehaviour
         
     }
 
-    public void SetText(ScoreboardItem item)
+    public void SetAsPlaceholder()
+    {
+        rankText.text = "";
+        nameText.text = "...";
+        bountyText.text = "";
+        killsText.text = "";
+        deathsText.text = "";
+
+    }
+
+    public void SetText(ScoreboardUIItem item)
     {
         //idText.text = item.Entity.Id.ToString();
-        nameText.text = ClientGameStats.instance.idToName(item.Entity);
-        bountyText.text = item.Bounty.ToString();
-        killsText.text = item.Kills.ToString();
-        deathsText.text = item.Deaths.ToString();
+
+        rankText.text = item.rank.ToString();
+        nameText.text = item.name;
+        bountyText.text = item.item.Bounty.ToString();
+        killsText.text = item.item.Kills.ToString();
+        deathsText.text = item.item.Deaths.ToString();
+
+        if (item.highlight) backGround.color = ScoreboardUI.instance.BlackBoardItemColorHighlight;
+        else backGround.color = defaultBackgroundColor;
+
+        //nameText.text = ClientGameStats.instance.idToName(item.Entity);
+        //bountyText.text = item.Bounty.ToString();
+        //killsText.text = item.Kills.ToString();
+        //deathsText.text = item.Deaths.ToString();
+
+
         //lastSeenText.text = item.LastSeen.X + ":" + item.LastSeen.Z;
         //costText.text = "~"+DonnerUtils.CalculateTeleportCost(DonnerPlayerAuthorative.instance.transform.position, new Vector3(item.LastSeen.X, DonnerPlayerAuthorative.instance.transform.position.y, item.LastSeen.Z)).ToString() + " sats";
     }
 
+    public void setDefaultBackgroundColor(Color c)
+    {
+        defaultBackgroundColor = c;
+        backGround.color = defaultBackgroundColor;
+    }
+
 }
+
+
+public class ScoreboardUIItem
+{
+    public string name;
+    public ScoreboardItem item;
+    public bool highlight;
+    public int rank;
+
+    public ScoreboardUIItem(string playerName, ScoreboardItem item)
+    {
+        name = playerName;
+        this.item = item;
+        highlight = false;
+        rank = 0;
+    }
+}
+

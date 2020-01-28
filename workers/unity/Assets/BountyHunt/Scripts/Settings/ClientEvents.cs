@@ -20,7 +20,7 @@ public class ClientEvents : MonoBehaviour
        
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
     [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
-    [HideInInspector] public ScoreboardItemListEvent onScoreboardUpdate = new ScoreboardItemListEvent();
+    [HideInInspector] public ScoreboardUIItemListEvent onScoreboardUpdate = new ScoreboardUIItemListEvent();
 
 
     private void Awake()

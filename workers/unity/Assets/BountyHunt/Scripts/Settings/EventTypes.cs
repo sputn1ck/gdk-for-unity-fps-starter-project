@@ -1,4 +1,5 @@
 using Bountyhunt;
+using Improbable.Gdk.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public class LongEvent : UnityEvent<long> { }
 public class StringEvent : UnityEvent<string> { }
 public class Vector2Event : UnityEvent<Vector2> { }
 public class GameObjectEvent : UnityEvent<GameObject> { }
-public class ScoreboardItemListEvent : UnityEvent<List<ScoreboardItem>> { }
+public class ScoreboardUIItemListEvent : UnityEvent<List<ScoreboardUIItem>,EntityId> { }
 [Serializable]public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
 [Serializable] public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
 

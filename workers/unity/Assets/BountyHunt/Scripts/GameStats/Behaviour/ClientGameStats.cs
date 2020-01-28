@@ -19,6 +19,7 @@ public class ClientGameStats : MonoBehaviour
     {
         GameStatsReader.OnScoreboardUpdate += OnScoreboardUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
+        sendScoreBoardEvent(GameStatsReader.Data.Scoreboard);
     }
 
     private void OnKillEvent(KillInfo obj)
@@ -31,8 +32,23 @@ public class ClientGameStats : MonoBehaviour
 
     private void OnScoreboardUpdate(Scoreboard obj)
     {
-        ClientEvents.instance.onScoreboardUpdate.Invoke(obj.Board);
+        sendScoreBoardEvent(obj);
 
+    }
+    private void sendScoreBoardEvent(Scoreboard obj)
+    {
+        List<ScoreboardUIItem> itemList = new List<ScoreboardUIItem>();
+
+        foreach (ScoreboardItem i in obj.Board)
+        {
+            itemList.Add(new ScoreboardUIItem(idToName(i.Entity), i));
+        }
+        EntityId playerID = new EntityId(-1);
+        if (Fps.Movement.FpsDriver.instance != null)
+        {
+            playerID = Fps.Movement.FpsDriver.instance.getEntityID();
+        }
+        ClientEvents.instance.onScoreboardUpdate.Invoke(itemList, playerID);
     }
 
     // Update is called once per frame
@@ -43,6 +59,12 @@ public class ClientGameStats : MonoBehaviour
 
     public string idToName(EntityId id)
     {
+        if (GameStatsReader == null)
+        {
+            Debug.LogError("No GameStatsReader found!");
+            return "ERROR: GameStatsReader not found!";
+        }
+
         if (GameStatsReader.Data.PlayerNames.ContainsKey(id))
         {
             return GameStatsReader.Data.PlayerNames[id];

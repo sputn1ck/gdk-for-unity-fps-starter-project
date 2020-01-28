@@ -12,6 +12,7 @@ using Fps.Config;
 using Improbable.Worker.CInterop;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
+using System.Linq;
 
 public class ServerGameStats : MonoBehaviour
 {
@@ -28,10 +29,14 @@ public class ServerGameStats : MonoBehaviour
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
         var nameMap = GameStatsWriter.Data.PlayerNames;
+        var scoreBoard = GameStatsWriter.Data.Scoreboard;
         if (nameMap.ContainsKey(obj.Payload.Id))
         {
             nameMap.Remove(obj.Payload.Id);
-            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap });
+            var user = scoreBoard.Board.Find(u => u.Entity == obj.Payload.Id);
+            if(scoreBoard.Board.Contains(user))
+                scoreBoard.Board.Remove(user);
+            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap, Scoreboard = scoreBoard });
         }
     }
 

@@ -12,14 +12,31 @@ public class ScoreboardUI : ScreenUI
     public List<UIBlackBoardItem> uIBlackBoardItems;
     public static ScoreboardUI instance;
     public ScoreBoardSorting sorting = ScoreBoardSorting.BOUNTY;
-    public UIBlackBoardItem playerItem;
-    List<ScoreboardItem> ScoreboardItems;
+    List<ScoreboardUIItem> ScoreboardUIItems;
+
+    bool reverseSorting = false;
 
     public Toggle sortBtnBounty;
     public Toggle sortBtnKills;
     public Toggle sortBtnDeaths;
 
+    public Color BlackBoardItemColorVariant1;
+    public Color BlackBoardItemColorVariant2;
+    public Color BlackBoardItemColorHighlight;
+
     EntityId playerID;
+
+    protected override void Awake()
+    {
+        
+        base.Awake();
+        instance = this;
+
+
+        ClientEvents.instance.onPlayerSpawn.AddListener(OnPlayerspawn);
+        ClientEvents.instance.onScoreboardUpdate.AddListener(UpdateScoreboard);
+    }
+
 
     void OnPlayerspawn(GameObject g)
     {
@@ -28,12 +45,11 @@ public class ScoreboardUI : ScreenUI
 
     private void Start()
     {
-        ClientEvents.instance.onPlayerSpawn.AddListener(OnPlayerspawn);
-        ClientEvents.instance.onScoreboardUpdate.AddListener(UpdateScoreboard);
+
         for (int i = 0; i < uIBlackBoardItems.Count; i++)
         {
-            if (i % 2 == 0) uIBlackBoardItems[i].backGround.gameObject.SetActive(false);
-            else uIBlackBoardItems[i].backGround.gameObject.SetActive(true);
+            if (i % 2 == 0) uIBlackBoardItems[i].setDefaultBackgroundColor(BlackBoardItemColorVariant1);
+            else uIBlackBoardItems[i].setDefaultBackgroundColor(BlackBoardItemColorVariant2);
         }
 
         sortBtnBounty.onValueChanged.AddListener(SetSortingToBounty);
@@ -50,14 +66,18 @@ public class ScoreboardUI : ScreenUI
         gameObject.SetActive(false);
     }
 
-    public void UpdateScoreboard(List<ScoreboardItem> update)
+    public void UpdateScoreboard(List<ScoreboardUIItem> update, EntityId playerID)
     {
-        ScoreboardItems = update;
+        this.playerID = playerID;  
+        ScoreboardUIItems = update;
         RefreshScoreBoard();
     }
 
     public void UpdateSorting(ScoreBoardSorting sorting)
     {
+        if (sorting == this.sorting) reverseSorting = !reverseSorting;
+        else reverseSorting = false;
+
         this.sorting = sorting;
         RefreshScoreBoard();
     }
@@ -89,36 +109,114 @@ public class ScoreboardUI : ScreenUI
 
     public void RefreshScoreBoard()
     {
-        switch (sorting)
+
+        if (!reverseSorting)
         {
-            case ScoreBoardSorting.BOUNTY:
-                ScoreboardItems = ScoreboardItems.OrderByDescending(o => o.Bounty).ToList();
-                break;
-            case ScoreBoardSorting.KILLS:
-                ScoreboardItems = ScoreboardItems.OrderByDescending(o => o.Kills).ToList();
-                break;
-            case ScoreBoardSorting.DEATHS:
-                ScoreboardItems = ScoreboardItems.OrderByDescending(o => o.Deaths).ToList();
-                break;
-            default:
-                break;
+            switch (sorting)
+            {
+                case ScoreBoardSorting.BOUNTY:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderByDescending(o => o.item.Bounty).ToList();
+                    break;
+                case ScoreBoardSorting.KILLS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderByDescending(o => o.item.Kills).ToList();
+                    break;
+                case ScoreBoardSorting.DEATHS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderByDescending(o => o.item.Deaths).ToList();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (sorting)
+            {
+                case ScoreBoardSorting.BOUNTY:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderBy(o => o.item.Bounty).ToList();
+                    break;
+                case ScoreBoardSorting.KILLS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderBy(o => o.item.Kills).ToList();
+                    break;
+                case ScoreBoardSorting.DEATHS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderBy(o => o.item.Deaths).ToList();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        for (int i = 0;i < ScoreboardUIItems.Count; i++)
+        {
+            ScoreboardUIItems[i].rank=i + 1;
         }
         
-        ScoreboardItem playerBBI = ScoreboardItems.Find(x => x.Entity.Id == playerID.Id);
-        playerItem.SetText(playerBBI);
+        int topListLength = uIBlackBoardItems.Count;
+        ScoreboardUIItem playerBBI = ScoreboardUIItems.Find(x => x.item.Entity.Id == playerID.Id);
+        if (playerBBI != null)
+        {
+            playerBBI.highlight = true;
+            int playerRank = ScoreboardUIItems.IndexOf(playerBBI);
 
-        int i = 0;
-        foreach (var item in ScoreboardItems)
-        {
-            if (i == uIBlackBoardItems.Count) break;
-            uIBlackBoardItems[i].Enable();
-            uIBlackBoardItems[i].SetText(item);
-            i++;
+            if(playerRank >= uIBlackBoardItems.Count)
+            {
+                UIBlackBoardItem bbItem;
+
+                if(playerRank == ScoreboardUIItems.Count - 1)
+                {
+                    topListLength = uIBlackBoardItems.Count - 3;
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 3];
+                    bbItem.Enable();
+                    bbItem.SetAsPlaceholder();
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 2];
+                    bbItem.Enable();
+                    bbItem.SetText(ScoreboardUIItems[playerRank-1]);
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 1];
+                    bbItem.Enable();
+                    bbItem.SetText(playerBBI);
+                }
+
+                else
+                {
+
+                    topListLength = uIBlackBoardItems.Count - 4;
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 4];
+                    bbItem.Enable();
+                    bbItem.SetAsPlaceholder();
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 3];
+                    bbItem.Enable();
+                    bbItem.SetText(ScoreboardUIItems[playerRank - 1]);
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 2];
+                    bbItem.Enable();
+                    bbItem.SetText(playerBBI);
+
+                    bbItem = uIBlackBoardItems[uIBlackBoardItems.Count - 1];
+                    bbItem.Enable();
+                    bbItem.SetText(ScoreboardUIItems[playerRank + 1]);
+                }
+
+            }
+        
         }
-        for (int j = i; j < uIBlackBoardItems.Count; j++)
-        {
-            uIBlackBoardItems[j].Disable();
+
+        for(int i = 0; i < topListLength; i++) {
+            if(i>=ScoreboardUIItems.Count)
+            {
+                uIBlackBoardItems[i].Disable();
+            }
+            else
+            {
+                
+                uIBlackBoardItems[i].Enable();
+                uIBlackBoardItems[i].SetText(ScoreboardUIItems[i]);
+            }
         }
+
     }
 
 
