@@ -41,5 +41,14 @@ namespace Fps.Guns
         {
             gunSettings = settings;
         }
+        public Ray[] GetShotgunRays(bool aiming, Camera camera, int pellets)
+        {
+            Ray[] rays = new Ray[pellets];
+            for (int i = 0; i < rays.Length; i++)
+            {
+                rays[i] = GetShotRay(aiming, camera);
+            }
+            return rays;
+        }
     }
 }

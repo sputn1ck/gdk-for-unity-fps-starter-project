@@ -13,6 +13,8 @@ namespace Fps.Guns
         [SerializeField] private Color shotColour;
         [SerializeField] private float shotDamage;
         [SerializeField] private float shotRange;
+
+        [SerializeField] private int pelletsPerShot;
         [SerializeField] private float bulletRenderLength;
         [SerializeField] private float shotRenderTime;
 
@@ -53,6 +55,8 @@ namespace Fps.Guns
         public Color ShotColour => shotColour;
 
         public float ShotDamage => shotDamage;
+
+        public int PelletsPerShot => pelletsPerShot;
 
         public float BulletRenderLength => bulletRenderLength;
 

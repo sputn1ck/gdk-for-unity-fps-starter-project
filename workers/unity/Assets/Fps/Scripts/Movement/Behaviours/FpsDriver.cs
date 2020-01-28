@@ -201,9 +201,24 @@ namespace Fps.Movement
 
         private void FireShot(GunSettings gunSettings)
         {
-            var ray = shotRayProvider.GetShotRay(gunState.Data.IsAiming, camera);
-            shooting.FireShot(gunSettings.ShotRange, ray);
-            shooting.InitiateCooldown(gunSettings.ShotCooldown);
+            if (gunSettings.PelletsPerShot > 1)
+            {
+                var rays = shotRayProvider.GetShotgunRays(gunState.Data.IsAiming, camera, gunSettings.PelletsPerShot);
+                for (int i = 0; i < rays.Length; i++)
+                {
+                    shooting.FireShot(gunSettings.ShotRange, rays[i]);
+                }
+
+                shooting.InitiateCooldown(gunSettings.ShotCooldown);
+
+            }
+            else
+            {
+
+                var ray = shotRayProvider.GetShotRay(gunState.Data.IsAiming, camera);
+                shooting.FireShot(gunSettings.ShotRange, ray);
+                shooting.InitiateCooldown(gunSettings.ShotCooldown);
+            }
         }
 
         private void Aiming(bool shouldBeAiming)
