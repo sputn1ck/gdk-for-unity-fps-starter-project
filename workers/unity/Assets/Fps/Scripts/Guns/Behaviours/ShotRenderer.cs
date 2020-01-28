@@ -196,7 +196,7 @@ namespace Fps.Guns
             }
 
             var bullet = bulletPool.Get();
-            bullet.Renderer.material.color = gunSettings.ShotColour;
+            bullet.Renderer.material.SetColor("Colour",gunSettings.ShotColour);
             activeBulletDetails.Add(bullet, new BulletDetails());
 
             StartCoroutine(Shot(bullet, hitPoint - GunBarrel.position, hit));
