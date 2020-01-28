@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7396859aec6fc045bf636535efee60a, type: 3}
+  m_Name: ShotgunSettings
+  m_EditorClassIdentifier: 
+  gunModel: {fileID: 1094674594523164, guid: ba906e05d8824654bb9415e685f066ec, type: 3}
+  impactEffect: {fileID: 1419766690294392, guid: c2d7fdb027d8e4f428cc314bc239a499,
+    type: 3}
+  muzzleFlashEffect: {fileID: 1884555819358432, guid: 70a6f8e8ee490e842b7d17c204ddcaa0,
+    type: 3}
+  bulletLineRenderer: {fileID: 1329646125381318, guid: c558db19813dfea4db657ff3a6f3c521,
+    type: 3}
+  shotColour: {r: 0.07971394, g: 1, b: 0, a: 1}
+  shotDamage: 8
+  shotRange: 40
+  pelletsPerShot: 20
+  bulletRenderLength: 10
+  shotRenderTime: 0.1
+  isAutomatic: 0
+  rateOfFire: 1
+  shotCooldown: 1
+  hipRecoil:
+    FirstPersonRecoil:
+      MinXVariance: -1
+      MaxXVariance: 1
+      MinYVariance: -1
+      MaxYVariance: 1
+      MinZVariance: -1
+      MaxZVariance: -1
+      VelocityDamper: 10
+      OffsetDamper: 10
+    ThirdPersonRecoil:
+      RecoilStrength: 1
+      RecoilTime: 0.1
+      ResetTime: 0.2
+  aimRecoil:
+    FirstPersonRecoil:
+      MinXVariance: -0.5
+      MaxXVariance: 0.5
+      MinYVariance: -0.5
+      MaxYVariance: 0.5
+      MinZVariance: -0.5
+      MaxZVariance: 0.5
+      VelocityDamper: 10
+      OffsetDamper: 10
+    ThirdPersonRecoil:
+      RecoilStrength: 0.5
+      RecoilTime: 0.1
+      ResetTime: 0.2
+  aimFov: 36
+  fovChangeTime: 0.1
+  inaccuracyFromHip: 8
+  inaccuracyWhileAiming: 4
+  aimPitchSpeed: 1
+  aimYawSpeed: 1
