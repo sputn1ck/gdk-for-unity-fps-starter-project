@@ -10,7 +10,7 @@ using Fps.Config;
 public class BountyPlayerAuthorative : MonoBehaviour
 {
 
-    [Require] HunterComponentReader HunterComponentReader;
+    [Require] public HunterComponentReader HunterComponentReader;
 
     private long lastBounty;
     private long lastEarnings;

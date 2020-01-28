@@ -1,0 +1,38 @@
+package chat;
+
+component Chat {
+    id = 510001;
+    command Empty send_message(ChatRequest);
+    event ChatMessage chat_message;
+}
+
+component PrivateChat{
+    id = 510002;
+    command Empty send_message(ChatMessage);
+}
+
+type Empty {
+
+}
+
+type ChatRequest {
+    string name = 1;
+    string message = 2;
+}
+
+type ChatMessage {
+    int64 timestamp = 1;
+    int64 entity_id = 2;
+    string sender = 3;
+    string message = 4;
+    MessageType type = 5;
+    bool show_announcement = 6;
+}
+
+enum MessageType{
+    PLAYER_CHAT = 0;
+    ERROR_LOG = 1;
+    INFO_LOG = 2;
+    DEBUG_LOG = 3;
+    AUCTION_LOG = 4;
+}

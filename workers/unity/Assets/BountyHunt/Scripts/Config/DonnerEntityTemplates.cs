@@ -14,6 +14,7 @@ using Fps.Guns;
 using Fps.SchemaExtensions;
 using Bountyhunt;
 using System.Collections.Generic;
+using Chat;
 
 public class DonnerEntityTemplates
 {
@@ -79,8 +80,8 @@ public class DonnerEntityTemplates
         };
 
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
-
-        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery);
+        var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
+        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery);
         var interestComponent = interestTemplate.ToSnapshot();
 
         // NEW STUFF
@@ -95,6 +96,7 @@ public class DonnerEntityTemplates
         {
             Skills = new List<int>() { 0 },
         };
+        var chatComponent = new PrivateChat.Snapshot();
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
@@ -133,6 +135,7 @@ public class DonnerEntityTemplates
         // NEW STUFF
         template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(skillComponent, WorkerUtils.UnityGameLogic);
+        template.AddComponent(chatComponent, client);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);
@@ -221,11 +224,14 @@ public class DonnerEntityTemplates
         var gameStatsComponent = new GameStats.Snapshot();
         gameStatsComponent.Scoreboard = new Scoreboard(new System.Collections.Generic.List<ScoreboardItem>());
         gameStatsComponent.PlayerNames = new System.Collections.Generic.Dictionary<EntityId, string>();
+        var chatComponent = new Chat.Chat.Snapshot();
+
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(boutySpawnerComponent, WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(gameStatsComponent, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
