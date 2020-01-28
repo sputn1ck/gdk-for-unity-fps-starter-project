@@ -43,25 +43,3 @@ public class ClientEvents : MonoBehaviour
 
 }
 
-
-[Serializable]
-public struct BountyUpdateEventArgs
-{
-    public long NewAmount;
-    public long OldAmount;
-    public Bountyhunt.BountyReason Reason;
-}
-
-[Serializable]
-public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
-
-[Serializable]
-public struct EarningsUpdateEventArgs
-{
-    public long NewAmount;
-    public long OldAmount;
-}
-
-[Serializable]
-
-public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }

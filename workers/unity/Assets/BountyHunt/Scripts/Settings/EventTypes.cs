@@ -35,3 +35,7 @@ public struct EarningsUpdateEventArgs
     public long NewAmount;
     public long OldAmount;
 }
+
+[Serializable]
+public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
+
