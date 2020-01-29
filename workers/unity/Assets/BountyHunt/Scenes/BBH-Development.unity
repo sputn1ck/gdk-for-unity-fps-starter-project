@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: onBountyUpdate.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6155843011314803828, guid: 265b840c3541fb249bdad092798bb49c,
+        type: 3}
+      propertyPath: UseDummy
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 265b840c3541fb249bdad092798bb49c, type: 3}
 --- !u!1 &685486277 stripped
@@ -331,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: localhost
+  getHighscoreTrigger: 0
 --- !u!114 &1071136913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6016,6 +6022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: localhost
+  getHighscoreTrigger: 0
 --- !u!1001 &2007593797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6068,7 +6075,7 @@ PrefabInstance:
     - target: {fileID: 114510834623507516, guid: a18c738cbcda9914591d9af24a618907,
         type: 3}
       propertyPath: MaxSimulatedPlayerCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18c738cbcda9914591d9af24a618907, type: 3}
@@ -6129,7 +6136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1813844308, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
       propertyPath: UseDummy
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
