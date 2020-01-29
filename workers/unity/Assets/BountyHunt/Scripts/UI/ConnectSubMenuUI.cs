@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Grpc.Core;
+
 public class ConnectSubMenuUI : SubMenuUI
 {
     public SubMenuUI serverMenu;
@@ -79,14 +81,24 @@ public class ConnectSubMenuUI : SubMenuUI
     private async void getNameAndPubkey()
     {
         var pubkey = LnClient.instance.GetPubkey();
-        var name = await BackendPlayerBehaviour.instance.client.GetUsername(pubkey);
-        if (pubkey == name)
+        try
         {
-            setName = true;
-        }
-        else
+
+            var name = await BackendPlayerBehaviour.instance.client.GetUsername(pubkey);
+            if (pubkey == name)
+            {
+                setName = true;
+            }
+            else
+            {
+                setName = false;
+
+                PlayerPrefs.SetString("playerName", name);
+                PlayerPrefs.Save();
+            }
+        } catch (RpcException e)
         {
-            setName = false;
+            Debug.Log(e);
         }
     }
 

@@ -312,6 +312,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f120075a52fe7074ba4b5a1f8c2fcc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1071136911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1455626031769568, guid: 75d29a39b8a626e42bdfc2e1d7af6746,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047321256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1071136912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071136911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447265b19b44ab341b7a636be767e827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: localhost
+--- !u!114 &1071136913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071136911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b7e8055d26f294bb3a2d1d624a8d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackendHost: localhost
+  testAmount: 0
+  testName: 
+  testTrigger: 0
 --- !u!1001 &1173687591
 PrefabInstance:
   m_ObjectHideFlags: 0

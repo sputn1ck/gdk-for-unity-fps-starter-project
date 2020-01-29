@@ -29,10 +29,13 @@ public class BountyPlayerServer : MonoBehaviour
         //StartCoroutine(BountyTick());
     }
 
-    void SetName()
+    //TODO hacky...
+    async void SetName()
     {
-        
-        GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(HunterComponentWriter.Data.Name, LinkedEntityComponent.EntityId));
+        var bbhbackend = FlagManager.instance.GetComponent<BackendPlayerBehaviour>();
+        var name = await bbhbackend.client.GetUsername(HunterComponentWriter.Data.Pubkey);
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = name });
+        GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(name, LinkedEntityComponent.EntityId));
     }
     private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)
     {
