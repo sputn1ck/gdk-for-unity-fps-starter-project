@@ -90,7 +90,8 @@ public class DonnerEntityTemplates
         {
             Earnings = 0,
             Bounty = 0,
-            Name = playerName
+            Name = playerName,
+            Pubkey = loginData.Pubkey
         };
         var skillComponent = new PlayerSkillComponent.Snapshot()
         {

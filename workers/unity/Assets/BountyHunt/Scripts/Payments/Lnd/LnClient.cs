@@ -81,7 +81,7 @@ public class DummyLnd : IClientLnd
     }
     public void Setup(string config, bool listen, bool apdata)
     {
-        pubkey = config;
+        pubkey = "pubkey" + UnityEngine.Random.Range(0, int.MaxValue);
     }
 
     public void ShutDown()
@@ -143,7 +143,7 @@ public class DummyLnd : IClientLnd
 
     public string GetPubkey()
     {
-        return "pubkey";
+        return this.pubkey;
     }
 
     public LnConf GetConfig()

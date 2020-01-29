@@ -9,6 +9,7 @@ component HunterComponent {
     int32 deaths = 3;
     int64 bounty = 4;
     int64 earnings = 5;
+    string pubkey = 6;
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
 }

@@ -4,13 +4,13 @@ using System;
 public struct LoginData
 {
     public string PlayerName;
-    public string AuthToken;
+    public string Pubkey;
     public int RequestedWeapon;
 
-    public LoginData(string playerName, string authToken, int requestedWeapon)
+    public LoginData(string playerName, string pubkey, int requestedWeapon)
     {
         PlayerName = playerName;
-        AuthToken = authToken;
+        Pubkey = pubkey;
         RequestedWeapon = requestedWeapon;
     }
 }

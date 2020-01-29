@@ -7,8 +7,12 @@ public class ConnectSubMenuUI : SubMenuUI
 {
     public SubMenuUI serverMenu;
     public SubMenuUI spawnMenu;
+
+    public SubMenuUI nameMenu;
     public TextMeshProUGUI errorText;
     public Button ConnectButton;
+
+    public bool setName;
 
     public void Connect()
     {
@@ -19,27 +23,35 @@ public class ConnectSubMenuUI : SubMenuUI
 
     public IEnumerator ConnectEnumerator()
     {
-        if (LndConnector.Instance.connectLocal)
+        if (setName)
         {
-            yield return LndConnector.Instance.GetPit();
-            LndConnector.Instance.deploymentId = "";
-            yield return LndConnector.Instance.GetLoginToken();
-            LndConnector.Instance.Connect();
-            spawnMenu.Select();
-        }
-        else
+            nameMenu.Select();
+        }else
         {
-            yield return LndConnector.Instance.GetPit();
-            serverMenu.Select();
+
+            if (LndConnector.Instance.connectLocal)
+            {
+                yield return LndConnector.Instance.GetPit();
+                LndConnector.Instance.deploymentId = "";
+                yield return LndConnector.Instance.GetLoginToken();
+                LndConnector.Instance.Connect();
+                spawnMenu.Select();
+            }
+            else
+            {
+                yield return LndConnector.Instance.GetPit();
+                serverMenu.Select();
+            }
         }
         
         
     }
 
+
     public void SetButtonFalse()
     {
         ConnectButton.interactable = false;
-        Invoke("SetButtonTrue", 5f);
+        Invoke("SetButtonTrue", 2f);
     }
 
     public void SetButtonTrue()
@@ -61,6 +73,21 @@ public class ConnectSubMenuUI : SubMenuUI
     {
         base.OnSelect();
         errorText.text = "";
+        getNameAndPubkey();
+    }
+
+    private async void getNameAndPubkey()
+    {
+        var pubkey = LnClient.instance.GetPubkey();
+        var name = await BackendPlayerBehaviour.instance.client.GetUsername(pubkey);
+        if (pubkey == name)
+        {
+            setName = true;
+        }
+        else
+        {
+            setName = false;
+        }
     }
 
 }

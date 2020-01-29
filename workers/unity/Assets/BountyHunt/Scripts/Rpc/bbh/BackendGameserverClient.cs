@@ -5,6 +5,7 @@ using Bbh;
 using System.Collections.Concurrent;
 using System.Threading;
 using System;
+using System.Threading.Tasks;
 
 public class BackendGameserverClient
 {
@@ -29,7 +30,6 @@ public class BackendGameserverClient
 
     public void Shutdown()
     {
-        
         ct.Cancel();
         listenThread.Abort();
     }
@@ -50,7 +50,7 @@ public class BackendGameserverClient
                                 await call.RequestStream.WriteAsync(current);
                             } catch (Grpc.Core.RpcException e)
                             {
-                                
+                                Debug.LogError(e);
                             }
                             
                         }
@@ -65,6 +65,7 @@ public class BackendGameserverClient
     public void AddToQueue(EventStreamRequest request)
     {
         eventQueue.Enqueue(request);
+        
     }
 
 }
