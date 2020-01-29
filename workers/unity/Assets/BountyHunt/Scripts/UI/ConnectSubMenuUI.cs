@@ -80,7 +80,8 @@ public class ConnectSubMenuUI : SubMenuUI
 
     private async void getNameAndPubkey()
     {
-        var pubkey = LnClient.instance.GetPubkey();
+        var getinfo = await LnClient.instance.lnd.GetInfo();
+        var pubkey = getinfo.IdentityPubkey;
         try
         {
 

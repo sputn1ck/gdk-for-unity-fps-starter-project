@@ -93,7 +93,7 @@ public class DummyLnd : IClientLnd
 
     public Task<GetInfoResponse> GetInfo()
     {
-        return Task.FromResult(new GetInfoResponse() { IdentityPubkey = "pubkey", SyncedToChain = false });
+        return Task.FromResult(new GetInfoResponse() { IdentityPubkey = pubkey, SyncedToChain = false });
     }
 
     public Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port)

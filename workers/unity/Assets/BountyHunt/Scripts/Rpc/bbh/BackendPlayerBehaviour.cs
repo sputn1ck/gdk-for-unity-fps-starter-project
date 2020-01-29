@@ -10,6 +10,7 @@ public class BackendPlayerBehaviour : MonoBehaviour
     public BackendPlayerClient client;
 
     public string target;
+    public bool getHighscoreTrigger;
     private void Awake()
     {
 
@@ -18,6 +19,26 @@ public class BackendPlayerBehaviour : MonoBehaviour
         client.Setup(target);
     }
 
+    private void Update()
+    {
+        if (getHighscoreTrigger)
+        {
+            getHighscoreTrigger = false;
+            getHighscore();
+        }
+    }
+
+    private async void getHighscore()
+    {
+        var res = await client.GetHighscore();
+        var s = "";
+        foreach(var h in res)
+        {
+            s += h.Name + ";" + h.Earnings + ";" + h.Kills + ";" + h.Deaths + "\n";
+        }
+        s = s.Replace("\n", System.Environment.NewLine);
+        Debug.Log(s);
+    }
     private void OnApplicationQuit()
     {
         client.Shutdown();

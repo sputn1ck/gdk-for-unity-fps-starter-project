@@ -49,11 +49,7 @@ namespace Fps.WorkerConnectors
         public void SpawnPlayer(int number)
         {
 
-
-
-
-
-            var loginData = new LoginData($"Donnerbot {number}", $"Donnerbot {number}", 0);
+            var loginData = new LoginData($"Donnerbot {number}", $"Donnerbot-{number}", UnityEngine.Random.Range(0,2));
             var serializedArgs = Encoding.ASCII.GetBytes(UnityEngine.JsonUtility.ToJson(loginData));
             var sendSystem = Worker.World.GetExistingSystem<SendCreatePlayerRequestSystem>();
             sendSystem.RequestPlayerCreation(serializedArgs);
