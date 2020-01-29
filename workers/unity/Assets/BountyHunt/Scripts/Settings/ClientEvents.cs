@@ -17,12 +17,13 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
-       
+
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
     [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
     [HideInInspector] public ScoreboardUIItemListEvent onScoreboardUpdate = new ScoreboardUIItemListEvent();
 
-    [HideInInspector] public ChatMessageEvent onChatMessage = new ChatMessageEvent();
+    [HideInInspector] public ChatMessageEvent onChatMessageRecieve = new ChatMessageEvent();
+    [HideInInspector] public StringColorEvent onAnnouncement = new StringColorEvent();
 
     private void Awake()
     {

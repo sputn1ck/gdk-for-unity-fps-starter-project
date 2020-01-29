@@ -14,10 +14,10 @@ public class StringEvent : UnityEvent<string> { }
 public class Vector2Event : UnityEvent<Vector2> { }
 public class GameObjectEvent : UnityEvent<GameObject> { }
 public class ScoreboardUIItemListEvent : UnityEvent<List<ScoreboardUIItem>,EntityId> { }
-[Serializable]public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
+[Serializable] public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
 [Serializable] public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
-
-
+public class StringColorEvent : UnityEvent<string, Color> { }
+[Serializable] public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
 
 
 
@@ -36,6 +36,4 @@ public struct EarningsUpdateEventArgs
     public long OldAmount;
 }
 
-[Serializable]
-public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
 

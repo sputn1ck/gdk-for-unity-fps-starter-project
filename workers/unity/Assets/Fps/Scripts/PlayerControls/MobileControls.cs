@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Fps.UI;
 using UnityEngine;
 
@@ -105,5 +105,7 @@ namespace Fps.PlayerControls
                 yield return null;
             }
         }
+
+        public bool ChatPressed { get; }
     }
 }

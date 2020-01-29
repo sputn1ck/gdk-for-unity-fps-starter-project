@@ -36,6 +36,7 @@ public class ClientGameChat : MonoBehaviour
 
     private void ChatReader_OnChatMessageEvent(ChatMessage obj)
     {
+
         Debug.Log(obj.Sender + ": " + obj.Message);
         /*
         if (obj.Sender == "SERVER")
@@ -52,7 +53,7 @@ public class ClientGameChat : MonoBehaviour
         }
         */
         //ChatPanelUI.instance.SpawnMessage(obj);
-        ClientEvents.instance.onChatMessage.Invoke(obj);
+        ClientEvents.instance.onChatMessageRecieve.Invoke(obj);
         if (obj.Sender == "AUCTION_STARTED")
         {
             ClientEvents.instance.onNewAuctionStarted.Invoke();

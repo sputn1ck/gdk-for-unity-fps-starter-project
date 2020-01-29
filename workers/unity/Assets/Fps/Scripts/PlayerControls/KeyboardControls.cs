@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Fps.PlayerControls
 {
@@ -26,6 +26,7 @@ namespace Fps.PlayerControls
         public bool MenuPressed => Input.GetKeyDown(KeyCode.Escape);
         public bool RespawnPressed => Input.GetKeyDown(KeyCode.Space);
         public bool ConnectPressed => Input.GetKeyDown(KeyCode.Space);
+        public bool ChatPressed => Input.GetKeyDown(KeyCode.T);
 
 
         private static bool Forward => Input.GetKey(KeyCode.W);
@@ -62,5 +63,6 @@ namespace Fps.PlayerControls
             cachedDirectionVectors[9] = forwardLeft;
             cachedDirectionVectors[10] = backwardLeft;
         }
+
     }
 }

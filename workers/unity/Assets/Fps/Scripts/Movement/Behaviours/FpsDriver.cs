@@ -35,6 +35,8 @@ namespace Fps.Movement
         private FpsAnimator fpsAnimator;
         private GunManager currentGun;
 
+        public bool editingInputfield;
+
         [SerializeField] private Transform pitchTransform;
         public new Camera camera;
 
@@ -77,10 +79,25 @@ namespace Fps.Movement
             Cursor.visible = false;
             serverMovement.OnForcedRotationEvent += OnForcedRotation;
             health.OnRespawnEvent += OnRespawn;
+            UnityEngine.EventSystems.EventSystem.current.sendNavigationEvents = false;
+
         }
 
         private void Update()
         {
+            if (UnityEngine.EventSystems.EventSystem.current.IsEditingInpputfield()||ChatPanelUI.instance.chatting)
+            {
+                movement.ApplyMovement(Vector3.zero, transform.rotation, MovementSpeed.Run, false);
+                Animations(false);
+                return;
+            }
+            
+            if (controller.ChatPressed)
+            {
+                ChatPanelUI.instance.StartChatInput();
+                return;
+            }
+
             if (controller.MenuPressed)
             {
                 BBHUIManager.instance.inGame.ToggleEscapeScreen();

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Fps.PlayerControls
 {
@@ -15,5 +15,6 @@ namespace Fps.PlayerControls
         bool ShootPressed { get; }
         bool ShootHeld { get; }
         bool ConnectPressed { get; }
+        bool ChatPressed { get; }
     }
 }

@@ -15,7 +15,7 @@ public class PlayerChat : MonoBehaviour
 
     private void PrivateChatCommandReceiver_OnSendMessageRequestReceived(PrivateChat.SendMessage.ReceivedRequest obj)
     {
-        ClientEvents.instance.onChatMessage.Invoke(obj.Payload);
+        ClientEvents.instance.onChatMessageRecieve.Invoke(obj.Payload);
         
     }
 }
