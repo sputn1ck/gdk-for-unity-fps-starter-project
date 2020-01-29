@@ -74,6 +74,7 @@ public class BountyKillSystem : ComponentSystem
             };
             if(victimDonnerInfo.Bounty > 0)
                 commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = victimDonnerInfo.Bounty, Position = pos } });
+            SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
             //PrometheusManager.TotalKills.Inc(1);
         }
     }
@@ -81,6 +82,15 @@ public class BountyKillSystem : ComponentSystem
     {
         componentUpdateSystem.SendEvent(new GameStats.UpdateScoreboardEvent.Event(new Bountyhunt.Empty()), new EntityId(2));
 
+    }
+
+    private void SendBackendUpdate(string killer, string victim)
+    {
+        var backend = BackendGameServerBehaviour.instance;
+        if (backend != null)
+        {
+            backend.AddKill(killer, victim);
+        }
     }
 
 }

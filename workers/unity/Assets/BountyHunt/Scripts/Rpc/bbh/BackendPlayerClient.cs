@@ -54,9 +54,9 @@ public class BackendPlayerClient
     public void Shutdown()
     {
 
-        Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
+        //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
         Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
         t.Wait(5000);
-        Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
+        //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
     }
 }

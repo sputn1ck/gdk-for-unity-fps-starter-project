@@ -57,6 +57,7 @@ public class BountyConversionSystem : ComponentSystem
                 var tick = calculateTick(hunterComponent.Bounty, percentage);
                 hunterComponent.Bounty = hunterComponent.Bounty - tick;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;
+                BackendGameServerBehaviour.instance.AddEarnings(hunterComponent.Pubkey, tick);
             });
 
     }

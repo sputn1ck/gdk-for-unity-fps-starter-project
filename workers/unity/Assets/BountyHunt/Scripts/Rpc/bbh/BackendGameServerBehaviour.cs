@@ -36,12 +36,12 @@ public class BackendGameServerBehaviour : MonoBehaviour
         }
     }
 
-    void AddKill(string killer, string victim)
+    public void AddKill(string killer, string victim)
     {
         backendClient.AddToQueue(new Bbh.EventStreamRequest { Kill = new Bbh.KillEvent() { Killer = killer, Victim = victim } });
     }
 
-    void AddEarnings(string user, long earnings)
+    public void AddEarnings(string user, long earnings)
     {
         backendClient.AddToQueue(new Bbh.EventStreamRequest { Earnings = new Bbh.EarningsEvent { Amt = earnings, User = user } });
     }

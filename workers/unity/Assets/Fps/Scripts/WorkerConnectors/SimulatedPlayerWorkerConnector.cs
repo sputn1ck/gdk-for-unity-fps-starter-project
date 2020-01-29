@@ -53,7 +53,7 @@ namespace Fps.WorkerConnectors
 
 
 
-            var loginData = new LoginData($"Donnerbot {number}", "valid", 0);
+            var loginData = new LoginData($"Donnerbot {number}", $"Donnerbot {number}", 0);
             var serializedArgs = Encoding.ASCII.GetBytes(UnityEngine.JsonUtility.ToJson(loginData));
             var sendSystem = Worker.World.GetExistingSystem<SendCreatePlayerRequestSystem>();
             sendSystem.RequestPlayerCreation(serializedArgs);
@@ -65,20 +65,6 @@ namespace Fps.WorkerConnectors
 
             GameObjectCreationHelper.EnableStandardGameObjectCreation(Worker.World,
                 new AdvancedEntityPipeline(Worker, AuthPlayer, NonAuthPlayer));
-        }
-    }
-    [Serializable]
-    public struct LoginData
-    {
-        public string PlayerName;
-        public string AuthToken;
-        public int RequestedWeapon;
-
-        public LoginData(string playerName, string authToken, int requestedWeapon)
-        {
-            PlayerName = playerName;
-            AuthToken = authToken;
-            RequestedWeapon = requestedWeapon;
         }
     }
 }

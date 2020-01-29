@@ -49,6 +49,8 @@ public class LnClient : MonoBehaviour
 
     public string GetPubkey()
     {
+
+        Debug.Log("pubkey: " + lnd.GetPubkey());
         return lnd.GetPubkey();
     }
 
@@ -209,6 +211,8 @@ public class LndClient : IClientLnd
     public bool useAppdata;
 
 
+    public CancellationTokenSource ct;
+    private Thread listenThread;
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     public LndClient()
     {
@@ -237,10 +241,50 @@ public class LndClient : IClientLnd
         Debug.Log("finished setup");
     }
 
-    public async void StartListening()
+    public void StartListening()
     {
-        await ListenInvoices();
-        
+        //await ListenInvoices();
+        listenThread = new Thread(async () =>
+        {
+            
+            while (!rpcChannel.ShutdownToken.IsCancellationRequested)
+            {
+                await ListenInvoicesTask();
+                Thread.Sleep(1000);
+            }
+        });
+        listenThread.Start();
+    }
+
+    private async Task ListenInvoicesTask()
+    {
+        var request = new InvoiceSubscription();
+
+        try
+        {
+            using (_invoiceStream = lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
+            {
+                Debug.Log("listening successfully started");
+                while (!rpcChannel.ShutdownToken.IsCancellationRequested && await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
+                {
+                    var invoice = _invoiceStream.ResponseStream.Current;
+
+                    Debug.Log("new invoice " + invoice);
+                    if (invoice.State == Invoice.Types.InvoiceState.Settled)
+                    {
+                        var e = new InvoiceSettledEventArgs();
+                        e.Invoice = invoice;
+                        OnInvoiceSettled(this, e);
+                    }
+
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
     public void LoadConfig()
     {
