@@ -18,7 +18,7 @@ public class ScoreboardUIItemListEvent : UnityEvent<List<ScoreboardUIItem>,Entit
 [Serializable] public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
 public class StringColorEvent : UnityEvent<string, Color> { }
 [Serializable] public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
-
+public class StringLongEvent : UnityEvent<string, long> { }
 
 
 [Serializable]
