@@ -16,7 +16,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 1.5
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 0.2
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 1
@@ -31,7 +31,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: SatUpdate
+    m_ConditionEvent: play
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8147918987057049301}
@@ -39,7 +39,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.023808705
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -56,7 +56,7 @@ AnimatorController:
   m_Name: SatAmt
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: SatUpdate
+  - m_Name: play
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -127,10 +127,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8147918987057049301}
-    m_Position: {x: 80, y: 250, z: 0}
+    m_Position: {x: 210, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4740933444831602257}
-    m_Position: {x: 280, y: 160, z: 0}
+    m_Position: {x: 210, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:

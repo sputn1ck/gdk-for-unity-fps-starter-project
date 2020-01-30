@@ -10,6 +10,7 @@ public class BountyUIController : MonoBehaviour
     public TextMeshProUGUI satUpdate;
     public Color positiveColor;
     public Color negativeColor;
+
     public void UpdateSats(long sats, long diff)
     {
         satText.text = sats.ToString();
@@ -28,6 +29,6 @@ public class BountyUIController : MonoBehaviour
             satUpdate.text = diff.ToString();
             satUpdate.color = negativeColor;
         }
-        satUpdate.GetComponent<Animator>().SetTrigger("SatUpdate");
+        satUpdate.GetComponent<Animator>().SetTrigger("play");
     }
 }
