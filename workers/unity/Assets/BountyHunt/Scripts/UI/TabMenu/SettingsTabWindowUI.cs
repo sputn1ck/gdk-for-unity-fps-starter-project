@@ -1,8 +1,10 @@
+using Fps.PlayerControls;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsTabWindowUI : TabMenuWindowUI
 {
@@ -17,9 +19,14 @@ public class SettingsTabWindowUI : TabMenuWindowUI
     public Toggle infoLogVisibilityToggle;
     public Toggle errorLogVisibilityToggle;
     public Toggle debugLogVisibilityToggle;
+    public Toggle auctionLogVisibilityToggle;
 
     //Inputs
     public Slider mouseSpeedSlider;
+    public TextMeshProUGUI mouseSpeedText;
+    float minSensitivity = 0;
+    float maxSensitivity = 10;
+
 
 
     private void Start()
@@ -28,12 +35,14 @@ public class SettingsTabWindowUI : TabMenuWindowUI
         infoLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowInfoLog", 1) != 0;
         errorLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowErrorLog", 1) != 0;
         debugLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowDebugLog", 0) != 0;
+        auctionLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowAuctionLog", 1) != 0;
 
 
         playerChatVisibilityToggle.onValueChanged.AddListener(SetPlayerChatVisibility);
         infoLogVisibilityToggle.onValueChanged.AddListener(SetInfoLogVisibility);
         errorLogVisibilityToggle.onValueChanged.AddListener(SetErrorLogVisibility);
         debugLogVisibilityToggle.onValueChanged.AddListener(SetDebugLogVisibility);
+        auctionLogVisibilityToggle.onValueChanged.AddListener(SetAuctionLogVisibility);
 
 
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
@@ -44,8 +53,12 @@ public class SettingsTabWindowUI : TabMenuWindowUI
         sfxVolumeSlider.value = AudioManager.instance.GetVolume(VolumeType.SFX);
 
 
-        //mouseSpeedSlider.onValueChanged.AddListener(SetSensitivity);
-        mouseSpeedSlider.value = PlayerPrefs.GetFloat("MouseSensitivity", 1);
+        mouseSpeedSlider.minValue = minSensitivity;
+        mouseSpeedSlider.maxValue = maxSensitivity;
+
+        mouseSpeedSlider.onValueChanged.AddListener(OnSenstitvitySliderChange);
+        
+        SetSensitivitySlider(PlayerPrefs.GetFloat("MouseSensitivity", 1));
     }
 
     private void SetMasterVolume(float vol)
@@ -62,15 +75,27 @@ public class SettingsTabWindowUI : TabMenuWindowUI
     {
         AudioManager.instance.SetVolume(VolumeType.SFX, vol);
     }
-    //TODO
-    /*
-    public void SetSensitivity(float sens)
+    
+    
+    public void OnSenstitvitySliderChange(float sens)
     {
+        sens = Mathf.Pow(1.58805f, (sens - 5f)) - 0.1f;
+        sens = Mathf.Max(0, sens);
+        mouseSpeedText.text = sens.ToString("0.000");
+
         PlayerPrefs.SetFloat("MouseSensitivity", sens);
         PlayerPrefs.Save();
-        KeyboardControls.Instance.sensitivity = sens;
+        if (!KeyboardControls.instance) return;
+        KeyboardControls.instance.sensitivity = sens;
     }
-    */
+
+    void SetSensitivitySlider(float sens)
+    {
+        mouseSpeedText.text = sens.ToString("0.000");
+        float value = Mathf.Log(sens + 0.1f, 1.58805f) + 5;
+        mouseSpeedSlider.SetValueWithoutNotify(value);
+    }
+
     private void SetPlayerChatVisibility(bool show)
     {
         PlayerPrefs.SetInt("ShowPlayerChat", show ? 1 : 0);
@@ -92,6 +117,12 @@ public class SettingsTabWindowUI : TabMenuWindowUI
     private void SetDebugLogVisibility(bool show)
     {
         PlayerPrefs.SetInt("ShowDebugLog", show ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    private void SetAuctionLogVisibility(bool show)
+    {
+        PlayerPrefs.SetInt("ShowAuctionLog", show ? 1 : 0);
         PlayerPrefs.Save();
     }
 

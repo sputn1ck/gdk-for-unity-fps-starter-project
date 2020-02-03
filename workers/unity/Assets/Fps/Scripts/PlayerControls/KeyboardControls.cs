@@ -4,6 +4,8 @@ namespace Fps.PlayerControls
 {
     public class KeyboardControls : MonoBehaviour, IControlProvider
     {
+        public float sensitivity;
+
         public Vector3 Movement
         {
             get
@@ -16,8 +18,8 @@ namespace Fps.PlayerControls
             }
         }
 
-        public float YawDelta => Input.GetAxis("Mouse X");
-        public float PitchDelta => Input.GetAxis("Mouse Y");
+        public float YawDelta => Input.GetAxis("Mouse X")*sensitivity;
+        public float PitchDelta => Input.GetAxis("Mouse Y")*sensitivity;
         public bool IsAiming => Input.GetMouseButton(1);
         public bool AreSprinting => Input.GetKey(KeyCode.LeftShift) && Forward && !Backward;
         public bool JumpPressed => Input.GetKeyDown(KeyCode.Space);
@@ -36,8 +38,12 @@ namespace Fps.PlayerControls
 
         private readonly Vector3[] cachedDirectionVectors = new Vector3[16];
 
+        public static KeyboardControls instance;
+
         private void Awake()
         {
+            sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1);
+            instance = this;
             CreateDirectionCache();
         }
 
@@ -63,6 +69,8 @@ namespace Fps.PlayerControls
             cachedDirectionVectors[9] = forwardLeft;
             cachedDirectionVectors[10] = backwardLeft;
         }
+
+        
 
     }
 }

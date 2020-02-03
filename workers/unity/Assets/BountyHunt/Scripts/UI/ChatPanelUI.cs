@@ -164,16 +164,16 @@ public class ChatPanelUI : MonoBehaviour
                 return PlayerPrefs.GetInt("ShowPlayerChat", 1) != 0;
                 break;
             case MessageType.ERROR_LOG:
-                return PlayerPrefs.GetInt("ShowInfoLog", 1) != 0;
+                return PlayerPrefs.GetInt("ShowErrorLog", 1) != 0;
                 break;
             case MessageType.INFO_LOG:
-                return PlayerPrefs.GetInt("ShowErrorLog", 1) != 0;
+                return PlayerPrefs.GetInt("ShowInfoLog", 1) != 0;
                 break;
             case MessageType.DEBUG_LOG:
                 return PlayerPrefs.GetInt("ShowDebugLog", 0) != 0;
                 break;
             case MessageType.AUCTION_LOG:
-                return PlayerPrefs.GetInt("ShowDebugLog", 0) != 0;
+                return PlayerPrefs.GetInt("ShowAuctionLog", 1) != 0;
                 break;
             default:
                 return true;
