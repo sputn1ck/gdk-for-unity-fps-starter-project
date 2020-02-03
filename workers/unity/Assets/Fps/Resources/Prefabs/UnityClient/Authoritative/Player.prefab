@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7011754983761731173}
   - component: {fileID: -1170277828860489674}
   - component: {fileID: 6664102670667166243}
+  - component: {fileID: -3606728209907532769}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30116109eb8b24346a34ba5d505cd5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editingInputfield: 0
   pitchTransform: {fileID: 4620716434285874}
   camera: {fileID: 20443460711874354}
   cameraSettings:
@@ -441,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8882a78e7c8b4134d9c24eed88fc7167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: 0
 --- !u!114 &7344274461009030805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +506,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1b7282c11b66c4caa7083ade784b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3606728209907532769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627949407420470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43b5754d83d55b4faf9857f360335c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitmarkerSound: {fileID: 8300000, guid: 5893d5274d2be024d87acdfdcd10971f, type: 3}
 --- !u!1001 &898400276755741151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -602,11 +618,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonModel
       objectReference: {fileID: 0}
-    - target: {fileID: 7451537192968994047, guid: 99c1c836e4262284d9b458f03442a4f6,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: f4ed84bfa2745d546a04e298e1de998e, type: 2}
     - target: {fileID: 1371366245061083600, guid: 99c1c836e4262284d9b458f03442a4f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,6 +678,11 @@ PrefabInstance:
       propertyPath: gunSocket
       value: 
       objectReference: {fileID: 114801285074366292}
+    - target: {fileID: 7451537192968994047, guid: 99c1c836e4262284d9b458f03442a4f6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f4ed84bfa2745d546a04e298e1de998e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99c1c836e4262284d9b458f03442a4f6, type: 3}
 --- !u!4 &7450142387778287261 stripped

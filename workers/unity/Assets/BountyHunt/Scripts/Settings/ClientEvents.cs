@@ -25,7 +25,7 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public ChatMessageEvent onChatMessageRecieve = new ChatMessageEvent();
     [HideInInspector] public StringColorEvent onAnnouncement = new StringColorEvent();
     [HideInInspector] public StringLongEvent onDonationMessageUpdate = new StringLongEvent();
-
+    [HideInInspector] public UnityEvent onOpponentHit = new UnityEvent();
     private void Awake()
     {
         if (instance == null) instance = this;
