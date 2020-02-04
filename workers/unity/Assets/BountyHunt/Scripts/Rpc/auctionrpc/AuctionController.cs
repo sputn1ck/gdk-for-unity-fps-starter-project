@@ -47,7 +47,7 @@ public class AuctionController
 
     }
     // Todo implement
-    public async void StartAuction(int duration)
+    public async Task<StartAuctionResponse> StartAuction(int duration)
     {
         var req = new StartAuctionRequest
         {
@@ -56,13 +56,15 @@ public class AuctionController
         try
         {
             var res = await adminClient.StartAuctionAsync(req, GetCallOptions());
+
+            return res;
             //serverChat.SendAuctionStartedChatMessage("new auction started! Duration: " + req.Duration + " seconds");
         }
         catch (RpcException e)
         {
             Debug.Log(e);
+            return null;
         }
-        await rpcChannel.ShutdownAsync();
 
     }
 
