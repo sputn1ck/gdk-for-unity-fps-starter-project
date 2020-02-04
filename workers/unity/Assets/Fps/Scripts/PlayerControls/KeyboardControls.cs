@@ -20,21 +20,21 @@ namespace Fps.PlayerControls
 
         public float YawDelta => Input.GetAxis("Mouse X")*sensitivity;
         public float PitchDelta => Input.GetAxis("Mouse Y")*sensitivity;
-        public bool IsAiming => Input.GetMouseButton(1);
-        public bool AreSprinting => Input.GetKey(KeyCode.LeftShift) && Forward && !Backward;
-        public bool JumpPressed => Input.GetKeyDown(KeyCode.Space);
-        public bool ShootPressed => Input.GetMouseButtonDown(0);
-        public bool ShootHeld => Input.GetMouseButton(0);
-        public bool MenuPressed => Input.GetKeyDown(KeyCode.Escape);
-        public bool RespawnPressed => Input.GetKeyDown(KeyCode.Space);
-        public bool ConnectPressed => Input.GetKeyDown(KeyCode.Space);
-        public bool ChatPressed => Input.GetKeyDown(KeyCode.T);
+        public bool IsAiming => Input.GetButton("Aim");
+        public bool AreSprinting => Input.GetButton("Sprint") && Forward && !Backward;
+        public bool JumpPressed => Input.GetButtonDown("Jump");
+        public bool ShootPressed => Input.GetButtonDown("Shoot");
+        public bool ShootHeld => Input.GetButton("Shoot");
+        public bool MenuPressed => Input.GetButtonDown("Menu");
+        public bool RespawnPressed => Input.GetButtonDown("Respawn");
+        public bool ConnectPressed => Input.GetButtonDown("Respawn");
+        public bool ChatPressed => Input.GetButtonDown("Chat");
 
 
-        private static bool Forward => Input.GetKey(KeyCode.W);
-        private static bool Backward => Input.GetKey(KeyCode.S);
-        private static bool Left => Input.GetKey(KeyCode.A);
-        private static bool Right => Input.GetKey(KeyCode.D);
+        private static bool Forward => Input.GetButton("Forward");
+        private static bool Backward => Input.GetButton("Backward");
+        private static bool Left => Input.GetButton("Left");
+        private static bool Right => Input.GetButton("Right");
 
         private readonly Vector3[] cachedDirectionVectors = new Vector3[16];
 
