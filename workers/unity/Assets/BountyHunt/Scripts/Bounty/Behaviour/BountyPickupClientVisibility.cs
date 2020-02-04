@@ -13,7 +13,7 @@ namespace Fps
         [Require] private BountyPickupReader bountyPickUpReader;
 
         public BountyPickUpMaterialSettings materialSettings;
-        public AudioClip spawnSound;
+        public AudioClip collectSound;
         public bool showAdvertiser;
         public GameObject holoAdParent;
         private MeshRenderer cubeMeshRenderer;
@@ -23,7 +23,6 @@ namespace Fps
             cubeMeshRenderer = GetComponentInChildren<MeshRenderer>();
             bountyPickUpReader.OnUpdate += OnBountyPickupComponentUpdated;
             UpdateVisibility();
-            //bountyPickUpReader.Data.BountyValue;
         }
 
         private void UpdateVisibility()
@@ -36,25 +35,17 @@ namespace Fps
             //transform.localScale = Vector3.one * appearance.scale;
 
         }
-        
 
         private void OnBountyPickupComponentUpdated(BountyPickup.Update update)
         {
+            Debug.Log("bounty update. Active: " +  update.IsActive);
+
             UpdateVisibility();
             if(update.IsActive == false)
             {
-                // TODO READD AUDIOMANAGER
-                //AudioManager.instance.spawnSound(spawnSound, transform.position);
+                AudioManager.instance.spawnSound(collectSound, transform.position);
             }
         }
 
-        /*
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                AudioObjectSpawner.instance.spawnSound(spawnSound, transform.position);
-            }
-        }*/
     }
 }

@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialSettings: {fileID: 11400000, guid: b51c515cb2c889b45a49a4b2ff47a40a, type: 2}
-  spawnSound: {fileID: 8300000, guid: ca289327da6b1674490aa7efd4d7305e, type: 3}
+  collectSound: {fileID: 8300000, guid: ca289327da6b1674490aa7efd4d7305e, type: 3}
   showAdvertiser: 0
   holoAdParent: {fileID: 6511547207699154476}
 --- !u!1 &4150740190819366831
@@ -195,6 +195,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4098788009680278}
     m_Modifications:
+    - target: {fileID: 1533992168924801175, guid: 95f19e01dafc87d44b272ecb076cae6e,
+        type: 3}
+      propertyPath: m_Name
+      value: Bounty Pickup
+      objectReference: {fileID: 0}
     - target: {fileID: 2527236379430656644, guid: 95f19e01dafc87d44b272ecb076cae6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -264,11 +269,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1533992168924801175, guid: 95f19e01dafc87d44b272ecb076cae6e,
-        type: 3}
-      propertyPath: m_Name
-      value: Bounty Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 4744020443927382139, guid: 95f19e01dafc87d44b272ecb076cae6e,
         type: 3}
