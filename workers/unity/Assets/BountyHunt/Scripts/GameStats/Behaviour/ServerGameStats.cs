@@ -18,49 +18,57 @@ public class ServerGameStats : MonoBehaviour
 {
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
+    
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
+        //GameStatsWriter.OnGainedKillEventEvent += GameStatsWriter_OnGainedKillEventEvent;
+    }
+
+    private void GameStatsWriter_OnGainedKillEventEvent(KillInfo obj)
+    {
+        var playerMap = GameStatsWriter.Data.PlayerMap;
+        if(playerMap.ContainsKey(obj.Killer) && playerMap.ContainsKey(obj.Victim))
+        {
+            var killer = playerMap[obj.Killer];
+            killer.Kills++;
+            var victim = playerMap[obj.Victim];
+            victim.Deaths++;
+            playerMap[obj.Killer] = killer;
+            playerMap[obj.Victim] = victim;
+            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
+        }
     }
 
     private void OnRemoveNameRequestReceived(GameStats.RemoveName.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        var nameMap = GameStatsWriter.Data.PlayerNames;
-        var scoreBoard = GameStatsWriter.Data.Scoreboard;
         var playerMap = GameStatsWriter.Data.PlayerMap;
-        if (nameMap.ContainsKey(obj.Payload.Id))
-        {
-            nameMap.Remove(obj.Payload.Id);
-            var user = scoreBoard.Board.Find(u => u.Entity == obj.Payload.Id);
-            if(scoreBoard.Board.Contains(user))
-                scoreBoard.Board.Remove(user);
-        }
         if (playerMap.ContainsKey(obj.Payload.Id))
         {
             playerMap.Remove(obj.Payload.Id);
-            var user = scoreBoard.Board.Find(u => u.Entity == obj.Payload.Id);
-            if (scoreBoard.Board.Contains(user))
-                scoreBoard.Board.Remove(user);
         }
 
-        GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap, PlayerMap = playerMap,Scoreboard = scoreBoard });
+        GameStatsWriter.SendUpdate(new GameStats.Update() {PlayerMap = playerMap });
     }
 
     private void OnSetNameRequestReceived(GameStats.SetName.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        var nameMap = GameStatsWriter.Data.PlayerNames;
-        if (nameMap.ContainsKey(obj.Payload.Id))
+        var playerMap = GameStatsWriter.Data.PlayerMap;
+        if (playerMap.ContainsKey(obj.Payload.Id))
         {
-            nameMap[obj.Payload.Id] = obj.Payload.Name;
+            var player = playerMap[obj.Payload.Id];
+            player.Name = obj.Payload.Name;
+            playerMap[obj.Payload.Id] = player;
         }else
         {
-            nameMap.Add(obj.Payload.Id, obj.Payload.Name);
+            var player = new PlayerItem { Name = obj.Payload.Name, Pubkey = obj.Payload.Pubkey };
+            playerMap.Add(obj.Payload.Id, player);
         }
-        GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap });
+        GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
     }
 }

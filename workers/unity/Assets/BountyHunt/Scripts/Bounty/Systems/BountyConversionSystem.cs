@@ -14,6 +14,7 @@ public class BountyConversionSystem : ComponentSystem
     private ComponentUpdateSystem componentUpdateSystem;
 
     private EntityQuery conversionGroup;
+    private EntityQuery gameStatsGroup;
 
     private float timeSum;
     protected override void OnCreate()
@@ -28,6 +29,9 @@ public class BountyConversionSystem : ComponentSystem
                 ComponentType.ReadWrite<HunterComponent.Component>(),
                 ComponentType.ReadOnly<SpatialEntityId>()
             );
+        gameStatsGroup = GetEntityQuery(
+                ComponentType.ReadWrite<GameStats.Component>(),
+                ComponentType.ReadOnly<SpatialEntityId>());
 
         timeSum = 0;
     }
@@ -48,17 +52,35 @@ public class BountyConversionSystem : ComponentSystem
             return;
         }
         var percentage = FlagManager.instance.defaultBountyPerTick;
-        Entities.With(conversionGroup).ForEach(
+        Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
+        {
+            Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
+            Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
             ref HunterComponent.Component hunterComponent) =>
             {
                 if (hunterComponent.Bounty == 0)
                     return;
                 var tick = calculateTick(hunterComponent.Bounty, percentage);
-                hunterComponent.Bounty = hunterComponent.Bounty - tick;
+                var newBounty = hunterComponent.Bounty - tick;
+                hunterComponent.Bounty = newBounty;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;
                 BackendGameServerBehaviour.instance.AddEarnings(hunterComponent.Pubkey, tick);
+                newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
             });
+            foreach(var player in newPairs)
+            {
+                if (gamestats.PlayerMap.ContainsKey(player.Key))
+                {
+                    var newPlayer = gamestats.PlayerMap[player.Key];
+                    newPlayer.Bounty = player.Value.Bounty;
+                    gamestats.PlayerMap[player.Key] = newPlayer;
+                }
+            }
+        });
+
+        
+        
 
     }
 

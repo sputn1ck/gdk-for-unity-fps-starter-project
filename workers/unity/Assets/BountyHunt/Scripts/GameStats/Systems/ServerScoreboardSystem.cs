@@ -48,7 +48,7 @@ public class ServerScoreboardSystem : ComponentSystem
             var item = new ScoreboardItem(entityId.EntityId, hunter.Bounty, hunter.Kills, hunter.Deaths);
             scoreboardItems.Add(item);
         });
-        componentUpdateSystem.SendUpdate(new GameStats.Update() { Scoreboard = new Scoreboard(scoreboardItems) }, new EntityId(2));
+        //componentUpdateSystem.SendUpdate(new GameStats.Update() { Scoreboard = new Scoreboard(scoreboardItems) }, new EntityId(2));
 
     }
 

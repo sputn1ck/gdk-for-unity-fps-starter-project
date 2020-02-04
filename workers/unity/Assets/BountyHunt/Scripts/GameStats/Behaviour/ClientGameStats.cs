@@ -17,9 +17,14 @@ public class ClientGameStats : MonoBehaviour
 
     void OnEnable()
     {
-        GameStatsReader.OnScoreboardUpdate += OnScoreboardUpdate;
+        GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
-        sendScoreBoardEvent(GameStatsReader.Data.Scoreboard);
+        sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
+    }
+
+    private void OnPlayerMapUpdate(Dictionary<EntityId, PlayerItem> obj)
+    {
+        sendScoreBoardEvent(obj);
     }
 
     private void OnKillEvent(KillInfo obj)
@@ -30,18 +35,20 @@ public class ClientGameStats : MonoBehaviour
         Debug.Log(killer + " killed " + victim);
     }
 
-    private void OnScoreboardUpdate(Scoreboard obj)
-    {
-        sendScoreBoardEvent(obj);
-
-    }
-    private void sendScoreBoardEvent(Scoreboard obj)
+    private void sendScoreBoardEvent(Dictionary<EntityId, PlayerItem> obj)
     {
         List<ScoreboardUIItem> itemList = new List<ScoreboardUIItem>();
 
-        foreach (ScoreboardItem i in obj.Board)
+        foreach (var i in obj)
         {
-            itemList.Add(new ScoreboardUIItem(idToName(i.Entity), i));
+            var scoreboarditem = new ScoreboardItem()
+            {
+                Entity = i.Key,
+                Bounty = i.Value.Bounty,
+                Kills = i.Value.Kills,
+                Deaths = i.Value.Deaths
+            };
+            itemList.Add(new ScoreboardUIItem(i.Value.Name, scoreboarditem));
         }
         EntityId playerID = new EntityId(-1);
         if (Fps.Movement.FpsDriver.instance != null)
@@ -65,9 +72,9 @@ public class ClientGameStats : MonoBehaviour
             return "ERROR: GameStatsReader not found!";
         }
 
-        if (GameStatsReader.Data.PlayerNames.ContainsKey(id))
+        if (GameStatsReader.Data.PlayerMap.ContainsKey(id))
         {
-            return GameStatsReader.Data.PlayerNames[id];
+            return GameStatsReader.Data.PlayerMap[id].Name;
         }
         return "";
     }

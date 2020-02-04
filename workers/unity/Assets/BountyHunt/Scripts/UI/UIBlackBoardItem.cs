@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Bountyhunt;
+using Improbable.Gdk.Core;
 
 public class UIBlackBoardItem : MonoBehaviour
 {
@@ -91,6 +92,22 @@ public class ScoreboardUIItem
         this.item = item;
         highlight = false;
         rank = 0;
+    }
+}
+
+public struct ScoreboardItem
+{
+    public EntityId Entity;
+    public long Bounty;
+    public int Kills;
+    public int Deaths;
+
+    public ScoreboardItem(EntityId entity, long bounty, int kills, int deaths)
+    {
+        Entity = entity;
+        Bounty = bounty;
+        Kills = kills;
+        Deaths = deaths;
     }
 }
 

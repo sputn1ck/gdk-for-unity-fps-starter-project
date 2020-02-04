@@ -223,8 +223,6 @@ public class DonnerEntityTemplates
     {
         var boutySpawnerComponent = new BountySpawner.Snapshot();
         var gameStatsComponent = new GameStats.Snapshot();
-        gameStatsComponent.Scoreboard = new Scoreboard(new System.Collections.Generic.List<ScoreboardItem>());
-        gameStatsComponent.PlayerNames = new System.Collections.Generic.Dictionary<EntityId, string>();
         gameStatsComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.Chat.Snapshot();
 
