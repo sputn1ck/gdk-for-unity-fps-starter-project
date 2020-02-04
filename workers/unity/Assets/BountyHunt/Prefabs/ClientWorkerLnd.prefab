@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 812099622420160741}
   - component: {fileID: 6155843011314803828}
   - component: {fileID: 3231388491131628992}
-  - component: {fileID: 8317162651777497984}
   - component: {fileID: 8932650709854373229}
   - component: {fileID: 6882851908204537564}
   - component: {fileID: 3756189763960350964}
@@ -80,7 +79,6 @@ MonoBehaviour:
   doAllTrigger: 0
   ClientWorkerConnectorPrefab: {fileID: 2049478701278950836, guid: 4394a34e02f6d0a4e8ca0b613fd1cc97,
     type: 3}
-  Manager: {fileID: 0}
   pubkey: 
   mainMenu: {fileID: 0}
   uiManager: {fileID: 0}
@@ -102,6 +100,7 @@ MonoBehaviour:
   confName: 
   UseDummy: 1
   UseApdata: 1
+  BackendHost: 
 --- !u!114 &3231388491131628992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +128,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onPlayerDie:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   onBountyUpdate:
     m_PersistentCalls:
       m_Calls: []
@@ -139,20 +143,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: EarningsUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &8317162651777497984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2466744334126222726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 730717b5b7f0719428991bd30e2dbec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  command: 
-  commandTrigger: 0
+  onChatMessageRecieve:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ChatMessageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &8932650709854373229
 MonoBehaviour:
   m_ObjectHideFlags: 0

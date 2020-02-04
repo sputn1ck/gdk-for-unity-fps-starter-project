@@ -6,7 +6,7 @@ using Grpc.Core;
 using System.Threading.Tasks;
 using System;
 
-public class DonnerDaemonClient : MonoBehaviour
+public class DonnerDaemonClient
 {
     public Channel rpcChannel;
     public DonnerDaemon.DonnerDaemonClient client;
@@ -14,25 +14,9 @@ public class DonnerDaemonClient : MonoBehaviour
     public static DonnerDaemonClient instance;
     public string command;
     public bool commandTrigger;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        Setup();
-        instance = this;
-    }
 
-    // Update is called once per frame
-    async void Update()
-    {
-        if (commandTrigger)
-        {
-            commandTrigger = false;
-            var s = await Lncli(command);
-            Debug.Log(s);
-        }
-    }
 
-    void Setup()
+    public void Setup()
     {
         rpcChannel = new Channel("localhost:10101", ChannelCredentials.Insecure);
         client = new DonnerDaemon.DonnerDaemonClient(rpcChannel);
@@ -52,8 +36,10 @@ public class DonnerDaemonClient : MonoBehaviour
         }
     }
 
-    public async void OnApplicationQuit()
+
+    public void Shutdown()
     {
-        await rpcChannel.ShutdownAsync();
+        Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
+        t.Wait(5000);
     }
 }

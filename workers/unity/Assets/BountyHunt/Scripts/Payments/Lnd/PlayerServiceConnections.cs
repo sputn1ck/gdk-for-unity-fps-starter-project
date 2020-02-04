@@ -20,6 +20,9 @@ public class PlayerServiceConnections : MonoBehaviour
     public string BackendHost;
     public BackendPlayerClient BackendPlayerClient;
 
+    public DonnerDaemonClient DonnerDaemonClient;
+
+    public AuctionClient AuctionClient;
     void Awake()
     {
         if(instance == null)
@@ -36,6 +39,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public async void Setup()
     {
+        SetupDonnerDaemon();
         await SetupLnd();
         SetupBackendServices();
     }
@@ -54,6 +58,12 @@ public class PlayerServiceConnections : MonoBehaviour
         await lnd.Setup(confName, false, UseApdata);
     }
 
+    public void SetupDonnerDaemon()
+    {
+        DonnerDaemonClient = new DonnerDaemonClient();
+        DonnerDaemonClient.Setup();
+    }
+
 
     public void SetupBackendServices()
     {
@@ -65,13 +75,19 @@ public class PlayerServiceConnections : MonoBehaviour
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient.Setup(BackendHost, lnd.GetPubkey(), sig.Signature);
+
+        // Auction Client
+        AuctionClient = new AuctionClient();
+        AuctionClient.Setup();
     }
 
 
     public void OnApplicationQuit()
     {
-
+        DonnerDaemonClient.Shutdown();
         lnd.ShutDown();
+        BackendPlayerClient.Shutdown();
+        AuctionClient.Shutdown();
         Debug.Log("client quit cleanly");
     }
 

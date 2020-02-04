@@ -17,7 +17,7 @@ public class ServerServiceConnections : MonoBehaviour
 
     public string BackendHost;
 
-
+    public AuctionController AuctionController;
 
 
     public BackendGameserverClient BackendGameServerClient;
@@ -69,7 +69,13 @@ public class ServerServiceConnections : MonoBehaviour
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient.Setup(BackendHost, lnd.GetPubkey(), sig.Signature);
+
+        // Auction Controller
+        AuctionController = new AuctionController();
+        AuctionController.Setup();
     }
+
+
 
     public void Update()
     {
@@ -81,6 +87,7 @@ public class ServerServiceConnections : MonoBehaviour
         lnd.ShutDown();
         BackendGameServerClient.Shutdown();
         BackendPlayerClient.Shutdown();
+        AuctionController.Shutdown();
         Debug.Log("server quit cleanly");
     }
 
