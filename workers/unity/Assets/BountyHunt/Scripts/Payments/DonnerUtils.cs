@@ -127,7 +127,6 @@ public struct RoughPosition
 public class BountyInvoice
 {
     public string pubkey;
-    public string user;
+    public string message;
     public long amount;
-    public string description;
 }

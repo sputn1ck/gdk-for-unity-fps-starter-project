@@ -30,12 +30,14 @@ namespace Bbh {
             "IAEoCzIULmJiaC5QbGF5ZXJJbmZvRXZlbnRIAEIHCgVldmVudCIVChNFdmVu",
             "dFN0cmVhbVJlc3BvbnNlIjoKCUtpbGxFdmVudBIOCgZraWxsZXIYASABKAkS",
             "DgoGdmljdGltGAIgASgJEg0KBWNhdXNlGAMgASgJIioKDUVhcm5pbmdzRXZl",
-            "bnQSDAoEdXNlchgBIAEoCRILCgNhbXQYAiABKAMifwoPUGxheWVySW5mb0V2",
-            "ZW50EgwKBHVzZXIYASABKAkSMgoKZXZlbnRfdHlwZRgCIAEoDjIeLmJiaC5Q",
-            "bGF5ZXJJbmZvRXZlbnQuRXZlbnRUeXBlIioKCUV2ZW50VHlwZRINCglIRUFS",
-            "VEJFQVQQABIOCgpESVNDT05ORUNUEAEyUQoLR2FtZVNlcnZpY2USQgoLRXZl",
-            "bnRTdHJlYW0SFy5iYmguRXZlbnRTdHJlYW1SZXF1ZXN0GhguYmJoLkV2ZW50",
-            "U3RyZWFtUmVzcG9uc2UoAWIGcHJvdG8z"));
+            "bnQSDAoEdXNlchgBIAEoCRILCgNhbXQYAiABKAMixgEKD1BsYXllckluZm9F",
+            "dmVudBIMCgR1c2VyGAEgASgJEjIKCmV2ZW50X3R5cGUYAiABKA4yHi5iYmgu",
+            "UGxheWVySW5mb0V2ZW50LkV2ZW50VHlwZRIWCg5jdXJyZW50X2JvdW50eRgD",
+            "IAEoAxIVCg1jdXJyZW50X2tpbGxzGAQgASgFEhYKDmN1cnJlbnRfZGVhdGhz",
+            "GAUgASgFIioKCUV2ZW50VHlwZRINCglIRUFSVEJFQVQQABIOCgpESVNDT05O",
+            "RUNUEAEyUQoLR2FtZVNlcnZpY2USQgoLRXZlbnRTdHJlYW0SFy5iYmguRXZl",
+            "bnRTdHJlYW1SZXF1ZXN0GhguYmJoLkV2ZW50U3RyZWFtUmVzcG9uc2UoAWIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -43,7 +45,7 @@ namespace Bbh {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamResponse), global::Bbh.EventStreamResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.KillEvent), global::Bbh.KillEvent.Parser, new[]{ "Killer", "Victim", "Cause" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EarningsEvent), global::Bbh.EarningsEvent.Parser, new[]{ "User", "Amt" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.PlayerInfoEvent), global::Bbh.PlayerInfoEvent.Parser, new[]{ "User", "EventType" }, null, new[]{ typeof(global::Bbh.PlayerInfoEvent.Types.EventType) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.PlayerInfoEvent), global::Bbh.PlayerInfoEvent.Parser, new[]{ "User", "EventType", "CurrentBounty", "CurrentKills", "CurrentDeaths" }, null, new[]{ typeof(global::Bbh.PlayerInfoEvent.Types.EventType) }, null)
           }));
     }
     #endregion
@@ -763,6 +765,9 @@ namespace Bbh {
     public PlayerInfoEvent(PlayerInfoEvent other) : this() {
       user_ = other.user_;
       eventType_ = other.eventType_;
+      currentBounty_ = other.currentBounty_;
+      currentKills_ = other.currentKills_;
+      currentDeaths_ = other.currentDeaths_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -793,6 +798,39 @@ namespace Bbh {
       }
     }
 
+    /// <summary>Field number for the "current_bounty" field.</summary>
+    public const int CurrentBountyFieldNumber = 3;
+    private long currentBounty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long CurrentBounty {
+      get { return currentBounty_; }
+      set {
+        currentBounty_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_kills" field.</summary>
+    public const int CurrentKillsFieldNumber = 4;
+    private int currentKills_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CurrentKills {
+      get { return currentKills_; }
+      set {
+        currentKills_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_deaths" field.</summary>
+    public const int CurrentDeathsFieldNumber = 5;
+    private int currentDeaths_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CurrentDeaths {
+      get { return currentDeaths_; }
+      set {
+        currentDeaths_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PlayerInfoEvent);
@@ -808,6 +846,9 @@ namespace Bbh {
       }
       if (User != other.User) return false;
       if (EventType != other.EventType) return false;
+      if (CurrentBounty != other.CurrentBounty) return false;
+      if (CurrentKills != other.CurrentKills) return false;
+      if (CurrentDeaths != other.CurrentDeaths) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -816,6 +857,9 @@ namespace Bbh {
       int hash = 1;
       if (User.Length != 0) hash ^= User.GetHashCode();
       if (EventType != 0) hash ^= EventType.GetHashCode();
+      if (CurrentBounty != 0L) hash ^= CurrentBounty.GetHashCode();
+      if (CurrentKills != 0) hash ^= CurrentKills.GetHashCode();
+      if (CurrentDeaths != 0) hash ^= CurrentDeaths.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -837,6 +881,18 @@ namespace Bbh {
         output.WriteRawTag(16);
         output.WriteEnum((int) EventType);
       }
+      if (CurrentBounty != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(CurrentBounty);
+      }
+      if (CurrentKills != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(CurrentKills);
+      }
+      if (CurrentDeaths != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(CurrentDeaths);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -850,6 +906,15 @@ namespace Bbh {
       }
       if (EventType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EventType);
+      }
+      if (CurrentBounty != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CurrentBounty);
+      }
+      if (CurrentKills != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentKills);
+      }
+      if (CurrentDeaths != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentDeaths);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -868,6 +933,15 @@ namespace Bbh {
       if (other.EventType != 0) {
         EventType = other.EventType;
       }
+      if (other.CurrentBounty != 0L) {
+        CurrentBounty = other.CurrentBounty;
+      }
+      if (other.CurrentKills != 0) {
+        CurrentKills = other.CurrentKills;
+      }
+      if (other.CurrentDeaths != 0) {
+        CurrentDeaths = other.CurrentDeaths;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -885,6 +959,18 @@ namespace Bbh {
           }
           case 16: {
             EventType = (global::Bbh.PlayerInfoEvent.Types.EventType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            CurrentBounty = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            CurrentKills = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CurrentDeaths = input.ReadInt32();
             break;
           }
         }

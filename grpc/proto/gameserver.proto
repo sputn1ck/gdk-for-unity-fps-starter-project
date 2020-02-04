@@ -31,6 +31,9 @@ message EarningsEvent {
 message PlayerInfoEvent {
     string user = 1;
     EventType event_type = 2;
+    int64 current_bounty = 3;
+    int32 current_kills = 4;
+    int32 current_deaths = 5;
     enum EventType{
         HEARTBEAT = 0;
         DISCONNECT = 1;

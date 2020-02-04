@@ -20,6 +20,8 @@ namespace Bbh {
     static readonly grpc::Marshaller<global::Bbh.GetHighscoreResponse> __Marshaller_bbh_GetHighscoreResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetHighscoreResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.AddBountyRequest> __Marshaller_bbh_AddBountyRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.AddBountyRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.AddBountyResponse> __Marshaller_bbh_AddBountyResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.AddBountyResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.ListOnlineRequest> __Marshaller_bbh_ListOnlineRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.ListOnlineRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.ListOnlineResponse> __Marshaller_bbh_ListOnlineResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.ListOnlineResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse> __Method_GetUsername = new grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse>(
         grpc::MethodType.Unary,
@@ -49,6 +51,13 @@ namespace Bbh {
         __Marshaller_bbh_AddBountyRequest,
         __Marshaller_bbh_AddBountyResponse);
 
+    static readonly grpc::Method<global::Bbh.ListOnlineRequest, global::Bbh.ListOnlineResponse> __Method_ListOnline = new grpc::Method<global::Bbh.ListOnlineRequest, global::Bbh.ListOnlineResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ListOnline",
+        __Marshaller_bbh_ListOnlineRequest,
+        __Marshaller_bbh_ListOnlineResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -75,6 +84,11 @@ namespace Bbh {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbh.AddBountyResponse> AddBounty(global::Bbh.AddBountyRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbh.ListOnlineResponse> ListOnline(global::Bbh.ListOnlineRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -168,6 +182,22 @@ namespace Bbh {
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddBounty, null, options, request);
       }
+      public virtual global::Bbh.ListOnlineResponse ListOnline(global::Bbh.ListOnlineRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ListOnline(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbh.ListOnlineResponse ListOnline(global::Bbh.ListOnlineRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ListOnline, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.ListOnlineResponse> ListOnlineAsync(global::Bbh.ListOnlineRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ListOnlineAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.ListOnlineResponse> ListOnlineAsync(global::Bbh.ListOnlineRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ListOnline, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ClientServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -183,7 +213,8 @@ namespace Bbh {
           .AddMethod(__Method_GetUsername, serviceImpl.GetUsername)
           .AddMethod(__Method_SetUsername, serviceImpl.SetUsername)
           .AddMethod(__Method_GetHighscore, serviceImpl.GetHighscore)
-          .AddMethod(__Method_AddBounty, serviceImpl.AddBounty).Build();
+          .AddMethod(__Method_AddBounty, serviceImpl.AddBounty)
+          .AddMethod(__Method_ListOnline, serviceImpl.ListOnline).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -196,6 +227,7 @@ namespace Bbh {
       serviceBinder.AddMethod(__Method_SetUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.SetUsernameRequest, global::Bbh.SetUsernameResponse>(serviceImpl.SetUsername));
       serviceBinder.AddMethod(__Method_GetHighscore, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetHighscoreRequest, global::Bbh.GetHighscoreResponse>(serviceImpl.GetHighscore));
       serviceBinder.AddMethod(__Method_AddBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.AddBountyRequest, global::Bbh.AddBountyResponse>(serviceImpl.AddBounty));
+      serviceBinder.AddMethod(__Method_ListOnline, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.ListOnlineRequest, global::Bbh.ListOnlineResponse>(serviceImpl.ListOnline));
     }
 
   }

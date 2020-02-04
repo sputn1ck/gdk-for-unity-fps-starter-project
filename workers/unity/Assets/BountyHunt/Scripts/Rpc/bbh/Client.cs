@@ -29,17 +29,23 @@ namespace Bbh {
             "bWVSZXF1ZXN0EgwKBG5hbWUYASABKAkiIwoTU2V0VXNlcm5hbWVSZXNwb25z",
             "ZRIMCgRuYW1lGAEgASgJIhUKE0dldEhpZ2hzY29yZVJlcXVlc3QiOgoUR2V0",
             "SGlnaHNjb3JlUmVzcG9uc2USIgoKaGlnaHNjb3JlcxgBIAMoCzIOLmJiaC5I",
-            "aWdoc2NvcmUiRgoQQWRkQm91bnR5UmVxdWVzdBIRCgllbnRpdHlfaWQYASAB",
-            "KAMSDgoGYW1vdW50GAIgASgDEg8KB21lc3NhZ2UYAyABKAkiJAoRQWRkQm91",
-            "bnR5UmVzcG9uc2USDwoHaW52b2ljZRgBIAEoCSJKCglIaWdoc2NvcmUSDAoE",
-            "bmFtZRgBIAEoCRINCgVraWxscxgCIAEoBRIOCgZkZWF0aHMYAyABKAUSEAoI",
-            "ZWFybmluZ3MYBCABKAMykwIKDUNsaWVudFNlcnZpY2USPwoLR2V0VXNlcm5h",
-            "bWUSFy5iYmguR2V0VXNlcm5hbWVSZXF1ZXN0GhcuYmJoLkdldFVzZXJuYW1l",
-            "UmVwb25zZRJACgtTZXRVc2VybmFtZRIXLmJiaC5TZXRVc2VybmFtZVJlcXVl",
-            "c3QaGC5iYmguU2V0VXNlcm5hbWVSZXNwb25zZRJDCgxHZXRIaWdoc2NvcmUS",
-            "GC5iYmguR2V0SGlnaHNjb3JlUmVxdWVzdBoZLmJiaC5HZXRIaWdoc2NvcmVS",
-            "ZXNwb25zZRI6CglBZGRCb3VudHkSFS5iYmguQWRkQm91bnR5UmVxdWVzdBoW",
-            "LmJiaC5BZGRCb3VudHlSZXNwb25zZWIGcHJvdG8z"));
+            "aWdoc2NvcmUiQwoQQWRkQm91bnR5UmVxdWVzdBIOCgZwdWJrZXkYASABKAkS",
+            "DgoGYW1vdW50GAIgASgDEg8KB21lc3NhZ2UYAyABKAkiJAoRQWRkQm91bnR5",
+            "UmVzcG9uc2USDwoHaW52b2ljZRgBIAEoCSITChFMaXN0T25saW5lUmVxdWVz",
+            "dCIyChJMaXN0T25saW5lUmVzcG9uc2USHAoHcGxheWVycxgBIAMoCzILLmJi",
+            "aC5QbGF5ZXIibQoGUGxheWVyEgwKBG5hbWUYASABKAkSDgoGcHVia2V5GAIg",
+            "ASgJEhYKDmN1cnJlbnRfYm91bnR5GAMgASgDEhUKDWN1cnJlbnRfa2lsbHMY",
+            "BCABKAUSFgoOY3VycmVudF9kZWF0aHMYBSABKAUiWgoJSGlnaHNjb3JlEgwK",
+            "BG5hbWUYASABKAkSDQoFa2lsbHMYAiABKAUSDgoGZGVhdGhzGAMgASgFEhAK",
+            "CGVhcm5pbmdzGAQgASgDEg4KBnB1YmtleRgFIAEoCTLSAgoNQ2xpZW50U2Vy",
+            "dmljZRI/CgtHZXRVc2VybmFtZRIXLmJiaC5HZXRVc2VybmFtZVJlcXVlc3Qa",
+            "Fy5iYmguR2V0VXNlcm5hbWVSZXBvbnNlEkAKC1NldFVzZXJuYW1lEhcuYmJo",
+            "LlNldFVzZXJuYW1lUmVxdWVzdBoYLmJiaC5TZXRVc2VybmFtZVJlc3BvbnNl",
+            "EkMKDEdldEhpZ2hzY29yZRIYLmJiaC5HZXRIaWdoc2NvcmVSZXF1ZXN0Ghku",
+            "YmJoLkdldEhpZ2hzY29yZVJlc3BvbnNlEjoKCUFkZEJvdW50eRIVLmJiaC5B",
+            "ZGRCb3VudHlSZXF1ZXN0GhYuYmJoLkFkZEJvdW50eVJlc3BvbnNlEj0KCkxp",
+            "c3RPbmxpbmUSFi5iYmguTGlzdE9ubGluZVJlcXVlc3QaFy5iYmguTGlzdE9u",
+            "bGluZVJlc3BvbnNlYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -49,9 +55,12 @@ namespace Bbh {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.SetUsernameResponse), global::Bbh.SetUsernameResponse.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetHighscoreRequest), global::Bbh.GetHighscoreRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetHighscoreResponse), global::Bbh.GetHighscoreResponse.Parser, new[]{ "Highscores" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AddBountyRequest), global::Bbh.AddBountyRequest.Parser, new[]{ "EntityId", "Amount", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AddBountyRequest), global::Bbh.AddBountyRequest.Parser, new[]{ "Pubkey", "Amount", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AddBountyResponse), global::Bbh.AddBountyResponse.Parser, new[]{ "Invoice" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.Highscore), global::Bbh.Highscore.Parser, new[]{ "Name", "Kills", "Deaths", "Earnings" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.ListOnlineRequest), global::Bbh.ListOnlineRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.ListOnlineResponse), global::Bbh.ListOnlineResponse.Parser, new[]{ "Players" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.Player), global::Bbh.Player.Parser, new[]{ "Name", "Pubkey", "CurrentBounty", "CurrentKills", "CurrentDeaths" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.Highscore), global::Bbh.Highscore.Parser, new[]{ "Name", "Kills", "Deaths", "Earnings", "Pubkey" }, null, null, null)
           }));
     }
     #endregion
@@ -793,7 +802,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public AddBountyRequest(AddBountyRequest other) : this() {
-      entityId_ = other.entityId_;
+      pubkey_ = other.pubkey_;
       amount_ = other.amount_;
       message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -804,14 +813,14 @@ namespace Bbh {
       return new AddBountyRequest(this);
     }
 
-    /// <summary>Field number for the "entity_id" field.</summary>
-    public const int EntityIdFieldNumber = 1;
-    private long entityId_;
+    /// <summary>Field number for the "pubkey" field.</summary>
+    public const int PubkeyFieldNumber = 1;
+    private string pubkey_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long EntityId {
-      get { return entityId_; }
+    public string Pubkey {
+      get { return pubkey_; }
       set {
-        entityId_ = value;
+        pubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -850,7 +859,7 @@ namespace Bbh {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (EntityId != other.EntityId) return false;
+      if (Pubkey != other.Pubkey) return false;
       if (Amount != other.Amount) return false;
       if (Message != other.Message) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -859,7 +868,7 @@ namespace Bbh {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (EntityId != 0L) hash ^= EntityId.GetHashCode();
+      if (Pubkey.Length != 0) hash ^= Pubkey.GetHashCode();
       if (Amount != 0L) hash ^= Amount.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
@@ -875,9 +884,9 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (EntityId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(EntityId);
+      if (Pubkey.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Pubkey);
       }
       if (Amount != 0L) {
         output.WriteRawTag(16);
@@ -895,8 +904,8 @@ namespace Bbh {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (EntityId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(EntityId);
+      if (Pubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pubkey);
       }
       if (Amount != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Amount);
@@ -915,8 +924,8 @@ namespace Bbh {
       if (other == null) {
         return;
       }
-      if (other.EntityId != 0L) {
-        EntityId = other.EntityId;
+      if (other.Pubkey.Length != 0) {
+        Pubkey = other.Pubkey;
       }
       if (other.Amount != 0L) {
         Amount = other.Amount;
@@ -935,8 +944,8 @@ namespace Bbh {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            EntityId = input.ReadInt64();
+          case 10: {
+            Pubkey = input.ReadString();
             break;
           }
           case 16: {
@@ -1082,6 +1091,469 @@ namespace Bbh {
 
   }
 
+  public sealed partial class ListOnlineRequest : pb::IMessage<ListOnlineRequest> {
+    private static readonly pb::MessageParser<ListOnlineRequest> _parser = new pb::MessageParser<ListOnlineRequest>(() => new ListOnlineRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListOnlineRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineRequest(ListOnlineRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineRequest Clone() {
+      return new ListOnlineRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListOnlineRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListOnlineRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListOnlineRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ListOnlineResponse : pb::IMessage<ListOnlineResponse> {
+    private static readonly pb::MessageParser<ListOnlineResponse> _parser = new pb::MessageParser<ListOnlineResponse>(() => new ListOnlineResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListOnlineResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineResponse(ListOnlineResponse other) : this() {
+      players_ = other.players_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListOnlineResponse Clone() {
+      return new ListOnlineResponse(this);
+    }
+
+    /// <summary>Field number for the "players" field.</summary>
+    public const int PlayersFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Bbh.Player> _repeated_players_codec
+        = pb::FieldCodec.ForMessage(10, global::Bbh.Player.Parser);
+    private readonly pbc::RepeatedField<global::Bbh.Player> players_ = new pbc::RepeatedField<global::Bbh.Player>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Bbh.Player> Players {
+      get { return players_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListOnlineResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListOnlineResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!players_.Equals(other.players_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= players_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      players_.WriteTo(output, _repeated_players_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += players_.CalculateSize(_repeated_players_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListOnlineResponse other) {
+      if (other == null) {
+        return;
+      }
+      players_.Add(other.players_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            players_.AddEntriesFrom(input, _repeated_players_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Player : pb::IMessage<Player> {
+    private static readonly pb::MessageParser<Player> _parser = new pb::MessageParser<Player>(() => new Player());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Player> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Player() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Player(Player other) : this() {
+      name_ = other.name_;
+      pubkey_ = other.pubkey_;
+      currentBounty_ = other.currentBounty_;
+      currentKills_ = other.currentKills_;
+      currentDeaths_ = other.currentDeaths_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Player Clone() {
+      return new Player(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "pubkey" field.</summary>
+    public const int PubkeyFieldNumber = 2;
+    private string pubkey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Pubkey {
+      get { return pubkey_; }
+      set {
+        pubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "current_bounty" field.</summary>
+    public const int CurrentBountyFieldNumber = 3;
+    private long currentBounty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long CurrentBounty {
+      get { return currentBounty_; }
+      set {
+        currentBounty_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_kills" field.</summary>
+    public const int CurrentKillsFieldNumber = 4;
+    private int currentKills_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CurrentKills {
+      get { return currentKills_; }
+      set {
+        currentKills_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_deaths" field.</summary>
+    public const int CurrentDeathsFieldNumber = 5;
+    private int currentDeaths_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CurrentDeaths {
+      get { return currentDeaths_; }
+      set {
+        currentDeaths_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Player);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Player other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Pubkey != other.Pubkey) return false;
+      if (CurrentBounty != other.CurrentBounty) return false;
+      if (CurrentKills != other.CurrentKills) return false;
+      if (CurrentDeaths != other.CurrentDeaths) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Pubkey.Length != 0) hash ^= Pubkey.GetHashCode();
+      if (CurrentBounty != 0L) hash ^= CurrentBounty.GetHashCode();
+      if (CurrentKills != 0) hash ^= CurrentKills.GetHashCode();
+      if (CurrentDeaths != 0) hash ^= CurrentDeaths.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Pubkey.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Pubkey);
+      }
+      if (CurrentBounty != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(CurrentBounty);
+      }
+      if (CurrentKills != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(CurrentKills);
+      }
+      if (CurrentDeaths != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(CurrentDeaths);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Pubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pubkey);
+      }
+      if (CurrentBounty != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CurrentBounty);
+      }
+      if (CurrentKills != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentKills);
+      }
+      if (CurrentDeaths != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentDeaths);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Player other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Pubkey.Length != 0) {
+        Pubkey = other.Pubkey;
+      }
+      if (other.CurrentBounty != 0L) {
+        CurrentBounty = other.CurrentBounty;
+      }
+      if (other.CurrentKills != 0) {
+        CurrentKills = other.CurrentKills;
+      }
+      if (other.CurrentDeaths != 0) {
+        CurrentDeaths = other.CurrentDeaths;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            Pubkey = input.ReadString();
+            break;
+          }
+          case 24: {
+            CurrentBounty = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            CurrentKills = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CurrentDeaths = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class Highscore : pb::IMessage<Highscore> {
     private static readonly pb::MessageParser<Highscore> _parser = new pb::MessageParser<Highscore>(() => new Highscore());
     private pb::UnknownFieldSet _unknownFields;
@@ -1090,7 +1562,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1111,6 +1583,7 @@ namespace Bbh {
       kills_ = other.kills_;
       deaths_ = other.deaths_;
       earnings_ = other.earnings_;
+      pubkey_ = other.pubkey_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1163,6 +1636,17 @@ namespace Bbh {
       }
     }
 
+    /// <summary>Field number for the "pubkey" field.</summary>
+    public const int PubkeyFieldNumber = 5;
+    private string pubkey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Pubkey {
+      get { return pubkey_; }
+      set {
+        pubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Highscore);
@@ -1180,6 +1664,7 @@ namespace Bbh {
       if (Kills != other.Kills) return false;
       if (Deaths != other.Deaths) return false;
       if (Earnings != other.Earnings) return false;
+      if (Pubkey != other.Pubkey) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1190,6 +1675,7 @@ namespace Bbh {
       if (Kills != 0) hash ^= Kills.GetHashCode();
       if (Deaths != 0) hash ^= Deaths.GetHashCode();
       if (Earnings != 0L) hash ^= Earnings.GetHashCode();
+      if (Pubkey.Length != 0) hash ^= Pubkey.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1219,6 +1705,10 @@ namespace Bbh {
         output.WriteRawTag(32);
         output.WriteInt64(Earnings);
       }
+      if (Pubkey.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Pubkey);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1238,6 +1728,9 @@ namespace Bbh {
       }
       if (Earnings != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Earnings);
+      }
+      if (Pubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pubkey);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1261,6 +1754,9 @@ namespace Bbh {
       }
       if (other.Earnings != 0L) {
         Earnings = other.Earnings;
+      }
+      if (other.Pubkey.Length != 0) {
+        Pubkey = other.Pubkey;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1287,6 +1783,10 @@ namespace Bbh {
           }
           case 32: {
             Earnings = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            Pubkey = input.ReadString();
             break;
           }
         }

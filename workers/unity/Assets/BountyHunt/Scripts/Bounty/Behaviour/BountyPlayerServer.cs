@@ -49,7 +49,7 @@ public class BountyPlayerServer : MonoBehaviour
         while (!ct.IsCancellationRequested)
         {
             PlayerHeartbeatClientCommandSender.SendPlayerHeartbeatCommand(LinkedEntityComponent.EntityId, new Improbable.Gdk.Core.Empty(), OnHearbeat);
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
@@ -57,7 +57,8 @@ public class BountyPlayerServer : MonoBehaviour
     {
         if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
-            BackendGameServerBehaviour.instance.AddPlayerHeartbeat(HunterComponentWriter.Data.Pubkey, Bbh.PlayerInfoEvent.Types.EventType.Heartbeat);
+            var data = HunterComponentWriter.Data;
+            BackendGameServerBehaviour.instance.AddPlayerHeartbeat(data.Pubkey, data.Bounty, data.Kills, data.Deaths);
         }
     }
     private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)

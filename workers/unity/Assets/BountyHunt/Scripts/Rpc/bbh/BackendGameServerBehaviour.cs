@@ -46,9 +46,19 @@ public class BackendGameServerBehaviour : MonoBehaviour
         backendClient.AddToQueue(new Bbh.EventStreamRequest { Earnings = new Bbh.EarningsEvent { Amt = earnings, User = user } });
     }
 
-    public void AddPlayerHeartbeat(string user, Bbh.PlayerInfoEvent.Types.EventType type)
+    public void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths)
     {
-        backendClient.AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() { User = user, EventType= type } });
+        backendClient.AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() {
+            User = user,
+            EventType= Bbh.PlayerInfoEvent.Types.EventType.Heartbeat,
+            CurrentBounty = bounty,
+            CurrentDeaths = deaths,
+            CurrentKills = kills
+        } });
+    }
+    public void AddPlayerDisconnect(string user)
+    {
+        backendClient.AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() { User = user, EventType = Bbh.PlayerInfoEvent.Types.EventType.Disconnect } });
     }
 
     private void OnApplicationQuit()
