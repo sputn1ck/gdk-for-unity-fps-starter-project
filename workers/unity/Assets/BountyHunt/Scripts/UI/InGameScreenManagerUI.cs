@@ -12,7 +12,7 @@ public class InGameScreenManagerUI : MonoBehaviour
     public ScreenUI Hud;
     public ScreenUI EscapeScreen;
     public ScreenUI ScoreBoardScreen;
-    public GameObject Reticle;
+    public ReticleUI Reticle;
 
     //TODO
     //public GameObject BountyUi;
@@ -52,7 +52,7 @@ public class InGameScreenManagerUI : MonoBehaviour
 
         UpdateScreens();
 
-        Reticle.SetActive(true);
+        Reticle.showReticle(true);
     }
 
     void OnPlayerSpawn(GameObject player)
@@ -97,7 +97,7 @@ public class InGameScreenManagerUI : MonoBehaviour
     public void SetPlayerAiming(bool isAiming)
     {
         isPlayerAiming = isAiming;
-        Reticle.SetActive(!isPlayerAiming);
+        Reticle.showReticle(!isPlayerAiming);
     }
 
     public void SetScoreBoardScreen(bool active)
@@ -113,7 +113,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(true);
             EscapeScreen.Show(false);
             RespawnScreen.Show(false);
-            Reticle.SetActive(false);
+            Reticle.showReticle(false);
             Cursor.visible = true;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
@@ -122,7 +122,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(false);
             EscapeScreen.Show(true);
             RespawnScreen.Show(false);
-            Reticle.SetActive(!isPlayerAiming);
+            Reticle.showReticle(!isPlayerAiming);
             Cursor.visible = true;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
@@ -131,7 +131,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(false);
             EscapeScreen.Show(false);
             RespawnScreen.Show(true);
-            Reticle.SetActive(!isPlayerAiming);
+            Reticle.showReticle(!isPlayerAiming);
             Cursor.visible = true;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
@@ -140,6 +140,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(false);
             EscapeScreen.Show(false);
             RespawnScreen.Show(false);
+            Reticle.showReticle(!isPlayerAiming);
             Cursor.visible = false;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.Locked));
         }
