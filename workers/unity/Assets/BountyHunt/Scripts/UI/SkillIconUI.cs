@@ -55,14 +55,14 @@ public class SkillIconUI : MonoBehaviour
     {
         active = true;
         Icon.gameObject.SetActive(true);
-        KeyText.gameObject.SetActive(false);
+        //KeyText.gameObject.SetActive(false);
     }
 
     void Deactivate()
     {
         active = false;
         if(hideWhenInactive) Icon.gameObject.SetActive(true);
-        KeyText.gameObject.SetActive(true);
+        //KeyText.gameObject.SetActive(true);
     }
 
     public void setSkill(PlayerSkill skill)
