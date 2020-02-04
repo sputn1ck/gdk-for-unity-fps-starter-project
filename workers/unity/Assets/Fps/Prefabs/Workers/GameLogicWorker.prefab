@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1813844308}
   - component: {fileID: 1813844307}
   - component: {fileID: 5171795202252606609}
+  - component: {fileID: 3078217333959010984}
+  - component: {fileID: 4427303356334879966}
   m_Layer: 0
   m_Name: GameLogicWorker
   m_TagString: Untagged
@@ -73,6 +75,7 @@ MonoBehaviour:
   defaultMinCubesPerSpawn: 2
   defaultMaxCubesPerSpawn: 25
   defaultMinSatsForDonationAnnouncement: 50
+  defaultSatoshiDropRate: 1
 --- !u!114 &5171795202252606609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,3 +92,27 @@ MonoBehaviour:
   TargetFrameRate: 30
   mapTemplate: {fileID: 11400000, guid: f62fdf28a64923b4caf60e8249f24ed7, type: 2}
   DisableRenderers: 1
+--- !u!114 &3078217333959010984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455626031769568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8e3c2acd7aa54478c4eb77daf57553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4427303356334879966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455626031769568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b1ce1a344257148b6d74b666f61ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -34,6 +34,7 @@ public class BountyPlayerServer : MonoBehaviour
     {
         var bbhbackend = FlagManager.instance.GetComponent<BackendPlayerBehaviour>();
         var name = await bbhbackend.client.GetUsername(HunterComponentWriter.Data.Pubkey);
+        BackendGameServerBehaviour.instance.AddPlayerHeartbeat(HunterComponentWriter.Data.Pubkey, Bbh.PlayerInfoEvent.Types.EventType.Heartbeat);
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = name });
         GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(name, LinkedEntityComponent.EntityId));
     }

@@ -46,6 +46,11 @@ public class BackendGameServerBehaviour : MonoBehaviour
         backendClient.AddToQueue(new Bbh.EventStreamRequest { Earnings = new Bbh.EarningsEvent { Amt = earnings, User = user } });
     }
 
+    public void AddPlayerHeartbeat(string user, Bbh.PlayerInfoEvent.Types.EventType type)
+    {
+        backendClient.AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() { User = user, EventType= type } });
+    }
+
     private void OnApplicationQuit()
     {
 

@@ -10,7 +10,11 @@ message EventStreamRequest {
     oneof event {
         KillEvent kill = 1;
         EarningsEvent earnings = 2;
+        PlayerInfoEvent player_info = 3;
     }
+}
+
+message EventStreamResponse {
 }
 
 message KillEvent {
@@ -24,5 +28,12 @@ message EarningsEvent {
     int64 amt = 2;
 }
 
-message EventStreamResponse {
+message PlayerInfoEvent {
+    string user = 1;
+    EventType event_type = 2;
+    enum EventType{
+        HEARTBEAT = 0;
+        DISCONNECT = 1;
+    }
 }
+

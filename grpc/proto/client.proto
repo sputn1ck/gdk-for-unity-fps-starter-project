@@ -6,6 +6,7 @@ service ClientService {
     rpc GetUsername(GetUsernameRequest) returns (GetUsernameReponse);
     rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse);
     rpc GetHighscore(GetHighscoreRequest) returns (GetHighscoreResponse);
+    rpc AddBounty(AddBountyRequest) returns (AddBountyResponse);
 }
 
 message GetUsernameRequest {}
@@ -26,6 +27,15 @@ message GetHighscoreRequest {}
 
 message GetHighscoreResponse {
     repeated Highscore highscores = 1;
+}
+
+message AddBountyRequest {
+    int64 entity_id = 1;
+    int64 amount = 2;
+    string message = 3;
+}
+message AddBountyResponse {
+    string invoice = 1;
 }
 
 message Highscore {

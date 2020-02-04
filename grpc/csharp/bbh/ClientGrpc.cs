@@ -18,6 +18,8 @@ namespace Bbh {
     static readonly grpc::Marshaller<global::Bbh.SetUsernameResponse> __Marshaller_bbh_SetUsernameResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.SetUsernameResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.GetHighscoreRequest> __Marshaller_bbh_GetHighscoreRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetHighscoreRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.GetHighscoreResponse> __Marshaller_bbh_GetHighscoreResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetHighscoreResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.AddBountyRequest> __Marshaller_bbh_AddBountyRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.AddBountyRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.AddBountyResponse> __Marshaller_bbh_AddBountyResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.AddBountyResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse> __Method_GetUsername = new grpc::Method<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse>(
         grpc::MethodType.Unary,
@@ -40,6 +42,13 @@ namespace Bbh {
         __Marshaller_bbh_GetHighscoreRequest,
         __Marshaller_bbh_GetHighscoreResponse);
 
+    static readonly grpc::Method<global::Bbh.AddBountyRequest, global::Bbh.AddBountyResponse> __Method_AddBounty = new grpc::Method<global::Bbh.AddBountyRequest, global::Bbh.AddBountyResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddBounty",
+        __Marshaller_bbh_AddBountyRequest,
+        __Marshaller_bbh_AddBountyResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -61,6 +70,11 @@ namespace Bbh {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbh.GetHighscoreResponse> GetHighscore(global::Bbh.GetHighscoreRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbh.AddBountyResponse> AddBounty(global::Bbh.AddBountyRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -138,6 +152,22 @@ namespace Bbh {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetHighscore, null, options, request);
       }
+      public virtual global::Bbh.AddBountyResponse AddBounty(global::Bbh.AddBountyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddBounty(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbh.AddBountyResponse AddBounty(global::Bbh.AddBountyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddBounty, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.AddBountyResponse> AddBountyAsync(global::Bbh.AddBountyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddBountyAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.AddBountyResponse> AddBountyAsync(global::Bbh.AddBountyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddBounty, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ClientServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -152,7 +182,8 @@ namespace Bbh {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetUsername, serviceImpl.GetUsername)
           .AddMethod(__Method_SetUsername, serviceImpl.SetUsername)
-          .AddMethod(__Method_GetHighscore, serviceImpl.GetHighscore).Build();
+          .AddMethod(__Method_GetHighscore, serviceImpl.GetHighscore)
+          .AddMethod(__Method_AddBounty, serviceImpl.AddBounty).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -164,6 +195,7 @@ namespace Bbh {
       serviceBinder.AddMethod(__Method_GetUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetUsernameRequest, global::Bbh.GetUsernameReponse>(serviceImpl.GetUsername));
       serviceBinder.AddMethod(__Method_SetUsername, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.SetUsernameRequest, global::Bbh.SetUsernameResponse>(serviceImpl.SetUsername));
       serviceBinder.AddMethod(__Method_GetHighscore, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetHighscoreRequest, global::Bbh.GetHighscoreResponse>(serviceImpl.GetHighscore));
+      serviceBinder.AddMethod(__Method_AddBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.AddBountyRequest, global::Bbh.AddBountyResponse>(serviceImpl.AddBounty));
     }
 
   }

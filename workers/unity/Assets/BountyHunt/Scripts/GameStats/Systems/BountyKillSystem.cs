@@ -58,9 +58,10 @@ public class BountyKillSystem : ComponentSystem
             {
                 Kills = killerDonnerInfo.Kills + 1
             };
+            var satsToDrop = (long)(victimDonnerInfo.Bounty - (victimDonnerInfo.Bounty * FlagManager.instance.GetSatoshiDropRate()));
             var victimModifiedInfo = new HunterComponent.Update()
             {
-                Bounty = 0,
+                Bounty = satsToDrop,
                 Deaths = victimDonnerInfo.Deaths + 1
             };
             var posSpatial = componentUpdateSystem.GetComponent<Position.Snapshot>(victimId);
@@ -73,7 +74,7 @@ public class BountyKillSystem : ComponentSystem
                 Z = (float)posSpatial.Coords.Z,
             };
             if(victimDonnerInfo.Bounty > 0)
-                commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = victimDonnerInfo.Bounty, Position = pos } });
+                commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = satsToDrop, Position = pos } });
             SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
             //PrometheusManager.TotalKills.Inc(1);
         }

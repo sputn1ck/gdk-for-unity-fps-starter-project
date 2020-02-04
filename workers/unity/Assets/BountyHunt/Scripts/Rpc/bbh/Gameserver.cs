@@ -24,21 +24,26 @@ namespace Bbh {
     static GameserverReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChBnYW1lc2VydmVyLnByb3RvEgNiYmgiZQoSRXZlbnRTdHJlYW1SZXF1ZXN0",
-            "Eh4KBGtpbGwYASABKAsyDi5iYmguS2lsbEV2ZW50SAASJgoIZWFybmluZ3MY",
-            "AiABKAsyEi5iYmguRWFybmluZ3NFdmVudEgAQgcKBWV2ZW50IjoKCUtpbGxF",
-            "dmVudBIOCgZraWxsZXIYASABKAkSDgoGdmljdGltGAIgASgJEg0KBWNhdXNl",
-            "GAMgASgJIioKDUVhcm5pbmdzRXZlbnQSDAoEdXNlchgBIAEoCRILCgNhbXQY",
-            "AiABKAMiFQoTRXZlbnRTdHJlYW1SZXNwb25zZTJRCgtHYW1lU2VydmljZRJC",
-            "CgtFdmVudFN0cmVhbRIXLmJiaC5FdmVudFN0cmVhbVJlcXVlc3QaGC5iYmgu",
-            "RXZlbnRTdHJlYW1SZXNwb25zZSgBYgZwcm90bzM="));
+            "ChBnYW1lc2VydmVyLnByb3RvEgNiYmgikgEKEkV2ZW50U3RyZWFtUmVxdWVz",
+            "dBIeCgRraWxsGAEgASgLMg4uYmJoLktpbGxFdmVudEgAEiYKCGVhcm5pbmdz",
+            "GAIgASgLMhIuYmJoLkVhcm5pbmdzRXZlbnRIABIrCgtwbGF5ZXJfaW5mbxgD",
+            "IAEoCzIULmJiaC5QbGF5ZXJJbmZvRXZlbnRIAEIHCgVldmVudCIVChNFdmVu",
+            "dFN0cmVhbVJlc3BvbnNlIjoKCUtpbGxFdmVudBIOCgZraWxsZXIYASABKAkS",
+            "DgoGdmljdGltGAIgASgJEg0KBWNhdXNlGAMgASgJIioKDUVhcm5pbmdzRXZl",
+            "bnQSDAoEdXNlchgBIAEoCRILCgNhbXQYAiABKAMifwoPUGxheWVySW5mb0V2",
+            "ZW50EgwKBHVzZXIYASABKAkSMgoKZXZlbnRfdHlwZRgCIAEoDjIeLmJiaC5Q",
+            "bGF5ZXJJbmZvRXZlbnQuRXZlbnRUeXBlIioKCUV2ZW50VHlwZRINCglIRUFS",
+            "VEJFQVQQABIOCgpESVNDT05ORUNUEAEyUQoLR2FtZVNlcnZpY2USQgoLRXZl",
+            "bnRTdHJlYW0SFy5iYmguRXZlbnRTdHJlYW1SZXF1ZXN0GhguYmJoLkV2ZW50",
+            "U3RyZWFtUmVzcG9uc2UoAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamRequest), global::Bbh.EventStreamRequest.Parser, new[]{ "Kill", "Earnings" }, new[]{ "Event" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamRequest), global::Bbh.EventStreamRequest.Parser, new[]{ "Kill", "Earnings", "PlayerInfo" }, new[]{ "Event" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamResponse), global::Bbh.EventStreamResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.KillEvent), global::Bbh.KillEvent.Parser, new[]{ "Killer", "Victim", "Cause" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EarningsEvent), global::Bbh.EarningsEvent.Parser, new[]{ "User", "Amt" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamResponse), global::Bbh.EventStreamResponse.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.PlayerInfoEvent), global::Bbh.PlayerInfoEvent.Parser, new[]{ "User", "EventType" }, null, new[]{ typeof(global::Bbh.PlayerInfoEvent.Types.EventType) }, null)
           }));
     }
     #endregion
@@ -77,6 +82,9 @@ namespace Bbh {
         case EventOneofCase.Earnings:
           Earnings = other.Earnings.Clone();
           break;
+        case EventOneofCase.PlayerInfo:
+          PlayerInfo = other.PlayerInfo.Clone();
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -109,12 +117,24 @@ namespace Bbh {
       }
     }
 
+    /// <summary>Field number for the "player_info" field.</summary>
+    public const int PlayerInfoFieldNumber = 3;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.PlayerInfoEvent PlayerInfo {
+      get { return eventCase_ == EventOneofCase.PlayerInfo ? (global::Bbh.PlayerInfoEvent) event_ : null; }
+      set {
+        event_ = value;
+        eventCase_ = value == null ? EventOneofCase.None : EventOneofCase.PlayerInfo;
+      }
+    }
+
     private object event_;
     /// <summary>Enum of possible cases for the "event" oneof.</summary>
     public enum EventOneofCase {
       None = 0,
       Kill = 1,
       Earnings = 2,
+      PlayerInfo = 3,
     }
     private EventOneofCase eventCase_ = EventOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -143,6 +163,7 @@ namespace Bbh {
       }
       if (!object.Equals(Kill, other.Kill)) return false;
       if (!object.Equals(Earnings, other.Earnings)) return false;
+      if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
       if (EventCase != other.EventCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -152,6 +173,7 @@ namespace Bbh {
       int hash = 1;
       if (eventCase_ == EventOneofCase.Kill) hash ^= Kill.GetHashCode();
       if (eventCase_ == EventOneofCase.Earnings) hash ^= Earnings.GetHashCode();
+      if (eventCase_ == EventOneofCase.PlayerInfo) hash ^= PlayerInfo.GetHashCode();
       hash ^= (int) eventCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -174,6 +196,10 @@ namespace Bbh {
         output.WriteRawTag(18);
         output.WriteMessage(Earnings);
       }
+      if (eventCase_ == EventOneofCase.PlayerInfo) {
+        output.WriteRawTag(26);
+        output.WriteMessage(PlayerInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -187,6 +213,9 @@ namespace Bbh {
       }
       if (eventCase_ == EventOneofCase.Earnings) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Earnings);
+      }
+      if (eventCase_ == EventOneofCase.PlayerInfo) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -211,6 +240,12 @@ namespace Bbh {
             Earnings = new global::Bbh.EarningsEvent();
           }
           Earnings.MergeFrom(other.Earnings);
+          break;
+        case EventOneofCase.PlayerInfo:
+          if (PlayerInfo == null) {
+            PlayerInfo = new global::Bbh.PlayerInfoEvent();
+          }
+          PlayerInfo.MergeFrom(other.PlayerInfo);
           break;
       }
 
@@ -243,6 +278,116 @@ namespace Bbh {
             Earnings = subBuilder;
             break;
           }
+          case 26: {
+            global::Bbh.PlayerInfoEvent subBuilder = new global::Bbh.PlayerInfoEvent();
+            if (eventCase_ == EventOneofCase.PlayerInfo) {
+              subBuilder.MergeFrom(PlayerInfo);
+            }
+            input.ReadMessage(subBuilder);
+            PlayerInfo = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class EventStreamResponse : pb::IMessage<EventStreamResponse> {
+    private static readonly pb::MessageParser<EventStreamResponse> _parser = new pb::MessageParser<EventStreamResponse>(() => new EventStreamResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<EventStreamResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventStreamResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventStreamResponse(EventStreamResponse other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventStreamResponse Clone() {
+      return new EventStreamResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as EventStreamResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(EventStreamResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(EventStreamResponse other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
         }
       }
     }
@@ -257,7 +402,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -442,7 +587,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -591,15 +736,15 @@ namespace Bbh {
 
   }
 
-  public sealed partial class EventStreamResponse : pb::IMessage<EventStreamResponse> {
-    private static readonly pb::MessageParser<EventStreamResponse> _parser = new pb::MessageParser<EventStreamResponse>(() => new EventStreamResponse());
+  public sealed partial class PlayerInfoEvent : pb::IMessage<PlayerInfoEvent> {
+    private static readonly pb::MessageParser<PlayerInfoEvent> _parser = new pb::MessageParser<PlayerInfoEvent>(() => new PlayerInfoEvent());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<EventStreamResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<PlayerInfoEvent> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -608,41 +753,69 @@ namespace Bbh {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EventStreamResponse() {
+    public PlayerInfoEvent() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EventStreamResponse(EventStreamResponse other) : this() {
+    public PlayerInfoEvent(PlayerInfoEvent other) : this() {
+      user_ = other.user_;
+      eventType_ = other.eventType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public EventStreamResponse Clone() {
-      return new EventStreamResponse(this);
+    public PlayerInfoEvent Clone() {
+      return new PlayerInfoEvent(this);
+    }
+
+    /// <summary>Field number for the "user" field.</summary>
+    public const int UserFieldNumber = 1;
+    private string user_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string User {
+      get { return user_; }
+      set {
+        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "event_type" field.</summary>
+    public const int EventTypeFieldNumber = 2;
+    private global::Bbh.PlayerInfoEvent.Types.EventType eventType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.PlayerInfoEvent.Types.EventType EventType {
+      get { return eventType_; }
+      set {
+        eventType_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as EventStreamResponse);
+      return Equals(other as PlayerInfoEvent);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(EventStreamResponse other) {
+    public bool Equals(PlayerInfoEvent other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (User != other.User) return false;
+      if (EventType != other.EventType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (User.Length != 0) hash ^= User.GetHashCode();
+      if (EventType != 0) hash ^= EventType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -656,6 +829,14 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (User.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(User);
+      }
+      if (EventType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) EventType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -664,6 +845,12 @@ namespace Bbh {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (User.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      }
+      if (EventType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) EventType);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -671,9 +858,15 @@ namespace Bbh {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(EventStreamResponse other) {
+    public void MergeFrom(PlayerInfoEvent other) {
       if (other == null) {
         return;
+      }
+      if (other.User.Length != 0) {
+        User = other.User;
+      }
+      if (other.EventType != 0) {
+        EventType = other.EventType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -686,9 +879,29 @@ namespace Bbh {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            User = input.ReadString();
+            break;
+          }
+          case 16: {
+            EventType = (global::Bbh.PlayerInfoEvent.Types.EventType) input.ReadEnum();
+            break;
+          }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the PlayerInfoEvent message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EventType {
+        [pbr::OriginalName("HEARTBEAT")] Heartbeat = 0,
+        [pbr::OriginalName("DISCONNECT")] Disconnect = 1,
+      }
+
+    }
+    #endregion
 
   }
 

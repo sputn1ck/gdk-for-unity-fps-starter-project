@@ -14,7 +14,8 @@ public class BountySpawnerServer : MonoBehaviour
 {
     [Require] WorldCommandSender WorldCommandSender;
     [Require] BountySpawnerCommandReceiver BountySpawnerCommandReceiver;
-    
+    [Require] HunterComponentCommandSender HunterComponentCommandSender;
+    [Require] GameStatsReader GameStatsReader;
 
     public int spawnAmount;
     public bool spawnTrigger;
@@ -24,8 +25,25 @@ public class BountySpawnerServer : MonoBehaviour
     {
         cancellationToken = new CancellationTokenSource();
         BountySpawnerCommandReceiver.OnSpawnBountyPickupRequestReceived += OnSpawnBountyPickupRequestReceived;
+        ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnRandomInvoicePaid);
+        ServerEvents.instance.OnAuctionInvoicePaid.AddListener(OnAuctionPaid);
+        ServerEvents.instance.OnBountyInvoicePaid.AddListener(OnBountyInvoicePaid);
     }
 
+    private void OnBountyInvoicePaid(BountyInvoice bounty)
+    {
+        HunterComponentCommandSender.SendAddBountyCommand(new EntityId(bounty.entityId), new AddBountyRequest(bounty.amount, BountyReason.DONATION));
+    }
+
+    private void OnRandomInvoicePaid(string memo, long amount)
+    {
+        SpawnPickupAtRandomPosition(amount);
+    }
+
+    private void OnAuctionPaid(AuctionInvoice auction)
+    {
+        StartCoroutine(AuctionSpawning(auction.Amount, FlagManager.instance.GetSpawnsPerAuction(), FlagManager.instance.GetAuctionDuration()));
+    }
     private void OnSpawnBountyPickupRequestReceived(BountySpawner.SpawnBountyPickup.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
@@ -62,7 +80,6 @@ public class BountySpawnerServer : MonoBehaviour
             return;
         var pos = getRandomPosition();
 
-        Debug.Log(" spawn pickup with: " + sats + " at: " + pos);
         //pos.y = pos.y + 1f;
         var bountypickup = DonnerEntityTemplates.BountyPickup(pos, sats);
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountypickup));
@@ -111,6 +128,20 @@ public class BountySpawnerServer : MonoBehaviour
         }
         yield return null;
 
+    }
+
+    IEnumerator AuctionSpawning(long auctionAmount, int totalTicks, float totalTimeSeconds)
+    {
+        Debug.Log("AuctionSpawning started");
+        int spawnCounter = 0;
+        float timePerTickSeconds = totalTimeSeconds / totalTicks;
+        long satsPerTick = auctionAmount / totalTicks;
+        for (spawnCounter = 0; spawnCounter < totalTicks; spawnCounter++)
+        {
+            SpawnTick(satsPerTick, Random.Range(FlagManager.instance.GetMinSpawns(), FlagManager.instance.GetMaxSpawns()));
+            yield return new WaitForSeconds(timePerTickSeconds);
+        }
+        Debug.Log("AuctionSpawning finished");
     }
 
     Vector3 getRandomPosition()

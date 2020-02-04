@@ -6,11 +6,13 @@ component GameStats{
     id = 440001;
     Scoreboard scoreboard = 1;
     map<EntityId, string> player_names = 2;
+    map<EntityId, PlayerItem> player_map = 3;
     event KillInfo gained_kill_event;
     event bountyhunt.Empty update_scoreboard_event;
     command bountyhunt.Empty set_name(SetNameRequest);
     command bountyhunt.Empty remove_name(RemoveNameRequest);
 }
+
 
 
 type Scoreboard {
@@ -34,6 +36,13 @@ type SetNameRequest {
 }
 
 type RemoveNameRequest {
-
     EntityId id = 1;
+}
+
+type PlayerItem {
+    string name = 1;
+    string pubkey = 2;
+    int64 bounty = 3;
+    int32 kills = 4;
+    int32 deaths = 5;
 }

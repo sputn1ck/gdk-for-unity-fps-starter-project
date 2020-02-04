@@ -225,6 +225,7 @@ public class DonnerEntityTemplates
         var gameStatsComponent = new GameStats.Snapshot();
         gameStatsComponent.Scoreboard = new Scoreboard(new System.Collections.Generic.List<ScoreboardItem>());
         gameStatsComponent.PlayerNames = new System.Collections.Generic.Dictionary<EntityId, string>();
+        gameStatsComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.Chat.Snapshot();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);

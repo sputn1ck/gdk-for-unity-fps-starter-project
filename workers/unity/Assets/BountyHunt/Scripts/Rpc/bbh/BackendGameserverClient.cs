@@ -50,6 +50,7 @@ public class BackendGameserverClient
                 Thread.Sleep(1000);
             }
         });
+        listenThread.Start();
     }
 
     

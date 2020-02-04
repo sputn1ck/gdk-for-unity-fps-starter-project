@@ -30,14 +30,23 @@ public class ServerGameStats : MonoBehaviour
             return;
         var nameMap = GameStatsWriter.Data.PlayerNames;
         var scoreBoard = GameStatsWriter.Data.Scoreboard;
+        var playerMap = GameStatsWriter.Data.PlayerMap;
         if (nameMap.ContainsKey(obj.Payload.Id))
         {
             nameMap.Remove(obj.Payload.Id);
             var user = scoreBoard.Board.Find(u => u.Entity == obj.Payload.Id);
             if(scoreBoard.Board.Contains(user))
                 scoreBoard.Board.Remove(user);
-            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap, Scoreboard = scoreBoard });
         }
+        if (playerMap.ContainsKey(obj.Payload.Id))
+        {
+            playerMap.Remove(obj.Payload.Id);
+            var user = scoreBoard.Board.Find(u => u.Entity == obj.Payload.Id);
+            if (scoreBoard.Board.Contains(user))
+                scoreBoard.Board.Remove(user);
+        }
+
+        GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerNames = nameMap, PlayerMap = playerMap,Scoreboard = scoreBoard });
     }
 
     private void OnSetNameRequestReceived(GameStats.SetName.ReceivedRequest obj)

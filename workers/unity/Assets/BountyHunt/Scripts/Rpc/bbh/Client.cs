@@ -29,13 +29,17 @@ namespace Bbh {
             "bWVSZXF1ZXN0EgwKBG5hbWUYASABKAkiIwoTU2V0VXNlcm5hbWVSZXNwb25z",
             "ZRIMCgRuYW1lGAEgASgJIhUKE0dldEhpZ2hzY29yZVJlcXVlc3QiOgoUR2V0",
             "SGlnaHNjb3JlUmVzcG9uc2USIgoKaGlnaHNjb3JlcxgBIAMoCzIOLmJiaC5I",
-            "aWdoc2NvcmUiSgoJSGlnaHNjb3JlEgwKBG5hbWUYASABKAkSDQoFa2lsbHMY",
-            "AiABKAUSDgoGZGVhdGhzGAMgASgFEhAKCGVhcm5pbmdzGAQgASgDMtcBCg1D",
-            "bGllbnRTZXJ2aWNlEj8KC0dldFVzZXJuYW1lEhcuYmJoLkdldFVzZXJuYW1l",
-            "UmVxdWVzdBoXLmJiaC5HZXRVc2VybmFtZVJlcG9uc2USQAoLU2V0VXNlcm5h",
-            "bWUSFy5iYmguU2V0VXNlcm5hbWVSZXF1ZXN0GhguYmJoLlNldFVzZXJuYW1l",
-            "UmVzcG9uc2USQwoMR2V0SGlnaHNjb3JlEhguYmJoLkdldEhpZ2hzY29yZVJl",
-            "cXVlc3QaGS5iYmguR2V0SGlnaHNjb3JlUmVzcG9uc2ViBnByb3RvMw=="));
+            "aWdoc2NvcmUiRgoQQWRkQm91bnR5UmVxdWVzdBIRCgllbnRpdHlfaWQYASAB",
+            "KAMSDgoGYW1vdW50GAIgASgDEg8KB21lc3NhZ2UYAyABKAkiJAoRQWRkQm91",
+            "bnR5UmVzcG9uc2USDwoHaW52b2ljZRgBIAEoCSJKCglIaWdoc2NvcmUSDAoE",
+            "bmFtZRgBIAEoCRINCgVraWxscxgCIAEoBRIOCgZkZWF0aHMYAyABKAUSEAoI",
+            "ZWFybmluZ3MYBCABKAMykwIKDUNsaWVudFNlcnZpY2USPwoLR2V0VXNlcm5h",
+            "bWUSFy5iYmguR2V0VXNlcm5hbWVSZXF1ZXN0GhcuYmJoLkdldFVzZXJuYW1l",
+            "UmVwb25zZRJACgtTZXRVc2VybmFtZRIXLmJiaC5TZXRVc2VybmFtZVJlcXVl",
+            "c3QaGC5iYmguU2V0VXNlcm5hbWVSZXNwb25zZRJDCgxHZXRIaWdoc2NvcmUS",
+            "GC5iYmguR2V0SGlnaHNjb3JlUmVxdWVzdBoZLmJiaC5HZXRIaWdoc2NvcmVS",
+            "ZXNwb25zZRI6CglBZGRCb3VudHkSFS5iYmguQWRkQm91bnR5UmVxdWVzdBoW",
+            "LmJiaC5BZGRCb3VudHlSZXNwb25zZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -45,6 +49,8 @@ namespace Bbh {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.SetUsernameResponse), global::Bbh.SetUsernameResponse.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetHighscoreRequest), global::Bbh.GetHighscoreRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetHighscoreResponse), global::Bbh.GetHighscoreResponse.Parser, new[]{ "Highscores" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AddBountyRequest), global::Bbh.AddBountyRequest.Parser, new[]{ "EntityId", "Amount", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AddBountyResponse), global::Bbh.AddBountyResponse.Parser, new[]{ "Invoice" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.Highscore), global::Bbh.Highscore.Parser, new[]{ "Name", "Kills", "Deaths", "Earnings" }, null, null, null)
           }));
     }
@@ -762,6 +768,320 @@ namespace Bbh {
 
   }
 
+  public sealed partial class AddBountyRequest : pb::IMessage<AddBountyRequest> {
+    private static readonly pb::MessageParser<AddBountyRequest> _parser = new pb::MessageParser<AddBountyRequest>(() => new AddBountyRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AddBountyRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyRequest(AddBountyRequest other) : this() {
+      entityId_ = other.entityId_;
+      amount_ = other.amount_;
+      message_ = other.message_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyRequest Clone() {
+      return new AddBountyRequest(this);
+    }
+
+    /// <summary>Field number for the "entity_id" field.</summary>
+    public const int EntityIdFieldNumber = 1;
+    private long entityId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long EntityId {
+      get { return entityId_; }
+      set {
+        entityId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "amount" field.</summary>
+    public const int AmountFieldNumber = 2;
+    private long amount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Amount {
+      get { return amount_; }
+      set {
+        amount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 3;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AddBountyRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AddBountyRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EntityId != other.EntityId) return false;
+      if (Amount != other.Amount) return false;
+      if (Message != other.Message) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EntityId != 0L) hash ^= EntityId.GetHashCode();
+      if (Amount != 0L) hash ^= Amount.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EntityId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(EntityId);
+      }
+      if (Amount != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Amount);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Message);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EntityId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(EntityId);
+      }
+      if (Amount != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Amount);
+      }
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AddBountyRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EntityId != 0L) {
+        EntityId = other.EntityId;
+      }
+      if (other.Amount != 0L) {
+        Amount = other.Amount;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            EntityId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Amount = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            Message = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class AddBountyResponse : pb::IMessage<AddBountyResponse> {
+    private static readonly pb::MessageParser<AddBountyResponse> _parser = new pb::MessageParser<AddBountyResponse>(() => new AddBountyResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AddBountyResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyResponse(AddBountyResponse other) : this() {
+      invoice_ = other.invoice_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AddBountyResponse Clone() {
+      return new AddBountyResponse(this);
+    }
+
+    /// <summary>Field number for the "invoice" field.</summary>
+    public const int InvoiceFieldNumber = 1;
+    private string invoice_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Invoice {
+      get { return invoice_; }
+      set {
+        invoice_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AddBountyResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AddBountyResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Invoice != other.Invoice) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Invoice.Length != 0) hash ^= Invoice.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Invoice.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Invoice);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Invoice.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Invoice);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AddBountyResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Invoice.Length != 0) {
+        Invoice = other.Invoice;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Invoice = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class Highscore : pb::IMessage<Highscore> {
     private static readonly pb::MessageParser<Highscore> _parser = new pb::MessageParser<Highscore>(() => new Highscore());
     private pb::UnknownFieldSet _unknownFields;
@@ -770,7 +1090,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Bbh.ClientReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -21,6 +21,7 @@ public class FlagManager : MonoBehaviour
     public int defaultMinCubesPerSpawn;
     public int defaultMaxCubesPerSpawn;
     public long defaultMinSatsForDonationAnnouncement;
+    public double defaultSatoshiDropRate;
 
     private Worker worker;
 
@@ -39,6 +40,7 @@ public class FlagManager : MonoBehaviour
     private const string minCubesPerSpawnFlag = "min_cubes";
     private const string maxCubesPerSpawnFlag = "max_cubes";
     private const string minSatsForDonationAnnouncementFlag = "min_sats_for_donation_announcement";
+    private const string satoshiDropRateFlag = "satoshi_drop_rate_on_death";
 
     // Start is called before the first frame update
     async void Start()
@@ -161,5 +163,13 @@ public class FlagManager : MonoBehaviour
         if (long.TryParse(worker.GetWorkerFlag(minSatsForDonationAnnouncementFlag), out minSatsForDonationAnnouncement))
             return minSatsForDonationAnnouncement;
         return defaultMinSatsForDonationAnnouncement;
+    }
+
+    public double GetSatoshiDropRate()
+    {
+        double satoshiDropRate;
+        if (double.TryParse(worker.GetWorkerFlag(satoshiDropRateFlag), out satoshiDropRate))
+            return satoshiDropRate;
+        return defaultSatoshiDropRate;
     }
 }
