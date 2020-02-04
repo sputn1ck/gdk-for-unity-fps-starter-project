@@ -9,57 +9,6 @@ using Grpc.Core;
 using Lnrpc;
 using UnityEngine;
 
-public class LnClient : MonoBehaviour
-{
-    public string confName;
-    public bool UseDummy;
-    public static LnClient instance;
-    public IClientLnd lnd;
-    public bool UseApdata;
-    void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }else
-        {
-            Destroy(this);
-            return;
-        }
-        if (UseDummy)
-        {
-            lnd = new DummyLnd();
-        } else
-        {
-            lnd = new LndClient();
-        }
-        lnd.Setup(confName, false,UseApdata);
-    }
-
-
-
-   
-    public void OnApplicationQuit()
-    {
-
-        lnd.ShutDown();
-        Debug.Log("client quit cleanly");
-    }
-
-
-    public string GetPubkey()
-    {
-
-        Debug.Log("pubkey: " + lnd.GetPubkey());
-        return lnd.GetPubkey();
-    }
-
-    public LnConf GetConfig()
-    {
-        return lnd.GetConfig();
-    }
-
-}
 [Serializable]
 public struct LnConf
 {
@@ -81,9 +30,10 @@ public class DummyLnd : IClientLnd
 
         invoices = new Dictionary<string, Invoice>();
     }
-    public void Setup(string config, bool listen, bool apdata)
+    public Task Setup(string config, bool listen, bool apdata)
     {
         pubkey = "pubkey" + UnityEngine.Random.Range(0, int.MaxValue);
+        return Task.CompletedTask;
     }
 
     public void ShutDown()
@@ -109,13 +59,13 @@ public class DummyLnd : IClientLnd
     public Task<string> GetInvoice(long amount, string description, long expiry)
     {
         var payreq = "invoice" + UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        invoices.Add(payreq, new Invoice {Memo = description, Value = amount, PaymentRequest = payreq });
+        invoices.Add(payreq, new Invoice { Memo = description, Value = amount, PaymentRequest = payreq });
         return Task.FromResult(payreq);
     }
 
     public Task<SendResponse> PayInvoice(string paymentRequest)
     {
-        return Task.FromResult(new SendResponse {PaymentError="not using real lightning" });
+        return Task.FromResult(new SendResponse { PaymentError = "not using real lightning" });
     }
 
     public Task<PendingChannelsResponse> PendingChannels()
@@ -153,7 +103,7 @@ public class DummyLnd : IClientLnd
         return new LnConf();
     }
 
-    
+
 
     public void SetPaid(string payreq)
     {
@@ -171,12 +121,12 @@ public class DummyLnd : IClientLnd
             var invoice = invoices[payreq];
             return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
         }
-        return await Task.FromResult(new PayReq { NumSatoshis = 0});
+        return await Task.FromResult(new PayReq { NumSatoshis = 0 });
     }
 
     public void Dispose()
     {
-        
+
     }
 
     public Task<long> GetWalletBalace()
@@ -197,7 +147,7 @@ public class DummyLnd : IClientLnd
 public class LndClient : IClientLnd
 {
     public string confName;
-    public LnClient instance;
+    public PlayerServiceConnections instance;
 
     private Grpc.Core.Channel rpcChannel;
     private Lightning.LightningClient lightningClient;
@@ -216,14 +166,14 @@ public class LndClient : IClientLnd
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     public LndClient()
     {
-        
+
     }
 
 
 
-    public async void Setup(string config, bool listen, bool useApdata)
+    public async Task Setup(string config, bool listen, bool useApdata)
     {
-       
+
         this.confName = config;
         this.useAppdata = useApdata;
         LoadConfig();
@@ -233,10 +183,10 @@ public class LndClient : IClientLnd
         rpcChannel = new Grpc.Core.Channel(lnconf.host, lnconf.rpcport, channelCreds);
         lightningClient = new Lightning.LightningClient(rpcChannel);
         pubkey = (await GetInfo()).IdentityPubkey;
-            
+
         Debug.Log("my pubkey: " + pubkey);
 
-        if(listen)
+        if (listen)
             StartListening();
         Debug.Log("finished setup");
     }
@@ -246,7 +196,7 @@ public class LndClient : IClientLnd
         //await ListenInvoices();
         listenThread = new Thread(async () =>
         {
-            
+
             while (!rpcChannel.ShutdownToken.IsCancellationRequested)
             {
                 await ListenInvoicesTask();
@@ -348,9 +298,9 @@ public class LndClient : IClientLnd
     }
     public async Task<GetInfoResponse> GetInfo()
     {
-                  
+
         return await lightningClient.GetInfoAsync(new GetInfoRequest { });
-        
+
     }
 
     public async Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port)
@@ -373,13 +323,13 @@ public class LndClient : IClientLnd
         return res;
     }
 
-    
+
     public async Task<string> GetInvoice(long amount, string description, long expiry)
     {
 
         if (amount < 1)
             amount = 1;
-        if(lightningClient == null)
+        if (lightningClient == null)
         {
             Debug.LogError("for some reason lightning client is null?");
         }
@@ -419,7 +369,7 @@ public class LndClient : IClientLnd
 
         try
         {
-            using (_invoiceStream = lightningClient.SubscribeInvoices(request,cancellationToken:rpcChannel.ShutdownToken))
+            using (_invoiceStream = lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
             {
                 Debug.Log("listening successfully started");
                 while (!rpcChannel.ShutdownToken.IsCancellationRequested && await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
@@ -433,11 +383,12 @@ public class LndClient : IClientLnd
                         e.Invoice = invoice;
                         OnInvoiceSettled(this, e);
                     }
-                    
+
 
                 }
             }
-        } catch(Exception e)
+        }
+        catch (Exception e)
         {
             Debug.Log(e);
         }
@@ -447,7 +398,7 @@ public class LndClient : IClientLnd
             await Task.Delay(1000);
             StartListening();
         }
-            
+
 
     }
 
@@ -473,19 +424,19 @@ public class LndClient : IClientLnd
     {
         Debug.Log("shutdown called");
         if (rpcChannel != null)
-        {   
+        {
             ShutDownRpc();
             Debug.Log("shutting down rpc");
         }
-            
-        
+
+
         if (_invoiceStream != null)
         {
 
             Debug.Log("disposing invoiceStream");
             _invoiceStream.Dispose();
         }
-        
+
 
 
     }
@@ -512,14 +463,14 @@ public class LndClient : IClientLnd
         {
             var invoice = await lightningClient.DecodePayReqAsync(new PayReqString { PayReq = payreq });
             OnInvoiceSettled.Invoke(this, new InvoiceSettledEventArgs() { Invoice = new Invoice { PaymentRequest = payreq, Value = invoice.NumSatoshis, Memo = invoice.Description } });
-            
+
         }
     }
 
 
     public async Task<PayReq> DecodePayreq(string payreq)
     {
-        return await lightningClient.DecodePayReqAsync(new PayReqString { PayReq= payreq });
+        return await lightningClient.DecodePayReqAsync(new PayReqString { PayReq = payreq });
     }
 
     public async Task CloseChannel(string channelPoint, uint index)
@@ -556,7 +507,7 @@ public class LndClient : IClientLnd
             Addr = address,
             SendAll = true,
             TargetConf = 6
-            
+
         });
         return res.Txid;
     }

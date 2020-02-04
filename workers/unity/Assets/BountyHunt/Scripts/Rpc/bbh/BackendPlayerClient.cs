@@ -14,24 +14,27 @@ public class BackendPlayerClient
 
     private Grpc.Core.Channel rpcChannel;
 
-    public void Setup(string target)
+    private string pubkey;
+    private string signature;
+    public void Setup(string target, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, 8899, Grpc.Core.ChannelCredentials.Insecure);
         client = new ClientService.ClientServiceClient(rpcChannel);
-        
+        this.pubkey = pubkey;
+        this.signature = signature;
 
     }
 
     public async Task<string> GetUsername(string pubkey)
     {
         
-        var res = await client.GetUsernameAsync(new GetUsernameRequest() { }, GetPubkeyCalloptions(pubkey));
+        var res = await client.GetUsernameAsync(new GetUsernameRequest() { }, GetPubkeyCalloptions());
         return res.Name;
     }
 
     public async Task<string> SetUsername(string pubkey, string userName)
     {
-        var res = await client.SetUsernameAsync(new SetUsernameRequest() { Name = userName }, GetPubkeyCalloptions(pubkey));
+        var res = await client.SetUsernameAsync(new SetUsernameRequest() { Name = userName }, GetPubkeyCalloptions());
         return res.Name;
     }
 
@@ -43,10 +46,11 @@ public class BackendPlayerClient
         return highscores;
     }
 
-    private CallOptions GetPubkeyCalloptions(string pubkey)
+    private CallOptions GetPubkeyCalloptions()
     {
         var md = new Metadata();
         md.Add("pubkey", pubkey);
+        md.Add("sig", signature);
         var co = new CallOptions(headers: md);
         return co;
     }

@@ -88,7 +88,7 @@ public class LndConnector : MonoBehaviour
     public async void DoAll()
     {
 
-        var getInfo = await LnClient.instance.lnd.GetInfo();
+        var getInfo = await PlayerServiceConnections.instance.lnd.GetInfo();
         pubkey = getInfo.IdentityPubkey;
         StartCoroutine(DoAllEnumerator());
     }
@@ -123,7 +123,7 @@ public class LndConnector : MonoBehaviour
     {
         var message = "heyho";
         
-            var sigfunc = LnClient.instance.lnd.SignMessage(message);
+            var sigfunc = PlayerServiceConnections.instance.lnd.SignMessage(message);
         
         UnityWebRequest www = UnityWebRequest.Get(host+"/spatial/pit/" + message+"/"+sigfunc.Signature);
         yield return www.SendWebRequest();

@@ -8,7 +8,7 @@ using System;
 public interface IClientLnd :IDisposable
 {
 
-    void Setup(string config, bool listen, bool useApdata);
+    Task Setup(string config, bool listen, bool useApdata);
     void ShutDown();
     Task<GetInfoResponse> GetInfo();
 

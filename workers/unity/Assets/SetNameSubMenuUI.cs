@@ -33,7 +33,7 @@ public class SetNameSubMenuUI : SubMenuUI
         }
         try
         {
-            var res = await BackendPlayerBehaviour.instance.client.SetUsername(pubkey, playerName);
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(pubkey, playerName);
             StartCoroutine(ConnectEnumerator());
 
         } catch(RpcException e)
@@ -52,7 +52,7 @@ public class SetNameSubMenuUI : SubMenuUI
         base.OnSelect();
         ErrorText.text = "";
 
-        pubkey = LnClient.instance.GetPubkey();
+        pubkey = PlayerServiceConnections.instance.GetPubkey();
     }
 
     public IEnumerator ConnectEnumerator()

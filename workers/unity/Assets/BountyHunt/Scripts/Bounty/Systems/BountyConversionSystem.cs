@@ -65,7 +65,7 @@ public class BountyConversionSystem : ComponentSystem
                 var newBounty = hunterComponent.Bounty - tick;
                 hunterComponent.Bounty = newBounty;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;
-                BackendGameServerBehaviour.instance.AddEarnings(hunterComponent.Pubkey, tick);
+                ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
                 newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
             });
             foreach(var player in newPairs)

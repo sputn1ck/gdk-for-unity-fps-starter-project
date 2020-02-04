@@ -32,7 +32,7 @@ public class ServerGameStats : MonoBehaviour
         var playerMap = GameStatsWriter.Data.PlayerMap;
         if (playerMap.ContainsKey(obj.Payload.Id))
         {
-            BackendGameServerBehaviour.instance.AddPlayerDisconnect(playerMap[obj.Payload.Id].Pubkey);
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[obj.Payload.Id].Pubkey);
 
             playerMap.Remove(obj.Payload.Id);
             GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });

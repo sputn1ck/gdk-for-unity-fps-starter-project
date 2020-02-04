@@ -123,7 +123,7 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
 
     private void SendRequest()
     {
-        var loginArgs = new LoginData(this.playerName, LnClient.instance.lnd.GetPubkey(), this.gunId);
+        var loginArgs = new LoginData(this.playerName, PlayerServiceConnections.instance.lnd.GetPubkey(), this.gunId);
         var serializedArgs = Encoding.ASCII.GetBytes(UnityEngine.JsonUtility.ToJson(loginArgs));
         Worker.World.GetExistingSystem<SendCreatePlayerRequestSystem>()
             .RequestPlayerCreation(serializedArgs, onPlayerResponse);

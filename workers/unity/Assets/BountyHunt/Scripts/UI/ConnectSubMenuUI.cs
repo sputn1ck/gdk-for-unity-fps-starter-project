@@ -75,17 +75,17 @@ public class ConnectSubMenuUI : SubMenuUI
     {
         base.OnSelect();
         errorText.text = "";
-        getNameAndPubkey();
+        Invoke("getNameAndPubkey",1f);
     }
 
     private async void getNameAndPubkey()
     {
-        var getinfo = await LnClient.instance.lnd.GetInfo();
+        var getinfo = await PlayerServiceConnections.instance.lnd.GetInfo();
         var pubkey = getinfo.IdentityPubkey;
         try
         {
 
-            var name = await BackendPlayerBehaviour.instance.client.GetUsername(pubkey);
+            var name = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername(pubkey);
             if (pubkey == name)
             {
                 setName = true;

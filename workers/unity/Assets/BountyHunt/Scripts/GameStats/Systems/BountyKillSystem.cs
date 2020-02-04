@@ -105,7 +105,7 @@ public class BountyKillSystem : ComponentSystem
 
     private void SendBackendUpdate(string killer, string victim)
     {
-        var backend = BackendGameServerBehaviour.instance;
+        var backend = ServerServiceConnections.instance.BackendGameServerClient;
         if (backend != null)
         {
             backend.AddKill(killer, victim);

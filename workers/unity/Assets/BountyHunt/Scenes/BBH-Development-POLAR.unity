@@ -293,44 +293,16 @@ PrefabInstance:
       propertyPath: UseDummy
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1813844308, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
+      propertyPath: confName
+      value: polar/polar-server/dd.conf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813844308, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
+      propertyPath: BackendHost
+      value: localhost
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d29a39b8a626e42bdfc2e1d7af6746, type: 3}
---- !u!1 &224329729 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1455626031769568, guid: 75d29a39b8a626e42bdfc2e1d7af6746,
-    type: 3}
-  m_PrefabInstance: {fileID: 224329728}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &224329730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 224329729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b7e8055d26f294bb3a2d1d624a8d43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BackendHost: localhost
-  testAmount: 0
-  testName: 
-  testTrigger: 0
---- !u!114 &224329731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 224329729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447265b19b44ab341b7a636be767e827, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: localhost
-  getHighscoreTrigger: 0
 --- !u!1 &685486277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2748526782618737085, guid: d52364553e6842940944c62b73e5e1b1,
@@ -3951,30 +3923,25 @@ PrefabInstance:
     - target: {fileID: 6155843011314803828, guid: 265b840c3541fb249bdad092798bb49c,
         type: 3}
       propertyPath: UseDummy
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155843011314803828, guid: 265b840c3541fb249bdad092798bb49c,
+        type: 3}
+      propertyPath: UseApdata
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155843011314803828, guid: 265b840c3541fb249bdad092798bb49c,
+        type: 3}
+      propertyPath: confName
+      value: polar/polar-client/dd.conf
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155843011314803828, guid: 265b840c3541fb249bdad092798bb49c,
+        type: 3}
+      propertyPath: BackendHost
+      value: localhost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 265b840c3541fb249bdad092798bb49c, type: 3}
---- !u!1 &1688058158 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2466744334126222726, guid: 265b840c3541fb249bdad092798bb49c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1688058157}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1688058159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688058158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447265b19b44ab341b7a636be767e827, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: localhost
-  getHighscoreTrigger: 0
 --- !u!1001 &2007593797
 PrefabInstance:
   m_ObjectHideFlags: 0

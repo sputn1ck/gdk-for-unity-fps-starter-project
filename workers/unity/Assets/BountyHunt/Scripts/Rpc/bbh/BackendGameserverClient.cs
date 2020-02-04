@@ -20,13 +20,17 @@ public class BackendGameserverClient
     private CancellationTokenSource ct;
     private Thread listenThread;
 
+    private string pubkey;
+    private string message;
 
-    public void Setup(string target)
+    public void Setup(string target, string pubkey, string message)
     {
         rpcChannel = new Grpc.Core.Channel(target, 8899,Grpc.Core.ChannelCredentials.Insecure);
         _client = new GameService.GameServiceClient(rpcChannel);
         eventQueue = new ConcurrentQueue<EventStreamRequest>();
         ct = new CancellationTokenSource();
+        this.pubkey = pubkey;
+        this.message = message;
     }
 
     public void Shutdown()
@@ -52,9 +56,36 @@ public class BackendGameserverClient
         });
         listenThread.Start();
     }
+    public void AddKill(string killer, string victim)
+    {
+        AddToQueue(new Bbh.EventStreamRequest { Kill = new Bbh.KillEvent() { Killer = killer, Victim = victim } });
+    }
 
-    
-    public void AddToQueue(EventStreamRequest request)
+    public void AddEarnings(string user, long earnings)
+    {
+        AddToQueue(new Bbh.EventStreamRequest { Earnings = new Bbh.EarningsEvent { Amt = earnings, User = user } });
+    }
+
+    public void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths)
+    {
+        AddToQueue(new Bbh.EventStreamRequest
+        {
+            PlayerInfo = new Bbh.PlayerInfoEvent()
+            {
+                User = user,
+                EventType = Bbh.PlayerInfoEvent.Types.EventType.Heartbeat,
+                CurrentBounty = bounty,
+                CurrentDeaths = deaths,
+                CurrentKills = kills
+            }
+        });
+    }
+    public void AddPlayerDisconnect(string user)
+    {
+        AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() { User = user, EventType = Bbh.PlayerInfoEvent.Types.EventType.Disconnect } });
+    }
+
+    private void AddToQueue(EventStreamRequest request)
     {
         eventQueue.Enqueue(request);
         
@@ -62,7 +93,7 @@ public class BackendGameserverClient
 
     private async Task eventStream()
     {
-        using (var call = _client.EventStream())
+        using (var call = _client.EventStream(GetPubkeyCalloptions()))
         {
             Debug.Log("opening stream");
             eventQueue.Enqueue(new EventStreamRequest());
@@ -84,7 +115,7 @@ public class BackendGameserverClient
                                 Debug.Log("failed to connect");
                                 eventQueue.Enqueue(current);
                                 await call.RequestStream.CompleteAsync();
-                                
+
                             }
                             Debug.Log("ERROR " + e);
                             return;
@@ -96,6 +127,16 @@ public class BackendGameserverClient
 
             await call.RequestStream.CompleteAsync();
         }
+    }
+    
+
+    private CallOptions GetPubkeyCalloptions()
+    {
+        var md = new Metadata();
+        md.Add("pubkey", pubkey);
+        md.Add("sig", message);
+        var co = new CallOptions(headers: md);
+        return co;
     }
 
 }

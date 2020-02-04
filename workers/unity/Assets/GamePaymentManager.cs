@@ -5,12 +5,12 @@ using UnityEngine;
 public class GamePaymentManager : MonoBehaviour
 {
     
-    private LnServer lnServer;
+    private ServerServiceConnections lnServer;
 
     private bool useLnd;
     private void Awake()
     {
-        lnServer = GetComponent<LnServer>();
+        lnServer = GetComponent<ServerServiceConnections>();
         if (lnServer == null)
         {
             useLnd = false;

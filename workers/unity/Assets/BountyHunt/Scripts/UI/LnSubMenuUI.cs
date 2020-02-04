@@ -26,7 +26,7 @@ public class LnSubMenuUI : SubMenuUI
     //public TMP_InputField BtcAddressInput;
     public Button WikiButton;
 
-    private LnClient lnClient;
+    private PlayerServiceConnections lnClient;
     private const string donnerPubkey = "024b0f1e453299eb39fd629ebc0f881e7714a86eb86f173b11f7606fcb4731e246";
     //private const long minBtc = 25000;
 
@@ -41,7 +41,7 @@ public class LnSubMenuUI : SubMenuUI
     {
         ErrorText.text = "";
         OkText.text = "";
-        lnClient = LnClient.instance;
+        lnClient = PlayerServiceConnections.instance;
         await UpdateBalance();
     }
 

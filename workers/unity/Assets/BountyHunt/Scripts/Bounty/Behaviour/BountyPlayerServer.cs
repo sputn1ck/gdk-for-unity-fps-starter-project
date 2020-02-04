@@ -37,8 +37,8 @@ public class BountyPlayerServer : MonoBehaviour
     //TODO hacky...
     async void SetName()
     {
-        var bbhbackend = FlagManager.instance.GetComponent<BackendPlayerBehaviour>();
-        var name = await bbhbackend.client.GetUsername(HunterComponentWriter.Data.Pubkey);
+        var bbhbackend = PlayerServiceConnections.instance.BackendPlayerClient;
+        var name = await bbhbackend.GetUsername(HunterComponentWriter.Data.Pubkey);
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = name });
         GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(name, LinkedEntityComponent.EntityId, HunterComponentWriter.Data.Pubkey));
         StartCoroutine(hearbeatCoroutine());
@@ -58,7 +58,7 @@ public class BountyPlayerServer : MonoBehaviour
         if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
             var data = HunterComponentWriter.Data;
-            BackendGameServerBehaviour.instance.AddPlayerHeartbeat(data.Pubkey, data.Bounty, data.Kills, data.Deaths);
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerHeartbeat(data.Pubkey, data.Bounty, data.Kills, data.Deaths);
         }
     }
     private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)
