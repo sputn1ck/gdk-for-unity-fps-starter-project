@@ -5,12 +5,15 @@ using UnityEngine;
 using Bountyhunt;
 using System.Threading;
 using Fps.Config;
+using Improbable.Gdk.Core;
 
 [WorkerType(WorkerUtils.UnityClient)]
 public class BountyPlayerAuthorative : MonoBehaviour
 {
 
     [Require] public HunterComponentReader HunterComponentReader;
+    [Require] public HunterComponentCommandSender HunterComponentCommandSender;
+    [Require] EntityId entityId;
 
     private long lastBounty;
     private long lastEarnings;
@@ -23,6 +26,24 @@ public class BountyPlayerAuthorative : MonoBehaviour
         lastEarnings = 0;
     }
 
+    public void RequestPayout(long amount)
+    {
+        // TODO get invoice
+
+        HunterComponentCommandSender.SendRequestPayoutCommand(entityId, new RequestPayoutRequest(""),OnRequestPayout);
+    }
+
+    private void OnRequestPayout(HunterComponent.RequestPayout.ReceivedResponse res)
+    {
+        if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
+        {
+            // TODO something went right
+        }
+        else
+        {
+            // TODO something went wrong
+        }
+    }
     private void HunterComponentReader_OnEarningsUpdate(long earnings)
     {
         ClientEvents.instance.onEarningsUpdate.Invoke(new EarningsUpdateEventArgs()

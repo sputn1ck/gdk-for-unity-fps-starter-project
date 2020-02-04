@@ -12,6 +12,7 @@ component HunterComponent {
     string pubkey = 6;
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
+    command RequestPayoutResponse request_payout(RequestPayoutRequest);
 }
 
 
@@ -22,6 +23,16 @@ type AddBountyRequest {
 
 type IncreaseEarningsRequest {
     int64 amount = 1;
+}
+
+type RequestPayoutRequest {
+    string pay_req = 1;
+}
+
+type RequestPayoutResponse {
+    bool ok = 1;
+    string pre_image = 2;
+    string error_message = 3;
 }
 
 enum BountyReason {

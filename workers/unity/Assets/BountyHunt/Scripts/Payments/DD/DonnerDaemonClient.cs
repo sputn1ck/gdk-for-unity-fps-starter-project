@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Donnerrpc;
+using Daemon;
 using Grpc.Core;
 using System.Threading.Tasks;
 using System;
@@ -9,7 +9,7 @@ using System;
 public class DonnerDaemonClient
 {
     public Channel rpcChannel;
-    public DonnerDaemon.DonnerDaemonClient client;
+    public DaemonService.DaemonServiceClient client;
 
     public static DonnerDaemonClient instance;
     public string command;
@@ -19,7 +19,7 @@ public class DonnerDaemonClient
     public void Setup()
     {
         rpcChannel = new Channel("localhost:10101", ChannelCredentials.Insecure);
-        client = new DonnerDaemon.DonnerDaemonClient(rpcChannel);
+        client = new DaemonService.DaemonServiceClient(rpcChannel);
         
     }
 

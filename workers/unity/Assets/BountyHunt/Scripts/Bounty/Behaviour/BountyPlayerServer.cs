@@ -7,6 +7,8 @@ using System.Threading;
 using Fps.Config;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
+using System;
+
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountyPlayerServer : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class BountyPlayerServer : MonoBehaviour
     [Require] public HunterComponentCommandReceiver BountyComponentCommandReceiver;
     [Require] public GameStatsCommandSender GameStatsCommandSender;
     [Require] public PlayerHeartbeatClientCommandSender PlayerHeartbeatClientCommandSender;
+    
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -23,14 +26,50 @@ public class BountyPlayerServer : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        
+
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
+        BountyComponentCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
         ct = new CancellationTokenSource();
 
         
         Invoke("SetName", 1f);
         //StartCoroutine(BountyTick());
+    }
+
+    private async void OnRequestPayout(HunterComponent.RequestPayout.ReceivedRequest obj)
+    {
+        Lnrpc.PayReq invoice;
+        try
+        {
+            invoice = await ServerServiceConnections.instance.lnd.DecodePayreq(obj.Payload.PayReq);
+
+        }
+        catch (Exception e)
+        {
+            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice: " + e.Message);
+            return;
+        }
+        if(invoice == null)
+        {
+            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice:");
+            return;
+        }
+        if (invoice.NumSatoshis > HunterComponentWriter.Data.Earnings)
+        {
+            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "not enough sats");
+            return;
+        }
+        var payment = await ServerServiceConnections.instance.lnd.PayInvoice(obj.Payload.PayReq);
+        if (payment.PaymentError != "")
+        {
+            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, payment.PaymentError);
+            return;
+        }
+        var newEarnings = Mathf.Clamp(HunterComponentWriter.Data.Earnings - payment.PaymentRoute.TotalAmtMsat / 1000,0, int.MaxValue);
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = (long)newEarnings });
+        BountyComponentCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), ""));
+
     }
 
 
