@@ -8,6 +8,7 @@ using System.Threading;
 using UnityEngine;
 using Bountyhunt;
 using Fps.Config;
+using System.Linq;
 
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountySpawnerServer : MonoBehaviour
@@ -32,7 +33,12 @@ public class BountySpawnerServer : MonoBehaviour
 
     private void OnBountyInvoicePaid(BountyInvoice bounty)
     {
-        HunterComponentCommandSender.SendAddBountyCommand(new EntityId(bounty.entityId), new AddBountyRequest(bounty.amount, BountyReason.DONATION));
+        var player = GameStatsReader.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == bounty.pubkey);
+        if (player.Value.Name == null)
+        {
+            return;
+        }
+        HunterComponentCommandSender.SendAddBountyCommand(player.Key, new AddBountyRequest(bounty.amount, BountyReason.DONATION));
     }
 
     private void OnRandomInvoicePaid(string memo, long amount)

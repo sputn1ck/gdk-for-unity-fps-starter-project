@@ -44,7 +44,8 @@ public class ServerDisconnectSystem : ComponentSystem
     {
         Entities.With(query).ForEach((ref HunterComponent.Component donnerinfo, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
         {
-            if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
+            Debug.Log(donnerinfo.Name + ";" + heartbeat.NumFailedHeartbeats);
+            if (heartbeat.NumFailedHeartbeats >= PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
             {
                 commandSystem.SendCommand(new GameStats.RemoveName.Request { TargetEntityId = new EntityId(2), Payload = new RemoveNameRequest { Id = entityId.EntityId } });
                 if (donnerinfo.Bounty > 0 || donnerinfo.Earnings > 0)
@@ -64,7 +65,6 @@ public class ServerDisconnectSystem : ComponentSystem
                         }
                     });
                     componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
-                    BackendGameServerBehaviour.instance.AddPlayerHeartbeat(donnerinfo.Pubkey, Bbh.PlayerInfoEvent.Types.EventType.Disconnect);
                 }
             }
             /*

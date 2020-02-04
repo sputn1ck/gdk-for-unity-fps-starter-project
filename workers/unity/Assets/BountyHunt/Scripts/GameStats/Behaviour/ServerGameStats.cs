@@ -23,22 +23,6 @@ public class ServerGameStats : MonoBehaviour
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
-        //GameStatsWriter.OnGainedKillEventEvent += GameStatsWriter_OnGainedKillEventEvent;
-    }
-
-    private void GameStatsWriter_OnGainedKillEventEvent(KillInfo obj)
-    {
-        var playerMap = GameStatsWriter.Data.PlayerMap;
-        if(playerMap.ContainsKey(obj.Killer) && playerMap.ContainsKey(obj.Victim))
-        {
-            var killer = playerMap[obj.Killer];
-            killer.Kills++;
-            var victim = playerMap[obj.Victim];
-            victim.Deaths++;
-            playerMap[obj.Killer] = killer;
-            playerMap[obj.Victim] = victim;
-            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
-        }
     }
 
     private void OnRemoveNameRequestReceived(GameStats.RemoveName.ReceivedRequest obj)
@@ -48,10 +32,12 @@ public class ServerGameStats : MonoBehaviour
         var playerMap = GameStatsWriter.Data.PlayerMap;
         if (playerMap.ContainsKey(obj.Payload.Id))
         {
+            BackendGameServerBehaviour.instance.AddPlayerHeartbeat(playerMap[obj.Payload.Id].Pubkey, Bbh.PlayerInfoEvent.Types.EventType.Disconnect);
+
             playerMap.Remove(obj.Payload.Id);
+            GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
         }
 
-        GameStatsWriter.SendUpdate(new GameStats.Update() {PlayerMap = playerMap });
     }
 
     private void OnSetNameRequestReceived(GameStats.SetName.ReceivedRequest obj)
@@ -59,6 +45,11 @@ public class ServerGameStats : MonoBehaviour
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
         var playerMap = GameStatsWriter.Data.PlayerMap;
+        var prev = playerMap.FirstOrDefault(u => u.Value.Pubkey == obj.Payload.Pubkey);
+        if(prev.Value.Pubkey != "")
+        {
+            playerMap.Remove(prev.Key);
+        }
         if (playerMap.ContainsKey(obj.Payload.Id))
         {
             var player = playerMap[obj.Payload.Id];

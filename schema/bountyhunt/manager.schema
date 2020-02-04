@@ -11,12 +11,6 @@ component GameStats{
     command bountyhunt.Empty remove_name(RemoveNameRequest);
 }
 
-
-
-type Scoreboard {
-    list<ScoreboardItem> board = 1;
-}
-
 type KillInfo {
     EntityId killer = 1;
     EntityId victim = 2;

@@ -126,7 +126,7 @@ public struct RoughPosition
 [Serializable]
 public class BountyInvoice
 {
-    public long entityId;
+    public string pubkey;
     public string user;
     public long amount;
     public string description;

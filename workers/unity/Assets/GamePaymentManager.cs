@@ -36,7 +36,7 @@ public class GamePaymentManager : MonoBehaviour
             return;
         }
         var bounty = DonnerUtils.MemoToBountyInvoice(e.Invoice.Memo);
-        if (bounty != null && bounty.entityId != 0)
+        if (bounty != null && bounty.pubkey != "")
         {
             ServerEvents.instance.OnBountyInvoicePaid.Invoke(bounty);
             return;
