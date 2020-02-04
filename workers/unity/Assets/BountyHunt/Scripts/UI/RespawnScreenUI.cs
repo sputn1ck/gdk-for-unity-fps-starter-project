@@ -17,6 +17,7 @@ public class RespawnScreenUI : ScreenUI
         RifleToggle.onValueChanged.AddListener(SelectRifle);
         SniperToggle.onValueChanged.AddListener(SelectSniper);
         ShotGunToggle.onValueChanged.AddListener(SelectShotgun);
+        respawnButton.onClick.AddListener(Respawn);
         isOn = true;
         //TODO
         //respawnButton.onClick.AddListener(DonnerPlayerAuthorative.instance.GetComponent<DonnerFpsDriver>().Respawn);
@@ -57,5 +58,11 @@ public class RespawnScreenUI : ScreenUI
         {
             FpsDriver.instance.ChangeGunId(2);
         }
+    }
+
+    public void Respawn()
+    {
+        if (!FpsDriver.instance) return;
+        FpsDriver.instance.Respawn();
     }
 }

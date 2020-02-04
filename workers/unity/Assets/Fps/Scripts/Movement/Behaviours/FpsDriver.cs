@@ -119,8 +119,7 @@ namespace Fps.Movement
             {
                 if (controller.RespawnPressed)
                 {
-                    isRequestingRespawn = true;
-                    requestingRespawnCoroutine = StartCoroutine(RequestRespawn());
+                    Respawn();
                 }
 
                 return;
@@ -185,6 +184,12 @@ namespace Fps.Movement
             var wasGroundedBeforeMovement = movement.IsGrounded;
             movement.ApplyMovement(toMove, rotation, movementSpeed, isJumpPressed);
             Animations(isJumpPressed && wasGroundedBeforeMovement);
+        }
+
+        public void Respawn()
+        {
+            isRequestingRespawn = true;
+            requestingRespawnCoroutine = StartCoroutine(RequestRespawn());
         }
 
         private IEnumerator RequestRespawn()
