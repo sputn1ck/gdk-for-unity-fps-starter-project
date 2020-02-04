@@ -24,16 +24,18 @@ public class ClientPlayerSkillBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (castTeleport)
+        for(int i = 0; i < SkillDictionary.Count;i++)
         {
-            castTeleport = false;
-            CastTeleport();
+            if (Input.GetKeyDown(SkillDictionary.Get(i).key))
+            {
+                CastSkill(i);
+            }
         }
     }
     //TODO add input for teleporting
-    void CastTeleport()
+    public void CastSkill(int id)
     {
-        PlayerSkillComponentCommandSender.SendActivateSkillCommand(LinkedEntityComponent.EntityId, new ActivateSkillRequest(0), ActivateSkillCallback);
+        PlayerSkillComponentCommandSender.SendActivateSkillCommand(LinkedEntityComponent.EntityId, new ActivateSkillRequest(id), ActivateSkillCallback);
     }
 
 
@@ -46,13 +48,20 @@ public class ClientPlayerSkillBehaviour : MonoBehaviour
             if (skill != null)
             {
                 skill.ClientCastSkill(this);
+                skill.CooldownStart();
+
             }
-        } else
+        }
+        else
         {
             // TODO blink ui button in red or something
             if(response.Message == "skill on cooldown")
             {
-
+                var skill = SkillDictionary.Get(response.RequestPayload.Id);
+                if(skill != null)
+                {
+                    skill.onCastFailed.Invoke();
+                }
             }
         }
     }
