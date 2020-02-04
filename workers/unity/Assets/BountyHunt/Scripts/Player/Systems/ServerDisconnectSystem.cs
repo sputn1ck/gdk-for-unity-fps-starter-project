@@ -44,8 +44,7 @@ public class ServerDisconnectSystem : ComponentSystem
     {
         Entities.With(query).ForEach((ref HunterComponent.Component donnerinfo, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
         {
-            Debug.Log(donnerinfo.Name + ";" + heartbeat.NumFailedHeartbeats);
-            if (heartbeat.NumFailedHeartbeats >= PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
+            if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
             {
                 commandSystem.SendCommand(new GameStats.RemoveName.Request { TargetEntityId = new EntityId(2), Payload = new RemoveNameRequest { Id = entityId.EntityId } });
                 if (donnerinfo.Bounty > 0 || donnerinfo.Earnings > 0)
