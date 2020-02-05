@@ -15,7 +15,9 @@ public class Vector2Event : UnityEvent<Vector2> { }
 public class GameObjectEvent : UnityEvent<GameObject> { }
 public class ScoreboardUIItemListEvent : UnityEvent<List<ScoreboardUIItem>,EntityId> { }
 [Serializable] public class BountyUpdateEvent : UnityEvent<BountyUpdateEventArgs> { }
-[Serializable] public class EarningsUpdateEvent : UnityEvent<EarningsUpdateEventArgs> { }
+[Serializable] public class SessionEarningsUpdateEvent : UnityEvent<SessionEarningsEventArgs> { }
+
+[Serializable] public class BalanceUpdateEvent : UnityEvent<BalanceUpdateEventArgs> { }
 public class StringColorEvent : UnityEvent<string, Color> { }
 [Serializable] public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
 public class StringLongEvent : UnityEvent<string, long> { }
@@ -32,7 +34,7 @@ public struct BountyUpdateEventArgs
 }
 
 [Serializable]
-public struct EarningsUpdateEventArgs
+public struct SessionEarningsEventArgs
 {
     public long NewAmount;
     public long OldAmount;
@@ -51,6 +53,12 @@ public struct PaymentFailureArgs
 {
     public string invoice;
     public string message;
+}
+
+public struct BalanceUpdateEventArgs
+{
+    public long NewAmount;
+    public long OldAmount;
 }
 
 

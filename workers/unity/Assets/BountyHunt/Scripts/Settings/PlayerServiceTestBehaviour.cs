@@ -43,6 +43,8 @@ public class PlayerServiceTestBehaviour : MonoBehaviour
         Debug.Log(info);
         var connection = await PlayerServiceConnections.instance.DonnerDaemonClient.GetConnection();
         Debug.Log(connection);
+        var walletBalance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+        Debug.Log(walletBalance);
         //var channel = await PlayerServiceConnections.instance.DonnerDaemonClient.GetPlatformChannel();
         //Debug.Log(channel);
     }

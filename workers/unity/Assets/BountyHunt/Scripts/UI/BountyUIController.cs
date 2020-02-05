@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Globalization;
 
 public class BountyUIController : MonoBehaviour
 {
@@ -31,4 +32,26 @@ public class BountyUIController : MonoBehaviour
         }
         satUpdate.GetComponent<Animator>().SetTrigger("play");
     }
+    public void UpdateSats(float sats, float diff, string format = "F1")
+    {
+        satText.text = sats.ToString(format, CultureInfo.InvariantCulture);
+        if (diff == 0)
+            return;
+        if (diff > 0)
+        {
+
+
+            satUpdate.text = "+" + diff.ToString();
+            satUpdate.color = positiveColor;
+        }
+        else
+        {
+
+            satUpdate.text = diff.ToString();
+            satUpdate.color = negativeColor;
+        }
+        satUpdate.GetComponent<Animator>().SetTrigger("play");
+    }
+
+    
 }

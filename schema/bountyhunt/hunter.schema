@@ -10,6 +10,7 @@ component HunterComponent {
     int64 bounty = 4;
     int64 earnings = 5;
     string pubkey = 6;
+    int64 session_earnings = 7;
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
     command RequestPayoutResponse request_payout(RequestPayoutRequest);

@@ -417,7 +417,7 @@ public class LndClient : IClientLnd
     private void ShutDownRpc()
     {
         Task task = Task.Run(async () => await rpcChannel.ShutdownAsync());
-        task.Wait();
+        task.Wait(5000);
     }
 
     public void ShutDown()

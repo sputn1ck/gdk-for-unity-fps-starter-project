@@ -53,6 +53,10 @@ public class DonnerDaemonClient
         return await client.GetConnectionAsync(new GetConnectionRequest());
     }
 
+    public async Task<WalletBalanceResponse> GetWalletBalance()
+    {
+        return await client.WalletBalanceAsync(new WalletBalanceRequest());
+    }
 
     public void Shutdown()
     {

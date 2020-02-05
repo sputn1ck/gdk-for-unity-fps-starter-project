@@ -22,6 +22,8 @@ namespace Daemon {
     static readonly grpc::Marshaller<global::Daemon.CreateInvoiceResponse> __Marshaller_daemon_CreateInvoiceResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.CreateInvoiceResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Daemon.PlatformChannelInfoRequest> __Marshaller_daemon_PlatformChannelInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.PlatformChannelInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Daemon.PlatformChannelInfoResponse> __Marshaller_daemon_PlatformChannelInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.PlatformChannelInfoResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Daemon.WalletBalanceRequest> __Marshaller_daemon_WalletBalanceRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.WalletBalanceRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Daemon.WalletBalanceResponse> __Marshaller_daemon_WalletBalanceResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.WalletBalanceResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Daemon.LncliRequest, global::Daemon.LncliResponse> __Method_Lncli = new grpc::Method<global::Daemon.LncliRequest, global::Daemon.LncliResponse>(
         grpc::MethodType.Unary,
@@ -58,6 +60,13 @@ namespace Daemon {
         __Marshaller_daemon_PlatformChannelInfoRequest,
         __Marshaller_daemon_PlatformChannelInfoResponse);
 
+    static readonly grpc::Method<global::Daemon.WalletBalanceRequest, global::Daemon.WalletBalanceResponse> __Method_WalletBalance = new grpc::Method<global::Daemon.WalletBalanceRequest, global::Daemon.WalletBalanceResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "WalletBalance",
+        __Marshaller_daemon_WalletBalanceRequest,
+        __Marshaller_daemon_WalletBalanceResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -89,6 +98,11 @@ namespace Daemon {
       }
 
       public virtual global::System.Threading.Tasks.Task PlatformChannelInfo(global::Daemon.PlatformChannelInfoRequest request, grpc::IServerStreamWriter<global::Daemon.PlatformChannelInfoResponse> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Daemon.WalletBalanceResponse> WalletBalance(global::Daemon.WalletBalanceRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -190,6 +204,22 @@ namespace Daemon {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_PlatformChannelInfo, null, options, request);
       }
+      public virtual global::Daemon.WalletBalanceResponse WalletBalance(global::Daemon.WalletBalanceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return WalletBalance(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Daemon.WalletBalanceResponse WalletBalance(global::Daemon.WalletBalanceRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_WalletBalance, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Daemon.WalletBalanceResponse> WalletBalanceAsync(global::Daemon.WalletBalanceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return WalletBalanceAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Daemon.WalletBalanceResponse> WalletBalanceAsync(global::Daemon.WalletBalanceRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_WalletBalance, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override DaemonServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -206,7 +236,8 @@ namespace Daemon {
           .AddMethod(__Method_GetInfo, serviceImpl.GetInfo)
           .AddMethod(__Method_GetConnection, serviceImpl.GetConnection)
           .AddMethod(__Method_CreateInvoice, serviceImpl.CreateInvoice)
-          .AddMethod(__Method_PlatformChannelInfo, serviceImpl.PlatformChannelInfo).Build();
+          .AddMethod(__Method_PlatformChannelInfo, serviceImpl.PlatformChannelInfo)
+          .AddMethod(__Method_WalletBalance, serviceImpl.WalletBalance).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -220,6 +251,7 @@ namespace Daemon {
       serviceBinder.AddMethod(__Method_GetConnection, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.GetConnectionRequest, global::Daemon.GetConnectionResponse>(serviceImpl.GetConnection));
       serviceBinder.AddMethod(__Method_CreateInvoice, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.CreateInvoiceRequest, global::Daemon.CreateInvoiceResponse>(serviceImpl.CreateInvoice));
       serviceBinder.AddMethod(__Method_PlatformChannelInfo, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Daemon.PlatformChannelInfoRequest, global::Daemon.PlatformChannelInfoResponse>(serviceImpl.PlatformChannelInfo));
+      serviceBinder.AddMethod(__Method_WalletBalance, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.WalletBalanceRequest, global::Daemon.WalletBalanceResponse>(serviceImpl.WalletBalance));
     }
 
   }

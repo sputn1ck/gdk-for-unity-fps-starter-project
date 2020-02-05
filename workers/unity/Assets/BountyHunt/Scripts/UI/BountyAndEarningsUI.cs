@@ -13,7 +13,7 @@ public class BountyAndEarningsUI : MonoBehaviour
     void Start()
     {
         ClientEvents.instance.onBountyUpdate.AddListener(UpdateBounty);
-        ClientEvents.instance.onEarningsUpdate.AddListener(UpdateEarnings);
+        ClientEvents.instance.onSessionEarningsUpdate.AddListener(UpdateBalance);
 
     }
 
@@ -22,7 +22,7 @@ public class BountyAndEarningsUI : MonoBehaviour
         BountyUI.UpdateSats(args.NewAmount, args.NewAmount - args.OldAmount);
     }
 
-    private void UpdateEarnings(EarningsUpdateEventArgs args)
+    private void UpdateBalance(SessionEarningsEventArgs args)
     {
         EarningsUI.UpdateSats(args.NewAmount, args.NewAmount - args.OldAmount);
     }

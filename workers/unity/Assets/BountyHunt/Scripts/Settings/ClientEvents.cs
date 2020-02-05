@@ -19,7 +19,8 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
 
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
-    [HideInInspector] public EarningsUpdateEvent onEarningsUpdate = new EarningsUpdateEvent();
+    [HideInInspector] public SessionEarningsUpdateEvent onSessionEarningsUpdate = new SessionEarningsUpdateEvent();
+    [HideInInspector] public BalanceUpdateEvent onBalanceUpdate = new BalanceUpdateEvent();
     [HideInInspector] public ScoreboardUIItemListEvent onScoreboardUpdate = new ScoreboardUIItemListEvent();
 
     [HideInInspector] public ChatMessageEvent onChatMessageRecieve = new ChatMessageEvent();
@@ -29,6 +30,7 @@ public class ClientEvents : MonoBehaviour
 
     [HideInInspector] public PaymentSuccessEvent onPaymentSucces = new PaymentSuccessEvent();
     [HideInInspector] public PaymentFailureEvent onPaymentFailure = new PaymentFailureEvent();
+
 
     private void Awake()
     {

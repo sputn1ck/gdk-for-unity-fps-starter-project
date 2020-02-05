@@ -42,7 +42,6 @@ public class BountyConversionSystem : ComponentSystem
             return;
         timeSum -= 5;
         BountyConversion();
-        SendBountyBoardUpdate();
     }
 
     private void BountyConversion()
@@ -55,6 +54,7 @@ public class BountyConversionSystem : ComponentSystem
         Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
         {
             Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
+            var newMap = gamestats.PlayerMap;
             Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
             ref HunterComponent.Component hunterComponent) =>
@@ -65,18 +65,20 @@ public class BountyConversionSystem : ComponentSystem
                 var newBounty = hunterComponent.Bounty - tick;
                 hunterComponent.Bounty = newBounty;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;
+                hunterComponent.SessionEarnings = hunterComponent.Earnings + tick;
                 ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
                 newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
             });
             foreach(var player in newPairs)
             {
-                if (gamestats.PlayerMap.ContainsKey(player.Key))
+                if (newMap.ContainsKey(player.Key))
                 {
-                    var newPlayer = gamestats.PlayerMap[player.Key];
+                    var newPlayer = newMap[player.Key];
                     newPlayer.Bounty = player.Value.Bounty;
-                    gamestats.PlayerMap[player.Key] = newPlayer;
+                    newMap[player.Key] = newPlayer;
                 }
             }
+            componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = newMap }, new EntityId(2));
         });
 
         
@@ -84,11 +86,6 @@ public class BountyConversionSystem : ComponentSystem
 
     }
 
-    private void SendBountyBoardUpdate()
-    {
-        componentUpdateSystem.SendEvent(new GameStats.UpdateScoreboardEvent.Event(new Bountyhunt.Empty()), new EntityId(2));
-
-    }
 
     private long calculateTick(long bounty, double percentage)
     {

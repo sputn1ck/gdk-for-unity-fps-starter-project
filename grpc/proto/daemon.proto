@@ -8,6 +8,7 @@ service DaemonService {
 	rpc GetConnection (GetConnectionRequest) returns (GetConnectionResponse);
 	rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
 	rpc PlatformChannelInfo (PlatformChannelInfoRequest) returns (stream PlatformChannelInfoResponse);
+	rpc WalletBalance (WalletBalanceRequest) returns (WalletBalanceResponse);
 }
 
 message LncliRequest {
@@ -56,4 +57,14 @@ message PlatformChannelInfoResponse {
 	int64 local_balance = 2;
 	int64 remote_balance = 3;
 	int64 eta = 4;
+}
+
+message WalletBalanceRequest {
+
+}
+
+message WalletBalanceResponse {
+	int64 stashBalance = 1;
+	int64 localBalance = 2;
+	int64 remoteBalance = 3;
 }

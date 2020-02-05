@@ -17,14 +17,23 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     private long lastBounty;
     private long lastEarnings;
+    private long lastBalance;
+    private long earningsThisSession;
+    private long lastEarningsThisSession;
     // Start is called before the first frame update
     void OnEnable()
     {
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
+        HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
         lastBounty = 0;
         lastEarnings = 0;
+        lastBalance = 0;
+        earningsThisSession = 0;
+        UpdateTotalBalance();
     }
+
+    
 
     public async void RequestPayout(long amount)
     {
@@ -58,12 +67,9 @@ public class BountyPlayerAuthorative : MonoBehaviour
     }
     private void HunterComponentReader_OnEarningsUpdate(long earnings)
     {
-        ClientEvents.instance.onEarningsUpdate.Invoke(new EarningsUpdateEventArgs()
-        {
-            NewAmount = earnings,
-            OldAmount = lastEarnings
-        });
+        
         lastEarnings = earnings;
+        UpdateTotalBalance();
     }
 
     private void HunterComponentReader_OnBountyUpdate(long bounty)
@@ -73,8 +79,28 @@ public class BountyPlayerAuthorative : MonoBehaviour
                 OldAmount = lastBounty,
                 Reason = BountyReason.PICKUP });
             lastBounty = bounty;
-        
-        
+    }
+    private void HunterComponentReader_OnSessionEarningsUpdate(long obj)
+    {
+        earningsThisSession = obj;
+        ClientEvents.instance.onSessionEarningsUpdate.Invoke(new SessionEarningsEventArgs()
+        {
+            NewAmount = earningsThisSession,
+            OldAmount = lastEarningsThisSession
+        });
+        lastEarningsThisSession = earningsThisSession;
+    }
+
+    private async void UpdateTotalBalance()
+    {
+        var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+        var totalBalance = lastEarnings + balance.LocalBalance + balance.StashBalance;
+        ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
+        {
+            NewAmount = totalBalance,
+            OldAmount = lastBalance,
+        });
+        lastBalance = totalBalance;
     }
 
 }

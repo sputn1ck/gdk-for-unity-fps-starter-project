@@ -37,16 +37,20 @@ namespace Daemon {
             "cG9uc2USDwoHaW52b2ljZRgBIAEoCSIcChpQbGF0Zm9ybUNoYW5uZWxJbmZv",
             "UmVxdWVzdCJpChtQbGF0Zm9ybUNoYW5uZWxJbmZvUmVzcG9uc2USDgoGc3Rh",
             "dHVzGAEgASgJEhUKDWxvY2FsX2JhbGFuY2UYAiABKAMSFgoOcmVtb3RlX2Jh",
-            "bGFuY2UYAyABKAMSCwoDZXRhGAQgASgDMv8CCg1EYWVtb25TZXJ2aWNlEjQK",
-            "BUxuY2xpEhQuZGFlbW9uLkxuY2xpUmVxdWVzdBoVLmRhZW1vbi5MbmNsaVJl",
-            "c3BvbnNlEjoKB0dldEluZm8SFi5kYWVtb24uR2V0SW5mb1JlcXVlc3QaFy5k",
-            "YWVtb24uR2V0SW5mb1Jlc3BvbnNlEkwKDUdldENvbm5lY3Rpb24SHC5kYWVt",
-            "b24uR2V0Q29ubmVjdGlvblJlcXVlc3QaHS5kYWVtb24uR2V0Q29ubmVjdGlv",
-            "blJlc3BvbnNlEkwKDUNyZWF0ZUludm9pY2USHC5kYWVtb24uQ3JlYXRlSW52",
-            "b2ljZVJlcXVlc3QaHS5kYWVtb24uQ3JlYXRlSW52b2ljZVJlc3BvbnNlEmAK",
-            "E1BsYXRmb3JtQ2hhbm5lbEluZm8SIi5kYWVtb24uUGxhdGZvcm1DaGFubmVs",
-            "SW5mb1JlcXVlc3QaIy5kYWVtb24uUGxhdGZvcm1DaGFubmVsSW5mb1Jlc3Bv",
-            "bnNlMAFiBnByb3RvMw=="));
+            "bGFuY2UYAyABKAMSCwoDZXRhGAQgASgDIhYKFFdhbGxldEJhbGFuY2VSZXF1",
+            "ZXN0IloKFVdhbGxldEJhbGFuY2VSZXNwb25zZRIUCgxzdGFzaEJhbGFuY2UY",
+            "ASABKAMSFAoMbG9jYWxCYWxhbmNlGAIgASgDEhUKDXJlbW90ZUJhbGFuY2UY",
+            "AyABKAMyzQMKDURhZW1vblNlcnZpY2USNAoFTG5jbGkSFC5kYWVtb24uTG5j",
+            "bGlSZXF1ZXN0GhUuZGFlbW9uLkxuY2xpUmVzcG9uc2USOgoHR2V0SW5mbxIW",
+            "LmRhZW1vbi5HZXRJbmZvUmVxdWVzdBoXLmRhZW1vbi5HZXRJbmZvUmVzcG9u",
+            "c2USTAoNR2V0Q29ubmVjdGlvbhIcLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVx",
+            "dWVzdBodLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVzcG9uc2USTAoNQ3JlYXRl",
+            "SW52b2ljZRIcLmRhZW1vbi5DcmVhdGVJbnZvaWNlUmVxdWVzdBodLmRhZW1v",
+            "bi5DcmVhdGVJbnZvaWNlUmVzcG9uc2USYAoTUGxhdGZvcm1DaGFubmVsSW5m",
+            "bxIiLmRhZW1vbi5QbGF0Zm9ybUNoYW5uZWxJbmZvUmVxdWVzdBojLmRhZW1v",
+            "bi5QbGF0Zm9ybUNoYW5uZWxJbmZvUmVzcG9uc2UwARJMCg1XYWxsZXRCYWxh",
+            "bmNlEhwuZGFlbW9uLldhbGxldEJhbGFuY2VSZXF1ZXN0Gh0uZGFlbW9uLldh",
+            "bGxldEJhbGFuY2VSZXNwb25zZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -59,7 +63,9 @@ namespace Daemon {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.CreateInvoiceRequest), global::Daemon.CreateInvoiceRequest.Parser, new[]{ "Amt", "Description" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.CreateInvoiceResponse), global::Daemon.CreateInvoiceResponse.Parser, new[]{ "Invoice" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.PlatformChannelInfoRequest), global::Daemon.PlatformChannelInfoRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.PlatformChannelInfoResponse), global::Daemon.PlatformChannelInfoResponse.Parser, new[]{ "Status", "LocalBalance", "RemoteBalance", "Eta" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.PlatformChannelInfoResponse), global::Daemon.PlatformChannelInfoResponse.Parser, new[]{ "Status", "LocalBalance", "RemoteBalance", "Eta" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.WalletBalanceRequest), global::Daemon.WalletBalanceRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.WalletBalanceResponse), global::Daemon.WalletBalanceResponse.Parser, new[]{ "StashBalance", "LocalBalance", "RemoteBalance" }, null, null, null)
           }));
     }
     #endregion
@@ -1572,6 +1578,292 @@ namespace Daemon {
           }
           case 32: {
             Eta = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class WalletBalanceRequest : pb::IMessage<WalletBalanceRequest> {
+    private static readonly pb::MessageParser<WalletBalanceRequest> _parser = new pb::MessageParser<WalletBalanceRequest>(() => new WalletBalanceRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<WalletBalanceRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceRequest(WalletBalanceRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceRequest Clone() {
+      return new WalletBalanceRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as WalletBalanceRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(WalletBalanceRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(WalletBalanceRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class WalletBalanceResponse : pb::IMessage<WalletBalanceResponse> {
+    private static readonly pb::MessageParser<WalletBalanceResponse> _parser = new pb::MessageParser<WalletBalanceResponse>(() => new WalletBalanceResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<WalletBalanceResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceResponse(WalletBalanceResponse other) : this() {
+      stashBalance_ = other.stashBalance_;
+      localBalance_ = other.localBalance_;
+      remoteBalance_ = other.remoteBalance_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public WalletBalanceResponse Clone() {
+      return new WalletBalanceResponse(this);
+    }
+
+    /// <summary>Field number for the "stashBalance" field.</summary>
+    public const int StashBalanceFieldNumber = 1;
+    private long stashBalance_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long StashBalance {
+      get { return stashBalance_; }
+      set {
+        stashBalance_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "localBalance" field.</summary>
+    public const int LocalBalanceFieldNumber = 2;
+    private long localBalance_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long LocalBalance {
+      get { return localBalance_; }
+      set {
+        localBalance_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "remoteBalance" field.</summary>
+    public const int RemoteBalanceFieldNumber = 3;
+    private long remoteBalance_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long RemoteBalance {
+      get { return remoteBalance_; }
+      set {
+        remoteBalance_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as WalletBalanceResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(WalletBalanceResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (StashBalance != other.StashBalance) return false;
+      if (LocalBalance != other.LocalBalance) return false;
+      if (RemoteBalance != other.RemoteBalance) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (StashBalance != 0L) hash ^= StashBalance.GetHashCode();
+      if (LocalBalance != 0L) hash ^= LocalBalance.GetHashCode();
+      if (RemoteBalance != 0L) hash ^= RemoteBalance.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (StashBalance != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(StashBalance);
+      }
+      if (LocalBalance != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(LocalBalance);
+      }
+      if (RemoteBalance != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(RemoteBalance);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (StashBalance != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(StashBalance);
+      }
+      if (LocalBalance != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(LocalBalance);
+      }
+      if (RemoteBalance != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(RemoteBalance);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(WalletBalanceResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.StashBalance != 0L) {
+        StashBalance = other.StashBalance;
+      }
+      if (other.LocalBalance != 0L) {
+        LocalBalance = other.LocalBalance;
+      }
+      if (other.RemoteBalance != 0L) {
+        RemoteBalance = other.RemoteBalance;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            StashBalance = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            LocalBalance = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            RemoteBalance = input.ReadInt64();
             break;
           }
         }
