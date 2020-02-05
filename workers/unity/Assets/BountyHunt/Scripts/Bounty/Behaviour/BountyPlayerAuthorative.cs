@@ -20,17 +20,23 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private long lastBalance;
     private long earningsThisSession;
     private long lastEarningsThisSession;
+
+    private CancellationTokenSource ct;
     // Start is called before the first frame update
     void OnEnable()
     {
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
         HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
+
         lastBounty = 0;
         lastEarnings = 0;
         lastBalance = 0;
         earningsThisSession = 0;
+
+        ct = new CancellationTokenSource();
         UpdateTotalBalance();
+        StartCoroutine(requestPayoutEnumerator());
     }
 
     
@@ -44,6 +50,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     private void OnRequestPayout(HunterComponent.RequestPayout.ReceivedResponse res)
     {
+        Debug.LogFormat("Payout Callback: status: {0} message {1} ", res.StatusCode, res.Message);
         if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
             // TODO something went right
@@ -103,4 +110,22 @@ public class BountyPlayerAuthorative : MonoBehaviour
         lastBalance = totalBalance;
     }
 
+
+    private IEnumerator requestPayoutEnumerator()
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            yield return new WaitForSeconds(10f);
+            if(HunterComponentReader.Data.Earnings > 10)
+            {
+                RequestPayout(HunterComponentReader.Data.Earnings);
+            }
+        }
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        ct.Cancel();
+    }
 }
