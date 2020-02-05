@@ -6,6 +6,8 @@ using Grpc.Core;
 using System.Threading.Tasks;
 using System;
 
+
+// TODO try catch blocks every rpc call
 public class DonnerDaemonClient
 {
     public Channel rpcChannel;
@@ -34,6 +36,21 @@ public class DonnerDaemonClient
             Debug.Log(e);
             return e.Message;
         }
+    }
+    public async Task<string> GetInvoice(string memo, long amount)
+    {
+        var res = await client.CreateInvoiceAsync(new CreateInvoiceRequest() { Amt = amount, Description = memo });
+        return res.Invoice;
+    }
+
+    public async Task<GetInfoResponse> GetInfo()
+    {
+        return await client.GetInfoAsync(new GetInfoRequest());
+    }
+
+    public async Task<GetConnectionResponse> GetConnection()
+    {
+        return await client.GetConnectionAsync(new GetConnectionRequest());
     }
 
 

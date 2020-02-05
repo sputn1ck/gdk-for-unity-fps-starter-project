@@ -20,6 +20,8 @@ public class StringColorEvent : UnityEvent<string, Color> { }
 [Serializable] public class ChatMessageEvent : UnityEvent<Chat.ChatMessage> { }
 public class StringLongEvent : UnityEvent<string, long> { }
 
+public class PaymentSuccessEvent : UnityEvent<PaymentSuccesArgs> { }
+public class PaymentFailureEvent : UnityEvent<PaymentFailureArgs> { }
 
 [Serializable]
 public struct BountyUpdateEventArgs
@@ -34,6 +36,21 @@ public struct EarningsUpdateEventArgs
 {
     public long NewAmount;
     public long OldAmount;
+}
+
+[Serializable]
+public struct PaymentSuccesArgs
+{
+    public string invoice;
+    public long amount;
+    public string descripion;
+}
+
+[Serializable]
+public struct PaymentFailureArgs
+{
+    public string invoice;
+    public string message;
 }
 
 

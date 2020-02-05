@@ -26,11 +26,11 @@ public class BountyPlayerAuthorative : MonoBehaviour
         lastEarnings = 0;
     }
 
-    public void RequestPayout(long amount)
+    public async void RequestPayout(long amount)
     {
-        // TODO get invoice
+        var res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInvoice("payout for " + HunterComponentReader.Data.Name + " Amount: " + amount, amount);
 
-        HunterComponentCommandSender.SendRequestPayoutCommand(entityId, new RequestPayoutRequest(""),OnRequestPayout);
+        HunterComponentCommandSender.SendRequestPayoutCommand(entityId, new RequestPayoutRequest(res),OnRequestPayout);
     }
 
     private void OnRequestPayout(HunterComponent.RequestPayout.ReceivedResponse res)
@@ -38,10 +38,22 @@ public class BountyPlayerAuthorative : MonoBehaviour
         if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
             // TODO something went right
+            ClientEvents.instance.onPaymentSucces.Invoke(new PaymentSuccesArgs()
+            {
+                amount = res.ResponsePayload.Value.Amount,
+                invoice = res.RequestPayload.PayReq,
+                descripion = res.ResponsePayload.Value.Message
+            });
+            
         }
         else
         {
             // TODO something went wrong
+            ClientEvents.instance.onPaymentFailure.Invoke(new PaymentFailureArgs
+            {
+                invoice = res.RequestPayload.PayReq,
+                message = res.Message
+            });
         }
     }
     private void HunterComponentReader_OnEarningsUpdate(long earnings)

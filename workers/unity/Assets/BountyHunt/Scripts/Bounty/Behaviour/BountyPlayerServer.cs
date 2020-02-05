@@ -68,7 +68,7 @@ public class BountyPlayerServer : MonoBehaviour
         }
         var newEarnings = Mathf.Clamp(HunterComponentWriter.Data.Earnings - payment.PaymentRoute.TotalAmtMsat / 1000,0, int.MaxValue);
         HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = (long)newEarnings });
-        BountyComponentCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), ""));
+        BountyComponentCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), invoice.Description,payment.PaymentRoute.TotalAmtMsat / 1000));
 
     }
 

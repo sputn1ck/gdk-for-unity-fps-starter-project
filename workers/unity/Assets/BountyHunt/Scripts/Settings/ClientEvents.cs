@@ -26,6 +26,10 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public StringColorEvent onAnnouncement = new StringColorEvent();
     [HideInInspector] public StringLongEvent onDonationMessageUpdate = new StringLongEvent();
     [HideInInspector] public UnityEvent onOpponentHit = new UnityEvent();
+
+    [HideInInspector] public PaymentSuccessEvent onPaymentSucces = new PaymentSuccessEvent();
+    [HideInInspector] public PaymentFailureEvent onPaymentFailure = new PaymentFailureEvent();
+
     private void Awake()
     {
         if (instance == null) instance = this;
