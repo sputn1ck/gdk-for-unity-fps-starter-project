@@ -90,6 +90,7 @@ public class DonnerEntityTemplates
         {
             Earnings = 0,
             Bounty = 0,
+            SessionEarnings = 0,
             Name = playerName,
             Pubkey = loginData.Pubkey
         };
