@@ -26,31 +26,30 @@ public class AuctionClient
     // TODO implement
     public async void AddDonation(string message, long amount)
     {
-        /*
+        
         try
         {
             var res = await auctionClient.SimpleChatAsync(new SimpleChatRequest { Amount = amount, Message = message });
-            PlayerNode.instance.PayInvoice(res.PayReq, amount);
+            var invoice = await PlayerServiceConnections.instance.lnd.PayInvoice(res.PayReq);
+            // TODO  check for donation siye
 
         }
         catch (RpcException e)
         {
-            if (amount > donationAnnonceMinimum)
-            {
-                ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, "DONATION", e.Message, true);
-            }
+           
+                ChatPanelUI.instance.SpawnMessage(MessageType.ERROR_LOG ,"DONATION", e.Message, false);
 
-        }*/
+        }
     }
     //TODO implement
     public async Task<AuctionEntry> AddBid(string message, long amount)
     {
-        /*
+        
         try
         {
             var activeAuction = await auctionClient.GetAuctionAsync(new GetAuctionRequest { AuctionId = "active" });
             var res = await auctionClient.BidAsync(new BidRequest { AuctionId = activeAuction.Auction.Id, Amount = amount, Message = message });
-            PlayerNode.instance.PayInvoice(res.Entry.PaymentRequest, amount, false);
+            var invoice = await PlayerServiceConnections.instance.lnd.PayInvoice(res.Entry.PaymentRequest);
             ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, "AUCTIONBID", "payment sent on route, check for payment status in ui");
             return res.Entry;
         }
@@ -58,12 +57,11 @@ public class AuctionClient
         {
             ChatPanelUI.instance.SpawnMessage(MessageType.ERROR_LOG, "AUCTIONBID", e.Message);
             return null;
-        }*/
-        return new AuctionEntry();
+        }
     }
     public async Task<AuctionEntry> BidStatus(string entryId)
     {
-        /*
+        
         try
         {
             var res = await auctionClient.GetBidAsync(new GetBidRequest { EntryId = entryId });
@@ -73,8 +71,7 @@ public class AuctionClient
         {
             ChatPanelUI.instance.SpawnMessage(MessageType.ERROR_LOG, "AUCTIONBID", e.Message);
             return null;
-        }*/
-        return new AuctionEntry();
+        }
     }
 
     public async Task<Auction> GetActiveAuction()
@@ -93,7 +90,7 @@ public class AuctionClient
 
 
     }
-    /*
+    
     public async void CancelBid(string BidId)
     {
         try
@@ -105,5 +102,5 @@ public class AuctionClient
         {
             ChatPanelUI.instance.SpawnMessage(MessageType.ERROR_LOG, "CANCELBID", e.Message);
         }
-    }*/
+    }
 }

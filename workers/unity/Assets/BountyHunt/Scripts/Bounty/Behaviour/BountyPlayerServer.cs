@@ -77,7 +77,7 @@ public class BountyPlayerServer : MonoBehaviour
     //TODO hacky...
     async void SetName()
     {
-        var bbhbackend = PlayerServiceConnections.instance.BackendPlayerClient;
+        var bbhbackend = ServerServiceConnections.instance.BackendPlayerClient;
         var name = await bbhbackend.GetUsername(HunterComponentWriter.Data.Pubkey);
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = name });
         GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(name, LinkedEntityComponent.EntityId, HunterComponentWriter.Data.Pubkey));

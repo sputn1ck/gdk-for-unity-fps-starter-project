@@ -42,6 +42,19 @@ public class ChatPanelUI : MonoBehaviour
         //DeactivateInputfield();
         chatInput.onSubmit.AddListener(Submit);
         ClientEvents.instance.onChatMessageRecieve.AddListener(SpawnMessage);
+        ClientEvents.instance.onPaymentSucces.AddListener(PaymentSucces);
+        ClientEvents.instance.onPaymentFailure.AddListener(PaymentFailuer);
+    }
+
+    public void PaymentSucces(PaymentSuccesArgs e)
+    {
+        SpawnMessage(MessageType.DEBUG_LOG, "PAYMENT SUCCESS", e.amount + " " + e.descripion);
+    }
+
+    public void PaymentFailuer(PaymentFailureArgs e)
+    {
+        SpawnMessage(MessageType.ERROR_LOG, "PAYMENT FAILURE", e.message);
+
     }
     public void SpawnMessage(MessageType type, string sender, string message)
     {

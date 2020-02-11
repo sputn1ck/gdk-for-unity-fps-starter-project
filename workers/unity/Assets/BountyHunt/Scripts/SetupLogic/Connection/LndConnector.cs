@@ -30,7 +30,6 @@ public class LndConnector : MonoBehaviour
     public GameObject ClientWorkerConnectorPrefab;
     public string pubkey;
     public GameObject mainMenu;
-    public BBHUIManager uiManager;
 
     public ClientWorkerConnectorLnd clientConnector;
 

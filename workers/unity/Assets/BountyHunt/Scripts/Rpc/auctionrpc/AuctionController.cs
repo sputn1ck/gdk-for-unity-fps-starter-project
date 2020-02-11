@@ -31,21 +31,6 @@ public class AuctionController
     }
 
 
-    IEnumerator AuctionEnumerator()
-    {
-        while (!cancellationToken.IsCancellationRequested)
-        {
-            if (FlagManager.instance.GetShouldRunAuction())
-            {
-                var duration = FlagManager.instance.GetAuctionDuration();
-                StartAuction(duration);
-                yield return new WaitForSeconds(duration + 15f);
-            }
-            yield return null;
-        }
-        yield return null;
-
-    }
     // Todo implement
     public async Task<StartAuctionResponse> StartAuction(int duration)
     {

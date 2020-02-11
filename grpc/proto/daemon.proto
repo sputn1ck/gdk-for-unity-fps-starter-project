@@ -3,68 +3,68 @@ syntax = "proto3";
 package daemon;
 
 service DaemonService {
-	rpc Lncli (LncliRequest) returns (LncliResponse);
-	rpc GetInfo (GetInfoRequest) returns (GetInfoResponse);
-	rpc GetConnection (GetConnectionRequest) returns (GetConnectionResponse);
-	rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
-	rpc PlatformChannelInfo (PlatformChannelInfoRequest) returns (stream PlatformChannelInfoResponse);
-	rpc WalletBalance (WalletBalanceRequest) returns (WalletBalanceResponse);
+    rpc Lncli (LncliRequest) returns (LncliResponse);
+    rpc GetInfo (GetInfoRequest) returns (GetInfoResponse);
+    rpc GetConnection (GetConnectionRequest) returns (GetConnectionResponse);
+    rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
+    rpc PlatformChannelInfo (PlatformChannelInfoRequest) returns (stream PlatformChannelInfoResponse);
+    rpc WalletBalance (WalletBalanceRequest) returns (WalletBalanceResponse);
 }
 
 message LncliRequest {
-	string command = 1;
+    string command = 1;
 }
 
 message LncliResponse {
-	string text_response = 2;
+    string text_response = 2;
 }
 
 message GetInfoRequest {
 }
 
 message GetInfoResponse {
-	bool node_alive = 1;
-	string node_pubkey = 2;
-	bool channel_open = 3;
-	bool channel_sync = 4;
+    bool node_alive = 1;
+    string node_pubkey = 2;
+    bool channel_open = 3;
+    bool channel_sync = 4;
 }
 
 message GetConnectionRequest {
 }
 
 message GetConnectionResponse {
-	bool node_alive = 1;
-	string grpc_address = 2;
-	string p2p_address = 3;
-	string cert_path = 4;
-	string macaroon_path = 5;
+    bool node_alive = 1;
+    string grpc_address = 2;
+    string p2p_address = 3;
+    string cert_path = 4;
+    string macaroon_path = 5;
 }
 
 message CreateInvoiceRequest {
-	int64 amt = 1;
-	string description = 2;
+    int64 amt = 1;
+    string description = 2;
 }
 
 message CreateInvoiceResponse {
-	string invoice = 1;
+    string invoice = 1;
 }
 
 message PlatformChannelInfoRequest {
 }
 
 message PlatformChannelInfoResponse {
-	string status = 1;
-	int64 local_balance = 2;
-	int64 remote_balance = 3;
-	int64 eta = 4;
+    string status = 1;
+    int64 local_balance = 2;
+    int64 remote_balance = 3;
+    int64 eta = 4;
 }
 
 message WalletBalanceRequest {
-
 }
 
 message WalletBalanceResponse {
-	int64 stashBalance = 1;
-	int64 localBalance = 2;
-	int64 remoteBalance = 3;
+    int64 stashBalance = 1;
+    int64 localBalance = 2;
+    int64 remoteBalance = 3;
+    int64 missingBalance = 4;
 }

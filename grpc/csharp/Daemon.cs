@@ -38,19 +38,20 @@ namespace Daemon {
             "UmVxdWVzdCJpChtQbGF0Zm9ybUNoYW5uZWxJbmZvUmVzcG9uc2USDgoGc3Rh",
             "dHVzGAEgASgJEhUKDWxvY2FsX2JhbGFuY2UYAiABKAMSFgoOcmVtb3RlX2Jh",
             "bGFuY2UYAyABKAMSCwoDZXRhGAQgASgDIhYKFFdhbGxldEJhbGFuY2VSZXF1",
-            "ZXN0IloKFVdhbGxldEJhbGFuY2VSZXNwb25zZRIUCgxzdGFzaEJhbGFuY2UY",
+            "ZXN0InIKFVdhbGxldEJhbGFuY2VSZXNwb25zZRIUCgxzdGFzaEJhbGFuY2UY",
             "ASABKAMSFAoMbG9jYWxCYWxhbmNlGAIgASgDEhUKDXJlbW90ZUJhbGFuY2UY",
-            "AyABKAMyzQMKDURhZW1vblNlcnZpY2USNAoFTG5jbGkSFC5kYWVtb24uTG5j",
-            "bGlSZXF1ZXN0GhUuZGFlbW9uLkxuY2xpUmVzcG9uc2USOgoHR2V0SW5mbxIW",
-            "LmRhZW1vbi5HZXRJbmZvUmVxdWVzdBoXLmRhZW1vbi5HZXRJbmZvUmVzcG9u",
-            "c2USTAoNR2V0Q29ubmVjdGlvbhIcLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVx",
-            "dWVzdBodLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVzcG9uc2USTAoNQ3JlYXRl",
-            "SW52b2ljZRIcLmRhZW1vbi5DcmVhdGVJbnZvaWNlUmVxdWVzdBodLmRhZW1v",
-            "bi5DcmVhdGVJbnZvaWNlUmVzcG9uc2USYAoTUGxhdGZvcm1DaGFubmVsSW5m",
-            "bxIiLmRhZW1vbi5QbGF0Zm9ybUNoYW5uZWxJbmZvUmVxdWVzdBojLmRhZW1v",
-            "bi5QbGF0Zm9ybUNoYW5uZWxJbmZvUmVzcG9uc2UwARJMCg1XYWxsZXRCYWxh",
-            "bmNlEhwuZGFlbW9uLldhbGxldEJhbGFuY2VSZXF1ZXN0Gh0uZGFlbW9uLldh",
-            "bGxldEJhbGFuY2VSZXNwb25zZWIGcHJvdG8z"));
+            "AyABKAMSFgoObWlzc2luZ0JhbGFuY2UYBCABKAMyzQMKDURhZW1vblNlcnZp",
+            "Y2USNAoFTG5jbGkSFC5kYWVtb24uTG5jbGlSZXF1ZXN0GhUuZGFlbW9uLkxu",
+            "Y2xpUmVzcG9uc2USOgoHR2V0SW5mbxIWLmRhZW1vbi5HZXRJbmZvUmVxdWVz",
+            "dBoXLmRhZW1vbi5HZXRJbmZvUmVzcG9uc2USTAoNR2V0Q29ubmVjdGlvbhIc",
+            "LmRhZW1vbi5HZXRDb25uZWN0aW9uUmVxdWVzdBodLmRhZW1vbi5HZXRDb25u",
+            "ZWN0aW9uUmVzcG9uc2USTAoNQ3JlYXRlSW52b2ljZRIcLmRhZW1vbi5DcmVh",
+            "dGVJbnZvaWNlUmVxdWVzdBodLmRhZW1vbi5DcmVhdGVJbnZvaWNlUmVzcG9u",
+            "c2USYAoTUGxhdGZvcm1DaGFubmVsSW5mbxIiLmRhZW1vbi5QbGF0Zm9ybUNo",
+            "YW5uZWxJbmZvUmVxdWVzdBojLmRhZW1vbi5QbGF0Zm9ybUNoYW5uZWxJbmZv",
+            "UmVzcG9uc2UwARJMCg1XYWxsZXRCYWxhbmNlEhwuZGFlbW9uLldhbGxldEJh",
+            "bGFuY2VSZXF1ZXN0Gh0uZGFlbW9uLldhbGxldEJhbGFuY2VSZXNwb25zZWIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -65,7 +66,7 @@ namespace Daemon {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.PlatformChannelInfoRequest), global::Daemon.PlatformChannelInfoRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.PlatformChannelInfoResponse), global::Daemon.PlatformChannelInfoResponse.Parser, new[]{ "Status", "LocalBalance", "RemoteBalance", "Eta" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.WalletBalanceRequest), global::Daemon.WalletBalanceRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.WalletBalanceResponse), global::Daemon.WalletBalanceResponse.Parser, new[]{ "StashBalance", "LocalBalance", "RemoteBalance" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.WalletBalanceResponse), global::Daemon.WalletBalanceResponse.Parser, new[]{ "StashBalance", "LocalBalance", "RemoteBalance", "MissingBalance" }, null, null, null)
           }));
     }
     #endregion
@@ -1715,6 +1716,7 @@ namespace Daemon {
       stashBalance_ = other.stashBalance_;
       localBalance_ = other.localBalance_;
       remoteBalance_ = other.remoteBalance_;
+      missingBalance_ = other.missingBalance_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1756,6 +1758,17 @@ namespace Daemon {
       }
     }
 
+    /// <summary>Field number for the "missingBalance" field.</summary>
+    public const int MissingBalanceFieldNumber = 4;
+    private long missingBalance_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long MissingBalance {
+      get { return missingBalance_; }
+      set {
+        missingBalance_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as WalletBalanceResponse);
@@ -1772,6 +1785,7 @@ namespace Daemon {
       if (StashBalance != other.StashBalance) return false;
       if (LocalBalance != other.LocalBalance) return false;
       if (RemoteBalance != other.RemoteBalance) return false;
+      if (MissingBalance != other.MissingBalance) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1781,6 +1795,7 @@ namespace Daemon {
       if (StashBalance != 0L) hash ^= StashBalance.GetHashCode();
       if (LocalBalance != 0L) hash ^= LocalBalance.GetHashCode();
       if (RemoteBalance != 0L) hash ^= RemoteBalance.GetHashCode();
+      if (MissingBalance != 0L) hash ^= MissingBalance.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1806,6 +1821,10 @@ namespace Daemon {
         output.WriteRawTag(24);
         output.WriteInt64(RemoteBalance);
       }
+      if (MissingBalance != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(MissingBalance);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1822,6 +1841,9 @@ namespace Daemon {
       }
       if (RemoteBalance != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(RemoteBalance);
+      }
+      if (MissingBalance != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MissingBalance);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1842,6 +1864,9 @@ namespace Daemon {
       }
       if (other.RemoteBalance != 0L) {
         RemoteBalance = other.RemoteBalance;
+      }
+      if (other.MissingBalance != 0L) {
+        MissingBalance = other.MissingBalance;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1864,6 +1889,10 @@ namespace Daemon {
           }
           case 24: {
             RemoteBalance = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            MissingBalance = input.ReadInt64();
             break;
           }
         }

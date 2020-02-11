@@ -28,7 +28,7 @@ public class DebugLndSubMenuUI : SubMenuUI
     {
         try
         {
-            var res = await DonnerDaemonClient.instance.Lncli(command);
+            var res = await PlayerServiceConnections.instance.DonnerDaemonClient.Lncli(command);
             Debug.Log(res);
             commandOutput.text = res;
             commandOutput.Rebuild(CanvasUpdate.PostLayout);

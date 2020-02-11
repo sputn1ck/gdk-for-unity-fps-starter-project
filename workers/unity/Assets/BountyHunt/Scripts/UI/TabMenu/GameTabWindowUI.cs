@@ -13,10 +13,6 @@ public class GameTabWindowUI : TabMenuWindowUI
     public TMP_InputField donationAmountInput;
     public Button donateButton;
 
-    //Teleport
-    public TMP_InputField teleportXInput;
-    public TMP_InputField teleportYInput;
-    public Button teleportButton;
 
     //Auction
     public TextMeshProUGUI highestBidText;
@@ -33,13 +29,12 @@ public class GameTabWindowUI : TabMenuWindowUI
     AuctionEntry currentBid = null;
 
     //TODO
-    /*
+    
     public void Start()
     {
 
         ClientEvents.instance.onNewAuctionStarted.AddListener(GetActiveAuction);
         donateButton.onClick.AddListener(Donate);
-        teleportButton.onClick.AddListener(Teleport);
         bidButton.onClick.AddListener(Bid);
         cancelButton.onClick.AddListener(CancelBid);
         statusButton.onClick.AddListener(BidStatus);
@@ -70,18 +65,9 @@ public class GameTabWindowUI : TabMenuWindowUI
         string message = donationMessageInput.text;
         long amount = long.Parse(donationAmountInput.text);
 
-        AuctionClient.instance.AddDonation(message, amount);
+        PlayerServiceConnections.instance.AuctionClient.AddDonation(message, amount);
     }
 
-    //TELEPORT
-    public void Teleport()
-    {
-        int x = int.Parse(teleportXInput.text);
-        int y = int.Parse(teleportYInput.text);
-
-        DonnerPlayerAuthorative.instance.SendTeleportRequest(new Vector2(x, y));
-
-    }
 
     //AUCTION
     public async void Bid()
@@ -89,11 +75,11 @@ public class GameTabWindowUI : TabMenuWindowUI
         var lastBid = currentBid;
         string message = auctionMessageInput.text;
         long amount = long.Parse(auctionAmountInput.text);
-        currentBid = await AuctionClient.instance.AddBid(message, amount);
+        currentBid = await PlayerServiceConnections.instance.AuctionClient.AddBid(message, amount);
         
         if(lastBid != null)
         {
-            AuctionClient.instance.CancelBid(lastBid.Id);
+            PlayerServiceConnections.instance.AuctionClient.CancelBid(lastBid.Id);
         }
         BidStatus();
     }
@@ -105,7 +91,7 @@ public class GameTabWindowUI : TabMenuWindowUI
             updateHighestBid(0);
             return;
         }
-        currentBid = await AuctionClient.instance.BidStatus(currentBid.Id);
+        currentBid = await PlayerServiceConnections.instance.AuctionClient.BidStatus(currentBid.Id);
         UpdateBidStatus();
     }
 
@@ -113,13 +99,13 @@ public class GameTabWindowUI : TabMenuWindowUI
     {
         if (currentBid == null)
             return;
-        AuctionClient.instance.CancelBid(currentBid.Id);
+        PlayerServiceConnections.instance.AuctionClient.CancelBid(currentBid.Id);
         BidStatus();
     }
 
     public async void GetActiveAuction()
     {
-        var newAuction = await AuctionClient.instance.GetActiveAuction();
+        var newAuction = await PlayerServiceConnections.instance.AuctionClient.GetActiveAuction();
         if((currentAuction == null && newAuction != null ) || (newAuction != null  && currentAuction.Id != newAuction.Id))
         {
             currentAuction = newAuction;
@@ -186,5 +172,5 @@ public class GameTabWindowUI : TabMenuWindowUI
         string timeString = hours + ":" + minString + ":" + secString;
         return timeString;
     }
-    */
+    
 }

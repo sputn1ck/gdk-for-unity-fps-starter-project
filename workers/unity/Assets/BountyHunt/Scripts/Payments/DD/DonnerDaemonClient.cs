@@ -22,8 +22,14 @@ public class DonnerDaemonClient
     {
         rpcChannel = new Channel("localhost:10101", ChannelCredentials.Insecure);
         client = new DaemonService.DaemonServiceClient(rpcChannel);
-        
+        LogInfo();
     }
+    private async void LogInfo()
+    {
+        var res = await GetInfo();
+        Debug.Log(res.NodeAlive + ";" + res.NodePubkey);
+    }
+
 
     public async Task<string> Lncli(string command)
     {

@@ -42,6 +42,11 @@ public class AuctionBehaviour : MonoBehaviour
     private async void StartAuction(int duration)
     {
         var res = await ServerServiceConnections.instance.AuctionController.StartAuction(duration);
+        if(res != null)
+        {
+            GetComponent<ServerGameChat>().SendAuctionStartedChatMessage(res.Auction.WinningEntry.Description);
+        }
+        
         Debug.Log("auction started " + res.Auction.Id);
     }
 
