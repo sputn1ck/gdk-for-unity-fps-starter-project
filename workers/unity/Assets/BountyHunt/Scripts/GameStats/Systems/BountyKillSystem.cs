@@ -7,8 +7,7 @@ using Improbable;
 using Fps.Health;
 using Bountyhunt;
 
-[UpdateInGroup(typeof(SpatialOSUpdateGroup))]
-[UpdateAfter(typeof(ServerHealthModifierSystem))]
+[UpdateAfter(typeof(SpatialOSUpdateGroup))]
 public class BountyKillSystem : ComponentSystem
 {
     

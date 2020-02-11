@@ -16,7 +16,7 @@ public class TeleportSkill : PlayerSkill
         JsonUtility.FromJson("", typeof(TeleportPayload));
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
-        var pos = new Vector3(teleport.x, 75, teleport.y);
+        var pos = new Vector3(teleport.x,75, teleport.y);
         pos = SpawnPoints.SnapToGround(pos);
         Debug.Log("teleport invoice paid!!" + pos);
 

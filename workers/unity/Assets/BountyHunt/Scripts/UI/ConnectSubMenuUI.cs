@@ -16,6 +16,10 @@ public class ConnectSubMenuUI : SubMenuUI
 
     public bool setName;
 
+    public void Awake()
+    {
+        ClientEvents.instance.onServicesSetup.AddListener(getNameAndPubkey);
+    }
     public void Connect()
     {
 
@@ -75,7 +79,7 @@ public class ConnectSubMenuUI : SubMenuUI
     {
         base.OnSelect();
         errorText.text = "";
-        Invoke("getNameAndPubkey",1f);
+        //Invoke("getNameAndPubkey",2f);
     }
 
     private async void getNameAndPubkey()

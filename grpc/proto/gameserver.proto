@@ -4,6 +4,7 @@ package bbh;
 
 service GameService {
     rpc EventStream (stream EventStreamRequest) returns (EventStreamResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
 }
 
 message EventStreamRequest {
@@ -38,5 +39,18 @@ message PlayerInfoEvent {
         HEARTBEAT = 0;
         DISCONNECT = 1;
     }
+}
+
+message GetUserRequest {
+    string pubkey = 1;
+}
+
+message GetUserResponse{
+    User user = 1;
+}
+
+message User {
+    string name = 1;
+    string pubkey = 2;
 }
 

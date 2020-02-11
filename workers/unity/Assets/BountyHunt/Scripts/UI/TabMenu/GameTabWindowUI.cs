@@ -38,7 +38,8 @@ public class GameTabWindowUI : TabMenuWindowUI
         bidButton.onClick.AddListener(Bid);
         cancelButton.onClick.AddListener(CancelBid);
         statusButton.onClick.AddListener(BidStatus);
-        Invoke("GameJoined", 1f);
+        ClientEvents.instance.onGameJoined.AddListener(GameJoined);
+        //Invoke("GameJoined", 1f);
         
     }
 

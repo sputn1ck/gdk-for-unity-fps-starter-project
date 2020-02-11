@@ -22,6 +22,7 @@ public class ServerServiceConnections : MonoBehaviour
 
     public BackendGameserverClient BackendGameServerClient;
     public BackendPlayerClient BackendPlayerClient;
+
     public void Awake()
     {
         if (instance == null)

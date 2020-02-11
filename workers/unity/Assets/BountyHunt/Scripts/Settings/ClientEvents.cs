@@ -18,6 +18,8 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
 
+    [HideInInspector] public UnityEvent onServicesSetup = new UnityEvent();
+
     [HideInInspector] public BountyUpdateEvent onBountyUpdate = new BountyUpdateEvent();
     [HideInInspector] public SessionEarningsUpdateEvent onSessionEarningsUpdate = new SessionEarningsUpdateEvent();
     [HideInInspector] public BalanceUpdateEvent onBalanceUpdate = new BalanceUpdateEvent();

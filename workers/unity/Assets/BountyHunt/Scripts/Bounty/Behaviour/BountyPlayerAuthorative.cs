@@ -101,7 +101,14 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private async void UpdateTotalBalance()
     {
         var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-        var totalBalance = lastEarnings + balance.LocalBalance + balance.StashBalance - balance.MissingBalance;
+        var totalBalance = lastEarnings + balance.LocalBalance;
+        if (balance.MissingBalance > 0)
+        {
+            totalBalance -= balance.MissingBalance;
+        } else
+        {
+            totalBalance += balance.StashBalance;
+        }
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
             NewAmount = totalBalance,

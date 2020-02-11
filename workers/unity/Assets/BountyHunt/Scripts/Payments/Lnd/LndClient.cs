@@ -249,8 +249,8 @@ public class LndClient : IClientLnd
             lnconf = JsonUtility.FromJson<LnConf>(json);
 
             var home = Environment.GetEnvironmentVariable("Appdata");
-            tlsCert = File.ReadAllText(home + "/Donner/Daemon/data/lnd/tls.cert");
-            macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/data/chain/bitcoin/mainnet/admin.macaroon"));
+            tlsCert = File.ReadAllText(home + "/Donner/Daemon/data/tls.cert");
+            macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
         }
         else
         {

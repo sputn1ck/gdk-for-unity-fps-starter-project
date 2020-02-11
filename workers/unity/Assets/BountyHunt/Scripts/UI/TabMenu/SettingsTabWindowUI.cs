@@ -19,7 +19,6 @@ public class SettingsTabWindowUI : TabMenuWindowUI
     public Toggle infoLogVisibilityToggle;
     public Toggle errorLogVisibilityToggle;
     public Toggle debugLogVisibilityToggle;
-    public Toggle auctionLogVisibilityToggle;
 
     //Inputs
     public Slider mouseSpeedSlider;
@@ -35,14 +34,12 @@ public class SettingsTabWindowUI : TabMenuWindowUI
         infoLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowInfoLog", 1) != 0;
         errorLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowErrorLog", 1) != 0;
         debugLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowDebugLog", 0) != 0;
-        auctionLogVisibilityToggle.isOn = PlayerPrefs.GetInt("ShowAuctionLog", 1) != 0;
 
 
         playerChatVisibilityToggle.onValueChanged.AddListener(SetPlayerChatVisibility);
         infoLogVisibilityToggle.onValueChanged.AddListener(SetInfoLogVisibility);
         errorLogVisibilityToggle.onValueChanged.AddListener(SetErrorLogVisibility);
         debugLogVisibilityToggle.onValueChanged.AddListener(SetDebugLogVisibility);
-        auctionLogVisibilityToggle.onValueChanged.AddListener(SetAuctionLogVisibility);
 
 
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
@@ -120,10 +117,5 @@ public class SettingsTabWindowUI : TabMenuWindowUI
         PlayerPrefs.Save();
     }
 
-    private void SetAuctionLogVisibility(bool show)
-    {
-        PlayerPrefs.SetInt("ShowAuctionLog", show ? 1 : 0);
-        PlayerPrefs.Save();
-    }
 
 }

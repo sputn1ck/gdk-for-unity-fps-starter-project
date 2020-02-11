@@ -34,6 +34,7 @@ namespace Fps.Movement
         private ShotRayProvider shotRayProvider;
         private FpsAnimator fpsAnimator;
         private GunManager currentGun;
+        private ClientPlayerSkillBehaviour skillBehaviour;
 
         public bool editingInputfield;
 
@@ -64,6 +65,7 @@ namespace Fps.Movement
             fpsAnimator.InitializeOwnAnimator();
             currentGun = GetComponent<GunManager>();
             controller = GetComponent<IControlProvider>();
+            skillBehaviour = GetComponent<ClientPlayerSkillBehaviour>();
 
             var uiManager = GameObject.FindGameObjectWithTag("OnScreenUI")?.GetComponent<BBHUIManager>();
             if (uiManager == null)
@@ -124,7 +126,13 @@ namespace Fps.Movement
 
                 return;
             }
-
+            for (int i = 0; i < SkillDictionary.Count; i++)
+            {
+                if (Input.GetKeyDown(SkillDictionary.Get(i).key))
+                {
+                    skillBehaviour.CastSkill(i);
+                }
+            }
             // Movement
             var toMove = transform.rotation * controller.Movement;
 

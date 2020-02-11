@@ -21,17 +21,6 @@ public class ClientPlayerSkillBehaviour : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        for(int i = 0; i < SkillDictionary.Count;i++)
-        {
-            if (Input.GetKeyDown(SkillDictionary.Get(i).key))
-            {
-                CastSkill(i);
-            }
-        }
-    }
     //TODO add input for teleporting
     public void CastSkill(int id)
     {

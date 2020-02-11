@@ -148,6 +148,7 @@ namespace Fps.Movement
 
         private void OnForcedRotation(RotationUpdate forcedRotation)
         {
+            Debug.Log("force rotation");
             var rotationUpdate = new RotationUpdate
             {
                 Pitch = forcedRotation.Pitch,

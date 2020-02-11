@@ -33,6 +33,12 @@ public class BackendGameserverClient
         this.message = message;
     }
 
+    public async Task<User> GetUser(string pubkey)
+    {
+        var res = await _client.GetUserAsync(new GetUserRequest() { Pubkey = pubkey}, GetPubkeyCalloptions());
+        return res.User;
+    }
+
     public void Shutdown()
     {
         Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);

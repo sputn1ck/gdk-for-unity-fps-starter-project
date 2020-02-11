@@ -5,7 +5,7 @@ using Unity.Entities;
 using UnityEngine;
 using Bountyhunt;
 
-[UpdateInGroup(typeof(SpatialOSUpdateGroup))]
+[UpdateAfter(typeof(SpatialOSUpdateGroup))]
 public class BountyConversionSystem : ComponentSystem
 {
 

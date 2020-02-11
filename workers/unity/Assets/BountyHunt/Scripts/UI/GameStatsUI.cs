@@ -14,8 +14,10 @@ public class GameStatsUI : MonoBehaviour
     void Start()
     {
         ClientEvents.instance.onBalanceUpdate.AddListener(UpdateBalance);
-        ClientEvents.instance.onPlayerSpawn.AddListener(PlayerSpawn);
+        
         ClientEvents.instance.onSessionEarningsUpdate.AddListener(SessionUpdate);
+
+        startTime = DateTime.Now;
     }
 
     private void UpdateBalance(BalanceUpdateEventArgs args)
@@ -23,11 +25,7 @@ public class GameStatsUI : MonoBehaviour
         BalanceUI.UpdateSats(args.NewAmount, args.NewAmount - args.OldAmount);
     }
 
-    // Update is called once per frame
-    void PlayerSpawn(GameObject player)
-    {
-        startTime = DateTime.Now;
-    }
+
 
     void SessionUpdate(SessionEarningsEventArgs e)
     {

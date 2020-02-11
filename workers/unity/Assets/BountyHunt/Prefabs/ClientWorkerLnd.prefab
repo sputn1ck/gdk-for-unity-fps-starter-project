@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3231388491131628992}
   - component: {fileID: 8932650709854373229}
   - component: {fileID: 6882851908204537564}
-  - component: {fileID: 3756189763960350964}
   - component: {fileID: 1205460437367705271}
   m_Layer: 0
   m_Name: ClientWorkerLnd
@@ -81,7 +80,6 @@ MonoBehaviour:
     type: 3}
   pubkey: 
   mainMenu: {fileID: 0}
-  uiManager: {fileID: 0}
   clientConnector: {fileID: 0}
   deploymentList:
     deployments: []
@@ -133,21 +131,36 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onServicesSetup:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   onBountyUpdate:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: BountyUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  onEarningsUpdate:
+  onSessionEarningsUpdate:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: EarningsUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: SessionEarningsUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onBalanceUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: BalanceUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onChatMessageRecieve:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: ChatMessageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  onOpponentHit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &8932650709854373229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,25 +188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bountyPickupMaterialSettings: {fileID: 11400000, guid: b51c515cb2c889b45a49a4b2ff47a40a,
     type: 2}
---- !u!114 &3756189763960350964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2466744334126222726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d177fe8fd6b0ed44bbdd5275c37e222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genericIRC: 0
-  oauth: 
-  nickName: 
-  channelName: 
-  server: irc.twitch.tv
-  connectTrigger: 0
-  isConnected: 0
 --- !u!114 &1205460437367705271
 MonoBehaviour:
   m_ObjectHideFlags: 0

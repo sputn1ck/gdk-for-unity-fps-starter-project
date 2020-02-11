@@ -14,6 +14,8 @@ namespace Bbh {
 
     static readonly grpc::Marshaller<global::Bbh.EventStreamRequest> __Marshaller_bbh_EventStreamRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.EventStreamRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.EventStreamResponse> __Marshaller_bbh_EventStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.EventStreamResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetUserRequest> __Marshaller_bbh_GetUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetUserRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetUserResponse> __Marshaller_bbh_GetUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetUserResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse> __Method_EventStream = new grpc::Method<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse>(
         grpc::MethodType.ClientStreaming,
@@ -21,6 +23,13 @@ namespace Bbh {
         "EventStream",
         __Marshaller_bbh_EventStreamRequest,
         __Marshaller_bbh_EventStreamResponse);
+
+    static readonly grpc::Method<global::Bbh.GetUserRequest, global::Bbh.GetUserResponse> __Method_GetUser = new grpc::Method<global::Bbh.GetUserRequest, global::Bbh.GetUserResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetUser",
+        __Marshaller_bbh_GetUserRequest,
+        __Marshaller_bbh_GetUserResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -33,6 +42,11 @@ namespace Bbh {
     public abstract partial class GameServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Bbh.EventStreamResponse> EventStream(grpc::IAsyncStreamReader<global::Bbh.EventStreamRequest> requestStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbh.GetUserResponse> GetUser(global::Bbh.GetUserRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -70,6 +84,22 @@ namespace Bbh {
       {
         return CallInvoker.AsyncClientStreamingCall(__Method_EventStream, null, options);
       }
+      public virtual global::Bbh.GetUserResponse GetUser(global::Bbh.GetUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetUser(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbh.GetUserResponse GetUser(global::Bbh.GetUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetUser, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetUserResponse> GetUserAsync(global::Bbh.GetUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetUserAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetUserResponse> GetUserAsync(global::Bbh.GetUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetUser, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -82,7 +112,8 @@ namespace Bbh {
     public static grpc::ServerServiceDefinition BindService(GameServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_EventStream, serviceImpl.EventStream).Build();
+          .AddMethod(__Method_EventStream, serviceImpl.EventStream)
+          .AddMethod(__Method_GetUser, serviceImpl.GetUser).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -92,6 +123,7 @@ namespace Bbh {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GameServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_EventStream, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse>(serviceImpl.EventStream));
+      serviceBinder.AddMethod(__Method_GetUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetUserRequest, global::Bbh.GetUserResponse>(serviceImpl.GetUser));
     }
 
   }

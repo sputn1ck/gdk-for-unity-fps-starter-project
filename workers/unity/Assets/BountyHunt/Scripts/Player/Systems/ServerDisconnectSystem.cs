@@ -12,7 +12,7 @@ using Improbable.Gdk.Subscriptions;
 using Improbable;
 using Improbable.Gdk.PlayerLifecycle;
 
-[UpdateInGroup(typeof(SpatialOSUpdateGroup))]
+[UpdateAfter(typeof(SpatialOSUpdateGroup))]
 public class ServerDisconnectSystem : ComponentSystem
 {
     private WorkerSystem workerSystem;

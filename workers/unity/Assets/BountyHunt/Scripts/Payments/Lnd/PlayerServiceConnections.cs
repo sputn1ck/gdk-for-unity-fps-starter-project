@@ -42,6 +42,7 @@ public class PlayerServiceConnections : MonoBehaviour
         SetupDonnerDaemon();
         await SetupLnd();
         SetupBackendServices();
+        ClientEvents.instance.onServicesSetup.Invoke();
     }
 
     public async Task SetupLnd()
