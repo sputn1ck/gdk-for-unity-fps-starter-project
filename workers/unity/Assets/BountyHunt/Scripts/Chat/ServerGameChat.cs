@@ -1,5 +1,5 @@
 using Improbable.Gdk.Subscriptions;
-using Improbable.Gdk.QueryBasedInterest;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +10,8 @@ using System;
 using Improbable.Gdk.Core;
 public class ServerGameChat : MonoBehaviour
 {
-    [Require] ChatCommandReceiver ChatCommandReceiver;
-    [Require] ChatWriter ChatWriter;
+    [Require] ChatComponentCommandReceiver ChatCommandReceiver;
+    [Require] ChatComponentWriter ChatWriter;
     [Require] PrivateChatCommandSender privateChatCommandSender;
     //[Require] PlayerStateReaderSubscriptionManager PlayerState;
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class ServerGameChat : MonoBehaviour
         ChatCommandReceiver.OnSendMessageRequestReceived += ChatCommandReceiver_OnSendMessageRequestReceived;
     }
 
-    private void ChatCommandReceiver_OnSendMessageRequestReceived(Chat.Chat.SendMessage.ReceivedRequest obj)
+    private void ChatCommandReceiver_OnSendMessageRequestReceived(Chat.ChatComponent.SendMessage.ReceivedRequest obj)
     {
         Debug.Log("chat command received");
         ChatWriter.SendChatMessageEvent(new ChatMessage(DateTime.UtcNow.ToFileTimeUtc(), obj.EntityId.Id, obj.Payload.Name, obj.Payload.Message, MessageType.PLAYER_CHAT, false));

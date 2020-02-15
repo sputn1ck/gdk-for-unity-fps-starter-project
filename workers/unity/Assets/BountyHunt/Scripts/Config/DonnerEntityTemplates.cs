@@ -225,7 +225,7 @@ public class DonnerEntityTemplates
         var boutySpawnerComponent = new BountySpawner.Snapshot();
         var gameStatsComponent = new GameStats.Snapshot();
         gameStatsComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
-        var chatComponent = new Chat.Chat.Snapshot();
+        var chatComponent = new Chat.ChatComponent.Snapshot();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);

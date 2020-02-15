@@ -1,6 +1,6 @@
 package chat;
 
-component Chat {
+component ChatComponent {
     id = 510001;
     command Empty send_message(ChatRequest);
     event ChatMessage chat_message;

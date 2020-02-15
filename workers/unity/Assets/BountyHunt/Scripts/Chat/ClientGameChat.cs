@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Improbable.Gdk.QueryBasedInterest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +16,8 @@ using Fps.Movement;
 
 public class ClientGameChat : MonoBehaviour
 {
-    [Require] ChatCommandSender ChatCommandSender;
-    [Require] ChatReader ChatReader;
+    [Require] ChatComponentCommandSender ChatCommandSender;
+    [Require] ChatComponentReader ChatReader;
 
     public static ClientGameChat instance;
     public string sendMessage;
