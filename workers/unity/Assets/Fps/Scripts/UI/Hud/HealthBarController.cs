@@ -1,21 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Fps.UI
 {
     public class HealthBarController : MonoBehaviour
     {
-        public RectTransform HealthFill;
-        private float fullHealthWidth;
+        public Image HealthFill1;
+        public Image HealthFill2;
+        public TMPro.TextMeshProUGUI healthText;
 
-        // Use this for initialization
-        private void Awake()
-        {
-            fullHealthWidth = HealthFill.rect.width;
-        }
 
         public void SetHealthBar(float healthFraction)
         {
-            HealthFill.sizeDelta = new Vector2(fullHealthWidth * healthFraction, HealthFill.rect.height);
+            HealthFill1.fillAmount = healthFraction;
+            HealthFill2.fillAmount = healthFraction;
+            healthText.text = Mathf.Ceil(healthFraction * 100).ToString();
         }
     }
 }

@@ -12,56 +12,57 @@ public class SkillIconUI : MonoBehaviour
 
     public bool clockwise = true;
     public bool reverse = false;
-    public bool hideWhenInactive = false;
+    public bool hideWhenReady = false;
 
-    float totalTime;
+    float totalDuration;
     float endTime;
-    bool active = true;
+    bool activeCooldown = true;
+    float readyOpacity = 1f;
+    float cooldownOpacity = 0.25f;
 
     private PlayerSkill skill;
 
     private void Start()
     {
-        Deactivate();
+        DeactivateCooldown();
     }
 
     public void StartCooldown(float time)
     {
-        totalTime = time;
+        totalDuration = time;
         endTime = Time.time + time;
-        Activate();
+        ActivateCooldown();
     }
 
     private void Update()
     {
-        if (!active) return;
+        if (!activeCooldown) return;
 
-        float remaining = Mathf.Clamp((endTime - Time.time) / totalTime, 0, 1);
+        float remaining = Mathf.Clamp((endTime - Time.time) / totalDuration, 0, 1);
 
-        if (reverse) remaining = 1 - remaining;
-
-        CoverImage.fillClockwise = clockwise;
-
-        CoverImage.fillAmount = remaining;
+        if (reverse) CoverImage.fillAmount  = 1 - remaining;
+        else CoverImage.fillAmount = remaining;
 
         if (remaining == 0)
         {
-            Deactivate();
+            DeactivateCooldown();
         } 
 
     }
 
-    void Activate()
+    void ActivateCooldown()
     {
-        active = true;
+        activeCooldown = true;
         Icon.gameObject.SetActive(true);
+        Icon.color = new Color(1,1,1,cooldownOpacity);
         //KeyText.gameObject.SetActive(false);
     }
 
-    void Deactivate()
+    void DeactivateCooldown()
     {
-        active = false;
-        if(hideWhenInactive) Icon.gameObject.SetActive(true);
+        activeCooldown = false;
+        if(hideWhenReady) Icon.gameObject.SetActive(true);
+        Icon.color = new Color(1, 1, 1, readyOpacity);
         //KeyText.gameObject.SetActive(true);
     }
 
@@ -72,7 +73,8 @@ public class SkillIconUI : MonoBehaviour
         Icon.sprite = skill.icon;
 
         skill.onCooldownStart.AddListener(StartCooldown);
-        
+        CoverImage.fillClockwise = clockwise;
+        CoverImage.fillAmount = 1;
     }
 
 }

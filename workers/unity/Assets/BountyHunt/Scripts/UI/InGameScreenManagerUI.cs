@@ -13,6 +13,7 @@ public class InGameScreenManagerUI : MonoBehaviour
     public ScreenUI EscapeScreen;
     public ScreenUI ScoreBoardScreen;
     public ReticleUI Reticle;
+    public HealthBarController Healthbar;
 
     //TODO
     //public GameObject BountyUi;
