@@ -490,6 +490,8 @@ namespace Lnrpc {
     static readonly grpc::Marshaller<global::Lnrpc.DisconnectPeerResponse> __Marshaller_lnrpc_DisconnectPeerResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.DisconnectPeerResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ListPeersRequest> __Marshaller_lnrpc_ListPeersRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ListPeersRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ListPeersResponse> __Marshaller_lnrpc_ListPeersResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ListPeersResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.PeerEventSubscription> __Marshaller_lnrpc_PeerEventSubscription = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.PeerEventSubscription.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.PeerEvent> __Marshaller_lnrpc_PeerEvent = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.PeerEvent.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.GetInfoRequest> __Marshaller_lnrpc_GetInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.GetInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.GetInfoResponse> __Marshaller_lnrpc_GetInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.GetInfoResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.PendingChannelsRequest> __Marshaller_lnrpc_PendingChannelsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.PendingChannelsRequest.Parser.ParseFrom);
@@ -503,6 +505,8 @@ namespace Lnrpc {
     static readonly grpc::Marshaller<global::Lnrpc.OpenChannelRequest> __Marshaller_lnrpc_OpenChannelRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.OpenChannelRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ChannelPoint> __Marshaller_lnrpc_ChannelPoint = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ChannelPoint.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.OpenStatusUpdate> __Marshaller_lnrpc_OpenStatusUpdate = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.OpenStatusUpdate.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.FundingTransitionMsg> __Marshaller_lnrpc_FundingTransitionMsg = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.FundingTransitionMsg.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.FundingStateStepResp> __Marshaller_lnrpc_FundingStateStepResp = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.FundingStateStepResp.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ChannelAcceptResponse> __Marshaller_lnrpc_ChannelAcceptResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ChannelAcceptResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ChannelAcceptRequest> __Marshaller_lnrpc_ChannelAcceptRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ChannelAcceptRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.CloseChannelRequest> __Marshaller_lnrpc_CloseChannelRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.CloseChannelRequest.Parser.ParseFrom);
@@ -554,6 +558,8 @@ namespace Lnrpc {
     static readonly grpc::Marshaller<global::Lnrpc.RestoreChanBackupRequest> __Marshaller_lnrpc_RestoreChanBackupRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.RestoreChanBackupRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.RestoreBackupResponse> __Marshaller_lnrpc_RestoreBackupResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.RestoreBackupResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Lnrpc.ChannelBackupSubscription> __Marshaller_lnrpc_ChannelBackupSubscription = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.ChannelBackupSubscription.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.BakeMacaroonRequest> __Marshaller_lnrpc_BakeMacaroonRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.BakeMacaroonRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Lnrpc.BakeMacaroonResponse> __Marshaller_lnrpc_BakeMacaroonResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Lnrpc.BakeMacaroonResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Lnrpc.WalletBalanceRequest, global::Lnrpc.WalletBalanceResponse> __Method_WalletBalance = new grpc::Method<global::Lnrpc.WalletBalanceRequest, global::Lnrpc.WalletBalanceResponse>(
         grpc::MethodType.Unary,
@@ -653,6 +659,13 @@ namespace Lnrpc {
         __Marshaller_lnrpc_ListPeersRequest,
         __Marshaller_lnrpc_ListPeersResponse);
 
+    static readonly grpc::Method<global::Lnrpc.PeerEventSubscription, global::Lnrpc.PeerEvent> __Method_SubscribePeerEvents = new grpc::Method<global::Lnrpc.PeerEventSubscription, global::Lnrpc.PeerEvent>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SubscribePeerEvents",
+        __Marshaller_lnrpc_PeerEventSubscription,
+        __Marshaller_lnrpc_PeerEvent);
+
     static readonly grpc::Method<global::Lnrpc.GetInfoRequest, global::Lnrpc.GetInfoResponse> __Method_GetInfo = new grpc::Method<global::Lnrpc.GetInfoRequest, global::Lnrpc.GetInfoResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -701,6 +714,13 @@ namespace Lnrpc {
         "OpenChannel",
         __Marshaller_lnrpc_OpenChannelRequest,
         __Marshaller_lnrpc_OpenStatusUpdate);
+
+    static readonly grpc::Method<global::Lnrpc.FundingTransitionMsg, global::Lnrpc.FundingStateStepResp> __Method_FundingStateStep = new grpc::Method<global::Lnrpc.FundingTransitionMsg, global::Lnrpc.FundingStateStepResp>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "FundingStateStep",
+        __Marshaller_lnrpc_FundingTransitionMsg,
+        __Marshaller_lnrpc_FundingStateStepResp);
 
     static readonly grpc::Method<global::Lnrpc.ChannelAcceptResponse, global::Lnrpc.ChannelAcceptRequest> __Method_ChannelAcceptor = new grpc::Method<global::Lnrpc.ChannelAcceptResponse, global::Lnrpc.ChannelAcceptRequest>(
         grpc::MethodType.DuplexStreaming,
@@ -912,6 +932,13 @@ namespace Lnrpc {
         __Marshaller_lnrpc_ChannelBackupSubscription,
         __Marshaller_lnrpc_ChanBackupSnapshot);
 
+    static readonly grpc::Method<global::Lnrpc.BakeMacaroonRequest, global::Lnrpc.BakeMacaroonResponse> __Method_BakeMacaroon = new grpc::Method<global::Lnrpc.BakeMacaroonRequest, global::Lnrpc.BakeMacaroonResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "BakeMacaroon",
+        __Marshaller_lnrpc_BakeMacaroonRequest,
+        __Marshaller_lnrpc_BakeMacaroonResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -1116,6 +1143,21 @@ namespace Lnrpc {
       }
 
       /// <summary>
+      ///*
+      ///SubscribePeerEvents creates a uni-directional stream from the server to
+      ///the client in which any events relevant to the state of peers are sent
+      ///over. Events include peers going online and offline.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task SubscribePeerEvents(global::Lnrpc.PeerEventSubscription request, grpc::IServerStreamWriter<global::Lnrpc.PeerEvent> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
       ///* lncli: `getinfo`
       ///GetInfo returns general information concerning the lightning node including
       ///it's identity pubkey, alias, the chains it is connected to, and information
@@ -1207,13 +1249,35 @@ namespace Lnrpc {
       ///request to a remote peer. Users are able to specify a target number of
       ///blocks that the funding transaction should be confirmed in, or a manual fee
       ///rate to us for the funding transaction. If neither are specified, then a
-      ///lax block confirmation target is used.
+      ///lax block confirmation target is used. Each OpenStatusUpdate will return
+      ///the pending channel ID of the in-progress channel. Depending on the
+      ///arguments specified in the OpenChannelRequest, this pending channel ID can
+      ///then be used to manually progress the channel funding flow.
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="responseStream">Used for sending responses back to the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>A task indicating completion of the handler.</returns>
       public virtual global::System.Threading.Tasks.Task OpenChannel(global::Lnrpc.OpenChannelRequest request, grpc::IServerStreamWriter<global::Lnrpc.OpenStatusUpdate> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///*
+      ///FundingStateStep is an advanced funding related call that allows the caller
+      ///to either execute some preparatory steps for a funding workflow, or
+      ///manually progress a funding workflow. The primary way a funding flow is
+      ///identified is via its pending channel ID. As an example, this method can be
+      ///used to specify that we're expecting a funding flow for a particular
+      ///pending channel ID, for which we need to use specific parameters.
+      ///Alternatively, this can be used to interactively drive PSBT signing for
+      ///funding for partially complete funding transactions.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Lnrpc.FundingStateStepResp> FundingStateStep(global::Lnrpc.FundingTransitionMsg request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1381,9 +1445,9 @@ namespace Lnrpc {
       ///notifying the client of newly added/settled invoices. The caller can
       ///optionally specify the add_index and/or the settle_index. If the add_index
       ///is specified, then we'll first start by sending add invoice events for all
-      ///invoices with an add_index greater than the specified value.  If the
+      ///invoices with an add_index greater than the specified value. If the
       ///settle_index is specified, the next, we'll send out all settle events for
-      ///invoices with a settle_index greater than the specified value.  One or both
+      ///invoices with a settle_index greater than the specified value. One or both
       ///of these fields can be set. If no fields are set, then we'll only send out
       ///the latest add/settle events.
       /// </summary>
@@ -1439,7 +1503,7 @@ namespace Lnrpc {
       ///DescribeGraph returns a description of the latest graph state from the
       ///point of view of the node. The graph information is partitioned into two
       ///components: all the nodes/vertexes, and all the edges that connect the
-      ///vertexes themselves.  As this is a directed graph, the edges also contain
+      ///vertexes themselves. As this is a directed graph, the edges also contain
       ///the node directional specific routing policy which includes: the time lock
       ///delta, fee information, etc.
       /// </summary>
@@ -1589,7 +1653,7 @@ namespace Lnrpc {
       ///
       ///A list of forwarding events are returned. The size of each forwarding event
       ///is 40 bytes, and the max message size able to be returned in gRPC is 4 MiB.
-      ///As a result each message can only contain 50k entries.  Each response has
+      ///As a result each message can only contain 50k entries. Each response has
       ///the index offset of the last entry. The index offset can be provided to the
       ///request to allow the caller to skip a series of records.
       /// </summary>
@@ -1678,6 +1742,20 @@ namespace Lnrpc {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>A task indicating completion of the handler.</returns>
       public virtual global::System.Threading.Tasks.Task SubscribeChannelBackups(global::Lnrpc.ChannelBackupSubscription request, grpc::IServerStreamWriter<global::Lnrpc.ChanBackupSnapshot> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      ///* lncli: `bakemacaroon`
+      ///BakeMacaroon allows the creation of a new macaroon with custom read and
+      ///write permissions. No first-party caveats are added since this can be done
+      ///offline.
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Lnrpc.BakeMacaroonResponse> BakeMacaroon(global::Lnrpc.BakeMacaroonRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2448,6 +2526,34 @@ namespace Lnrpc {
         return CallInvoker.AsyncUnaryCall(__Method_ListPeers, null, options, request);
       }
       /// <summary>
+      ///*
+      ///SubscribePeerEvents creates a uni-directional stream from the server to
+      ///the client in which any events relevant to the state of peers are sent
+      ///over. Events include peers going online and offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Lnrpc.PeerEvent> SubscribePeerEvents(global::Lnrpc.PeerEventSubscription request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SubscribePeerEvents(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///*
+      ///SubscribePeerEvents creates a uni-directional stream from the server to
+      ///the client in which any events relevant to the state of peers are sent
+      ///over. Events include peers going online and offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Lnrpc.PeerEvent> SubscribePeerEvents(global::Lnrpc.PeerEventSubscription request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SubscribePeerEvents, null, options, request);
+      }
+      /// <summary>
       ///* lncli: `getinfo`
       ///GetInfo returns general information concerning the lightning node including
       ///it's identity pubkey, alias, the chains it is connected to, and information
@@ -2763,7 +2869,10 @@ namespace Lnrpc {
       ///request to a remote peer. Users are able to specify a target number of
       ///blocks that the funding transaction should be confirmed in, or a manual fee
       ///rate to us for the funding transaction. If neither are specified, then a
-      ///lax block confirmation target is used.
+      ///lax block confirmation target is used. Each OpenStatusUpdate will return
+      ///the pending channel ID of the in-progress channel. Depending on the
+      ///arguments specified in the OpenChannelRequest, this pending channel ID can
+      ///then be used to manually progress the channel funding flow.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -2780,7 +2889,10 @@ namespace Lnrpc {
       ///request to a remote peer. Users are able to specify a target number of
       ///blocks that the funding transaction should be confirmed in, or a manual fee
       ///rate to us for the funding transaction. If neither are specified, then a
-      ///lax block confirmation target is used.
+      ///lax block confirmation target is used. Each OpenStatusUpdate will return
+      ///the pending channel ID of the in-progress channel. Depending on the
+      ///arguments specified in the OpenChannelRequest, this pending channel ID can
+      ///then be used to manually progress the channel funding flow.
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -2788,6 +2900,82 @@ namespace Lnrpc {
       public virtual grpc::AsyncServerStreamingCall<global::Lnrpc.OpenStatusUpdate> OpenChannel(global::Lnrpc.OpenChannelRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_OpenChannel, null, options, request);
+      }
+      /// <summary>
+      ///*
+      ///FundingStateStep is an advanced funding related call that allows the caller
+      ///to either execute some preparatory steps for a funding workflow, or
+      ///manually progress a funding workflow. The primary way a funding flow is
+      ///identified is via its pending channel ID. As an example, this method can be
+      ///used to specify that we're expecting a funding flow for a particular
+      ///pending channel ID, for which we need to use specific parameters.
+      ///Alternatively, this can be used to interactively drive PSBT signing for
+      ///funding for partially complete funding transactions.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Lnrpc.FundingStateStepResp FundingStateStep(global::Lnrpc.FundingTransitionMsg request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return FundingStateStep(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///*
+      ///FundingStateStep is an advanced funding related call that allows the caller
+      ///to either execute some preparatory steps for a funding workflow, or
+      ///manually progress a funding workflow. The primary way a funding flow is
+      ///identified is via its pending channel ID. As an example, this method can be
+      ///used to specify that we're expecting a funding flow for a particular
+      ///pending channel ID, for which we need to use specific parameters.
+      ///Alternatively, this can be used to interactively drive PSBT signing for
+      ///funding for partially complete funding transactions.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Lnrpc.FundingStateStepResp FundingStateStep(global::Lnrpc.FundingTransitionMsg request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_FundingStateStep, null, options, request);
+      }
+      /// <summary>
+      ///*
+      ///FundingStateStep is an advanced funding related call that allows the caller
+      ///to either execute some preparatory steps for a funding workflow, or
+      ///manually progress a funding workflow. The primary way a funding flow is
+      ///identified is via its pending channel ID. As an example, this method can be
+      ///used to specify that we're expecting a funding flow for a particular
+      ///pending channel ID, for which we need to use specific parameters.
+      ///Alternatively, this can be used to interactively drive PSBT signing for
+      ///funding for partially complete funding transactions.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Lnrpc.FundingStateStepResp> FundingStateStepAsync(global::Lnrpc.FundingTransitionMsg request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return FundingStateStepAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///*
+      ///FundingStateStep is an advanced funding related call that allows the caller
+      ///to either execute some preparatory steps for a funding workflow, or
+      ///manually progress a funding workflow. The primary way a funding flow is
+      ///identified is via its pending channel ID. As an example, this method can be
+      ///used to specify that we're expecting a funding flow for a particular
+      ///pending channel ID, for which we need to use specific parameters.
+      ///Alternatively, this can be used to interactively drive PSBT signing for
+      ///funding for partially complete funding transactions.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Lnrpc.FundingStateStepResp> FundingStateStepAsync(global::Lnrpc.FundingTransitionMsg request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_FundingStateStep, null, options, request);
       }
       /// <summary>
       ///*
@@ -3273,9 +3461,9 @@ namespace Lnrpc {
       ///notifying the client of newly added/settled invoices. The caller can
       ///optionally specify the add_index and/or the settle_index. If the add_index
       ///is specified, then we'll first start by sending add invoice events for all
-      ///invoices with an add_index greater than the specified value.  If the
+      ///invoices with an add_index greater than the specified value. If the
       ///settle_index is specified, the next, we'll send out all settle events for
-      ///invoices with a settle_index greater than the specified value.  One or both
+      ///invoices with a settle_index greater than the specified value. One or both
       ///of these fields can be set. If no fields are set, then we'll only send out
       ///the latest add/settle events.
       /// </summary>
@@ -3294,9 +3482,9 @@ namespace Lnrpc {
       ///notifying the client of newly added/settled invoices. The caller can
       ///optionally specify the add_index and/or the settle_index. If the add_index
       ///is specified, then we'll first start by sending add invoice events for all
-      ///invoices with an add_index greater than the specified value.  If the
+      ///invoices with an add_index greater than the specified value. If the
       ///settle_index is specified, the next, we'll send out all settle events for
-      ///invoices with a settle_index greater than the specified value.  One or both
+      ///invoices with a settle_index greater than the specified value. One or both
       ///of these fields can be set. If no fields are set, then we'll only send out
       ///the latest add/settle events.
       /// </summary>
@@ -3464,7 +3652,7 @@ namespace Lnrpc {
       ///DescribeGraph returns a description of the latest graph state from the
       ///point of view of the node. The graph information is partitioned into two
       ///components: all the nodes/vertexes, and all the edges that connect the
-      ///vertexes themselves.  As this is a directed graph, the edges also contain
+      ///vertexes themselves. As this is a directed graph, the edges also contain
       ///the node directional specific routing policy which includes: the time lock
       ///delta, fee information, etc.
       /// </summary>
@@ -3482,7 +3670,7 @@ namespace Lnrpc {
       ///DescribeGraph returns a description of the latest graph state from the
       ///point of view of the node. The graph information is partitioned into two
       ///components: all the nodes/vertexes, and all the edges that connect the
-      ///vertexes themselves.  As this is a directed graph, the edges also contain
+      ///vertexes themselves. As this is a directed graph, the edges also contain
       ///the node directional specific routing policy which includes: the time lock
       ///delta, fee information, etc.
       /// </summary>
@@ -3498,7 +3686,7 @@ namespace Lnrpc {
       ///DescribeGraph returns a description of the latest graph state from the
       ///point of view of the node. The graph information is partitioned into two
       ///components: all the nodes/vertexes, and all the edges that connect the
-      ///vertexes themselves.  As this is a directed graph, the edges also contain
+      ///vertexes themselves. As this is a directed graph, the edges also contain
       ///the node directional specific routing policy which includes: the time lock
       ///delta, fee information, etc.
       /// </summary>
@@ -3516,7 +3704,7 @@ namespace Lnrpc {
       ///DescribeGraph returns a description of the latest graph state from the
       ///point of view of the node. The graph information is partitioned into two
       ///components: all the nodes/vertexes, and all the edges that connect the
-      ///vertexes themselves.  As this is a directed graph, the edges also contain
+      ///vertexes themselves. As this is a directed graph, the edges also contain
       ///the node directional specific routing policy which includes: the time lock
       ///delta, fee information, etc.
       /// </summary>
@@ -4014,7 +4202,7 @@ namespace Lnrpc {
       ///
       ///A list of forwarding events are returned. The size of each forwarding event
       ///is 40 bytes, and the max message size able to be returned in gRPC is 4 MiB.
-      ///As a result each message can only contain 50k entries.  Each response has
+      ///As a result each message can only contain 50k entries. Each response has
       ///the index offset of the last entry. The index offset can be provided to the
       ///request to allow the caller to skip a series of records.
       /// </summary>
@@ -4036,7 +4224,7 @@ namespace Lnrpc {
       ///
       ///A list of forwarding events are returned. The size of each forwarding event
       ///is 40 bytes, and the max message size able to be returned in gRPC is 4 MiB.
-      ///As a result each message can only contain 50k entries.  Each response has
+      ///As a result each message can only contain 50k entries. Each response has
       ///the index offset of the last entry. The index offset can be provided to the
       ///request to allow the caller to skip a series of records.
       /// </summary>
@@ -4056,7 +4244,7 @@ namespace Lnrpc {
       ///
       ///A list of forwarding events are returned. The size of each forwarding event
       ///is 40 bytes, and the max message size able to be returned in gRPC is 4 MiB.
-      ///As a result each message can only contain 50k entries.  Each response has
+      ///As a result each message can only contain 50k entries. Each response has
       ///the index offset of the last entry. The index offset can be provided to the
       ///request to allow the caller to skip a series of records.
       /// </summary>
@@ -4078,7 +4266,7 @@ namespace Lnrpc {
       ///
       ///A list of forwarding events are returned. The size of each forwarding event
       ///is 40 bytes, and the max message size able to be returned in gRPC is 4 MiB.
-      ///As a result each message can only contain 50k entries.  Each response has
+      ///As a result each message can only contain 50k entries. Each response has
       ///the index offset of the last entry. The index offset can be provided to the
       ///request to allow the caller to skip a series of records.
       /// </summary>
@@ -4373,6 +4561,62 @@ namespace Lnrpc {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SubscribeChannelBackups, null, options, request);
       }
+      /// <summary>
+      ///* lncli: `bakemacaroon`
+      ///BakeMacaroon allows the creation of a new macaroon with custom read and
+      ///write permissions. No first-party caveats are added since this can be done
+      ///offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Lnrpc.BakeMacaroonResponse BakeMacaroon(global::Lnrpc.BakeMacaroonRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BakeMacaroon(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///* lncli: `bakemacaroon`
+      ///BakeMacaroon allows the creation of a new macaroon with custom read and
+      ///write permissions. No first-party caveats are added since this can be done
+      ///offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Lnrpc.BakeMacaroonResponse BakeMacaroon(global::Lnrpc.BakeMacaroonRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_BakeMacaroon, null, options, request);
+      }
+      /// <summary>
+      ///* lncli: `bakemacaroon`
+      ///BakeMacaroon allows the creation of a new macaroon with custom read and
+      ///write permissions. No first-party caveats are added since this can be done
+      ///offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Lnrpc.BakeMacaroonResponse> BakeMacaroonAsync(global::Lnrpc.BakeMacaroonRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BakeMacaroonAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      ///* lncli: `bakemacaroon`
+      ///BakeMacaroon allows the creation of a new macaroon with custom read and
+      ///write permissions. No first-party caveats are added since this can be done
+      ///offline.
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Lnrpc.BakeMacaroonResponse> BakeMacaroonAsync(global::Lnrpc.BakeMacaroonRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_BakeMacaroon, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override LightningClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -4399,6 +4643,7 @@ namespace Lnrpc {
           .AddMethod(__Method_ConnectPeer, serviceImpl.ConnectPeer)
           .AddMethod(__Method_DisconnectPeer, serviceImpl.DisconnectPeer)
           .AddMethod(__Method_ListPeers, serviceImpl.ListPeers)
+          .AddMethod(__Method_SubscribePeerEvents, serviceImpl.SubscribePeerEvents)
           .AddMethod(__Method_GetInfo, serviceImpl.GetInfo)
           .AddMethod(__Method_PendingChannels, serviceImpl.PendingChannels)
           .AddMethod(__Method_ListChannels, serviceImpl.ListChannels)
@@ -4406,6 +4651,7 @@ namespace Lnrpc {
           .AddMethod(__Method_ClosedChannels, serviceImpl.ClosedChannels)
           .AddMethod(__Method_OpenChannelSync, serviceImpl.OpenChannelSync)
           .AddMethod(__Method_OpenChannel, serviceImpl.OpenChannel)
+          .AddMethod(__Method_FundingStateStep, serviceImpl.FundingStateStep)
           .AddMethod(__Method_ChannelAcceptor, serviceImpl.ChannelAcceptor)
           .AddMethod(__Method_CloseChannel, serviceImpl.CloseChannel)
           .AddMethod(__Method_AbandonChannel, serviceImpl.AbandonChannel)
@@ -4435,7 +4681,8 @@ namespace Lnrpc {
           .AddMethod(__Method_ExportAllChannelBackups, serviceImpl.ExportAllChannelBackups)
           .AddMethod(__Method_VerifyChanBackup, serviceImpl.VerifyChanBackup)
           .AddMethod(__Method_RestoreChannelBackups, serviceImpl.RestoreChannelBackups)
-          .AddMethod(__Method_SubscribeChannelBackups, serviceImpl.SubscribeChannelBackups).Build();
+          .AddMethod(__Method_SubscribeChannelBackups, serviceImpl.SubscribeChannelBackups)
+          .AddMethod(__Method_BakeMacaroon, serviceImpl.BakeMacaroon).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -4458,6 +4705,7 @@ namespace Lnrpc {
       serviceBinder.AddMethod(__Method_ConnectPeer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.ConnectPeerRequest, global::Lnrpc.ConnectPeerResponse>(serviceImpl.ConnectPeer));
       serviceBinder.AddMethod(__Method_DisconnectPeer, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.DisconnectPeerRequest, global::Lnrpc.DisconnectPeerResponse>(serviceImpl.DisconnectPeer));
       serviceBinder.AddMethod(__Method_ListPeers, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.ListPeersRequest, global::Lnrpc.ListPeersResponse>(serviceImpl.ListPeers));
+      serviceBinder.AddMethod(__Method_SubscribePeerEvents, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Lnrpc.PeerEventSubscription, global::Lnrpc.PeerEvent>(serviceImpl.SubscribePeerEvents));
       serviceBinder.AddMethod(__Method_GetInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.GetInfoRequest, global::Lnrpc.GetInfoResponse>(serviceImpl.GetInfo));
       serviceBinder.AddMethod(__Method_PendingChannels, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.PendingChannelsRequest, global::Lnrpc.PendingChannelsResponse>(serviceImpl.PendingChannels));
       serviceBinder.AddMethod(__Method_ListChannels, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.ListChannelsRequest, global::Lnrpc.ListChannelsResponse>(serviceImpl.ListChannels));
@@ -4465,6 +4713,7 @@ namespace Lnrpc {
       serviceBinder.AddMethod(__Method_ClosedChannels, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.ClosedChannelsRequest, global::Lnrpc.ClosedChannelsResponse>(serviceImpl.ClosedChannels));
       serviceBinder.AddMethod(__Method_OpenChannelSync, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.OpenChannelRequest, global::Lnrpc.ChannelPoint>(serviceImpl.OpenChannelSync));
       serviceBinder.AddMethod(__Method_OpenChannel, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Lnrpc.OpenChannelRequest, global::Lnrpc.OpenStatusUpdate>(serviceImpl.OpenChannel));
+      serviceBinder.AddMethod(__Method_FundingStateStep, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.FundingTransitionMsg, global::Lnrpc.FundingStateStepResp>(serviceImpl.FundingStateStep));
       serviceBinder.AddMethod(__Method_ChannelAcceptor, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Lnrpc.ChannelAcceptResponse, global::Lnrpc.ChannelAcceptRequest>(serviceImpl.ChannelAcceptor));
       serviceBinder.AddMethod(__Method_CloseChannel, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Lnrpc.CloseChannelRequest, global::Lnrpc.CloseStatusUpdate>(serviceImpl.CloseChannel));
       serviceBinder.AddMethod(__Method_AbandonChannel, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.AbandonChannelRequest, global::Lnrpc.AbandonChannelResponse>(serviceImpl.AbandonChannel));
@@ -4495,6 +4744,7 @@ namespace Lnrpc {
       serviceBinder.AddMethod(__Method_VerifyChanBackup, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.ChanBackupSnapshot, global::Lnrpc.VerifyChanBackupResponse>(serviceImpl.VerifyChanBackup));
       serviceBinder.AddMethod(__Method_RestoreChannelBackups, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.RestoreChanBackupRequest, global::Lnrpc.RestoreBackupResponse>(serviceImpl.RestoreChannelBackups));
       serviceBinder.AddMethod(__Method_SubscribeChannelBackups, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Lnrpc.ChannelBackupSubscription, global::Lnrpc.ChanBackupSnapshot>(serviceImpl.SubscribeChannelBackups));
+      serviceBinder.AddMethod(__Method_BakeMacaroon, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Lnrpc.BakeMacaroonRequest, global::Lnrpc.BakeMacaroonResponse>(serviceImpl.BakeMacaroon));
     }
 
   }

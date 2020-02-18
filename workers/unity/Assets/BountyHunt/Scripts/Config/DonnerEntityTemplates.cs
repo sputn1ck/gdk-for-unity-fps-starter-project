@@ -3,7 +3,7 @@ using UnityEngine;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
-using Improbable.Gdk.QueryBasedInterest;
+
 
 using Improbable.Gdk.TransformSynchronization;
 using Fps;
@@ -15,6 +15,7 @@ using Fps.SchemaExtensions;
 using Bountyhunt;
 using System.Collections.Generic;
 using Chat;
+using Improbable.Gdk.QueryBasedInterest;
 
 public class DonnerEntityTemplates
 {

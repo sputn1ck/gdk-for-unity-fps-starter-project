@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GamePaymentManager : MonoBehaviour
 {
-    
+
     private ServerServiceConnections lnServer;
 
     private bool useLnd;
@@ -17,8 +17,8 @@ public class GamePaymentManager : MonoBehaviour
             return;
         }
         useLnd = true;
-        
-            
+
+
 
     }
     // Start is called before the first frame update
@@ -29,6 +29,31 @@ public class GamePaymentManager : MonoBehaviour
 
     void InvoiceSettled(object sender, InvoiceSettledEventArgs e)
     {
+        if (e.Invoice.IsKeysend)
+        {
+            foreach(var htlc in e.Invoice.Htlcs)
+            {
+                if (htlc.CustomRecords.ContainsKey(Utility.BountyInt))
+                {
+                    Google.Protobuf.ByteString memoByte;
+                    var memoString = "";
+                    if (htlc.CustomRecords.TryGetValue(Utility.MemoInt, out memoByte))
+                    {
+                        memoString = memoByte.ToStringUtf8();
+                    }
+
+                    var playerpub = Utility.bytesToString(htlc.CustomRecords[Utility.BountyInt].ToByteArray());
+                    ServerEvents.instance.OnBountyInvoicePaid.Invoke(new BountyInvoice
+                    {
+                        amount = e.Invoice.AmtPaidSat,
+                        pubkey = playerpub,
+                        message = memoString
+                    });
+                }
+            }
+
+            return;
+        }
         var auction = DonnerUtils.MemoToAuctionInvoice(e.Invoice.Memo);
         if (auction != null && auction.AuctionId != null)
         {
@@ -48,6 +73,6 @@ public class GamePaymentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

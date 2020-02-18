@@ -51,518 +51,607 @@ namespace Lnrpc {
             "ZXMSJgoOZGVzdF9hZGRyZXNzZXMYCCADKAlSDmRlc3RfYWRkcmVzc2VzEh4K",
             "CnJhd190eF9oZXgYCSABKAlSCnJhd190eF9oZXgiGAoWR2V0VHJhbnNhY3Rp",
             "b25zUmVxdWVzdCJMChJUcmFuc2FjdGlvbkRldGFpbHMSNgoMdHJhbnNhY3Rp",
-            "b25zGAEgAygLMhIubG5ycGMuVHJhbnNhY3Rpb25SDHRyYW5zYWN0aW9ucyI3",
-            "CghGZWVMaW1pdBIPCgVmaXhlZBgBIAEoA0gAEhEKB3BlcmNlbnQYAiABKANI",
-            "AEIHCgVsaW1pdCLcAgoLU2VuZFJlcXVlc3QSDAoEZGVzdBgBIAEoDBITCgtk",
-            "ZXN0X3N0cmluZxgCIAEoCRILCgNhbXQYAyABKAMSFAoMcGF5bWVudF9oYXNo",
-            "GAQgASgMEhsKE3BheW1lbnRfaGFzaF9zdHJpbmcYBSABKAkSFwoPcGF5bWVu",
-            "dF9yZXF1ZXN0GAYgASgJEhgKEGZpbmFsX2NsdHZfZGVsdGEYByABKAUSIgoJ",
-            "ZmVlX2xpbWl0GAggASgLMg8ubG5ycGMuRmVlTGltaXQSHAoQb3V0Z29pbmdf",
-            "Y2hhbl9pZBgJIAEoBEICMAESEgoKY2x0dl9saW1pdBgKIAEoDRIxCghkZXN0",
-            "X3RsdhgLIAMoCzIfLmxucnBjLlNlbmRSZXF1ZXN0LkRlc3RUbHZFbnRyeRou",
-            "CgxEZXN0VGx2RW50cnkSCwoDa2V5GAEgASgEEg0KBXZhbHVlGAIgASgMOgI4",
-            "ASK4AQoMU2VuZFJlc3BvbnNlEiQKDXBheW1lbnRfZXJyb3IYASABKAlSDXBh",
-            "eW1lbnRfZXJyb3ISKgoQcGF5bWVudF9wcmVpbWFnZRgCIAEoDFIQcGF5bWVu",
-            "dF9wcmVpbWFnZRIyCg1wYXltZW50X3JvdXRlGAMgASgLMgwubG5ycGMuUm91",
-            "dGVSDXBheW1lbnRfcm91dGUSIgoMcGF5bWVudF9oYXNoGAQgASgMUgxwYXlt",
-            "ZW50X2hhc2giagoSU2VuZFRvUm91dGVSZXF1ZXN0EhQKDHBheW1lbnRfaGFz",
-            "aBgBIAEoDBIbChNwYXltZW50X2hhc2hfc3RyaW5nGAIgASgJEhsKBXJvdXRl",
-            "GAQgASgLMgwubG5ycGMuUm91dGVKBAgDEAQitQIKFENoYW5uZWxBY2NlcHRS",
-            "ZXF1ZXN0EhMKC25vZGVfcHVia2V5GAEgASgMEhIKCmNoYWluX2hhc2gYAiAB",
-            "KAwSFwoPcGVuZGluZ19jaGFuX2lkGAMgASgMEhMKC2Z1bmRpbmdfYW10GAQg",
-            "ASgEEhAKCHB1c2hfYW10GAUgASgEEhIKCmR1c3RfbGltaXQYBiABKAQSGwoT",
-            "bWF4X3ZhbHVlX2luX2ZsaWdodBgHIAEoBBIXCg9jaGFubmVsX3Jlc2VydmUY",
-            "CCABKAQSEAoIbWluX2h0bGMYCSABKAQSEgoKZmVlX3Blcl9rdxgKIAEoBBIR",
-            "Cgljc3ZfZGVsYXkYCyABKA0SGgoSbWF4X2FjY2VwdGVkX2h0bGNzGAwgASgN",
-            "EhUKDWNoYW5uZWxfZmxhZ3MYDSABKA0iQAoVQ2hhbm5lbEFjY2VwdFJlc3Bv",
-            "bnNlEg4KBmFjY2VwdBgBIAEoCBIXCg9wZW5kaW5nX2NoYW5faWQYAiABKAwi",
-            "ogEKDENoYW5uZWxQb2ludBIwChJmdW5kaW5nX3R4aWRfYnl0ZXMYASABKAxI",
-            "AFISZnVuZGluZ190eGlkX2J5dGVzEiwKEGZ1bmRpbmdfdHhpZF9zdHIYAiAB",
-            "KAlIAFIQZnVuZGluZ190eGlkX3N0chIiCgxvdXRwdXRfaW5kZXgYAyABKA1S",
-            "DG91dHB1dF9pbmRleEIOCgxmdW5kaW5nX3R4aWQiagoIT3V0UG9pbnQSHgoK",
-            "dHhpZF9ieXRlcxgBIAEoDFIKdHhpZF9ieXRlcxIaCgh0eGlkX3N0chgCIAEo",
-            "CVIIdHhpZF9zdHISIgoMb3V0cHV0X2luZGV4GAMgASgNUgxvdXRwdXRfaW5k",
-            "ZXgiPgoQTGlnaHRuaW5nQWRkcmVzcxIWCgZwdWJrZXkYASABKAlSBnB1Ymtl",
-            "eRISCgRob3N0GAIgASgJUgRob3N0IqEBChJFc3RpbWF0ZUZlZVJlcXVlc3QS",
-            "QQoMQWRkclRvQW1vdW50GAEgAygLMisubG5ycGMuRXN0aW1hdGVGZWVSZXF1",
-            "ZXN0LkFkZHJUb0Ftb3VudEVudHJ5EhMKC3RhcmdldF9jb25mGAIgASgFGjMK",
-            "EUFkZHJUb0Ftb3VudEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEo",
-            "AzoCOAEiYwoTRXN0aW1hdGVGZWVSZXNwb25zZRIYCgdmZWVfc2F0GAEgASgD",
-            "UgdmZWVfc2F0EjIKFGZlZXJhdGVfc2F0X3Blcl9ieXRlGAIgASgDUhRmZWVy",
-            "YXRlX3NhdF9wZXJfYnl0ZSKxAQoPU2VuZE1hbnlSZXF1ZXN0Ej4KDEFkZHJU",
-            "b0Ftb3VudBgBIAMoCzIoLmxucnBjLlNlbmRNYW55UmVxdWVzdC5BZGRyVG9B",
-            "bW91bnRFbnRyeRITCgt0YXJnZXRfY29uZhgDIAEoBRIUCgxzYXRfcGVyX2J5",
-            "dGUYBSABKAMaMwoRQWRkclRvQW1vdW50RW50cnkSCwoDa2V5GAEgASgJEg0K",
-            "BXZhbHVlGAIgASgDOgI4ASImChBTZW5kTWFueVJlc3BvbnNlEhIKBHR4aWQY",
-            "ASABKAlSBHR4aWQibQoQU2VuZENvaW5zUmVxdWVzdBIMCgRhZGRyGAEgASgJ",
-            "Eg4KBmFtb3VudBgCIAEoAxITCgt0YXJnZXRfY29uZhgDIAEoBRIUCgxzYXRf",
-            "cGVyX2J5dGUYBSABKAMSEAoIc2VuZF9hbGwYBiABKAgiJwoRU2VuZENvaW5z",
-            "UmVzcG9uc2USEgoEdHhpZBgBIAEoCVIEdHhpZCI6ChJMaXN0VW5zcGVudFJl",
-            "cXVlc3QSEQoJbWluX2NvbmZzGAEgASgFEhEKCW1heF9jb25mcxgCIAEoBSI4",
-            "ChNMaXN0VW5zcGVudFJlc3BvbnNlEiEKBXV0eG9zGAEgAygLMgsubG5ycGMu",
-            "VXR4b1IFdXR4b3MiNQoRTmV3QWRkcmVzc1JlcXVlc3QSIAoEdHlwZRgBIAEo",
-            "DjISLmxucnBjLkFkZHJlc3NUeXBlIi4KEk5ld0FkZHJlc3NSZXNwb25zZRIY",
-            "CgdhZGRyZXNzGAEgASgJUgdhZGRyZXNzIiYKElNpZ25NZXNzYWdlUmVxdWVz",
-            "dBIQCgNtc2cYASABKAxSA21zZyIzChNTaWduTWVzc2FnZVJlc3BvbnNlEhwK",
-            "CXNpZ25hdHVyZRgBIAEoCVIJc2lnbmF0dXJlIkYKFFZlcmlmeU1lc3NhZ2VS",
-            "ZXF1ZXN0EhAKA21zZxgBIAEoDFIDbXNnEhwKCXNpZ25hdHVyZRgCIAEoCVIJ",
-            "c2lnbmF0dXJlIkUKFVZlcmlmeU1lc3NhZ2VSZXNwb25zZRIUCgV2YWxpZBgB",
-            "IAEoCFIFdmFsaWQSFgoGcHVia2V5GAIgASgJUgZwdWJrZXkiSQoSQ29ubmVj",
-            "dFBlZXJSZXF1ZXN0EiUKBGFkZHIYASABKAsyFy5sbnJwYy5MaWdodG5pbmdB",
-            "ZGRyZXNzEgwKBHBlcm0YAiABKAgiFQoTQ29ubmVjdFBlZXJSZXNwb25zZSIx",
-            "ChVEaXNjb25uZWN0UGVlclJlcXVlc3QSGAoHcHViX2tleRgBIAEoCVIHcHVi",
-            "X2tleSIYChZEaXNjb25uZWN0UGVlclJlc3BvbnNlIoYBCgRIVExDEhoKCGlu",
-            "Y29taW5nGAEgASgIUghpbmNvbWluZxIWCgZhbW91bnQYAiABKANSBmFtb3Vu",
-            "dBIcCgloYXNoX2xvY2sYAyABKAxSCWhhc2hfbG9jaxIsChFleHBpcmF0aW9u",
-            "X2hlaWdodBgEIAEoDVIRZXhwaXJhdGlvbl9oZWlnaHQi7gYKB0NoYW5uZWwS",
-            "FgoGYWN0aXZlGAEgASgIUgZhY3RpdmUSJAoNcmVtb3RlX3B1YmtleRgCIAEo",
-            "CVINcmVtb3RlX3B1YmtleRIkCg1jaGFubmVsX3BvaW50GAMgASgJUg1jaGFu",
-            "bmVsX3BvaW50EhwKB2NoYW5faWQYBCABKARCAjABUgdjaGFuX2lkEhoKCGNh",
-            "cGFjaXR5GAUgASgDUghjYXBhY2l0eRIkCg1sb2NhbF9iYWxhbmNlGAYgASgD",
-            "Ug1sb2NhbF9iYWxhbmNlEiYKDnJlbW90ZV9iYWxhbmNlGAcgASgDUg5yZW1v",
-            "dGVfYmFsYW5jZRIeCgpjb21taXRfZmVlGAggASgDUgpjb21taXRfZmVlEiQK",
-            "DWNvbW1pdF93ZWlnaHQYCSABKANSDWNvbW1pdF93ZWlnaHQSHgoKZmVlX3Bl",
-            "cl9rdxgKIAEoA1IKZmVlX3Blcl9rdxIsChF1bnNldHRsZWRfYmFsYW5jZRgL",
-            "IAEoA1IRdW5zZXR0bGVkX2JhbGFuY2USMAoTdG90YWxfc2F0b3NoaXNfc2Vu",
-            "dBgMIAEoA1ITdG90YWxfc2F0b3NoaXNfc2VudBI4Chd0b3RhbF9zYXRvc2hp",
-            "c19yZWNlaXZlZBgNIAEoA1IXdG90YWxfc2F0b3NoaXNfcmVjZWl2ZWQSIAoL",
-            "bnVtX3VwZGF0ZXMYDiABKARSC251bV91cGRhdGVzEjEKDXBlbmRpbmdfaHRs",
-            "Y3MYDyADKAsyCy5sbnJwYy5IVExDUg1wZW5kaW5nX2h0bGNzEhwKCWNzdl9k",
-            "ZWxheRgQIAEoDVIJY3N2X2RlbGF5EhgKB3ByaXZhdGUYESABKAhSB3ByaXZh",
-            "dGUSHAoJaW5pdGlhdG9yGBIgASgIUglpbml0aWF0b3ISLAoRY2hhbl9zdGF0",
-            "dXNfZmxhZ3MYEyABKAlSEWNoYW5fc3RhdHVzX2ZsYWdzEjYKFmxvY2FsX2No",
-            "YW5fcmVzZXJ2ZV9zYXQYFCABKANSFmxvY2FsX2NoYW5fcmVzZXJ2ZV9zYXQS",
-            "OAoXcmVtb3RlX2NoYW5fcmVzZXJ2ZV9zYXQYFSABKANSF3JlbW90ZV9jaGFu",
-            "X3Jlc2VydmVfc2F0EiwKEXN0YXRpY19yZW1vdGVfa2V5GBYgASgIUhFzdGF0",
-            "aWNfcmVtb3RlX2tleSJsChNMaXN0Q2hhbm5lbHNSZXF1ZXN0EhMKC2FjdGl2",
-            "ZV9vbmx5GAEgASgIEhUKDWluYWN0aXZlX29ubHkYAiABKAgSEwoLcHVibGlj",
-            "X29ubHkYAyABKAgSFAoMcHJpdmF0ZV9vbmx5GAQgASgIIkIKFExpc3RDaGFu",
-            "bmVsc1Jlc3BvbnNlEioKCGNoYW5uZWxzGAsgAygLMg4ubG5ycGMuQ2hhbm5l",
-            "bFIIY2hhbm5lbHMiugQKE0NoYW5uZWxDbG9zZVN1bW1hcnkSJAoNY2hhbm5l",
-            "bF9wb2ludBgBIAEoCVINY2hhbm5lbF9wb2ludBIcCgdjaGFuX2lkGAIgASgE",
-            "QgIwAVIHY2hhbl9pZBIeCgpjaGFpbl9oYXNoGAMgASgJUgpjaGFpbl9oYXNo",
-            "EigKD2Nsb3NpbmdfdHhfaGFzaBgEIAEoCVIPY2xvc2luZ190eF9oYXNoEiQK",
-            "DXJlbW90ZV9wdWJrZXkYBSABKAlSDXJlbW90ZV9wdWJrZXkSGgoIY2FwYWNp",
-            "dHkYBiABKANSCGNhcGFjaXR5EiIKDGNsb3NlX2hlaWdodBgHIAEoDVIMY2xv",
-            "c2VfaGVpZ2h0EigKD3NldHRsZWRfYmFsYW5jZRgIIAEoA1IPc2V0dGxlZF9i",
-            "YWxhbmNlEjAKE3RpbWVfbG9ja2VkX2JhbGFuY2UYCSABKANSE3RpbWVfbG9j",
-            "a2VkX2JhbGFuY2USRgoKY2xvc2VfdHlwZRgKIAEoDjImLmxucnBjLkNoYW5u",
-            "ZWxDbG9zZVN1bW1hcnkuQ2xvc3VyZVR5cGVSCmNsb3NlX3R5cGUiigEKC0Ns",
-            "b3N1cmVUeXBlEhUKEUNPT1BFUkFUSVZFX0NMT1NFEAASFQoRTE9DQUxfRk9S",
-            "Q0VfQ0xPU0UQARIWChJSRU1PVEVfRk9SQ0VfQ0xPU0UQAhIQCgxCUkVBQ0hf",
-            "Q0xPU0UQAxIUChBGVU5ESU5HX0NBTkNFTEVEEAQSDQoJQUJBTkRPTkVEEAUi",
-            "lAEKFUNsb3NlZENoYW5uZWxzUmVxdWVzdBITCgtjb29wZXJhdGl2ZRgBIAEo",
-            "CBITCgtsb2NhbF9mb3JjZRgCIAEoCBIUCgxyZW1vdGVfZm9yY2UYAyABKAgS",
-            "DgoGYnJlYWNoGAQgASgIEhgKEGZ1bmRpbmdfY2FuY2VsZWQYBSABKAgSEQoJ",
-            "YWJhbmRvbmVkGAYgASgIIlAKFkNsb3NlZENoYW5uZWxzUmVzcG9uc2USNgoI",
-            "Y2hhbm5lbHMYASADKAsyGi5sbnJwYy5DaGFubmVsQ2xvc2VTdW1tYXJ5Ughj",
-            "aGFubmVscyLfAgoEUGVlchIYCgdwdWJfa2V5GAEgASgJUgdwdWJfa2V5EhgK",
-            "B2FkZHJlc3MYAyABKAlSB2FkZHJlc3MSHgoKYnl0ZXNfc2VudBgEIAEoBFIK",
-            "Ynl0ZXNfc2VudBIeCgpieXRlc19yZWN2GAUgASgEUgpieXRlc19yZWN2EhoK",
-            "CHNhdF9zZW50GAYgASgDUghzYXRfc2VudBIaCghzYXRfcmVjdhgHIAEoA1II",
-            "c2F0X3JlY3YSGAoHaW5ib3VuZBgIIAEoCFIHaW5ib3VuZBIcCglwaW5nX3Rp",
-            "bWUYCSABKANSCXBpbmdfdGltZRIyCglzeW5jX3R5cGUYCiABKA4yFC5sbnJw",
-            "Yy5QZWVyLlN5bmNUeXBlUglzeW5jX3R5cGUiPwoIU3luY1R5cGUSEAoMVU5L",
-            "Tk9XTl9TWU5DEAASDwoLQUNUSVZFX1NZTkMQARIQCgxQQVNTSVZFX1NZTkMQ",
-            "AiISChBMaXN0UGVlcnNSZXF1ZXN0IjYKEUxpc3RQZWVyc1Jlc3BvbnNlEiEK",
-            "BXBlZXJzGAEgAygLMgsubG5ycGMuUGVlclIFcGVlcnMiEAoOR2V0SW5mb1Jl",
-            "cXVlc3Qi5wQKD0dldEluZm9SZXNwb25zZRIoCg9pZGVudGl0eV9wdWJrZXkY",
-            "ASABKAlSD2lkZW50aXR5X3B1YmtleRIUCgVhbGlhcxgCIAEoCVIFYWxpYXMS",
-            "MgoUbnVtX3BlbmRpbmdfY2hhbm5lbHMYAyABKA1SFG51bV9wZW5kaW5nX2No",
-            "YW5uZWxzEjAKE251bV9hY3RpdmVfY2hhbm5lbHMYBCABKA1SE251bV9hY3Rp",
-            "dmVfY2hhbm5lbHMSHAoJbnVtX3BlZXJzGAUgASgNUgludW1fcGVlcnMSIgoM",
-            "YmxvY2tfaGVpZ2h0GAYgASgNUgxibG9ja19oZWlnaHQSHgoKYmxvY2tfaGFz",
-            "aBgIIAEoCVIKYmxvY2tfaGFzaBIoCg9zeW5jZWRfdG9fY2hhaW4YCSABKAhS",
-            "D3N5bmNlZF90b19jaGFpbhIcCgd0ZXN0bmV0GAogASgIQgIYAVIHdGVzdG5l",
-            "dBISCgR1cmlzGAwgAygJUgR1cmlzEjQKFWJlc3RfaGVhZGVyX3RpbWVzdGFt",
-            "cBgNIAEoA1IVYmVzdF9oZWFkZXJfdGltZXN0YW1wEhgKB3ZlcnNpb24YDiAB",
-            "KAlSB3ZlcnNpb24SNAoVbnVtX2luYWN0aXZlX2NoYW5uZWxzGA8gASgNUhVu",
-            "dW1faW5hY3RpdmVfY2hhbm5lbHMSJAoGY2hhaW5zGBAgAygLMgwubG5ycGMu",
-            "Q2hhaW5SBmNoYWlucxIUCgVjb2xvchgRIAEoCVIFY29sb3ISKAoPc3luY2Vk",
-            "X3RvX2dyYXBoGBIgASgIUg9zeW5jZWRfdG9fZ3JhcGhKBAgLEAwiNwoFQ2hh",
-            "aW4SFAoFY2hhaW4YASABKAlSBWNoYWluEhgKB25ldHdvcmsYAiABKAlSB25l",
-            "dHdvcmsiVQoSQ29uZmlybWF0aW9uVXBkYXRlEhEKCWJsb2NrX3NoYRgBIAEo",
-            "DBIUCgxibG9ja19oZWlnaHQYAiABKAUSFgoObnVtX2NvbmZzX2xlZnQYAyAB",
-            "KA0iTgoRQ2hhbm5lbE9wZW5VcGRhdGUSOQoNY2hhbm5lbF9wb2ludBgBIAEo",
-            "CzITLmxucnBjLkNoYW5uZWxQb2ludFINY2hhbm5lbF9wb2ludCJSChJDaGFu",
-            "bmVsQ2xvc2VVcGRhdGUSIgoMY2xvc2luZ190eGlkGAEgASgMUgxjbG9zaW5n",
-            "X3R4aWQSGAoHc3VjY2VzcxgCIAEoCFIHc3VjY2VzcyJ7ChNDbG9zZUNoYW5u",
-            "ZWxSZXF1ZXN0EioKDWNoYW5uZWxfcG9pbnQYASABKAsyEy5sbnJwYy5DaGFu",
-            "bmVsUG9pbnQSDQoFZm9yY2UYAiABKAgSEwoLdGFyZ2V0X2NvbmYYAyABKAUS",
-            "FAoMc2F0X3Blcl9ieXRlGAQgASgDIpgBChFDbG9zZVN0YXR1c1VwZGF0ZRI8",
-            "Cg1jbG9zZV9wZW5kaW5nGAEgASgLMhQubG5ycGMuUGVuZGluZ1VwZGF0ZUgA",
-            "Ug1jbG9zZV9wZW5kaW5nEjsKCmNoYW5fY2xvc2UYAyABKAsyGS5sbnJwYy5D",
-            "aGFubmVsQ2xvc2VVcGRhdGVIAFIKY2hhbl9jbG9zZUIICgZ1cGRhdGUiRwoN",
-            "UGVuZGluZ1VwZGF0ZRISCgR0eGlkGAEgASgMUgR0eGlkEiIKDG91dHB1dF9p",
-            "bmRleBgCIAEoDVIMb3V0cHV0X2luZGV4IpkDChJPcGVuQ2hhbm5lbFJlcXVl",
-            "c3QSIAoLbm9kZV9wdWJrZXkYAiABKAxSC25vZGVfcHVia2V5Ei4KEm5vZGVf",
-            "cHVia2V5X3N0cmluZxgDIAEoCVISbm9kZV9wdWJrZXlfc3RyaW5nEjIKFGxv",
-            "Y2FsX2Z1bmRpbmdfYW1vdW50GAQgASgDUhRsb2NhbF9mdW5kaW5nX2Ftb3Vu",
-            "dBIaCghwdXNoX3NhdBgFIAEoA1IIcHVzaF9zYXQSEwoLdGFyZ2V0X2NvbmYY",
-            "BiABKAUSFAoMc2F0X3Blcl9ieXRlGAcgASgDEhgKB3ByaXZhdGUYCCABKAhS",
-            "B3ByaXZhdGUSJAoNbWluX2h0bGNfbXNhdBgJIAEoA1INbWluX2h0bGNfbXNh",
-            "dBIqChByZW1vdGVfY3N2X2RlbGF5GAogASgNUhByZW1vdGVfY3N2X2RlbGF5",
-            "EhwKCW1pbl9jb25mcxgLIAEoBVIJbWluX2NvbmZzEiwKEXNwZW5kX3VuY29u",
-            "ZmlybWVkGAwgASgIUhFzcGVuZF91bmNvbmZpcm1lZCKSAQoQT3BlblN0YXR1",
-            "c1VwZGF0ZRI6CgxjaGFuX3BlbmRpbmcYASABKAsyFC5sbnJwYy5QZW5kaW5n",
-            "VXBkYXRlSABSDGNoYW5fcGVuZGluZxI4CgljaGFuX29wZW4YAyABKAsyGC5s",
-            "bnJwYy5DaGFubmVsT3BlblVwZGF0ZUgAUgljaGFuX29wZW5CCAoGdXBkYXRl",
-            "Is8BCgtQZW5kaW5nSFRMQxIaCghpbmNvbWluZxgBIAEoCFIIaW5jb21pbmcS",
-            "FgoGYW1vdW50GAIgASgDUgZhbW91bnQSGgoIb3V0cG9pbnQYAyABKAlSCG91",
-            "dHBvaW50EigKD21hdHVyaXR5X2hlaWdodBgEIAEoDVIPbWF0dXJpdHlfaGVp",
-            "Z2h0EjAKE2Jsb2Nrc190aWxfbWF0dXJpdHkYBSABKAVSE2Jsb2Nrc190aWxf",
-            "bWF0dXJpdHkSFAoFc3RhZ2UYBiABKA1SBXN0YWdlIhgKFlBlbmRpbmdDaGFu",
-            "bmVsc1JlcXVlc3QinA0KF1BlbmRpbmdDaGFubmVsc1Jlc3BvbnNlEjAKE3Rv",
-            "dGFsX2xpbWJvX2JhbGFuY2UYASABKANSE3RvdGFsX2xpbWJvX2JhbGFuY2US",
-            "ZwoVcGVuZGluZ19vcGVuX2NoYW5uZWxzGAIgAygLMjEubG5ycGMuUGVuZGlu",
-            "Z0NoYW5uZWxzUmVzcG9uc2UuUGVuZGluZ09wZW5DaGFubmVsUhVwZW5kaW5n",
-            "X29wZW5fY2hhbm5lbHMSaAoYcGVuZGluZ19jbG9zaW5nX2NoYW5uZWxzGAMg",
-            "AygLMiwubG5ycGMuUGVuZGluZ0NoYW5uZWxzUmVzcG9uc2UuQ2xvc2VkQ2hh",
-            "bm5lbFIYcGVuZGluZ19jbG9zaW5nX2NoYW5uZWxzEnkKHnBlbmRpbmdfZm9y",
-            "Y2VfY2xvc2luZ19jaGFubmVscxgEIAMoCzIxLmxucnBjLlBlbmRpbmdDaGFu",
-            "bmVsc1Jlc3BvbnNlLkZvcmNlQ2xvc2VkQ2hhbm5lbFIecGVuZGluZ19mb3Jj",
-            "ZV9jbG9zaW5nX2NoYW5uZWxzEmoKFndhaXRpbmdfY2xvc2VfY2hhbm5lbHMY",
-            "BSADKAsyMi5sbnJwYy5QZW5kaW5nQ2hhbm5lbHNSZXNwb25zZS5XYWl0aW5n",
-            "Q2xvc2VDaGFubmVsUhZ3YWl0aW5nX2Nsb3NlX2NoYW5uZWxzGrwCCg5QZW5k",
-            "aW5nQ2hhbm5lbBIoCg9yZW1vdGVfbm9kZV9wdWIYASABKAlSD3JlbW90ZV9u",
-            "b2RlX3B1YhIkCg1jaGFubmVsX3BvaW50GAIgASgJUg1jaGFubmVsX3BvaW50",
-            "EhoKCGNhcGFjaXR5GAMgASgDUghjYXBhY2l0eRIkCg1sb2NhbF9iYWxhbmNl",
-            "GAQgASgDUg1sb2NhbF9iYWxhbmNlEiYKDnJlbW90ZV9iYWxhbmNlGAUgASgD",
-            "Ug5yZW1vdGVfYmFsYW5jZRI2ChZsb2NhbF9jaGFuX3Jlc2VydmVfc2F0GAYg",
-            "ASgDUhZsb2NhbF9jaGFuX3Jlc2VydmVfc2F0EjgKF3JlbW90ZV9jaGFuX3Jl",
-            "c2VydmVfc2F0GAcgASgDUhdyZW1vdGVfY2hhbl9yZXNlcnZlX3NhdBr1AQoS",
-            "UGVuZGluZ09wZW5DaGFubmVsEkcKB2NoYW5uZWwYASABKAsyLS5sbnJwYy5Q",
-            "ZW5kaW5nQ2hhbm5lbHNSZXNwb25zZS5QZW5kaW5nQ2hhbm5lbFIHY2hhbm5l",
-            "bBIwChNjb25maXJtYXRpb25faGVpZ2h0GAIgASgNUhNjb25maXJtYXRpb25f",
-            "aGVpZ2h0Eh4KCmNvbW1pdF9mZWUYBCABKANSCmNvbW1pdF9mZWUSJAoNY29t",
-            "bWl0X3dlaWdodBgFIAEoA1INY29tbWl0X3dlaWdodBIeCgpmZWVfcGVyX2t3",
-            "GAYgASgDUgpmZWVfcGVyX2t3GnsKE1dhaXRpbmdDbG9zZUNoYW5uZWwSPgoH",
+            "b25zGAEgAygLMhIubG5ycGMuVHJhbnNhY3Rpb25SDHRyYW5zYWN0aW9ucyJN",
+            "CghGZWVMaW1pdBIPCgVmaXhlZBgBIAEoA0gAEhQKCmZpeGVkX21zYXQYAyAB",
+            "KANIABIRCgdwZXJjZW50GAIgASgDSABCBwoFbGltaXQi9AMKC1NlbmRSZXF1",
+            "ZXN0EgwKBGRlc3QYASABKAwSFwoLZGVzdF9zdHJpbmcYAiABKAlCAhgBEgsK",
+            "A2FtdBgDIAEoAxIQCghhbXRfbXNhdBgMIAEoAxIUCgxwYXltZW50X2hhc2gY",
+            "BCABKAwSHwoTcGF5bWVudF9oYXNoX3N0cmluZxgFIAEoCUICGAESFwoPcGF5",
+            "bWVudF9yZXF1ZXN0GAYgASgJEhgKEGZpbmFsX2NsdHZfZGVsdGEYByABKAUS",
+            "IgoJZmVlX2xpbWl0GAggASgLMg8ubG5ycGMuRmVlTGltaXQSHAoQb3V0Z29p",
+            "bmdfY2hhbl9pZBgJIAEoBEICMAESFwoPbGFzdF9ob3BfcHVia2V5GA0gASgM",
+            "EhIKCmNsdHZfbGltaXQYCiABKA0SRgoTZGVzdF9jdXN0b21fcmVjb3JkcxgL",
+            "IAMoCzIpLmxucnBjLlNlbmRSZXF1ZXN0LkRlc3RDdXN0b21SZWNvcmRzRW50",
+            "cnkSGgoSYWxsb3dfc2VsZl9wYXltZW50GA4gASgIEigKDWRlc3RfZmVhdHVy",
+            "ZXMYDyADKA4yES5sbnJwYy5GZWF0dXJlQml0GjgKFkRlc3RDdXN0b21SZWNv",
+            "cmRzRW50cnkSCwoDa2V5GAEgASgEEg0KBXZhbHVlGAIgASgMOgI4ASK4AQoM",
+            "U2VuZFJlc3BvbnNlEiQKDXBheW1lbnRfZXJyb3IYASABKAlSDXBheW1lbnRf",
+            "ZXJyb3ISKgoQcGF5bWVudF9wcmVpbWFnZRgCIAEoDFIQcGF5bWVudF9wcmVp",
+            "bWFnZRIyCg1wYXltZW50X3JvdXRlGAMgASgLMgwubG5ycGMuUm91dGVSDXBh",
+            "eW1lbnRfcm91dGUSIgoMcGF5bWVudF9oYXNoGAQgASgMUgxwYXltZW50X2hh",
+            "c2gibgoSU2VuZFRvUm91dGVSZXF1ZXN0EhQKDHBheW1lbnRfaGFzaBgBIAEo",
+            "DBIfChNwYXltZW50X2hhc2hfc3RyaW5nGAIgASgJQgIYARIbCgVyb3V0ZRgE",
+            "IAEoCzIMLmxucnBjLlJvdXRlSgQIAxAEIrUCChRDaGFubmVsQWNjZXB0UmVx",
+            "dWVzdBITCgtub2RlX3B1YmtleRgBIAEoDBISCgpjaGFpbl9oYXNoGAIgASgM",
+            "EhcKD3BlbmRpbmdfY2hhbl9pZBgDIAEoDBITCgtmdW5kaW5nX2FtdBgEIAEo",
+            "BBIQCghwdXNoX2FtdBgFIAEoBBISCgpkdXN0X2xpbWl0GAYgASgEEhsKE21h",
+            "eF92YWx1ZV9pbl9mbGlnaHQYByABKAQSFwoPY2hhbm5lbF9yZXNlcnZlGAgg",
+            "ASgEEhAKCG1pbl9odGxjGAkgASgEEhIKCmZlZV9wZXJfa3cYCiABKAQSEQoJ",
+            "Y3N2X2RlbGF5GAsgASgNEhoKEm1heF9hY2NlcHRlZF9odGxjcxgMIAEoDRIV",
+            "Cg1jaGFubmVsX2ZsYWdzGA0gASgNIkAKFUNoYW5uZWxBY2NlcHRSZXNwb25z",
+            "ZRIOCgZhY2NlcHQYASABKAgSFwoPcGVuZGluZ19jaGFuX2lkGAIgASgMIqIB",
+            "CgxDaGFubmVsUG9pbnQSMAoSZnVuZGluZ190eGlkX2J5dGVzGAEgASgMSABS",
+            "EmZ1bmRpbmdfdHhpZF9ieXRlcxIsChBmdW5kaW5nX3R4aWRfc3RyGAIgASgJ",
+            "SABSEGZ1bmRpbmdfdHhpZF9zdHISIgoMb3V0cHV0X2luZGV4GAMgASgNUgxv",
+            "dXRwdXRfaW5kZXhCDgoMZnVuZGluZ190eGlkImoKCE91dFBvaW50Eh4KCnR4",
+            "aWRfYnl0ZXMYASABKAxSCnR4aWRfYnl0ZXMSGgoIdHhpZF9zdHIYAiABKAlS",
+            "CHR4aWRfc3RyEiIKDG91dHB1dF9pbmRleBgDIAEoDVIMb3V0cHV0X2luZGV4",
+            "Ij4KEExpZ2h0bmluZ0FkZHJlc3MSFgoGcHVia2V5GAEgASgJUgZwdWJrZXkS",
+            "EgoEaG9zdBgCIAEoCVIEaG9zdCKhAQoSRXN0aW1hdGVGZWVSZXF1ZXN0EkEK",
+            "DEFkZHJUb0Ftb3VudBgBIAMoCzIrLmxucnBjLkVzdGltYXRlRmVlUmVxdWVz",
+            "dC5BZGRyVG9BbW91bnRFbnRyeRITCgt0YXJnZXRfY29uZhgCIAEoBRozChFB",
+            "ZGRyVG9BbW91bnRFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAM6",
+            "AjgBImMKE0VzdGltYXRlRmVlUmVzcG9uc2USGAoHZmVlX3NhdBgBIAEoA1IH",
+            "ZmVlX3NhdBIyChRmZWVyYXRlX3NhdF9wZXJfYnl0ZRgCIAEoA1IUZmVlcmF0",
+            "ZV9zYXRfcGVyX2J5dGUisQEKD1NlbmRNYW55UmVxdWVzdBI+CgxBZGRyVG9B",
+            "bW91bnQYASADKAsyKC5sbnJwYy5TZW5kTWFueVJlcXVlc3QuQWRkclRvQW1v",
+            "dW50RW50cnkSEwoLdGFyZ2V0X2NvbmYYAyABKAUSFAoMc2F0X3Blcl9ieXRl",
+            "GAUgASgDGjMKEUFkZHJUb0Ftb3VudEVudHJ5EgsKA2tleRgBIAEoCRINCgV2",
+            "YWx1ZRgCIAEoAzoCOAEiJgoQU2VuZE1hbnlSZXNwb25zZRISCgR0eGlkGAEg",
+            "ASgJUgR0eGlkIm0KEFNlbmRDb2luc1JlcXVlc3QSDAoEYWRkchgBIAEoCRIO",
+            "CgZhbW91bnQYAiABKAMSEwoLdGFyZ2V0X2NvbmYYAyABKAUSFAoMc2F0X3Bl",
+            "cl9ieXRlGAUgASgDEhAKCHNlbmRfYWxsGAYgASgIIicKEVNlbmRDb2luc1Jl",
+            "c3BvbnNlEhIKBHR4aWQYASABKAlSBHR4aWQiOgoSTGlzdFVuc3BlbnRSZXF1",
+            "ZXN0EhEKCW1pbl9jb25mcxgBIAEoBRIRCgltYXhfY29uZnMYAiABKAUiOAoT",
+            "TGlzdFVuc3BlbnRSZXNwb25zZRIhCgV1dHhvcxgBIAMoCzILLmxucnBjLlV0",
+            "eG9SBXV0eG9zIjUKEU5ld0FkZHJlc3NSZXF1ZXN0EiAKBHR5cGUYASABKA4y",
+            "Ei5sbnJwYy5BZGRyZXNzVHlwZSIuChJOZXdBZGRyZXNzUmVzcG9uc2USGAoH",
+            "YWRkcmVzcxgBIAEoCVIHYWRkcmVzcyImChJTaWduTWVzc2FnZVJlcXVlc3QS",
+            "EAoDbXNnGAEgASgMUgNtc2ciMwoTU2lnbk1lc3NhZ2VSZXNwb25zZRIcCglz",
+            "aWduYXR1cmUYASABKAlSCXNpZ25hdHVyZSJGChRWZXJpZnlNZXNzYWdlUmVx",
+            "dWVzdBIQCgNtc2cYASABKAxSA21zZxIcCglzaWduYXR1cmUYAiABKAlSCXNp",
+            "Z25hdHVyZSJFChVWZXJpZnlNZXNzYWdlUmVzcG9uc2USFAoFdmFsaWQYASAB",
+            "KAhSBXZhbGlkEhYKBnB1YmtleRgCIAEoCVIGcHVia2V5IkkKEkNvbm5lY3RQ",
+            "ZWVyUmVxdWVzdBIlCgRhZGRyGAEgASgLMhcubG5ycGMuTGlnaHRuaW5nQWRk",
+            "cmVzcxIMCgRwZXJtGAIgASgIIhUKE0Nvbm5lY3RQZWVyUmVzcG9uc2UiMQoV",
+            "RGlzY29ubmVjdFBlZXJSZXF1ZXN0EhgKB3B1Yl9rZXkYASABKAlSB3B1Yl9r",
+            "ZXkiGAoWRGlzY29ubmVjdFBlZXJSZXNwb25zZSKGAQoESFRMQxIaCghpbmNv",
+            "bWluZxgBIAEoCFIIaW5jb21pbmcSFgoGYW1vdW50GAIgASgDUgZhbW91bnQS",
+            "HAoJaGFzaF9sb2NrGAMgASgMUgloYXNoX2xvY2sSLAoRZXhwaXJhdGlvbl9o",
+            "ZWlnaHQYBCABKA1SEWV4cGlyYXRpb25faGVpZ2h0IsgHCgdDaGFubmVsEhYK",
+            "BmFjdGl2ZRgBIAEoCFIGYWN0aXZlEiQKDXJlbW90ZV9wdWJrZXkYAiABKAlS",
+            "DXJlbW90ZV9wdWJrZXkSJAoNY2hhbm5lbF9wb2ludBgDIAEoCVINY2hhbm5l",
+            "bF9wb2ludBIcCgdjaGFuX2lkGAQgASgEQgIwAVIHY2hhbl9pZBIaCghjYXBh",
+            "Y2l0eRgFIAEoA1IIY2FwYWNpdHkSJAoNbG9jYWxfYmFsYW5jZRgGIAEoA1IN",
+            "bG9jYWxfYmFsYW5jZRImCg5yZW1vdGVfYmFsYW5jZRgHIAEoA1IOcmVtb3Rl",
+            "X2JhbGFuY2USHgoKY29tbWl0X2ZlZRgIIAEoA1IKY29tbWl0X2ZlZRIkCg1j",
+            "b21taXRfd2VpZ2h0GAkgASgDUg1jb21taXRfd2VpZ2h0Eh4KCmZlZV9wZXJf",
+            "a3cYCiABKANSCmZlZV9wZXJfa3cSLAoRdW5zZXR0bGVkX2JhbGFuY2UYCyAB",
+            "KANSEXVuc2V0dGxlZF9iYWxhbmNlEjAKE3RvdGFsX3NhdG9zaGlzX3NlbnQY",
+            "DCABKANSE3RvdGFsX3NhdG9zaGlzX3NlbnQSOAoXdG90YWxfc2F0b3NoaXNf",
+            "cmVjZWl2ZWQYDSABKANSF3RvdGFsX3NhdG9zaGlzX3JlY2VpdmVkEiAKC251",
+            "bV91cGRhdGVzGA4gASgEUgtudW1fdXBkYXRlcxIxCg1wZW5kaW5nX2h0bGNz",
+            "GA8gAygLMgsubG5ycGMuSFRMQ1INcGVuZGluZ19odGxjcxIcCgljc3ZfZGVs",
+            "YXkYECABKA1SCWNzdl9kZWxheRIYCgdwcml2YXRlGBEgASgIUgdwcml2YXRl",
+            "EhwKCWluaXRpYXRvchgSIAEoCFIJaW5pdGlhdG9yEiwKEWNoYW5fc3RhdHVz",
+            "X2ZsYWdzGBMgASgJUhFjaGFuX3N0YXR1c19mbGFncxI2ChZsb2NhbF9jaGFu",
+            "X3Jlc2VydmVfc2F0GBQgASgDUhZsb2NhbF9jaGFuX3Jlc2VydmVfc2F0EjgK",
+            "F3JlbW90ZV9jaGFuX3Jlc2VydmVfc2F0GBUgASgDUhdyZW1vdGVfY2hhbl9y",
+            "ZXNlcnZlX3NhdBIsChFzdGF0aWNfcmVtb3RlX2tleRgWIAEoCFIRc3RhdGlj",
+            "X3JlbW90ZV9rZXkSGgoIbGlmZXRpbWUYFyABKANSCGxpZmV0aW1lEhYKBnVw",
+            "dGltZRgYIAEoA1IGdXB0aW1lEiQKDWNsb3NlX2FkZHJlc3MYGSABKAlSDWNs",
+            "b3NlX2FkZHJlc3MibAoTTGlzdENoYW5uZWxzUmVxdWVzdBITCgthY3RpdmVf",
+            "b25seRgBIAEoCBIVCg1pbmFjdGl2ZV9vbmx5GAIgASgIEhMKC3B1YmxpY19v",
+            "bmx5GAMgASgIEhQKDHByaXZhdGVfb25seRgEIAEoCCJCChRMaXN0Q2hhbm5l",
+            "bHNSZXNwb25zZRIqCghjaGFubmVscxgLIAMoCzIOLmxucnBjLkNoYW5uZWxS",
+            "CGNoYW5uZWxzIroEChNDaGFubmVsQ2xvc2VTdW1tYXJ5EiQKDWNoYW5uZWxf",
+            "cG9pbnQYASABKAlSDWNoYW5uZWxfcG9pbnQSHAoHY2hhbl9pZBgCIAEoBEIC",
+            "MAFSB2NoYW5faWQSHgoKY2hhaW5faGFzaBgDIAEoCVIKY2hhaW5faGFzaBIo",
+            "Cg9jbG9zaW5nX3R4X2hhc2gYBCABKAlSD2Nsb3NpbmdfdHhfaGFzaBIkCg1y",
+            "ZW1vdGVfcHVia2V5GAUgASgJUg1yZW1vdGVfcHVia2V5EhoKCGNhcGFjaXR5",
+            "GAYgASgDUghjYXBhY2l0eRIiCgxjbG9zZV9oZWlnaHQYByABKA1SDGNsb3Nl",
+            "X2hlaWdodBIoCg9zZXR0bGVkX2JhbGFuY2UYCCABKANSD3NldHRsZWRfYmFs",
+            "YW5jZRIwChN0aW1lX2xvY2tlZF9iYWxhbmNlGAkgASgDUhN0aW1lX2xvY2tl",
+            "ZF9iYWxhbmNlEkYKCmNsb3NlX3R5cGUYCiABKA4yJi5sbnJwYy5DaGFubmVs",
+            "Q2xvc2VTdW1tYXJ5LkNsb3N1cmVUeXBlUgpjbG9zZV90eXBlIooBCgtDbG9z",
+            "dXJlVHlwZRIVChFDT09QRVJBVElWRV9DTE9TRRAAEhUKEUxPQ0FMX0ZPUkNF",
+            "X0NMT1NFEAESFgoSUkVNT1RFX0ZPUkNFX0NMT1NFEAISEAoMQlJFQUNIX0NM",
+            "T1NFEAMSFAoQRlVORElOR19DQU5DRUxFRBAEEg0KCUFCQU5ET05FRBAFIpQB",
+            "ChVDbG9zZWRDaGFubmVsc1JlcXVlc3QSEwoLY29vcGVyYXRpdmUYASABKAgS",
+            "EwoLbG9jYWxfZm9yY2UYAiABKAgSFAoMcmVtb3RlX2ZvcmNlGAMgASgIEg4K",
+            "BmJyZWFjaBgEIAEoCBIYChBmdW5kaW5nX2NhbmNlbGVkGAUgASgIEhEKCWFi",
+            "YW5kb25lZBgGIAEoCCJQChZDbG9zZWRDaGFubmVsc1Jlc3BvbnNlEjYKCGNo",
+            "YW5uZWxzGAEgAygLMhoubG5ycGMuQ2hhbm5lbENsb3NlU3VtbWFyeVIIY2hh",
+            "bm5lbHMi1wMKBFBlZXISGAoHcHViX2tleRgBIAEoCVIHcHViX2tleRIYCgdh",
+            "ZGRyZXNzGAMgASgJUgdhZGRyZXNzEh4KCmJ5dGVzX3NlbnQYBCABKARSCmJ5",
+            "dGVzX3NlbnQSHgoKYnl0ZXNfcmVjdhgFIAEoBFIKYnl0ZXNfcmVjdhIaCghz",
+            "YXRfc2VudBgGIAEoA1IIc2F0X3NlbnQSGgoIc2F0X3JlY3YYByABKANSCHNh",
+            "dF9yZWN2EhgKB2luYm91bmQYCCABKAhSB2luYm91bmQSHAoJcGluZ190aW1l",
+            "GAkgASgDUglwaW5nX3RpbWUSMgoJc3luY190eXBlGAogASgOMhQubG5ycGMu",
+            "UGVlci5TeW5jVHlwZVIJc3luY190eXBlEjUKCGZlYXR1cmVzGAsgAygLMhku",
+            "bG5ycGMuUGVlci5GZWF0dXJlc0VudHJ5UghmZWF0dXJlcxo/Cg1GZWF0dXJl",
+            "c0VudHJ5EgsKA2tleRgBIAEoDRIdCgV2YWx1ZRgCIAEoCzIOLmxucnBjLkZl",
+            "YXR1cmU6AjgBIj8KCFN5bmNUeXBlEhAKDFVOS05PV05fU1lOQxAAEg8KC0FD",
+            "VElWRV9TWU5DEAESEAoMUEFTU0lWRV9TWU5DEAIiEgoQTGlzdFBlZXJzUmVx",
+            "dWVzdCI2ChFMaXN0UGVlcnNSZXNwb25zZRIhCgVwZWVycxgBIAMoCzILLmxu",
+            "cnBjLlBlZXJSBXBlZXJzIhcKFVBlZXJFdmVudFN1YnNjcmlwdGlvbiKFAQoJ",
+            "UGVlckV2ZW50EhgKB3B1Yl9rZXkYASABKAlSB3B1Yl9rZXkSLgoEdHlwZRgC",
+            "IAEoDjIaLmxucnBjLlBlZXJFdmVudC5FdmVudFR5cGVSBHR5cGUiLgoJRXZl",
+            "bnRUeXBlEg8KC1BFRVJfT05MSU5FEAASEAoMUEVFUl9PRkZMSU5FEAEiEAoO",
+            "R2V0SW5mb1JlcXVlc3Qi6gUKD0dldEluZm9SZXNwb25zZRIYCgd2ZXJzaW9u",
+            "GA4gASgJUgd2ZXJzaW9uEigKD2lkZW50aXR5X3B1YmtleRgBIAEoCVIPaWRl",
+            "bnRpdHlfcHVia2V5EhQKBWFsaWFzGAIgASgJUgVhbGlhcxIUCgVjb2xvchgR",
+            "IAEoCVIFY29sb3ISMgoUbnVtX3BlbmRpbmdfY2hhbm5lbHMYAyABKA1SFG51",
+            "bV9wZW5kaW5nX2NoYW5uZWxzEjAKE251bV9hY3RpdmVfY2hhbm5lbHMYBCAB",
+            "KA1SE251bV9hY3RpdmVfY2hhbm5lbHMSNAoVbnVtX2luYWN0aXZlX2NoYW5u",
+            "ZWxzGA8gASgNUhVudW1faW5hY3RpdmVfY2hhbm5lbHMSHAoJbnVtX3BlZXJz",
+            "GAUgASgNUgludW1fcGVlcnMSIgoMYmxvY2tfaGVpZ2h0GAYgASgNUgxibG9j",
+            "a19oZWlnaHQSHgoKYmxvY2tfaGFzaBgIIAEoCVIKYmxvY2tfaGFzaBI0ChVi",
+            "ZXN0X2hlYWRlcl90aW1lc3RhbXAYDSABKANSFWJlc3RfaGVhZGVyX3RpbWVz",
+            "dGFtcBIoCg9zeW5jZWRfdG9fY2hhaW4YCSABKAhSD3N5bmNlZF90b19jaGFp",
+            "bhIoCg9zeW5jZWRfdG9fZ3JhcGgYEiABKAhSD3N5bmNlZF90b19ncmFwaBIc",
+            "Cgd0ZXN0bmV0GAogASgIQgIYAVIHdGVzdG5ldBIkCgZjaGFpbnMYECADKAsy",
+            "DC5sbnJwYy5DaGFpblIGY2hhaW5zEhIKBHVyaXMYDCADKAlSBHVyaXMSQAoI",
+            "ZmVhdHVyZXMYEyADKAsyJC5sbnJwYy5HZXRJbmZvUmVzcG9uc2UuRmVhdHVy",
+            "ZXNFbnRyeVIIZmVhdHVyZXMaPwoNRmVhdHVyZXNFbnRyeRILCgNrZXkYASAB",
+            "KA0SHQoFdmFsdWUYAiABKAsyDi5sbnJwYy5GZWF0dXJlOgI4AUoECAsQDCI3",
+            "CgVDaGFpbhIUCgVjaGFpbhgBIAEoCVIFY2hhaW4SGAoHbmV0d29yaxgCIAEo",
+            "CVIHbmV0d29yayJVChJDb25maXJtYXRpb25VcGRhdGUSEQoJYmxvY2tfc2hh",
+            "GAEgASgMEhQKDGJsb2NrX2hlaWdodBgCIAEoBRIWCg5udW1fY29uZnNfbGVm",
+            "dBgDIAEoDSJOChFDaGFubmVsT3BlblVwZGF0ZRI5Cg1jaGFubmVsX3BvaW50",
+            "GAEgASgLMhMubG5ycGMuQ2hhbm5lbFBvaW50Ug1jaGFubmVsX3BvaW50IlIK",
+            "EkNoYW5uZWxDbG9zZVVwZGF0ZRIiCgxjbG9zaW5nX3R4aWQYASABKAxSDGNs",
+            "b3NpbmdfdHhpZBIYCgdzdWNjZXNzGAIgASgIUgdzdWNjZXNzIqcBChNDbG9z",
+            "ZUNoYW5uZWxSZXF1ZXN0EioKDWNoYW5uZWxfcG9pbnQYASABKAsyEy5sbnJw",
+            "Yy5DaGFubmVsUG9pbnQSDQoFZm9yY2UYAiABKAgSEwoLdGFyZ2V0X2NvbmYY",
+            "AyABKAUSFAoMc2F0X3Blcl9ieXRlGAQgASgDEioKEGRlbGl2ZXJ5X2FkZHJl",
+            "c3MYBSABKAlSEGRlbGl2ZXJ5X2FkZHJlc3MimAEKEUNsb3NlU3RhdHVzVXBk",
+            "YXRlEjwKDWNsb3NlX3BlbmRpbmcYASABKAsyFC5sbnJwYy5QZW5kaW5nVXBk",
+            "YXRlSABSDWNsb3NlX3BlbmRpbmcSOwoKY2hhbl9jbG9zZRgDIAEoCzIZLmxu",
+            "cnBjLkNoYW5uZWxDbG9zZVVwZGF0ZUgAUgpjaGFuX2Nsb3NlQggKBnVwZGF0",
+            "ZSJHCg1QZW5kaW5nVXBkYXRlEhIKBHR4aWQYASABKAxSBHR4aWQSIgoMb3V0",
+            "cHV0X2luZGV4GAIgASgNUgxvdXRwdXRfaW5kZXgi+wMKEk9wZW5DaGFubmVs",
+            "UmVxdWVzdBIgCgtub2RlX3B1YmtleRgCIAEoDFILbm9kZV9wdWJrZXkSMgoS",
+            "bm9kZV9wdWJrZXlfc3RyaW5nGAMgASgJQgIYAVISbm9kZV9wdWJrZXlfc3Ry",
+            "aW5nEjIKFGxvY2FsX2Z1bmRpbmdfYW1vdW50GAQgASgDUhRsb2NhbF9mdW5k",
+            "aW5nX2Ftb3VudBIaCghwdXNoX3NhdBgFIAEoA1IIcHVzaF9zYXQSEwoLdGFy",
+            "Z2V0X2NvbmYYBiABKAUSFAoMc2F0X3Blcl9ieXRlGAcgASgDEhgKB3ByaXZh",
+            "dGUYCCABKAhSB3ByaXZhdGUSJAoNbWluX2h0bGNfbXNhdBgJIAEoA1INbWlu",
+            "X2h0bGNfbXNhdBIqChByZW1vdGVfY3N2X2RlbGF5GAogASgNUhByZW1vdGVf",
+            "Y3N2X2RlbGF5EhwKCW1pbl9jb25mcxgLIAEoBVIJbWluX2NvbmZzEiwKEXNw",
+            "ZW5kX3VuY29uZmlybWVkGAwgASgIUhFzcGVuZF91bmNvbmZpcm1lZBIkCg1j",
+            "bG9zZV9hZGRyZXNzGA0gASgJUg1jbG9zZV9hZGRyZXNzEjYKDGZ1bmRpbmdf",
+            "c2hpbRgOIAEoCzISLmxucnBjLkZ1bmRpbmdTaGltUgxmdW5kaW5nX3NoaW0i",
+            "vAEKEE9wZW5TdGF0dXNVcGRhdGUSOgoMY2hhbl9wZW5kaW5nGAEgASgLMhQu",
+            "bG5ycGMuUGVuZGluZ1VwZGF0ZUgAUgxjaGFuX3BlbmRpbmcSOAoJY2hhbl9v",
+            "cGVuGAMgASgLMhgubG5ycGMuQ2hhbm5lbE9wZW5VcGRhdGVIAFIJY2hhbl9v",
+            "cGVuEigKD3BlbmRpbmdfY2hhbl9pZBgEIAEoDFIPcGVuZGluZ19jaGFuX2lk",
+            "QggKBnVwZGF0ZSIzCgpLZXlMb2NhdG9yEhIKCmtleV9mYW1pbHkYASABKAUS",
+            "EQoJa2V5X2luZGV4GAIgASgFIkoKDUtleURlc2NyaXB0b3ISFQoNcmF3X2tl",
+            "eV9ieXRlcxgBIAEoDBIiCgdrZXlfbG9jGAIgASgLMhEubG5ycGMuS2V5TG9j",
+            "YXRvciKbAQoNQ2hhblBvaW50U2hpbRILCgNhbXQYASABKAMSJwoKY2hhbl9w",
+            "b2ludBgCIAEoCzITLmxucnBjLkNoYW5uZWxQb2ludBInCglsb2NhbF9rZXkY",
+            "AyABKAsyFC5sbnJwYy5LZXlEZXNjcmlwdG9yEhIKCnJlbW90ZV9rZXkYBCAB",
+            "KAwSFwoPcGVuZGluZ19jaGFuX2lkGAUgASgMIkYKC0Z1bmRpbmdTaGltEi8K",
+            "D2NoYW5fcG9pbnRfc2hpbRgBIAEoCzIULmxucnBjLkNoYW5Qb2ludFNoaW1I",
+            "AEIGCgRzaGltIiwKEUZ1bmRpbmdTaGltQ2FuY2VsEhcKD3BlbmRpbmdfY2hh",
+            "bl9pZBgBIAEoDCJ/ChRGdW5kaW5nVHJhbnNpdGlvbk1zZxIrCg1zaGltX3Jl",
+            "Z2lzdGVyGAEgASgLMhIubG5ycGMuRnVuZGluZ1NoaW1IABIvCgtzaGltX2Nh",
+            "bmNlbBgCIAEoCzIYLmxucnBjLkZ1bmRpbmdTaGltQ2FuY2VsSABCCQoHdHJp",
+            "Z2dlciIWChRGdW5kaW5nU3RhdGVTdGVwUmVzcCLPAQoLUGVuZGluZ0hUTEMS",
+            "GgoIaW5jb21pbmcYASABKAhSCGluY29taW5nEhYKBmFtb3VudBgCIAEoA1IG",
+            "YW1vdW50EhoKCG91dHBvaW50GAMgASgJUghvdXRwb2ludBIoCg9tYXR1cml0",
+            "eV9oZWlnaHQYBCABKA1SD21hdHVyaXR5X2hlaWdodBIwChNibG9ja3NfdGls",
+            "X21hdHVyaXR5GAUgASgFUhNibG9ja3NfdGlsX21hdHVyaXR5EhQKBXN0YWdl",
+            "GAYgASgNUgVzdGFnZSIYChZQZW5kaW5nQ2hhbm5lbHNSZXF1ZXN0IpwNChdQ",
+            "ZW5kaW5nQ2hhbm5lbHNSZXNwb25zZRIwChN0b3RhbF9saW1ib19iYWxhbmNl",
+            "GAEgASgDUhN0b3RhbF9saW1ib19iYWxhbmNlEmcKFXBlbmRpbmdfb3Blbl9j",
+            "aGFubmVscxgCIAMoCzIxLmxucnBjLlBlbmRpbmdDaGFubmVsc1Jlc3BvbnNl",
+            "LlBlbmRpbmdPcGVuQ2hhbm5lbFIVcGVuZGluZ19vcGVuX2NoYW5uZWxzEmgK",
+            "GHBlbmRpbmdfY2xvc2luZ19jaGFubmVscxgDIAMoCzIsLmxucnBjLlBlbmRp",
+            "bmdDaGFubmVsc1Jlc3BvbnNlLkNsb3NlZENoYW5uZWxSGHBlbmRpbmdfY2xv",
+            "c2luZ19jaGFubmVscxJ5Ch5wZW5kaW5nX2ZvcmNlX2Nsb3NpbmdfY2hhbm5l",
+            "bHMYBCADKAsyMS5sbnJwYy5QZW5kaW5nQ2hhbm5lbHNSZXNwb25zZS5Gb3Jj",
+            "ZUNsb3NlZENoYW5uZWxSHnBlbmRpbmdfZm9yY2VfY2xvc2luZ19jaGFubmVs",
+            "cxJqChZ3YWl0aW5nX2Nsb3NlX2NoYW5uZWxzGAUgAygLMjIubG5ycGMuUGVu",
+            "ZGluZ0NoYW5uZWxzUmVzcG9uc2UuV2FpdGluZ0Nsb3NlQ2hhbm5lbFIWd2Fp",
+            "dGluZ19jbG9zZV9jaGFubmVscxq8AgoOUGVuZGluZ0NoYW5uZWwSKAoPcmVt",
+            "b3RlX25vZGVfcHViGAEgASgJUg9yZW1vdGVfbm9kZV9wdWISJAoNY2hhbm5l",
+            "bF9wb2ludBgCIAEoCVINY2hhbm5lbF9wb2ludBIaCghjYXBhY2l0eRgDIAEo",
+            "A1IIY2FwYWNpdHkSJAoNbG9jYWxfYmFsYW5jZRgEIAEoA1INbG9jYWxfYmFs",
+            "YW5jZRImCg5yZW1vdGVfYmFsYW5jZRgFIAEoA1IOcmVtb3RlX2JhbGFuY2US",
+            "NgoWbG9jYWxfY2hhbl9yZXNlcnZlX3NhdBgGIAEoA1IWbG9jYWxfY2hhbl9y",
+            "ZXNlcnZlX3NhdBI4ChdyZW1vdGVfY2hhbl9yZXNlcnZlX3NhdBgHIAEoA1IX",
+            "cmVtb3RlX2NoYW5fcmVzZXJ2ZV9zYXQa9QEKElBlbmRpbmdPcGVuQ2hhbm5l",
+            "bBJHCgdjaGFubmVsGAEgASgLMi0ubG5ycGMuUGVuZGluZ0NoYW5uZWxzUmVz",
+            "cG9uc2UuUGVuZGluZ0NoYW5uZWxSB2NoYW5uZWwSMAoTY29uZmlybWF0aW9u",
+            "X2hlaWdodBgCIAEoDVITY29uZmlybWF0aW9uX2hlaWdodBIeCgpjb21taXRf",
+            "ZmVlGAQgASgDUgpjb21taXRfZmVlEiQKDWNvbW1pdF93ZWlnaHQYBSABKANS",
+            "DWNvbW1pdF93ZWlnaHQSHgoKZmVlX3Blcl9rdxgGIAEoA1IKZmVlX3Blcl9r",
+            "dxp7ChNXYWl0aW5nQ2xvc2VDaGFubmVsEj4KB2NoYW5uZWwYASABKAsyLS5s",
+            "bnJwYy5QZW5kaW5nQ2hhbm5lbHNSZXNwb25zZS5QZW5kaW5nQ2hhbm5lbBIk",
+            "Cg1saW1ib19iYWxhbmNlGAIgASgDUg1saW1ib19iYWxhbmNlGnMKDUNsb3Nl",
+            "ZENoYW5uZWwSPgoHY2hhbm5lbBgBIAEoCzItLmxucnBjLlBlbmRpbmdDaGFu",
+            "bmVsc1Jlc3BvbnNlLlBlbmRpbmdDaGFubmVsEiIKDGNsb3NpbmdfdHhpZBgC",
+            "IAEoCVIMY2xvc2luZ190eGlkGusCChJGb3JjZUNsb3NlZENoYW5uZWwSRwoH",
             "Y2hhbm5lbBgBIAEoCzItLmxucnBjLlBlbmRpbmdDaGFubmVsc1Jlc3BvbnNl",
-            "LlBlbmRpbmdDaGFubmVsEiQKDWxpbWJvX2JhbGFuY2UYAiABKANSDWxpbWJv",
-            "X2JhbGFuY2UacwoNQ2xvc2VkQ2hhbm5lbBI+CgdjaGFubmVsGAEgASgLMi0u",
-            "bG5ycGMuUGVuZGluZ0NoYW5uZWxzUmVzcG9uc2UuUGVuZGluZ0NoYW5uZWwS",
-            "IgoMY2xvc2luZ190eGlkGAIgASgJUgxjbG9zaW5nX3R4aWQa6wIKEkZvcmNl",
-            "Q2xvc2VkQ2hhbm5lbBJHCgdjaGFubmVsGAEgASgLMi0ubG5ycGMuUGVuZGlu",
-            "Z0NoYW5uZWxzUmVzcG9uc2UuUGVuZGluZ0NoYW5uZWxSB2NoYW5uZWwSIgoM",
-            "Y2xvc2luZ190eGlkGAIgASgJUgxjbG9zaW5nX3R4aWQSJAoNbGltYm9fYmFs",
-            "YW5jZRgDIAEoA1INbGltYm9fYmFsYW5jZRIoCg9tYXR1cml0eV9oZWlnaHQY",
-            "BCABKA1SD21hdHVyaXR5X2hlaWdodBIwChNibG9ja3NfdGlsX21hdHVyaXR5",
-            "GAUgASgFUhNibG9ja3NfdGlsX21hdHVyaXR5EiwKEXJlY292ZXJlZF9iYWxh",
-            "bmNlGAYgASgDUhFyZWNvdmVyZWRfYmFsYW5jZRI4Cg1wZW5kaW5nX2h0bGNz",
-            "GAggAygLMhIubG5ycGMuUGVuZGluZ0hUTENSDXBlbmRpbmdfaHRsY3MiGgoY",
-            "Q2hhbm5lbEV2ZW50U3Vic2NyaXB0aW9uIrUDChJDaGFubmVsRXZlbnRVcGRh",
-            "dGUSNAoMb3Blbl9jaGFubmVsGAEgASgLMg4ubG5ycGMuQ2hhbm5lbEgAUgxv",
-            "cGVuX2NoYW5uZWwSRAoOY2xvc2VkX2NoYW5uZWwYAiABKAsyGi5sbnJwYy5D",
-            "aGFubmVsQ2xvc2VTdW1tYXJ5SABSDmNsb3NlZF9jaGFubmVsEj0KDmFjdGl2",
-            "ZV9jaGFubmVsGAMgASgLMhMubG5ycGMuQ2hhbm5lbFBvaW50SABSDmFjdGl2",
-            "ZV9jaGFubmVsEkEKEGluYWN0aXZlX2NoYW5uZWwYBCABKAsyEy5sbnJwYy5D",
-            "aGFubmVsUG9pbnRIAFIQaW5hY3RpdmVfY2hhbm5lbBI4CgR0eXBlGAUgASgO",
-            "MiQubG5ycGMuQ2hhbm5lbEV2ZW50VXBkYXRlLlVwZGF0ZVR5cGVSBHR5cGUi",
-            "XAoKVXBkYXRlVHlwZRIQCgxPUEVOX0NIQU5ORUwQABISCg5DTE9TRURfQ0hB",
-            "Tk5FTBABEhIKDkFDVElWRV9DSEFOTkVMEAISFAoQSU5BQ1RJVkVfQ0hBTk5F",
-            "TBADQgkKB2NoYW5uZWwiFgoUV2FsbGV0QmFsYW5jZVJlcXVlc3QinQEKFVdh",
-            "bGxldEJhbGFuY2VSZXNwb25zZRIkCg10b3RhbF9iYWxhbmNlGAEgASgDUg10",
-            "b3RhbF9iYWxhbmNlEiwKEWNvbmZpcm1lZF9iYWxhbmNlGAIgASgDUhFjb25m",
-            "aXJtZWRfYmFsYW5jZRIwChN1bmNvbmZpcm1lZF9iYWxhbmNlGAMgASgDUhN1",
-            "bmNvbmZpcm1lZF9iYWxhbmNlIhcKFUNoYW5uZWxCYWxhbmNlUmVxdWVzdCJm",
-            "ChZDaGFubmVsQmFsYW5jZVJlc3BvbnNlEhgKB2JhbGFuY2UYASABKANSB2Jh",
-            "bGFuY2USMgoUcGVuZGluZ19vcGVuX2JhbGFuY2UYAiABKANSFHBlbmRpbmdf",
-            "b3Blbl9iYWxhbmNlIq0CChJRdWVyeVJvdXRlc1JlcXVlc3QSDwoHcHViX2tl",
-            "eRgBIAEoCRILCgNhbXQYAiABKAMSGAoQZmluYWxfY2x0dl9kZWx0YRgEIAEo",
-            "BRIiCglmZWVfbGltaXQYBSABKAsyDy5sbnJwYy5GZWVMaW1pdBIVCg1pZ25v",
-            "cmVkX25vZGVzGAYgAygMEi0KDWlnbm9yZWRfZWRnZXMYByADKAsyEi5sbnJw",
-            "Yy5FZGdlTG9jYXRvckICGAESFgoOc291cmNlX3B1Yl9rZXkYCCABKAkSGwoT",
-            "dXNlX21pc3Npb25fY29udHJvbBgJIAEoCBImCg1pZ25vcmVkX3BhaXJzGAog",
-            "AygLMg8ubG5ycGMuTm9kZVBhaXISEgoKY2x0dl9saW1pdBgLIAEoDUoECAMQ",
-            "BCIkCghOb2RlUGFpchIMCgRmcm9tGAEgASgMEgoKAnRvGAIgASgMIkAKC0Vk",
-            "Z2VMb2NhdG9yEhYKCmNoYW5uZWxfaWQYASABKARCAjABEhkKEWRpcmVjdGlv",
-            "bl9yZXZlcnNlGAIgASgIIl8KE1F1ZXJ5Um91dGVzUmVzcG9uc2USJAoGcm91",
-            "dGVzGAEgAygLMgwubG5ycGMuUm91dGVSBnJvdXRlcxIiCgxzdWNjZXNzX3By",
-            "b2IYAiABKAFSDHN1Y2Nlc3NfcHJvYiKtAgoDSG9wEhwKB2NoYW5faWQYASAB",
-            "KARCAjABUgdjaGFuX2lkEiQKDWNoYW5fY2FwYWNpdHkYAiABKANSDWNoYW5f",
-            "Y2FwYWNpdHkSKgoOYW10X3RvX2ZvcndhcmQYAyABKANCAhgBUg5hbXRfdG9f",
-            "Zm9yd2FyZBIUCgNmZWUYBCABKANCAhgBUgNmZWUSFgoGZXhwaXJ5GAUgASgN",
-            "UgZleHBpcnkSMAoTYW10X3RvX2ZvcndhcmRfbXNhdBgGIAEoA1ITYW10X3Rv",
-            "X2ZvcndhcmRfbXNhdBIaCghmZWVfbXNhdBgHIAEoA1IIZmVlX21zYXQSGAoH",
-            "cHViX2tleRgIIAEoCVIHcHViX2tleRIgCgt0bHZfcGF5bG9hZBgJIAEoCFIL",
-            "dGx2X3BheWxvYWQi6QEKBVJvdXRlEigKD3RvdGFsX3RpbWVfbG9jaxgBIAEo",
-            "DVIPdG90YWxfdGltZV9sb2NrEiIKCnRvdGFsX2ZlZXMYAiABKANCAhgBUgp0",
-            "b3RhbF9mZWVzEiAKCXRvdGFsX2FtdBgDIAEoA0ICGAFSCXRvdGFsX2FtdBIe",
-            "CgRob3BzGAQgAygLMgoubG5ycGMuSG9wUgRob3BzEigKD3RvdGFsX2ZlZXNf",
-            "bXNhdBgFIAEoA1IPdG90YWxfZmVlc19tc2F0EiYKDnRvdGFsX2FtdF9tc2F0",
-            "GAYgASgDUg50b3RhbF9hbXRfbXNhdCI8Cg9Ob2RlSW5mb1JlcXVlc3QSDwoH",
-            "cHViX2tleRgBIAEoCRIYChBpbmNsdWRlX2NoYW5uZWxzGAIgASgIIrABCghO",
-            "b2RlSW5mbxIoCgRub2RlGAEgASgLMhQubG5ycGMuTGlnaHRuaW5nTm9kZVIE",
-            "bm9kZRIiCgxudW1fY2hhbm5lbHMYAiABKA1SDG51bV9jaGFubmVscxImCg50",
-            "b3RhbF9jYXBhY2l0eRgDIAEoA1IOdG90YWxfY2FwYWNpdHkSLgoIY2hhbm5l",
-            "bHMYBCADKAsyEi5sbnJwYy5DaGFubmVsRWRnZVIIY2hhbm5lbHMiqQEKDUxp",
-            "Z2h0bmluZ05vZGUSIAoLbGFzdF91cGRhdGUYASABKA1SC2xhc3RfdXBkYXRl",
-            "EhgKB3B1Yl9rZXkYAiABKAlSB3B1Yl9rZXkSFAoFYWxpYXMYAyABKAlSBWFs",
-            "aWFzEjAKCWFkZHJlc3NlcxgEIAMoCzISLmxucnBjLk5vZGVBZGRyZXNzUglh",
-            "ZGRyZXNzZXMSFAoFY29sb3IYBSABKAlSBWNvbG9yIjsKC05vZGVBZGRyZXNz",
-            "EhgKB25ldHdvcmsYASABKAlSB25ldHdvcmsSEgoEYWRkchgCIAEoCVIEYWRk",
-            "ciKRAgoNUm91dGluZ1BvbGljeRIoCg90aW1lX2xvY2tfZGVsdGEYASABKA1S",
-            "D3RpbWVfbG9ja19kZWx0YRIaCghtaW5faHRsYxgCIAEoA1IIbWluX2h0bGMS",
-            "JAoNZmVlX2Jhc2VfbXNhdBgDIAEoA1INZmVlX2Jhc2VfbXNhdBIwChNmZWVf",
-            "cmF0ZV9taWxsaV9tc2F0GAQgASgDUhNmZWVfcmF0ZV9taWxsaV9tc2F0EhoK",
-            "CGRpc2FibGVkGAUgASgIUghkaXNhYmxlZBIkCg1tYXhfaHRsY19tc2F0GAYg",
-            "ASgEUg1tYXhfaHRsY19tc2F0EiAKC2xhc3RfdXBkYXRlGAcgASgNUgtsYXN0",
-            "X3VwZGF0ZSLDAgoLQ2hhbm5lbEVkZ2USIgoKY2hhbm5lbF9pZBgBIAEoBEIC",
-            "MAFSCmNoYW5uZWxfaWQSHgoKY2hhbl9wb2ludBgCIAEoCVIKY2hhbl9wb2lu",
-            "dBIkCgtsYXN0X3VwZGF0ZRgDIAEoDUICGAFSC2xhc3RfdXBkYXRlEhwKCW5v",
-            "ZGUxX3B1YhgEIAEoCVIJbm9kZTFfcHViEhwKCW5vZGUyX3B1YhgFIAEoCVIJ",
-            "bm9kZTJfcHViEhoKCGNhcGFjaXR5GAYgASgDUghjYXBhY2l0eRI4Cgxub2Rl",
-            "MV9wb2xpY3kYByABKAsyFC5sbnJwYy5Sb3V0aW5nUG9saWN5Ugxub2RlMV9w",
-            "b2xpY3kSOAoMbm9kZTJfcG9saWN5GAggASgLMhQubG5ycGMuUm91dGluZ1Bv",
-            "bGljeVIMbm9kZTJfcG9saWN5IkcKE0NoYW5uZWxHcmFwaFJlcXVlc3QSMAoT",
-            "aW5jbHVkZV91bmFubm91bmNlZBgBIAEoCFITaW5jbHVkZV91bmFubm91bmNl",
-            "ZCJkCgxDaGFubmVsR3JhcGgSKgoFbm9kZXMYASADKAsyFC5sbnJwYy5MaWdo",
-            "dG5pbmdOb2RlUgVub2RlcxIoCgVlZGdlcxgCIAMoCzISLmxucnBjLkNoYW5u",
-            "ZWxFZGdlUgVlZGdlcyImCg9DaGFuSW5mb1JlcXVlc3QSEwoHY2hhbl9pZBgB",
-            "IAEoBEICMAEiFAoSTmV0d29ya0luZm9SZXF1ZXN0IukDCgtOZXR3b3JrSW5m",
-            "bxImCg5ncmFwaF9kaWFtZXRlchgBIAEoDVIOZ3JhcGhfZGlhbWV0ZXISJgoO",
-            "YXZnX291dF9kZWdyZWUYAiABKAFSDmF2Z19vdXRfZGVncmVlEiYKDm1heF9v",
-            "dXRfZGVncmVlGAMgASgNUg5tYXhfb3V0X2RlZ3JlZRIcCgludW1fbm9kZXMY",
-            "BCABKA1SCW51bV9ub2RlcxIiCgxudW1fY2hhbm5lbHMYBSABKA1SDG51bV9j",
-            "aGFubmVscxI2ChZ0b3RhbF9uZXR3b3JrX2NhcGFjaXR5GAYgASgDUhZ0b3Rh",
-            "bF9uZXR3b3JrX2NhcGFjaXR5EioKEGF2Z19jaGFubmVsX3NpemUYByABKAFS",
-            "EGF2Z19jaGFubmVsX3NpemUSKgoQbWluX2NoYW5uZWxfc2l6ZRgIIAEoA1IQ",
-            "bWluX2NoYW5uZWxfc2l6ZRIqChBtYXhfY2hhbm5lbF9zaXplGAkgASgDUhBt",
-            "YXhfY2hhbm5lbF9zaXplEjgKF21lZGlhbl9jaGFubmVsX3NpemVfc2F0GAog",
-            "ASgDUhdtZWRpYW5fY2hhbm5lbF9zaXplX3NhdBIqChBudW1fem9tYmllX2No",
-            "YW5zGAsgASgEUhBudW1fem9tYmllX2NoYW5zIg0KC1N0b3BSZXF1ZXN0Ig4K",
-            "DFN0b3BSZXNwb25zZSIbChlHcmFwaFRvcG9sb2d5U3Vic2NyaXB0aW9uIqMB",
-            "ChNHcmFwaFRvcG9sb2d5VXBkYXRlEicKDG5vZGVfdXBkYXRlcxgBIAMoCzIR",
-            "LmxucnBjLk5vZGVVcGRhdGUSMQoPY2hhbm5lbF91cGRhdGVzGAIgAygLMhgu",
-            "bG5ycGMuQ2hhbm5lbEVkZ2VVcGRhdGUSMAoMY2xvc2VkX2NoYW5zGAMgAygL",
-            "MhoubG5ycGMuQ2xvc2VkQ2hhbm5lbFVwZGF0ZSJsCgpOb2RlVXBkYXRlEhEK",
-            "CWFkZHJlc3NlcxgBIAMoCRIUCgxpZGVudGl0eV9rZXkYAiABKAkSFwoPZ2xv",
-            "YmFsX2ZlYXR1cmVzGAMgASgMEg0KBWFsaWFzGAQgASgJEg0KBWNvbG9yGAUg",
-            "ASgJIsQBChFDaGFubmVsRWRnZVVwZGF0ZRITCgdjaGFuX2lkGAEgASgEQgIw",
-            "ARInCgpjaGFuX3BvaW50GAIgASgLMhMubG5ycGMuQ2hhbm5lbFBvaW50EhAK",
-            "CGNhcGFjaXR5GAMgASgDEiwKDnJvdXRpbmdfcG9saWN5GAQgASgLMhQubG5y",
-            "cGMuUm91dGluZ1BvbGljeRIYChBhZHZlcnRpc2luZ19ub2RlGAUgASgJEhcK",
-            "D2Nvbm5lY3Rpbmdfbm9kZRgGIAEoCSJ8ChNDbG9zZWRDaGFubmVsVXBkYXRl",
-            "EhMKB2NoYW5faWQYASABKARCAjABEhAKCGNhcGFjaXR5GAIgASgDEhUKDWNs",
-            "b3NlZF9oZWlnaHQYAyABKA0SJwoKY2hhbl9wb2ludBgEIAEoCzITLmxucnBj",
-            "LkNoYW5uZWxQb2ludCLXAQoHSG9wSGludBIYCgdub2RlX2lkGAEgASgJUgdu",
-            "b2RlX2lkEhwKB2NoYW5faWQYAiABKARCAjABUgdjaGFuX2lkEiQKDWZlZV9i",
-            "YXNlX21zYXQYAyABKA1SDWZlZV9iYXNlX21zYXQSQAobZmVlX3Byb3BvcnRp",
-            "b25hbF9taWxsaW9udGhzGAQgASgNUhtmZWVfcHJvcG9ydGlvbmFsX21pbGxp",
-            "b250aHMSLAoRY2x0dl9leHBpcnlfZGVsdGEYBSABKA1SEWNsdHZfZXhwaXJ5",
-            "X2RlbHRhIjkKCVJvdXRlSGludBIsCglob3BfaGludHMYASADKAsyDi5sbnJw",
-            "Yy5Ib3BIaW50Uglob3BfaGludHMivwYKB0ludm9pY2USEgoEbWVtbxgBIAEo",
-            "CVIEbWVtbxIcCgdyZWNlaXB0GAIgASgMQgIYAVIHcmVjZWlwdBIeCgpyX3By",
-            "ZWltYWdlGAMgASgMUgpyX3ByZWltYWdlEhYKBnJfaGFzaBgEIAEoDFIGcl9o",
-            "YXNoEhQKBXZhbHVlGAUgASgDUgV2YWx1ZRIcCgdzZXR0bGVkGAYgASgIQgIY",
-            "AVIHc2V0dGxlZBIkCg1jcmVhdGlvbl9kYXRlGAcgASgDUg1jcmVhdGlvbl9k",
-            "YXRlEiAKC3NldHRsZV9kYXRlGAggASgDUgtzZXR0bGVfZGF0ZRIoCg9wYXlt",
-            "ZW50X3JlcXVlc3QYCSABKAlSD3BheW1lbnRfcmVxdWVzdBIqChBkZXNjcmlw",
-            "dGlvbl9oYXNoGAogASgMUhBkZXNjcmlwdGlvbl9oYXNoEhYKBmV4cGlyeRgL",
-            "IAEoA1IGZXhwaXJ5EiQKDWZhbGxiYWNrX2FkZHIYDCABKAlSDWZhbGxiYWNr",
-            "X2FkZHISIAoLY2x0dl9leHBpcnkYDSABKARSC2NsdHZfZXhwaXJ5EjIKC3Jv",
-            "dXRlX2hpbnRzGA4gAygLMhAubG5ycGMuUm91dGVIaW50Ugtyb3V0ZV9oaW50",
-            "cxIYCgdwcml2YXRlGA8gASgIUgdwcml2YXRlEhwKCWFkZF9pbmRleBgQIAEo",
-            "BFIJYWRkX2luZGV4EiIKDHNldHRsZV9pbmRleBgRIAEoBFIMc2V0dGxlX2lu",
-            "ZGV4Eh4KCGFtdF9wYWlkGBIgASgDQgIYAVIIYW10X3BhaWQSIgoMYW10X3Bh",
-            "aWRfc2F0GBMgASgDUgxhbXRfcGFpZF9zYXQSJAoNYW10X3BhaWRfbXNhdBgU",
-            "IAEoA1INYW10X3BhaWRfbXNhdBIxCgVzdGF0ZRgVIAEoDjIbLmxucnBjLklu",
-            "dm9pY2UuSW52b2ljZVN0YXRlUgVzdGF0ZRIoCgVodGxjcxgWIAMoCzISLmxu",
-            "cnBjLkludm9pY2VIVExDUgVodGxjcyJBCgxJbnZvaWNlU3RhdGUSCAoET1BF",
-            "ThAAEgsKB1NFVFRMRUQQARIMCghDQU5DRUxFRBACEgwKCEFDQ0VQVEVEEAMi",
-            "qAIKC0ludm9pY2VIVExDEhwKB2NoYW5faWQYASABKARCAjABUgdjaGFuX2lk",
-            "Eh4KCmh0bGNfaW5kZXgYAiABKARSCmh0bGNfaW5kZXgSGgoIYW10X21zYXQY",
-            "AyABKARSCGFtdF9tc2F0EiQKDWFjY2VwdF9oZWlnaHQYBCABKAVSDWFjY2Vw",
-            "dF9oZWlnaHQSIAoLYWNjZXB0X3RpbWUYBSABKANSC2FjY2VwdF90aW1lEiIK",
-            "DHJlc29sdmVfdGltZRgGIAEoA1IMcmVzb2x2ZV90aW1lEiQKDWV4cGlyeV9o",
-            "ZWlnaHQYByABKAVSDWV4cGlyeV9oZWlnaHQSLQoFc3RhdGUYCCABKA4yFy5s",
-            "bnJwYy5JbnZvaWNlSFRMQ1N0YXRlUgVzdGF0ZSJ0ChJBZGRJbnZvaWNlUmVz",
-            "cG9uc2USFgoGcl9oYXNoGAEgASgMUgZyX2hhc2gSKAoPcGF5bWVudF9yZXF1",
-            "ZXN0GAIgASgJUg9wYXltZW50X3JlcXVlc3QSHAoJYWRkX2luZGV4GBAgASgE",
-            "UglhZGRfaW5kZXgiRQoLUGF5bWVudEhhc2gSHgoKcl9oYXNoX3N0chgBIAEo",
-            "CVIKcl9oYXNoX3N0chIWCgZyX2hhc2gYAiABKAxSBnJfaGFzaCKkAQoSTGlz",
-            "dEludm9pY2VSZXF1ZXN0EiIKDHBlbmRpbmdfb25seRgBIAEoCFIMcGVuZGlu",
-            "Z19vbmx5EiIKDGluZGV4X29mZnNldBgEIAEoBFIMaW5kZXhfb2Zmc2V0EioK",
-            "EG51bV9tYXhfaW52b2ljZXMYBSABKARSEG51bV9tYXhfaW52b2ljZXMSGgoI",
-            "cmV2ZXJzZWQYBiABKAhSCHJldmVyc2VkIp8BChNMaXN0SW52b2ljZVJlc3Bv",
-            "bnNlEioKCGludm9pY2VzGAEgAygLMg4ubG5ycGMuSW52b2ljZVIIaW52b2lj",
-            "ZXMSLAoRbGFzdF9pbmRleF9vZmZzZXQYAiABKARSEWxhc3RfaW5kZXhfb2Zm",
-            "c2V0Ei4KEmZpcnN0X2luZGV4X29mZnNldBgDIAEoBFISZmlyc3RfaW5kZXhf",
-            "b2Zmc2V0IlcKE0ludm9pY2VTdWJzY3JpcHRpb24SHAoJYWRkX2luZGV4GAEg",
-            "ASgEUglhZGRfaW5kZXgSIgoMc2V0dGxlX2luZGV4GAIgASgEUgxzZXR0bGVf",
-            "aW5kZXgi3wMKB1BheW1lbnQSIgoMcGF5bWVudF9oYXNoGAEgASgJUgxwYXlt",
-            "ZW50X2hhc2gSGAoFdmFsdWUYAiABKANCAhgBUgV2YWx1ZRIkCg1jcmVhdGlv",
-            "bl9kYXRlGAMgASgDUg1jcmVhdGlvbl9kYXRlEhIKBHBhdGgYBCADKAlSBHBh",
-            "dGgSFAoDZmVlGAUgASgDQgIYAVIDZmVlEioKEHBheW1lbnRfcHJlaW1hZ2UY",
-            "BiABKAlSEHBheW1lbnRfcHJlaW1hZ2USHAoJdmFsdWVfc2F0GAcgASgDUgl2",
-            "YWx1ZV9zYXQSHgoKdmFsdWVfbXNhdBgIIAEoA1IKdmFsdWVfbXNhdBIoCg9w",
-            "YXltZW50X3JlcXVlc3QYCSABKAlSD3BheW1lbnRfcmVxdWVzdBI0CgZzdGF0",
-            "dXMYCiABKA4yHC5sbnJwYy5QYXltZW50LlBheW1lbnRTdGF0dXNSBnN0YXR1",
-            "cxIYCgdmZWVfc2F0GAsgASgDUgdmZWVfc2F0EhoKCGZlZV9tc2F0GAwgASgD",
-            "UghmZWVfbXNhdCJGCg1QYXltZW50U3RhdHVzEgsKB1VOS05PV04QABINCglJ",
-            "Tl9GTElHSFQQARINCglTVUNDRUVERUQQAhIKCgZGQUlMRUQQAyIxChNMaXN0",
-            "UGF5bWVudHNSZXF1ZXN0EhoKEmluY2x1ZGVfaW5jb21wbGV0ZRgBIAEoCCJC",
-            "ChRMaXN0UGF5bWVudHNSZXNwb25zZRIqCghwYXltZW50cxgBIAMoCzIOLmxu",
-            "cnBjLlBheW1lbnRSCHBheW1lbnRzIhoKGERlbGV0ZUFsbFBheW1lbnRzUmVx",
-            "dWVzdCIbChlEZWxldGVBbGxQYXltZW50c1Jlc3BvbnNlIkMKFUFiYW5kb25D",
-            "aGFubmVsUmVxdWVzdBIqCg1jaGFubmVsX3BvaW50GAEgASgLMhMubG5ycGMu",
-            "Q2hhbm5lbFBvaW50IhgKFkFiYW5kb25DaGFubmVsUmVzcG9uc2UiNQoRRGVi",
-            "dWdMZXZlbFJlcXVlc3QSDAoEc2hvdxgBIAEoCBISCgpsZXZlbF9zcGVjGAIg",
-            "ASgJIjYKEkRlYnVnTGV2ZWxSZXNwb25zZRIgCgtzdWJfc3lzdGVtcxgBIAEo",
-            "CVILc3ViX3N5c3RlbXMiHwoMUGF5UmVxU3RyaW5nEg8KB3BheV9yZXEYASAB",
-            "KAki8gIKBlBheVJlcRIgCgtkZXN0aW5hdGlvbhgBIAEoCVILZGVzdGluYXRp",
-            "b24SIgoMcGF5bWVudF9oYXNoGAIgASgJUgxwYXltZW50X2hhc2gSIgoMbnVt",
-            "X3NhdG9zaGlzGAMgASgDUgxudW1fc2F0b3NoaXMSHAoJdGltZXN0YW1wGAQg",
-            "ASgDUgl0aW1lc3RhbXASFgoGZXhwaXJ5GAUgASgDUgZleHBpcnkSIAoLZGVz",
-            "Y3JpcHRpb24YBiABKAlSC2Rlc2NyaXB0aW9uEioKEGRlc2NyaXB0aW9uX2hh",
-            "c2gYByABKAlSEGRlc2NyaXB0aW9uX2hhc2gSJAoNZmFsbGJhY2tfYWRkchgI",
-            "IAEoCVINZmFsbGJhY2tfYWRkchIgCgtjbHR2X2V4cGlyeRgJIAEoA1ILY2x0",
-            "dl9leHBpcnkSMgoLcm91dGVfaGludHMYCiADKAsyEC5sbnJwYy5Sb3V0ZUhp",
-            "bnRSC3JvdXRlX2hpbnRzIhIKEEZlZVJlcG9ydFJlcXVlc3QimQEKEENoYW5u",
-            "ZWxGZWVSZXBvcnQSIQoKY2hhbl9wb2ludBgBIAEoCVINY2hhbm5lbF9wb2lu",
-            "dBIkCg1iYXNlX2ZlZV9tc2F0GAIgASgDUg1iYXNlX2ZlZV9tc2F0EiAKC2Zl",
-            "ZV9wZXJfbWlsGAMgASgDUgtmZWVfcGVyX21pbBIaCghmZWVfcmF0ZRgEIAEo",
-            "AVIIZmVlX3JhdGUivAEKEUZlZVJlcG9ydFJlc3BvbnNlEjsKDGNoYW5uZWxf",
-            "ZmVlcxgBIAMoCzIXLmxucnBjLkNoYW5uZWxGZWVSZXBvcnRSDGNoYW5uZWxf",
-            "ZmVlcxIgCgtkYXlfZmVlX3N1bRgCIAEoBFILZGF5X2ZlZV9zdW0SIgoMd2Vl",
-            "a19mZWVfc3VtGAMgASgEUgx3ZWVrX2ZlZV9zdW0SJAoNbW9udGhfZmVlX3N1",
-            "bRgEIAEoBFINbW9udGhfZmVlX3N1bSKBAgoTUG9saWN5VXBkYXRlUmVxdWVz",
-            "dBIYCgZnbG9iYWwYASABKAhIAFIGZ2xvYmFsEjUKCmNoYW5fcG9pbnQYAiAB",
-            "KAsyEy5sbnJwYy5DaGFubmVsUG9pbnRIAFIKY2hhbl9wb2ludBIkCg1iYXNl",
-            "X2ZlZV9tc2F0GAMgASgDUg1iYXNlX2ZlZV9tc2F0EhoKCGZlZV9yYXRlGAQg",
-            "ASgBUghmZWVfcmF0ZRIoCg90aW1lX2xvY2tfZGVsdGEYBSABKA1SD3RpbWVf",
-            "bG9ja19kZWx0YRIkCg1tYXhfaHRsY19tc2F0GAYgASgEUg1tYXhfaHRsY19t",
-            "c2F0QgcKBXNjb3BlIhYKFFBvbGljeVVwZGF0ZVJlc3BvbnNlIqIBChhGb3J3",
-            "YXJkaW5nSGlzdG9yeVJlcXVlc3QSHgoKc3RhcnRfdGltZRgBIAEoBFIKc3Rh",
-            "cnRfdGltZRIaCghlbmRfdGltZRgCIAEoBFIIZW5kX3RpbWUSIgoMaW5kZXhf",
-            "b2Zmc2V0GAMgASgNUgxpbmRleF9vZmZzZXQSJgoObnVtX21heF9ldmVudHMY",
-            "BCABKA1SDm51bV9tYXhfZXZlbnRzIp8CCg9Gb3J3YXJkaW5nRXZlbnQSHAoJ",
-            "dGltZXN0YW1wGAEgASgEUgl0aW1lc3RhbXASIgoKY2hhbl9pZF9pbhgCIAEo",
-            "BEICMAFSCmNoYW5faWRfaW4SJAoLY2hhbl9pZF9vdXQYBCABKARCAjABUgtj",
-            "aGFuX2lkX291dBIWCgZhbXRfaW4YBSABKARSBmFtdF9pbhIYCgdhbXRfb3V0",
-            "GAYgASgEUgdhbXRfb3V0EhAKA2ZlZRgHIAEoBFIDZmVlEhoKCGZlZV9tc2F0",
-            "GAggASgEUghmZWVfbXNhdBIgCgthbXRfaW5fbXNhdBgJIAEoBFILYW10X2lu",
-            "X21zYXQSIgoMYW10X291dF9tc2F0GAogASgEUgxhbXRfb3V0X21zYXQijwEK",
-            "GUZvcndhcmRpbmdIaXN0b3J5UmVzcG9uc2USRAoRZm9yd2FyZGluZ19ldmVu",
-            "dHMYASADKAsyFi5sbnJwYy5Gb3J3YXJkaW5nRXZlbnRSEWZvcndhcmRpbmdf",
-            "ZXZlbnRzEiwKEWxhc3Rfb2Zmc2V0X2luZGV4GAIgASgNUhFsYXN0X29mZnNl",
-            "dF9pbmRleCJFChpFeHBvcnRDaGFubmVsQmFja3VwUmVxdWVzdBInCgpjaGFu",
-            "X3BvaW50GAEgASgLMhMubG5ycGMuQ2hhbm5lbFBvaW50ImYKDUNoYW5uZWxC",
-            "YWNrdXASMwoKY2hhbl9wb2ludBgBIAEoCzITLmxucnBjLkNoYW5uZWxQb2lu",
-            "dFIKY2hhbl9wb2ludBIgCgtjaGFuX2JhY2t1cBgCIAEoDFILY2hhbl9iYWNr",
-            "dXAidgoPTXVsdGlDaGFuQmFja3VwEjUKC2NoYW5fcG9pbnRzGAEgAygLMhMu",
-            "bG5ycGMuQ2hhbm5lbFBvaW50UgtjaGFuX3BvaW50cxIsChFtdWx0aV9jaGFu",
-            "X2JhY2t1cBgCIAEoDFIRbXVsdGlfY2hhbl9iYWNrdXAiGQoXQ2hhbkJhY2t1",
-            "cEV4cG9ydFJlcXVlc3QiowEKEkNoYW5CYWNrdXBTbmFwc2hvdBJHChNzaW5n",
-            "bGVfY2hhbl9iYWNrdXBzGAEgASgLMhUubG5ycGMuQ2hhbm5lbEJhY2t1cHNS",
-            "E3NpbmdsZV9jaGFuX2JhY2t1cHMSRAoRbXVsdGlfY2hhbl9iYWNrdXAYAiAB",
-            "KAsyFi5sbnJwYy5NdWx0aUNoYW5CYWNrdXBSEW11bHRpX2NoYW5fYmFja3Vw",
-            "IkoKDkNoYW5uZWxCYWNrdXBzEjgKDGNoYW5fYmFja3VwcxgBIAMoCzIULmxu",
-            "cnBjLkNoYW5uZWxCYWNrdXBSDGNoYW5fYmFja3VwcyKRAQoYUmVzdG9yZUNo",
-            "YW5CYWNrdXBSZXF1ZXN0EjsKDGNoYW5fYmFja3VwcxgBIAEoCzIVLmxucnBj",
-            "LkNoYW5uZWxCYWNrdXBzSABSDGNoYW5fYmFja3VwcxIuChFtdWx0aV9jaGFu",
-            "X2JhY2t1cBgCIAEoDEgAUhFtdWx0aV9jaGFuX2JhY2t1cEIICgZiYWNrdXAi",
-            "FwoVUmVzdG9yZUJhY2t1cFJlc3BvbnNlIhsKGUNoYW5uZWxCYWNrdXBTdWJz",
-            "Y3JpcHRpb24iGgoYVmVyaWZ5Q2hhbkJhY2t1cFJlc3BvbnNlKn0KC0FkZHJl",
-            "c3NUeXBlEhcKE1dJVE5FU1NfUFVCS0VZX0hBU0gQABIWChJORVNURURfUFVC",
-            "S0VZX0hBU0gQARIeChpVTlVTRURfV0lUTkVTU19QVUJLRVlfSEFTSBACEh0K",
-            "GVVOVVNFRF9ORVNURURfUFVCS0VZX0hBU0gQAyo7ChBJbnZvaWNlSFRMQ1N0",
-            "YXRlEgwKCEFDQ0VQVEVEEAASCwoHU0VUVExFRBABEgwKCENBTkNFTEVEEAIy",
-            "rQIKDldhbGxldFVubG9ja2VyEjoKB0dlblNlZWQSFS5sbnJwYy5HZW5TZWVk",
-            "UmVxdWVzdBoWLmxucnBjLkdlblNlZWRSZXNwb25zZSIAEkMKCkluaXRXYWxs",
-            "ZXQSGC5sbnJwYy5Jbml0V2FsbGV0UmVxdWVzdBoZLmxucnBjLkluaXRXYWxs",
-            "ZXRSZXNwb25zZSIAEkkKDFVubG9ja1dhbGxldBIaLmxucnBjLlVubG9ja1dh",
-            "bGxldFJlcXVlc3QaGy5sbnJwYy5VbmxvY2tXYWxsZXRSZXNwb25zZSIAEk8K",
-            "DkNoYW5nZVBhc3N3b3JkEhwubG5ycGMuQ2hhbmdlUGFzc3dvcmRSZXF1ZXN0",
-            "Gh0ubG5ycGMuQ2hhbmdlUGFzc3dvcmRSZXNwb25zZSIAMp0dCglMaWdodG5p",
-            "bmcSTAoNV2FsbGV0QmFsYW5jZRIbLmxucnBjLldhbGxldEJhbGFuY2VSZXF1",
-            "ZXN0GhwubG5ycGMuV2FsbGV0QmFsYW5jZVJlc3BvbnNlIgASTwoOQ2hhbm5l",
-            "bEJhbGFuY2USHC5sbnJwYy5DaGFubmVsQmFsYW5jZVJlcXVlc3QaHS5sbnJw",
-            "Yy5DaGFubmVsQmFsYW5jZVJlc3BvbnNlIgASTQoPR2V0VHJhbnNhY3Rpb25z",
-            "Eh0ubG5ycGMuR2V0VHJhbnNhY3Rpb25zUmVxdWVzdBoZLmxucnBjLlRyYW5z",
-            "YWN0aW9uRGV0YWlscyIAEkYKC0VzdGltYXRlRmVlEhkubG5ycGMuRXN0aW1h",
-            "dGVGZWVSZXF1ZXN0GhoubG5ycGMuRXN0aW1hdGVGZWVSZXNwb25zZSIAEkAK",
-            "CVNlbmRDb2lucxIXLmxucnBjLlNlbmRDb2luc1JlcXVlc3QaGC5sbnJwYy5T",
-            "ZW5kQ29pbnNSZXNwb25zZSIAEkYKC0xpc3RVbnNwZW50EhkubG5ycGMuTGlz",
-            "dFVuc3BlbnRSZXF1ZXN0GhoubG5ycGMuTGlzdFVuc3BlbnRSZXNwb25zZSIA",
-            "EkwKFVN1YnNjcmliZVRyYW5zYWN0aW9ucxIdLmxucnBjLkdldFRyYW5zYWN0",
-            "aW9uc1JlcXVlc3QaEi5sbnJwYy5UcmFuc2FjdGlvbjABEjsKCFNlbmRNYW55",
-            "EhYubG5ycGMuU2VuZE1hbnlSZXF1ZXN0GhcubG5ycGMuU2VuZE1hbnlSZXNw",
-            "b25zZRJDCgpOZXdBZGRyZXNzEhgubG5ycGMuTmV3QWRkcmVzc1JlcXVlc3Qa",
-            "GS5sbnJwYy5OZXdBZGRyZXNzUmVzcG9uc2UiABJGCgtTaWduTWVzc2FnZRIZ",
-            "LmxucnBjLlNpZ25NZXNzYWdlUmVxdWVzdBoaLmxucnBjLlNpZ25NZXNzYWdl",
-            "UmVzcG9uc2UiABJMCg1WZXJpZnlNZXNzYWdlEhsubG5ycGMuVmVyaWZ5TWVz",
-            "c2FnZVJlcXVlc3QaHC5sbnJwYy5WZXJpZnlNZXNzYWdlUmVzcG9uc2UiABJG",
-            "CgtDb25uZWN0UGVlchIZLmxucnBjLkNvbm5lY3RQZWVyUmVxdWVzdBoaLmxu",
-            "cnBjLkNvbm5lY3RQZWVyUmVzcG9uc2UiABJPCg5EaXNjb25uZWN0UGVlchIc",
-            "LmxucnBjLkRpc2Nvbm5lY3RQZWVyUmVxdWVzdBodLmxucnBjLkRpc2Nvbm5l",
-            "Y3RQZWVyUmVzcG9uc2UiABJACglMaXN0UGVlcnMSFy5sbnJwYy5MaXN0UGVl",
-            "cnNSZXF1ZXN0GhgubG5ycGMuTGlzdFBlZXJzUmVzcG9uc2UiABI6CgdHZXRJ",
-            "bmZvEhUubG5ycGMuR2V0SW5mb1JlcXVlc3QaFi5sbnJwYy5HZXRJbmZvUmVz",
-            "cG9uc2UiABJSCg9QZW5kaW5nQ2hhbm5lbHMSHS5sbnJwYy5QZW5kaW5nQ2hh",
-            "bm5lbHNSZXF1ZXN0Gh4ubG5ycGMuUGVuZGluZ0NoYW5uZWxzUmVzcG9uc2Ui",
-            "ABJJCgxMaXN0Q2hhbm5lbHMSGi5sbnJwYy5MaXN0Q2hhbm5lbHNSZXF1ZXN0",
-            "GhsubG5ycGMuTGlzdENoYW5uZWxzUmVzcG9uc2UiABJWChZTdWJzY3JpYmVD",
-            "aGFubmVsRXZlbnRzEh8ubG5ycGMuQ2hhbm5lbEV2ZW50U3Vic2NyaXB0aW9u",
-            "GhkubG5ycGMuQ2hhbm5lbEV2ZW50VXBkYXRlMAESTwoOQ2xvc2VkQ2hhbm5l",
-            "bHMSHC5sbnJwYy5DbG9zZWRDaGFubmVsc1JlcXVlc3QaHS5sbnJwYy5DbG9z",
-            "ZWRDaGFubmVsc1Jlc3BvbnNlIgASQwoPT3BlbkNoYW5uZWxTeW5jEhkubG5y",
-            "cGMuT3BlbkNoYW5uZWxSZXF1ZXN0GhMubG5ycGMuQ2hhbm5lbFBvaW50IgAS",
-            "QwoLT3BlbkNoYW5uZWwSGS5sbnJwYy5PcGVuQ2hhbm5lbFJlcXVlc3QaFy5s",
-            "bnJwYy5PcGVuU3RhdHVzVXBkYXRlMAESUAoPQ2hhbm5lbEFjY2VwdG9yEhwu",
-            "bG5ycGMuQ2hhbm5lbEFjY2VwdFJlc3BvbnNlGhsubG5ycGMuQ2hhbm5lbEFj",
-            "Y2VwdFJlcXVlc3QoATABEkgKDENsb3NlQ2hhbm5lbBIaLmxucnBjLkNsb3Nl",
-            "Q2hhbm5lbFJlcXVlc3QaGC5sbnJwYy5DbG9zZVN0YXR1c1VwZGF0ZSIAMAES",
-            "TwoOQWJhbmRvbkNoYW5uZWwSHC5sbnJwYy5BYmFuZG9uQ2hhbm5lbFJlcXVl",
-            "c3QaHS5sbnJwYy5BYmFuZG9uQ2hhbm5lbFJlc3BvbnNlIgASOgoLU2VuZFBh",
-            "eW1lbnQSEi5sbnJwYy5TZW5kUmVxdWVzdBoTLmxucnBjLlNlbmRSZXNwb25z",
-            "ZSgBMAESPAoPU2VuZFBheW1lbnRTeW5jEhIubG5ycGMuU2VuZFJlcXVlc3Qa",
-            "Ey5sbnJwYy5TZW5kUmVzcG9uc2UiABJBCgtTZW5kVG9Sb3V0ZRIZLmxucnBj",
-            "LlNlbmRUb1JvdXRlUmVxdWVzdBoTLmxucnBjLlNlbmRSZXNwb25zZSgBMAES",
-            "QwoPU2VuZFRvUm91dGVTeW5jEhkubG5ycGMuU2VuZFRvUm91dGVSZXF1ZXN0",
-            "GhMubG5ycGMuU2VuZFJlc3BvbnNlIgASOQoKQWRkSW52b2ljZRIOLmxucnBj",
-            "Lkludm9pY2UaGS5sbnJwYy5BZGRJbnZvaWNlUmVzcG9uc2UiABJHCgxMaXN0",
-            "SW52b2ljZXMSGS5sbnJwYy5MaXN0SW52b2ljZVJlcXVlc3QaGi5sbnJwYy5M",
-            "aXN0SW52b2ljZVJlc3BvbnNlIgASNQoNTG9va3VwSW52b2ljZRISLmxucnBj",
-            "LlBheW1lbnRIYXNoGg4ubG5ycGMuSW52b2ljZSIAEkMKEVN1YnNjcmliZUlu",
-            "dm9pY2VzEhoubG5ycGMuSW52b2ljZVN1YnNjcmlwdGlvbhoOLmxucnBjLklu",
-            "dm9pY2UiADABEjQKDERlY29kZVBheVJlcRITLmxucnBjLlBheVJlcVN0cmlu",
-            "ZxoNLmxucnBjLlBheVJlcSIAEkkKDExpc3RQYXltZW50cxIaLmxucnBjLkxp",
-            "c3RQYXltZW50c1JlcXVlc3QaGy5sbnJwYy5MaXN0UGF5bWVudHNSZXNwb25z",
-            "ZSIAElgKEURlbGV0ZUFsbFBheW1lbnRzEh8ubG5ycGMuRGVsZXRlQWxsUGF5",
-            "bWVudHNSZXF1ZXN0GiAubG5ycGMuRGVsZXRlQWxsUGF5bWVudHNSZXNwb25z",
-            "ZSIAEkIKDURlc2NyaWJlR3JhcGgSGi5sbnJwYy5DaGFubmVsR3JhcGhSZXF1",
-            "ZXN0GhMubG5ycGMuQ2hhbm5lbEdyYXBoIgASOwoLR2V0Q2hhbkluZm8SFi5s",
-            "bnJwYy5DaGFuSW5mb1JlcXVlc3QaEi5sbnJwYy5DaGFubmVsRWRnZSIAEjgK",
-            "C0dldE5vZGVJbmZvEhYubG5ycGMuTm9kZUluZm9SZXF1ZXN0Gg8ubG5ycGMu",
-            "Tm9kZUluZm8iABJGCgtRdWVyeVJvdXRlcxIZLmxucnBjLlF1ZXJ5Um91dGVz",
-            "UmVxdWVzdBoaLmxucnBjLlF1ZXJ5Um91dGVzUmVzcG9uc2UiABJBCg5HZXRO",
-            "ZXR3b3JrSW5mbxIZLmxucnBjLk5ldHdvcmtJbmZvUmVxdWVzdBoSLmxucnBj",
-            "Lk5ldHdvcmtJbmZvIgASNQoKU3RvcERhZW1vbhISLmxucnBjLlN0b3BSZXF1",
-            "ZXN0GhMubG5ycGMuU3RvcFJlc3BvbnNlElcKFVN1YnNjcmliZUNoYW5uZWxH",
-            "cmFwaBIgLmxucnBjLkdyYXBoVG9wb2xvZ3lTdWJzY3JpcHRpb24aGi5sbnJw",
-            "Yy5HcmFwaFRvcG9sb2d5VXBkYXRlMAESQQoKRGVidWdMZXZlbBIYLmxucnBj",
-            "LkRlYnVnTGV2ZWxSZXF1ZXN0GhkubG5ycGMuRGVidWdMZXZlbFJlc3BvbnNl",
-            "EkAKCUZlZVJlcG9ydBIXLmxucnBjLkZlZVJlcG9ydFJlcXVlc3QaGC5sbnJw",
-            "Yy5GZWVSZXBvcnRSZXNwb25zZSIAElAKE1VwZGF0ZUNoYW5uZWxQb2xpY3kS",
-            "Gi5sbnJwYy5Qb2xpY3lVcGRhdGVSZXF1ZXN0GhsubG5ycGMuUG9saWN5VXBk",
-            "YXRlUmVzcG9uc2UiABJYChFGb3J3YXJkaW5nSGlzdG9yeRIfLmxucnBjLkZv",
-            "cndhcmRpbmdIaXN0b3J5UmVxdWVzdBogLmxucnBjLkZvcndhcmRpbmdIaXN0",
-            "b3J5UmVzcG9uc2UiABJQChNFeHBvcnRDaGFubmVsQmFja3VwEiEubG5ycGMu",
-            "RXhwb3J0Q2hhbm5lbEJhY2t1cFJlcXVlc3QaFC5sbnJwYy5DaGFubmVsQmFj",
-            "a3VwIgASVgoXRXhwb3J0QWxsQ2hhbm5lbEJhY2t1cHMSHi5sbnJwYy5DaGFu",
-            "QmFja3VwRXhwb3J0UmVxdWVzdBoZLmxucnBjLkNoYW5CYWNrdXBTbmFwc2hv",
-            "dCIAElAKEFZlcmlmeUNoYW5CYWNrdXASGS5sbnJwYy5DaGFuQmFja3VwU25h",
-            "cHNob3QaHy5sbnJwYy5WZXJpZnlDaGFuQmFja3VwUmVzcG9uc2UiABJYChVS",
-            "ZXN0b3JlQ2hhbm5lbEJhY2t1cHMSHy5sbnJwYy5SZXN0b3JlQ2hhbkJhY2t1",
-            "cFJlcXVlc3QaHC5sbnJwYy5SZXN0b3JlQmFja3VwUmVzcG9uc2UiABJaChdT",
-            "dWJzY3JpYmVDaGFubmVsQmFja3VwcxIgLmxucnBjLkNoYW5uZWxCYWNrdXBT",
-            "dWJzY3JpcHRpb24aGS5sbnJwYy5DaGFuQmFja3VwU25hcHNob3QiADABQida",
-            "JWdpdGh1Yi5jb20vbGlnaHRuaW5nbmV0d29yay9sbmQvbG5ycGNiBnByb3Rv",
-            "Mw=="));
+            "LlBlbmRpbmdDaGFubmVsUgdjaGFubmVsEiIKDGNsb3NpbmdfdHhpZBgCIAEo",
+            "CVIMY2xvc2luZ190eGlkEiQKDWxpbWJvX2JhbGFuY2UYAyABKANSDWxpbWJv",
+            "X2JhbGFuY2USKAoPbWF0dXJpdHlfaGVpZ2h0GAQgASgNUg9tYXR1cml0eV9o",
+            "ZWlnaHQSMAoTYmxvY2tzX3RpbF9tYXR1cml0eRgFIAEoBVITYmxvY2tzX3Rp",
+            "bF9tYXR1cml0eRIsChFyZWNvdmVyZWRfYmFsYW5jZRgGIAEoA1IRcmVjb3Zl",
+            "cmVkX2JhbGFuY2USOAoNcGVuZGluZ19odGxjcxgIIAMoCzISLmxucnBjLlBl",
+            "bmRpbmdIVExDUg1wZW5kaW5nX2h0bGNzIhoKGENoYW5uZWxFdmVudFN1YnNj",
+            "cmlwdGlvbiK1AwoSQ2hhbm5lbEV2ZW50VXBkYXRlEjQKDG9wZW5fY2hhbm5l",
+            "bBgBIAEoCzIOLmxucnBjLkNoYW5uZWxIAFIMb3Blbl9jaGFubmVsEkQKDmNs",
+            "b3NlZF9jaGFubmVsGAIgASgLMhoubG5ycGMuQ2hhbm5lbENsb3NlU3VtbWFy",
+            "eUgAUg5jbG9zZWRfY2hhbm5lbBI9Cg5hY3RpdmVfY2hhbm5lbBgDIAEoCzIT",
+            "LmxucnBjLkNoYW5uZWxQb2ludEgAUg5hY3RpdmVfY2hhbm5lbBJBChBpbmFj",
+            "dGl2ZV9jaGFubmVsGAQgASgLMhMubG5ycGMuQ2hhbm5lbFBvaW50SABSEGlu",
+            "YWN0aXZlX2NoYW5uZWwSOAoEdHlwZRgFIAEoDjIkLmxucnBjLkNoYW5uZWxF",
+            "dmVudFVwZGF0ZS5VcGRhdGVUeXBlUgR0eXBlIlwKClVwZGF0ZVR5cGUSEAoM",
+            "T1BFTl9DSEFOTkVMEAASEgoOQ0xPU0VEX0NIQU5ORUwQARISCg5BQ1RJVkVf",
+            "Q0hBTk5FTBACEhQKEElOQUNUSVZFX0NIQU5ORUwQA0IJCgdjaGFubmVsIhYK",
+            "FFdhbGxldEJhbGFuY2VSZXF1ZXN0Ip0BChVXYWxsZXRCYWxhbmNlUmVzcG9u",
+            "c2USJAoNdG90YWxfYmFsYW5jZRgBIAEoA1INdG90YWxfYmFsYW5jZRIsChFj",
+            "b25maXJtZWRfYmFsYW5jZRgCIAEoA1IRY29uZmlybWVkX2JhbGFuY2USMAoT",
+            "dW5jb25maXJtZWRfYmFsYW5jZRgDIAEoA1ITdW5jb25maXJtZWRfYmFsYW5j",
+            "ZSIXChVDaGFubmVsQmFsYW5jZVJlcXVlc3QiZgoWQ2hhbm5lbEJhbGFuY2VS",
+            "ZXNwb25zZRIYCgdiYWxhbmNlGAEgASgDUgdiYWxhbmNlEjIKFHBlbmRpbmdf",
+            "b3Blbl9iYWxhbmNlGAIgASgDUhRwZW5kaW5nX29wZW5fYmFsYW5jZSLQBAoS",
+            "UXVlcnlSb3V0ZXNSZXF1ZXN0Eg8KB3B1Yl9rZXkYASABKAkSCwoDYW10GAIg",
+            "ASgDEhAKCGFtdF9tc2F0GAwgASgDEhgKEGZpbmFsX2NsdHZfZGVsdGEYBCAB",
+            "KAUSIgoJZmVlX2xpbWl0GAUgASgLMg8ubG5ycGMuRmVlTGltaXQSFQoNaWdu",
+            "b3JlZF9ub2RlcxgGIAMoDBItCg1pZ25vcmVkX2VkZ2VzGAcgAygLMhIubG5y",
+            "cGMuRWRnZUxvY2F0b3JCAhgBEhYKDnNvdXJjZV9wdWJfa2V5GAggASgJEhsK",
+            "E3VzZV9taXNzaW9uX2NvbnRyb2wYCSABKAgSJgoNaWdub3JlZF9wYWlycxgK",
+            "IAMoCzIPLmxucnBjLk5vZGVQYWlyEhIKCmNsdHZfbGltaXQYCyABKA0STQoT",
+            "ZGVzdF9jdXN0b21fcmVjb3JkcxgNIAMoCzIwLmxucnBjLlF1ZXJ5Um91dGVz",
+            "UmVxdWVzdC5EZXN0Q3VzdG9tUmVjb3Jkc0VudHJ5EhwKEG91dGdvaW5nX2No",
+            "YW5faWQYDiABKARCAjABEhcKD2xhc3RfaG9wX3B1YmtleRgPIAEoDBIlCgty",
+            "b3V0ZV9oaW50cxgQIAMoCzIQLmxucnBjLlJvdXRlSGludBIoCg1kZXN0X2Zl",
+            "YXR1cmVzGBEgAygOMhEubG5ycGMuRmVhdHVyZUJpdBo4ChZEZXN0Q3VzdG9t",
+            "UmVjb3Jkc0VudHJ5EgsKA2tleRgBIAEoBBINCgV2YWx1ZRgCIAEoDDoCOAFK",
+            "BAgDEAQiJAoITm9kZVBhaXISDAoEZnJvbRgBIAEoDBIKCgJ0bxgCIAEoDCJA",
+            "CgtFZGdlTG9jYXRvchIWCgpjaGFubmVsX2lkGAEgASgEQgIwARIZChFkaXJl",
+            "Y3Rpb25fcmV2ZXJzZRgCIAEoCCJfChNRdWVyeVJvdXRlc1Jlc3BvbnNlEiQK",
+            "BnJvdXRlcxgBIAMoCzIMLmxucnBjLlJvdXRlUgZyb3V0ZXMSIgoMc3VjY2Vz",
+            "c19wcm9iGAIgASgBUgxzdWNjZXNzX3Byb2Ii3AMKA0hvcBIcCgdjaGFuX2lk",
+            "GAEgASgEQgIwAVIHY2hhbl9pZBIkCg1jaGFuX2NhcGFjaXR5GAIgASgDUg1j",
+            "aGFuX2NhcGFjaXR5EioKDmFtdF90b19mb3J3YXJkGAMgASgDQgIYAVIOYW10",
+            "X3RvX2ZvcndhcmQSFAoDZmVlGAQgASgDQgIYAVIDZmVlEhYKBmV4cGlyeRgF",
+            "IAEoDVIGZXhwaXJ5EjAKE2FtdF90b19mb3J3YXJkX21zYXQYBiABKANSE2Ft",
+            "dF90b19mb3J3YXJkX21zYXQSGgoIZmVlX21zYXQYByABKANSCGZlZV9tc2F0",
+            "EhgKB3B1Yl9rZXkYCCABKAlSB3B1Yl9rZXkSIAoLdGx2X3BheWxvYWQYCSAB",
+            "KAhSC3Rsdl9wYXlsb2FkEjAKCm1wcF9yZWNvcmQYCiABKAsyEC5sbnJwYy5N",
+            "UFBSZWNvcmRSCm1wcF9yZWNvcmQSRQoOY3VzdG9tX3JlY29yZHMYCyADKAsy",
+            "HS5sbnJwYy5Ib3AuQ3VzdG9tUmVjb3Jkc0VudHJ5Ug5jdXN0b21fcmVjb3Jk",
+            "cxo0ChJDdXN0b21SZWNvcmRzRW50cnkSCwoDa2V5GAEgASgEEg0KBXZhbHVl",
+            "GAIgASgMOgI4ASJXCglNUFBSZWNvcmQSIgoMcGF5bWVudF9hZGRyGAsgASgM",
+            "UgxwYXltZW50X2FkZHISJgoOdG90YWxfYW10X21zYXQYCiABKANSDnRvdGFs",
+            "X2FtdF9tc2F0IukBCgVSb3V0ZRIoCg90b3RhbF90aW1lX2xvY2sYASABKA1S",
+            "D3RvdGFsX3RpbWVfbG9jaxIiCgp0b3RhbF9mZWVzGAIgASgDQgIYAVIKdG90",
+            "YWxfZmVlcxIgCgl0b3RhbF9hbXQYAyABKANCAhgBUgl0b3RhbF9hbXQSHgoE",
+            "aG9wcxgEIAMoCzIKLmxucnBjLkhvcFIEaG9wcxIoCg90b3RhbF9mZWVzX21z",
+            "YXQYBSABKANSD3RvdGFsX2ZlZXNfbXNhdBImCg50b3RhbF9hbXRfbXNhdBgG",
+            "IAEoA1IOdG90YWxfYW10X21zYXQiPAoPTm9kZUluZm9SZXF1ZXN0Eg8KB3B1",
+            "Yl9rZXkYASABKAkSGAoQaW5jbHVkZV9jaGFubmVscxgCIAEoCCKwAQoITm9k",
+            "ZUluZm8SKAoEbm9kZRgBIAEoCzIULmxucnBjLkxpZ2h0bmluZ05vZGVSBG5v",
+            "ZGUSIgoMbnVtX2NoYW5uZWxzGAIgASgNUgxudW1fY2hhbm5lbHMSJgoOdG90",
+            "YWxfY2FwYWNpdHkYAyABKANSDnRvdGFsX2NhcGFjaXR5Ei4KCGNoYW5uZWxz",
+            "GAQgAygLMhIubG5ycGMuQ2hhbm5lbEVkZ2VSCGNoYW5uZWxzIqoCCg1MaWdo",
+            "dG5pbmdOb2RlEiAKC2xhc3RfdXBkYXRlGAEgASgNUgtsYXN0X3VwZGF0ZRIY",
+            "CgdwdWJfa2V5GAIgASgJUgdwdWJfa2V5EhQKBWFsaWFzGAMgASgJUgVhbGlh",
+            "cxIwCglhZGRyZXNzZXMYBCADKAsyEi5sbnJwYy5Ob2RlQWRkcmVzc1IJYWRk",
+            "cmVzc2VzEhQKBWNvbG9yGAUgASgJUgVjb2xvchI+CghmZWF0dXJlcxgGIAMo",
+            "CzIiLmxucnBjLkxpZ2h0bmluZ05vZGUuRmVhdHVyZXNFbnRyeVIIZmVhdHVy",
+            "ZXMaPwoNRmVhdHVyZXNFbnRyeRILCgNrZXkYASABKA0SHQoFdmFsdWUYAiAB",
+            "KAsyDi5sbnJwYy5GZWF0dXJlOgI4ASI7CgtOb2RlQWRkcmVzcxIYCgduZXR3",
+            "b3JrGAEgASgJUgduZXR3b3JrEhIKBGFkZHIYAiABKAlSBGFkZHIikQIKDVJv",
+            "dXRpbmdQb2xpY3kSKAoPdGltZV9sb2NrX2RlbHRhGAEgASgNUg90aW1lX2xv",
+            "Y2tfZGVsdGESGgoIbWluX2h0bGMYAiABKANSCG1pbl9odGxjEiQKDWZlZV9i",
+            "YXNlX21zYXQYAyABKANSDWZlZV9iYXNlX21zYXQSMAoTZmVlX3JhdGVfbWls",
+            "bGlfbXNhdBgEIAEoA1ITZmVlX3JhdGVfbWlsbGlfbXNhdBIaCghkaXNhYmxl",
+            "ZBgFIAEoCFIIZGlzYWJsZWQSJAoNbWF4X2h0bGNfbXNhdBgGIAEoBFINbWF4",
+            "X2h0bGNfbXNhdBIgCgtsYXN0X3VwZGF0ZRgHIAEoDVILbGFzdF91cGRhdGUi",
+            "wwIKC0NoYW5uZWxFZGdlEiIKCmNoYW5uZWxfaWQYASABKARCAjABUgpjaGFu",
+            "bmVsX2lkEh4KCmNoYW5fcG9pbnQYAiABKAlSCmNoYW5fcG9pbnQSJAoLbGFz",
+            "dF91cGRhdGUYAyABKA1CAhgBUgtsYXN0X3VwZGF0ZRIcCglub2RlMV9wdWIY",
+            "BCABKAlSCW5vZGUxX3B1YhIcCglub2RlMl9wdWIYBSABKAlSCW5vZGUyX3B1",
+            "YhIaCghjYXBhY2l0eRgGIAEoA1IIY2FwYWNpdHkSOAoMbm9kZTFfcG9saWN5",
+            "GAcgASgLMhQubG5ycGMuUm91dGluZ1BvbGljeVIMbm9kZTFfcG9saWN5EjgK",
+            "DG5vZGUyX3BvbGljeRgIIAEoCzIULmxucnBjLlJvdXRpbmdQb2xpY3lSDG5v",
+            "ZGUyX3BvbGljeSJHChNDaGFubmVsR3JhcGhSZXF1ZXN0EjAKE2luY2x1ZGVf",
+            "dW5hbm5vdW5jZWQYASABKAhSE2luY2x1ZGVfdW5hbm5vdW5jZWQiZAoMQ2hh",
+            "bm5lbEdyYXBoEioKBW5vZGVzGAEgAygLMhQubG5ycGMuTGlnaHRuaW5nTm9k",
+            "ZVIFbm9kZXMSKAoFZWRnZXMYAiADKAsyEi5sbnJwYy5DaGFubmVsRWRnZVIF",
+            "ZWRnZXMiJgoPQ2hhbkluZm9SZXF1ZXN0EhMKB2NoYW5faWQYASABKARCAjAB",
+            "IhQKEk5ldHdvcmtJbmZvUmVxdWVzdCLpAwoLTmV0d29ya0luZm8SJgoOZ3Jh",
+            "cGhfZGlhbWV0ZXIYASABKA1SDmdyYXBoX2RpYW1ldGVyEiYKDmF2Z19vdXRf",
+            "ZGVncmVlGAIgASgBUg5hdmdfb3V0X2RlZ3JlZRImCg5tYXhfb3V0X2RlZ3Jl",
+            "ZRgDIAEoDVIObWF4X291dF9kZWdyZWUSHAoJbnVtX25vZGVzGAQgASgNUglu",
+            "dW1fbm9kZXMSIgoMbnVtX2NoYW5uZWxzGAUgASgNUgxudW1fY2hhbm5lbHMS",
+            "NgoWdG90YWxfbmV0d29ya19jYXBhY2l0eRgGIAEoA1IWdG90YWxfbmV0d29y",
+            "a19jYXBhY2l0eRIqChBhdmdfY2hhbm5lbF9zaXplGAcgASgBUhBhdmdfY2hh",
+            "bm5lbF9zaXplEioKEG1pbl9jaGFubmVsX3NpemUYCCABKANSEG1pbl9jaGFu",
+            "bmVsX3NpemUSKgoQbWF4X2NoYW5uZWxfc2l6ZRgJIAEoA1IQbWF4X2NoYW5u",
+            "ZWxfc2l6ZRI4ChdtZWRpYW5fY2hhbm5lbF9zaXplX3NhdBgKIAEoA1IXbWVk",
+            "aWFuX2NoYW5uZWxfc2l6ZV9zYXQSKgoQbnVtX3pvbWJpZV9jaGFucxgLIAEo",
+            "BFIQbnVtX3pvbWJpZV9jaGFucyINCgtTdG9wUmVxdWVzdCIOCgxTdG9wUmVz",
+            "cG9uc2UiGwoZR3JhcGhUb3BvbG9neVN1YnNjcmlwdGlvbiKjAQoTR3JhcGhU",
+            "b3BvbG9neVVwZGF0ZRInCgxub2RlX3VwZGF0ZXMYASADKAsyES5sbnJwYy5O",
+            "b2RlVXBkYXRlEjEKD2NoYW5uZWxfdXBkYXRlcxgCIAMoCzIYLmxucnBjLkNo",
+            "YW5uZWxFZGdlVXBkYXRlEjAKDGNsb3NlZF9jaGFucxgDIAMoCzIaLmxucnBj",
+            "LkNsb3NlZENoYW5uZWxVcGRhdGUibAoKTm9kZVVwZGF0ZRIRCglhZGRyZXNz",
+            "ZXMYASADKAkSFAoMaWRlbnRpdHlfa2V5GAIgASgJEhcKD2dsb2JhbF9mZWF0",
+            "dXJlcxgDIAEoDBINCgVhbGlhcxgEIAEoCRINCgVjb2xvchgFIAEoCSLEAQoR",
+            "Q2hhbm5lbEVkZ2VVcGRhdGUSEwoHY2hhbl9pZBgBIAEoBEICMAESJwoKY2hh",
+            "bl9wb2ludBgCIAEoCzITLmxucnBjLkNoYW5uZWxQb2ludBIQCghjYXBhY2l0",
+            "eRgDIAEoAxIsCg5yb3V0aW5nX3BvbGljeRgEIAEoCzIULmxucnBjLlJvdXRp",
+            "bmdQb2xpY3kSGAoQYWR2ZXJ0aXNpbmdfbm9kZRgFIAEoCRIXCg9jb25uZWN0",
+            "aW5nX25vZGUYBiABKAkifAoTQ2xvc2VkQ2hhbm5lbFVwZGF0ZRITCgdjaGFu",
+            "X2lkGAEgASgEQgIwARIQCghjYXBhY2l0eRgCIAEoAxIVCg1jbG9zZWRfaGVp",
+            "Z2h0GAMgASgNEicKCmNoYW5fcG9pbnQYBCABKAsyEy5sbnJwYy5DaGFubmVs",
+            "UG9pbnQi1wEKB0hvcEhpbnQSGAoHbm9kZV9pZBgBIAEoCVIHbm9kZV9pZBIc",
+            "CgdjaGFuX2lkGAIgASgEQgIwAVIHY2hhbl9pZBIkCg1mZWVfYmFzZV9tc2F0",
+            "GAMgASgNUg1mZWVfYmFzZV9tc2F0EkAKG2ZlZV9wcm9wb3J0aW9uYWxfbWls",
+            "bGlvbnRocxgEIAEoDVIbZmVlX3Byb3BvcnRpb25hbF9taWxsaW9udGhzEiwK",
+            "EWNsdHZfZXhwaXJ5X2RlbHRhGAUgASgNUhFjbHR2X2V4cGlyeV9kZWx0YSI5",
+            "CglSb3V0ZUhpbnQSLAoJaG9wX2hpbnRzGAEgAygLMg4ubG5ycGMuSG9wSGlu",
+            "dFIJaG9wX2hpbnRzIuIHCgdJbnZvaWNlEhIKBG1lbW8YASABKAlSBG1lbW8S",
+            "HgoKcl9wcmVpbWFnZRgDIAEoDFIKcl9wcmVpbWFnZRIWCgZyX2hhc2gYBCAB",
+            "KAxSBnJfaGFzaBIUCgV2YWx1ZRgFIAEoA1IFdmFsdWUSHgoKdmFsdWVfbXNh",
+            "dBgXIAEoA1IKdmFsdWVfbXNhdBIcCgdzZXR0bGVkGAYgASgIQgIYAVIHc2V0",
+            "dGxlZBIkCg1jcmVhdGlvbl9kYXRlGAcgASgDUg1jcmVhdGlvbl9kYXRlEiAK",
+            "C3NldHRsZV9kYXRlGAggASgDUgtzZXR0bGVfZGF0ZRIoCg9wYXltZW50X3Jl",
+            "cXVlc3QYCSABKAlSD3BheW1lbnRfcmVxdWVzdBIqChBkZXNjcmlwdGlvbl9o",
+            "YXNoGAogASgMUhBkZXNjcmlwdGlvbl9oYXNoEhYKBmV4cGlyeRgLIAEoA1IG",
+            "ZXhwaXJ5EiQKDWZhbGxiYWNrX2FkZHIYDCABKAlSDWZhbGxiYWNrX2FkZHIS",
+            "IAoLY2x0dl9leHBpcnkYDSABKARSC2NsdHZfZXhwaXJ5EjIKC3JvdXRlX2hp",
+            "bnRzGA4gAygLMhAubG5ycGMuUm91dGVIaW50Ugtyb3V0ZV9oaW50cxIYCgdw",
+            "cml2YXRlGA8gASgIUgdwcml2YXRlEhwKCWFkZF9pbmRleBgQIAEoBFIJYWRk",
+            "X2luZGV4EiIKDHNldHRsZV9pbmRleBgRIAEoBFIMc2V0dGxlX2luZGV4Eh4K",
+            "CGFtdF9wYWlkGBIgASgDQgIYAVIIYW10X3BhaWQSIgoMYW10X3BhaWRfc2F0",
+            "GBMgASgDUgxhbXRfcGFpZF9zYXQSJAoNYW10X3BhaWRfbXNhdBgUIAEoA1IN",
+            "YW10X3BhaWRfbXNhdBIxCgVzdGF0ZRgVIAEoDjIbLmxucnBjLkludm9pY2Uu",
+            "SW52b2ljZVN0YXRlUgVzdGF0ZRIoCgVodGxjcxgWIAMoCzISLmxucnBjLklu",
+            "dm9pY2VIVExDUgVodGxjcxI4CghmZWF0dXJlcxgYIAMoCzIcLmxucnBjLklu",
+            "dm9pY2UuRmVhdHVyZXNFbnRyeVIIZmVhdHVyZXMSHgoKaXNfa2V5c2VuZBgZ",
+            "IAEoCFIKaXNfa2V5c2VuZBo/Cg1GZWF0dXJlc0VudHJ5EgsKA2tleRgBIAEo",
+            "DRIdCgV2YWx1ZRgCIAEoCzIOLmxucnBjLkZlYXR1cmU6AjgBIkEKDEludm9p",
+            "Y2VTdGF0ZRIICgRPUEVOEAASCwoHU0VUVExFRBABEgwKCENBTkNFTEVEEAIS",
+            "DAoIQUNDRVBURUQQA0oECAIQAyLdAwoLSW52b2ljZUhUTEMSHAoHY2hhbl9p",
+            "ZBgBIAEoBEICMAFSB2NoYW5faWQSHgoKaHRsY19pbmRleBgCIAEoBFIKaHRs",
+            "Y19pbmRleBIaCghhbXRfbXNhdBgDIAEoBFIIYW10X21zYXQSJAoNYWNjZXB0",
+            "X2hlaWdodBgEIAEoBVINYWNjZXB0X2hlaWdodBIgCgthY2NlcHRfdGltZRgF",
+            "IAEoA1ILYWNjZXB0X3RpbWUSIgoMcmVzb2x2ZV90aW1lGAYgASgDUgxyZXNv",
+            "bHZlX3RpbWUSJAoNZXhwaXJ5X2hlaWdodBgHIAEoBVINZXhwaXJ5X2hlaWdo",
+            "dBItCgVzdGF0ZRgIIAEoDjIXLmxucnBjLkludm9pY2VIVExDU3RhdGVSBXN0",
+            "YXRlEk0KDmN1c3RvbV9yZWNvcmRzGAkgAygLMiUubG5ycGMuSW52b2ljZUhU",
+            "TEMuQ3VzdG9tUmVjb3Jkc0VudHJ5Ug5jdXN0b21fcmVjb3JkcxIuChJtcHBf",
+            "dG90YWxfYW10X21zYXQYCiABKARSEm1wcF90b3RhbF9hbXRfbXNhdBo0ChJD",
+            "dXN0b21SZWNvcmRzRW50cnkSCwoDa2V5GAEgASgEEg0KBXZhbHVlGAIgASgM",
+            "OgI4ASJ0ChJBZGRJbnZvaWNlUmVzcG9uc2USFgoGcl9oYXNoGAEgASgMUgZy",
+            "X2hhc2gSKAoPcGF5bWVudF9yZXF1ZXN0GAIgASgJUg9wYXltZW50X3JlcXVl",
+            "c3QSHAoJYWRkX2luZGV4GBAgASgEUglhZGRfaW5kZXgiSQoLUGF5bWVudEhh",
+            "c2gSIgoKcl9oYXNoX3N0chgBIAEoCUICGAFSCnJfaGFzaF9zdHISFgoGcl9o",
+            "YXNoGAIgASgMUgZyX2hhc2gipAEKEkxpc3RJbnZvaWNlUmVxdWVzdBIiCgxw",
+            "ZW5kaW5nX29ubHkYASABKAhSDHBlbmRpbmdfb25seRIiCgxpbmRleF9vZmZz",
+            "ZXQYBCABKARSDGluZGV4X29mZnNldBIqChBudW1fbWF4X2ludm9pY2VzGAUg",
+            "ASgEUhBudW1fbWF4X2ludm9pY2VzEhoKCHJldmVyc2VkGAYgASgIUghyZXZl",
+            "cnNlZCKfAQoTTGlzdEludm9pY2VSZXNwb25zZRIqCghpbnZvaWNlcxgBIAMo",
+            "CzIOLmxucnBjLkludm9pY2VSCGludm9pY2VzEiwKEWxhc3RfaW5kZXhfb2Zm",
+            "c2V0GAIgASgEUhFsYXN0X2luZGV4X29mZnNldBIuChJmaXJzdF9pbmRleF9v",
+            "ZmZzZXQYAyABKARSEmZpcnN0X2luZGV4X29mZnNldCJXChNJbnZvaWNlU3Vi",
+            "c2NyaXB0aW9uEhwKCWFkZF9pbmRleBgBIAEoBFIJYWRkX2luZGV4EiIKDHNl",
+            "dHRsZV9pbmRleBgCIAEoBFIMc2V0dGxlX2luZGV4Ir0ECgdQYXltZW50EiIK",
+            "DHBheW1lbnRfaGFzaBgBIAEoCVIMcGF5bWVudF9oYXNoEhgKBXZhbHVlGAIg",
+            "ASgDQgIYAVIFdmFsdWUSKAoNY3JlYXRpb25fZGF0ZRgDIAEoA0ICGAFSDWNy",
+            "ZWF0aW9uX2RhdGUSFgoEcGF0aBgEIAMoCUICGAFSBHBhdGgSFAoDZmVlGAUg",
+            "ASgDQgIYAVIDZmVlEioKEHBheW1lbnRfcHJlaW1hZ2UYBiABKAlSEHBheW1l",
+            "bnRfcHJlaW1hZ2USHAoJdmFsdWVfc2F0GAcgASgDUgl2YWx1ZV9zYXQSHgoK",
+            "dmFsdWVfbXNhdBgIIAEoA1IKdmFsdWVfbXNhdBIoCg9wYXltZW50X3JlcXVl",
+            "c3QYCSABKAlSD3BheW1lbnRfcmVxdWVzdBI0CgZzdGF0dXMYCiABKA4yHC5s",
+            "bnJwYy5QYXltZW50LlBheW1lbnRTdGF0dXNSBnN0YXR1cxIYCgdmZWVfc2F0",
+            "GAsgASgDUgdmZWVfc2F0EhoKCGZlZV9tc2F0GAwgASgDUghmZWVfbXNhdBIq",
+            "ChBjcmVhdGlvbl90aW1lX25zGA0gASgDUhBjcmVhdGlvbl90aW1lX25zEigK",
+            "BWh0bGNzGA4gAygLMhIubG5ycGMuSFRMQ0F0dGVtcHRSBWh0bGNzIkYKDVBh",
+            "eW1lbnRTdGF0dXMSCwoHVU5LTk9XThAAEg0KCUlOX0ZMSUdIVBABEg0KCVNV",
+            "Q0NFRURFRBACEgoKBkZBSUxFRBADIvQBCgtIVExDQXR0ZW1wdBI1CgZzdGF0",
+            "dXMYASABKA4yHS5sbnJwYy5IVExDQXR0ZW1wdC5IVExDU3RhdHVzUgZzdGF0",
+            "dXMSIgoFcm91dGUYAiABKAsyDC5sbnJwYy5Sb3V0ZVIFcm91dGUSKAoPYXR0",
+            "ZW1wdF90aW1lX25zGAMgASgDUg9hdHRlbXB0X3RpbWVfbnMSKAoPcmVzb2x2",
+            "ZV90aW1lX25zGAQgASgDUg9yZXNvbHZlX3RpbWVfbnMiNgoKSFRMQ1N0YXR1",
+            "cxINCglJTl9GTElHSFQQABINCglTVUNDRUVERUQQARIKCgZGQUlMRUQQAiIx",
+            "ChNMaXN0UGF5bWVudHNSZXF1ZXN0EhoKEmluY2x1ZGVfaW5jb21wbGV0ZRgB",
+            "IAEoCCJCChRMaXN0UGF5bWVudHNSZXNwb25zZRIqCghwYXltZW50cxgBIAMo",
+            "CzIOLmxucnBjLlBheW1lbnRSCHBheW1lbnRzIhoKGERlbGV0ZUFsbFBheW1l",
+            "bnRzUmVxdWVzdCIbChlEZWxldGVBbGxQYXltZW50c1Jlc3BvbnNlIkMKFUFi",
+            "YW5kb25DaGFubmVsUmVxdWVzdBIqCg1jaGFubmVsX3BvaW50GAEgASgLMhMu",
+            "bG5ycGMuQ2hhbm5lbFBvaW50IhgKFkFiYW5kb25DaGFubmVsUmVzcG9uc2Ui",
+            "NQoRRGVidWdMZXZlbFJlcXVlc3QSDAoEc2hvdxgBIAEoCBISCgpsZXZlbF9z",
+            "cGVjGAIgASgJIjYKEkRlYnVnTGV2ZWxSZXNwb25zZRIgCgtzdWJfc3lzdGVt",
+            "cxgBIAEoCVILc3ViX3N5c3RlbXMiHwoMUGF5UmVxU3RyaW5nEg8KB3BheV9y",
+            "ZXEYASABKAkirAQKBlBheVJlcRIgCgtkZXN0aW5hdGlvbhgBIAEoCVILZGVz",
+            "dGluYXRpb24SIgoMcGF5bWVudF9oYXNoGAIgASgJUgxwYXltZW50X2hhc2gS",
+            "IgoMbnVtX3NhdG9zaGlzGAMgASgDUgxudW1fc2F0b3NoaXMSHAoJdGltZXN0",
+            "YW1wGAQgASgDUgl0aW1lc3RhbXASFgoGZXhwaXJ5GAUgASgDUgZleHBpcnkS",
+            "IAoLZGVzY3JpcHRpb24YBiABKAlSC2Rlc2NyaXB0aW9uEioKEGRlc2NyaXB0",
+            "aW9uX2hhc2gYByABKAlSEGRlc2NyaXB0aW9uX2hhc2gSJAoNZmFsbGJhY2tf",
+            "YWRkchgIIAEoCVINZmFsbGJhY2tfYWRkchIgCgtjbHR2X2V4cGlyeRgJIAEo",
+            "A1ILY2x0dl9leHBpcnkSMgoLcm91dGVfaGludHMYCiADKAsyEC5sbnJwYy5S",
+            "b3V0ZUhpbnRSC3JvdXRlX2hpbnRzEiIKDHBheW1lbnRfYWRkchgLIAEoDFIM",
+            "cGF5bWVudF9hZGRyEhoKCG51bV9tc2F0GAwgASgDUghudW1fbXNhdBI3Cghm",
+            "ZWF0dXJlcxgNIAMoCzIbLmxucnBjLlBheVJlcS5GZWF0dXJlc0VudHJ5Ughm",
+            "ZWF0dXJlcxo/Cg1GZWF0dXJlc0VudHJ5EgsKA2tleRgBIAEoDRIdCgV2YWx1",
+            "ZRgCIAEoCzIOLmxucnBjLkZlYXR1cmU6AjgBIlsKB0ZlYXR1cmUSEgoEbmFt",
+            "ZRgCIAEoCVIEbmFtZRIgCgtpc19yZXF1aXJlZBgDIAEoCFILaXNfcmVxdWly",
+            "ZWQSGgoIaXNfa25vd24YBCABKAhSCGlzX2tub3duIhIKEEZlZVJlcG9ydFJl",
+            "cXVlc3QimQEKEENoYW5uZWxGZWVSZXBvcnQSIQoKY2hhbl9wb2ludBgBIAEo",
+            "CVINY2hhbm5lbF9wb2ludBIkCg1iYXNlX2ZlZV9tc2F0GAIgASgDUg1iYXNl",
+            "X2ZlZV9tc2F0EiAKC2ZlZV9wZXJfbWlsGAMgASgDUgtmZWVfcGVyX21pbBIa",
+            "CghmZWVfcmF0ZRgEIAEoAVIIZmVlX3JhdGUivAEKEUZlZVJlcG9ydFJlc3Bv",
+            "bnNlEjsKDGNoYW5uZWxfZmVlcxgBIAMoCzIXLmxucnBjLkNoYW5uZWxGZWVS",
+            "ZXBvcnRSDGNoYW5uZWxfZmVlcxIgCgtkYXlfZmVlX3N1bRgCIAEoBFILZGF5",
+            "X2ZlZV9zdW0SIgoMd2Vla19mZWVfc3VtGAMgASgEUgx3ZWVrX2ZlZV9zdW0S",
+            "JAoNbW9udGhfZmVlX3N1bRgEIAEoBFINbW9udGhfZmVlX3N1bSLbAgoTUG9s",
+            "aWN5VXBkYXRlUmVxdWVzdBIYCgZnbG9iYWwYASABKAhIAFIGZ2xvYmFsEjUK",
+            "CmNoYW5fcG9pbnQYAiABKAsyEy5sbnJwYy5DaGFubmVsUG9pbnRIAFIKY2hh",
+            "bl9wb2ludBIkCg1iYXNlX2ZlZV9tc2F0GAMgASgDUg1iYXNlX2ZlZV9tc2F0",
+            "EhoKCGZlZV9yYXRlGAQgASgBUghmZWVfcmF0ZRIoCg90aW1lX2xvY2tfZGVs",
+            "dGEYBSABKA1SD3RpbWVfbG9ja19kZWx0YRIkCg1tYXhfaHRsY19tc2F0GAYg",
+            "ASgEUg1tYXhfaHRsY19tc2F0EiQKDW1pbl9odGxjX21zYXQYByABKARSDW1p",
+            "bl9odGxjX21zYXQSMgoXbWluX2h0bGNfbXNhdF9zcGVjaWZpZWQYCCABKAhS",
+            "EXNldF9taW5faHRsY19tc2F0QgcKBXNjb3BlIhYKFFBvbGljeVVwZGF0ZVJl",
+            "c3BvbnNlIqIBChhGb3J3YXJkaW5nSGlzdG9yeVJlcXVlc3QSHgoKc3RhcnRf",
+            "dGltZRgBIAEoBFIKc3RhcnRfdGltZRIaCghlbmRfdGltZRgCIAEoBFIIZW5k",
+            "X3RpbWUSIgoMaW5kZXhfb2Zmc2V0GAMgASgNUgxpbmRleF9vZmZzZXQSJgoO",
+            "bnVtX21heF9ldmVudHMYBCABKA1SDm51bV9tYXhfZXZlbnRzIp8CCg9Gb3J3",
+            "YXJkaW5nRXZlbnQSHAoJdGltZXN0YW1wGAEgASgEUgl0aW1lc3RhbXASIgoK",
+            "Y2hhbl9pZF9pbhgCIAEoBEICMAFSCmNoYW5faWRfaW4SJAoLY2hhbl9pZF9v",
+            "dXQYBCABKARCAjABUgtjaGFuX2lkX291dBIWCgZhbXRfaW4YBSABKARSBmFt",
+            "dF9pbhIYCgdhbXRfb3V0GAYgASgEUgdhbXRfb3V0EhAKA2ZlZRgHIAEoBFID",
+            "ZmVlEhoKCGZlZV9tc2F0GAggASgEUghmZWVfbXNhdBIgCgthbXRfaW5fbXNh",
+            "dBgJIAEoBFILYW10X2luX21zYXQSIgoMYW10X291dF9tc2F0GAogASgEUgxh",
+            "bXRfb3V0X21zYXQijwEKGUZvcndhcmRpbmdIaXN0b3J5UmVzcG9uc2USRAoR",
+            "Zm9yd2FyZGluZ19ldmVudHMYASADKAsyFi5sbnJwYy5Gb3J3YXJkaW5nRXZl",
+            "bnRSEWZvcndhcmRpbmdfZXZlbnRzEiwKEWxhc3Rfb2Zmc2V0X2luZGV4GAIg",
+            "ASgNUhFsYXN0X29mZnNldF9pbmRleCJFChpFeHBvcnRDaGFubmVsQmFja3Vw",
+            "UmVxdWVzdBInCgpjaGFuX3BvaW50GAEgASgLMhMubG5ycGMuQ2hhbm5lbFBv",
+            "aW50ImYKDUNoYW5uZWxCYWNrdXASMwoKY2hhbl9wb2ludBgBIAEoCzITLmxu",
+            "cnBjLkNoYW5uZWxQb2ludFIKY2hhbl9wb2ludBIgCgtjaGFuX2JhY2t1cBgC",
+            "IAEoDFILY2hhbl9iYWNrdXAidgoPTXVsdGlDaGFuQmFja3VwEjUKC2NoYW5f",
+            "cG9pbnRzGAEgAygLMhMubG5ycGMuQ2hhbm5lbFBvaW50UgtjaGFuX3BvaW50",
+            "cxIsChFtdWx0aV9jaGFuX2JhY2t1cBgCIAEoDFIRbXVsdGlfY2hhbl9iYWNr",
+            "dXAiGQoXQ2hhbkJhY2t1cEV4cG9ydFJlcXVlc3QiowEKEkNoYW5CYWNrdXBT",
+            "bmFwc2hvdBJHChNzaW5nbGVfY2hhbl9iYWNrdXBzGAEgASgLMhUubG5ycGMu",
+            "Q2hhbm5lbEJhY2t1cHNSE3NpbmdsZV9jaGFuX2JhY2t1cHMSRAoRbXVsdGlf",
+            "Y2hhbl9iYWNrdXAYAiABKAsyFi5sbnJwYy5NdWx0aUNoYW5CYWNrdXBSEW11",
+            "bHRpX2NoYW5fYmFja3VwIkoKDkNoYW5uZWxCYWNrdXBzEjgKDGNoYW5fYmFj",
+            "a3VwcxgBIAMoCzIULmxucnBjLkNoYW5uZWxCYWNrdXBSDGNoYW5fYmFja3Vw",
+            "cyKRAQoYUmVzdG9yZUNoYW5CYWNrdXBSZXF1ZXN0EjsKDGNoYW5fYmFja3Vw",
+            "cxgBIAEoCzIVLmxucnBjLkNoYW5uZWxCYWNrdXBzSABSDGNoYW5fYmFja3Vw",
+            "cxIuChFtdWx0aV9jaGFuX2JhY2t1cBgCIAEoDEgAUhFtdWx0aV9jaGFuX2Jh",
+            "Y2t1cEIICgZiYWNrdXAiFwoVUmVzdG9yZUJhY2t1cFJlc3BvbnNlIhsKGUNo",
+            "YW5uZWxCYWNrdXBTdWJzY3JpcHRpb24iGgoYVmVyaWZ5Q2hhbkJhY2t1cFJl",
+            "c3BvbnNlIkQKEk1hY2Fyb29uUGVybWlzc2lvbhIWCgZlbnRpdHkYASABKAlS",
+            "BmVudGl0eRIWCgZhY3Rpb24YAiABKAlSBmFjdGlvbiJSChNCYWtlTWFjYXJv",
+            "b25SZXF1ZXN0EjsKC3Blcm1pc3Npb25zGAEgAygLMhkubG5ycGMuTWFjYXJv",
+            "b25QZXJtaXNzaW9uUgtwZXJtaXNzaW9ucyIyChRCYWtlTWFjYXJvb25SZXNw",
+            "b25zZRIaCghtYWNhcm9vbhgBIAEoCVIIbWFjYXJvb24qfQoLQWRkcmVzc1R5",
+            "cGUSFwoTV0lUTkVTU19QVUJLRVlfSEFTSBAAEhYKEk5FU1RFRF9QVUJLRVlf",
+            "SEFTSBABEh4KGlVOVVNFRF9XSVRORVNTX1BVQktFWV9IQVNIEAISHQoZVU5V",
+            "U0VEX05FU1RFRF9QVUJLRVlfSEFTSBADKjsKEEludm9pY2VIVExDU3RhdGUS",
+            "DAoIQUNDRVBURUQQABILCgdTRVRUTEVEEAESDAoIQ0FOQ0VMRUQQAiqlAwoK",
+            "RmVhdHVyZUJpdBIYChREQVRBTE9TU19QUk9URUNUX1JFURAAEhgKFERBVEFM",
+            "T1NTX1BST1RFQ1RfT1BUEAESFwoTSU5JVElBTF9ST1VJTkdfU1lOQxADEh8K",
+            "G1VQRlJPTlRfU0hVVERPV05fU0NSSVBUX1JFURAEEh8KG1VQRlJPTlRfU0hV",
+            "VERPV05fU0NSSVBUX09QVBAFEhYKEkdPU1NJUF9RVUVSSUVTX1JFURAGEhYK",
+            "EkdPU1NJUF9RVUVSSUVTX09QVBAHEhEKDVRMVl9PTklPTl9SRVEQCBIRCg1U",
+            "TFZfT05JT05fT1BUEAkSGgoWRVhUX0dPU1NJUF9RVUVSSUVTX1JFURAKEhoK",
+            "FkVYVF9HT1NTSVBfUVVFUklFU19PUFQQCxIZChVTVEFUSUNfUkVNT1RFX0tF",
+            "WV9SRVEQDBIZChVTVEFUSUNfUkVNT1RFX0tFWV9PUFQQDRIUChBQQVlNRU5U",
+            "X0FERFJfUkVREA4SFAoQUEFZTUVOVF9BRERSX09QVBAPEgsKB01QUF9SRVEQ",
+            "EBILCgdNUFBfT1BUEBEyrQIKDldhbGxldFVubG9ja2VyEjoKB0dlblNlZWQS",
+            "FS5sbnJwYy5HZW5TZWVkUmVxdWVzdBoWLmxucnBjLkdlblNlZWRSZXNwb25z",
+            "ZSIAEkMKCkluaXRXYWxsZXQSGC5sbnJwYy5Jbml0V2FsbGV0UmVxdWVzdBoZ",
+            "LmxucnBjLkluaXRXYWxsZXRSZXNwb25zZSIAEkkKDFVubG9ja1dhbGxldBIa",
+            "LmxucnBjLlVubG9ja1dhbGxldFJlcXVlc3QaGy5sbnJwYy5VbmxvY2tXYWxs",
+            "ZXRSZXNwb25zZSIAEk8KDkNoYW5nZVBhc3N3b3JkEhwubG5ycGMuQ2hhbmdl",
+            "UGFzc3dvcmRSZXF1ZXN0Gh0ubG5ycGMuQ2hhbmdlUGFzc3dvcmRSZXNwb25z",
+            "ZSIAMv8eCglMaWdodG5pbmcSTAoNV2FsbGV0QmFsYW5jZRIbLmxucnBjLldh",
+            "bGxldEJhbGFuY2VSZXF1ZXN0GhwubG5ycGMuV2FsbGV0QmFsYW5jZVJlc3Bv",
+            "bnNlIgASTwoOQ2hhbm5lbEJhbGFuY2USHC5sbnJwYy5DaGFubmVsQmFsYW5j",
+            "ZVJlcXVlc3QaHS5sbnJwYy5DaGFubmVsQmFsYW5jZVJlc3BvbnNlIgASTQoP",
+            "R2V0VHJhbnNhY3Rpb25zEh0ubG5ycGMuR2V0VHJhbnNhY3Rpb25zUmVxdWVz",
+            "dBoZLmxucnBjLlRyYW5zYWN0aW9uRGV0YWlscyIAEkYKC0VzdGltYXRlRmVl",
+            "EhkubG5ycGMuRXN0aW1hdGVGZWVSZXF1ZXN0GhoubG5ycGMuRXN0aW1hdGVG",
+            "ZWVSZXNwb25zZSIAEkAKCVNlbmRDb2lucxIXLmxucnBjLlNlbmRDb2luc1Jl",
+            "cXVlc3QaGC5sbnJwYy5TZW5kQ29pbnNSZXNwb25zZSIAEkYKC0xpc3RVbnNw",
+            "ZW50EhkubG5ycGMuTGlzdFVuc3BlbnRSZXF1ZXN0GhoubG5ycGMuTGlzdFVu",
+            "c3BlbnRSZXNwb25zZSIAEkwKFVN1YnNjcmliZVRyYW5zYWN0aW9ucxIdLmxu",
+            "cnBjLkdldFRyYW5zYWN0aW9uc1JlcXVlc3QaEi5sbnJwYy5UcmFuc2FjdGlv",
+            "bjABEjsKCFNlbmRNYW55EhYubG5ycGMuU2VuZE1hbnlSZXF1ZXN0GhcubG5y",
+            "cGMuU2VuZE1hbnlSZXNwb25zZRJDCgpOZXdBZGRyZXNzEhgubG5ycGMuTmV3",
+            "QWRkcmVzc1JlcXVlc3QaGS5sbnJwYy5OZXdBZGRyZXNzUmVzcG9uc2UiABJG",
+            "CgtTaWduTWVzc2FnZRIZLmxucnBjLlNpZ25NZXNzYWdlUmVxdWVzdBoaLmxu",
+            "cnBjLlNpZ25NZXNzYWdlUmVzcG9uc2UiABJMCg1WZXJpZnlNZXNzYWdlEhsu",
+            "bG5ycGMuVmVyaWZ5TWVzc2FnZVJlcXVlc3QaHC5sbnJwYy5WZXJpZnlNZXNz",
+            "YWdlUmVzcG9uc2UiABJGCgtDb25uZWN0UGVlchIZLmxucnBjLkNvbm5lY3RQ",
+            "ZWVyUmVxdWVzdBoaLmxucnBjLkNvbm5lY3RQZWVyUmVzcG9uc2UiABJPCg5E",
+            "aXNjb25uZWN0UGVlchIcLmxucnBjLkRpc2Nvbm5lY3RQZWVyUmVxdWVzdBod",
+            "LmxucnBjLkRpc2Nvbm5lY3RQZWVyUmVzcG9uc2UiABJACglMaXN0UGVlcnMS",
+            "Fy5sbnJwYy5MaXN0UGVlcnNSZXF1ZXN0GhgubG5ycGMuTGlzdFBlZXJzUmVz",
+            "cG9uc2UiABJHChNTdWJzY3JpYmVQZWVyRXZlbnRzEhwubG5ycGMuUGVlckV2",
+            "ZW50U3Vic2NyaXB0aW9uGhAubG5ycGMuUGVlckV2ZW50MAESOgoHR2V0SW5m",
+            "bxIVLmxucnBjLkdldEluZm9SZXF1ZXN0GhYubG5ycGMuR2V0SW5mb1Jlc3Bv",
+            "bnNlIgASUgoPUGVuZGluZ0NoYW5uZWxzEh0ubG5ycGMuUGVuZGluZ0NoYW5u",
+            "ZWxzUmVxdWVzdBoeLmxucnBjLlBlbmRpbmdDaGFubmVsc1Jlc3BvbnNlIgAS",
+            "SQoMTGlzdENoYW5uZWxzEhoubG5ycGMuTGlzdENoYW5uZWxzUmVxdWVzdBob",
+            "LmxucnBjLkxpc3RDaGFubmVsc1Jlc3BvbnNlIgASVgoWU3Vic2NyaWJlQ2hh",
+            "bm5lbEV2ZW50cxIfLmxucnBjLkNoYW5uZWxFdmVudFN1YnNjcmlwdGlvbhoZ",
+            "LmxucnBjLkNoYW5uZWxFdmVudFVwZGF0ZTABEk8KDkNsb3NlZENoYW5uZWxz",
+            "EhwubG5ycGMuQ2xvc2VkQ2hhbm5lbHNSZXF1ZXN0Gh0ubG5ycGMuQ2xvc2Vk",
+            "Q2hhbm5lbHNSZXNwb25zZSIAEkMKD09wZW5DaGFubmVsU3luYxIZLmxucnBj",
+            "Lk9wZW5DaGFubmVsUmVxdWVzdBoTLmxucnBjLkNoYW5uZWxQb2ludCIAEkMK",
+            "C09wZW5DaGFubmVsEhkubG5ycGMuT3BlbkNoYW5uZWxSZXF1ZXN0GhcubG5y",
+            "cGMuT3BlblN0YXR1c1VwZGF0ZTABEkwKEEZ1bmRpbmdTdGF0ZVN0ZXASGy5s",
+            "bnJwYy5GdW5kaW5nVHJhbnNpdGlvbk1zZxobLmxucnBjLkZ1bmRpbmdTdGF0",
+            "ZVN0ZXBSZXNwElAKD0NoYW5uZWxBY2NlcHRvchIcLmxucnBjLkNoYW5uZWxB",
+            "Y2NlcHRSZXNwb25zZRobLmxucnBjLkNoYW5uZWxBY2NlcHRSZXF1ZXN0KAEw",
+            "ARJICgxDbG9zZUNoYW5uZWwSGi5sbnJwYy5DbG9zZUNoYW5uZWxSZXF1ZXN0",
+            "GhgubG5ycGMuQ2xvc2VTdGF0dXNVcGRhdGUiADABEk8KDkFiYW5kb25DaGFu",
+            "bmVsEhwubG5ycGMuQWJhbmRvbkNoYW5uZWxSZXF1ZXN0Gh0ubG5ycGMuQWJh",
+            "bmRvbkNoYW5uZWxSZXNwb25zZSIAEjoKC1NlbmRQYXltZW50EhIubG5ycGMu",
+            "U2VuZFJlcXVlc3QaEy5sbnJwYy5TZW5kUmVzcG9uc2UoATABEjwKD1NlbmRQ",
+            "YXltZW50U3luYxISLmxucnBjLlNlbmRSZXF1ZXN0GhMubG5ycGMuU2VuZFJl",
+            "c3BvbnNlIgASQQoLU2VuZFRvUm91dGUSGS5sbnJwYy5TZW5kVG9Sb3V0ZVJl",
+            "cXVlc3QaEy5sbnJwYy5TZW5kUmVzcG9uc2UoATABEkMKD1NlbmRUb1JvdXRl",
+            "U3luYxIZLmxucnBjLlNlbmRUb1JvdXRlUmVxdWVzdBoTLmxucnBjLlNlbmRS",
+            "ZXNwb25zZSIAEjkKCkFkZEludm9pY2USDi5sbnJwYy5JbnZvaWNlGhkubG5y",
+            "cGMuQWRkSW52b2ljZVJlc3BvbnNlIgASRwoMTGlzdEludm9pY2VzEhkubG5y",
+            "cGMuTGlzdEludm9pY2VSZXF1ZXN0GhoubG5ycGMuTGlzdEludm9pY2VSZXNw",
+            "b25zZSIAEjUKDUxvb2t1cEludm9pY2USEi5sbnJwYy5QYXltZW50SGFzaBoO",
+            "LmxucnBjLkludm9pY2UiABJDChFTdWJzY3JpYmVJbnZvaWNlcxIaLmxucnBj",
+            "Lkludm9pY2VTdWJzY3JpcHRpb24aDi5sbnJwYy5JbnZvaWNlIgAwARI0CgxE",
+            "ZWNvZGVQYXlSZXESEy5sbnJwYy5QYXlSZXFTdHJpbmcaDS5sbnJwYy5QYXlS",
+            "ZXEiABJJCgxMaXN0UGF5bWVudHMSGi5sbnJwYy5MaXN0UGF5bWVudHNSZXF1",
+            "ZXN0GhsubG5ycGMuTGlzdFBheW1lbnRzUmVzcG9uc2UiABJYChFEZWxldGVB",
+            "bGxQYXltZW50cxIfLmxucnBjLkRlbGV0ZUFsbFBheW1lbnRzUmVxdWVzdBog",
+            "LmxucnBjLkRlbGV0ZUFsbFBheW1lbnRzUmVzcG9uc2UiABJCCg1EZXNjcmli",
+            "ZUdyYXBoEhoubG5ycGMuQ2hhbm5lbEdyYXBoUmVxdWVzdBoTLmxucnBjLkNo",
+            "YW5uZWxHcmFwaCIAEjsKC0dldENoYW5JbmZvEhYubG5ycGMuQ2hhbkluZm9S",
+            "ZXF1ZXN0GhIubG5ycGMuQ2hhbm5lbEVkZ2UiABI4CgtHZXROb2RlSW5mbxIW",
+            "LmxucnBjLk5vZGVJbmZvUmVxdWVzdBoPLmxucnBjLk5vZGVJbmZvIgASRgoL",
+            "UXVlcnlSb3V0ZXMSGS5sbnJwYy5RdWVyeVJvdXRlc1JlcXVlc3QaGi5sbnJw",
+            "Yy5RdWVyeVJvdXRlc1Jlc3BvbnNlIgASQQoOR2V0TmV0d29ya0luZm8SGS5s",
+            "bnJwYy5OZXR3b3JrSW5mb1JlcXVlc3QaEi5sbnJwYy5OZXR3b3JrSW5mbyIA",
+            "EjUKClN0b3BEYWVtb24SEi5sbnJwYy5TdG9wUmVxdWVzdBoTLmxucnBjLlN0",
+            "b3BSZXNwb25zZRJXChVTdWJzY3JpYmVDaGFubmVsR3JhcGgSIC5sbnJwYy5H",
+            "cmFwaFRvcG9sb2d5U3Vic2NyaXB0aW9uGhoubG5ycGMuR3JhcGhUb3BvbG9n",
+            "eVVwZGF0ZTABEkEKCkRlYnVnTGV2ZWwSGC5sbnJwYy5EZWJ1Z0xldmVsUmVx",
+            "dWVzdBoZLmxucnBjLkRlYnVnTGV2ZWxSZXNwb25zZRJACglGZWVSZXBvcnQS",
+            "Fy5sbnJwYy5GZWVSZXBvcnRSZXF1ZXN0GhgubG5ycGMuRmVlUmVwb3J0UmVz",
+            "cG9uc2UiABJQChNVcGRhdGVDaGFubmVsUG9saWN5EhoubG5ycGMuUG9saWN5",
+            "VXBkYXRlUmVxdWVzdBobLmxucnBjLlBvbGljeVVwZGF0ZVJlc3BvbnNlIgAS",
+            "WAoRRm9yd2FyZGluZ0hpc3RvcnkSHy5sbnJwYy5Gb3J3YXJkaW5nSGlzdG9y",
+            "eVJlcXVlc3QaIC5sbnJwYy5Gb3J3YXJkaW5nSGlzdG9yeVJlc3BvbnNlIgAS",
+            "UAoTRXhwb3J0Q2hhbm5lbEJhY2t1cBIhLmxucnBjLkV4cG9ydENoYW5uZWxC",
+            "YWNrdXBSZXF1ZXN0GhQubG5ycGMuQ2hhbm5lbEJhY2t1cCIAElYKF0V4cG9y",
+            "dEFsbENoYW5uZWxCYWNrdXBzEh4ubG5ycGMuQ2hhbkJhY2t1cEV4cG9ydFJl",
+            "cXVlc3QaGS5sbnJwYy5DaGFuQmFja3VwU25hcHNob3QiABJQChBWZXJpZnlD",
+            "aGFuQmFja3VwEhkubG5ycGMuQ2hhbkJhY2t1cFNuYXBzaG90Gh8ubG5ycGMu",
+            "VmVyaWZ5Q2hhbkJhY2t1cFJlc3BvbnNlIgASWAoVUmVzdG9yZUNoYW5uZWxC",
+            "YWNrdXBzEh8ubG5ycGMuUmVzdG9yZUNoYW5CYWNrdXBSZXF1ZXN0GhwubG5y",
+            "cGMuUmVzdG9yZUJhY2t1cFJlc3BvbnNlIgASWgoXU3Vic2NyaWJlQ2hhbm5l",
+            "bEJhY2t1cHMSIC5sbnJwYy5DaGFubmVsQmFja3VwU3Vic2NyaXB0aW9uGhku",
+            "bG5ycGMuQ2hhbkJhY2t1cFNuYXBzaG90IgAwARJJCgxCYWtlTWFjYXJvb24S",
+            "Gi5sbnJwYy5CYWtlTWFjYXJvb25SZXF1ZXN0GhsubG5ycGMuQmFrZU1hY2Fy",
+            "b29uUmVzcG9uc2UiAEInWiVnaXRodWIuY29tL2xpZ2h0bmluZ25ldHdvcmsv",
+            "bG5kL2xucnBjYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Lnrpc.AddressType), typeof(global::Lnrpc.InvoiceHTLCState), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Lnrpc.AddressType), typeof(global::Lnrpc.InvoiceHTLCState), typeof(global::Lnrpc.FeatureBit), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GenSeedRequest), global::Lnrpc.GenSeedRequest.Parser, new[]{ "AezeedPassphrase", "SeedEntropy" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GenSeedResponse), global::Lnrpc.GenSeedResponse.Parser, new[]{ "CipherSeedMnemonic", "EncipheredSeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.InitWalletRequest), global::Lnrpc.InitWalletRequest.Parser, new[]{ "WalletPassword", "CipherSeedMnemonic", "AezeedPassphrase", "RecoveryWindow", "ChannelBackups" }, null, null, null),
@@ -575,8 +664,8 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Transaction), global::Lnrpc.Transaction.Parser, new[]{ "TxHash", "Amount", "NumConfirmations", "BlockHash", "BlockHeight", "TimeStamp", "TotalFees", "DestAddresses", "RawTxHex" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GetTransactionsRequest), global::Lnrpc.GetTransactionsRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.TransactionDetails), global::Lnrpc.TransactionDetails.Parser, new[]{ "Transactions" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FeeLimit), global::Lnrpc.FeeLimit.Parser, new[]{ "Fixed", "Percent" }, new[]{ "Limit" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.SendRequest), global::Lnrpc.SendRequest.Parser, new[]{ "Dest", "DestString", "Amt", "PaymentHash", "PaymentHashString", "PaymentRequest", "FinalCltvDelta", "FeeLimit", "OutgoingChanId", "CltvLimit", "DestTlv" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FeeLimit), global::Lnrpc.FeeLimit.Parser, new[]{ "Fixed", "FixedMsat", "Percent" }, new[]{ "Limit" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.SendRequest), global::Lnrpc.SendRequest.Parser, new[]{ "Dest", "DestString", "Amt", "AmtMsat", "PaymentHash", "PaymentHashString", "PaymentRequest", "FinalCltvDelta", "FeeLimit", "OutgoingChanId", "LastHopPubkey", "CltvLimit", "DestCustomRecords", "AllowSelfPayment", "DestFeatures" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.SendResponse), global::Lnrpc.SendResponse.Parser, new[]{ "PaymentError", "PaymentPreimage", "PaymentRoute", "PaymentHash" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.SendToRouteRequest), global::Lnrpc.SendToRouteRequest.Parser, new[]{ "PaymentHash", "PaymentHashString", "Route" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelAcceptRequest), global::Lnrpc.ChannelAcceptRequest.Parser, new[]{ "NodePubkey", "ChainHash", "PendingChanId", "FundingAmt", "PushAmt", "DustLimit", "MaxValueInFlight", "ChannelReserve", "MinHtlc", "FeePerKw", "CsvDelay", "MaxAcceptedHtlcs", "ChannelFlags" }, null, null, null),
@@ -603,26 +692,35 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.DisconnectPeerRequest), global::Lnrpc.DisconnectPeerRequest.Parser, new[]{ "PubKey" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.DisconnectPeerResponse), global::Lnrpc.DisconnectPeerResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.HTLC), global::Lnrpc.HTLC.Parser, new[]{ "Incoming", "Amount", "HashLock", "ExpirationHeight" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Channel), global::Lnrpc.Channel.Parser, new[]{ "Active", "RemotePubkey", "ChannelPoint", "ChanId", "Capacity", "LocalBalance", "RemoteBalance", "CommitFee", "CommitWeight", "FeePerKw", "UnsettledBalance", "TotalSatoshisSent", "TotalSatoshisReceived", "NumUpdates", "PendingHtlcs", "CsvDelay", "Private", "Initiator", "ChanStatusFlags", "LocalChanReserveSat", "RemoteChanReserveSat", "StaticRemoteKey" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Channel), global::Lnrpc.Channel.Parser, new[]{ "Active", "RemotePubkey", "ChannelPoint", "ChanId", "Capacity", "LocalBalance", "RemoteBalance", "CommitFee", "CommitWeight", "FeePerKw", "UnsettledBalance", "TotalSatoshisSent", "TotalSatoshisReceived", "NumUpdates", "PendingHtlcs", "CsvDelay", "Private", "Initiator", "ChanStatusFlags", "LocalChanReserveSat", "RemoteChanReserveSat", "StaticRemoteKey", "Lifetime", "Uptime", "CloseAddress" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListChannelsRequest), global::Lnrpc.ListChannelsRequest.Parser, new[]{ "ActiveOnly", "InactiveOnly", "PublicOnly", "PrivateOnly" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListChannelsResponse), global::Lnrpc.ListChannelsResponse.Parser, new[]{ "Channels" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelCloseSummary), global::Lnrpc.ChannelCloseSummary.Parser, new[]{ "ChannelPoint", "ChanId", "ChainHash", "ClosingTxHash", "RemotePubkey", "Capacity", "CloseHeight", "SettledBalance", "TimeLockedBalance", "CloseType" }, null, new[]{ typeof(global::Lnrpc.ChannelCloseSummary.Types.ClosureType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ClosedChannelsRequest), global::Lnrpc.ClosedChannelsRequest.Parser, new[]{ "Cooperative", "LocalForce", "RemoteForce", "Breach", "FundingCanceled", "Abandoned" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ClosedChannelsResponse), global::Lnrpc.ClosedChannelsResponse.Parser, new[]{ "Channels" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Peer), global::Lnrpc.Peer.Parser, new[]{ "PubKey", "Address", "BytesSent", "BytesRecv", "SatSent", "SatRecv", "Inbound", "PingTime", "SyncType" }, null, new[]{ typeof(global::Lnrpc.Peer.Types.SyncType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Peer), global::Lnrpc.Peer.Parser, new[]{ "PubKey", "Address", "BytesSent", "BytesRecv", "SatSent", "SatRecv", "Inbound", "PingTime", "SyncType", "Features" }, null, new[]{ typeof(global::Lnrpc.Peer.Types.SyncType) }, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListPeersRequest), global::Lnrpc.ListPeersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListPeersResponse), global::Lnrpc.ListPeersResponse.Parser, new[]{ "Peers" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PeerEventSubscription), global::Lnrpc.PeerEventSubscription.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PeerEvent), global::Lnrpc.PeerEvent.Parser, new[]{ "PubKey", "Type" }, null, new[]{ typeof(global::Lnrpc.PeerEvent.Types.EventType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GetInfoRequest), global::Lnrpc.GetInfoRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GetInfoResponse), global::Lnrpc.GetInfoResponse.Parser, new[]{ "IdentityPubkey", "Alias", "NumPendingChannels", "NumActiveChannels", "NumPeers", "BlockHeight", "BlockHash", "SyncedToChain", "Testnet", "Uris", "BestHeaderTimestamp", "Version", "NumInactiveChannels", "Chains", "Color", "SyncedToGraph" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.GetInfoResponse), global::Lnrpc.GetInfoResponse.Parser, new[]{ "Version", "IdentityPubkey", "Alias", "Color", "NumPendingChannels", "NumActiveChannels", "NumInactiveChannels", "NumPeers", "BlockHeight", "BlockHash", "BestHeaderTimestamp", "SyncedToChain", "SyncedToGraph", "Testnet", "Chains", "Uris", "Features" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Chain), global::Lnrpc.Chain.Parser, new[]{ "Chain_", "Network" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ConfirmationUpdate), global::Lnrpc.ConfirmationUpdate.Parser, new[]{ "BlockSha", "BlockHeight", "NumConfsLeft" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelOpenUpdate), global::Lnrpc.ChannelOpenUpdate.Parser, new[]{ "ChannelPoint" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelCloseUpdate), global::Lnrpc.ChannelCloseUpdate.Parser, new[]{ "ClosingTxid", "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.CloseChannelRequest), global::Lnrpc.CloseChannelRequest.Parser, new[]{ "ChannelPoint", "Force", "TargetConf", "SatPerByte" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.CloseChannelRequest), global::Lnrpc.CloseChannelRequest.Parser, new[]{ "ChannelPoint", "Force", "TargetConf", "SatPerByte", "DeliveryAddress" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.CloseStatusUpdate), global::Lnrpc.CloseStatusUpdate.Parser, new[]{ "ClosePending", "ChanClose" }, new[]{ "Update" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PendingUpdate), global::Lnrpc.PendingUpdate.Parser, new[]{ "Txid", "OutputIndex" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.OpenChannelRequest), global::Lnrpc.OpenChannelRequest.Parser, new[]{ "NodePubkey", "NodePubkeyString", "LocalFundingAmount", "PushSat", "TargetConf", "SatPerByte", "Private", "MinHtlcMsat", "RemoteCsvDelay", "MinConfs", "SpendUnconfirmed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.OpenStatusUpdate), global::Lnrpc.OpenStatusUpdate.Parser, new[]{ "ChanPending", "ChanOpen" }, new[]{ "Update" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.OpenChannelRequest), global::Lnrpc.OpenChannelRequest.Parser, new[]{ "NodePubkey", "NodePubkeyString", "LocalFundingAmount", "PushSat", "TargetConf", "SatPerByte", "Private", "MinHtlcMsat", "RemoteCsvDelay", "MinConfs", "SpendUnconfirmed", "CloseAddress", "FundingShim" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.OpenStatusUpdate), global::Lnrpc.OpenStatusUpdate.Parser, new[]{ "ChanPending", "ChanOpen", "PendingChanId" }, new[]{ "Update" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.KeyLocator), global::Lnrpc.KeyLocator.Parser, new[]{ "KeyFamily", "KeyIndex" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.KeyDescriptor), global::Lnrpc.KeyDescriptor.Parser, new[]{ "RawKeyBytes", "KeyLoc" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChanPointShim), global::Lnrpc.ChanPointShim.Parser, new[]{ "Amt", "ChanPoint", "LocalKey", "RemoteKey", "PendingChanId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FundingShim), global::Lnrpc.FundingShim.Parser, new[]{ "ChanPointShim" }, new[]{ "Shim" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FundingShimCancel), global::Lnrpc.FundingShimCancel.Parser, new[]{ "PendingChanId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FundingTransitionMsg), global::Lnrpc.FundingTransitionMsg.Parser, new[]{ "ShimRegister", "ShimCancel" }, new[]{ "Trigger" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FundingStateStepResp), global::Lnrpc.FundingStateStepResp.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PendingHTLC), global::Lnrpc.PendingHTLC.Parser, new[]{ "Incoming", "Amount", "Outpoint", "MaturityHeight", "BlocksTilMaturity", "Stage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PendingChannelsRequest), global::Lnrpc.PendingChannelsRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PendingChannelsResponse), global::Lnrpc.PendingChannelsResponse.Parser, new[]{ "TotalLimboBalance", "PendingOpenChannels", "PendingClosingChannels", "PendingForceClosingChannels", "WaitingCloseChannels" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PendingChannelsResponse.Types.PendingChannel), global::Lnrpc.PendingChannelsResponse.Types.PendingChannel.Parser, new[]{ "RemoteNodePub", "ChannelPoint", "Capacity", "LocalBalance", "RemoteBalance", "LocalChanReserveSat", "RemoteChanReserveSat" }, null, null, null),
@@ -636,15 +734,16 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.WalletBalanceResponse), global::Lnrpc.WalletBalanceResponse.Parser, new[]{ "TotalBalance", "ConfirmedBalance", "UnconfirmedBalance" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelBalanceRequest), global::Lnrpc.ChannelBalanceRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelBalanceResponse), global::Lnrpc.ChannelBalanceResponse.Parser, new[]{ "Balance", "PendingOpenBalance" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.QueryRoutesRequest), global::Lnrpc.QueryRoutesRequest.Parser, new[]{ "PubKey", "Amt", "FinalCltvDelta", "FeeLimit", "IgnoredNodes", "IgnoredEdges", "SourcePubKey", "UseMissionControl", "IgnoredPairs", "CltvLimit" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.QueryRoutesRequest), global::Lnrpc.QueryRoutesRequest.Parser, new[]{ "PubKey", "Amt", "AmtMsat", "FinalCltvDelta", "FeeLimit", "IgnoredNodes", "IgnoredEdges", "SourcePubKey", "UseMissionControl", "IgnoredPairs", "CltvLimit", "DestCustomRecords", "OutgoingChanId", "LastHopPubkey", "RouteHints", "DestFeatures" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.NodePair), global::Lnrpc.NodePair.Parser, new[]{ "From", "To" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.EdgeLocator), global::Lnrpc.EdgeLocator.Parser, new[]{ "ChannelId", "DirectionReverse" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.QueryRoutesResponse), global::Lnrpc.QueryRoutesResponse.Parser, new[]{ "Routes", "SuccessProb" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Hop), global::Lnrpc.Hop.Parser, new[]{ "ChanId", "ChanCapacity", "AmtToForward", "Fee", "Expiry", "AmtToForwardMsat", "FeeMsat", "PubKey", "TlvPayload" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Hop), global::Lnrpc.Hop.Parser, new[]{ "ChanId", "ChanCapacity", "AmtToForward", "Fee", "Expiry", "AmtToForwardMsat", "FeeMsat", "PubKey", "TlvPayload", "MppRecord", "CustomRecords" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.MPPRecord), global::Lnrpc.MPPRecord.Parser, new[]{ "PaymentAddr", "TotalAmtMsat" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Route), global::Lnrpc.Route.Parser, new[]{ "TotalTimeLock", "TotalFees", "TotalAmt", "Hops", "TotalFeesMsat", "TotalAmtMsat" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.NodeInfoRequest), global::Lnrpc.NodeInfoRequest.Parser, new[]{ "PubKey", "IncludeChannels" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.NodeInfo), global::Lnrpc.NodeInfo.Parser, new[]{ "Node", "NumChannels", "TotalCapacity", "Channels" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.LightningNode), global::Lnrpc.LightningNode.Parser, new[]{ "LastUpdate", "PubKey", "Alias", "Addresses", "Color" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.LightningNode), global::Lnrpc.LightningNode.Parser, new[]{ "LastUpdate", "PubKey", "Alias", "Addresses", "Color", "Features" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.NodeAddress), global::Lnrpc.NodeAddress.Parser, new[]{ "Network", "Addr" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.RoutingPolicy), global::Lnrpc.RoutingPolicy.Parser, new[]{ "TimeLockDelta", "MinHtlc", "FeeBaseMsat", "FeeRateMilliMsat", "Disabled", "MaxHtlcMsat", "LastUpdate" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelEdge), global::Lnrpc.ChannelEdge.Parser, new[]{ "ChannelId", "ChanPoint", "LastUpdate", "Node1Pub", "Node2Pub", "Capacity", "Node1Policy", "Node2Policy" }, null, null, null),
@@ -662,14 +761,15 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ClosedChannelUpdate), global::Lnrpc.ClosedChannelUpdate.Parser, new[]{ "ChanId", "Capacity", "ClosedHeight", "ChanPoint" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.HopHint), global::Lnrpc.HopHint.Parser, new[]{ "NodeId", "ChanId", "FeeBaseMsat", "FeeProportionalMillionths", "CltvExpiryDelta" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.RouteHint), global::Lnrpc.RouteHint.Parser, new[]{ "HopHints" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Invoice), global::Lnrpc.Invoice.Parser, new[]{ "Memo", "Receipt", "RPreimage", "RHash", "Value", "Settled", "CreationDate", "SettleDate", "PaymentRequest", "DescriptionHash", "Expiry", "FallbackAddr", "CltvExpiry", "RouteHints", "Private", "AddIndex", "SettleIndex", "AmtPaid", "AmtPaidSat", "AmtPaidMsat", "State", "Htlcs" }, null, new[]{ typeof(global::Lnrpc.Invoice.Types.InvoiceState) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.InvoiceHTLC), global::Lnrpc.InvoiceHTLC.Parser, new[]{ "ChanId", "HtlcIndex", "AmtMsat", "AcceptHeight", "AcceptTime", "ResolveTime", "ExpiryHeight", "State" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Invoice), global::Lnrpc.Invoice.Parser, new[]{ "Memo", "RPreimage", "RHash", "Value", "ValueMsat", "Settled", "CreationDate", "SettleDate", "PaymentRequest", "DescriptionHash", "Expiry", "FallbackAddr", "CltvExpiry", "RouteHints", "Private", "AddIndex", "SettleIndex", "AmtPaid", "AmtPaidSat", "AmtPaidMsat", "State", "Htlcs", "Features", "IsKeysend" }, null, new[]{ typeof(global::Lnrpc.Invoice.Types.InvoiceState) }, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.InvoiceHTLC), global::Lnrpc.InvoiceHTLC.Parser, new[]{ "ChanId", "HtlcIndex", "AmtMsat", "AcceptHeight", "AcceptTime", "ResolveTime", "ExpiryHeight", "State", "CustomRecords", "MppTotalAmtMsat" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.AddInvoiceResponse), global::Lnrpc.AddInvoiceResponse.Parser, new[]{ "RHash", "PaymentRequest", "AddIndex" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PaymentHash), global::Lnrpc.PaymentHash.Parser, new[]{ "RHashStr", "RHash" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListInvoiceRequest), global::Lnrpc.ListInvoiceRequest.Parser, new[]{ "PendingOnly", "IndexOffset", "NumMaxInvoices", "Reversed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListInvoiceResponse), global::Lnrpc.ListInvoiceResponse.Parser, new[]{ "Invoices", "LastIndexOffset", "FirstIndexOffset" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.InvoiceSubscription), global::Lnrpc.InvoiceSubscription.Parser, new[]{ "AddIndex", "SettleIndex" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Payment), global::Lnrpc.Payment.Parser, new[]{ "PaymentHash", "Value", "CreationDate", "Path", "Fee", "PaymentPreimage", "ValueSat", "ValueMsat", "PaymentRequest", "Status", "FeeSat", "FeeMsat" }, null, new[]{ typeof(global::Lnrpc.Payment.Types.PaymentStatus) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Payment), global::Lnrpc.Payment.Parser, new[]{ "PaymentHash", "Value", "CreationDate", "Path", "Fee", "PaymentPreimage", "ValueSat", "ValueMsat", "PaymentRequest", "Status", "FeeSat", "FeeMsat", "CreationTimeNs", "Htlcs" }, null, new[]{ typeof(global::Lnrpc.Payment.Types.PaymentStatus) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.HTLCAttempt), global::Lnrpc.HTLCAttempt.Parser, new[]{ "Status", "Route", "AttemptTimeNs", "ResolveTimeNs" }, null, new[]{ typeof(global::Lnrpc.HTLCAttempt.Types.HTLCStatus) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListPaymentsRequest), global::Lnrpc.ListPaymentsRequest.Parser, new[]{ "IncludeIncomplete" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ListPaymentsResponse), global::Lnrpc.ListPaymentsResponse.Parser, new[]{ "Payments" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.DeleteAllPaymentsRequest), global::Lnrpc.DeleteAllPaymentsRequest.Parser, null, null, null, null),
@@ -679,11 +779,12 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.DebugLevelRequest), global::Lnrpc.DebugLevelRequest.Parser, new[]{ "Show", "LevelSpec" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.DebugLevelResponse), global::Lnrpc.DebugLevelResponse.Parser, new[]{ "SubSystems" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PayReqString), global::Lnrpc.PayReqString.Parser, new[]{ "PayReq" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PayReq), global::Lnrpc.PayReq.Parser, new[]{ "Destination", "PaymentHash", "NumSatoshis", "Timestamp", "Expiry", "Description", "DescriptionHash", "FallbackAddr", "CltvExpiry", "RouteHints" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PayReq), global::Lnrpc.PayReq.Parser, new[]{ "Destination", "PaymentHash", "NumSatoshis", "Timestamp", "Expiry", "Description", "DescriptionHash", "FallbackAddr", "CltvExpiry", "RouteHints", "PaymentAddr", "NumMsat", "Features" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.Feature), global::Lnrpc.Feature.Parser, new[]{ "Name", "IsRequired", "IsKnown" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FeeReportRequest), global::Lnrpc.FeeReportRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelFeeReport), global::Lnrpc.ChannelFeeReport.Parser, new[]{ "ChanPoint", "BaseFeeMsat", "FeePerMil", "FeeRate" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.FeeReportResponse), global::Lnrpc.FeeReportResponse.Parser, new[]{ "ChannelFees", "DayFeeSum", "WeekFeeSum", "MonthFeeSum" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PolicyUpdateRequest), global::Lnrpc.PolicyUpdateRequest.Parser, new[]{ "Global", "ChanPoint", "BaseFeeMsat", "FeeRate", "TimeLockDelta", "MaxHtlcMsat" }, new[]{ "Scope" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PolicyUpdateRequest), global::Lnrpc.PolicyUpdateRequest.Parser, new[]{ "Global", "ChanPoint", "BaseFeeMsat", "FeeRate", "TimeLockDelta", "MaxHtlcMsat", "MinHtlcMsat", "MinHtlcMsatSpecified" }, new[]{ "Scope" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.PolicyUpdateResponse), global::Lnrpc.PolicyUpdateResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ForwardingHistoryRequest), global::Lnrpc.ForwardingHistoryRequest.Parser, new[]{ "StartTime", "EndTime", "IndexOffset", "NumMaxEvents" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ForwardingEvent), global::Lnrpc.ForwardingEvent.Parser, new[]{ "Timestamp", "ChanIdIn", "ChanIdOut", "AmtIn", "AmtOut", "Fee", "FeeMsat", "AmtInMsat", "AmtOutMsat" }, null, null, null),
@@ -697,7 +798,10 @@ namespace Lnrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.RestoreChanBackupRequest), global::Lnrpc.RestoreChanBackupRequest.Parser, new[]{ "ChanBackups", "MultiChanBackup" }, new[]{ "Backup" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.RestoreBackupResponse), global::Lnrpc.RestoreBackupResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.ChannelBackupSubscription), global::Lnrpc.ChannelBackupSubscription.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.VerifyChanBackupResponse), global::Lnrpc.VerifyChanBackupResponse.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.VerifyChanBackupResponse), global::Lnrpc.VerifyChanBackupResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.MacaroonPermission), global::Lnrpc.MacaroonPermission.Parser, new[]{ "Entity", "Action" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.BakeMacaroonRequest), global::Lnrpc.BakeMacaroonRequest.Parser, new[]{ "Permissions" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Lnrpc.BakeMacaroonResponse), global::Lnrpc.BakeMacaroonResponse.Parser, new[]{ "Macaroon" }, null, null, null)
           }));
     }
     #endregion
@@ -722,6 +826,26 @@ namespace Lnrpc {
     [pbr::OriginalName("ACCEPTED")] Accepted = 0,
     [pbr::OriginalName("SETTLED")] Settled = 1,
     [pbr::OriginalName("CANCELED")] Canceled = 2,
+  }
+
+  public enum FeatureBit {
+    [pbr::OriginalName("DATALOSS_PROTECT_REQ")] DatalossProtectReq = 0,
+    [pbr::OriginalName("DATALOSS_PROTECT_OPT")] DatalossProtectOpt = 1,
+    [pbr::OriginalName("INITIAL_ROUING_SYNC")] InitialRouingSync = 3,
+    [pbr::OriginalName("UPFRONT_SHUTDOWN_SCRIPT_REQ")] UpfrontShutdownScriptReq = 4,
+    [pbr::OriginalName("UPFRONT_SHUTDOWN_SCRIPT_OPT")] UpfrontShutdownScriptOpt = 5,
+    [pbr::OriginalName("GOSSIP_QUERIES_REQ")] GossipQueriesReq = 6,
+    [pbr::OriginalName("GOSSIP_QUERIES_OPT")] GossipQueriesOpt = 7,
+    [pbr::OriginalName("TLV_ONION_REQ")] TlvOnionReq = 8,
+    [pbr::OriginalName("TLV_ONION_OPT")] TlvOnionOpt = 9,
+    [pbr::OriginalName("EXT_GOSSIP_QUERIES_REQ")] ExtGossipQueriesReq = 10,
+    [pbr::OriginalName("EXT_GOSSIP_QUERIES_OPT")] ExtGossipQueriesOpt = 11,
+    [pbr::OriginalName("STATIC_REMOTE_KEY_REQ")] StaticRemoteKeyReq = 12,
+    [pbr::OriginalName("STATIC_REMOTE_KEY_OPT")] StaticRemoteKeyOpt = 13,
+    [pbr::OriginalName("PAYMENT_ADDR_REQ")] PaymentAddrReq = 14,
+    [pbr::OriginalName("PAYMENT_ADDR_OPT")] PaymentAddrOpt = 15,
+    [pbr::OriginalName("MPP_REQ")] MppReq = 16,
+    [pbr::OriginalName("MPP_OPT")] MppOpt = 17,
   }
 
   #endregion
@@ -768,7 +892,8 @@ namespace Lnrpc {
     /// <summary>
     ///*
     ///aezeed_passphrase is an optional user provided passphrase that will be used
-    ///to encrypt the generated aezeed cipher seed.
+    ///to encrypt the generated aezeed cipher seed. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString AezeedPassphrase {
@@ -785,6 +910,7 @@ namespace Lnrpc {
     ///*
     ///seed_entropy is an optional 16-bytes generated via CSPRNG. If not
     ///specified, then a fresh set of randomness will be used to create the seed.
+    ///When using REST, this field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString SeedEntropy {
@@ -1101,7 +1227,8 @@ namespace Lnrpc {
     ///*
     ///wallet_password is the passphrase that should be used to encrypt the
     ///wallet. This MUST be at least 8 chars in length. After creation, this
-    ///password is required to unlock the daemon.
+    ///password is required to unlock the daemon. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString WalletPassword {
@@ -1133,7 +1260,8 @@ namespace Lnrpc {
     /// <summary>
     ///*
     ///aezeed_passphrase is an optional user provided passphrase that will be used
-    ///to encrypt the generated aezeed cipher seed.
+    ///to encrypt the generated aezeed cipher seed. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString AezeedPassphrase {
@@ -1473,7 +1601,7 @@ namespace Lnrpc {
     ///*
     ///wallet_password should be the current valid passphrase for the daemon. This
     ///will be required to decrypt on-disk material that the daemon requires to
-    ///function properly.
+    ///function properly. When using REST, this field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString WalletPassword {
@@ -1786,7 +1914,7 @@ namespace Lnrpc {
     /// <summary>
     ///*
     ///current_password should be the current valid passphrase used to unlock the
-    ///daemon.
+    ///daemon. When using REST, this field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString CurrentPassword {
@@ -1802,7 +1930,7 @@ namespace Lnrpc {
     /// <summary>
     ///*
     ///new_password should be the new passphrase that will be needed to unlock the
-    ///daemon.
+    ///daemon. When using REST, this field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString NewPassword {
@@ -2932,6 +3060,9 @@ namespace Lnrpc {
         case LimitOneofCase.Fixed:
           Fixed = other.Fixed;
           break;
+        case LimitOneofCase.FixedMsat:
+          FixedMsat = other.FixedMsat;
+          break;
         case LimitOneofCase.Percent:
           Percent = other.Percent;
           break;
@@ -2948,7 +3079,10 @@ namespace Lnrpc {
     /// <summary>Field number for the "fixed" field.</summary>
     public const int FixedFieldNumber = 1;
     /// <summary>
-    //// The fee limit expressed as a fixed amount of satoshis.
+    ///*
+    ///The fee limit expressed as a fixed amount of satoshis.
+    ///
+    ///The fields fixed and fixed_msat are mutually exclusive.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Fixed {
@@ -2956,6 +3090,23 @@ namespace Lnrpc {
       set {
         limit_ = value;
         limitCase_ = LimitOneofCase.Fixed;
+      }
+    }
+
+    /// <summary>Field number for the "fixed_msat" field.</summary>
+    public const int FixedMsatFieldNumber = 3;
+    /// <summary>
+    ///*
+    ///The fee limit expressed as a fixed amount of millisatoshis.
+    ///
+    ///The fields fixed and fixed_msat are mutually exclusive.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long FixedMsat {
+      get { return limitCase_ == LimitOneofCase.FixedMsat ? (long) limit_ : 0L; }
+      set {
+        limit_ = value;
+        limitCase_ = LimitOneofCase.FixedMsat;
       }
     }
 
@@ -2978,6 +3129,7 @@ namespace Lnrpc {
     public enum LimitOneofCase {
       None = 0,
       Fixed = 1,
+      FixedMsat = 3,
       Percent = 2,
     }
     private LimitOneofCase limitCase_ = LimitOneofCase.None;
@@ -3006,6 +3158,7 @@ namespace Lnrpc {
         return true;
       }
       if (Fixed != other.Fixed) return false;
+      if (FixedMsat != other.FixedMsat) return false;
       if (Percent != other.Percent) return false;
       if (LimitCase != other.LimitCase) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -3015,6 +3168,7 @@ namespace Lnrpc {
     public override int GetHashCode() {
       int hash = 1;
       if (limitCase_ == LimitOneofCase.Fixed) hash ^= Fixed.GetHashCode();
+      if (limitCase_ == LimitOneofCase.FixedMsat) hash ^= FixedMsat.GetHashCode();
       if (limitCase_ == LimitOneofCase.Percent) hash ^= Percent.GetHashCode();
       hash ^= (int) limitCase_;
       if (_unknownFields != null) {
@@ -3038,6 +3192,10 @@ namespace Lnrpc {
         output.WriteRawTag(16);
         output.WriteInt64(Percent);
       }
+      if (limitCase_ == LimitOneofCase.FixedMsat) {
+        output.WriteRawTag(24);
+        output.WriteInt64(FixedMsat);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3048,6 +3206,9 @@ namespace Lnrpc {
       int size = 0;
       if (limitCase_ == LimitOneofCase.Fixed) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Fixed);
+      }
+      if (limitCase_ == LimitOneofCase.FixedMsat) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(FixedMsat);
       }
       if (limitCase_ == LimitOneofCase.Percent) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Percent);
@@ -3066,6 +3227,9 @@ namespace Lnrpc {
       switch (other.LimitCase) {
         case LimitOneofCase.Fixed:
           Fixed = other.Fixed;
+          break;
+        case LimitOneofCase.FixedMsat:
+          FixedMsat = other.FixedMsat;
           break;
         case LimitOneofCase.Percent:
           Percent = other.Percent;
@@ -3089,6 +3253,10 @@ namespace Lnrpc {
           }
           case 16: {
             Percent = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            FixedMsat = input.ReadInt64();
             break;
           }
         }
@@ -3125,14 +3293,18 @@ namespace Lnrpc {
       dest_ = other.dest_;
       destString_ = other.destString_;
       amt_ = other.amt_;
+      amtMsat_ = other.amtMsat_;
       paymentHash_ = other.paymentHash_;
       paymentHashString_ = other.paymentHashString_;
       paymentRequest_ = other.paymentRequest_;
       finalCltvDelta_ = other.finalCltvDelta_;
       feeLimit_ = other.feeLimit_ != null ? other.feeLimit_.Clone() : null;
       outgoingChanId_ = other.outgoingChanId_;
+      lastHopPubkey_ = other.lastHopPubkey_;
       cltvLimit_ = other.cltvLimit_;
-      destTlv_ = other.destTlv_.Clone();
+      destCustomRecords_ = other.destCustomRecords_.Clone();
+      allowSelfPayment_ = other.allowSelfPayment_;
+      destFeatures_ = other.destFeatures_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3145,7 +3317,9 @@ namespace Lnrpc {
     public const int DestFieldNumber = 1;
     private pb::ByteString dest_ = pb::ByteString.Empty;
     /// <summary>
-    //// The identity pubkey of the payment recipient
+    ///*
+    ///The identity pubkey of the payment recipient. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Dest {
@@ -3159,8 +3333,11 @@ namespace Lnrpc {
     public const int DestStringFieldNumber = 2;
     private string destString_ = "";
     /// <summary>
-    //// The hex-encoded identity pubkey of the payment recipient
+    ///*
+    ///The hex-encoded identity pubkey of the payment recipient. Deprecated now
+    ///that the REST gateway supports base64 encoding of bytes fields.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string DestString {
       get { return destString_; }
@@ -3173,7 +3350,10 @@ namespace Lnrpc {
     public const int AmtFieldNumber = 3;
     private long amt_;
     /// <summary>
-    //// Number of satoshis to send.
+    ///*
+    ///The amount to send expressed in satoshis.
+    ///
+    ///The fields amt and amt_msat are mutually exclusive.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Amt {
@@ -3183,11 +3363,30 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "amt_msat" field.</summary>
+    public const int AmtMsatFieldNumber = 12;
+    private long amtMsat_;
+    /// <summary>
+    ///*
+    ///The amount to send expressed in millisatoshis.
+    ///
+    ///The fields amt and amt_msat are mutually exclusive.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long AmtMsat {
+      get { return amtMsat_; }
+      set {
+        amtMsat_ = value;
+      }
+    }
+
     /// <summary>Field number for the "payment_hash" field.</summary>
     public const int PaymentHashFieldNumber = 4;
     private pb::ByteString paymentHash_ = pb::ByteString.Empty;
     /// <summary>
-    //// The hash to use within the payment's HTLC
+    ///*
+    ///The hash to use within the payment's HTLC. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString PaymentHash {
@@ -3201,8 +3400,11 @@ namespace Lnrpc {
     public const int PaymentHashStringFieldNumber = 5;
     private string paymentHashString_ = "";
     /// <summary>
-    //// The hex-encoded hash to use within the payment's HTLC
+    ///*
+    ///The hex-encoded hash to use within the payment's HTLC. Deprecated now
+    ///that the REST gateway supports base64 encoding of bytes fields.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string PaymentHashString {
       get { return paymentHashString_; }
@@ -3216,7 +3418,7 @@ namespace Lnrpc {
     private string paymentRequest_ = "";
     /// <summary>
     ///*
-    ///A bare-bones invoice for a payment within the Lightning Network.  With the
+    ///A bare-bones invoice for a payment within the Lightning Network. With the
     ///details of the invoice, the sender has all the data necessary to send a
     ///payment to the recipient.
     /// </summary>
@@ -3278,6 +3480,21 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "last_hop_pubkey" field.</summary>
+    public const int LastHopPubkeyFieldNumber = 13;
+    private pb::ByteString lastHopPubkey_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///The pubkey of the last hop of the route. If empty, any hop may be used.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString LastHopPubkey {
+      get { return lastHopPubkey_; }
+      set {
+        lastHopPubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "cltv_limit" field.</summary>
     public const int CltvLimitFieldNumber = 10;
     private uint cltvLimit_;
@@ -3295,20 +3512,54 @@ namespace Lnrpc {
       }
     }
 
-    /// <summary>Field number for the "dest_tlv" field.</summary>
-    public const int DestTlvFieldNumber = 11;
-    private static readonly pbc::MapField<ulong, pb::ByteString>.Codec _map_destTlv_codec
+    /// <summary>Field number for the "dest_custom_records" field.</summary>
+    public const int DestCustomRecordsFieldNumber = 11;
+    private static readonly pbc::MapField<ulong, pb::ByteString>.Codec _map_destCustomRecords_codec
         = new pbc::MapField<ulong, pb::ByteString>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForBytes(18), 90);
-    private readonly pbc::MapField<ulong, pb::ByteString> destTlv_ = new pbc::MapField<ulong, pb::ByteString>();
+    private readonly pbc::MapField<ulong, pb::ByteString> destCustomRecords_ = new pbc::MapField<ulong, pb::ByteString>();
     /// <summary>
     ///* 
     ///An optional field that can be used to pass an arbitrary set of TLV records
     ///to a peer which understands the new records. This can be used to pass
-    ///application specific data during the payment attempt.
+    ///application specific data during the payment attempt. Record types are
+    ///required to be in the custom range >= 65536. When using REST, the values
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::MapField<ulong, pb::ByteString> DestTlv {
-      get { return destTlv_; }
+    public pbc::MapField<ulong, pb::ByteString> DestCustomRecords {
+      get { return destCustomRecords_; }
+    }
+
+    /// <summary>Field number for the "allow_self_payment" field.</summary>
+    public const int AllowSelfPaymentFieldNumber = 14;
+    private bool allowSelfPayment_;
+    /// <summary>
+    //// If set, circular payments to self are permitted.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool AllowSelfPayment {
+      get { return allowSelfPayment_; }
+      set {
+        allowSelfPayment_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dest_features" field.</summary>
+    public const int DestFeaturesFieldNumber = 15;
+    private static readonly pb::FieldCodec<global::Lnrpc.FeatureBit> _repeated_destFeatures_codec
+        = pb::FieldCodec.ForEnum(122, x => (int) x, x => (global::Lnrpc.FeatureBit) x);
+    private readonly pbc::RepeatedField<global::Lnrpc.FeatureBit> destFeatures_ = new pbc::RepeatedField<global::Lnrpc.FeatureBit>();
+    /// <summary>
+    ///*
+    ///Features assumed to be supported by the final node. All transitive feature
+    ///depdencies must also be set properly. For a given feature bit pair, either
+    ///optional or remote may be set, but not both. If this field is nil or empty,
+    ///the router will try to load destination features from the graph as a
+    ///fallback.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Lnrpc.FeatureBit> DestFeatures {
+      get { return destFeatures_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3327,14 +3578,18 @@ namespace Lnrpc {
       if (Dest != other.Dest) return false;
       if (DestString != other.DestString) return false;
       if (Amt != other.Amt) return false;
+      if (AmtMsat != other.AmtMsat) return false;
       if (PaymentHash != other.PaymentHash) return false;
       if (PaymentHashString != other.PaymentHashString) return false;
       if (PaymentRequest != other.PaymentRequest) return false;
       if (FinalCltvDelta != other.FinalCltvDelta) return false;
       if (!object.Equals(FeeLimit, other.FeeLimit)) return false;
       if (OutgoingChanId != other.OutgoingChanId) return false;
+      if (LastHopPubkey != other.LastHopPubkey) return false;
       if (CltvLimit != other.CltvLimit) return false;
-      if (!DestTlv.Equals(other.DestTlv)) return false;
+      if (!DestCustomRecords.Equals(other.DestCustomRecords)) return false;
+      if (AllowSelfPayment != other.AllowSelfPayment) return false;
+      if(!destFeatures_.Equals(other.destFeatures_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3344,14 +3599,18 @@ namespace Lnrpc {
       if (Dest.Length != 0) hash ^= Dest.GetHashCode();
       if (DestString.Length != 0) hash ^= DestString.GetHashCode();
       if (Amt != 0L) hash ^= Amt.GetHashCode();
+      if (AmtMsat != 0L) hash ^= AmtMsat.GetHashCode();
       if (PaymentHash.Length != 0) hash ^= PaymentHash.GetHashCode();
       if (PaymentHashString.Length != 0) hash ^= PaymentHashString.GetHashCode();
       if (PaymentRequest.Length != 0) hash ^= PaymentRequest.GetHashCode();
       if (FinalCltvDelta != 0) hash ^= FinalCltvDelta.GetHashCode();
       if (feeLimit_ != null) hash ^= FeeLimit.GetHashCode();
       if (OutgoingChanId != 0UL) hash ^= OutgoingChanId.GetHashCode();
+      if (LastHopPubkey.Length != 0) hash ^= LastHopPubkey.GetHashCode();
       if (CltvLimit != 0) hash ^= CltvLimit.GetHashCode();
-      hash ^= DestTlv.GetHashCode();
+      hash ^= DestCustomRecords.GetHashCode();
+      if (AllowSelfPayment != false) hash ^= AllowSelfPayment.GetHashCode();
+      hash ^= destFeatures_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3405,7 +3664,20 @@ namespace Lnrpc {
         output.WriteRawTag(80);
         output.WriteUInt32(CltvLimit);
       }
-      destTlv_.WriteTo(output, _map_destTlv_codec);
+      destCustomRecords_.WriteTo(output, _map_destCustomRecords_codec);
+      if (AmtMsat != 0L) {
+        output.WriteRawTag(96);
+        output.WriteInt64(AmtMsat);
+      }
+      if (LastHopPubkey.Length != 0) {
+        output.WriteRawTag(106);
+        output.WriteBytes(LastHopPubkey);
+      }
+      if (AllowSelfPayment != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(AllowSelfPayment);
+      }
+      destFeatures_.WriteTo(output, _repeated_destFeatures_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3422,6 +3694,9 @@ namespace Lnrpc {
       }
       if (Amt != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Amt);
+      }
+      if (AmtMsat != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AmtMsat);
       }
       if (PaymentHash.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(PaymentHash);
@@ -3441,10 +3716,17 @@ namespace Lnrpc {
       if (OutgoingChanId != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(OutgoingChanId);
       }
+      if (LastHopPubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(LastHopPubkey);
+      }
       if (CltvLimit != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CltvLimit);
       }
-      size += destTlv_.CalculateSize(_map_destTlv_codec);
+      size += destCustomRecords_.CalculateSize(_map_destCustomRecords_codec);
+      if (AllowSelfPayment != false) {
+        size += 1 + 1;
+      }
+      size += destFeatures_.CalculateSize(_repeated_destFeatures_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3464,6 +3746,9 @@ namespace Lnrpc {
       }
       if (other.Amt != 0L) {
         Amt = other.Amt;
+      }
+      if (other.AmtMsat != 0L) {
+        AmtMsat = other.AmtMsat;
       }
       if (other.PaymentHash.Length != 0) {
         PaymentHash = other.PaymentHash;
@@ -3486,10 +3771,17 @@ namespace Lnrpc {
       if (other.OutgoingChanId != 0UL) {
         OutgoingChanId = other.OutgoingChanId;
       }
+      if (other.LastHopPubkey.Length != 0) {
+        LastHopPubkey = other.LastHopPubkey;
+      }
       if (other.CltvLimit != 0) {
         CltvLimit = other.CltvLimit;
       }
-      destTlv_.Add(other.destTlv_);
+      destCustomRecords_.Add(other.destCustomRecords_);
+      if (other.AllowSelfPayment != false) {
+        AllowSelfPayment = other.AllowSelfPayment;
+      }
+      destFeatures_.Add(other.destFeatures_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3545,7 +3837,24 @@ namespace Lnrpc {
             break;
           }
           case 90: {
-            destTlv_.AddEntriesFrom(input, _map_destTlv_codec);
+            destCustomRecords_.AddEntriesFrom(input, _map_destCustomRecords_codec);
+            break;
+          }
+          case 96: {
+            AmtMsat = input.ReadInt64();
+            break;
+          }
+          case 106: {
+            LastHopPubkey = input.ReadBytes();
+            break;
+          }
+          case 112: {
+            AllowSelfPayment = input.ReadBool();
+            break;
+          }
+          case 122:
+          case 120: {
+            destFeatures_.AddEntriesFrom(input, _repeated_destFeatures_codec);
             break;
           }
         }
@@ -3813,7 +4122,9 @@ namespace Lnrpc {
     public const int PaymentHashFieldNumber = 1;
     private pb::ByteString paymentHash_ = pb::ByteString.Empty;
     /// <summary>
-    //// The payment hash to use for the HTLC.
+    ///*
+    ///The payment hash to use for the HTLC. When using REST, this field must be
+    ///encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString PaymentHash {
@@ -3827,8 +4138,11 @@ namespace Lnrpc {
     public const int PaymentHashStringFieldNumber = 2;
     private string paymentHashString_ = "";
     /// <summary>
-    //// An optional hex-encoded payment hash to be used for the HTLC.
+    ///*
+    ///An optional hex-encoded payment hash to be used for the HTLC. Deprecated now
+    ///that the REST gateway supports base64 encoding of bytes fields.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string PaymentHashString {
       get { return paymentHashString_; }
@@ -4688,7 +5002,9 @@ namespace Lnrpc {
     /// <summary>Field number for the "funding_txid_bytes" field.</summary>
     public const int FundingTxidBytesFieldNumber = 1;
     /// <summary>
-    //// Txid of the funding transaction
+    ///*
+    ///Txid of the funding transaction. When using REST, this field must be
+    ///encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString FundingTxidBytes {
@@ -4702,7 +5018,9 @@ namespace Lnrpc {
     /// <summary>Field number for the "funding_txid_str" field.</summary>
     public const int FundingTxidStrFieldNumber = 2;
     /// <summary>
-    //// Hex-encoded string representing the funding transaction
+    ///*
+    ///Hex-encoded string representing the byte-reversed hash of the funding
+    ///transaction.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string FundingTxidStr {
@@ -6840,7 +7158,9 @@ namespace Lnrpc {
     public const int MsgFieldNumber = 1;
     private pb::ByteString msg_ = pb::ByteString.Empty;
     /// <summary>
-    //// The message to be signed
+    ///*
+    ///The message to be signed. When using REST, this field must be encoded as
+    ///base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Msg {
@@ -7105,7 +7425,9 @@ namespace Lnrpc {
     public const int MsgFieldNumber = 1;
     private pb::ByteString msg_ = pb::ByteString.Empty;
     /// <summary>
-    //// The message over which the signature is to be verified
+    ///*
+    ///The message over which the signature is to be verified. When using REST,
+    ///this field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Msg {
@@ -7446,7 +7768,7 @@ namespace Lnrpc {
     private bool perm_;
     /// <summary>
     ///* If set, the daemon will attempt to persistently connect to the target
-    /// peer.  Otherwise, the call will be synchronous. 
+    /// peer. Otherwise, the call will be synchronous. 
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Perm {
@@ -8156,6 +8478,9 @@ namespace Lnrpc {
       localChanReserveSat_ = other.localChanReserveSat_;
       remoteChanReserveSat_ = other.remoteChanReserveSat_;
       staticRemoteKey_ = other.staticRemoteKey_;
+      lifetime_ = other.lifetime_;
+      uptime_ = other.uptime_;
+      closeAddress_ = other.closeAddress_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -8495,6 +8820,58 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "lifetime" field.</summary>
+    public const int LifetimeFieldNumber = 23;
+    private long lifetime_;
+    /// <summary>
+    ///*
+    ///The number of seconds that the channel has been monitored by the channel
+    ///scoring system. Scores are currently not persisted, so this value may be
+    ///less than the lifetime of the channel [EXPERIMENTAL].
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Lifetime {
+      get { return lifetime_; }
+      set {
+        lifetime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "uptime" field.</summary>
+    public const int UptimeFieldNumber = 24;
+    private long uptime_;
+    /// <summary>
+    ///*
+    ///The number of seconds that the remote peer has been observed as being online
+    ///by the channel scoring system over the lifetime of the channel [EXPERIMENTAL].
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Uptime {
+      get { return uptime_; }
+      set {
+        uptime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "close_address" field.</summary>
+    public const int CloseAddressFieldNumber = 25;
+    private string closeAddress_ = "";
+    /// <summary>
+    ///*
+    ///Close address is the address that we will enforce payout to on cooperative
+    ///close if the channel was opened utilizing option upfront shutdown. This
+    ///value can be set on channel open by setting close_address in an open channel
+    ///request. If this value is not set, you can still choose a payout address by
+    ///cooperatively closing with the delivery_address field set.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CloseAddress {
+      get { return closeAddress_; }
+      set {
+        closeAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Channel);
@@ -8530,6 +8907,9 @@ namespace Lnrpc {
       if (LocalChanReserveSat != other.LocalChanReserveSat) return false;
       if (RemoteChanReserveSat != other.RemoteChanReserveSat) return false;
       if (StaticRemoteKey != other.StaticRemoteKey) return false;
+      if (Lifetime != other.Lifetime) return false;
+      if (Uptime != other.Uptime) return false;
+      if (CloseAddress != other.CloseAddress) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -8558,6 +8938,9 @@ namespace Lnrpc {
       if (LocalChanReserveSat != 0L) hash ^= LocalChanReserveSat.GetHashCode();
       if (RemoteChanReserveSat != 0L) hash ^= RemoteChanReserveSat.GetHashCode();
       if (StaticRemoteKey != false) hash ^= StaticRemoteKey.GetHashCode();
+      if (Lifetime != 0L) hash ^= Lifetime.GetHashCode();
+      if (Uptime != 0L) hash ^= Uptime.GetHashCode();
+      if (CloseAddress.Length != 0) hash ^= CloseAddress.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -8656,6 +9039,18 @@ namespace Lnrpc {
         output.WriteRawTag(176, 1);
         output.WriteBool(StaticRemoteKey);
       }
+      if (Lifetime != 0L) {
+        output.WriteRawTag(184, 1);
+        output.WriteInt64(Lifetime);
+      }
+      if (Uptime != 0L) {
+        output.WriteRawTag(192, 1);
+        output.WriteInt64(Uptime);
+      }
+      if (CloseAddress.Length != 0) {
+        output.WriteRawTag(202, 1);
+        output.WriteString(CloseAddress);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -8727,6 +9122,15 @@ namespace Lnrpc {
       }
       if (StaticRemoteKey != false) {
         size += 2 + 1;
+      }
+      if (Lifetime != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Lifetime);
+      }
+      if (Uptime != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Uptime);
+      }
+      if (CloseAddress.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(CloseAddress);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -8802,6 +9206,15 @@ namespace Lnrpc {
       }
       if (other.StaticRemoteKey != false) {
         StaticRemoteKey = other.StaticRemoteKey;
+      }
+      if (other.Lifetime != 0L) {
+        Lifetime = other.Lifetime;
+      }
+      if (other.Uptime != 0L) {
+        Uptime = other.Uptime;
+      }
+      if (other.CloseAddress.Length != 0) {
+        CloseAddress = other.CloseAddress;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -8900,6 +9313,18 @@ namespace Lnrpc {
           }
           case 176: {
             StaticRemoteKey = input.ReadBool();
+            break;
+          }
+          case 184: {
+            Lifetime = input.ReadInt64();
+            break;
+          }
+          case 192: {
+            Uptime = input.ReadInt64();
+            break;
+          }
+          case 202: {
+            CloseAddress = input.ReadString();
             break;
           }
         }
@@ -10096,6 +10521,7 @@ namespace Lnrpc {
       inbound_ = other.inbound_;
       pingTime_ = other.pingTime_;
       syncType_ = other.syncType_;
+      features_ = other.features_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -10230,6 +10656,19 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "features" field.</summary>
+    public const int FeaturesFieldNumber = 11;
+    private static readonly pbc::MapField<uint, global::Lnrpc.Feature>.Codec _map_features_codec
+        = new pbc::MapField<uint, global::Lnrpc.Feature>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::Lnrpc.Feature.Parser), 90);
+    private readonly pbc::MapField<uint, global::Lnrpc.Feature> features_ = new pbc::MapField<uint, global::Lnrpc.Feature>();
+    /// <summary>
+    //// Features advertised by the remote peer in their init message.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<uint, global::Lnrpc.Feature> Features {
+      get { return features_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Peer);
@@ -10252,6 +10691,7 @@ namespace Lnrpc {
       if (Inbound != other.Inbound) return false;
       if (PingTime != other.PingTime) return false;
       if (SyncType != other.SyncType) return false;
+      if (!Features.Equals(other.Features)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10267,6 +10707,7 @@ namespace Lnrpc {
       if (Inbound != false) hash ^= Inbound.GetHashCode();
       if (PingTime != 0L) hash ^= PingTime.GetHashCode();
       if (SyncType != 0) hash ^= SyncType.GetHashCode();
+      hash ^= Features.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10316,6 +10757,7 @@ namespace Lnrpc {
         output.WriteRawTag(80);
         output.WriteEnum((int) SyncType);
       }
+      features_.WriteTo(output, _map_features_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10351,6 +10793,7 @@ namespace Lnrpc {
       if (SyncType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SyncType);
       }
+      size += features_.CalculateSize(_map_features_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -10389,6 +10832,7 @@ namespace Lnrpc {
       if (other.SyncType != 0) {
         SyncType = other.SyncType;
       }
+      features_.Add(other.features_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -10434,6 +10878,10 @@ namespace Lnrpc {
           }
           case 80: {
             SyncType = (global::Lnrpc.Peer.Types.SyncType) input.ReadEnum();
+            break;
+          }
+          case 90: {
+            features_.AddEntriesFrom(input, _map_features_codec);
             break;
           }
         }
@@ -10692,6 +11140,279 @@ namespace Lnrpc {
 
   }
 
+  public sealed partial class PeerEventSubscription : pb::IMessage<PeerEventSubscription> {
+    private static readonly pb::MessageParser<PeerEventSubscription> _parser = new pb::MessageParser<PeerEventSubscription>(() => new PeerEventSubscription());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PeerEventSubscription> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[49]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEventSubscription() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEventSubscription(PeerEventSubscription other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEventSubscription Clone() {
+      return new PeerEventSubscription(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PeerEventSubscription);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PeerEventSubscription other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PeerEventSubscription other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class PeerEvent : pb::IMessage<PeerEvent> {
+    private static readonly pb::MessageParser<PeerEvent> _parser = new pb::MessageParser<PeerEvent>(() => new PeerEvent());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PeerEvent> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[50]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEvent() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEvent(PeerEvent other) : this() {
+      pubKey_ = other.pubKey_;
+      type_ = other.type_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PeerEvent Clone() {
+      return new PeerEvent(this);
+    }
+
+    /// <summary>Field number for the "pub_key" field.</summary>
+    public const int PubKeyFieldNumber = 1;
+    private string pubKey_ = "";
+    /// <summary>
+    //// The identity pubkey of the peer.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PubKey {
+      get { return pubKey_; }
+      set {
+        pubKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 2;
+    private global::Lnrpc.PeerEvent.Types.EventType type_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.PeerEvent.Types.EventType Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PeerEvent);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PeerEvent other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PubKey != other.PubKey) return false;
+      if (Type != other.Type) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PubKey.Length != 0) hash ^= PubKey.GetHashCode();
+      if (Type != 0) hash ^= Type.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (PubKey.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(PubKey);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Type);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PubKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PubKey);
+      }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PeerEvent other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PubKey.Length != 0) {
+        PubKey = other.PubKey;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            PubKey = input.ReadString();
+            break;
+          }
+          case 16: {
+            Type = (global::Lnrpc.PeerEvent.Types.EventType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the PeerEvent message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum EventType {
+        [pbr::OriginalName("PEER_ONLINE")] PeerOnline = 0,
+        [pbr::OriginalName("PEER_OFFLINE")] PeerOffline = 1,
+      }
+
+    }
+    #endregion
+
+  }
+
   public sealed partial class GetInfoRequest : pb::IMessage<GetInfoRequest> {
     private static readonly pb::MessageParser<GetInfoRequest> _parser = new pb::MessageParser<GetInfoRequest>(() => new GetInfoRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -10700,7 +11421,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[49]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[51]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10801,7 +11522,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[50]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[52]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -10818,28 +11539,43 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetInfoResponse(GetInfoResponse other) : this() {
+      version_ = other.version_;
       identityPubkey_ = other.identityPubkey_;
       alias_ = other.alias_;
+      color_ = other.color_;
       numPendingChannels_ = other.numPendingChannels_;
       numActiveChannels_ = other.numActiveChannels_;
+      numInactiveChannels_ = other.numInactiveChannels_;
       numPeers_ = other.numPeers_;
       blockHeight_ = other.blockHeight_;
       blockHash_ = other.blockHash_;
-      syncedToChain_ = other.syncedToChain_;
-      testnet_ = other.testnet_;
-      uris_ = other.uris_.Clone();
       bestHeaderTimestamp_ = other.bestHeaderTimestamp_;
-      version_ = other.version_;
-      numInactiveChannels_ = other.numInactiveChannels_;
-      chains_ = other.chains_.Clone();
-      color_ = other.color_;
+      syncedToChain_ = other.syncedToChain_;
       syncedToGraph_ = other.syncedToGraph_;
+      testnet_ = other.testnet_;
+      chains_ = other.chains_.Clone();
+      uris_ = other.uris_.Clone();
+      features_ = other.features_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetInfoResponse Clone() {
       return new GetInfoResponse(this);
+    }
+
+    /// <summary>Field number for the "version" field.</summary>
+    public const int VersionFieldNumber = 14;
+    private string version_ = "";
+    /// <summary>
+    //// The version of the LND software that the node is running.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Version {
+      get { return version_; }
+      set {
+        version_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     /// <summary>Field number for the "identity_pubkey" field.</summary>
@@ -10870,6 +11606,20 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "color" field.</summary>
+    public const int ColorFieldNumber = 17;
+    private string color_ = "";
+    /// <summary>
+    //// The color of the current node in hex code format
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Color {
+      get { return color_; }
+      set {
+        color_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "num_pending_channels" field.</summary>
     public const int NumPendingChannelsFieldNumber = 3;
     private uint numPendingChannels_;
@@ -10895,6 +11645,20 @@ namespace Lnrpc {
       get { return numActiveChannels_; }
       set {
         numActiveChannels_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "num_inactive_channels" field.</summary>
+    public const int NumInactiveChannelsFieldNumber = 15;
+    private uint numInactiveChannels_;
+    /// <summary>
+    //// Number of inactive channels
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint NumInactiveChannels {
+      get { return numInactiveChannels_; }
+      set {
+        numInactiveChannels_ = value;
       }
     }
 
@@ -10940,6 +11704,20 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "best_header_timestamp" field.</summary>
+    public const int BestHeaderTimestampFieldNumber = 13;
+    private long bestHeaderTimestamp_;
+    /// <summary>
+    //// Timestamp of the block best known to the wallet
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long BestHeaderTimestamp {
+      get { return bestHeaderTimestamp_; }
+      set {
+        bestHeaderTimestamp_ = value;
+      }
+    }
+
     /// <summary>Field number for the "synced_to_chain" field.</summary>
     public const int SyncedToChainFieldNumber = 9;
     private bool syncedToChain_;
@@ -10951,6 +11729,20 @@ namespace Lnrpc {
       get { return syncedToChain_; }
       set {
         syncedToChain_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "synced_to_graph" field.</summary>
+    public const int SyncedToGraphFieldNumber = 18;
+    private bool syncedToGraph_;
+    /// <summary>
+    /// Whether we consider ourselves synced with the public channel graph.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool SyncedToGraph {
+      get { return syncedToGraph_; }
+      set {
+        syncedToGraph_ = value;
       }
     }
 
@@ -10971,61 +11763,6 @@ namespace Lnrpc {
       }
     }
 
-    /// <summary>Field number for the "uris" field.</summary>
-    public const int UrisFieldNumber = 12;
-    private static readonly pb::FieldCodec<string> _repeated_uris_codec
-        = pb::FieldCodec.ForString(98);
-    private readonly pbc::RepeatedField<string> uris_ = new pbc::RepeatedField<string>();
-    /// <summary>
-    //// The URIs of the current node.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> Uris {
-      get { return uris_; }
-    }
-
-    /// <summary>Field number for the "best_header_timestamp" field.</summary>
-    public const int BestHeaderTimestampFieldNumber = 13;
-    private long bestHeaderTimestamp_;
-    /// <summary>
-    //// Timestamp of the block best known to the wallet
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long BestHeaderTimestamp {
-      get { return bestHeaderTimestamp_; }
-      set {
-        bestHeaderTimestamp_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "version" field.</summary>
-    public const int VersionFieldNumber = 14;
-    private string version_ = "";
-    /// <summary>
-    //// The version of the LND software that the node is running.
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Version {
-      get { return version_; }
-      set {
-        version_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "num_inactive_channels" field.</summary>
-    public const int NumInactiveChannelsFieldNumber = 15;
-    private uint numInactiveChannels_;
-    /// <summary>
-    //// Number of inactive channels
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint NumInactiveChannels {
-      get { return numInactiveChannels_; }
-      set {
-        numInactiveChannels_ = value;
-      }
-    }
-
     /// <summary>Field number for the "chains" field.</summary>
     public const int ChainsFieldNumber = 16;
     private static readonly pb::FieldCodec<global::Lnrpc.Chain> _repeated_chains_codec
@@ -11039,32 +11776,32 @@ namespace Lnrpc {
       get { return chains_; }
     }
 
-    /// <summary>Field number for the "color" field.</summary>
-    public const int ColorFieldNumber = 17;
-    private string color_ = "";
+    /// <summary>Field number for the "uris" field.</summary>
+    public const int UrisFieldNumber = 12;
+    private static readonly pb::FieldCodec<string> _repeated_uris_codec
+        = pb::FieldCodec.ForString(98);
+    private readonly pbc::RepeatedField<string> uris_ = new pbc::RepeatedField<string>();
     /// <summary>
-    //// The color of the current node in hex code format
+    //// The URIs of the current node.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Color {
-      get { return color_; }
-      set {
-        color_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<string> Uris {
+      get { return uris_; }
     }
 
-    /// <summary>Field number for the "synced_to_graph" field.</summary>
-    public const int SyncedToGraphFieldNumber = 18;
-    private bool syncedToGraph_;
+    /// <summary>Field number for the "features" field.</summary>
+    public const int FeaturesFieldNumber = 19;
+    private static readonly pbc::MapField<uint, global::Lnrpc.Feature>.Codec _map_features_codec
+        = new pbc::MapField<uint, global::Lnrpc.Feature>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::Lnrpc.Feature.Parser), 154);
+    private readonly pbc::MapField<uint, global::Lnrpc.Feature> features_ = new pbc::MapField<uint, global::Lnrpc.Feature>();
     /// <summary>
-    /// Whether we consider ourselves synced with the public channel graph.
+    ///
+    ///Features that our node has advertised in our init message, node
+    ///announcements and invoices.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool SyncedToGraph {
-      get { return syncedToGraph_; }
-      set {
-        syncedToGraph_ = value;
-      }
+    public pbc::MapField<uint, global::Lnrpc.Feature> Features {
+      get { return features_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11080,44 +11817,46 @@ namespace Lnrpc {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Version != other.Version) return false;
       if (IdentityPubkey != other.IdentityPubkey) return false;
       if (Alias != other.Alias) return false;
+      if (Color != other.Color) return false;
       if (NumPendingChannels != other.NumPendingChannels) return false;
       if (NumActiveChannels != other.NumActiveChannels) return false;
+      if (NumInactiveChannels != other.NumInactiveChannels) return false;
       if (NumPeers != other.NumPeers) return false;
       if (BlockHeight != other.BlockHeight) return false;
       if (BlockHash != other.BlockHash) return false;
-      if (SyncedToChain != other.SyncedToChain) return false;
-      if (Testnet != other.Testnet) return false;
-      if(!uris_.Equals(other.uris_)) return false;
       if (BestHeaderTimestamp != other.BestHeaderTimestamp) return false;
-      if (Version != other.Version) return false;
-      if (NumInactiveChannels != other.NumInactiveChannels) return false;
-      if(!chains_.Equals(other.chains_)) return false;
-      if (Color != other.Color) return false;
+      if (SyncedToChain != other.SyncedToChain) return false;
       if (SyncedToGraph != other.SyncedToGraph) return false;
+      if (Testnet != other.Testnet) return false;
+      if(!chains_.Equals(other.chains_)) return false;
+      if(!uris_.Equals(other.uris_)) return false;
+      if (!Features.Equals(other.Features)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Version.Length != 0) hash ^= Version.GetHashCode();
       if (IdentityPubkey.Length != 0) hash ^= IdentityPubkey.GetHashCode();
       if (Alias.Length != 0) hash ^= Alias.GetHashCode();
+      if (Color.Length != 0) hash ^= Color.GetHashCode();
       if (NumPendingChannels != 0) hash ^= NumPendingChannels.GetHashCode();
       if (NumActiveChannels != 0) hash ^= NumActiveChannels.GetHashCode();
+      if (NumInactiveChannels != 0) hash ^= NumInactiveChannels.GetHashCode();
       if (NumPeers != 0) hash ^= NumPeers.GetHashCode();
       if (BlockHeight != 0) hash ^= BlockHeight.GetHashCode();
       if (BlockHash.Length != 0) hash ^= BlockHash.GetHashCode();
-      if (SyncedToChain != false) hash ^= SyncedToChain.GetHashCode();
-      if (Testnet != false) hash ^= Testnet.GetHashCode();
-      hash ^= uris_.GetHashCode();
       if (BestHeaderTimestamp != 0L) hash ^= BestHeaderTimestamp.GetHashCode();
-      if (Version.Length != 0) hash ^= Version.GetHashCode();
-      if (NumInactiveChannels != 0) hash ^= NumInactiveChannels.GetHashCode();
-      hash ^= chains_.GetHashCode();
-      if (Color.Length != 0) hash ^= Color.GetHashCode();
+      if (SyncedToChain != false) hash ^= SyncedToChain.GetHashCode();
       if (SyncedToGraph != false) hash ^= SyncedToGraph.GetHashCode();
+      if (Testnet != false) hash ^= Testnet.GetHashCode();
+      hash ^= chains_.GetHashCode();
+      hash ^= uris_.GetHashCode();
+      hash ^= Features.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11189,6 +11928,7 @@ namespace Lnrpc {
         output.WriteRawTag(144, 1);
         output.WriteBool(SyncedToGraph);
       }
+      features_.WriteTo(output, _map_features_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11197,17 +11937,26 @@ namespace Lnrpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Version.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Version);
+      }
       if (IdentityPubkey.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(IdentityPubkey);
       }
       if (Alias.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Alias);
       }
+      if (Color.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(Color);
+      }
       if (NumPendingChannels != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NumPendingChannels);
       }
       if (NumActiveChannels != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NumActiveChannels);
+      }
+      if (NumInactiveChannels != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NumInactiveChannels);
       }
       if (NumPeers != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NumPeers);
@@ -11218,29 +11967,21 @@ namespace Lnrpc {
       if (BlockHash.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(BlockHash);
       }
-      if (SyncedToChain != false) {
-        size += 1 + 1;
-      }
-      if (Testnet != false) {
-        size += 1 + 1;
-      }
-      size += uris_.CalculateSize(_repeated_uris_codec);
       if (BestHeaderTimestamp != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(BestHeaderTimestamp);
       }
-      if (Version.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Version);
-      }
-      if (NumInactiveChannels != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(NumInactiveChannels);
-      }
-      size += chains_.CalculateSize(_repeated_chains_codec);
-      if (Color.Length != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeStringSize(Color);
+      if (SyncedToChain != false) {
+        size += 1 + 1;
       }
       if (SyncedToGraph != false) {
         size += 2 + 1;
       }
+      if (Testnet != false) {
+        size += 1 + 1;
+      }
+      size += chains_.CalculateSize(_repeated_chains_codec);
+      size += uris_.CalculateSize(_repeated_uris_codec);
+      size += features_.CalculateSize(_map_features_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -11252,17 +11993,26 @@ namespace Lnrpc {
       if (other == null) {
         return;
       }
+      if (other.Version.Length != 0) {
+        Version = other.Version;
+      }
       if (other.IdentityPubkey.Length != 0) {
         IdentityPubkey = other.IdentityPubkey;
       }
       if (other.Alias.Length != 0) {
         Alias = other.Alias;
       }
+      if (other.Color.Length != 0) {
+        Color = other.Color;
+      }
       if (other.NumPendingChannels != 0) {
         NumPendingChannels = other.NumPendingChannels;
       }
       if (other.NumActiveChannels != 0) {
         NumActiveChannels = other.NumActiveChannels;
+      }
+      if (other.NumInactiveChannels != 0) {
+        NumInactiveChannels = other.NumInactiveChannels;
       }
       if (other.NumPeers != 0) {
         NumPeers = other.NumPeers;
@@ -11273,29 +12023,21 @@ namespace Lnrpc {
       if (other.BlockHash.Length != 0) {
         BlockHash = other.BlockHash;
       }
-      if (other.SyncedToChain != false) {
-        SyncedToChain = other.SyncedToChain;
-      }
-      if (other.Testnet != false) {
-        Testnet = other.Testnet;
-      }
-      uris_.Add(other.uris_);
       if (other.BestHeaderTimestamp != 0L) {
         BestHeaderTimestamp = other.BestHeaderTimestamp;
       }
-      if (other.Version.Length != 0) {
-        Version = other.Version;
-      }
-      if (other.NumInactiveChannels != 0) {
-        NumInactiveChannels = other.NumInactiveChannels;
-      }
-      chains_.Add(other.chains_);
-      if (other.Color.Length != 0) {
-        Color = other.Color;
+      if (other.SyncedToChain != false) {
+        SyncedToChain = other.SyncedToChain;
       }
       if (other.SyncedToGraph != false) {
         SyncedToGraph = other.SyncedToGraph;
       }
+      if (other.Testnet != false) {
+        Testnet = other.Testnet;
+      }
+      chains_.Add(other.chains_);
+      uris_.Add(other.uris_);
+      features_.Add(other.features_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -11371,6 +12113,10 @@ namespace Lnrpc {
             SyncedToGraph = input.ReadBool();
             break;
           }
+          case 154: {
+            features_.AddEntriesFrom(input, _map_features_codec);
+            break;
+          }
         }
       }
     }
@@ -11385,7 +12131,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[51]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[53]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11548,7 +12294,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[52]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[54]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11733,7 +12479,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[53]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[55]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -11868,7 +12614,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[54]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[56]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12025,7 +12771,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[55]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[57]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12046,6 +12792,7 @@ namespace Lnrpc {
       force_ = other.force_;
       targetConf_ = other.targetConf_;
       satPerByte_ = other.satPerByte_;
+      deliveryAddress_ = other.deliveryAddress_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -12113,6 +12860,24 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "delivery_address" field.</summary>
+    public const int DeliveryAddressFieldNumber = 5;
+    private string deliveryAddress_ = "";
+    /// <summary>
+    ///
+    ///An optional address to send funds to in the case of a cooperative close.
+    ///If the channel was opened with an upfront shutdown script and this field
+    ///is set, the request to close will fail because the channel must pay out
+    ///to the upfront shutdown addresss.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string DeliveryAddress {
+      get { return deliveryAddress_; }
+      set {
+        deliveryAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as CloseChannelRequest);
@@ -12130,6 +12895,7 @@ namespace Lnrpc {
       if (Force != other.Force) return false;
       if (TargetConf != other.TargetConf) return false;
       if (SatPerByte != other.SatPerByte) return false;
+      if (DeliveryAddress != other.DeliveryAddress) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -12140,6 +12906,7 @@ namespace Lnrpc {
       if (Force != false) hash ^= Force.GetHashCode();
       if (TargetConf != 0) hash ^= TargetConf.GetHashCode();
       if (SatPerByte != 0L) hash ^= SatPerByte.GetHashCode();
+      if (DeliveryAddress.Length != 0) hash ^= DeliveryAddress.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -12169,6 +12936,10 @@ namespace Lnrpc {
         output.WriteRawTag(32);
         output.WriteInt64(SatPerByte);
       }
+      if (DeliveryAddress.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(DeliveryAddress);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -12188,6 +12959,9 @@ namespace Lnrpc {
       }
       if (SatPerByte != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(SatPerByte);
+      }
+      if (DeliveryAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeliveryAddress);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -12214,6 +12988,9 @@ namespace Lnrpc {
       }
       if (other.SatPerByte != 0L) {
         SatPerByte = other.SatPerByte;
+      }
+      if (other.DeliveryAddress.Length != 0) {
+        DeliveryAddress = other.DeliveryAddress;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -12245,6 +13022,10 @@ namespace Lnrpc {
             SatPerByte = input.ReadInt64();
             break;
           }
+          case 42: {
+            DeliveryAddress = input.ReadString();
+            break;
+          }
         }
       }
     }
@@ -12259,7 +13040,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[56]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[58]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12463,7 +13244,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[57]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[59]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12620,7 +13401,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[58]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[60]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12648,6 +13429,8 @@ namespace Lnrpc {
       remoteCsvDelay_ = other.remoteCsvDelay_;
       minConfs_ = other.minConfs_;
       spendUnconfirmed_ = other.spendUnconfirmed_;
+      closeAddress_ = other.closeAddress_;
+      fundingShim_ = other.fundingShim_ != null ? other.fundingShim_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -12660,7 +13443,9 @@ namespace Lnrpc {
     public const int NodePubkeyFieldNumber = 2;
     private pb::ByteString nodePubkey_ = pb::ByteString.Empty;
     /// <summary>
-    //// The pubkey of the node to open a channel with
+    ///*
+    ///The pubkey of the node to open a channel with. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString NodePubkey {
@@ -12674,8 +13459,11 @@ namespace Lnrpc {
     public const int NodePubkeyStringFieldNumber = 3;
     private string nodePubkeyString_ = "";
     /// <summary>
-    //// The hex encoded pubkey of the node to open a channel with
+    ///*
+    ///The hex encoded pubkey of the node to open a channel with. Deprecated now
+    ///that the REST gateway supports base64 encoding of bytes fields.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string NodePubkeyString {
       get { return nodePubkeyString_; }
@@ -12810,6 +13598,47 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "close_address" field.</summary>
+    public const int CloseAddressFieldNumber = 13;
+    private string closeAddress_ = "";
+    /// <summary>
+    ///
+    ///Close address is an optional address which specifies the address to which
+    ///funds should be paid out to upon cooperative close. This field may only be
+    ///set if the peer supports the option upfront feature bit (call listpeers
+    ///to check). The remote peer will only accept cooperative closes to this
+    ///address if it is set.
+    ///
+    ///Note: If this value is set on channel creation, you will *not* be able to
+    ///cooperatively close out to a different address.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string CloseAddress {
+      get { return closeAddress_; }
+      set {
+        closeAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "funding_shim" field.</summary>
+    public const int FundingShimFieldNumber = 14;
+    private global::Lnrpc.FundingShim fundingShim_;
+    /// <summary>
+    ///*
+    ///Funding shims are an optional argument that allow the caller to intercept
+    ///certain funding functionality. For example, a shim can be provided to use a
+    ///particular key for the commitment key (ideally cold) rather than use one
+    ///that is generated by the wallet as normal, or signal that signing will be
+    ///carried out in an interactive manner (PSBT based).
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.FundingShim FundingShim {
+      get { return fundingShim_; }
+      set {
+        fundingShim_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as OpenChannelRequest);
@@ -12834,6 +13663,8 @@ namespace Lnrpc {
       if (RemoteCsvDelay != other.RemoteCsvDelay) return false;
       if (MinConfs != other.MinConfs) return false;
       if (SpendUnconfirmed != other.SpendUnconfirmed) return false;
+      if (CloseAddress != other.CloseAddress) return false;
+      if (!object.Equals(FundingShim, other.FundingShim)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -12851,6 +13682,8 @@ namespace Lnrpc {
       if (RemoteCsvDelay != 0) hash ^= RemoteCsvDelay.GetHashCode();
       if (MinConfs != 0) hash ^= MinConfs.GetHashCode();
       if (SpendUnconfirmed != false) hash ^= SpendUnconfirmed.GetHashCode();
+      if (CloseAddress.Length != 0) hash ^= CloseAddress.GetHashCode();
+      if (fundingShim_ != null) hash ^= FundingShim.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -12908,6 +13741,14 @@ namespace Lnrpc {
         output.WriteRawTag(96);
         output.WriteBool(SpendUnconfirmed);
       }
+      if (CloseAddress.Length != 0) {
+        output.WriteRawTag(106);
+        output.WriteString(CloseAddress);
+      }
+      if (fundingShim_ != null) {
+        output.WriteRawTag(114);
+        output.WriteMessage(FundingShim);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -12948,6 +13789,12 @@ namespace Lnrpc {
       }
       if (SpendUnconfirmed != false) {
         size += 1 + 1;
+      }
+      if (CloseAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CloseAddress);
+      }
+      if (fundingShim_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FundingShim);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -12992,6 +13839,15 @@ namespace Lnrpc {
       }
       if (other.SpendUnconfirmed != false) {
         SpendUnconfirmed = other.SpendUnconfirmed;
+      }
+      if (other.CloseAddress.Length != 0) {
+        CloseAddress = other.CloseAddress;
+      }
+      if (other.fundingShim_ != null) {
+        if (fundingShim_ == null) {
+          FundingShim = new global::Lnrpc.FundingShim();
+        }
+        FundingShim.MergeFrom(other.FundingShim);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -13048,6 +13904,17 @@ namespace Lnrpc {
             SpendUnconfirmed = input.ReadBool();
             break;
           }
+          case 106: {
+            CloseAddress = input.ReadString();
+            break;
+          }
+          case 114: {
+            if (fundingShim_ == null) {
+              FundingShim = new global::Lnrpc.FundingShim();
+            }
+            input.ReadMessage(FundingShim);
+            break;
+          }
         }
       }
     }
@@ -13062,7 +13929,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[59]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[61]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13079,6 +13946,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public OpenStatusUpdate(OpenStatusUpdate other) : this() {
+      pendingChanId_ = other.pendingChanId_;
       switch (other.UpdateCase) {
         case UpdateOneofCase.ChanPending:
           ChanPending = other.ChanPending.Clone();
@@ -13118,6 +13986,22 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "pending_chan_id" field.</summary>
+    public const int PendingChanIdFieldNumber = 4;
+    private pb::ByteString pendingChanId_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///The pending channel ID of the created channel. This value may be used to
+    ///further the funding flow manually via the FundingStateStep method.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PendingChanId {
+      get { return pendingChanId_; }
+      set {
+        pendingChanId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     private object update_;
     /// <summary>Enum of possible cases for the "update" oneof.</summary>
     public enum UpdateOneofCase {
@@ -13152,6 +14036,7 @@ namespace Lnrpc {
       }
       if (!object.Equals(ChanPending, other.ChanPending)) return false;
       if (!object.Equals(ChanOpen, other.ChanOpen)) return false;
+      if (PendingChanId != other.PendingChanId) return false;
       if (UpdateCase != other.UpdateCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -13161,6 +14046,7 @@ namespace Lnrpc {
       int hash = 1;
       if (updateCase_ == UpdateOneofCase.ChanPending) hash ^= ChanPending.GetHashCode();
       if (updateCase_ == UpdateOneofCase.ChanOpen) hash ^= ChanOpen.GetHashCode();
+      if (PendingChanId.Length != 0) hash ^= PendingChanId.GetHashCode();
       hash ^= (int) updateCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -13183,6 +14069,10 @@ namespace Lnrpc {
         output.WriteRawTag(26);
         output.WriteMessage(ChanOpen);
       }
+      if (PendingChanId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(PendingChanId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -13197,6 +14087,9 @@ namespace Lnrpc {
       if (updateCase_ == UpdateOneofCase.ChanOpen) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ChanOpen);
       }
+      if (PendingChanId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PendingChanId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -13207,6 +14100,9 @@ namespace Lnrpc {
     public void MergeFrom(OpenStatusUpdate other) {
       if (other == null) {
         return;
+      }
+      if (other.PendingChanId.Length != 0) {
+        PendingChanId = other.PendingChanId;
       }
       switch (other.UpdateCase) {
         case UpdateOneofCase.ChanPending:
@@ -13252,6 +14148,1229 @@ namespace Lnrpc {
             ChanOpen = subBuilder;
             break;
           }
+          case 34: {
+            PendingChanId = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class KeyLocator : pb::IMessage<KeyLocator> {
+    private static readonly pb::MessageParser<KeyLocator> _parser = new pb::MessageParser<KeyLocator>(() => new KeyLocator());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<KeyLocator> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[62]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyLocator() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyLocator(KeyLocator other) : this() {
+      keyFamily_ = other.keyFamily_;
+      keyIndex_ = other.keyIndex_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyLocator Clone() {
+      return new KeyLocator(this);
+    }
+
+    /// <summary>Field number for the "key_family" field.</summary>
+    public const int KeyFamilyFieldNumber = 1;
+    private int keyFamily_;
+    /// <summary>
+    //// The family of key being identified.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int KeyFamily {
+      get { return keyFamily_; }
+      set {
+        keyFamily_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "key_index" field.</summary>
+    public const int KeyIndexFieldNumber = 2;
+    private int keyIndex_;
+    /// <summary>
+    //// The precise index of the key being identified.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int KeyIndex {
+      get { return keyIndex_; }
+      set {
+        keyIndex_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as KeyLocator);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(KeyLocator other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (KeyFamily != other.KeyFamily) return false;
+      if (KeyIndex != other.KeyIndex) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (KeyFamily != 0) hash ^= KeyFamily.GetHashCode();
+      if (KeyIndex != 0) hash ^= KeyIndex.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (KeyFamily != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(KeyFamily);
+      }
+      if (KeyIndex != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(KeyIndex);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (KeyFamily != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KeyFamily);
+      }
+      if (KeyIndex != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KeyIndex);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(KeyLocator other) {
+      if (other == null) {
+        return;
+      }
+      if (other.KeyFamily != 0) {
+        KeyFamily = other.KeyFamily;
+      }
+      if (other.KeyIndex != 0) {
+        KeyIndex = other.KeyIndex;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            KeyFamily = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            KeyIndex = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class KeyDescriptor : pb::IMessage<KeyDescriptor> {
+    private static readonly pb::MessageParser<KeyDescriptor> _parser = new pb::MessageParser<KeyDescriptor>(() => new KeyDescriptor());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<KeyDescriptor> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[63]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyDescriptor() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyDescriptor(KeyDescriptor other) : this() {
+      rawKeyBytes_ = other.rawKeyBytes_;
+      keyLoc_ = other.keyLoc_ != null ? other.keyLoc_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KeyDescriptor Clone() {
+      return new KeyDescriptor(this);
+    }
+
+    /// <summary>Field number for the "raw_key_bytes" field.</summary>
+    public const int RawKeyBytesFieldNumber = 1;
+    private pb::ByteString rawKeyBytes_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///The raw bytes of the key being identified. 
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString RawKeyBytes {
+      get { return rawKeyBytes_; }
+      set {
+        rawKeyBytes_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "key_loc" field.</summary>
+    public const int KeyLocFieldNumber = 2;
+    private global::Lnrpc.KeyLocator keyLoc_;
+    /// <summary>
+    ///* 
+    ///The key locator that identifies which key to use for signing. 
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.KeyLocator KeyLoc {
+      get { return keyLoc_; }
+      set {
+        keyLoc_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as KeyDescriptor);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(KeyDescriptor other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RawKeyBytes != other.RawKeyBytes) return false;
+      if (!object.Equals(KeyLoc, other.KeyLoc)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RawKeyBytes.Length != 0) hash ^= RawKeyBytes.GetHashCode();
+      if (keyLoc_ != null) hash ^= KeyLoc.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RawKeyBytes.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(RawKeyBytes);
+      }
+      if (keyLoc_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(KeyLoc);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RawKeyBytes.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RawKeyBytes);
+      }
+      if (keyLoc_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KeyLoc);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(KeyDescriptor other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RawKeyBytes.Length != 0) {
+        RawKeyBytes = other.RawKeyBytes;
+      }
+      if (other.keyLoc_ != null) {
+        if (keyLoc_ == null) {
+          KeyLoc = new global::Lnrpc.KeyLocator();
+        }
+        KeyLoc.MergeFrom(other.KeyLoc);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            RawKeyBytes = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            if (keyLoc_ == null) {
+              KeyLoc = new global::Lnrpc.KeyLocator();
+            }
+            input.ReadMessage(KeyLoc);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ChanPointShim : pb::IMessage<ChanPointShim> {
+    private static readonly pb::MessageParser<ChanPointShim> _parser = new pb::MessageParser<ChanPointShim>(() => new ChanPointShim());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChanPointShim> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[64]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChanPointShim() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChanPointShim(ChanPointShim other) : this() {
+      amt_ = other.amt_;
+      chanPoint_ = other.chanPoint_ != null ? other.chanPoint_.Clone() : null;
+      localKey_ = other.localKey_ != null ? other.localKey_.Clone() : null;
+      remoteKey_ = other.remoteKey_;
+      pendingChanId_ = other.pendingChanId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChanPointShim Clone() {
+      return new ChanPointShim(this);
+    }
+
+    /// <summary>Field number for the "amt" field.</summary>
+    public const int AmtFieldNumber = 1;
+    private long amt_;
+    /// <summary>
+    ///*
+    ///The size of the pre-crafted output to be used as the channel point for this
+    ///channel funding.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Amt {
+      get { return amt_; }
+      set {
+        amt_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chan_point" field.</summary>
+    public const int ChanPointFieldNumber = 2;
+    private global::Lnrpc.ChannelPoint chanPoint_;
+    /// <summary>
+    //// The target channel point to refrence in created commitment transactions.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.ChannelPoint ChanPoint {
+      get { return chanPoint_; }
+      set {
+        chanPoint_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "local_key" field.</summary>
+    public const int LocalKeyFieldNumber = 3;
+    private global::Lnrpc.KeyDescriptor localKey_;
+    /// <summary>
+    //// Our local key to use when creating the multi-sig output.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.KeyDescriptor LocalKey {
+      get { return localKey_; }
+      set {
+        localKey_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "remote_key" field.</summary>
+    public const int RemoteKeyFieldNumber = 4;
+    private pb::ByteString remoteKey_ = pb::ByteString.Empty;
+    /// <summary>
+    //// The key of the remote party to use when creating the multi-sig output.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString RemoteKey {
+      get { return remoteKey_; }
+      set {
+        remoteKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "pending_chan_id" field.</summary>
+    public const int PendingChanIdFieldNumber = 5;
+    private pb::ByteString pendingChanId_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///If non-zero, then this will be used as the pending channel ID on the wire
+    ///protocol to initate the funding request. This is an optional field, and
+    ///should only be set if the responder is already expecting a specific pending
+    ///channel ID.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PendingChanId {
+      get { return pendingChanId_; }
+      set {
+        pendingChanId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChanPointShim);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChanPointShim other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Amt != other.Amt) return false;
+      if (!object.Equals(ChanPoint, other.ChanPoint)) return false;
+      if (!object.Equals(LocalKey, other.LocalKey)) return false;
+      if (RemoteKey != other.RemoteKey) return false;
+      if (PendingChanId != other.PendingChanId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Amt != 0L) hash ^= Amt.GetHashCode();
+      if (chanPoint_ != null) hash ^= ChanPoint.GetHashCode();
+      if (localKey_ != null) hash ^= LocalKey.GetHashCode();
+      if (RemoteKey.Length != 0) hash ^= RemoteKey.GetHashCode();
+      if (PendingChanId.Length != 0) hash ^= PendingChanId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Amt != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Amt);
+      }
+      if (chanPoint_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(ChanPoint);
+      }
+      if (localKey_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(LocalKey);
+      }
+      if (RemoteKey.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(RemoteKey);
+      }
+      if (PendingChanId.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteBytes(PendingChanId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Amt != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Amt);
+      }
+      if (chanPoint_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ChanPoint);
+      }
+      if (localKey_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LocalKey);
+      }
+      if (RemoteKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RemoteKey);
+      }
+      if (PendingChanId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PendingChanId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChanPointShim other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Amt != 0L) {
+        Amt = other.Amt;
+      }
+      if (other.chanPoint_ != null) {
+        if (chanPoint_ == null) {
+          ChanPoint = new global::Lnrpc.ChannelPoint();
+        }
+        ChanPoint.MergeFrom(other.ChanPoint);
+      }
+      if (other.localKey_ != null) {
+        if (localKey_ == null) {
+          LocalKey = new global::Lnrpc.KeyDescriptor();
+        }
+        LocalKey.MergeFrom(other.LocalKey);
+      }
+      if (other.RemoteKey.Length != 0) {
+        RemoteKey = other.RemoteKey;
+      }
+      if (other.PendingChanId.Length != 0) {
+        PendingChanId = other.PendingChanId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Amt = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (chanPoint_ == null) {
+              ChanPoint = new global::Lnrpc.ChannelPoint();
+            }
+            input.ReadMessage(ChanPoint);
+            break;
+          }
+          case 26: {
+            if (localKey_ == null) {
+              LocalKey = new global::Lnrpc.KeyDescriptor();
+            }
+            input.ReadMessage(LocalKey);
+            break;
+          }
+          case 34: {
+            RemoteKey = input.ReadBytes();
+            break;
+          }
+          case 42: {
+            PendingChanId = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FundingShim : pb::IMessage<FundingShim> {
+    private static readonly pb::MessageParser<FundingShim> _parser = new pb::MessageParser<FundingShim>(() => new FundingShim());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FundingShim> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[65]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShim() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShim(FundingShim other) : this() {
+      switch (other.ShimCase) {
+        case ShimOneofCase.ChanPointShim:
+          ChanPointShim = other.ChanPointShim.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShim Clone() {
+      return new FundingShim(this);
+    }
+
+    /// <summary>Field number for the "chan_point_shim" field.</summary>
+    public const int ChanPointShimFieldNumber = 1;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.ChanPointShim ChanPointShim {
+      get { return shimCase_ == ShimOneofCase.ChanPointShim ? (global::Lnrpc.ChanPointShim) shim_ : null; }
+      set {
+        shim_ = value;
+        shimCase_ = value == null ? ShimOneofCase.None : ShimOneofCase.ChanPointShim;
+      }
+    }
+
+    private object shim_;
+    /// <summary>Enum of possible cases for the "shim" oneof.</summary>
+    public enum ShimOneofCase {
+      None = 0,
+      ChanPointShim = 1,
+    }
+    private ShimOneofCase shimCase_ = ShimOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ShimOneofCase ShimCase {
+      get { return shimCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearShim() {
+      shimCase_ = ShimOneofCase.None;
+      shim_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FundingShim);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FundingShim other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ChanPointShim, other.ChanPointShim)) return false;
+      if (ShimCase != other.ShimCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (shimCase_ == ShimOneofCase.ChanPointShim) hash ^= ChanPointShim.GetHashCode();
+      hash ^= (int) shimCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (shimCase_ == ShimOneofCase.ChanPointShim) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ChanPointShim);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (shimCase_ == ShimOneofCase.ChanPointShim) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ChanPointShim);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FundingShim other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.ShimCase) {
+        case ShimOneofCase.ChanPointShim:
+          if (ChanPointShim == null) {
+            ChanPointShim = new global::Lnrpc.ChanPointShim();
+          }
+          ChanPointShim.MergeFrom(other.ChanPointShim);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            global::Lnrpc.ChanPointShim subBuilder = new global::Lnrpc.ChanPointShim();
+            if (shimCase_ == ShimOneofCase.ChanPointShim) {
+              subBuilder.MergeFrom(ChanPointShim);
+            }
+            input.ReadMessage(subBuilder);
+            ChanPointShim = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FundingShimCancel : pb::IMessage<FundingShimCancel> {
+    private static readonly pb::MessageParser<FundingShimCancel> _parser = new pb::MessageParser<FundingShimCancel>(() => new FundingShimCancel());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FundingShimCancel> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[66]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShimCancel() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShimCancel(FundingShimCancel other) : this() {
+      pendingChanId_ = other.pendingChanId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingShimCancel Clone() {
+      return new FundingShimCancel(this);
+    }
+
+    /// <summary>Field number for the "pending_chan_id" field.</summary>
+    public const int PendingChanIdFieldNumber = 1;
+    private pb::ByteString pendingChanId_ = pb::ByteString.Empty;
+    /// <summary>
+    //// The pending channel ID of the channel to cancel the funding shim for.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PendingChanId {
+      get { return pendingChanId_; }
+      set {
+        pendingChanId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FundingShimCancel);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FundingShimCancel other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PendingChanId != other.PendingChanId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PendingChanId.Length != 0) hash ^= PendingChanId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (PendingChanId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(PendingChanId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PendingChanId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PendingChanId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FundingShimCancel other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PendingChanId.Length != 0) {
+        PendingChanId = other.PendingChanId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            PendingChanId = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FundingTransitionMsg : pb::IMessage<FundingTransitionMsg> {
+    private static readonly pb::MessageParser<FundingTransitionMsg> _parser = new pb::MessageParser<FundingTransitionMsg>(() => new FundingTransitionMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FundingTransitionMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[67]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingTransitionMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingTransitionMsg(FundingTransitionMsg other) : this() {
+      switch (other.TriggerCase) {
+        case TriggerOneofCase.ShimRegister:
+          ShimRegister = other.ShimRegister.Clone();
+          break;
+        case TriggerOneofCase.ShimCancel:
+          ShimCancel = other.ShimCancel.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingTransitionMsg Clone() {
+      return new FundingTransitionMsg(this);
+    }
+
+    /// <summary>Field number for the "shim_register" field.</summary>
+    public const int ShimRegisterFieldNumber = 1;
+    /// <summary>
+    ///*
+    ///The funding shim to regsiter. This should be used before any
+    ///channel funding has began by the remote party, as it is intended as a
+    ///prepatory step for the full channel funding.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.FundingShim ShimRegister {
+      get { return triggerCase_ == TriggerOneofCase.ShimRegister ? (global::Lnrpc.FundingShim) trigger_ : null; }
+      set {
+        trigger_ = value;
+        triggerCase_ = value == null ? TriggerOneofCase.None : TriggerOneofCase.ShimRegister;
+      }
+    }
+
+    /// <summary>Field number for the "shim_cancel" field.</summary>
+    public const int ShimCancelFieldNumber = 2;
+    /// <summary>
+    //// Used to cancel an existing registered funding shim.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.FundingShimCancel ShimCancel {
+      get { return triggerCase_ == TriggerOneofCase.ShimCancel ? (global::Lnrpc.FundingShimCancel) trigger_ : null; }
+      set {
+        trigger_ = value;
+        triggerCase_ = value == null ? TriggerOneofCase.None : TriggerOneofCase.ShimCancel;
+      }
+    }
+
+    private object trigger_;
+    /// <summary>Enum of possible cases for the "trigger" oneof.</summary>
+    public enum TriggerOneofCase {
+      None = 0,
+      ShimRegister = 1,
+      ShimCancel = 2,
+    }
+    private TriggerOneofCase triggerCase_ = TriggerOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TriggerOneofCase TriggerCase {
+      get { return triggerCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearTrigger() {
+      triggerCase_ = TriggerOneofCase.None;
+      trigger_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FundingTransitionMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FundingTransitionMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ShimRegister, other.ShimRegister)) return false;
+      if (!object.Equals(ShimCancel, other.ShimCancel)) return false;
+      if (TriggerCase != other.TriggerCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (triggerCase_ == TriggerOneofCase.ShimRegister) hash ^= ShimRegister.GetHashCode();
+      if (triggerCase_ == TriggerOneofCase.ShimCancel) hash ^= ShimCancel.GetHashCode();
+      hash ^= (int) triggerCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (triggerCase_ == TriggerOneofCase.ShimRegister) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ShimRegister);
+      }
+      if (triggerCase_ == TriggerOneofCase.ShimCancel) {
+        output.WriteRawTag(18);
+        output.WriteMessage(ShimCancel);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (triggerCase_ == TriggerOneofCase.ShimRegister) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ShimRegister);
+      }
+      if (triggerCase_ == TriggerOneofCase.ShimCancel) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ShimCancel);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FundingTransitionMsg other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.TriggerCase) {
+        case TriggerOneofCase.ShimRegister:
+          if (ShimRegister == null) {
+            ShimRegister = new global::Lnrpc.FundingShim();
+          }
+          ShimRegister.MergeFrom(other.ShimRegister);
+          break;
+        case TriggerOneofCase.ShimCancel:
+          if (ShimCancel == null) {
+            ShimCancel = new global::Lnrpc.FundingShimCancel();
+          }
+          ShimCancel.MergeFrom(other.ShimCancel);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            global::Lnrpc.FundingShim subBuilder = new global::Lnrpc.FundingShim();
+            if (triggerCase_ == TriggerOneofCase.ShimRegister) {
+              subBuilder.MergeFrom(ShimRegister);
+            }
+            input.ReadMessage(subBuilder);
+            ShimRegister = subBuilder;
+            break;
+          }
+          case 18: {
+            global::Lnrpc.FundingShimCancel subBuilder = new global::Lnrpc.FundingShimCancel();
+            if (triggerCase_ == TriggerOneofCase.ShimCancel) {
+              subBuilder.MergeFrom(ShimCancel);
+            }
+            input.ReadMessage(subBuilder);
+            ShimCancel = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FundingStateStepResp : pb::IMessage<FundingStateStepResp> {
+    private static readonly pb::MessageParser<FundingStateStepResp> _parser = new pb::MessageParser<FundingStateStepResp>(() => new FundingStateStepResp());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FundingStateStepResp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[68]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingStateStepResp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingStateStepResp(FundingStateStepResp other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FundingStateStepResp Clone() {
+      return new FundingStateStepResp(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FundingStateStepResp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FundingStateStepResp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FundingStateStepResp other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
         }
       }
     }
@@ -13266,7 +15385,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[60]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[69]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13556,7 +15675,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[61]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[70]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13657,7 +15776,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[62]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[71]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15117,7 +17236,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[63]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[72]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15218,7 +17337,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[64]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[73]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15542,7 +17661,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[65]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[74]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15643,7 +17762,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[66]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[75]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15837,7 +17956,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[67]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[76]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -15938,7 +18057,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[68]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[77]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16101,7 +18220,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[69]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[78]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16120,6 +18239,7 @@ namespace Lnrpc {
     public QueryRoutesRequest(QueryRoutesRequest other) : this() {
       pubKey_ = other.pubKey_;
       amt_ = other.amt_;
+      amtMsat_ = other.amtMsat_;
       finalCltvDelta_ = other.finalCltvDelta_;
       feeLimit_ = other.feeLimit_ != null ? other.feeLimit_.Clone() : null;
       ignoredNodes_ = other.ignoredNodes_.Clone();
@@ -16128,6 +18248,11 @@ namespace Lnrpc {
       useMissionControl_ = other.useMissionControl_;
       ignoredPairs_ = other.ignoredPairs_.Clone();
       cltvLimit_ = other.cltvLimit_;
+      destCustomRecords_ = other.destCustomRecords_.Clone();
+      outgoingChanId_ = other.outgoingChanId_;
+      lastHopPubkey_ = other.lastHopPubkey_;
+      routeHints_ = other.routeHints_.Clone();
+      destFeatures_ = other.destFeatures_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -16154,7 +18279,10 @@ namespace Lnrpc {
     public const int AmtFieldNumber = 2;
     private long amt_;
     /// <summary>
-    //// The amount to send expressed in satoshis
+    ///*
+    ///The amount to send expressed in satoshis.
+    ///
+    ///The fields amt and amt_msat are mutually exclusive.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Amt {
@@ -16164,11 +18292,33 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "amt_msat" field.</summary>
+    public const int AmtMsatFieldNumber = 12;
+    private long amtMsat_;
+    /// <summary>
+    ///*
+    ///The amount to send expressed in millisatoshis.
+    ///
+    ///The fields amt and amt_msat are mutually exclusive.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long AmtMsat {
+      get { return amtMsat_; }
+      set {
+        amtMsat_ = value;
+      }
+    }
+
     /// <summary>Field number for the "final_cltv_delta" field.</summary>
     public const int FinalCltvDeltaFieldNumber = 4;
     private int finalCltvDelta_;
     /// <summary>
-    //// An optional CLTV delta from the current height that should be used for the timelock of the final hop
+    ///*
+    ///An optional CLTV delta from the current height that should be used for the
+    ///timelock of the final hop. Note that unlike SendPayment, QueryRoutes does
+    ///not add any additional block padding on top of final_ctlv_delta. This
+    ///padding of a few blocks needs to be added manually or otherwise failures may
+    ///happen when a block comes in while the payment is in flight.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int FinalCltvDelta {
@@ -16203,7 +18353,8 @@ namespace Lnrpc {
     private readonly pbc::RepeatedField<pb::ByteString> ignoredNodes_ = new pbc::RepeatedField<pb::ByteString>();
     /// <summary>
     ///*
-    ///A list of nodes to ignore during path finding.
+    ///A list of nodes to ignore during path finding. When using REST, these fields
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<pb::ByteString> IgnoredNodes {
@@ -16288,6 +18439,88 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "dest_custom_records" field.</summary>
+    public const int DestCustomRecordsFieldNumber = 13;
+    private static readonly pbc::MapField<ulong, pb::ByteString>.Codec _map_destCustomRecords_codec
+        = new pbc::MapField<ulong, pb::ByteString>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForBytes(18), 106);
+    private readonly pbc::MapField<ulong, pb::ByteString> destCustomRecords_ = new pbc::MapField<ulong, pb::ByteString>();
+    /// <summary>
+    ///* 
+    ///An optional field that can be used to pass an arbitrary set of TLV records
+    ///to a peer which understands the new records. This can be used to pass
+    ///application specific data during the payment attempt. If the destination
+    ///does not support the specified recrods, and error will be returned.
+    ///Record types are required to be in the custom range >= 65536. When using
+    ///REST, the values must be encoded as base64.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<ulong, pb::ByteString> DestCustomRecords {
+      get { return destCustomRecords_; }
+    }
+
+    /// <summary>Field number for the "outgoing_chan_id" field.</summary>
+    public const int OutgoingChanIdFieldNumber = 14;
+    private ulong outgoingChanId_;
+    /// <summary>
+    ///*
+    ///The channel id of the channel that must be taken to the first hop. If zero,
+    ///any channel may be used.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong OutgoingChanId {
+      get { return outgoingChanId_; }
+      set {
+        outgoingChanId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "last_hop_pubkey" field.</summary>
+    public const int LastHopPubkeyFieldNumber = 15;
+    private pb::ByteString lastHopPubkey_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///The pubkey of the last hop of the route. If empty, any hop may be used.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString LastHopPubkey {
+      get { return lastHopPubkey_; }
+      set {
+        lastHopPubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "route_hints" field.</summary>
+    public const int RouteHintsFieldNumber = 16;
+    private static readonly pb::FieldCodec<global::Lnrpc.RouteHint> _repeated_routeHints_codec
+        = pb::FieldCodec.ForMessage(130, global::Lnrpc.RouteHint.Parser);
+    private readonly pbc::RepeatedField<global::Lnrpc.RouteHint> routeHints_ = new pbc::RepeatedField<global::Lnrpc.RouteHint>();
+    /// <summary>
+    ///*
+    ///Optional route hints to reach the destination through private channels.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Lnrpc.RouteHint> RouteHints {
+      get { return routeHints_; }
+    }
+
+    /// <summary>Field number for the "dest_features" field.</summary>
+    public const int DestFeaturesFieldNumber = 17;
+    private static readonly pb::FieldCodec<global::Lnrpc.FeatureBit> _repeated_destFeatures_codec
+        = pb::FieldCodec.ForEnum(138, x => (int) x, x => (global::Lnrpc.FeatureBit) x);
+    private readonly pbc::RepeatedField<global::Lnrpc.FeatureBit> destFeatures_ = new pbc::RepeatedField<global::Lnrpc.FeatureBit>();
+    /// <summary>
+    ///*
+    ///Features assumed to be supported by the final node. All transitive feature
+    ///depdencies must also be set properly. For a given feature bit pair, either
+    ///optional or remote may be set, but not both. If this field is nil or empty,
+    ///the router will try to load destination features from the graph as a
+    ///fallback.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Lnrpc.FeatureBit> DestFeatures {
+      get { return destFeatures_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as QueryRoutesRequest);
@@ -16303,6 +18536,7 @@ namespace Lnrpc {
       }
       if (PubKey != other.PubKey) return false;
       if (Amt != other.Amt) return false;
+      if (AmtMsat != other.AmtMsat) return false;
       if (FinalCltvDelta != other.FinalCltvDelta) return false;
       if (!object.Equals(FeeLimit, other.FeeLimit)) return false;
       if(!ignoredNodes_.Equals(other.ignoredNodes_)) return false;
@@ -16311,6 +18545,11 @@ namespace Lnrpc {
       if (UseMissionControl != other.UseMissionControl) return false;
       if(!ignoredPairs_.Equals(other.ignoredPairs_)) return false;
       if (CltvLimit != other.CltvLimit) return false;
+      if (!DestCustomRecords.Equals(other.DestCustomRecords)) return false;
+      if (OutgoingChanId != other.OutgoingChanId) return false;
+      if (LastHopPubkey != other.LastHopPubkey) return false;
+      if(!routeHints_.Equals(other.routeHints_)) return false;
+      if(!destFeatures_.Equals(other.destFeatures_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -16319,6 +18558,7 @@ namespace Lnrpc {
       int hash = 1;
       if (PubKey.Length != 0) hash ^= PubKey.GetHashCode();
       if (Amt != 0L) hash ^= Amt.GetHashCode();
+      if (AmtMsat != 0L) hash ^= AmtMsat.GetHashCode();
       if (FinalCltvDelta != 0) hash ^= FinalCltvDelta.GetHashCode();
       if (feeLimit_ != null) hash ^= FeeLimit.GetHashCode();
       hash ^= ignoredNodes_.GetHashCode();
@@ -16327,6 +18567,11 @@ namespace Lnrpc {
       if (UseMissionControl != false) hash ^= UseMissionControl.GetHashCode();
       hash ^= ignoredPairs_.GetHashCode();
       if (CltvLimit != 0) hash ^= CltvLimit.GetHashCode();
+      hash ^= DestCustomRecords.GetHashCode();
+      if (OutgoingChanId != 0UL) hash ^= OutgoingChanId.GetHashCode();
+      if (LastHopPubkey.Length != 0) hash ^= LastHopPubkey.GetHashCode();
+      hash ^= routeHints_.GetHashCode();
+      hash ^= destFeatures_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -16371,6 +18616,21 @@ namespace Lnrpc {
         output.WriteRawTag(88);
         output.WriteUInt32(CltvLimit);
       }
+      if (AmtMsat != 0L) {
+        output.WriteRawTag(96);
+        output.WriteInt64(AmtMsat);
+      }
+      destCustomRecords_.WriteTo(output, _map_destCustomRecords_codec);
+      if (OutgoingChanId != 0UL) {
+        output.WriteRawTag(112);
+        output.WriteUInt64(OutgoingChanId);
+      }
+      if (LastHopPubkey.Length != 0) {
+        output.WriteRawTag(122);
+        output.WriteBytes(LastHopPubkey);
+      }
+      routeHints_.WriteTo(output, _repeated_routeHints_codec);
+      destFeatures_.WriteTo(output, _repeated_destFeatures_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -16384,6 +18644,9 @@ namespace Lnrpc {
       }
       if (Amt != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Amt);
+      }
+      if (AmtMsat != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AmtMsat);
       }
       if (FinalCltvDelta != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(FinalCltvDelta);
@@ -16403,6 +18666,15 @@ namespace Lnrpc {
       if (CltvLimit != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CltvLimit);
       }
+      size += destCustomRecords_.CalculateSize(_map_destCustomRecords_codec);
+      if (OutgoingChanId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(OutgoingChanId);
+      }
+      if (LastHopPubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(LastHopPubkey);
+      }
+      size += routeHints_.CalculateSize(_repeated_routeHints_codec);
+      size += destFeatures_.CalculateSize(_repeated_destFeatures_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -16419,6 +18691,9 @@ namespace Lnrpc {
       }
       if (other.Amt != 0L) {
         Amt = other.Amt;
+      }
+      if (other.AmtMsat != 0L) {
+        AmtMsat = other.AmtMsat;
       }
       if (other.FinalCltvDelta != 0) {
         FinalCltvDelta = other.FinalCltvDelta;
@@ -16441,6 +18716,15 @@ namespace Lnrpc {
       if (other.CltvLimit != 0) {
         CltvLimit = other.CltvLimit;
       }
+      destCustomRecords_.Add(other.destCustomRecords_);
+      if (other.OutgoingChanId != 0UL) {
+        OutgoingChanId = other.OutgoingChanId;
+      }
+      if (other.LastHopPubkey.Length != 0) {
+        LastHopPubkey = other.LastHopPubkey;
+      }
+      routeHints_.Add(other.routeHints_);
+      destFeatures_.Add(other.destFeatures_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -16495,6 +18779,31 @@ namespace Lnrpc {
             CltvLimit = input.ReadUInt32();
             break;
           }
+          case 96: {
+            AmtMsat = input.ReadInt64();
+            break;
+          }
+          case 106: {
+            destCustomRecords_.AddEntriesFrom(input, _map_destCustomRecords_codec);
+            break;
+          }
+          case 112: {
+            OutgoingChanId = input.ReadUInt64();
+            break;
+          }
+          case 122: {
+            LastHopPubkey = input.ReadBytes();
+            break;
+          }
+          case 130: {
+            routeHints_.AddEntriesFrom(input, _repeated_routeHints_codec);
+            break;
+          }
+          case 138:
+          case 136: {
+            destFeatures_.AddEntriesFrom(input, _repeated_destFeatures_codec);
+            break;
+          }
         }
       }
     }
@@ -16509,7 +18818,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[70]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[79]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16540,7 +18849,9 @@ namespace Lnrpc {
     public const int FromFieldNumber = 1;
     private pb::ByteString from_ = pb::ByteString.Empty;
     /// <summary>
-    //// The sending node of the pair.
+    ///*
+    ///The sending node of the pair. When using REST, this field must be encoded as
+    ///base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString From {
@@ -16554,7 +18865,9 @@ namespace Lnrpc {
     public const int ToFieldNumber = 2;
     private pb::ByteString to_ = pb::ByteString.Empty;
     /// <summary>
-    //// The receiving node of the pair.
+    ///*
+    ///The receiving node of the pair. When using REST, this field must be encoded
+    ///as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString To {
@@ -16672,7 +18985,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[71]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[80]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16839,7 +19152,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[72]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[81]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -16998,7 +19311,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[73]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[82]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17024,6 +19337,8 @@ namespace Lnrpc {
       feeMsat_ = other.feeMsat_;
       pubKey_ = other.pubKey_;
       tlvPayload_ = other.tlvPayload_;
+      mppRecord_ = other.mppRecord_ != null ? other.mppRecord_.Clone() : null;
+      customRecords_ = other.customRecords_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -17139,7 +19454,8 @@ namespace Lnrpc {
     /// <summary>
     ///* 
     ///If set to true, then this hop will be encoded using the new variable length
-    ///TLV format.
+    ///TLV format. Note that if any custom tlv_records below are specified, then
+    ///this field MUST be set to true for them to be encoded properly.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool TlvPayload {
@@ -17147,6 +19463,40 @@ namespace Lnrpc {
       set {
         tlvPayload_ = value;
       }
+    }
+
+    /// <summary>Field number for the "mpp_record" field.</summary>
+    public const int MppRecordFieldNumber = 10;
+    private global::Lnrpc.MPPRecord mppRecord_;
+    /// <summary>
+    ///*
+    ///An optional TLV record tha singals the use of an MPP payment. If present,
+    ///the receiver will enforce that that the same mpp_record is included in the
+    ///final hop payload of all non-zero payments in the HTLC set. If empty, a
+    ///regular single-shot payment is or was attempted.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.MPPRecord MppRecord {
+      get { return mppRecord_; }
+      set {
+        mppRecord_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "custom_records" field.</summary>
+    public const int CustomRecordsFieldNumber = 11;
+    private static readonly pbc::MapField<ulong, pb::ByteString>.Codec _map_customRecords_codec
+        = new pbc::MapField<ulong, pb::ByteString>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForBytes(18), 90);
+    private readonly pbc::MapField<ulong, pb::ByteString> customRecords_ = new pbc::MapField<ulong, pb::ByteString>();
+    /// <summary>
+    ///*
+    ///An optional set of key-value TLV records. This is useful within the context
+    ///of the SendToRoute call as it allows callers to specify arbitrary K-V pairs
+    ///to drop off at each hop within the onion.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<ulong, pb::ByteString> CustomRecords {
+      get { return customRecords_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17171,6 +19521,8 @@ namespace Lnrpc {
       if (FeeMsat != other.FeeMsat) return false;
       if (PubKey != other.PubKey) return false;
       if (TlvPayload != other.TlvPayload) return false;
+      if (!object.Equals(MppRecord, other.MppRecord)) return false;
+      if (!CustomRecords.Equals(other.CustomRecords)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -17186,6 +19538,8 @@ namespace Lnrpc {
       if (FeeMsat != 0L) hash ^= FeeMsat.GetHashCode();
       if (PubKey.Length != 0) hash ^= PubKey.GetHashCode();
       if (TlvPayload != false) hash ^= TlvPayload.GetHashCode();
+      if (mppRecord_ != null) hash ^= MppRecord.GetHashCode();
+      hash ^= CustomRecords.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -17235,6 +19589,11 @@ namespace Lnrpc {
         output.WriteRawTag(72);
         output.WriteBool(TlvPayload);
       }
+      if (mppRecord_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(MppRecord);
+      }
+      customRecords_.WriteTo(output, _map_customRecords_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -17270,6 +19629,10 @@ namespace Lnrpc {
       if (TlvPayload != false) {
         size += 1 + 1;
       }
+      if (mppRecord_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MppRecord);
+      }
+      size += customRecords_.CalculateSize(_map_customRecords_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -17308,6 +19671,13 @@ namespace Lnrpc {
       if (other.TlvPayload != false) {
         TlvPayload = other.TlvPayload;
       }
+      if (other.mppRecord_ != null) {
+        if (mppRecord_ == null) {
+          MppRecord = new global::Lnrpc.MPPRecord();
+        }
+        MppRecord.MergeFrom(other.MppRecord);
+      }
+      customRecords_.Add(other.customRecords_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -17355,6 +19725,188 @@ namespace Lnrpc {
             TlvPayload = input.ReadBool();
             break;
           }
+          case 82: {
+            if (mppRecord_ == null) {
+              MppRecord = new global::Lnrpc.MPPRecord();
+            }
+            input.ReadMessage(MppRecord);
+            break;
+          }
+          case 90: {
+            customRecords_.AddEntriesFrom(input, _map_customRecords_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MPPRecord : pb::IMessage<MPPRecord> {
+    private static readonly pb::MessageParser<MPPRecord> _parser = new pb::MessageParser<MPPRecord>(() => new MPPRecord());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MPPRecord> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[83]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MPPRecord() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MPPRecord(MPPRecord other) : this() {
+      paymentAddr_ = other.paymentAddr_;
+      totalAmtMsat_ = other.totalAmtMsat_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MPPRecord Clone() {
+      return new MPPRecord(this);
+    }
+
+    /// <summary>Field number for the "payment_addr" field.</summary>
+    public const int PaymentAddrFieldNumber = 11;
+    private pb::ByteString paymentAddr_ = pb::ByteString.Empty;
+    /// <summary>
+    ///*
+    ///A unique, random identifier used to authenticate the sender as the intended
+    ///payer of a multi-path payment. The payment_addr must be the same for all
+    ///subpayments, and match the payment_addr provided in the receiver's invoice.
+    ///The same payment_addr must be used on all subpayments.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PaymentAddr {
+      get { return paymentAddr_; }
+      set {
+        paymentAddr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "total_amt_msat" field.</summary>
+    public const int TotalAmtMsatFieldNumber = 10;
+    private long totalAmtMsat_;
+    /// <summary>
+    ///*
+    ///The total amount in milli-satoshis being sent as part of a larger multi-path
+    ///payment. The caller is responsible for ensuring subpayments to the same node
+    ///and payment_hash sum exactly to total_amt_msat. The same
+    ///total_amt_msat must be used on all subpayments.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long TotalAmtMsat {
+      get { return totalAmtMsat_; }
+      set {
+        totalAmtMsat_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MPPRecord);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MPPRecord other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PaymentAddr != other.PaymentAddr) return false;
+      if (TotalAmtMsat != other.TotalAmtMsat) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PaymentAddr.Length != 0) hash ^= PaymentAddr.GetHashCode();
+      if (TotalAmtMsat != 0L) hash ^= TotalAmtMsat.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TotalAmtMsat != 0L) {
+        output.WriteRawTag(80);
+        output.WriteInt64(TotalAmtMsat);
+      }
+      if (PaymentAddr.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteBytes(PaymentAddr);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PaymentAddr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PaymentAddr);
+      }
+      if (TotalAmtMsat != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TotalAmtMsat);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MPPRecord other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PaymentAddr.Length != 0) {
+        PaymentAddr = other.PaymentAddr;
+      }
+      if (other.TotalAmtMsat != 0L) {
+        TotalAmtMsat = other.TotalAmtMsat;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 80: {
+            TotalAmtMsat = input.ReadInt64();
+            break;
+          }
+          case 90: {
+            PaymentAddr = input.ReadBytes();
+            break;
+          }
         }
       }
     }
@@ -17377,7 +19929,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[74]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[84]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17413,7 +19965,7 @@ namespace Lnrpc {
     private uint totalTimeLock_;
     /// <summary>
     ///*
-    ///The cumulative (final) time lock across the entire route.  This is the CLTV
+    ///The cumulative (final) time lock across the entire route. This is the CLTV
     ///value that should be extended to the first hop in the route. All other hops
     ///will decrement the time-lock as advertised, leaving enough time for all
     ///hops to wait for or present the payment preimage to complete the payment.
@@ -17431,7 +19983,7 @@ namespace Lnrpc {
     private long totalFees_;
     /// <summary>
     ///*
-    ///The sum of the fees paid at each hop within the final route.  In the case
+    ///The sum of the fees paid at each hop within the final route. In the case
     ///of a one-hop payment, this value will be zero as we don't need to pay a fee
     ///to ourselves.
     /// </summary>
@@ -17673,7 +20225,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[75]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[85]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -17836,7 +20388,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[76]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[86]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18070,7 +20622,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[77]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[87]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18092,6 +20644,7 @@ namespace Lnrpc {
       alias_ = other.alias_;
       addresses_ = other.addresses_.Clone();
       color_ = other.color_;
+      features_ = other.features_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -18154,6 +20707,16 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "features" field.</summary>
+    public const int FeaturesFieldNumber = 6;
+    private static readonly pbc::MapField<uint, global::Lnrpc.Feature>.Codec _map_features_codec
+        = new pbc::MapField<uint, global::Lnrpc.Feature>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::Lnrpc.Feature.Parser), 50);
+    private readonly pbc::MapField<uint, global::Lnrpc.Feature> features_ = new pbc::MapField<uint, global::Lnrpc.Feature>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<uint, global::Lnrpc.Feature> Features {
+      get { return features_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as LightningNode);
@@ -18172,6 +20735,7 @@ namespace Lnrpc {
       if (Alias != other.Alias) return false;
       if(!addresses_.Equals(other.addresses_)) return false;
       if (Color != other.Color) return false;
+      if (!Features.Equals(other.Features)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -18183,6 +20747,7 @@ namespace Lnrpc {
       if (Alias.Length != 0) hash ^= Alias.GetHashCode();
       hash ^= addresses_.GetHashCode();
       if (Color.Length != 0) hash ^= Color.GetHashCode();
+      hash ^= Features.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -18213,6 +20778,7 @@ namespace Lnrpc {
         output.WriteRawTag(42);
         output.WriteString(Color);
       }
+      features_.WriteTo(output, _map_features_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -18234,6 +20800,7 @@ namespace Lnrpc {
       if (Color.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Color);
       }
+      size += features_.CalculateSize(_map_features_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -18258,6 +20825,7 @@ namespace Lnrpc {
       if (other.Color.Length != 0) {
         Color = other.Color;
       }
+      features_.Add(other.features_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -18289,6 +20857,10 @@ namespace Lnrpc {
             Color = input.ReadString();
             break;
           }
+          case 50: {
+            features_.AddEntriesFrom(input, _map_features_codec);
+            break;
+          }
         }
       }
     }
@@ -18303,7 +20875,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[78]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[88]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18460,7 +21032,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[79]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[89]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -18765,7 +21337,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[80]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[90]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19109,7 +21681,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[81]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[91]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19247,7 +21819,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[82]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[92]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19394,7 +21966,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[83]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[93]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19529,7 +22101,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[84]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[94]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -19630,7 +22202,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[85]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[95]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20042,7 +22614,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[86]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[96]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20143,7 +22715,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[87]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[97]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20244,7 +22816,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[88]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[98]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20345,7 +22917,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[89]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[99]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20506,7 +23078,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[90]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[100]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -20739,7 +23311,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[91]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[101]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21026,7 +23598,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[92]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[102]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21251,7 +23823,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[93]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[103]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21509,7 +24081,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[94]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[104]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21635,7 +24207,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[95]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[105]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -21653,10 +24225,10 @@ namespace Lnrpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Invoice(Invoice other) : this() {
       memo_ = other.memo_;
-      receipt_ = other.receipt_;
       rPreimage_ = other.rPreimage_;
       rHash_ = other.rHash_;
       value_ = other.value_;
+      valueMsat_ = other.valueMsat_;
       settled_ = other.settled_;
       creationDate_ = other.creationDate_;
       settleDate_ = other.settleDate_;
@@ -21674,6 +24246,8 @@ namespace Lnrpc {
       amtPaidMsat_ = other.amtPaidMsat_;
       state_ = other.state_;
       htlcs_ = other.htlcs_.Clone();
+      features_ = other.features_.Clone();
+      isKeysend_ = other.isKeysend_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -21700,29 +24274,14 @@ namespace Lnrpc {
       }
     }
 
-    /// <summary>Field number for the "receipt" field.</summary>
-    public const int ReceiptFieldNumber = 2;
-    private pb::ByteString receipt_ = pb::ByteString.Empty;
-    /// <summary>
-    ///* Deprecated. An optional cryptographic receipt of payment which is not
-    ///implemented.
-    /// </summary>
-    [global::System.ObsoleteAttribute]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString Receipt {
-      get { return receipt_; }
-      set {
-        receipt_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "r_preimage" field.</summary>
     public const int RPreimageFieldNumber = 3;
     private pb::ByteString rPreimage_ = pb::ByteString.Empty;
     /// <summary>
     ///*
     ///The hex-encoded preimage (32 byte) which will allow settling an incoming
-    ///HTLC payable to this preimage
+    ///HTLC payable to this preimage. When using REST, this field must be encoded
+    ///as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString RPreimage {
@@ -21736,7 +24295,9 @@ namespace Lnrpc {
     public const int RHashFieldNumber = 4;
     private pb::ByteString rHash_ = pb::ByteString.Empty;
     /// <summary>
-    //// The hash of the preimage
+    ///*
+    ///The hash of the preimage. When using REST, this field must be encoded as
+    ///base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString RHash {
@@ -21750,13 +24311,33 @@ namespace Lnrpc {
     public const int ValueFieldNumber = 5;
     private long value_;
     /// <summary>
-    //// The value of this invoice in satoshis
+    ///*
+    ///The value of this invoice in satoshis
+    ///
+    ///The fields value and value_msat are mutually exclusive.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Value {
       get { return value_; }
       set {
         value_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "value_msat" field.</summary>
+    public const int ValueMsatFieldNumber = 23;
+    private long valueMsat_;
+    /// <summary>
+    ///*
+    ///The value of this invoice in millisatoshis
+    ///
+    ///The fields value and value_msat are mutually exclusive.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ValueMsat {
+      get { return valueMsat_; }
+      set {
+        valueMsat_ = value;
       }
     }
 
@@ -21808,7 +24389,7 @@ namespace Lnrpc {
     private string paymentRequest_ = "";
     /// <summary>
     ///*
-    ///A bare-bones invoice for a payment within the Lightning Network.  With the
+    ///A bare-bones invoice for a payment within the Lightning Network. With the
     ///details of the invoice, the sender has all the data necessary to send a
     ///payment to the recipient.
     /// </summary>
@@ -21827,7 +24408,8 @@ namespace Lnrpc {
     ///*
     ///Hash (SHA-256) of a description of the payment. Used if the description of
     ///payment (memo) is too long to naturally fit within the description field
-    ///of an encoded payment request.
+    ///of an encoded payment request. When using REST, this field must be encoded
+    ///as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString DescriptionHash {
@@ -22027,6 +24609,35 @@ namespace Lnrpc {
       get { return htlcs_; }
     }
 
+    /// <summary>Field number for the "features" field.</summary>
+    public const int FeaturesFieldNumber = 24;
+    private static readonly pbc::MapField<uint, global::Lnrpc.Feature>.Codec _map_features_codec
+        = new pbc::MapField<uint, global::Lnrpc.Feature>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::Lnrpc.Feature.Parser), 194);
+    private readonly pbc::MapField<uint, global::Lnrpc.Feature> features_ = new pbc::MapField<uint, global::Lnrpc.Feature>();
+    /// <summary>
+    //// List of features advertised on the invoice.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<uint, global::Lnrpc.Feature> Features {
+      get { return features_; }
+    }
+
+    /// <summary>Field number for the "is_keysend" field.</summary>
+    public const int IsKeysendFieldNumber = 25;
+    private bool isKeysend_;
+    /// <summary>
+    ///*
+    ///Indicates if this invoice was a spontaneous payment that arrived via keysend
+    ///[EXPERIMENTAL].
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsKeysend {
+      get { return isKeysend_; }
+      set {
+        isKeysend_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Invoice);
@@ -22041,10 +24652,10 @@ namespace Lnrpc {
         return true;
       }
       if (Memo != other.Memo) return false;
-      if (Receipt != other.Receipt) return false;
       if (RPreimage != other.RPreimage) return false;
       if (RHash != other.RHash) return false;
       if (Value != other.Value) return false;
+      if (ValueMsat != other.ValueMsat) return false;
       if (Settled != other.Settled) return false;
       if (CreationDate != other.CreationDate) return false;
       if (SettleDate != other.SettleDate) return false;
@@ -22062,6 +24673,8 @@ namespace Lnrpc {
       if (AmtPaidMsat != other.AmtPaidMsat) return false;
       if (State != other.State) return false;
       if(!htlcs_.Equals(other.htlcs_)) return false;
+      if (!Features.Equals(other.Features)) return false;
+      if (IsKeysend != other.IsKeysend) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -22069,10 +24682,10 @@ namespace Lnrpc {
     public override int GetHashCode() {
       int hash = 1;
       if (Memo.Length != 0) hash ^= Memo.GetHashCode();
-      if (Receipt.Length != 0) hash ^= Receipt.GetHashCode();
       if (RPreimage.Length != 0) hash ^= RPreimage.GetHashCode();
       if (RHash.Length != 0) hash ^= RHash.GetHashCode();
       if (Value != 0L) hash ^= Value.GetHashCode();
+      if (ValueMsat != 0L) hash ^= ValueMsat.GetHashCode();
       if (Settled != false) hash ^= Settled.GetHashCode();
       if (CreationDate != 0L) hash ^= CreationDate.GetHashCode();
       if (SettleDate != 0L) hash ^= SettleDate.GetHashCode();
@@ -22090,6 +24703,8 @@ namespace Lnrpc {
       if (AmtPaidMsat != 0L) hash ^= AmtPaidMsat.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
       hash ^= htlcs_.GetHashCode();
+      hash ^= Features.GetHashCode();
+      if (IsKeysend != false) hash ^= IsKeysend.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -22106,10 +24721,6 @@ namespace Lnrpc {
       if (Memo.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Memo);
-      }
-      if (Receipt.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteBytes(Receipt);
       }
       if (RPreimage.Length != 0) {
         output.WriteRawTag(26);
@@ -22185,6 +24796,15 @@ namespace Lnrpc {
         output.WriteEnum((int) State);
       }
       htlcs_.WriteTo(output, _repeated_htlcs_codec);
+      if (ValueMsat != 0L) {
+        output.WriteRawTag(184, 1);
+        output.WriteInt64(ValueMsat);
+      }
+      features_.WriteTo(output, _map_features_codec);
+      if (IsKeysend != false) {
+        output.WriteRawTag(200, 1);
+        output.WriteBool(IsKeysend);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -22196,9 +24816,6 @@ namespace Lnrpc {
       if (Memo.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Memo);
       }
-      if (Receipt.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Receipt);
-      }
       if (RPreimage.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(RPreimage);
       }
@@ -22207,6 +24824,9 @@ namespace Lnrpc {
       }
       if (Value != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Value);
+      }
+      if (ValueMsat != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ValueMsat);
       }
       if (Settled != false) {
         size += 1 + 1;
@@ -22255,6 +24875,10 @@ namespace Lnrpc {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       size += htlcs_.CalculateSize(_repeated_htlcs_codec);
+      size += features_.CalculateSize(_map_features_codec);
+      if (IsKeysend != false) {
+        size += 2 + 1;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -22269,9 +24893,6 @@ namespace Lnrpc {
       if (other.Memo.Length != 0) {
         Memo = other.Memo;
       }
-      if (other.Receipt.Length != 0) {
-        Receipt = other.Receipt;
-      }
       if (other.RPreimage.Length != 0) {
         RPreimage = other.RPreimage;
       }
@@ -22280,6 +24901,9 @@ namespace Lnrpc {
       }
       if (other.Value != 0L) {
         Value = other.Value;
+      }
+      if (other.ValueMsat != 0L) {
+        ValueMsat = other.ValueMsat;
       }
       if (other.Settled != false) {
         Settled = other.Settled;
@@ -22328,6 +24952,10 @@ namespace Lnrpc {
         State = other.State;
       }
       htlcs_.Add(other.htlcs_);
+      features_.Add(other.features_);
+      if (other.IsKeysend != false) {
+        IsKeysend = other.IsKeysend;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -22341,10 +24969,6 @@ namespace Lnrpc {
             break;
           case 10: {
             Memo = input.ReadString();
-            break;
-          }
-          case 18: {
-            Receipt = input.ReadBytes();
             break;
           }
           case 26: {
@@ -22427,6 +25051,18 @@ namespace Lnrpc {
             htlcs_.AddEntriesFrom(input, _repeated_htlcs_codec);
             break;
           }
+          case 184: {
+            ValueMsat = input.ReadInt64();
+            break;
+          }
+          case 194: {
+            features_.AddEntriesFrom(input, _map_features_codec);
+            break;
+          }
+          case 200: {
+            IsKeysend = input.ReadBool();
+            break;
+          }
         }
       }
     }
@@ -22458,7 +25094,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[96]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[106]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -22483,6 +25119,8 @@ namespace Lnrpc {
       resolveTime_ = other.resolveTime_;
       expiryHeight_ = other.expiryHeight_;
       state_ = other.state_;
+      customRecords_ = other.customRecords_.Clone();
+      mppTotalAmtMsat_ = other.mppTotalAmtMsat_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -22603,6 +25241,33 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "custom_records" field.</summary>
+    public const int CustomRecordsFieldNumber = 9;
+    private static readonly pbc::MapField<ulong, pb::ByteString>.Codec _map_customRecords_codec
+        = new pbc::MapField<ulong, pb::ByteString>.Codec(pb::FieldCodec.ForUInt64(8), pb::FieldCodec.ForBytes(18), 74);
+    private readonly pbc::MapField<ulong, pb::ByteString> customRecords_ = new pbc::MapField<ulong, pb::ByteString>();
+    /// <summary>
+    //// Custom tlv records.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<ulong, pb::ByteString> CustomRecords {
+      get { return customRecords_; }
+    }
+
+    /// <summary>Field number for the "mpp_total_amt_msat" field.</summary>
+    public const int MppTotalAmtMsatFieldNumber = 10;
+    private ulong mppTotalAmtMsat_;
+    /// <summary>
+    //// The total amount of the mpp payment in msat.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MppTotalAmtMsat {
+      get { return mppTotalAmtMsat_; }
+      set {
+        mppTotalAmtMsat_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as InvoiceHTLC);
@@ -22624,6 +25289,8 @@ namespace Lnrpc {
       if (ResolveTime != other.ResolveTime) return false;
       if (ExpiryHeight != other.ExpiryHeight) return false;
       if (State != other.State) return false;
+      if (!CustomRecords.Equals(other.CustomRecords)) return false;
+      if (MppTotalAmtMsat != other.MppTotalAmtMsat) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -22638,6 +25305,8 @@ namespace Lnrpc {
       if (ResolveTime != 0L) hash ^= ResolveTime.GetHashCode();
       if (ExpiryHeight != 0) hash ^= ExpiryHeight.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
+      hash ^= CustomRecords.GetHashCode();
+      if (MppTotalAmtMsat != 0UL) hash ^= MppTotalAmtMsat.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -22683,6 +25352,11 @@ namespace Lnrpc {
         output.WriteRawTag(64);
         output.WriteEnum((int) State);
       }
+      customRecords_.WriteTo(output, _map_customRecords_codec);
+      if (MppTotalAmtMsat != 0UL) {
+        output.WriteRawTag(80);
+        output.WriteUInt64(MppTotalAmtMsat);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -22714,6 +25388,10 @@ namespace Lnrpc {
       }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
+      }
+      size += customRecords_.CalculateSize(_map_customRecords_codec);
+      if (MppTotalAmtMsat != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MppTotalAmtMsat);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -22749,6 +25427,10 @@ namespace Lnrpc {
       }
       if (other.State != 0) {
         State = other.State;
+      }
+      customRecords_.Add(other.customRecords_);
+      if (other.MppTotalAmtMsat != 0UL) {
+        MppTotalAmtMsat = other.MppTotalAmtMsat;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -22793,6 +25475,14 @@ namespace Lnrpc {
             State = (global::Lnrpc.InvoiceHTLCState) input.ReadEnum();
             break;
           }
+          case 74: {
+            customRecords_.AddEntriesFrom(input, _map_customRecords_codec);
+            break;
+          }
+          case 80: {
+            MppTotalAmtMsat = input.ReadUInt64();
+            break;
+          }
         }
       }
     }
@@ -22807,7 +25497,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[97]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[107]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -22851,7 +25541,7 @@ namespace Lnrpc {
     private string paymentRequest_ = "";
     /// <summary>
     ///*
-    ///A bare-bones invoice for a payment within the Lightning Network.  With the
+    ///A bare-bones invoice for a payment within the Lightning Network. With the
     ///details of the invoice, the sender has all the data necessary to send a
     ///payment to the recipient.
     /// </summary>
@@ -23005,7 +25695,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[98]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[108]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -23039,7 +25729,10 @@ namespace Lnrpc {
     ///*
     ///The hex-encoded payment hash of the invoice to be looked up. The passed
     ///payment hash must be exactly 32 bytes, otherwise an error is returned.
+    ///Deprecated now that the REST gateway supports base64 encoding of bytes
+    ///fields.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string RHashStr {
       get { return rHashStr_; }
@@ -23052,7 +25745,9 @@ namespace Lnrpc {
     public const int RHashFieldNumber = 2;
     private pb::ByteString rHash_ = pb::ByteString.Empty;
     /// <summary>
-    //// The payment hash of the invoice to be looked up.
+    ///*
+    ///The payment hash of the invoice to be looked up. When using REST, this field
+    ///must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString RHash {
@@ -23170,7 +25865,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[99]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[109]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -23203,7 +25898,9 @@ namespace Lnrpc {
     public const int PendingOnlyFieldNumber = 1;
     private bool pendingOnly_;
     /// <summary>
-    //// If set, only unsettled invoices will be returned in the response.
+    ///*
+    ///If set, only invoices that are not settled and not canceled will be returned
+    ///in the response.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool PendingOnly {
@@ -23399,7 +26096,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[100]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[110]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -23591,7 +26288,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[101]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[111]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -23762,7 +26459,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[102]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[112]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -23791,6 +26488,8 @@ namespace Lnrpc {
       status_ = other.status_;
       feeSat_ = other.feeSat_;
       feeMsat_ = other.feeMsat_;
+      creationTimeNs_ = other.creationTimeNs_;
+      htlcs_ = other.htlcs_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -23832,8 +26531,9 @@ namespace Lnrpc {
     public const int CreationDateFieldNumber = 3;
     private long creationDate_;
     /// <summary>
-    //// The date of this payment
+    //// Deprecated, use creation_time_ns
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long CreationDate {
       get { return creationDate_; }
@@ -23848,8 +26548,9 @@ namespace Lnrpc {
         = pb::FieldCodec.ForString(34);
     private readonly pbc::RepeatedField<string> path_ = new pbc::RepeatedField<string>();
     /// <summary>
-    //// The path this payment took
+    //// The path this payment took.
     /// </summary>
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Path {
       get { return path_; }
@@ -23968,6 +26669,33 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "creation_time_ns" field.</summary>
+    public const int CreationTimeNsFieldNumber = 13;
+    private long creationTimeNs_;
+    /// <summary>
+    //// The time in UNIX nanoseconds at which the payment was created.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long CreationTimeNs {
+      get { return creationTimeNs_; }
+      set {
+        creationTimeNs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "htlcs" field.</summary>
+    public const int HtlcsFieldNumber = 14;
+    private static readonly pb::FieldCodec<global::Lnrpc.HTLCAttempt> _repeated_htlcs_codec
+        = pb::FieldCodec.ForMessage(114, global::Lnrpc.HTLCAttempt.Parser);
+    private readonly pbc::RepeatedField<global::Lnrpc.HTLCAttempt> htlcs_ = new pbc::RepeatedField<global::Lnrpc.HTLCAttempt>();
+    /// <summary>
+    //// The HTLCs made in attempt to settle the payment [EXPERIMENTAL].
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Lnrpc.HTLCAttempt> Htlcs {
+      get { return htlcs_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Payment);
@@ -23993,6 +26721,8 @@ namespace Lnrpc {
       if (Status != other.Status) return false;
       if (FeeSat != other.FeeSat) return false;
       if (FeeMsat != other.FeeMsat) return false;
+      if (CreationTimeNs != other.CreationTimeNs) return false;
+      if(!htlcs_.Equals(other.htlcs_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -24011,6 +26741,8 @@ namespace Lnrpc {
       if (Status != 0) hash ^= Status.GetHashCode();
       if (FeeSat != 0L) hash ^= FeeSat.GetHashCode();
       if (FeeMsat != 0L) hash ^= FeeMsat.GetHashCode();
+      if (CreationTimeNs != 0L) hash ^= CreationTimeNs.GetHashCode();
+      hash ^= htlcs_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -24069,6 +26801,11 @@ namespace Lnrpc {
         output.WriteRawTag(96);
         output.WriteInt64(FeeMsat);
       }
+      if (CreationTimeNs != 0L) {
+        output.WriteRawTag(104);
+        output.WriteInt64(CreationTimeNs);
+      }
+      htlcs_.WriteTo(output, _repeated_htlcs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -24111,6 +26848,10 @@ namespace Lnrpc {
       if (FeeMsat != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(FeeMsat);
       }
+      if (CreationTimeNs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreationTimeNs);
+      }
+      size += htlcs_.CalculateSize(_repeated_htlcs_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -24156,6 +26897,10 @@ namespace Lnrpc {
       if (other.FeeMsat != 0L) {
         FeeMsat = other.FeeMsat;
       }
+      if (other.CreationTimeNs != 0L) {
+        CreationTimeNs = other.CreationTimeNs;
+      }
+      htlcs_.Add(other.htlcs_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -24215,6 +26960,14 @@ namespace Lnrpc {
             FeeMsat = input.ReadInt64();
             break;
           }
+          case 104: {
+            CreationTimeNs = input.ReadInt64();
+            break;
+          }
+          case 114: {
+            htlcs_.AddEntriesFrom(input, _repeated_htlcs_codec);
+            break;
+          }
         }
       }
     }
@@ -24235,6 +26988,252 @@ namespace Lnrpc {
 
   }
 
+  public sealed partial class HTLCAttempt : pb::IMessage<HTLCAttempt> {
+    private static readonly pb::MessageParser<HTLCAttempt> _parser = new pb::MessageParser<HTLCAttempt>(() => new HTLCAttempt());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<HTLCAttempt> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[113]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HTLCAttempt() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HTLCAttempt(HTLCAttempt other) : this() {
+      status_ = other.status_;
+      route_ = other.route_ != null ? other.route_.Clone() : null;
+      attemptTimeNs_ = other.attemptTimeNs_;
+      resolveTimeNs_ = other.resolveTimeNs_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public HTLCAttempt Clone() {
+      return new HTLCAttempt(this);
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 1;
+    private global::Lnrpc.HTLCAttempt.Types.HTLCStatus status_ = 0;
+    /// <summary>
+    //// The status of the HTLC.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.HTLCAttempt.Types.HTLCStatus Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "route" field.</summary>
+    public const int RouteFieldNumber = 2;
+    private global::Lnrpc.Route route_;
+    /// <summary>
+    //// The route taken by this HTLC.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Lnrpc.Route Route {
+      get { return route_; }
+      set {
+        route_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attempt_time_ns" field.</summary>
+    public const int AttemptTimeNsFieldNumber = 3;
+    private long attemptTimeNs_;
+    /// <summary>
+    //// The time in UNIX nanoseconds at which this HTLC was sent.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long AttemptTimeNs {
+      get { return attemptTimeNs_; }
+      set {
+        attemptTimeNs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "resolve_time_ns" field.</summary>
+    public const int ResolveTimeNsFieldNumber = 4;
+    private long resolveTimeNs_;
+    /// <summary>
+    ///*
+    ///The time in UNIX nanoseconds at which this HTLC was settled or failed.
+    ///This value will not be set if the HTLC is still IN_FLIGHT.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ResolveTimeNs {
+      get { return resolveTimeNs_; }
+      set {
+        resolveTimeNs_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as HTLCAttempt);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(HTLCAttempt other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Status != other.Status) return false;
+      if (!object.Equals(Route, other.Route)) return false;
+      if (AttemptTimeNs != other.AttemptTimeNs) return false;
+      if (ResolveTimeNs != other.ResolveTimeNs) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Status != 0) hash ^= Status.GetHashCode();
+      if (route_ != null) hash ^= Route.GetHashCode();
+      if (AttemptTimeNs != 0L) hash ^= AttemptTimeNs.GetHashCode();
+      if (ResolveTimeNs != 0L) hash ^= ResolveTimeNs.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Status != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Status);
+      }
+      if (route_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Route);
+      }
+      if (AttemptTimeNs != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(AttemptTimeNs);
+      }
+      if (ResolveTimeNs != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(ResolveTimeNs);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Status != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      }
+      if (route_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Route);
+      }
+      if (AttemptTimeNs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AttemptTimeNs);
+      }
+      if (ResolveTimeNs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ResolveTimeNs);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(HTLCAttempt other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Status != 0) {
+        Status = other.Status;
+      }
+      if (other.route_ != null) {
+        if (route_ == null) {
+          Route = new global::Lnrpc.Route();
+        }
+        Route.MergeFrom(other.Route);
+      }
+      if (other.AttemptTimeNs != 0L) {
+        AttemptTimeNs = other.AttemptTimeNs;
+      }
+      if (other.ResolveTimeNs != 0L) {
+        ResolveTimeNs = other.ResolveTimeNs;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Status = (global::Lnrpc.HTLCAttempt.Types.HTLCStatus) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            if (route_ == null) {
+              Route = new global::Lnrpc.Route();
+            }
+            input.ReadMessage(Route);
+            break;
+          }
+          case 24: {
+            AttemptTimeNs = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            ResolveTimeNs = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the HTLCAttempt message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum HTLCStatus {
+        [pbr::OriginalName("IN_FLIGHT")] InFlight = 0,
+        [pbr::OriginalName("SUCCEEDED")] Succeeded = 1,
+        [pbr::OriginalName("FAILED")] Failed = 2,
+      }
+
+    }
+    #endregion
+
+  }
+
   public sealed partial class ListPaymentsRequest : pb::IMessage<ListPaymentsRequest> {
     private static readonly pb::MessageParser<ListPaymentsRequest> _parser = new pb::MessageParser<ListPaymentsRequest>(() => new ListPaymentsRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -24243,7 +27242,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[103]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[114]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24378,7 +27377,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[104]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[115]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24502,7 +27501,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[105]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[116]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24603,7 +27602,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[106]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[117]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24704,7 +27703,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[107]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[118]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24839,7 +27838,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[108]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[119]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -24940,7 +27939,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[109]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[120]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25097,7 +28096,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[110]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[121]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25226,7 +28225,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[111]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[122]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25358,7 +28357,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[112]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[123]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25385,6 +28384,9 @@ namespace Lnrpc {
       fallbackAddr_ = other.fallbackAddr_;
       cltvExpiry_ = other.cltvExpiry_;
       routeHints_ = other.routeHints_.Clone();
+      paymentAddr_ = other.paymentAddr_;
+      numMsat_ = other.numMsat_;
+      features_ = other.features_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -25502,6 +28504,38 @@ namespace Lnrpc {
       get { return routeHints_; }
     }
 
+    /// <summary>Field number for the "payment_addr" field.</summary>
+    public const int PaymentAddrFieldNumber = 11;
+    private pb::ByteString paymentAddr_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString PaymentAddr {
+      get { return paymentAddr_; }
+      set {
+        paymentAddr_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "num_msat" field.</summary>
+    public const int NumMsatFieldNumber = 12;
+    private long numMsat_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NumMsat {
+      get { return numMsat_; }
+      set {
+        numMsat_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "features" field.</summary>
+    public const int FeaturesFieldNumber = 13;
+    private static readonly pbc::MapField<uint, global::Lnrpc.Feature>.Codec _map_features_codec
+        = new pbc::MapField<uint, global::Lnrpc.Feature>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::Lnrpc.Feature.Parser), 106);
+    private readonly pbc::MapField<uint, global::Lnrpc.Feature> features_ = new pbc::MapField<uint, global::Lnrpc.Feature>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<uint, global::Lnrpc.Feature> Features {
+      get { return features_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PayReq);
@@ -25525,6 +28559,9 @@ namespace Lnrpc {
       if (FallbackAddr != other.FallbackAddr) return false;
       if (CltvExpiry != other.CltvExpiry) return false;
       if(!routeHints_.Equals(other.routeHints_)) return false;
+      if (PaymentAddr != other.PaymentAddr) return false;
+      if (NumMsat != other.NumMsat) return false;
+      if (!Features.Equals(other.Features)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -25541,6 +28578,9 @@ namespace Lnrpc {
       if (FallbackAddr.Length != 0) hash ^= FallbackAddr.GetHashCode();
       if (CltvExpiry != 0L) hash ^= CltvExpiry.GetHashCode();
       hash ^= routeHints_.GetHashCode();
+      if (PaymentAddr.Length != 0) hash ^= PaymentAddr.GetHashCode();
+      if (NumMsat != 0L) hash ^= NumMsat.GetHashCode();
+      hash ^= Features.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -25591,6 +28631,15 @@ namespace Lnrpc {
         output.WriteInt64(CltvExpiry);
       }
       routeHints_.WriteTo(output, _repeated_routeHints_codec);
+      if (PaymentAddr.Length != 0) {
+        output.WriteRawTag(90);
+        output.WriteBytes(PaymentAddr);
+      }
+      if (NumMsat != 0L) {
+        output.WriteRawTag(96);
+        output.WriteInt64(NumMsat);
+      }
+      features_.WriteTo(output, _map_features_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -25627,6 +28676,13 @@ namespace Lnrpc {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(CltvExpiry);
       }
       size += routeHints_.CalculateSize(_repeated_routeHints_codec);
+      if (PaymentAddr.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(PaymentAddr);
+      }
+      if (NumMsat != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NumMsat);
+      }
+      size += features_.CalculateSize(_map_features_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -25666,6 +28722,13 @@ namespace Lnrpc {
         CltvExpiry = other.CltvExpiry;
       }
       routeHints_.Add(other.routeHints_);
+      if (other.PaymentAddr.Length != 0) {
+        PaymentAddr = other.PaymentAddr;
+      }
+      if (other.NumMsat != 0L) {
+        NumMsat = other.NumMsat;
+      }
+      features_.Add(other.features_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -25717,6 +28780,203 @@ namespace Lnrpc {
             routeHints_.AddEntriesFrom(input, _repeated_routeHints_codec);
             break;
           }
+          case 90: {
+            PaymentAddr = input.ReadBytes();
+            break;
+          }
+          case 96: {
+            NumMsat = input.ReadInt64();
+            break;
+          }
+          case 106: {
+            features_.AddEntriesFrom(input, _map_features_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Feature : pb::IMessage<Feature> {
+    private static readonly pb::MessageParser<Feature> _parser = new pb::MessageParser<Feature>(() => new Feature());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Feature> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[124]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Feature() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Feature(Feature other) : this() {
+      name_ = other.name_;
+      isRequired_ = other.isRequired_;
+      isKnown_ = other.isKnown_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Feature Clone() {
+      return new Feature(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "is_required" field.</summary>
+    public const int IsRequiredFieldNumber = 3;
+    private bool isRequired_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsRequired {
+      get { return isRequired_; }
+      set {
+        isRequired_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_known" field.</summary>
+    public const int IsKnownFieldNumber = 4;
+    private bool isKnown_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsKnown {
+      get { return isKnown_; }
+      set {
+        isKnown_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Feature);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Feature other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (IsRequired != other.IsRequired) return false;
+      if (IsKnown != other.IsKnown) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (IsRequired != false) hash ^= IsRequired.GetHashCode();
+      if (IsKnown != false) hash ^= IsKnown.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (IsRequired != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(IsRequired);
+      }
+      if (IsKnown != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsKnown);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (IsRequired != false) {
+        size += 1 + 1;
+      }
+      if (IsKnown != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Feature other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.IsRequired != false) {
+        IsRequired = other.IsRequired;
+      }
+      if (other.IsKnown != false) {
+        IsKnown = other.IsKnown;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 24: {
+            IsRequired = input.ReadBool();
+            break;
+          }
+          case 32: {
+            IsKnown = input.ReadBool();
+            break;
+          }
         }
       }
     }
@@ -25731,7 +28991,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[113]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[125]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -25832,7 +29092,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[114]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[126]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26057,7 +29317,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[115]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[127]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26274,7 +29534,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[116]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[128]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26295,6 +29555,8 @@ namespace Lnrpc {
       feeRate_ = other.feeRate_;
       timeLockDelta_ = other.timeLockDelta_;
       maxHtlcMsat_ = other.maxHtlcMsat_;
+      minHtlcMsat_ = other.minHtlcMsat_;
+      minHtlcMsatSpecified_ = other.minHtlcMsatSpecified_;
       switch (other.ScopeCase) {
         case ScopeOneofCase.Global:
           Global = other.Global;
@@ -26396,6 +29658,34 @@ namespace Lnrpc {
       }
     }
 
+    /// <summary>Field number for the "min_htlc_msat" field.</summary>
+    public const int MinHtlcMsatFieldNumber = 7;
+    private ulong minHtlcMsat_;
+    /// <summary>
+    //// The minimum HTLC size in milli-satoshis. Only applied if min_htlc_msat_specified is true.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MinHtlcMsat {
+      get { return minHtlcMsat_; }
+      set {
+        minHtlcMsat_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "min_htlc_msat_specified" field.</summary>
+    public const int MinHtlcMsatSpecifiedFieldNumber = 8;
+    private bool minHtlcMsatSpecified_;
+    /// <summary>
+    //// If true, min_htlc_msat is applied.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool MinHtlcMsatSpecified {
+      get { return minHtlcMsatSpecified_; }
+      set {
+        minHtlcMsatSpecified_ = value;
+      }
+    }
+
     private object scope_;
     /// <summary>Enum of possible cases for the "scope" oneof.</summary>
     public enum ScopeOneofCase {
@@ -26434,6 +29724,8 @@ namespace Lnrpc {
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(FeeRate, other.FeeRate)) return false;
       if (TimeLockDelta != other.TimeLockDelta) return false;
       if (MaxHtlcMsat != other.MaxHtlcMsat) return false;
+      if (MinHtlcMsat != other.MinHtlcMsat) return false;
+      if (MinHtlcMsatSpecified != other.MinHtlcMsatSpecified) return false;
       if (ScopeCase != other.ScopeCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -26447,6 +29739,8 @@ namespace Lnrpc {
       if (FeeRate != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(FeeRate);
       if (TimeLockDelta != 0) hash ^= TimeLockDelta.GetHashCode();
       if (MaxHtlcMsat != 0UL) hash ^= MaxHtlcMsat.GetHashCode();
+      if (MinHtlcMsat != 0UL) hash ^= MinHtlcMsat.GetHashCode();
+      if (MinHtlcMsatSpecified != false) hash ^= MinHtlcMsatSpecified.GetHashCode();
       hash ^= (int) scopeCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -26485,6 +29779,14 @@ namespace Lnrpc {
         output.WriteRawTag(48);
         output.WriteUInt64(MaxHtlcMsat);
       }
+      if (MinHtlcMsat != 0UL) {
+        output.WriteRawTag(56);
+        output.WriteUInt64(MinHtlcMsat);
+      }
+      if (MinHtlcMsatSpecified != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(MinHtlcMsatSpecified);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -26511,6 +29813,12 @@ namespace Lnrpc {
       if (MaxHtlcMsat != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MaxHtlcMsat);
       }
+      if (MinHtlcMsat != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MinHtlcMsat);
+      }
+      if (MinHtlcMsatSpecified != false) {
+        size += 1 + 1;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -26533,6 +29841,12 @@ namespace Lnrpc {
       }
       if (other.MaxHtlcMsat != 0UL) {
         MaxHtlcMsat = other.MaxHtlcMsat;
+      }
+      if (other.MinHtlcMsat != 0UL) {
+        MinHtlcMsat = other.MinHtlcMsat;
+      }
+      if (other.MinHtlcMsatSpecified != false) {
+        MinHtlcMsatSpecified = other.MinHtlcMsatSpecified;
       }
       switch (other.ScopeCase) {
         case ScopeOneofCase.Global:
@@ -26586,6 +29900,14 @@ namespace Lnrpc {
             MaxHtlcMsat = input.ReadUInt64();
             break;
           }
+          case 56: {
+            MinHtlcMsat = input.ReadUInt64();
+            break;
+          }
+          case 64: {
+            MinHtlcMsatSpecified = input.ReadBool();
+            break;
+          }
         }
       }
     }
@@ -26600,7 +29922,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[117]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[129]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26701,7 +30023,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[118]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[130]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -26926,7 +30248,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[119]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[131]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -27306,7 +30628,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[120]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[132]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -27461,7 +30783,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[121]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[133]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -27599,7 +30921,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[122]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[134]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -27648,7 +30970,8 @@ namespace Lnrpc {
     ///*
     ///Is an encrypted single-chan backup. this can be passed to
     ///RestoreChannelBackups, or the WalletUnlocker Init and Unlock methods in
-    ///order to trigger the recovery protocol.
+    ///order to trigger the recovery protocol. When using REST, this field must be
+    ///encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString ChanBackup {
@@ -27772,7 +31095,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[123]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[135]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -27820,7 +31143,8 @@ namespace Lnrpc {
     ///*
     ///A single encrypted blob containing all the static channel backups of the
     ///channel listed above. This can be stored as a single file or blob, and
-    ///safely be replaced with any prior/future versions.
+    ///safely be replaced with any prior/future versions. When using REST, this
+    ///field must be encoded as base64.
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString MultiChanBackup_ {
@@ -27931,7 +31255,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[124]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[136]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28032,7 +31356,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[125]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[137]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28211,7 +31535,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[126]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[138]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28336,7 +31660,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[127]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[139]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28372,6 +31696,10 @@ namespace Lnrpc {
 
     /// <summary>Field number for the "chan_backups" field.</summary>
     public const int ChanBackupsFieldNumber = 1;
+    /// <summary>
+    ///*
+    ///The channels to restore as a list of channel/backup pairs.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Lnrpc.ChannelBackups ChanBackups {
       get { return backupCase_ == BackupOneofCase.ChanBackups ? (global::Lnrpc.ChannelBackups) backup_ : null; }
@@ -28383,6 +31711,11 @@ namespace Lnrpc {
 
     /// <summary>Field number for the "multi_chan_backup" field.</summary>
     public const int MultiChanBackupFieldNumber = 2;
+    /// <summary>
+    ///*
+    ///The channels to restore in the packed multi backup format. When using
+    ///REST, this field must be encoded as base64.
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString MultiChanBackup {
       get { return backupCase_ == BackupOneofCase.MultiChanBackup ? (pb::ByteString) backup_ : pb::ByteString.Empty; }
@@ -28532,7 +31865,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[128]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[140]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28633,7 +31966,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[129]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[141]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28734,7 +32067,7 @@ namespace Lnrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[130]; }
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[142]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -28821,6 +32154,425 @@ namespace Lnrpc {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MacaroonPermission : pb::IMessage<MacaroonPermission> {
+    private static readonly pb::MessageParser<MacaroonPermission> _parser = new pb::MessageParser<MacaroonPermission>(() => new MacaroonPermission());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MacaroonPermission> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[143]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MacaroonPermission() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MacaroonPermission(MacaroonPermission other) : this() {
+      entity_ = other.entity_;
+      action_ = other.action_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MacaroonPermission Clone() {
+      return new MacaroonPermission(this);
+    }
+
+    /// <summary>Field number for the "entity" field.</summary>
+    public const int EntityFieldNumber = 1;
+    private string entity_ = "";
+    /// <summary>
+    //// The entity a permission grants access to.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Entity {
+      get { return entity_; }
+      set {
+        entity_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "action" field.</summary>
+    public const int ActionFieldNumber = 2;
+    private string action_ = "";
+    /// <summary>
+    //// The action that is granted.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Action {
+      get { return action_; }
+      set {
+        action_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MacaroonPermission);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MacaroonPermission other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Entity != other.Entity) return false;
+      if (Action != other.Action) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Entity.Length != 0) hash ^= Entity.GetHashCode();
+      if (Action.Length != 0) hash ^= Action.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Entity.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Entity);
+      }
+      if (Action.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Action);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Entity.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Entity);
+      }
+      if (Action.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Action);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MacaroonPermission other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Entity.Length != 0) {
+        Entity = other.Entity;
+      }
+      if (other.Action.Length != 0) {
+        Action = other.Action;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Entity = input.ReadString();
+            break;
+          }
+          case 18: {
+            Action = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BakeMacaroonRequest : pb::IMessage<BakeMacaroonRequest> {
+    private static readonly pb::MessageParser<BakeMacaroonRequest> _parser = new pb::MessageParser<BakeMacaroonRequest>(() => new BakeMacaroonRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BakeMacaroonRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[144]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonRequest(BakeMacaroonRequest other) : this() {
+      permissions_ = other.permissions_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonRequest Clone() {
+      return new BakeMacaroonRequest(this);
+    }
+
+    /// <summary>Field number for the "permissions" field.</summary>
+    public const int PermissionsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Lnrpc.MacaroonPermission> _repeated_permissions_codec
+        = pb::FieldCodec.ForMessage(10, global::Lnrpc.MacaroonPermission.Parser);
+    private readonly pbc::RepeatedField<global::Lnrpc.MacaroonPermission> permissions_ = new pbc::RepeatedField<global::Lnrpc.MacaroonPermission>();
+    /// <summary>
+    //// The list of permissions the new macaroon should grant.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Lnrpc.MacaroonPermission> Permissions {
+      get { return permissions_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BakeMacaroonRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BakeMacaroonRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!permissions_.Equals(other.permissions_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= permissions_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      permissions_.WriteTo(output, _repeated_permissions_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += permissions_.CalculateSize(_repeated_permissions_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BakeMacaroonRequest other) {
+      if (other == null) {
+        return;
+      }
+      permissions_.Add(other.permissions_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            permissions_.AddEntriesFrom(input, _repeated_permissions_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BakeMacaroonResponse : pb::IMessage<BakeMacaroonResponse> {
+    private static readonly pb::MessageParser<BakeMacaroonResponse> _parser = new pb::MessageParser<BakeMacaroonResponse>(() => new BakeMacaroonResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BakeMacaroonResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Lnrpc.RpcReflection.Descriptor.MessageTypes[145]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonResponse(BakeMacaroonResponse other) : this() {
+      macaroon_ = other.macaroon_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BakeMacaroonResponse Clone() {
+      return new BakeMacaroonResponse(this);
+    }
+
+    /// <summary>Field number for the "macaroon" field.</summary>
+    public const int MacaroonFieldNumber = 1;
+    private string macaroon_ = "";
+    /// <summary>
+    //// The hex encoded macaroon, serialized in binary format.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Macaroon {
+      get { return macaroon_; }
+      set {
+        macaroon_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BakeMacaroonResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BakeMacaroonResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Macaroon != other.Macaroon) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Macaroon.Length != 0) hash ^= Macaroon.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Macaroon.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Macaroon);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Macaroon.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Macaroon);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BakeMacaroonResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Macaroon.Length != 0) {
+        Macaroon = other.Macaroon;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Macaroon = input.ReadString();
+            break;
+          }
         }
       }
     }

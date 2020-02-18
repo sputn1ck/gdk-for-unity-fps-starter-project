@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public static class Utility
 {
-
+    public const ulong BountyInt = 989810498;
+    public const ulong MemoInt = 9898104109;
     public static void resetLocalTransform(this Transform t)
     {
         t.localPosition = Vector3.zero;
@@ -41,6 +43,14 @@ public static class Utility
         byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
         byte a = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
         return new Color32(r, g, b, a);
+    }
+
+    public static string bytesToString(byte[] ba)
+    {
+        StringBuilder hex = new StringBuilder(ba.Length * 2);
+        foreach (byte b in ba)
+            hex.AppendFormat("{0:x2}", b);
+        return hex.ToString();
     }
 
 }

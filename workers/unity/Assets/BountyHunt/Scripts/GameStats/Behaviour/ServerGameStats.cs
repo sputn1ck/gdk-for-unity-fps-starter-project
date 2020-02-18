@@ -1,15 +1,5 @@
-using System.Collections;
-using Improbable.Gdk.Core;
-using Improbable.Gdk.GameObjectCreation;
-using Improbable.Gdk.PlayerLifecycle;
 using UnityEngine;
-using Fps;
-using Fps.Metrics;
-using Fps.Health;
-using Fps.Guns;
-using Fps.WorkerConnectors;
 using Fps.Config;
-using Improbable.Worker.CInterop;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using System.Linq;

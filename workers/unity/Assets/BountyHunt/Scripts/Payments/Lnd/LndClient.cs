@@ -164,6 +164,7 @@ public class LndClient : IClientLnd
     public CancellationTokenSource ct;
     private Thread listenThread;
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
+
     public LndClient()
     {
 
