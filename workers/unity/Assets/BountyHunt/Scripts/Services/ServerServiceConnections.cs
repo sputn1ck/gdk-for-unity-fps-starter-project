@@ -16,12 +16,14 @@ public class ServerServiceConnections : MonoBehaviour
     public IClientLnd lnd;
 
     public string BackendHost;
+    public string PrometheusHost;
 
     public AuctionController AuctionController;
 
 
     public BackendGameserverClient BackendGameServerClient;
     public BackendPlayerClient BackendPlayerClient;
+    public PrometheusManager Prometheus;
 
     public void Awake()
     {
@@ -74,6 +76,10 @@ public class ServerServiceConnections : MonoBehaviour
         // Auction Controller
         AuctionController = new AuctionController();
         AuctionController.Setup();
+
+        //Prometheus
+        Prometheus = new PrometheusManager();
+        Prometheus.Setup(PrometheusHost);
     }
 
 
@@ -85,6 +91,7 @@ public class ServerServiceConnections : MonoBehaviour
 
     public void OnApplicationQuit()
     {
+        Prometheus.Shutdown();
         lnd.ShutDown();
         BackendGameServerClient.Shutdown();
         BackendPlayerClient.Shutdown();

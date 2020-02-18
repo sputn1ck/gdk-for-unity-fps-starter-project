@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using Bountyhunt;
+using Fps;
 
 [UpdateAfter(typeof(SpatialOSUpdateGroup))]
 public class BountyConversionSystem : ComponentSystem
@@ -27,7 +28,8 @@ public class BountyConversionSystem : ComponentSystem
 
         conversionGroup = GetEntityQuery(
                 ComponentType.ReadWrite<HunterComponent.Component>(),
-                ComponentType.ReadOnly<SpatialEntityId>()
+                ComponentType.ReadOnly<SpatialEntityId>(),
+                ComponentType.ReadOnly<GunComponent.Component>()
             );
         gameStatsGroup = GetEntityQuery(
                 ComponentType.ReadWrite<GameStats.Component>(),
@@ -55,9 +57,15 @@ public class BountyConversionSystem : ComponentSystem
         {
             Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
             var newMap = gamestats.PlayerMap;
+
+            double activeBounty = 0;
+            int[] activeClasses = new int[]
+            {
+            0,0,0
+            };
             Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
-            ref HunterComponent.Component hunterComponent) =>
+            ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun) =>
             {
                 if (hunterComponent.Bounty == 0)
                     return;
@@ -68,6 +76,9 @@ public class BountyConversionSystem : ComponentSystem
                 hunterComponent.SessionEarnings = hunterComponent.SessionEarnings + tick;
                 ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
                 newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
+
+                activeBounty += hunterComponent.Bounty;
+                activeClasses[gun.GunId] += 1;
             });
             foreach(var player in newPairs)
             {
@@ -79,6 +90,12 @@ public class BountyConversionSystem : ComponentSystem
                 }
             }
             componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = newMap }, new EntityId(2));
+
+            PrometheusManager.ActivePlayers.Set(newMap.Count);
+            PrometheusManager.ActiveBounty.Set(activeBounty);
+            PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
+            PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
+            PrometheusManager.ActiveScouts.Set(activeClasses[2]);
         });
 
         

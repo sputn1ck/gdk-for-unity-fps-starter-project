@@ -28,6 +28,7 @@ public class GamePaymentManager : MonoBehaviour
 
     void InvoiceSettled(object sender, InvoiceSettledEventArgs e)
     {
+        PrometheusManager.TotalSatsAdded.Inc(e.Invoice.AmtPaidSat);
         if (e.Invoice.IsKeysend)
         {
             foreach (var htlc in e.Invoice.Htlcs)
@@ -48,6 +49,8 @@ public class GamePaymentManager : MonoBehaviour
                         pubkey = playerpub,
                         message = memoString
                     });
+                    PrometheusManager.TotalBountyPaidAmount.Inc();
+                    PrometheusManager.TotalBountyPaidSats.Inc(e.Invoice.AmtPaidSat);
                 }
             }
 
@@ -58,6 +61,9 @@ public class GamePaymentManager : MonoBehaviour
         if (auction != null && auction.AuctionId != null)
         {
             ServerEvents.instance.OnAuctionInvoicePaid.Invoke(auction);
+
+            PrometheusManager.TotalAuctionsPaidAmount.Inc();
+            PrometheusManager.TotalAuctionsPaidSats.Inc(e.Invoice.AmtPaidSat);
             return;
         }
 
@@ -65,10 +71,15 @@ public class GamePaymentManager : MonoBehaviour
         if (bounty != null && bounty.pubkey != "")
         {
             ServerEvents.instance.OnBountyInvoicePaid.Invoke(bounty);
+            PrometheusManager.TotalBountyPaidAmount.Inc();
+            PrometheusManager.TotalBountyPaidSats.Inc(e.Invoice.AmtPaidSat);
             return;
         }
 
         ServerEvents.instance.OnRandomInvoicePaid.Invoke(e.Invoice.Memo, e.Invoice.AmtPaidSat);
+
+        PrometheusManager.TotalChatPaidAmount.Inc();
+        PrometheusManager.TotalChatPaidSats.Inc(e.Invoice.AmtPaidSat);
     }
 
     // Update is called once per frame

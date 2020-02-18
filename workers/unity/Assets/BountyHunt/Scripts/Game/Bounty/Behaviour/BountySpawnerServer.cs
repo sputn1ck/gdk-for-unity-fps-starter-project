@@ -127,7 +127,7 @@ public class BountySpawnerServer : MonoBehaviour
             {
                 var duration = FlagManager.instance.GetAuctionDuration();
                 SpawnTick(FlagManager.instance.GetSubsidyPerMinute() / 2, UnityEngine.Random.Range(FlagManager.instance.GetMinSpawns(), FlagManager.instance.GetMaxSpawns()));
-                //PrometheusManager.TotalSubsidy.Inc(FlagManager.instance.GetSubsidyPerMinute() / 2);
+                PrometheusManager.TotalSubsidy.Inc(FlagManager.instance.GetSubsidyPerMinute() / 2);
                 yield return new WaitForSeconds(30f);
             }
             yield return null;

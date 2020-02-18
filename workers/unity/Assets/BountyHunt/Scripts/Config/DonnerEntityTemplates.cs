@@ -154,7 +154,7 @@ public class DonnerEntityTemplates
 
         template.SetReadAccess(WorkerUtils.UnityClient, WorkerUtils.UnityGameLogic, WorkerUtils.MobileClient);
         template.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
-        /*
+        
         switch (loginData.RequestedWeapon)
         {
             case (0):
@@ -168,7 +168,7 @@ public class DonnerEntityTemplates
                 break;
             default:
                 break;
-        }*/
+        }
         return template;
     }
     /*

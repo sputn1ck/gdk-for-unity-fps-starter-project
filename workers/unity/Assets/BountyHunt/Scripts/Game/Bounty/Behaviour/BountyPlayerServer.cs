@@ -70,6 +70,7 @@ public class BountyPlayerServer : MonoBehaviour
         Debug.Log("new earnings");
         HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = (long)newEarnings });
         BountyComponentCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), invoice.Description,payment.PaymentRoute.TotalAmtMsat / 1000));
+        PrometheusManager.TotalEarnings.Inc(invoice.NumSatoshis);
 
     }
 

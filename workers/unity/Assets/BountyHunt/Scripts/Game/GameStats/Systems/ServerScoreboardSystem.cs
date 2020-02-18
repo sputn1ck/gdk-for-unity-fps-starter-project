@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using Bountyhunt;
+using Fps;
 
 [UpdateAfter(typeof(BountyKillSystem))]
 public class ServerScoreboardSystem : ComponentSystem
@@ -26,7 +27,8 @@ public class ServerScoreboardSystem : ComponentSystem
 
         hunterGroup = GetEntityQuery(
                 ComponentType.ReadWrite<HunterComponent.Component>(),
-                ComponentType.ReadOnly<SpatialEntityId>()
+                ComponentType.ReadOnly<SpatialEntityId>(),
+                ComponentType.ReadOnly<GunComponent.Component>()
             );
         statsGroup = GetEntityQuery(ComponentType.ReadWrite<GameStats.Component>());
 
@@ -43,12 +45,26 @@ public class ServerScoreboardSystem : ComponentSystem
             return;
         }
         List<ScoreboardItem> scoreboardItems = new List<ScoreboardItem>();
-        Entities.With(hunterGroup).ForEach((ref SpatialEntityId entityId, ref HunterComponent.Component hunter) =>
+        double activeBounty = 0;
+        int[] activeClasses = new int[]
+        {
+            0,0,0
+        };
+        Entities.With(hunterGroup).ForEach((ref SpatialEntityId entityId, ref HunterComponent.Component hunter, ref GunComponent.Component gun) =>
         {
             var item = new ScoreboardItem(entityId.EntityId, hunter.Bounty, hunter.Kills, hunter.Deaths);
+            activeBounty += hunter.Bounty;
+            activeClasses[gun.GunId] += 1;
+
             scoreboardItems.Add(item);
         });
-        //componentUpdateSystem.SendUpdate(new GameStats.Update() { Scoreboard = new Scoreboard(scoreboardItems) }, new EntityId(2));
+        PrometheusManager.ActivePlayers.Set(scoreboardItems.Count);
+        PrometheusManager.ActiveBounty.Set(activeBounty);
+        PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
+        PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
+        PrometheusManager.ActiveScouts.Set(activeClasses[2]);
+
+        
 
     }
 

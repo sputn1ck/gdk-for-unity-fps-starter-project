@@ -77,7 +77,7 @@ public class BountyKillSystem : ComponentSystem
             
             SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
             SetScoreboard(killerId, victimId);
-            //PrometheusManager.TotalKills.Inc(1);
+            PrometheusManager.TotalKills.Inc(1);
         }
     }
     private void SetScoreboard(EntityId killerId, EntityId victimId)

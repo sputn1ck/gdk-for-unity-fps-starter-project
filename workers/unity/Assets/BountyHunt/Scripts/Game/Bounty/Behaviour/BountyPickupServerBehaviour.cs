@@ -31,8 +31,8 @@ namespace Fps
             {
                 //respawnCoroutine = StartCoroutine(RespawnHealthPackRoutine());
             }
-            //PrometheusManager.ActiveSats.Inc(bountyPickupWriter.Data.BountyValue);
-            //PrometheusManager.ActiveCubes.Inc(1);
+            PrometheusManager.ActiveSats.Inc(bountyPickupWriter.Data.BountyValue);
+            PrometheusManager.ActiveCubes.Inc(1);
 
 
         }
@@ -87,8 +87,8 @@ namespace Fps
                 Reason = BountyReason.PICKUP,
                 Amount = bountyPickupWriter.Data.BountyValue,
             });
-            //PrometheusManager.ActiveSats.Dec(bountyPickupWriter.Data.BountyValue);
-            //PrometheusManager.ActiveCubes.Dec(1);
+            PrometheusManager.ActiveSats.Dec(bountyPickupWriter.Data.BountyValue);
+            PrometheusManager.ActiveCubes.Dec(1);
             // Toggle health pack to its "consumed" state
             SetIsActive(false);
             Invoke("DeleteEntity", 1f);
