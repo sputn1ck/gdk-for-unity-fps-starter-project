@@ -25,11 +25,12 @@ public class DummyLnd : IClientLnd
 
     public event InvoiceSettledEventHandler OnInvoiceSettled;
     public Dictionary<string, Invoice> invoices;
+
     public DummyLnd()
     {
-
         invoices = new Dictionary<string, Invoice>();
     }
+
     public Task Setup(string config, bool listen, bool apdata)
     {
         pubkey = "pubkey" + UnityEngine.Random.Range(0, int.MaxValue);
@@ -103,13 +104,10 @@ public class DummyLnd : IClientLnd
         return new LnConf();
     }
 
-
-
     public void SetPaid(string payreq)
     {
         if (invoices.ContainsKey(payreq))
         {
-
             OnInvoiceSettled.Invoke(this, new InvoiceSettledEventArgs() { Invoice = invoices[payreq] });
         }
     }
@@ -121,12 +119,12 @@ public class DummyLnd : IClientLnd
             var invoice = invoices[payreq];
             return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
         }
+
         return await Task.FromResult(new PayReq { NumSatoshis = 0 });
     }
 
     public void Dispose()
     {
-
     }
 
     public Task<long> GetWalletBalace()
@@ -144,6 +142,7 @@ public class DummyLnd : IClientLnd
         throw new NotImplementedException();
     }
 }
+
 public class LndClient : IClientLnd
 {
     public string confName;
@@ -167,14 +166,11 @@ public class LndClient : IClientLnd
 
     public LndClient()
     {
-
     }
-
 
 
     public async Task Setup(string config, bool listen, bool useApdata)
     {
-
         this.confName = config;
         this.useAppdata = useApdata;
         LoadConfig();
@@ -197,7 +193,6 @@ public class LndClient : IClientLnd
         //await ListenInvoices();
         listenThread = new Thread(async () =>
         {
-
             while (!rpcChannel.ShutdownToken.IsCancellationRequested)
             {
                 await ListenInvoicesTask();
@@ -213,10 +208,12 @@ public class LndClient : IClientLnd
 
         try
         {
-            using (_invoiceStream = lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
+            using (_invoiceStream =
+                lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
             {
                 Debug.Log("listening successfully started");
-                while (!rpcChannel.ShutdownToken.IsCancellationRequested && await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
+                while (!rpcChannel.ShutdownToken.IsCancellationRequested &&
+                    await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
                 {
                     var invoice = _invoiceStream.ResponseStream.Current;
 
@@ -227,8 +224,6 @@ public class LndClient : IClientLnd
                         e.Invoice = invoice;
                         OnInvoiceSettled(this, e);
                     }
-
-
                 }
             }
         }
@@ -237,6 +232,7 @@ public class LndClient : IClientLnd
             Debug.Log(e);
         }
     }
+
     public void LoadConfig()
     {
         string path = Application.dataPath + "/StreamingAssets";
@@ -251,7 +247,8 @@ public class LndClient : IClientLnd
 
             var home = Environment.GetEnvironmentVariable("Appdata");
             tlsCert = File.ReadAllText(home + "/Donner/Daemon/data/tls.cert");
-            macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
+            macaroon = MacaroonCallCredentials.ToHex(
+                File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
         }
         else
         {
@@ -261,47 +258,44 @@ public class LndClient : IClientLnd
 
             tlsCert = File.ReadAllText(path + "/" + lnconf.tlsfile);
             macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(path + "/" + lnconf.macaroonfile));
-
         }
 #elif UNITY_STANDALONE_OSX
-
-        path =  Application.dataPath + "/Resources/Data/StreamingAssets";
-        confName="/dd-mac.conf";
+        path = Application.dataPath + "/Resources/Data/StreamingAssets";
+        confName = "/dd-mac.conf";
 
         var json = File.ReadAllText(path + "/" + confName);
         lnconf = JsonUtility.FromJson<LnConf>(json);
 
         var home = Environment.GetEnvironmentVariable("HOME");
         tlsCert = File.ReadAllText(home + "/Library/Application Support/Donner/Daemon/data/tls.cert");
-        macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Library/Application Support/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
+        macaroon =
+ MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Library/Application Support/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
 #elif UNITY_STANDALONE_WIN
         path = Application.dataPath + "/StreamingAssets";
-        confName="/dd-win.conf";
-        
+        confName = "/dd-win.conf";
+
         var json = File.ReadAllText(path + "/" + confName);
         lnconf = JsonUtility.FromJson<LnConf>(json);
-        
+
         var home = Environment.GetEnvironmentVariable("Appdata");
         tlsCert = File.ReadAllText(home + "/Donner/Daemon/data/tls.cert");
-        macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
+        macaroon =
+ MacaroonCallCredentials.ToHex(File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
 
 #else
-
         path = Application.dataPath + "/StreamingAssets";
         var json = File.ReadAllText(path + "/" + confName);
         lnconf = JsonUtility.FromJson<LnConf>(json);
-        
+
         tlsCert = File.ReadAllText(path + "/" + lnconf.tlsfile);
         macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(path + "/" + lnconf.macaroonfile));
 
 #endif
-
     }
+
     public async Task<GetInfoResponse> GetInfo()
     {
-
         return await lightningClient.GetInfoAsync(new GetInfoRequest { });
-
     }
 
     public async Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port)
@@ -327,13 +321,13 @@ public class LndClient : IClientLnd
 
     public async Task<string> GetInvoice(long amount, string description, long expiry)
     {
-
         if (amount < 1)
             amount = 1;
         if (lightningClient == null)
         {
             Debug.LogError("for some reason lightning client is null?");
         }
+
         var invoice = await lightningClient.AddInvoiceAsync(new Invoice
         {
             Value = amount,
@@ -370,10 +364,12 @@ public class LndClient : IClientLnd
 
         try
         {
-            using (_invoiceStream = lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
+            using (_invoiceStream =
+                lightningClient.SubscribeInvoices(request, cancellationToken: rpcChannel.ShutdownToken))
             {
                 Debug.Log("listening successfully started");
-                while (!rpcChannel.ShutdownToken.IsCancellationRequested && await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
+                while (!rpcChannel.ShutdownToken.IsCancellationRequested &&
+                    await _invoiceStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
                 {
                     var invoice = _invoiceStream.ResponseStream.Current;
 
@@ -384,8 +380,6 @@ public class LndClient : IClientLnd
                         e.Invoice = invoice;
                         OnInvoiceSettled(this, e);
                     }
-
-
                 }
             }
         }
@@ -393,14 +387,13 @@ public class LndClient : IClientLnd
         {
             Debug.Log(e);
         }
+
         Debug.Log("listen invoices over");
         if (!rpcChannel.ShutdownToken.IsCancellationRequested)
         {
             await Task.Delay(1000);
             StartListening();
         }
-
-
     }
 
     public async Task<PendingChannelsResponse> PendingChannels()
@@ -412,9 +405,11 @@ public class LndClient : IClientLnd
 
     public SignMessageResponse SignMessage(string message)
     {
-        var res = lightningClient.SignMessage(new SignMessageRequest { Msg = Google.Protobuf.ByteString.CopyFromUtf8(message) });
+        var res = lightningClient.SignMessage(new SignMessageRequest
+            { Msg = Google.Protobuf.ByteString.CopyFromUtf8(message) });
         return res;
     }
+
     private void ShutDownRpc()
     {
         Task task = Task.Run(async () => await rpcChannel.ShutdownAsync());
@@ -433,18 +428,18 @@ public class LndClient : IClientLnd
 
         if (_invoiceStream != null)
         {
-
             Debug.Log("disposing invoiceStream");
             _invoiceStream.Dispose();
         }
-
-
-
     }
 
     public async Task<ChannelPoint> OpenChannel(string pubkey, long satAmount)
     {
-        var res = await lightningClient.OpenChannelSyncAsync(new OpenChannelRequest { NodePubkeyString = pubkey, LocalFundingAmount = satAmount, SpendUnconfirmed = true, TargetConf = FlagManager.instance.GetTargetConf(), Private = true });
+        var res = await lightningClient.OpenChannelSyncAsync(new OpenChannelRequest
+        {
+            NodePubkeyString = pubkey, LocalFundingAmount = satAmount, SpendUnconfirmed = true,
+            TargetConf = FlagManager.instance.GetTargetConf(), Private = true
+        });
         return res;
     }
 
@@ -463,8 +458,12 @@ public class LndClient : IClientLnd
         if (OnInvoiceSettled != null)
         {
             var invoice = await lightningClient.DecodePayReqAsync(new PayReqString { PayReq = payreq });
-            OnInvoiceSettled.Invoke(this, new InvoiceSettledEventArgs() { Invoice = new Invoice { PaymentRequest = payreq, Value = invoice.NumSatoshis, Memo = invoice.Description } });
-
+            OnInvoiceSettled.Invoke(this,
+                new InvoiceSettledEventArgs()
+                {
+                    Invoice = new Invoice
+                        { PaymentRequest = payreq, Value = invoice.NumSatoshis, Memo = invoice.Description }
+                });
         }
     }
 
@@ -486,9 +485,11 @@ public class LndClient : IClientLnd
         };
         using (var closeChannelStream = lightningClient.CloseChannel(req))
         {
-            while (!rpcChannel.ShutdownToken.IsCancellationRequested && await closeChannelStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
+            while (!rpcChannel.ShutdownToken.IsCancellationRequested &&
+                await closeChannelStream.ResponseStream.MoveNext(rpcChannel.ShutdownToken))
             {
-                if (closeChannelStream.ResponseStream.Current.UpdateCase == CloseStatusUpdate.UpdateOneofCase.ClosePending)
+                if (closeChannelStream.ResponseStream.Current.UpdateCase ==
+                    CloseStatusUpdate.UpdateOneofCase.ClosePending)
                 {
                     return;
                 }
@@ -508,10 +509,10 @@ public class LndClient : IClientLnd
             Addr = address,
             SendAll = true,
             TargetConf = 6
-
         });
         return res.Txid;
     }
+
     public void Dispose()
     {
         ShutDown();

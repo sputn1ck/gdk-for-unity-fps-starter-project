@@ -9,6 +9,7 @@ public static class Utility
 {
     public const ulong BountyInt = 989810498;
     public const ulong MemoInt = 9898104109;
+
     public static void resetLocalTransform(this Transform t)
     {
         t.localPosition = Vector3.zero;
@@ -18,7 +19,8 @@ public static class Utility
 
     public static void Log(string message, Color color)
     {
-        Debug.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>", (byte)(color.r * 255f), (byte)(color.g * 255f), (byte)(color.b * 255f), message));
+        Debug.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>", (byte) (color.r * 255f),
+            (byte) (color.g * 255f), (byte) (color.b * 255f), message));
     }
 
     public static bool IsEditingInpputfield(this EventSystem sys)
@@ -52,5 +54,4 @@ public static class Utility
             hex.AppendFormat("{0:x2}", b);
         return hex.ToString();
     }
-
 }

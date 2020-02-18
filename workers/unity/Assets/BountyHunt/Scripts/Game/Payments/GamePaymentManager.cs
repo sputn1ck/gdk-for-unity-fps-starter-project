@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GamePaymentManager : MonoBehaviour
 {
-
     private ServerServiceConnections lnServer;
 
     private bool useLnd;
+
     private void Awake()
     {
         lnServer = GetComponent<ServerServiceConnections>();
@@ -16,11 +16,10 @@ public class GamePaymentManager : MonoBehaviour
             useLnd = false;
             return;
         }
+
         useLnd = true;
-
-
-
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +30,7 @@ public class GamePaymentManager : MonoBehaviour
     {
         if (e.Invoice.IsKeysend)
         {
-            foreach(var htlc in e.Invoice.Htlcs)
+            foreach (var htlc in e.Invoice.Htlcs)
             {
                 if (htlc.CustomRecords.ContainsKey(Utility.BountyInt))
                 {
@@ -54,12 +53,14 @@ public class GamePaymentManager : MonoBehaviour
 
             return;
         }
+
         var auction = DonnerUtils.MemoToAuctionInvoice(e.Invoice.Memo);
         if (auction != null && auction.AuctionId != null)
         {
             ServerEvents.instance.OnAuctionInvoicePaid.Invoke(auction);
             return;
         }
+
         var bounty = DonnerUtils.MemoToBountyInvoice(e.Invoice.Memo);
         if (bounty != null && bounty.pubkey != "")
         {
@@ -73,6 +74,5 @@ public class GamePaymentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 }

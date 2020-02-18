@@ -8,7 +8,7 @@ using Fps;
 public class DonnerSnapshot : MonoBehaviour
 {
     private static readonly string DefaultSnapshotPath =
-            Path.Combine(Application.dataPath, "../../../snapshots/default.snapshot");
+        Path.Combine(Application.dataPath, "../../../snapshots/default.snapshot");
 
     private static readonly string CloudSnapshotPath =
         Path.Combine(Application.dataPath, "../../../snapshots/cloud.snapshot");
@@ -48,8 +48,6 @@ public class DonnerSnapshot : MonoBehaviour
             var healthPack = DonnerEntityTemplates.BountyPickup(pos, 10);
             snapshot.AddEntity(healthPack);
         }
-
-
     }
 
     private static void AddGameManager(Snapshot snapshot)
