@@ -9,6 +9,7 @@ public class BountyUIController : MonoBehaviour
 {
     public TextMeshProUGUI satText;
     public TextMeshProUGUI satUpdate;
+    public Animator updatePanel;
     public Color positiveColor;
     public Color negativeColor;
 
@@ -30,7 +31,8 @@ public class BountyUIController : MonoBehaviour
             satUpdate.text = diff.ToString();
             satUpdate.color = negativeColor;
         }
-        satUpdate.GetComponent<Animator>().SetTrigger("play");
+        updatePanel.GetComponent<Animator>().SetTrigger("play");
+        //GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
     public void UpdateSats(float sats, float diff, string format = "F1")
     {
@@ -50,7 +52,8 @@ public class BountyUIController : MonoBehaviour
             satUpdate.text = diff.ToString();
             satUpdate.color = negativeColor;
         }
-        satUpdate.GetComponent<Animator>().SetTrigger("play");
+        updatePanel.GetComponent<Animator>().SetTrigger("play");
+        //GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
 
     

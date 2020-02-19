@@ -54,7 +54,7 @@ public class SkillIconUI : MonoBehaviour
     {
         activeCooldown = true;
         Icon.gameObject.SetActive(true);
-        Icon.color = new Color(1,1,1,cooldownOpacity);
+        Icon.GetComponent<CanvasGroup>().alpha = cooldownOpacity;
         //KeyText.gameObject.SetActive(false);
     }
 
@@ -62,7 +62,8 @@ public class SkillIconUI : MonoBehaviour
     {
         activeCooldown = false;
         if(hideWhenReady) Icon.gameObject.SetActive(true);
-        Icon.color = new Color(1, 1, 1, readyOpacity);
+        Icon.GetComponent<CanvasGroup>().alpha = readyOpacity;
+
         //KeyText.gameObject.SetActive(true);
     }
 

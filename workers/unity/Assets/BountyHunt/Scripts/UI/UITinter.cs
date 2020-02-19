@@ -10,7 +10,7 @@ using TMPro;
     Primary,Secondary
 }
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class UITinter : MonoBehaviour
 {
     public static UnityEvent tintEvent =  new UnityEvent();
