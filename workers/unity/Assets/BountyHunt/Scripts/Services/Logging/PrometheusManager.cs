@@ -55,7 +55,7 @@ public class PrometheusManager
         var headerValue = Convert.ToBase64String(Encoding.UTF8.GetBytes("user:"+ FlagManager.instance.GetMonitoringPassword()));
         httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", headerValue);
-        this.monitoringEndpoint = monitoringEndpoint;
+        this.monitoringEndpoint = monitorEndpoint;
         /*
          * request test
          *
@@ -78,10 +78,10 @@ public class PrometheusManager
 
     public void Shutdown()
     {
-        Task t = Task.Run(async () => await ShutdownTask());
+        Task t = Task.Run(() => ShutdownTask());
         t.Wait(5000);
     }
-    private async Task ShutdownTask()
+    private void ShutdownTask()
     {
         metricPusher = new MetricPusher(new MetricPusherOptions
         {
@@ -99,6 +99,6 @@ public class PrometheusManager
         ActiveScouts.Set(0);
         ActiveSnipers.Set(0);
         ActiveSoldiers.Set(0);
-        await metricPusher.StopAsync();
+        metricPusher.Stop();
     }
 }
