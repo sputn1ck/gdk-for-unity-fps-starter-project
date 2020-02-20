@@ -1,0 +1,27 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component GameModeManager {
+    id = 460001;
+    RoundInfo current_round = 1;
+    RoundInfo next_round = 2;
+
+    event RoundInfo new_round;
+}
+
+
+type RoundInfo {
+    GameMode game_mode = 1;
+    TimeInfo time_info = 2;
+}
+
+type TimeInfo {
+    int64 start_time = 1;
+    int64 duration = 2;
+}
+
+enum GameMode {
+    LOBBY=0;
+    BOUNTYHUNT=1;
+}
