@@ -10,8 +10,7 @@ public class BBHUIManager : MonoBehaviour
     public InGameScreenManagerUI inGame;
     public static BBHUIManager instance;
 
-    public Color primaryUIColor= Color.white;
-    public Color secondaryUIColor = Color.white;
+    [SerializeField] public List<TintingPair> UITints;
 
 
     private void Awake()
@@ -20,8 +19,10 @@ public class BBHUIManager : MonoBehaviour
 
         ScreenManager.gameObject.SetActive(false);
 
-        UITinter.setColor(TintColor.Primary, primaryUIColor);
-        UITinter.setColor(TintColor.Secondary, secondaryUIColor);
+        foreach(TintingPair tp in UITints)
+        {
+            UITinter.setColor(tp.tint, tp.color);
+        }
 
     }
 

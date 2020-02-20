@@ -7,7 +7,7 @@ using TMPro;
 
 [System.Serializable] public enum TintColor
 {
-    Primary,Secondary
+    Primary,Panel,MenuPanel,Secondary
 }
 
 //[ExecuteInEditMode]
@@ -74,5 +74,10 @@ public class UITinter : MonoBehaviour
         tintEvent.Invoke();
     }
 
-
+}
+[System.Serializable]
+public struct TintingPair
+{
+    public TintColor tint;
+    public Color color;
 }
