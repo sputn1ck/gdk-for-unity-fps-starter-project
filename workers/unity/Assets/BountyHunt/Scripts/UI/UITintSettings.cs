@@ -6,15 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BBH/UI/TintSettings")]
 public class UITintSettings : ScriptableObject
 {
+    public BBHUIManager OnScreenUIPrefab;
 
     public Color primaryColor;
     public Color secondaryColor;
 
     private void OnValidate()
     {
-        UITinter.tintDict[TintColor.Primary] = primaryColor;
-        UITinter.tintDict[TintColor.Secondary] = secondaryColor;
-        UITinter.tintEvent.Invoke();
+        
+        UITinter.setColor(TintColor.Primary, primaryColor);
+        UITinter.setColor(TintColor.Secondary, secondaryColor);
+
+        OnScreenUIPrefab.primaryUIColor = primaryColor;
+        OnScreenUIPrefab.secondaryUIColor = secondaryColor;
     }
 
 

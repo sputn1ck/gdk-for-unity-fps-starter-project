@@ -31,8 +31,8 @@ public class BountyUIController : MonoBehaviour
             satUpdate.text = diff.ToString();
             satUpdate.color = negativeColor;
         }
+
         updatePanel.GetComponent<Animator>().SetTrigger("play");
-        //GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
     public void UpdateSats(float sats, float diff, string format = "F1")
     {
@@ -53,8 +53,8 @@ public class BountyUIController : MonoBehaviour
             satUpdate.color = negativeColor;
         }
         updatePanel.GetComponent<Animator>().SetTrigger("play");
-        //GetComponent<RectTransform>().ForceUpdateRectTransforms();
+
     }
 
-    
+
 }

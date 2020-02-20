@@ -51,6 +51,28 @@ public class UITinter : MonoBehaviour
 
     private void OnValidate()
     {
-        updateColor();
+        //updateColor();
     }
+
+    public static void setColor(TintColor tint, Color color)
+    {
+        tintDict[tint] = color;
+        string code = "UICOLOR_" + (int)tint;
+        PlayerPrefs.SetString(code, Utility.ColorToHex(color));
+        PlayerPrefs.Save();
+        tintEvent.Invoke();
+    }
+
+    public void InitializeAll()
+    {
+        foreach(var t in tintDict)
+        {
+            string code = "UICOLOR_" + (int)tint;
+            Color c = Utility.HexToColor(PlayerPrefs.GetString(code, "ffffffff"));
+            tintDict[t.Key] = c;
+        }
+        tintEvent.Invoke();
+    }
+
+
 }

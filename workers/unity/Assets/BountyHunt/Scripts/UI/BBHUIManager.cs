@@ -10,12 +10,18 @@ public class BBHUIManager : MonoBehaviour
     public InGameScreenManagerUI inGame;
     public static BBHUIManager instance;
 
+    public Color primaryUIColor= Color.white;
+    public Color secondaryUIColor = Color.white;
+
 
     private void Awake()
     {
         instance = this;
 
         ScreenManager.gameObject.SetActive(false);
+
+        UITinter.setColor(TintColor.Primary, primaryUIColor);
+        UITinter.setColor(TintColor.Secondary, secondaryUIColor);
 
     }
 
