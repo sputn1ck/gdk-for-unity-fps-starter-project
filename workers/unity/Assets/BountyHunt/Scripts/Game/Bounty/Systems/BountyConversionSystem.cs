@@ -43,10 +43,10 @@ public class BountyConversionSystem : ComponentSystem
         if (timeSum < 5)
             return;
         timeSum -= 5;
-        BountyConversion();
+        TimedBountyConversion();
     }
 
-    private void BountyConversion()
+    private void TimedBountyConversion()
     {
         if (conversionGroup.IsEmptyIgnoreFilter)
         {
@@ -98,8 +98,8 @@ public class BountyConversionSystem : ComponentSystem
             PrometheusManager.ActiveScouts.Set(activeClasses[2]);
         });
 
-        
-        
+
+
 
     }
 

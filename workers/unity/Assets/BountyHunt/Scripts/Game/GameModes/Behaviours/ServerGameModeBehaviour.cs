@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
+using Unity.Entities;
 
-public class ServerRoundBehaviour : MonoBehaviour
+public class ServerGameModeBehaviour : MonoBehaviour
 {
 
     [Require] public GameModeManagerWriter GameModeManagerWriter;
 
-
     private int gameModeRotationCounter;
+    private GameMode currentGameMode;
 
 
     private void OnEnable()
@@ -19,13 +20,13 @@ public class ServerRoundBehaviour : MonoBehaviour
         gameModeRotationCounter = 0;
 
         StartCoroutine(gameModeEnumerator());
+
     }
 
     private void StartGameMode()
     {
 
         var gameMode = GameModeRotation.Get(gameModeRotationCounter);
-        Debug.Log("starting gamemode " + gameMode.Name);
         var RoundInfo = new RoundInfo()
         {
             GameModeInfo = new GameModeInfo(gameModeRotationCounter),
@@ -42,12 +43,29 @@ public class ServerRoundBehaviour : MonoBehaviour
         });
 
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
+        currentGameMode = gameMode;
+        currentGameMode.OnGameModeStart(this);
+    }
+
+    private void EndGameMode()
+    {
+        currentGameMode.OnGameModeEnd(this);
+        var gameMode = GameModeRotation.Get(gameModeRotationCounter);
+        var RoundInfo = new RoundInfo()
+        {
+            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
+            TimeInfo = new TimeInfo()
+            {
+                StartTime = DateTime.UtcNow.ToFileTime(),
+                Duration = gameMode.GlobalSettings.NanoSeconds,
+            }
+        };
+        GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
     }
     private void SetNextGameMode()
     {
         var nextGameModeId = getNextGameModeInt();
         var gameMode = GameModeRotation.Get(nextGameModeId);
-        Debug.Log("setting next gamemode " + gameMode.Name);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             NextRound = new RoundInfo()
@@ -72,6 +90,7 @@ public class ServerRoundBehaviour : MonoBehaviour
                 GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration;
             if (DateTime.UtcNow.ToFileTime() > endTime)
             {
+                EndGameMode();
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
                 SetNextGameMode();
