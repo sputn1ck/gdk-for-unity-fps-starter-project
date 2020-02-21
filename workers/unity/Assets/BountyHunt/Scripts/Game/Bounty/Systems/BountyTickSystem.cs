@@ -53,6 +53,8 @@
                 tickTime = gameMode.PlayerSettings.bountyTickTime;
                 if (gameMode.PlayerSettings.BountyTickConversion == 0)
                     return;
+                if (tickGroup.IsEmptyIgnoreFilter)
+                    return;
                 Entities.With(tickGroup).ForEach((Entity entity, ref HunterComponent.Component hunterComponent) =>
                 {
                     Debug.Log("adding bounty tick");

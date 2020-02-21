@@ -10,12 +10,12 @@ using Bountyhunt;
 [UpdateAfter(typeof(SpatialOSUpdateGroup))]
 public class BountyKillSystem : ComponentSystem
 {
-    
+
 
     private WorkerSystem workerSystem;
     private CommandSystem commandSystem;
     private ComponentUpdateSystem componentUpdateSystem;
-    
+
     protected override void OnCreate()
     {
         base.OnCreate();
@@ -74,32 +74,10 @@ public class BountyKillSystem : ComponentSystem
             };
             if(victimDonnerInfo.Bounty > 0)
                 commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = satsToDrop, Position = pos } });
-            
+
             SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
-            SetScoreboard(killerId, victimId);
             PrometheusManager.TotalKills.Inc(1);
         }
-    }
-    private void SetScoreboard(EntityId killerId, EntityId victimId)
-    {
-        var gameStats = componentUpdateSystem.GetComponent<GameStats.Snapshot>(new EntityId(2));
-        var playerMap = gameStats.PlayerMap;
-        if (playerMap.ContainsKey(killerId) && playerMap.ContainsKey(victimId))
-        {
-            var killer = playerMap[killerId];
-            killer.Kills++;
-            var victim = playerMap[victimId];
-            victim.Deaths++;
-            playerMap[killerId] = killer;
-            playerMap[victimId] = victim;
-            componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = playerMap }, new EntityId(2));
-        }
-
-    }
-    private void SendBountyBoardUpdate()
-    {
-        componentUpdateSystem.SendEvent(new GameStats.UpdateScoreboardEvent.Event(new Bountyhunt.Empty()), new EntityId(2));
-
     }
 
     private void SendBackendUpdate(string killer, string victim)

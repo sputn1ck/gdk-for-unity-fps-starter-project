@@ -51,14 +51,7 @@ public class BountyConversionSystem : ComponentSystem
         }
         Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
         {
-            Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
-            var newMap = gamestats.PlayerMap;
 
-            double activeBounty = 0;
-            int[] activeClasses = new int[]
-            {
-            0,0,0
-            };
             Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
             ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent) =>
@@ -72,29 +65,12 @@ public class BountyConversionSystem : ComponentSystem
                     hunterComponent.Earnings = hunterComponent.Earnings + tick;
                     hunterComponent.SessionEarnings = hunterComponent.SessionEarnings + tick;
                     ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
-                    newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
-                    activeBounty += hunterComponent.Bounty;
+
                 }
-                activeClasses[gun.GunId] += 1;
             });
-            foreach(var player in newPairs)
-            {
-                if (newMap.ContainsKey(player.Key))
-                {
-                    var newPlayer = newMap[player.Key];
-                    newPlayer.Bounty = player.Value.Bounty;
-                    newMap[player.Key] = newPlayer;
-                }
-            }
 
-            gamestats.PlayerMap = newMap;
-            //componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = newMap }, new EntityId(2));
 
-            PrometheusManager.ActivePlayers.Set(newMap.Count);
-            PrometheusManager.ActiveBounty.Set(activeBounty);
-            PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
-            PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
-            PrometheusManager.ActiveScouts.Set(activeClasses[2]);
+            
         });
 
 

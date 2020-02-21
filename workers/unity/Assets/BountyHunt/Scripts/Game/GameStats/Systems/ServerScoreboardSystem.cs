@@ -30,42 +30,67 @@ public class ServerScoreboardSystem : ComponentSystem
                 ComponentType.ReadOnly<SpatialEntityId>(),
                 ComponentType.ReadOnly<GunComponent.Component>()
             );
-        statsGroup = GetEntityQuery(ComponentType.ReadWrite<GameStats.Component>());
+        statsGroup = GetEntityQuery(ComponentType.ReadWrite<GameStats.Component>(),
+            ComponentType.ReadOnly<SpatialEntityId>());
 
 
     }
 
     protected override void OnUpdate()
     {
-        var events = componentUpdateSystem.GetEventsReceived<GameStats.UpdateScoreboardEvent.Event>();
-        if (events.Count == 0)
-            return;
-        if (hunterGroup.IsEmptyIgnoreFilter)
-        {
-            return;
-        }
-        List<ScoreboardItem> scoreboardItems = new List<ScoreboardItem>();
-        double activeBounty = 0;
-        int[] activeClasses = new int[]
-        {
-            0,0,0
-        };
-        Entities.With(hunterGroup).ForEach((ref SpatialEntityId entityId, ref HunterComponent.Component hunter, ref GunComponent.Component gun) =>
-        {
-            var item = new ScoreboardItem(entityId.EntityId, hunter.Bounty, hunter.Kills, hunter.Deaths);
-            activeBounty += hunter.Bounty;
-            activeClasses[gun.GunId] += 1;
 
-            scoreboardItems.Add(item);
+        Entities.With(statsGroup).ForEach((ref GameStats.Component gamestats) =>
+        {
+            var updates = componentUpdateSystem.GetComponentUpdatesReceived<HunterComponent.Update>();
+            if (updates.Count == 0)
+                return;
+            
+            Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
+            for (int i = 0; i < updates.Count; i++)
+            {
+                if(!newPairs.ContainsKey(updates[i].EntityId))
+                    newPairs.Add(updates[i].EntityId, new PlayerItem());
+            }
+            var newMap = gamestats.PlayerMap;
+            double activeBounty = 0;
+            var activeClasses = new int[]
+            {
+                0,0,0
+            };
+            Entities.With(hunterGroup).ForEach((ref SpatialEntityId entityId, ref HunterComponent.Component hunter,
+                ref GunComponent.Component gun) =>
+            {
+                if (newPairs.ContainsKey(entityId.EntityId))
+                {
+                    newPairs[entityId.EntityId] = new PlayerItem() { Bounty = hunter.Bounty, Deaths = hunter.Deaths, Kills = hunter.Kills,Name = hunter.Name, Pubkey = hunter.Pubkey};
+                }
+                activeBounty += hunter.Bounty;
+                activeClasses[gun.GunId]++;
+            });
+            foreach(var player in newPairs)
+            {
+                if (newMap.ContainsKey(player.Key))
+                {
+                    var newPlayer = newMap[player.Key];
+                    newPlayer.Bounty = player.Value.Bounty;
+                    newPlayer.Kills = player.Value.Kills;
+                    newPlayer.Deaths = player.Value.Deaths;
+                    newPlayer.Name = player.Value.Name;
+                    newPlayer.Pubkey = player.Value.Pubkey;
+                    newMap[player.Key] = newPlayer;
+                }
+            }
+
+            gamestats.PlayerMap = newMap;
+
+            PrometheusManager.ActivePlayers.Set(newMap.Count);
+            PrometheusManager.ActiveBounty.Set(activeBounty);
+            PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
+            PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
+            PrometheusManager.ActiveScouts.Set(activeClasses[2]);
+
+
         });
-        PrometheusManager.ActivePlayers.Set(scoreboardItems.Count);
-        PrometheusManager.ActiveBounty.Set(activeBounty);
-        PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
-        PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
-        PrometheusManager.ActiveScouts.Set(activeClasses[2]);
-
-        
-
     }
 
 
