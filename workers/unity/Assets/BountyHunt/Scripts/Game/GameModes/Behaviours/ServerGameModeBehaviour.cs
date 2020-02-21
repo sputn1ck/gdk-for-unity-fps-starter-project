@@ -94,6 +94,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
             if (DateTime.UtcNow.ToFileTime() > endTime)
             {
                 EndGameMode();
+                //Todo send out starts in event
+                yield return new WaitForSeconds(5f);
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
                 SetNextGameMode();

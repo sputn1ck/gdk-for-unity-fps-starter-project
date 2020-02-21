@@ -63,18 +63,18 @@ public class BountyConversionSystem : ComponentSystem
             (ref SpatialEntityId entityId,
             ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent) =>
             {
-                if (hunterComponent.Bounty == 0)
-                    return;
-                var tick = calculateTick(hunterComponent.Bounty, tickComponent.TickAmount);
-                Debug.Log("ticking with " + tick + " from component: " + tickComponent.TickAmount);
-                var newBounty = hunterComponent.Bounty - tick;
-                hunterComponent.Bounty = newBounty;
-                hunterComponent.Earnings = hunterComponent.Earnings + tick;
-                hunterComponent.SessionEarnings = hunterComponent.SessionEarnings + tick;
-                ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
-                newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
-
-                activeBounty += hunterComponent.Bounty;
+                if (hunterComponent.Bounty != 0)
+                {
+                    var tick = calculateTick(hunterComponent.Bounty, tickComponent.TickAmount);
+                    Debug.Log("ticking with " + tick + " from component: " + tickComponent.TickAmount);
+                    var newBounty = hunterComponent.Bounty - tick;
+                    hunterComponent.Bounty = newBounty;
+                    hunterComponent.Earnings = hunterComponent.Earnings + tick;
+                    hunterComponent.SessionEarnings = hunterComponent.SessionEarnings + tick;
+                    ServerServiceConnections.instance.BackendGameServerClient.AddEarnings(hunterComponent.Pubkey, tick);
+                    newPairs.Add(entityId.EntityId, new PlayerItem() { Bounty = newBounty });
+                    activeBounty += hunterComponent.Bounty;
+                }
                 activeClasses[gun.GunId] += 1;
             });
             foreach(var player in newPairs)
@@ -86,7 +86,9 @@ public class BountyConversionSystem : ComponentSystem
                     newMap[player.Key] = newPlayer;
                 }
             }
-            componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = newMap }, new EntityId(2));
+
+            gamestats.PlayerMap = newMap;
+            //componentUpdateSystem.SendUpdate(new GameStats.Update() { PlayerMap = newMap }, new EntityId(2));
 
             PrometheusManager.ActivePlayers.Set(newMap.Count);
             PrometheusManager.ActiveBounty.Set(activeBounty);
