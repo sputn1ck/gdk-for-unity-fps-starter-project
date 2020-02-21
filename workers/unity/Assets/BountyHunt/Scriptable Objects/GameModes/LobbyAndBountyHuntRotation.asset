@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5759ad6ad3bfe403496926a29878753f, type: 3}
-  m_Name: LobbyGameMode
+  m_Script: {fileID: 11500000, guid: 2f094bcd533fa4603a1a582c076bf52c, type: 3}
+  m_Name: LobbyAndBountyHuntRotation
   m_EditorClassIdentifier: 
-  Name: Lobby
-  GlobalSettings:
-    SecondDuration: 180
-  PlayerSettings:
-    RespawnPlayerOnStart: 0
+  gameModes:
+  - {fileID: 11400000, guid: fcce7d5b88b9e4943931949d12420cd8, type: 2}
+  - {fileID: 11400000, guid: 47a34597a79a14bfcbbc6d77806d86fd, type: 2}

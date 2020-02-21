@@ -154,7 +154,7 @@ public class DonnerEntityTemplates
 
         template.SetReadAccess(WorkerUtils.UnityClient, WorkerUtils.UnityGameLogic, WorkerUtils.MobileClient);
         template.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
-        
+
         switch (loginData.RequestedWeapon)
         {
             case (0):
@@ -191,6 +191,8 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(new Metadata.Snapshot("BountyPickup"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(bountyPickUpComponent, WorkerUtils.UnityGameLogic);
+
+
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
 
@@ -227,6 +229,7 @@ public class DonnerEntityTemplates
         var gameStatsComponent = new GameStats.Snapshot();
         gameStatsComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.ChatComponent.Snapshot();
+        var roundInfoComponent = new Bountyhunt.GameModeManager.Snapshot();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
@@ -234,6 +237,8 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(boutySpawnerComponent, WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(gameStatsComponent, WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(roundInfoComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

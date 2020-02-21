@@ -25,11 +25,13 @@ public class ServerServiceConnections : MonoBehaviour
     public BackendPlayerClient BackendPlayerClient;
     public PrometheusManager Prometheus;
 
+    public static CancellationTokenSource ct;
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            ct = new CancellationTokenSource();
         }
         else
         {
@@ -86,11 +88,12 @@ public class ServerServiceConnections : MonoBehaviour
 
     public void Update()
     {
-        
+
     }
 
     public void OnApplicationQuit()
     {
+        ct.Cancel();
         Prometheus.Shutdown();
         lnd.ShutDown();
         BackendGameServerClient.Shutdown();
@@ -109,6 +112,6 @@ public class ServerServiceConnections : MonoBehaviour
         return lnd.GetConfig();
     }
 
-   
+
 
 }

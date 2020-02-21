@@ -6,7 +6,14 @@ using UnityEngine;
 [Serializable]
 public struct GameModeGlobalSettings
 {
-    public int SecondDuration;
+    public long SecondDuration;
 
+    public long NanoSeconds
+    {
+        get
+        {
+            return SecondDuration * 10000000;
+        }
+    }
 
 }

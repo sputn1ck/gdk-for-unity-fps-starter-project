@@ -12,11 +12,7 @@ using System.Threading.Tasks;
 public class AuctionBehaviour : MonoBehaviour
 {
 
-    CancellationTokenSource cancellationToken;
-    private void Awake()
-    {
-        cancellationToken = new CancellationTokenSource();
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +21,7 @@ public class AuctionBehaviour : MonoBehaviour
 
     IEnumerator AuctionEnumerator()
     {
-        while (!cancellationToken.IsCancellationRequested)
+        while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
             if (FlagManager.instance.GetShouldRunAuction())
             {
@@ -38,7 +34,7 @@ public class AuctionBehaviour : MonoBehaviour
         yield return null;
 
     }
-    
+
     private async void StartAuction(int duration)
     {
         var res = await ServerServiceConnections.instance.AuctionController.StartAuction(duration);
@@ -46,12 +42,8 @@ public class AuctionBehaviour : MonoBehaviour
         {
             GetComponent<ServerGameChat>().SendAuctionStartedChatMessage(res.Auction.WinningEntry.Description);
         }
-        
+
         Debug.Log("auction started " + res.Auction.Id);
     }
 
-    private void OnApplicationQuit()
-    {
-        cancellationToken.Cancel();
-    }
 }

@@ -12,7 +12,7 @@ component GameModeManager {
 
 
 type RoundInfo {
-    GameMode game_mode = 1;
+    GameModeInfo game_mode_info = 1;
     TimeInfo time_info = 2;
 }
 
@@ -21,7 +21,6 @@ type TimeInfo {
     int64 duration = 2;
 }
 
-enum GameMode {
-    LOBBY=0;
-    BOUNTYHUNT=1;
+type GameModeInfo {
+    int32 game_mode_id = 1;
 }
