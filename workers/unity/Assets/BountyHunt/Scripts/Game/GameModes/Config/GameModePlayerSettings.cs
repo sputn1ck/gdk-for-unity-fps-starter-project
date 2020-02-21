@@ -6,5 +6,9 @@ using UnityEngine;
 [Serializable]
 public struct GameModePlayerSettings
 {
-    public bool RespawnPlayerOnStart;
+    public bool TeleportPlayerOnStart;
+    public bool ClearBountyOnEnd;
+
+    public double BountyTickConversion;
+    public float bountyTickTime;
 }

@@ -9,6 +9,7 @@ using Fps.Respawning;
 using Fps.SchemaExtensions;
 using Improbable;
 
+[UpdateAfter(typeof(BountyTickSystem))][UpdateBefore(typeof(BountyConversionSystem))]
 public class ServerGameModeSystem : ComponentSystem
 {
     private WorkerSystem workerSystem;
@@ -17,6 +18,7 @@ public class ServerGameModeSystem : ComponentSystem
 
     private EntityQuery playerBountyGroup;
     private EntityQuery playerTeleportGroup;
+    private EntityManager entityManager;
 
     protected override void OnCreate()
     {
@@ -25,7 +27,7 @@ public class ServerGameModeSystem : ComponentSystem
         workerSystem = World.GetExistingSystem<WorkerSystem>();
         commandSystem = World.GetExistingSystem<CommandSystem>();
         componentUpdateSystem = World.GetExistingSystem<ComponentUpdateSystem>();
-
+        entityManager = World.EntityManager;
         playerBountyGroup = GetEntityQuery(
             ComponentType.ReadWrite<HunterComponent.Component>(),
             ComponentType.ReadOnly<SpatialEntityId>()
@@ -50,9 +52,18 @@ public class ServerGameModeSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameModeManager.EndRound.Event>();
         if (events.Count < 1)
             return;
-        Entities.With(playerBountyGroup).ForEach((ref HunterComponent.Component hunter, ref SpatialEntityId entityId) =>
+        var gameMode = GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId);
+        Entities.With(playerBountyGroup).ForEach((Entity entity) =>
         {
-
+            entityManager.AddComponent(entity, new ResetRoundEarnings().GetType());
+            if (gameMode.PlayerSettings.ClearBountyOnEnd)
+            {
+                var tickComponent = new TickComponent()
+                {
+                    TickAmount = 1
+                };
+                entityManager.AddComponentData(entity, tickComponent);
+            }
         });
     }
 
@@ -61,7 +72,7 @@ public class ServerGameModeSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameModeManager.NewRound.Event>();
         if (events.Count < 1)
             return;
-        if (GameModeRotation.Get(events[0].Event.Payload.GameModeInfo.GameModeId).PlayerSettings.RespawnPlayerOnStart)
+        if (GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId).PlayerSettings.TeleportPlayerOnStart)
         {
             TeleportPlayers();
         }
@@ -111,6 +122,9 @@ public class ServerGameModeSystem : ComponentSystem
         return pos;
     }
 
-
 }
+
+
+[RemoveAtEndOfTick]
+public struct ResetRoundEarnings : IComponentData{}
 

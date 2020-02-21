@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "BBH/GameModes/Dictionary", order = 0)]
-public class GameModeRotation : ScriptableObject
+public class GameModeDictionary : ScriptableObject
 {
-    public static GameModeRotation Instance;
+    public static GameModeDictionary Instance;
 
     [SerializeField] private GameMode[] gameModes;
     // Start is called before the first frame update

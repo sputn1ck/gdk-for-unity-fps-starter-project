@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
+using Chat;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
 
@@ -26,7 +27,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
     private void StartGameMode()
     {
 
-        var gameMode = GameModeRotation.Get(gameModeRotationCounter);
+        var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         var RoundInfo = new RoundInfo()
         {
             GameModeInfo = new GameModeInfo(gameModeRotationCounter),
@@ -45,12 +46,13 @@ public class ServerGameModeBehaviour : MonoBehaviour
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
         currentGameMode = gameMode;
         currentGameMode.OnGameModeStart(this);
+        ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
     }
 
     private void EndGameMode()
     {
         currentGameMode.OnGameModeEnd(this);
-        var gameMode = GameModeRotation.Get(gameModeRotationCounter);
+        var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         var RoundInfo = new RoundInfo()
         {
             GameModeInfo = new GameModeInfo(gameModeRotationCounter),
@@ -61,11 +63,12 @@ public class ServerGameModeBehaviour : MonoBehaviour
             }
         };
         GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
+        ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has ended", MessageType.INFO_LOG);
     }
     private void SetNextGameMode()
     {
         var nextGameModeId = getNextGameModeInt();
-        var gameMode = GameModeRotation.Get(nextGameModeId);
+        var gameMode = GameModeDictionary.Get(nextGameModeId);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             NextRound = new RoundInfo()
@@ -104,7 +107,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private int getNextGameModeInt()
     {
-        return gameModeRotationCounter >= GameModeRotation.Count - 1 ? 0 : gameModeRotationCounter + 1;
+        return gameModeRotationCounter >= GameModeDictionary.Count - 1 ? 0 : gameModeRotationCounter + 1;
     }
 
 }

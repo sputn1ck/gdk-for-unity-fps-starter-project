@@ -37,6 +37,10 @@ type RequestPayoutResponse {
     int64 amount = 4;
 }
 
+type NextBountyTick {
+    double tick_percentage = 1;
+}
+
 enum BountyReason {
     PICKUP = 0;
     DONATION = 1;

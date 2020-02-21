@@ -13,10 +13,14 @@ public class ServerGameChat : MonoBehaviour
     [Require] ChatComponentCommandReceiver ChatCommandReceiver;
     [Require] ChatComponentWriter ChatWriter;
     [Require] PrivateChatCommandSender privateChatCommandSender;
+
+    public static ServerGameChat instance;
     //[Require] PlayerStateReaderSubscriptionManager PlayerState;
     // Start is called before the first frame update
     void OnEnable()
     {
+        if (!Equals(instance, this))
+            instance = this;
         ChatCommandReceiver.OnSendMessageRequestReceived += ChatCommandReceiver_OnSendMessageRequestReceived;
     }
 
@@ -39,20 +43,12 @@ public class ServerGameChat : MonoBehaviour
         ChatWriter.SendChatMessageEvent(new ChatMessage(DateTime.UtcNow.ToFileTimeUtc(), 2, "AUCTION_STARTED", message, MessageType.AUCTION_LOG, true));
     }
 
-    public void SendGlobalMessage(int id, string sender, string message, MessageType type, bool announce)
+    private void SendGlobalMessage(int id, string sender, string message, MessageType type, bool announce)
     {
         ChatMessage msg = new ChatMessage(DateTime.UtcNow.ToFileTimeUtc(), id, sender, message, type, announce);
         ChatWriter.SendChatMessageEvent(msg);
     }
-    public void SendGlobalMessage(string sender, string message, MessageType type)
-    {
-        SendGlobalMessage(2, sender, message, type, false);
-    }
-    public void SendGlobalMessage(int id, string sender, string message, MessageType type)
-    {
-        SendGlobalMessage(id, sender, message, type, false);
-    }
-    public void SendGlobalMessage(string sender, string message, MessageType type, bool announce)
+    public void SendGlobalMessage(string sender, string message, MessageType type, bool announce = false)
     {
         SendGlobalMessage(2, sender, message, type, announce);
     }

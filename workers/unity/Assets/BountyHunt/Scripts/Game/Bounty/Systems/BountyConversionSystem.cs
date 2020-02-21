@@ -29,7 +29,8 @@ public class BountyConversionSystem : ComponentSystem
         conversionGroup = GetEntityQuery(
                 ComponentType.ReadWrite<HunterComponent.Component>(),
                 ComponentType.ReadOnly<SpatialEntityId>(),
-                ComponentType.ReadOnly<GunComponent.Component>()
+                ComponentType.ReadOnly<GunComponent.Component>(),
+                ComponentType.ReadOnly<TickComponent>()
             );
         gameStatsGroup = GetEntityQuery(
                 ComponentType.ReadWrite<GameStats.Component>(),
@@ -39,20 +40,15 @@ public class BountyConversionSystem : ComponentSystem
     }
     protected override void OnUpdate()
     {
-        timeSum += Time.deltaTime;
-        if (timeSum < 5)
-            return;
-        timeSum -= 5;
-        TimedBountyConversion();
+        BountyConversion();
     }
 
-    private void TimedBountyConversion()
+    private void BountyConversion()
     {
         if (conversionGroup.IsEmptyIgnoreFilter)
         {
             return;
         }
-        var percentage = FlagManager.instance.defaultBountyPerTick;
         Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
         {
             Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
@@ -65,11 +61,12 @@ public class BountyConversionSystem : ComponentSystem
             };
             Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
-            ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun) =>
+            ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent) =>
             {
                 if (hunterComponent.Bounty == 0)
                     return;
-                var tick = calculateTick(hunterComponent.Bounty, percentage);
+                var tick = calculateTick(hunterComponent.Bounty, tickComponent.TickAmount);
+                Debug.Log("ticking with " + tick + " from component: " + tickComponent.TickAmount);
                 var newBounty = hunterComponent.Bounty - tick;
                 hunterComponent.Bounty = newBounty;
                 hunterComponent.Earnings = hunterComponent.Earnings + tick;

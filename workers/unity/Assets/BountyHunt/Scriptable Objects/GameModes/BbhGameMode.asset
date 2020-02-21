@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfdb0b950e11427fbc4ae6e5416aaf90, type: 3}
-  m_Name: LobbyGameMode
+  m_Name: BbhGameMode
   m_EditorClassIdentifier: 
   Name: Lobby
   GlobalSettings:
-    SecondDuration: 30
+    SecondDuration: 10
   PlayerSettings:
     TeleportPlayerOnStart: 0
-    ClearBountyOnEnd: 0
-    BountyTickConversion: 0
+    ClearBountyOnEnd: 1
+    BountyTickConversion: 0.05
     bountyTickTime: 5
