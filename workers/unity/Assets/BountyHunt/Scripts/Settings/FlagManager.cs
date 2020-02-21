@@ -45,7 +45,7 @@ public class FlagManager : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-       
+
         instance = this;
         var tmp = GetComponent<BBHGameLogicWorkerConnector>();
         if(tmp == null)
@@ -65,6 +65,7 @@ public class FlagManager : MonoBehaviour
 
     public int GetAuctionDuration()
     {
+
         int auctionDuration;
         if (int.TryParse(worker.GetWorkerFlag(auctionSeconds), out auctionDuration))
             return auctionDuration;
@@ -138,6 +139,10 @@ public class FlagManager : MonoBehaviour
     }
     public string GetMonitoringPassword()
     {
+        if (worker == null)
+        {
+            return defaultMonitoringPassword;
+        }
         string password = worker.GetWorkerFlag(prometheusPasswordFlag);
         if (password != null)
             return password;

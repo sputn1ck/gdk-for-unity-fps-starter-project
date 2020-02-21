@@ -184,7 +184,10 @@ public class LndClient : IClientLnd
         Debug.Log("my pubkey: " + pubkey);
 
         if (listen)
+        {
             StartListening();
+        }
+
         Debug.Log("finished setup");
     }
 
@@ -222,7 +225,11 @@ public class LndClient : IClientLnd
                     {
                         var e = new InvoiceSettledEventArgs();
                         e.Invoice = invoice;
-                        OnInvoiceSettled(this, e);
+                        if (OnInvoiceSettled != null)
+                        {
+                            OnInvoiceSettled(this, e);
+                        }
+
                     }
                 }
             }
@@ -244,8 +251,16 @@ public class LndClient : IClientLnd
 
             var json = File.ReadAllText(path + "/" + confName);
             lnconf = JsonUtility.FromJson<LnConf>(json);
+            string home = "";
+            if (Application.platform == RuntimePlatform.OSXEditor)
+            {
+                home = Environment.GetEnvironmentVariable("HOME") + "/Library/Application Support";
+            }
+            else
+            {
+                home = Environment.GetEnvironmentVariable("Appdata");
+            }
 
-            var home = Environment.GetEnvironmentVariable("Appdata");
             tlsCert = File.ReadAllText(home + "/Donner/Daemon/data/tls.cert");
             macaroon = MacaroonCallCredentials.ToHex(
                 File.ReadAllBytes(home + "/Donner/Daemon/data/lnd/chain/bitcoin/mainnet/admin.macaroon"));
