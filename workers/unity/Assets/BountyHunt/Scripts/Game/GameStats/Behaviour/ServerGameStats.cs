@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Fps.Config;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using System.Linq;
+using Improbable.Gdk.Core;
 
 public class ServerGameStats : MonoBehaviour
 {
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
-    
+    [Require] GameModeManagerReader GameModeManagerReader;
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
@@ -51,5 +53,22 @@ public class ServerGameStats : MonoBehaviour
             playerMap.Add(obj.Payload.Id, player);
         }
         GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
+    }
+
+
+    public void ResetScoreboard()
+    {
+        var playerMap = GameStatsWriter.Data.PlayerMap;
+        var newMap = new Dictionary<EntityId, PlayerItem>();
+        foreach (var player in GameStatsWriter.Data.PlayerMap)
+        {
+            newMap.Add(player.Key, new PlayerItem(player.Value.Name, player.Value.Pubkey, 0,0,0,0));
+        }
+
+        GameStatsWriter.SendUpdate(new GameStats.Update()
+        {
+            LastRoundScores = playerMap,
+            PlayerMap = newMap
+        });
     }
 }

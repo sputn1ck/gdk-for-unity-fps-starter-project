@@ -5,6 +5,7 @@ import "bountyhunt/common.schema";
 component GameStats{
     id = 440001;
     map<EntityId, PlayerItem> player_map = 1;
+    map<EntityId, PlayerItem> last_round_scores = 2;
     event KillInfo gained_kill_event;
     event bountyhunt.Empty update_scoreboard_event;
     command bountyhunt.Empty set_name(SetNameRequest);
@@ -32,4 +33,5 @@ type PlayerItem {
     int64 bounty = 3;
     int32 kills = 4;
     int32 deaths = 5;
+    int64 round_earnings=6;
 }

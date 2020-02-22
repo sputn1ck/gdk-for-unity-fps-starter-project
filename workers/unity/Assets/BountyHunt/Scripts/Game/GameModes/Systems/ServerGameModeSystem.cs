@@ -18,6 +18,7 @@ public class ServerGameModeSystem : ComponentSystem
 
     private EntityQuery playerBountyGroup;
     private EntityQuery playerTeleportGroup;
+    private EntityQuery gameStatsGroup;
     private EntityManager entityManager;
 
     protected override void OnCreate()
@@ -37,6 +38,11 @@ public class ServerGameModeSystem : ComponentSystem
             ComponentType.ReadWrite<Position.Component>(),
             ComponentType.ReadWrite<ServerMovement.Component>(),
             ComponentType.ReadWrite<HunterComponent.Component>(),
+            ComponentType.ReadOnly<SpatialEntityId>()
+        );
+        gameStatsGroup = GetEntityQuery(
+            ComponentType.ReadWrite<GameStats.Component>(),
+            ComponentType.ReadWrite<GameModeManager.Component>(),
             ComponentType.ReadOnly<SpatialEntityId>()
         );
     }

@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
 using Chat;
+using Grpc.Core;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
 
@@ -14,14 +15,14 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private int gameModeRotationCounter;
     private GameMode currentGameMode;
-
+    private ServerGameStats ServerGameStats;
 
     private void OnEnable()
     {
         gameModeRotationCounter = 0;
 
         StartCoroutine(gameModeEnumerator());
-
+        ServerGameStats = GetComponent<ServerGameStats>();
     }
 
     private void StartGameMode()
@@ -94,6 +95,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
             if (DateTime.UtcNow.ToFileTime() > endTime)
             {
                 EndGameMode();
+                yield return new WaitForEndOfFrame();
+                ServerGameStats.ResetScoreboard();
                 //Todo send out starts in event
                 yield return new WaitForSeconds(5f);
                 gameModeRotationCounter = getNextGameModeInt();
