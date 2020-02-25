@@ -22,6 +22,7 @@ public class KillFeedUI : MonoBehaviour
         instance = this;
         inactiveMessages = new List<KillFeedMessageUI>();
         activeMessages = new List<KillFeedMessageUI>();
+        ClientEvents.instance.onAnyKill.AddListener(OnKill);
     }
 
     public void NewMessage(string msg)
@@ -66,6 +67,12 @@ public class KillFeedUI : MonoBehaviour
             sendTest = false;
             NewMessage(testMessage);
         }
+    }
+
+    void OnKill(KillEventArgs args)
+    {
+        string msg = args.killer + " killed " + args.victim;
+        NewMessage(msg);
     }
 
 }

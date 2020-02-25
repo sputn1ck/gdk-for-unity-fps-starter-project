@@ -25,6 +25,8 @@ public class StringLongEvent : UnityEvent<string, long> { }
 public class PaymentSuccessEvent : UnityEvent<PaymentSuccesArgs> { }
 public class PaymentFailureEvent : UnityEvent<PaymentFailureArgs> { }
 
+public class KillEvent : UnityEvent<KillEventArgs> { }
+
 [Serializable]
 public struct BountyUpdateEventArgs
 {
@@ -59,6 +61,12 @@ public struct BalanceUpdateEventArgs
 {
     public long NewAmount;
     public long OldAmount;
+}
+
+public struct KillEventArgs
+{
+    public string killer;
+    public string victim;
 }
 
 
