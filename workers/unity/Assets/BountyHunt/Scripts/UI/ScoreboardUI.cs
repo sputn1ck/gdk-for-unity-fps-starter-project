@@ -20,10 +20,6 @@ public class ScoreboardUI : ScreenUI
     public Toggle sortBtnKills;
     public Toggle sortBtnDeaths;
 
-    public Color BlackBoardItemColorVariant1;
-    public Color BlackBoardItemColorVariant2;
-    public Color BlackBoardItemColorHighlight;
-
     EntityId playerID;
 
     protected override void Awake()
@@ -45,12 +41,6 @@ public class ScoreboardUI : ScreenUI
 
     private void Start()
     {
-
-        for (int i = 0; i < uIBlackBoardItems.Count; i++)
-        {
-            if (i % 2 == 0) uIBlackBoardItems[i].setDefaultBackgroundColor(BlackBoardItemColorVariant1);
-            else uIBlackBoardItems[i].setDefaultBackgroundColor(BlackBoardItemColorVariant2);
-        }
 
         sortBtnBounty.onValueChanged.AddListener(SetSortingToBounty);
         sortBtnKills.onValueChanged.AddListener(SetSortingToKills);

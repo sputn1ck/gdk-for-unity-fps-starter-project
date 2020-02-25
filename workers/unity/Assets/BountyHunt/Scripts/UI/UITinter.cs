@@ -7,7 +7,7 @@ using TMPro;
 
 [System.Serializable] public enum TintColor
 {
-    Primary,Panel,MenuPanel,Secondary
+    Primary,Panel,MenuPanel,Secondary,Input,HighlightedPanel
 }
 
 //[ExecuteInEditMode]
