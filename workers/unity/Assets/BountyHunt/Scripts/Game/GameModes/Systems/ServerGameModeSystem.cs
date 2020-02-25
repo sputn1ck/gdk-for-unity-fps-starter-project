@@ -98,26 +98,11 @@ public class ServerGameModeSystem : ComponentSystem
             var randomPos = getRandomPosition();
 
 
-            var newLatest = new ServerResponse
+            commandSystem.SendCommand(new HunterComponent.TeleportPlayer.Request()
             {
-                Position = randomPos.ToVector3Int(),
-                IncludesJump = false,
-                Timestamp = serverMovement.Latest.Timestamp,
-                TimeDelta = 0
-            };
-
-            var serverMovementUpdate = new ServerMovement.Update
-            {
-                Latest = newLatest
-            };
-
-            var spatialPositionUpdate = new Position.Update
-            {
-                Coords = Coordinates.FromUnityVector(randomPos)
-            };
-
-            componentUpdateSystem.SendUpdate(serverMovementUpdate, entityId.EntityId);
-            componentUpdateSystem.SendUpdate(spatialPositionUpdate,entityId.EntityId);
+                TargetEntityId = entityId.EntityId,
+                Payload = new TeleportRequest(randomPos.x, randomPos.y, randomPos.z)
+            }); ;
         });
     }
 

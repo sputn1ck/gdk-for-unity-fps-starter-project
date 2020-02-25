@@ -8,6 +8,9 @@ using Fps.Config;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
 using System;
+using Fps;
+using Fps.SchemaExtensions;
+using Improbable;
 
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountyPlayerServer : MonoBehaviour
@@ -17,12 +20,12 @@ public class BountyPlayerServer : MonoBehaviour
     [Require] public HunterComponentCommandReceiver BountyComponentCommandReceiver;
     [Require] public GameStatsCommandSender GameStatsCommandSender;
     [Require] public PlayerHeartbeatClientCommandSender PlayerHeartbeatClientCommandSender;
-    
+    [Require] public ServerMovementWriter ServerMovementWriter;
+    [Require] public PositionWriter spatialPosition;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
 
-    private CancellationTokenSource ct;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -30,11 +33,43 @@ public class BountyPlayerServer : MonoBehaviour
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
         BountyComponentCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
-        ct = new CancellationTokenSource();
+        BountyComponentCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
 
         
         Invoke("SetName", 1f);
         //StartCoroutine(BountyTick());
+    }
+
+    private void OnTeleport(HunterComponent.TeleportPlayer.ReceivedRequest obj)
+    {
+        var pos = new Vector3(obj.Payload.X, obj.Payload.Y, obj.Payload.Z);
+
+
+        //var (pos, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
+
+
+        // Move to a spawn point (position and rotation)
+        var newLatest = new ServerResponse
+        {
+            Position = pos.ToVector3Int(),
+            IncludesJump = false,
+            Timestamp = ServerMovementWriter.Data.Latest.Timestamp,
+            TimeDelta = 0
+        };
+
+        var serverMovementUpdate = new ServerMovement.Update
+        {
+            Latest = newLatest
+        };
+        ServerMovementWriter.SendUpdate(serverMovementUpdate);
+
+        transform.position = pos + LinkedEntityComponent.Worker.Origin;
+
+        var spatialPositionUpdate = new Position.Update
+        {
+            Coords = Coordinates.FromUnityVector(pos)
+        };
+        spatialPosition.SendUpdate(spatialPositionUpdate);
     }
 
     private async void OnRequestPayout(HunterComponent.RequestPayout.ReceivedRequest obj)
@@ -87,7 +122,7 @@ public class BountyPlayerServer : MonoBehaviour
 
     IEnumerator hearbeatCoroutine()
     {
-        while (!ct.IsCancellationRequested)
+        while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
             PlayerHeartbeatClientCommandSender.SendPlayerHeartbeatCommand(LinkedEntityComponent.EntityId, new Improbable.Gdk.Core.Empty(), OnHearbeat);
             yield return new WaitForSeconds(3f);
@@ -114,9 +149,5 @@ public class BountyPlayerServer : MonoBehaviour
         StopCoroutine(hearbeatCoroutine());
     }
 
-    private void OnApplicationQuit()
-    {
-        ct.Cancel();
-    }
 
 }
