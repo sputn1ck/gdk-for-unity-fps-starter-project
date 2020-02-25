@@ -11,12 +11,20 @@ using Fps.SchemaExtensions;
 public class TeleportSkill : PlayerSkill
 {
     public float Distance;
-    public override void ServerCastSkill(ServerPlayerSkillBehaviour player)
+    public override CastResponse ServerCastSkill(ServerPlayerSkillBehaviour player)
     {
         JsonUtility.FromJson("", typeof(TeleportPayload));
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
-        var pos = new Vector3(teleport.x,75, teleport.y);
+        var pos = new Vector3(teleport.x, 75, teleport.y);
+        if (pos.x > 140 || pos.y > 140)
+        {
+            return new CastResponse()
+            {
+                ok = false,
+                errorMsg = "out of bounds"
+            };
+        }
         pos = SpawnPoints.SnapToGround(pos);
         Debug.Log("teleport invoice paid!!" + pos);
 
@@ -46,6 +54,10 @@ public class TeleportSkill : PlayerSkill
             Coords = Coordinates.FromUnityVector(pos)
         };
         player.spatialPosition.SendUpdate(spatialPositionUpdate);
+        return new CastResponse()
+        {
+            ok = true
+        };
     }
     public override void ClientCastSkill(ClientPlayerSkillBehaviour player)
     {

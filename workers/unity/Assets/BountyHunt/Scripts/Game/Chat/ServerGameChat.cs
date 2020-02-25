@@ -40,7 +40,7 @@ public class ServerGameChat : MonoBehaviour
     public void SendAuctionStartedChatMessage(string message)
     {
 
-        ChatWriter.SendChatMessageEvent(new ChatMessage(DateTime.UtcNow.ToFileTimeUtc(), 2, "AUCTION_STARTED", message, MessageType.AUCTION_LOG, true));
+        ChatWriter.SendChatMessageEvent(new ChatMessage(DateTime.UtcNow.ToFileTimeUtc(), 2, "AUCTION_STARTED", message, MessageType.AUCTION_LOG, false));
     }
 
     private void SendGlobalMessage(int id, string sender, string message, MessageType type, bool announce)

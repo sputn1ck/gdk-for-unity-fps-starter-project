@@ -46,6 +46,8 @@ public class SetNameSubMenuUI : SubMenuUI
     public void SetPlayerName(string name)
     {
         playerName = name;
+        PlayerPrefs.SetString("playerName", playerName);
+        PlayerPrefs.Save();
     }
     public override void OnSelect()
     {

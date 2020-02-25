@@ -60,7 +60,7 @@ public class BountyKillSystem : ComponentSystem
             var satsToDrop = (long)(victimDonnerInfo.Bounty - (victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.PlayerSettings.BountyDropPercentageOnDeath));
             var victimModifiedInfo = new HunterComponent.Update()
             {
-                Bounty = satsToDrop,
+                Bounty = victimDonnerInfo.Bounty - satsToDrop,
                 Deaths = victimDonnerInfo.Deaths + 1
             };
             var posSpatial = componentUpdateSystem.GetComponent<Position.Snapshot>(victimId);

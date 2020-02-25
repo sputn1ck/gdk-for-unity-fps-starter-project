@@ -22,7 +22,7 @@ public abstract class PlayerSkill : ScriptableObject
         onCooldownStart.Invoke(Cooldown);
     }
 
-    public abstract void ServerCastSkill(ServerPlayerSkillBehaviour player);
+    public abstract CastResponse ServerCastSkill(ServerPlayerSkillBehaviour player);
     public abstract void ClientCastSkill(ClientPlayerSkillBehaviour player);
 
     public abstract void NonAuthorativeCastSkill(NonAuthorativePlayerSkillBehaviour player);
@@ -36,9 +36,10 @@ public abstract class PayloadSkill : PlayerSkill
 public abstract class TimedSkill : PlayerSkill
 {
     public float castTime;
-    public override void ServerCastSkill(ServerPlayerSkillBehaviour player)
+    public override CastResponse ServerCastSkill(ServerPlayerSkillBehaviour player)
     {
         player.StartCoroutine(CastTime(player));
+        return new CastResponse() { ok = true };
     }
     private IEnumerator CastTime(ServerPlayerSkillBehaviour player)
     {
@@ -48,3 +49,8 @@ public abstract class TimedSkill : PlayerSkill
     public abstract void RealCast(ServerPlayerSkillBehaviour player);
 }
 
+public class CastResponse
+{
+    public string errorMsg;
+    public bool ok;
+}

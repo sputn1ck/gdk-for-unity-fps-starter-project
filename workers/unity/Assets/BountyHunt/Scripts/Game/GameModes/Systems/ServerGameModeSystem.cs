@@ -58,7 +58,7 @@ public class ServerGameModeSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameModeManager.EndRound.Event>();
         if (events.Count < 1)
             return;
-        var gameMode = GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId);
+        var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
         Entities.With(playerBountyGroup).ForEach((Entity entity) =>
         {
             entityManager.AddComponent(entity, new ResetRoundEarnings().GetType());

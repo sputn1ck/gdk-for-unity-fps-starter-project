@@ -8,10 +8,12 @@ public class DonationMessageUI : MonoBehaviour
 {
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI satsText;
+    public TextMeshProUGUI gamepotText;
 
     void Start()
     {
         ClientEvents.instance.onDonationMessageUpdate.AddListener(UpdateMessage);
+        ClientEvents.instance.onBalanceUpdate.AddListener(UpdateGamepot);
     }
 
     private void UpdateMessage(string msg, long sats)
@@ -20,5 +22,9 @@ public class DonationMessageUI : MonoBehaviour
         satsText.text = sats + " <sprite=0>";
     }
 
+    private void UpdateGamepot(BalanceUpdateEventArgs e)
+    {
+        gamepotText.text = e.NewAmount.ToString();
+    }
 
 }

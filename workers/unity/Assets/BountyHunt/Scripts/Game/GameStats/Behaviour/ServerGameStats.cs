@@ -58,7 +58,6 @@ public class ServerGameStats : MonoBehaviour
 
     public void ResetScoreboard()
     {
-        var playerMap = GameStatsWriter.Data.PlayerMap;
         var newMap = new Dictionary<EntityId, PlayerItem>();
         foreach (var player in GameStatsWriter.Data.PlayerMap)
         {
@@ -67,8 +66,8 @@ public class ServerGameStats : MonoBehaviour
 
         GameStatsWriter.SendUpdate(new GameStats.Update()
         {
-            LastRoundScores = playerMap,
-            PlayerMap = newMap
-        });
+            LastRoundScores = newMap,
+            PlayerMap = new Dictionary<EntityId, PlayerItem>()
+    });
     }
 }

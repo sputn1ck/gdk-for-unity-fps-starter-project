@@ -41,7 +41,12 @@ public class ServerPlayerSkillBehaviour : MonoBehaviour
             SendError(obj, "skill on cooldown");
             return;
         }
-        skill.ServerCastSkill(this);
+        var res = skill.ServerCastSkill(this);
+        if (!res.ok)
+        {
+            SendError(obj, res.errorMsg);
+            return;
+        }
         StartCoroutine(HandleCooldown(obj.Payload.Id, skill.Cooldown));
         PlayerSkillComponentCommandReceiver.SendActivateSkillResponse(new PlayerSkillComponent.ActivateSkill.Response(obj.RequestId, new Bountyhunt.ActivateSkillResponse(obj.Payload.Id)));
     }
