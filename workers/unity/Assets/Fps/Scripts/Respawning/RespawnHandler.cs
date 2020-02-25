@@ -73,6 +73,20 @@ namespace Fps.Respawning
 
             // Trigger the respawn event.
             health.SendRespawnEvent(new Empty());
+            switch (newGunId)
+            {
+                case (0):
+                    PrometheusManager.TotalSoldiersChosen.Inc();
+                    break;
+                case (1):
+                    PrometheusManager.TotalSnipersChosen.Inc();
+                    break;
+                case (2):
+                    PrometheusManager.TotalScoutsChosen.Inc();
+                    break;
+                default:
+                    break;
+            }
 
             // Update spatial position in the next frame.
             StartCoroutine(SetSpatialPosition(spawnPosition));

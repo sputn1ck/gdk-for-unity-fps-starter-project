@@ -62,6 +62,7 @@ public class ServerDisconnectSystem : ComponentSystem
                                 Z = (float)pos.Coords.Z
                             }
                         }
+                       
                     });
                     componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
                 }

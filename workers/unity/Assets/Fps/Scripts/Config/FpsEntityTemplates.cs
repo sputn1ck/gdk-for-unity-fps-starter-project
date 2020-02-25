@@ -5,6 +5,7 @@ using Fps.SchemaExtensions;
 using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
+using Improbable.Gdk.PlayerLifecycle;
 
 namespace Fps.Config
 {

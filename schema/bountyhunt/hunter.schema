@@ -14,6 +14,7 @@ component HunterComponent {
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
     command RequestPayoutResponse request_payout(RequestPayoutRequest);
+    command bountyhunt.Empty teleport_player(TeleportRequest);
 }
 
 
@@ -35,6 +36,16 @@ type RequestPayoutResponse {
     string pre_image = 2;
     string message = 3;
     int64 amount = 4;
+}
+
+type NextBountyTick {
+    double tick_percentage = 1;
+}
+
+type TeleportRequest {
+    float x = 1;
+    float y = 2;
+    float z = 3;
 }
 
 enum BountyReason {
