@@ -11,15 +11,17 @@ using Unity.Entities;
 public class ServerGameModeBehaviour : MonoBehaviour
 {
 
+    public static ServerGameModeBehaviour instance;
     [Require] public GameModeManagerWriter GameModeManagerWriter;
 
     private int gameModeRotationCounter;
-    private GameMode currentGameMode;
+    public GameMode currentGameMode;
     private int nextGameModeId;
     private ServerGameStats ServerGameStats;
 
     private void OnEnable()
     {
+        instance = this;
         gameModeRotationCounter = 0;
 
         StartCoroutine(gameModeEnumerator());

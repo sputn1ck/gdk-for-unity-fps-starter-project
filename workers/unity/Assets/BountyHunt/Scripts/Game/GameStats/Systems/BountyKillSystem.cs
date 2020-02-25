@@ -57,7 +57,7 @@ public class BountyKillSystem : ComponentSystem
             {
                 Kills = killerDonnerInfo.Kills + 1
             };
-            var satsToDrop = (long)(victimDonnerInfo.Bounty - (victimDonnerInfo.Bounty * FlagManager.instance.GetSatoshiDropRate()));
+            var satsToDrop = (long)(victimDonnerInfo.Bounty - (victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.PlayerSettings.BountyDropPercentageOnDeath));
             var victimModifiedInfo = new HunterComponent.Update()
             {
                 Bounty = satsToDrop,
@@ -72,7 +72,7 @@ public class BountyKillSystem : ComponentSystem
                 Y = (float)posSpatial.Coords.Y,
                 Z = (float)posSpatial.Coords.Z,
             };
-            if(victimDonnerInfo.Bounty > 0)
+            if(satsToDrop > 0)
                 commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = satsToDrop, Position = pos } });
 
             SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);

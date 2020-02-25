@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,5 +10,6 @@ public struct GameModePlayerSettings
     public bool ClearBountyOnEnd;
 
     public double BountyTickConversion;
-    public float bountyTickTime;
+    public float BountyTickTime;
+    public double BountyDropPercentageOnDeath;
 }

@@ -50,7 +50,7 @@
             Entities.With(gameStatsGroup).ForEach((ref GameModeManager.Component gameModeComponent) =>
             {
                 var gameMode = GameModeDictionary.Get(gameModeComponent.CurrentRound.GameModeInfo.GameModeId);
-                tickTime = gameMode.PlayerSettings.bountyTickTime;
+                tickTime = gameMode.PlayerSettings.BountyTickTime;
                 if (gameMode.PlayerSettings.BountyTickConversion == 0)
                     return;
                 if (tickGroup.IsEmptyIgnoreFilter)
