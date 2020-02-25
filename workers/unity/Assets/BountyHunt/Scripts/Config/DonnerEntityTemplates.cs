@@ -228,8 +228,11 @@ public class DonnerEntityTemplates
         var boutySpawnerComponent = new BountySpawner.Snapshot();
         var gameStatsComponent = new GameStats.Snapshot();
         gameStatsComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
+
+        gameStatsComponent.LastRoundScores = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.ChatComponent.Snapshot();
         var roundInfoComponent = new Bountyhunt.GameModeManager.Snapshot();
+        var paymentComponent = new PaymentManagerComponent.Snapshot();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
@@ -239,6 +242,8 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(roundInfoComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(paymentComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
