@@ -9,6 +9,7 @@ component GameModeManager {
 
     event RoundInfo new_round;
     event RoundInfo end_round;
+    event CoundDownInfo start_countdown;
 }
 
 
@@ -24,4 +25,9 @@ type TimeInfo {
 
 type GameModeInfo {
     int32 game_mode_id = 1;
+}
+
+type CoundDownInfo {
+    int32 next_round_id = 1;
+    int32 countdown = 2;
 }

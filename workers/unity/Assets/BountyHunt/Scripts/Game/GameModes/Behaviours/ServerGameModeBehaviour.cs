@@ -15,6 +15,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private int gameModeRotationCounter;
     private GameMode currentGameMode;
+    private int nextGameModeId;
     private ServerGameStats ServerGameStats;
 
     private void OnEnable()
@@ -68,7 +69,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
     }
     private void SetNextGameMode()
     {
-        var nextGameModeId = getNextGameModeInt();
+        nextGameModeId = getNextGameModeInt();
         var gameMode = GameModeDictionary.Get(nextGameModeId);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
@@ -98,6 +99,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 yield return new WaitForEndOfFrame();
                 ServerGameStats.ResetScoreboard();
                 //Todo send out starts in event
+                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
                 yield return new WaitForSeconds(5f);
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
