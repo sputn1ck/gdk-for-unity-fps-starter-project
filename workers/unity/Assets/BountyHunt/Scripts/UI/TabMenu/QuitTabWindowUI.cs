@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class QuitTabWindowUI : TabMenuWindowUI
 {
-    public Button payOutAllEarningsButton;
     public Button quitGameButton;
     public Button MainMenuButton;
 
     void Start()
     {
-        payOutAllEarningsButton.onClick.AddListener(payOutAllEarnings);
         quitGameButton.onClick.AddListener(QuitGame);
         MainMenuButton.onClick.AddListener(MainMenu);
     }

@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 4066030188749915097}
   - component: {fileID: 7293247561763641737}
   - component: {fileID: 8241041290916175933}
+  - component: {fileID: 5861386306204065725}
   m_Layer: 5
   m_Name: hitmarker
   m_TagString: Untagged
@@ -156,6 +157,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5861386306204065725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388184501256473129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a06f0a2e5b98674d8b03f97da85739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tint: 0
 --- !u!1 &5325542661937484247
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +181,7 @@ GameObject:
   - component: {fileID: 2608436024193428796}
   - component: {fileID: 8721156142081754579}
   - component: {fileID: 5423789106527303533}
+  - component: {fileID: 4649882776409077150}
   m_Layer: 5
   m_Name: reticle
   m_TagString: Untagged
@@ -231,3 +246,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4649882776409077150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325542661937484247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a06f0a2e5b98674d8b03f97da85739c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tint: 0

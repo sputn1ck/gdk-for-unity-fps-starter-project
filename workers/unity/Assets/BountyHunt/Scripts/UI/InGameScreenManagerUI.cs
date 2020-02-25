@@ -13,6 +13,7 @@ public class InGameScreenManagerUI : MonoBehaviour
     public ScreenUI EscapeScreen;
     public ScreenUI ScoreBoardScreen;
     public ReticleUI Reticle;
+    public HealthBarController Healthbar;
 
     //TODO
     //public GameObject BountyUi;
@@ -122,7 +123,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(false);
             EscapeScreen.Show(true);
             RespawnScreen.Show(false);
-            Reticle.showReticle(!isPlayerAiming);
+            Reticle.showReticle(false);
             Cursor.visible = true;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
@@ -131,7 +132,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             ScoreBoardScreen.Show(false);
             EscapeScreen.Show(false);
             RespawnScreen.Show(true);
-            Reticle.showReticle(!isPlayerAiming);
+            Reticle.showReticle(false);
             Cursor.visible = true;
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }

@@ -13,8 +13,8 @@ public class UIBlackBoardItem : MonoBehaviour
     public TextMeshProUGUI bountyText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI deathsText;
-    public Image backGround;
-    Color defaultBackgroundColor;
+    public Image backGroundImage;
+    public Image highlightImage;
 
     //public TextMeshProUGUI lastSeenText;
     //public TextMeshProUGUI costText;
@@ -57,8 +57,16 @@ public class UIBlackBoardItem : MonoBehaviour
         killsText.text = item.item.Kills.ToString();
         deathsText.text = item.item.Deaths.ToString();
 
-        if (item.highlight) backGround.color = ScoreboardUI.instance.BlackBoardItemColorHighlight;
-        else backGround.color = defaultBackgroundColor;
+        if (item.highlight)
+        {
+            highlightImage.gameObject.SetActive(true);
+            //backGroundImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            highlightImage.gameObject.SetActive(false);
+            //backGroundImage.gameObject.SetActive(true);
+        }
 
         //nameText.text = ClientGameStats.instance.idToName(item.Entity);
         //bountyText.text = item.Bounty.ToString();
@@ -70,11 +78,6 @@ public class UIBlackBoardItem : MonoBehaviour
         //costText.text = "~"+DonnerUtils.CalculateTeleportCost(DonnerPlayerAuthorative.instance.transform.position, new Vector3(item.LastSeen.X, DonnerPlayerAuthorative.instance.transform.position.y, item.LastSeen.Z)).ToString() + " sats";
     }
 
-    public void setDefaultBackgroundColor(Color c)
-    {
-        defaultBackgroundColor = c;
-        backGround.color = defaultBackgroundColor;
-    }
 
 }
 

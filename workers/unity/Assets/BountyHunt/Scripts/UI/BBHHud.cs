@@ -28,7 +28,7 @@ public class BBHHud : MonoBehaviour
 
         inGameScreenManager = BBHUIManager.instance.inGame;
 
-        healthBarController = inGameScreenManager.GetComponentInChildren<HealthBarController>(true);
+        healthBarController = inGameScreenManager.Healthbar;
 
         postProcessObject = GameObject.FindGameObjectWithTag("PostProcessing");
         if (postProcessObject == null)
