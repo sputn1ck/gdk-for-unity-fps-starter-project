@@ -17,7 +17,7 @@ public class TeleportSkill : PlayerSkill
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
         var pos = new Vector3(teleport.x, 75, teleport.y);
-        if (pos.x > 140 || pos.y > 140)
+        if (pos.x > 140 || pos.y > 140 || pos.y < -140 || pos.x < -140)
         {
             return new CastResponse()
             {
