@@ -75,7 +75,7 @@ public class SpawnSubMenuUI : SubMenuUI
     public override void OnSelect()
     {
         base.OnSelect();
-        playerName = PlayerPrefs.GetString("playerName", "");
+        playerName = PlayerPrefs.GetString("playerName", "anon");
         ErrorText.text = "";
     }
 }
