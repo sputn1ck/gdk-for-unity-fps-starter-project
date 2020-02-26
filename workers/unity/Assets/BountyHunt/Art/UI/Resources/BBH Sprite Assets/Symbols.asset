@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-9148905725022810678
+--- !u!21 &-5372655203098548985
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -47,31 +47,75 @@ MonoBehaviour:
   m_Name: Symbols
   m_EditorClassIdentifier: 
   hashCode: 826809141
-  material: {fileID: -9148905725022810678}
+  material: {fileID: -5372655203098548985}
   materialHashCode: 0
   m_Version: 1.1.0
   spriteSheet: {fileID: 2800000, guid: bd83023b664645e4ca9fac237e53e836, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 0
+    m_GlyphIndex: 2
+    m_Scale: 1
+    m_Name: sats
+    m_HashCode: 4093237
+  - m_ElementType: 2
+    m_Unicode: 0
     m_GlyphIndex: 0
-    m_Scale: 1.1
-    m_Name: sat
-    m_HashCode: 124038
+    m_Scale: 1
+    m_Name: kill
+    m_HashCode: 3797794
+  - m_ElementType: 2
+    m_Unicode: 0
+    m_GlyphIndex: 1
+    m_Scale: 1
+    m_Name: death
+    m_HashCode: 115067740
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 256
-      m_Height: 256
-      m_HorizontalBearingX: 19.31
-      m_HorizontalBearingY: 218
-      m_HorizontalAdvance: 289
+      m_Width: 128
+      m_Height: 80
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 408
+      m_Width: 128
+      m_Height: 80
+    m_Scale: 0.8
+    m_AtlasIndex: 0
+    sprite: {fileID: -3739395637988037281, guid: bd83023b664645e4ca9fac237e53e836,
+      type: 3}
+  - m_Index: 1
+    m_Metrics:
+      m_Width: 128
+      m_Height: 80
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 256
+      m_Y: 408
+      m_Width: 128
+      m_Height: 80
+    m_Scale: 0.8
+    m_AtlasIndex: 0
+    sprite: {fileID: -469525390435789673, guid: bd83023b664645e4ca9fac237e53e836,
+      type: 3}
+  - m_Index: 2
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 128
+      m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
-      m_Y: 768
-      m_Width: 256
-      m_Height: 256
-    m_Scale: 1
+      m_Y: 384
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 0.8
     m_AtlasIndex: 0
     sprite: {fileID: 8720604468809159126, guid: bd83023b664645e4ca9fac237e53e836,
       type: 3}

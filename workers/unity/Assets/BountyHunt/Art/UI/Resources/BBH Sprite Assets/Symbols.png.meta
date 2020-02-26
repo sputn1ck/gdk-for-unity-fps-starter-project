@@ -5,6 +5,18 @@ TextureImporter:
   - first:
       213: 8720604468809159126
     second: sat
+  - first:
+      213: 6529409492014541504
+    second: test
+  - first:
+      213: 8720604468809159126
+    second: sats
+  - first:
+      213: -3739395637988037281
+    second: kill
+  - first:
+      213: -469525390435789673
+    second: death
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -89,13 +101,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sat
+      name: sats
       rect:
         serializedVersion: 2
         x: 0
-        y: 768
-        width: 256
-        height: 256
+        y: 384
+        width: 128
+        height: 128
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -103,8 +115,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84efa525dc85a0f4a868ec5907df77e5
+      spriteID: b5bc148443f5e7a47854594d99eb1c73
       internalID: 8720604468809159126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kill
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 408
+        width: 128
+        height: 80
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58e39c01d1bcec846b4c6776992bc601
+      internalID: -3739395637988037281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 408
+        width: 128
+        height: 80
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6cdba272163b434aa6f7647b9800458
+      internalID: -469525390435789673
       vertices: []
       indices: 
       edges: []
