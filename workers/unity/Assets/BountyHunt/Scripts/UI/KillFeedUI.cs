@@ -13,7 +13,8 @@ public class KillFeedUI : MonoBehaviour
     public int maxMessageCount;
 
     [Space(20)]
-    public string testMessage = "Max killed Moritz";
+    public string testKiller = "Max";
+    public string testVictim = "Moritz";
     public bool sendTest = false;
 
 
@@ -65,13 +66,14 @@ public class KillFeedUI : MonoBehaviour
         if (sendTest)
         {
             sendTest = false;
-            NewMessage(testMessage);
+            ClientEvents.instance.onAnyKill.Invoke(new KillEventArgs { killer = testKiller, victim = testVictim });
+            //NewMessage(testKiller);
         }
     }
 
     void OnKill(KillEventArgs args)
     {
-        string msg = args.killer + " killed " + args.victim;
+        string msg = args.killer + " <sprite name=\"kill\" tint=0> " + args.victim;
         NewMessage(msg);
     }
 
