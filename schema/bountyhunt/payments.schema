@@ -1,0 +1,24 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component PaymentManagerComponent {
+    id = 470001;
+    NewWinnerMessage auction_winner = 1;
+
+    event NewWinnerMessage random_invoice_paid;
+    event BountyIncrease bounty_increase;
+}
+
+
+
+type NewWinnerMessage{
+    string text = 1;
+    int64 sats = 2;
+}
+
+type BountyIncrease {
+    string text = 1;
+    int64 receiver_id = 2;
+    int64 sats = 3;
+}

@@ -17,9 +17,14 @@ public class BountySpawnerServer : MonoBehaviour
     [Require] BountySpawnerCommandReceiver BountySpawnerCommandReceiver;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] GameStatsReader GameStatsReader;
+    [Require] PaymentManagerComponentWriter PaymentManagerComponentWriter;
 
     public int spawnAmount;
     public bool spawnTrigger;
+    private bool spawnAtRandom;
+    private long spawnAtRandomAmount;
+    private bool startAuctionTrigger;
+    private long startAuctionAmount;
     private CancellationTokenSource cancellationToken;
     // Start is called before the first frame update
     void OnEnable()
@@ -39,16 +44,41 @@ public class BountySpawnerServer : MonoBehaviour
             return;
         }
         HunterComponentCommandSender.SendAddBountyCommand(player.Key, new AddBountyRequest(bounty.amount, BountyReason.DONATION));
+        PaymentManagerComponentWriter.SendBountyIncreaseEvent(new BountyIncrease(bounty.message, player.Key.Id, bounty.amount));
+    }
+    void Update()
+    {
+        if (spawnTrigger)
+        {
+            spawnTrigger = false;
+            SpawnTick(spawnAmount);
+        }
+        if (spawnAtRandom)
+        {
+            spawnAtRandom = false;
+            SpawnPickupAtRandomPosition(spawnAtRandomAmount);
+            spawnAtRandomAmount = 0;
+        }
+        if(startAuctionTrigger)
+        {
+            startAuctionTrigger = false;
+            StartCoroutine(AuctionSpawning(startAuctionAmount, FlagManager.instance.GetSpawnsPerAuction(), FlagManager.instance.GetAuctionDuration()));
+            startAuctionAmount = 0;
+        }
     }
 
     private void OnRandomInvoicePaid(string memo, long amount)
     {
-        SpawnPickupAtRandomPosition(amount);
+        spawnAtRandomAmount = amount;
+        spawnAtRandom = true;
+        PaymentManagerComponentWriter.SendRandomInvoicePaidEvent(new NewWinnerMessage(memo, amount));
     }
 
     private void OnAuctionPaid(AuctionInvoice auction)
     {
-        StartCoroutine(AuctionSpawning(auction.Amount, FlagManager.instance.GetSpawnsPerAuction(), FlagManager.instance.GetAuctionDuration()));
+        startAuctionAmount = auction.Amount;
+        startAuctionTrigger = true;
+        PaymentManagerComponentWriter.SendUpdate(new PaymentManagerComponent.Update() { AuctionWinner = new NewWinnerMessage(auction.WinningMessage, auction.Amount) });
     }
     private void OnSpawnBountyPickupRequestReceived(BountySpawner.SpawnBountyPickup.ReceivedRequest obj)
     {
@@ -67,14 +97,7 @@ public class BountySpawnerServer : MonoBehaviour
         StartCoroutine(SubsidyEnumerator());
     }
     // Update is called once per frame
-    void Update()
-    {
-        if (spawnTrigger)
-        {
-            spawnTrigger = false;
-            SpawnTick(spawnAmount);
-        }
-    }
+
     void SpawnPickup(Vector3 position, long sats)
     {
         var bountypickup = DonnerEntityTemplates.BountyPickup(position, sats);

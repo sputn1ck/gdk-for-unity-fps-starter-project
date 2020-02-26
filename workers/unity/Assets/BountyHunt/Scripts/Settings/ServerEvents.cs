@@ -7,6 +7,8 @@ public class ServerEvents : MonoBehaviour
 {
 
     public static ServerEvents instance;
+
+    public InvoicePaidEvent OnInvoicePaid = new InvoicePaidEvent();
     public AuctionInvoicePaidEvent OnAuctionInvoicePaid = new AuctionInvoicePaidEvent();
     public BountyInvoicePaidEvent OnBountyInvoicePaid = new BountyInvoicePaidEvent();
     public RandomInvoicePaidEvent OnRandomInvoicePaid = new RandomInvoicePaidEvent();
@@ -22,4 +24,5 @@ public class BountyInvoicePaidEvent : UnityEvent<BountyInvoice> { };
 
 public class RandomInvoicePaidEvent : UnityEvent<string, long> { };
 
+public class InvoicePaidEvent : UnityEvent<InvoiceSettledEventArgs> { };
 

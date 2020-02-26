@@ -18,15 +18,17 @@ public class GamePaymentManager : MonoBehaviour
         }
 
         useLnd = true;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        lnServer.lnd.AddCallback(InvoiceSettled);
+        //lnServer.lnd.AddCallback(InvoiceSettled);
+        ServerEvents.instance.OnInvoicePaid.AddListener(InvoiceSettled);
     }
 
-    void InvoiceSettled(object sender, InvoiceSettledEventArgs e)
+    void InvoiceSettled(InvoiceSettledEventArgs e)
     {
         PrometheusManager.TotalSatsAdded.Inc(e.Invoice.AmtPaidSat);
         if (e.Invoice.IsKeysend)

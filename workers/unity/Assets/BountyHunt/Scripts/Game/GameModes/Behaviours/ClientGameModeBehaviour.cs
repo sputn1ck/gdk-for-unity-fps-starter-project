@@ -1,5 +1,6 @@
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,8 @@ public class ClientGameModeBehaviour : MonoBehaviour
     private void OnEnable()
     {
         GameModeManagerReader.OnStartCountdownEvent += OnStartCountdown;
-        GameModeManagerReader.OnCurrentRoundUpdate += GameModeManagerReader_OnCurrentRoundUpdate;
-        // 
     }
 
-    private void GameModeManagerReader_OnCurrentRoundUpdate(RoundInfo obj)
-    {
-        Debug.Log("midgame update");
-    }
 
     private void OnStartCountdown(CoundDownInfo obj)
     {

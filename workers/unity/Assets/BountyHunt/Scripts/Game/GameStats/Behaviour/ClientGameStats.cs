@@ -29,8 +29,8 @@ public class ClientGameStats : MonoBehaviour
 
     private void OnKillEvent(KillInfo obj)
     {
-        var killer = idToName(obj.Killer);
-        var victim = idToName(obj.Victim);
+        var killer = IdToName(obj.Killer);
+        var victim = IdToName(obj.Victim);
         // TODO implement UI;
         Debug.Log(killer + " killed " + victim);
     }
@@ -64,7 +64,7 @@ public class ClientGameStats : MonoBehaviour
         
     }
 
-    public string idToName(EntityId id)
+    public string IdToName(EntityId id)
     {
         if (GameStatsReader == null)
         {

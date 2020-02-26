@@ -225,11 +225,9 @@ public class LndClient : IClientLnd
                     {
                         var e = new InvoiceSettledEventArgs();
                         e.Invoice = invoice;
-                        if (OnInvoiceSettled != null)
-                        {
-                            OnInvoiceSettled(this, e);
-                        }
 
+                        //OnInvoiceSettled?.Invoke(this, e);
+                        ServerEvents.instance.OnInvoicePaid.Invoke(e);
                     }
                 }
             }

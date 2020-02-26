@@ -8,11 +8,16 @@ using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using System.Threading;
 using System.Threading.Tasks;
-
-public class AuctionBehaviour : MonoBehaviour
+using Bountyhunt;
+public class ServerPaymentManager : MonoBehaviour
 {
+    [Require] PaymentManagerComponentWriter PaymentManagerComponentWriter;
 
 
+    private void OnEnable()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +45,7 @@ public class AuctionBehaviour : MonoBehaviour
         var res = await ServerServiceConnections.instance.AuctionController.StartAuction(duration);
         if(res != null)
         {
-            GetComponent<ServerGameChat>().SendAuctionStartedChatMessage(res.Auction.WinningEntry.Description);
+            GetComponent<ServerGameChat>().SendAuctionStartedChatMessage("new auction started");
         }
 
         Debug.Log("auction started " + res.Auction.Id);
