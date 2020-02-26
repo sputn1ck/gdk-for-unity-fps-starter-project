@@ -17,6 +17,8 @@ public class ServerGameStats : MonoBehaviour
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
     }
 
+
+
     private void OnRemoveNameRequestReceived(GameStats.RemoveName.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)

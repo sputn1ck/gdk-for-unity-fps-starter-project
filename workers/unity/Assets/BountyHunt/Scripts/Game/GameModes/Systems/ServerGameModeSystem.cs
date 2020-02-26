@@ -9,7 +9,7 @@ using Fps.Respawning;
 using Fps.SchemaExtensions;
 using Improbable;
 
-[UpdateAfter(typeof(BountyTickSystem))][UpdateBefore(typeof(BountyConversionSystem))]
+[UpdateBefore(typeof(BountyTickSystem))][UpdateBefore(typeof(BountyConversionSystem))]
 public class ServerGameModeSystem : ComponentSystem
 {
     private WorkerSystem workerSystem;
@@ -62,14 +62,6 @@ public class ServerGameModeSystem : ComponentSystem
         Entities.With(playerBountyGroup).ForEach((Entity entity) =>
         {
             entityManager.AddComponent(entity, new ResetRoundEarnings().GetType());
-            if (gameMode.PlayerSettings.ClearBountyOnEnd)
-            {
-                var tickComponent = new TickComponent()
-                {
-                    TickAmount = 1
-                };
-                entityManager.AddComponentData(entity, tickComponent);
-            }
         });
     }
 

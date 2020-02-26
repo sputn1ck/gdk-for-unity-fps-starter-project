@@ -72,10 +72,13 @@ public class BountyKillSystem : ComponentSystem
                 Y = (float)posSpatial.Coords.Y,
                 Z = (float)posSpatial.Coords.Z,
             };
-            if(satsToDrop > 0)
+            if (satsToDrop > 0)
+            {
                 commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = satsToDrop, Position = pos } });
+            }
 
             SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
+            
             PrometheusManager.TotalKills.Inc(1);
         }
     }

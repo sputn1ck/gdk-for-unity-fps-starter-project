@@ -52,7 +52,7 @@ public class ServerScoreboardSystem : ComponentSystem
                     newPairs.Add(updates[i].EntityId, new PlayerItem());
             }
             var newMap = gamestats.PlayerMap;
-            double activeBounty = 0;
+            long activeBounty = 0;
             var activeClasses = new int[]
             {
                 0,0,0
@@ -82,7 +82,7 @@ public class ServerScoreboardSystem : ComponentSystem
             }
 
             gamestats.PlayerMap = newMap;
-
+            gamestats.BountyOnPlayers = activeBounty;
             PrometheusManager.ActivePlayers.Set(newMap.Count);
             PrometheusManager.ActiveBounty.Set(activeBounty);
             PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);

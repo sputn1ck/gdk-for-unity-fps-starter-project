@@ -19,7 +19,19 @@ public class ClientGameStats : MonoBehaviour
     {
         GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
+        GameStatsReader.OnBountyInCubesUpdate += OnBountyInCubesUpdate;
+        GameStatsReader.OnBountyOnPlayersUpdate += OnBountyInPlayersUpdate;
         sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
+    }
+
+    private void OnBountyInPlayersUpdate(long obj)
+    {
+        Debug.LogFormat("new bounty in Players: {0}", obj);
+    }
+
+    private void OnBountyInCubesUpdate(long obj)
+    {
+        Debug.LogFormat("new bounty in cubes: {0}", obj);
     }
 
     private void OnPlayerMapUpdate(Dictionary<EntityId, PlayerItem> obj)

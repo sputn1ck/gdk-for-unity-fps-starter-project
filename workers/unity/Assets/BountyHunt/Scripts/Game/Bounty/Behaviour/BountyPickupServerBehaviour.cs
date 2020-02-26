@@ -16,6 +16,7 @@ namespace Fps
         [Require] private HunterComponentCommandSender hunterComponentCommandSender;
 
         [Require] private WorldCommandSender commandSender;
+        [Require] private GameStatsCommandSender GameStatsCommandSender;
         [Require] private EntityId entityId;
 
         private Coroutine respawnCoroutine;
@@ -87,6 +88,7 @@ namespace Fps
                 Reason = BountyReason.PICKUP,
                 Amount = bountyPickupWriter.Data.BountyValue,
             });
+            GameStatsCommandSender.SendUpdateSatsInCubesCommand(new EntityId(2), new UpdateSatsInCubesRequest { Amount = -1*bountyPickupWriter.Data.BountyValue });
             PrometheusManager.ActiveSats.Dec(bountyPickupWriter.Data.BountyValue);
             PrometheusManager.ActiveCubes.Dec(1);
             // Toggle health pack to its "consumed" state

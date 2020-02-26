@@ -7,6 +7,7 @@ component GameModeManager {
     RoundInfo current_round = 1;
     RoundInfo next_round = 2;
 
+
     event RoundInfo new_round;
     event RoundInfo end_round;
     event CoundDownInfo start_countdown;
