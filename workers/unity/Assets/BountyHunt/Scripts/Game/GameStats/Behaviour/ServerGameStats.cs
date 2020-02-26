@@ -66,8 +66,8 @@ public class ServerGameStats : MonoBehaviour
 
         GameStatsWriter.SendUpdate(new GameStats.Update()
         {
-            LastRoundScores = newMap,
-            PlayerMap = new Dictionary<EntityId, PlayerItem>()
-    });
+            LastRoundScores = GameStatsWriter.Data.PlayerMap,
+            PlayerMap = newMap
+        });
     }
 }
