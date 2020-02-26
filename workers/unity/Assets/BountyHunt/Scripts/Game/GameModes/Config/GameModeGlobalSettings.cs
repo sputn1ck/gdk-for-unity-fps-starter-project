@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine;
 public struct GameModeGlobalSettings
 {
     public long SecondDuration;
-
+    public bool ClearPickups;
     public long NanoSeconds
     {
         get

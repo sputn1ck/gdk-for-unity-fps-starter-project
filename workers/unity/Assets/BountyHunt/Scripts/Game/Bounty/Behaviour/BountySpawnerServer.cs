@@ -46,9 +46,10 @@ public class BountySpawnerServer : MonoBehaviour
     }
     IEnumerator StartSpawning(StartSpawningRequest request)
     {
+        var totalBounty = request.TotalBounty + GameStatsWriter.Data.CarryoverSats;
         var totalTicks = ((int)(request.TotalDuration / request.TimeBetweenTicks)) - 1;
-        var remainingSats = request.TotalBounty;
-        var tickInfo = GetSatDistribution(totalTicks, request.TotalBounty, request.Distribution);
+        var remainingSats = totalBounty;
+        var tickInfo = GetSatDistribution(totalTicks, totalBounty, request.Distribution);
         for (int i = 0; i < tickInfo.Length; i++)
         {
             SpawnTick(tickInfo[i], request.MinSpawns, request.MaxSpawns);

@@ -8,6 +8,7 @@ using Fps;
 using Fps.Respawning;
 using Fps.SchemaExtensions;
 using Improbable;
+using Improbable.Gdk.Core.Commands;
 
 [UpdateBefore(typeof(BountyTickSystem))][UpdateBefore(typeof(BountyConversionSystem))]
 public class ServerGameModeSystem : ComponentSystem
@@ -15,10 +16,11 @@ public class ServerGameModeSystem : ComponentSystem
     private WorkerSystem workerSystem;
     private CommandSystem commandSystem;
     private ComponentUpdateSystem componentUpdateSystem;
+    
 
     private EntityQuery playerBountyGroup;
     private EntityQuery playerTeleportGroup;
-    private EntityQuery gameStatsGroup;
+    private EntityQuery bountyCubeGroup;
     private EntityManager entityManager;
 
     protected override void OnCreate()
@@ -40,10 +42,9 @@ public class ServerGameModeSystem : ComponentSystem
             ComponentType.ReadWrite<HunterComponent.Component>(),
             ComponentType.ReadOnly<SpatialEntityId>()
         );
-        gameStatsGroup = GetEntityQuery(
-            ComponentType.ReadWrite<GameStats.Component>(),
-            ComponentType.ReadWrite<GameModeManager.Component>(),
-            ComponentType.ReadOnly<SpatialEntityId>()
+        bountyCubeGroup = GetEntityQuery(
+            ComponentType.ReadOnly<SpatialEntityId>(),
+            ComponentType.ReadOnly<BountyPickup.Component>()
         );
     }
 
@@ -59,10 +60,10 @@ public class ServerGameModeSystem : ComponentSystem
         if (events.Count < 1)
             return;
         var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
-        Entities.With(playerBountyGroup).ForEach((Entity entity) =>
+        if (gameMode.GlobalSettings.ClearPickups)
         {
-            entityManager.AddComponent(entity, new ResetRoundEarnings().GetType());
-        });
+            ClearPickups();
+        }
     }
 
     private void StartGameModeStuff()
@@ -97,6 +98,24 @@ public class ServerGameModeSystem : ComponentSystem
             }); ;
         });
     }
+    void ClearPickups()
+    {
+        long carryOverSats = 0;
+        Entities.With(bountyCubeGroup).ForEach((
+            ref SpatialEntityId entityId,
+            ref BountyPickup.Component bountyPickup) =>
+        {
+            commandSystem.SendCommand(new WorldCommands.DeleteEntity.Request{
+                EntityId = entityId.EntityId
+            });
+            carryOverSats += bountyPickup.BountyValue;
+        });
+
+        componentUpdateSystem.SendUpdate(new GameStats.Update {
+            BountyInCubes = 0,
+            CarryoverSats = carryOverSats
+        }, new EntityId(2));
+    }
 
     Vector3 getRandomPosition()
     {
@@ -107,7 +126,4 @@ public class ServerGameModeSystem : ComponentSystem
 
 }
 
-
-[RemoveAtEndOfTick]
-public struct ResetRoundEarnings : IComponentData{}
 
