@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -141,6 +142,11 @@ public class DummyLnd : IClientLnd
     {
         throw new NotImplementedException();
     }
+
+    public IEnumerator HandleInvoices(CancellationTokenSource ct)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class LndClient : IClientLnd
@@ -163,6 +169,7 @@ public class LndClient : IClientLnd
     public CancellationTokenSource ct;
     private Thread listenThread;
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
+    private ConcurrentQueue<InvoiceSettledEventArgs> invoiceSettledQueue;
 
     public LndClient()
     {
@@ -180,7 +187,7 @@ public class LndClient : IClientLnd
         rpcChannel = new Grpc.Core.Channel(lnconf.host, lnconf.rpcport, channelCreds);
         lightningClient = new Lightning.LightningClient(rpcChannel);
         pubkey = (await GetInfo()).IdentityPubkey;
-
+        invoiceSettledQueue = new ConcurrentQueue<InvoiceSettledEventArgs>();
         Debug.Log("my pubkey: " + pubkey);
 
         if (listen)
@@ -191,6 +198,17 @@ public class LndClient : IClientLnd
         Debug.Log("finished setup");
     }
 
+    public IEnumerator HandleInvoices(CancellationTokenSource ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            if(invoiceSettledQueue.TryDequeue(out InvoiceSettledEventArgs e))
+            {
+                OnInvoiceSettled?.Invoke(this, e);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
     public void StartListening()
     {
         //await ListenInvoices();
@@ -227,7 +245,8 @@ public class LndClient : IClientLnd
                         e.Invoice = invoice;
 
                         //OnInvoiceSettled?.Invoke(this, e);
-                        ServerEvents.instance.OnInvoicePaid.Invoke(e);
+                        //ServerEvents.instance.OnInvoicePaid.Invoke(e);
+                        invoiceSettledQueue.Enqueue(e);
                     }
                 }
             }

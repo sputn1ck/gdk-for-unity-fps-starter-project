@@ -58,6 +58,7 @@ public class ServerServiceConnections : MonoBehaviour
         }
 
         await lnd.Setup(confName, true, false);
+        StartCoroutine(lnd.HandleInvoices(ct));
     }
 
     public void SetupBackendServices()
