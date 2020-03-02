@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7405320585406772464}
   - component: {fileID: 162102102990674526}
+  - component: {fileID: 2444824342079934273}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -428,6 +429,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2674942633320556665}
   m_CullTransparentMesh: 0
+--- !u!114 &2444824342079934273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674942633320556665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f734857d857b29b44b2e800ea3fa885f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeText: {fileID: 7722890896252295068}
+  icon: {fileID: 1544302098937866829}
+  defaultTint: 0
+  hurryTint: 6
+  hurryDuration: 5
+  testTimeRemaining: 20
+  testGameMode: {fileID: 11400000, guid: d546ae006980b4b56ae18def0c1dcb39, type: 2}
+  test: 0
 --- !u!1 &3336150394194732705
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: -9148905725022810678, guid: d60359441c3bc724c9062302e523f317,
+  m_Material: {fileID: -5372655203098548985, guid: d60359441c3bc724c9062302e523f317,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -756,10 +777,10 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 77771fdaa29148543942f59c2baf20e9, type: 2}
   m_spriteAsset: {fileID: 11400000, guid: d60359441c3bc724c9062302e523f317, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: -9148905725022810678, guid: d60359441c3bc724c9062302e523f317,
+  m_sharedMaterial: {fileID: -5372655203098548985, guid: d60359441c3bc724c9062302e523f317,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -777,7 +798,6 @@ GameObject:
   - component: {fileID: 3553464771441806622}
   - component: {fileID: 6529812863081808250}
   - component: {fileID: 7722890896252295068}
-  - component: {fileID: 240686279569280540}
   m_Layer: 5
   m_Name: time
   m_TagString: Untagged
@@ -925,19 +945,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &240686279569280540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5862712597412050263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a06f0a2e5b98674d8b03f97da85739c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tint: 0
 --- !u!1 &7187941132133659938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageText: {fileID: 1382965833311204574}
   satsText: {fileID: 2333185882820072040}
+  gamepotText: {fileID: 0}
 --- !u!1 &7631096103853261721
 GameObject:
   m_ObjectHideFlags: 0

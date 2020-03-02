@@ -33,6 +33,8 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public PaymentSuccessEvent onPaymentSucces = new PaymentSuccessEvent();
     [HideInInspector] public PaymentFailureEvent onPaymentFailure = new PaymentFailureEvent();
     [HideInInspector] public KillEvent onAnyKill = new KillEvent();
+    [HideInInspector] public RoundUpdateEvent onRoundUpdate = new RoundUpdateEvent();
+
 
     private void Awake()
     {

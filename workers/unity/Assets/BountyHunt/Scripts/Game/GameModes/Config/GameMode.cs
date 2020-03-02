@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class GameMode : ScriptableObject
 {
     public string Name;
+    public Sprite Icon;
     public GameModeGlobalSettings GlobalSettings;
     public GameModePlayerSettings PlayerSettings;
 

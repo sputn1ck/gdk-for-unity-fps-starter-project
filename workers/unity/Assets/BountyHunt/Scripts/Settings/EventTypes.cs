@@ -27,6 +27,8 @@ public class PaymentFailureEvent : UnityEvent<PaymentFailureArgs> { }
 
 public class KillEvent : UnityEvent<KillEventArgs> { }
 
+public class RoundUpdateEvent : UnityEvent<RoundUpdateEventArgs> { }
+
 [Serializable]
 public struct BountyUpdateEventArgs
 {
@@ -69,4 +71,12 @@ public struct KillEventArgs
     public string victim;
 }
 
+public struct RoundUpdateEventArgs
+{
+    /// <summary>
+    /// rounds remainig time in seconds
+    /// </summary>
+    public float remainingTime;
+    public GameMode gameMode;
+}
 
