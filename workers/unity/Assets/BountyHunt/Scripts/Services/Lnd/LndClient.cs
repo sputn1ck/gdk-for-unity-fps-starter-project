@@ -204,11 +204,12 @@ public class LndClient : IClientLnd
         {
             if(invoiceSettledQueue.TryDequeue(out InvoiceSettledEventArgs e))
             {
-                OnInvoiceSettled?.Invoke(this, e);
+                ServerEvents.instance.OnInvoicePaid.Invoke(e);
             }
             yield return new WaitForEndOfFrame();
         }
     }
+
     public void StartListening()
     {
         //await ListenInvoices();
@@ -556,3 +557,23 @@ public class LndClient : IClientLnd
         return res.TotalBalance;
     }
 }
+
+/* concurrent channel test
+public class Channel<T>
+{
+
+    private readonly ConcurrentQueue<T> _queue = new ConcurrentQueue<T>();
+    private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(0);
+    public void Write(T value)
+    {
+        _queue.Enqueue(value); 
+        _semaphore.Release(); 
+    }
+
+    public async Task<T> ReadAsync(CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false); 
+        bool gotOne = _queue.TryDequeue(out T item); 
+        return item;
+    }
+}*/

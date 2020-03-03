@@ -73,12 +73,16 @@ public class GamePaymentManager : MonoBehaviour
         if (bounty != null && bounty.pubkey != "")
         {
             ServerEvents.instance.OnBountyInvoicePaid.Invoke(bounty);
+
             PrometheusManager.TotalBountyPaidAmount.Inc();
             PrometheusManager.TotalBountyPaidSats.Inc(e.Invoice.AmtPaidSat);
             return;
         }
 
-        ServerEvents.instance.OnRandomInvoicePaid.Invoke(e.Invoice.Memo, e.Invoice.AmtPaidSat);
+        ServerEvents.instance.OnRandomInvoicePaid.Invoke(new RandomInvoice {
+            amount = e.Invoice.AmtPaidSat,
+            message = e.Invoice.Memo
+        });
 
         PrometheusManager.TotalChatPaidAmount.Inc();
         PrometheusManager.TotalChatPaidSats.Inc(e.Invoice.AmtPaidSat);

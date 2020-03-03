@@ -16,7 +16,7 @@ public class ServerPaymentManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        ServerEvents.instance.OnAuctionInvoicePaid.AddListener(NewBid);
     }
     // Start is called before the first frame update
     void Start()
@@ -51,4 +51,15 @@ public class ServerPaymentManager : MonoBehaviour
         Debug.Log("auction started " + res.Auction.Id);
     }
 
+    private void NewBid(AuctionInvoice invoice)
+    {
+        PaymentManagerComponentWriter.SendUpdate(new PaymentManagerComponent.Update { AuctionWinner = new Option<NewWinnerMessage>(new NewWinnerMessage(invoice.WinningMessage, invoice.Amount)) });
+            
+        
+    }
+    private void OnDisable()
+    {
+
+        ServerEvents.instance.OnAuctionInvoicePaid.RemoveListener(NewBid);
+    }
 }

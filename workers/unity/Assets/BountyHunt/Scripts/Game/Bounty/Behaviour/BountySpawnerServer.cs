@@ -42,11 +42,15 @@ public class BountySpawnerServer : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
+        GameStatsWriter.SendUpdate(new GameStats.Update
+        {
+            RemainingPot = obj.Payload.TotalBounty,
+        });
         StartCoroutine(StartSpawning(obj.Payload));
     }
     IEnumerator StartSpawning(StartSpawningRequest request)
     {
-        var totalBounty = request.TotalBounty + GameStatsWriter.Data.CarryoverSats;
+        var totalBounty = request.TotalBounty ;
         var totalTicks = ((int)(request.TotalDuration / request.TimeBetweenTicks)) - 1;
         var remainingSats = totalBounty;
         var tickInfo = GetSatDistribution(totalTicks, totalBounty, request.Distribution);
@@ -55,7 +59,8 @@ public class BountySpawnerServer : MonoBehaviour
             SpawnTick(tickInfo[i], request.MinSpawns, request.MaxSpawns);
             remainingSats -= tickInfo[i];
             PrometheusManager.TotalSubsidy.Inc(tickInfo[i]);
-            GameStatsWriter.SendUpdate(new GameStats.Update() { BountyInCubes = GameStatsWriter.Data.BountyInCubes+tickInfo[i] });
+            var data = GameStatsWriter.Data;
+            GameStatsWriter.SendUpdate(new GameStats.Update() { BountyInCubes = data.BountyInCubes+tickInfo[i], RemainingPot = data.RemainingPot - tickInfo[i] });
             yield return new WaitForSeconds(request.TimeBetweenTicks);
         }
         yield return null;

@@ -8,6 +8,7 @@ using Improbable.Gdk.Core;
 public class ClientGameStats : MonoBehaviour
 {
     [Require] GameStatsReader GameStatsReader;
+    
     public static ClientGameStats instance;
 
     private void Awake()
@@ -21,6 +22,15 @@ public class ClientGameStats : MonoBehaviour
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
         GameStatsReader.OnBountyInCubesUpdate += OnBountyInCubesUpdate;
         GameStatsReader.OnBountyOnPlayersUpdate += OnBountyInPlayersUpdate;
+        GameStatsReader.OnCarryoverSatsUpdate += (long obj) =>
+        {
+            Debug.LogFormat("Carryover Sats {0}", obj);
+        };
+        GameStatsReader.OnRemainingPotUpdate += (long pot) =>
+        {
+            Debug.LogFormat("Remaining Poty {0}", pot);
+        };
+        
         sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
     }
 

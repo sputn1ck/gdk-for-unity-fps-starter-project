@@ -14,6 +14,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
     public static ServerGameModeBehaviour instance;
     [Require] public GameModeManagerWriter GameModeManagerWriter;
     [Require] public BountySpawnerCommandSender BountySpawnerCommandSender;
+    [Require] public GameStatsWriter GameStatsWriter;
 
     private int gameModeRotationCounter;
     public GameMode currentGameMode;

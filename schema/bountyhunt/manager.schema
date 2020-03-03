@@ -9,6 +9,7 @@ component GameStats{
     int64 bounty_in_cubes = 3;
     int64 bounty_on_players = 4;
     int64 carryover_sats = 5;
+    int64 remaining_pot = 6;
     event KillInfo gained_kill_event;
     event bountyhunt.Empty update_scoreboard_event;
     command bountyhunt.Empty set_name(SetNameRequest);
