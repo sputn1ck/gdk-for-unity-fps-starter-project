@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,12 @@ public static class Utility
         t.localScale = Vector3.one;
         t.localRotation = Quaternion.identity;
     }
+
+    public static long Abs(long input)
+    {
+        if (input >= 0) return input;
+        else return -input;
+    }  
 
     public static void Log(string message, Color color)
     {
@@ -54,4 +61,42 @@ public static class Utility
             hex.AppendFormat("{0:x2}", b);
         return hex.ToString();
     }
+
+    public static string LongToShortString (long number)
+    {
+        long nabs = Abs(number);
+
+        if (nabs >= 10000000000)
+        {
+            float n = number / 1000000000f;
+            return String.Format("{0:0G}",n);
+        }
+        if (nabs >= 1000000000)
+        {
+            float n = number / 1000000000f;
+            return String.Format("{0:0.0G}", n);
+        }
+        if (nabs >= 10000000)
+        {
+            float n = number / 1000000f;
+            return String.Format("{0:0M}", n);
+        }
+        if (nabs >= 1000000)
+        {
+            float n = number / 1000000f;
+            return String.Format("{0:0.0M}", n);
+        }
+        if (nabs >= 10000)
+        {
+            float n = number / 1000f;
+            return String.Format("{0:0K}", n);
+        }
+        if (nabs >= 1000)
+        {
+            float n = number / 1000f;
+            return String.Format("{0:0.0K}", n);
+        }
+        return number.ToString();
+    }
+
 }

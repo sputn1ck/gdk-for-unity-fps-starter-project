@@ -35,6 +35,9 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public KillEvent onAnyKill = new KillEvent();
     [HideInInspector] public RoundUpdateEvent onRoundUpdate = new RoundUpdateEvent();
 
+    [HideInInspector] public LongEvent onGlobalBountyUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onGlobalLootUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onGlobalPotUpdate = new LongEvent();
 
     private void Awake()
     {
