@@ -22,11 +22,11 @@ public class GamePotUI : MonoBehaviour
 
     public void UpdateField(TextMeshProUGUI textField, long sats)
     {
-        string text = Utility.LongToShortString(sats);
+        string text = Utility.LongToShortString(sats)+ "<sprite name=\"sats\" color=#FFED92>";
         textField.text = text; 
     }
 
-    /*
+    
     public long testnumber;
     public bool test;
 
@@ -40,6 +40,6 @@ public class GamePotUI : MonoBehaviour
             ClientEvents.instance.onGlobalPotUpdate.Invoke(testnumber*3);
         }
     }
-    */
+    
 
 }
