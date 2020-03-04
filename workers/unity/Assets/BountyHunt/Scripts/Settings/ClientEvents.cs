@@ -17,6 +17,10 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
+    [HideInInspector] public LongEvent onBountyInPlayersUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onBountyinCubesUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onCarryoverSatsUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onRemainingPotUpdate = new LongEvent();
 
     [HideInInspector] public UnityEvent onServicesSetup = new UnityEvent();
 
