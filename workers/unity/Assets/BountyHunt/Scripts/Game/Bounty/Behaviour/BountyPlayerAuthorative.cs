@@ -15,6 +15,8 @@ public class BountyPlayerAuthorative : MonoBehaviour
     [Require] public HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId entityId;
 
+    public static BountyPlayerAuthorative instance;
+
     private long lastBounty;
     private long lastEarnings;
     private long lastBalance;
@@ -22,7 +24,10 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private long lastEarningsThisSession;
 
     private CancellationTokenSource ct;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        instance = this;
+    }
     void OnEnable()
     {
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;

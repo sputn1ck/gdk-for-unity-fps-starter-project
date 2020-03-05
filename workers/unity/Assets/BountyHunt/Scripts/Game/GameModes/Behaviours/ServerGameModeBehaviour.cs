@@ -44,7 +44,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
             }
         };
         currentGameMode = gameMode;
-        currentGameMode.OnGameModeStart(this);
+        currentGameMode.ServerOnGameModeStart(this);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
@@ -55,7 +55,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private void EndGameMode()
     {
-        currentGameMode.OnGameModeEnd(this);
+        currentGameMode.ServerOnGameModeEnd(this);
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         var RoundInfo = new RoundInfo()
         {

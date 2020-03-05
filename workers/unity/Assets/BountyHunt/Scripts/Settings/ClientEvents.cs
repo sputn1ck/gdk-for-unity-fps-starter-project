@@ -45,6 +45,16 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public LongEvent onCarryoverSatsUpdate = new LongEvent();
     [HideInInspector] public LongEvent onRemainingPotUpdate = new LongEvent();
 
+    [HideInInspector] public IntEvent onPlayerLifeTimeKillsUpdate = new IntEvent();
+
+    [HideInInspector] public IntEvent onPlayerLifeTimeDeathsUpdate = new IntEvent();
+    [HideInInspector] public LongEvent onPlayerLifeTimeEarningsUpdate = new LongEvent();
+
+    [HideInInspector] public IntEvent onAllTimeKillsUpdate = new IntEvent();
+    [HideInInspector] public IntEvent onAllTimeDeathsUpdate = new IntEvent();
+    [HideInInspector] public LongEvent onAllTimeEarningsUpdate = new LongEvent();
+
+
     private void Awake()
     {
         if (instance == null) instance = this;

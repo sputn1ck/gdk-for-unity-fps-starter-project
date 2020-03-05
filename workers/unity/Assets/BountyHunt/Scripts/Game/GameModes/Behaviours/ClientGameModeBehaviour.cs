@@ -31,22 +31,25 @@ public class ClientGameModeBehaviour : MonoBehaviour
 
     private void OnStartCountdown(CoundDownInfo obj)
     {
-        var gameMode = GameModeDictionary.Get(obj.NextRoundId);
-        StartCoroutine(CountdownEnumerator(gameMode.Name, obj.Countdown));
+        
+        var nextGameMode = GameModeDictionary.Get(obj.NextRoundId);
+        var currentGameMode = GameModeDictionary.Get(GameModeManagerReader.Data.CurrentRound.GameModeInfo.GameModeId);
+        StartCoroutine(CountdownEnumerator(nextGameMode, obj.Countdown, currentGameMode));
     }
 
-    IEnumerator CountdownEnumerator(string gameModeName, int duration)
+    IEnumerator CountdownEnumerator(GameMode nextGameMode, int duration, GameMode currentGameMode)
     {
+        currentGameMode.ClientOnGameModeEnd(this);
         var currentSecond = duration;
         while(currentSecond > 0)
         {
-            ClientEvents.instance.onAnnouncement.Invoke(gameModeName + " starting in " + currentSecond, ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+            ClientEvents.instance.onAnnouncement.Invoke(nextGameMode.Name + " starting in " + currentSecond, ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
             yield return new WaitForSeconds(1f);
             currentSecond -= 1;
         }
         yield return new WaitForSeconds(0.1f);
-        ClientEvents.instance.onAnnouncement.Invoke(gameModeName + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
-
+        ClientEvents.instance.onAnnouncement.Invoke(nextGameMode.Name + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+        nextGameMode.ClientOnGameModeStart(this);
     }
 
     private double getRoundSeconds()

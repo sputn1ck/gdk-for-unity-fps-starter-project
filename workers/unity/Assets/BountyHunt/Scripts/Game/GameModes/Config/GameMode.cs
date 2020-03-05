@@ -10,6 +10,9 @@ public abstract class GameMode : ScriptableObject
     public GameModeGlobalSettings GlobalSettings;
     public GameModePlayerSettings PlayerSettings;
 
-    public abstract void OnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour);
-    public abstract void OnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour);
+    public abstract void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour);
+    public abstract void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour);
+
+    public abstract void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour);
+    public abstract void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour);
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class LobbyGameMode : GameMode
 {
     private ServerGameModeBehaviour _serverGameModeBehaviour;
-    public override async void OnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override async void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
     {
         Debug.Log("start lobby");
         _serverGameModeBehaviour = serverGameModeBehaviour;
@@ -16,7 +16,7 @@ public class LobbyGameMode : GameMode
         ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
     }
 
-    public override async void OnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override async void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
     {
         Debug.Log("end lobby");
         await Task.Delay(2000);
@@ -47,6 +47,16 @@ public class LobbyGameMode : GameMode
     {
         ServerEvents.instance.OnAuctionInvoicePaid.RemoveListener(OnAuctionPaid);
         ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
+    }
+
+    public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
+    {
+        
+    }
+
+    public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
+    {
+        
     }
 }
 

@@ -14,7 +14,7 @@ public class BountyHuntGameMode : GameMode
 {
     public BountyHuntSettings bountyHuntSettings;
     private ServerGameModeBehaviour _serverGameModeBehaviour;
-    public override async void OnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override async void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
     {
         _serverGameModeBehaviour = serverGameModeBehaviour;
         var totalSats = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundBounty() + bountyHuntSettings.baseSats + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
@@ -34,7 +34,7 @@ public class BountyHuntGameMode : GameMode
         ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
     }
 
-    public override void OnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
     {
 
         ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
@@ -59,6 +59,15 @@ public class BountyHuntGameMode : GameMode
         return pos;
     }
 
+    public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
+    {
+
+    }
+
+    public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
+    {
+        PlayerServiceConnections.instance.BackendPlayerClient.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
+    }
 }
 
 [Serializable]
