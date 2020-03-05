@@ -130,3 +130,10 @@ public class BountyInvoice
     public string message;
     public long amount;
 }
+
+[Serializable]
+public class RandomInvoice
+{
+    public string message;
+    public long amount;
+}

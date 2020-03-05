@@ -8,6 +8,7 @@ using Improbable.Gdk.Core;
 public class ClientGameStats : MonoBehaviour
 {
     [Require] GameStatsReader GameStatsReader;
+    
     public static ClientGameStats instance;
 
     private void Awake()
@@ -17,9 +18,51 @@ public class ClientGameStats : MonoBehaviour
 
     void OnEnable()
     {
+
+        initEvents();
+        sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
+        sendOutEvents();
+    }
+
+    private void initEvents()
+    {
         GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
-        sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
+        GameStatsReader.OnBountyInCubesUpdate += OnBountyInCubesUpdate;
+        GameStatsReader.OnBountyOnPlayersUpdate += OnBountyInPlayersUpdate;
+        GameStatsReader.OnCarryoverSatsUpdate += (long obj) =>
+        {
+            ClientEvents.instance.onCarryoverSatsUpdate.Invoke(obj);
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(obj);
+        };
+        GameStatsReader.OnRemainingPotUpdate += (long obj) =>
+        {
+            ClientEvents.instance.onRemainingPotUpdate.Invoke(obj);
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(obj);
+        };
+    }
+
+    private void sendOutEvents()
+    {
+        var data = GameStatsReader.Data;
+        ClientEvents.instance.onBountyinCubesUpdate.Invoke(data.BountyInCubes);
+        ClientEvents.instance.onBountyInPlayersUpdate.Invoke(data.BountyOnPlayers);
+        ClientEvents.instance.onGlobalPotUpdate.Invoke(data.RemainingPot);
+        if(data.CarryoverSats == 0)
+        {
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(data.CarryoverSats);
+        }
+    }
+    private void OnBountyInPlayersUpdate(long obj)
+    {
+        ClientEvents.instance.onBountyInPlayersUpdate.Invoke(obj);
+        ClientEvents.instance.onGlobalBountyUpdate.Invoke(obj);
+    }
+
+    private void OnBountyInCubesUpdate(long obj)
+    {
+        ClientEvents.instance.onBountyinCubesUpdate.Invoke(obj);
+        ClientEvents.instance.onGlobalLootUpdate.Invoke(obj);
     }
 
     private void OnPlayerMapUpdate(Dictionary<EntityId, PlayerItem> obj)

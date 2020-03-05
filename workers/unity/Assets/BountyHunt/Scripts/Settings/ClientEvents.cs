@@ -39,6 +39,12 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public LongEvent onGlobalLootUpdate = new LongEvent();
     [HideInInspector] public LongEvent onGlobalPotUpdate = new LongEvent();
 
+
+    [HideInInspector] public LongEvent onBountyInPlayersUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onBountyinCubesUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onCarryoverSatsUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onRemainingPotUpdate = new LongEvent();
+
     private void Awake()
     {
         if (instance == null) instance = this;

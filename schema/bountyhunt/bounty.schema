@@ -10,13 +10,39 @@ component BountyPickup {
 
 component BountySpawner {
     id = 420003;
-     command bountyhunt.Empty spawn_bounty_pickup(SpawnBountyPickupRequest);
+    command bountyhunt.Empty spawn_bounty_pickup(SpawnBountyPickupRequest);
+    command bountyhunt.Empty spawn_many_pickups(BountyPickupInfo);
+    command bountyhunt.Empty start_spawning(StartSpawningRequest);
 }
 
 type SpawnBountyPickupRequest {
     int64 bounty_value = 1;
     bountyhunt.Vector3Float position = 2;
 }
+
+type SpawnManyPickupsRequest {
+    list<BountyPickupInfo> pickups = 1;
+}
+
+
+type BountyPickupInfo {
+    int64 bounty_value = 1;
+    bountyhunt.Vector3Float position = 2;
+}
+
+type StartSpawningRequest{
+    int64 total_bounty = 1;
+    float total_duration = 2;
+    float time_between_ticks = 3;
+    Distribution distribution = 4;
+    int32 min_spawns = 5;
+    int32 max_spawns = 6;
+}
+
+enum Distribution {
+    UNIFORM = 0;
+}
+
 
 
 

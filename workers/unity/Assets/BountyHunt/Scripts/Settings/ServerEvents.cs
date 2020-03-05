@@ -22,7 +22,7 @@ public class ServerEvents : MonoBehaviour
 public class AuctionInvoicePaidEvent : UnityEvent<AuctionInvoice> { };
 public class BountyInvoicePaidEvent : UnityEvent<BountyInvoice> { };
 
-public class RandomInvoicePaidEvent : UnityEvent<string, long> { };
+public class RandomInvoicePaidEvent : UnityEvent<RandomInvoice> { };
 
 public class InvoicePaidEvent : UnityEvent<InvoiceSettledEventArgs> { };
 

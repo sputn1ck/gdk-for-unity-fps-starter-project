@@ -6,10 +6,15 @@ component GameStats{
     id = 440001;
     map<EntityId, PlayerItem> player_map = 1;
     map<EntityId, PlayerItem> last_round_scores = 2;
+    int64 bounty_in_cubes = 3;
+    int64 bounty_on_players = 4;
+    int64 carryover_sats = 5;
+    int64 remaining_pot = 6;
     event KillInfo gained_kill_event;
     event bountyhunt.Empty update_scoreboard_event;
     command bountyhunt.Empty set_name(SetNameRequest);
     command bountyhunt.Empty remove_name(RemoveNameRequest);
+    command bountyhunt.Empty update_sats_in_cubes(UpdateSatsInCubesRequest);
 }
 
 type KillInfo {
@@ -34,4 +39,8 @@ type PlayerItem {
     int32 kills = 4;
     int32 deaths = 5;
     int64 round_earnings=6;
+}
+
+type UpdateSatsInCubesRequest{
+    int64 amount = 1;
 }

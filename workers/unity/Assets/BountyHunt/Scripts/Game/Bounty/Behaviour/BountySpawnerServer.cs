@@ -16,29 +16,21 @@ public class BountySpawnerServer : MonoBehaviour
     [Require] WorldCommandSender WorldCommandSender;
     [Require] BountySpawnerCommandReceiver BountySpawnerCommandReceiver;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
-    [Require] GameStatsReader GameStatsReader;
+    [Require] GameStatsWriter GameStatsWriter;
     [Require] PaymentManagerComponentWriter PaymentManagerComponentWriter;
 
-    public int spawnAmount;
-    public bool spawnTrigger;
-    private bool spawnAtRandom;
-    private long spawnAtRandomAmount;
-    private bool startAuctionTrigger;
-    private long startAuctionAmount;
-    private CancellationTokenSource cancellationToken;
     // Start is called before the first frame update
     void OnEnable()
     {
-        cancellationToken = new CancellationTokenSource();
         BountySpawnerCommandReceiver.OnSpawnBountyPickupRequestReceived += OnSpawnBountyPickupRequestReceived;
-        ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnRandomInvoicePaid);
-        ServerEvents.instance.OnAuctionInvoicePaid.AddListener(OnAuctionPaid);
+        BountySpawnerCommandReceiver.OnStartSpawningRequestReceived += OnStartSpawning;
         ServerEvents.instance.OnBountyInvoicePaid.AddListener(OnBountyInvoicePaid);
     }
 
+    
     private void OnBountyInvoicePaid(BountyInvoice bounty)
     {
-        var player = GameStatsReader.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == bounty.pubkey);
+        var player = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == bounty.pubkey);
         if (player.Value.Name == null)
         {
             return;
@@ -46,40 +38,37 @@ public class BountySpawnerServer : MonoBehaviour
         HunterComponentCommandSender.SendAddBountyCommand(player.Key, new AddBountyRequest(bounty.amount, BountyReason.DONATION));
         PaymentManagerComponentWriter.SendBountyIncreaseEvent(new BountyIncrease(bounty.message, player.Key.Id, bounty.amount));
     }
-    void Update()
+    private void OnStartSpawning(BountySpawner.StartSpawning.ReceivedRequest obj)
     {
-        if (spawnTrigger)
+        if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
+            return;
+        GameStatsWriter.SendUpdate(new GameStats.Update
         {
-            spawnTrigger = false;
-            SpawnTick(spawnAmount);
-        }
-        if (spawnAtRandom)
+            RemainingPot = obj.Payload.TotalBounty,
+        });
+        StartCoroutine(StartSpawning(obj.Payload));
+    }
+    IEnumerator StartSpawning(StartSpawningRequest request)
+    {
+        var totalBounty = request.TotalBounty ;
+        
+        var totalTicks = Mathf.FloorToInt(request.TotalDuration / request.TimeBetweenTicks);
+        var remainingSats = totalBounty;
+        var tickInfo = GetSatDistribution(totalTicks, totalBounty, request.Distribution);
+        for (int i = 0; i < tickInfo.Length; i++)
         {
-            spawnAtRandom = false;
-            SpawnPickupAtRandomPosition(spawnAtRandomAmount);
-            spawnAtRandomAmount = 0;
+            SpawnTick(tickInfo[i], request.MinSpawns, request.MaxSpawns);
+            remainingSats -= tickInfo[i];
+            PrometheusManager.TotalSubsidy.Inc(tickInfo[i]);
+            var data = GameStatsWriter.Data;
+            GameStatsWriter.SendUpdate(new GameStats.Update() { BountyInCubes = data.BountyInCubes+tickInfo[i], RemainingPot = data.RemainingPot - tickInfo[i] });
+            yield return new WaitForSeconds(request.TimeBetweenTicks);
         }
-        if(startAuctionTrigger)
-        {
-            startAuctionTrigger = false;
-            StartCoroutine(AuctionSpawning(startAuctionAmount, FlagManager.instance.GetSpawnsPerAuction(), FlagManager.instance.GetAuctionDuration()));
-            startAuctionAmount = 0;
-        }
+        yield return null;
     }
 
-    private void OnRandomInvoicePaid(string memo, long amount)
-    {
-        spawnAtRandomAmount = amount;
-        spawnAtRandom = true;
-        PaymentManagerComponentWriter.SendRandomInvoicePaidEvent(new NewWinnerMessage(memo, amount));
-    }
 
-    private void OnAuctionPaid(AuctionInvoice auction)
-    {
-        startAuctionAmount = auction.Amount;
-        startAuctionTrigger = true;
-        PaymentManagerComponentWriter.SendUpdate(new PaymentManagerComponent.Update() { AuctionWinner = new NewWinnerMessage(auction.WinningMessage, auction.Amount) });
-    }
+
     private void OnSpawnBountyPickupRequestReceived(BountySpawner.SpawnBountyPickup.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
@@ -88,14 +77,13 @@ public class BountySpawnerServer : MonoBehaviour
             return;
         var v3 = obj.Payload.Position;
         var pos = new Vector3(v3.X, v3.Y, v3.Z);
+        GameStatsWriter.SendUpdate(new GameStats.Update()
+        {
+            BountyInCubes = GameStatsWriter.Data.BountyInCubes + obj.Payload.BountyValue
+        });
         SpawnPickup(pos, obj.Payload.BountyValue);
     }
 
-    private void Start()
-    {
-
-        StartCoroutine(SubsidyEnumerator());
-    }
     // Update is called once per frame
 
     void SpawnPickup(Vector3 position, long sats)
@@ -116,17 +104,17 @@ public class BountySpawnerServer : MonoBehaviour
 
     }
 
-    private void SpawnTick(long satsPerTick, int maxSpawns = 20)
+    private void SpawnTick(long satsPerTick, int minSpawns = 1, int maxSpawns = 20)
     {
+        Debug.LogFormat("spawning tick with {0} sats per tick {1} min spawns {2} max spawns ", satsPerTick, minSpawns, maxSpawns);
         long totalSats = 0;
         long remainingSats = satsPerTick;
         long carrySats = satsPerTick % maxSpawns;
-        long satsPerSpawn = (long)Mathf.Clamp((int)satsPerTick / (int)maxSpawns, 1, int.MaxValue);
+        long satsPerSpawn = (long)Mathf.Clamp((int)satsPerTick / (int)maxSpawns, minSpawns, int.MaxValue);
         int spawns = 0;
         for (spawns = 0; spawns < maxSpawns; spawns++)
         {
             SpawnPickupAtRandomPosition(satsPerSpawn);
-            //long nextSats = GetNextSats(remainingSats);
             remainingSats = remainingSats - satsPerSpawn;
             totalSats += satsPerSpawn;
             if (remainingSats < 1)
@@ -142,36 +130,6 @@ public class BountySpawnerServer : MonoBehaviour
 
     }
 
-    IEnumerator SubsidyEnumerator()
-    {
-        while (!cancellationToken.IsCancellationRequested)
-        {
-            if (FlagManager.instance.GetSubsidizeGame())
-            {
-                var duration = FlagManager.instance.GetAuctionDuration();
-                SpawnTick(FlagManager.instance.GetSubsidyPerMinute() / 2, UnityEngine.Random.Range(FlagManager.instance.GetMinSpawns(), FlagManager.instance.GetMaxSpawns()));
-                PrometheusManager.TotalSubsidy.Inc(FlagManager.instance.GetSubsidyPerMinute() / 2);
-                yield return new WaitForSeconds(30f);
-            }
-            yield return null;
-        }
-        yield return null;
-
-    }
-
-    IEnumerator AuctionSpawning(long auctionAmount, int totalTicks, float totalTimeSeconds)
-    {
-        Debug.Log("AuctionSpawning started");
-        int spawnCounter = 0;
-        float timePerTickSeconds = totalTimeSeconds / totalTicks;
-        long satsPerTick = auctionAmount / totalTicks;
-        for (spawnCounter = 0; spawnCounter < totalTicks; spawnCounter++)
-        {
-            SpawnTick(satsPerTick, Random.Range(FlagManager.instance.GetMinSpawns(), FlagManager.instance.GetMaxSpawns()));
-            yield return new WaitForSeconds(timePerTickSeconds);
-        }
-        Debug.Log("AuctionSpawning finished");
-    }
 
     Vector3 getRandomPosition()
     {
@@ -179,9 +137,23 @@ public class BountySpawnerServer : MonoBehaviour
         pos = SpawnPoints.SnapToGround(pos);
         return pos;
     }
-
-    public void OnApplicationQuit()
+    private long[] GetSatDistribution(int totalTicks, long totalSats, Distribution distribution)
     {
-        cancellationToken.Cancel();
+        switch (distribution) {
+            case Distribution.UNIFORM:
+                return GetUniformDistribution(totalTicks, totalSats);
+            default:
+                return GetUniformDistribution(totalTicks, totalSats);
+        }
+    }
+
+    private long[] GetUniformDistribution(int totalTicks, long totalSats)
+    {
+        var tickInfo = new long[totalTicks];
+        for (int i = 0; i < totalTicks; i++)
+        {
+            tickInfo[i] = (long)(totalSats / totalTicks);
+        }
+        return tickInfo;
     }
 }

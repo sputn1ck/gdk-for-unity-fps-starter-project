@@ -13,6 +13,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     public static ServerGameModeBehaviour instance;
     [Require] public GameModeManagerWriter GameModeManagerWriter;
+    [Require] public BountySpawnerCommandSender BountySpawnerCommandSender;
+    [Require] public GameStatsWriter GameStatsWriter;
 
     private int gameModeRotationCounter;
     public GameMode currentGameMode;
@@ -41,16 +43,14 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 Duration = gameMode.GlobalSettings.NanoSeconds,
             }
         };
-
+        currentGameMode = gameMode;
+        currentGameMode.OnGameModeStart(this);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
         });
-
-        GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
-        currentGameMode = gameMode;
-        currentGameMode.OnGameModeStart(this);
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
+        GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
     }
 
     private void EndGameMode()
@@ -83,7 +83,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
                     StartTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime + GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration,
                     Duration = gameMode.GlobalSettings.NanoSeconds,
                 }
-            },
+            }
         });
     }
 
@@ -98,11 +98,9 @@ public class ServerGameModeBehaviour : MonoBehaviour
             if (DateTime.UtcNow.ToFileTime() > endTime)
             {
                 EndGameMode();
-                yield return new WaitForEndOfFrame();
-                ServerGameStats.ResetScoreboard();
-                //Todo send out starts in event
                 GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
                 yield return new WaitForSeconds(5f);
+                ServerGameStats.ResetScoreboard();
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
                 SetNextGameMode();

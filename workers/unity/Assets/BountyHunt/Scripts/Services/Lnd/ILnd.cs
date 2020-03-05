@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using Lnrpc;
 using System.Threading.Tasks;
 using System;
+using System.Threading;
 
 public interface IClientLnd :IDisposable
 {
@@ -25,6 +26,7 @@ public interface IClientLnd :IDisposable
 
     void RemoveCallback(InvoiceSettledEventHandler e);
 
+    IEnumerator HandleInvoices(CancellationTokenSource ct);
     Task<ChannelPoint> OpenChannel(string pubkey, long satAmount);
     
     string GetPubkey();
