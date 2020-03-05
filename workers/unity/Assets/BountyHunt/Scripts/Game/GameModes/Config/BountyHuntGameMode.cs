@@ -18,7 +18,10 @@ public class BountyHuntGameMode : GameMode
     {
         _serverGameModeBehaviour = serverGameModeBehaviour;
         var totalSats = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundBounty() + bountyHuntSettings.baseSats + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
-        Debug.Log("total sats");
+        serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
+        {
+            CarryoverSats = 0
+        });
         serverGameModeBehaviour.BountySpawnerCommandSender.SendStartSpawningCommand(new EntityId(2), new Bountyhunt.StartSpawningRequest()
         {
             TotalDuration = GlobalSettings.SecondDuration,
@@ -28,7 +31,6 @@ public class BountyHuntGameMode : GameMode
             TotalBounty = totalSats,
             Distribution = bountyHuntSettings.distribution
         });
-
         ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
     }
 

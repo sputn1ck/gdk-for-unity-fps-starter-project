@@ -20,6 +20,7 @@ public class LobbyGameMode : GameMode
     {
         Debug.Log("end lobby");
         await Task.Delay(2000);
+        RemoveListeners();
     }
 
     private void OnAuctionPaid(AuctionInvoice auctionInvoice)

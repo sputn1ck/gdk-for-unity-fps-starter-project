@@ -18,6 +18,14 @@ public class ClientGameStats : MonoBehaviour
 
     void OnEnable()
     {
+
+        initEvents();
+        sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
+        sendOutEvents();
+    }
+
+    private void initEvents()
+    {
         GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
         GameStatsReader.OnBountyInCubesUpdate += OnBountyInCubesUpdate;
@@ -32,10 +40,19 @@ public class ClientGameStats : MonoBehaviour
             ClientEvents.instance.onRemainingPotUpdate.Invoke(obj);
             ClientEvents.instance.onGlobalPotUpdate.Invoke(obj);
         };
-        
-        sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
     }
 
+    private void sendOutEvents()
+    {
+        var data = GameStatsReader.Data;
+        ClientEvents.instance.onBountyinCubesUpdate.Invoke(data.BountyInCubes);
+        ClientEvents.instance.onBountyInPlayersUpdate.Invoke(data.BountyOnPlayers);
+        ClientEvents.instance.onGlobalPotUpdate.Invoke(data.RemainingPot);
+        if(data.CarryoverSats == 0)
+        {
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(data.CarryoverSats);
+        }
+    }
     private void OnBountyInPlayersUpdate(long obj)
     {
         ClientEvents.instance.onBountyInPlayersUpdate.Invoke(obj);
