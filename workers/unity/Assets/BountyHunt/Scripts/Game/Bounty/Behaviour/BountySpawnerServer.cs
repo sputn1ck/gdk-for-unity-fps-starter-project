@@ -51,7 +51,8 @@ public class BountySpawnerServer : MonoBehaviour
     IEnumerator StartSpawning(StartSpawningRequest request)
     {
         var totalBounty = request.TotalBounty ;
-        var totalTicks = ((int)(request.TotalDuration / request.TimeBetweenTicks)) - 1;
+        
+        var totalTicks = Mathf.FloorToInt(request.TotalDuration / request.TimeBetweenTicks);
         var remainingSats = totalBounty;
         var tickInfo = GetSatDistribution(totalTicks, totalBounty, request.Distribution);
         for (int i = 0; i < tickInfo.Length; i++)
