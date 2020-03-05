@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,12 @@ public static class Utility
         t.localScale = Vector3.one;
         t.localRotation = Quaternion.identity;
     }
+
+    public static long Abs(long input)
+    {
+        if (input >= 0) return input;
+        else return -input;
+    }  
 
     public static void Log(string message, Color color)
     {
@@ -54,4 +61,88 @@ public static class Utility
             hex.AppendFormat("{0:x2}", b);
         return hex.ToString();
     }
+
+    public static string SatsToShortString(long sats)
+    {
+        return SatsToShortString(sats,false, Color.clear);
+    }
+    
+    public static string SatsToShortString(long sats,bool includeSymbol)
+    {
+        return SatsToShortString(sats, includeSymbol, Color.clear);
+    }
+
+    public static string SatsToShortString(long sats, Color symbolColor)
+    {
+        return SatsToShortString(sats, true, symbolColor);
+    }
+
+    /// <param name="sats">satoshi amount</param>
+    /// <param name="includeSymbol">should sats/btc sprite be included? (using TMP sprite Asset) </param>
+    /// <param name="symbolColor">Color of the Symbol (if included) Color.Clear => tint</param>
+    public static string SatsToShortString (long sats, bool includeSymbol, Color symbolColor)
+    {
+        string colorString;
+        if (symbolColor == Color.clear) colorString = " tint=1";
+        else colorString = " color=#" + ColorToHex(symbolColor);
+
+        string valueString;
+        string symbolCode = "sats";
+
+        long nabs = Abs(sats);
+
+        if (nabs >= 10000000000 && !includeSymbol)
+        {
+            float n = sats / 1000000000f;
+            valueString = String.Format("{0:0G}", n);
+        }
+
+        if (nabs >= 1000000000)
+        {
+            if (includeSymbol)
+            {
+                float n = sats / 100000000f;
+                valueString = String.Format("{0:0}", n);
+            }
+            else
+            {
+                float n = sats / 1000000000f;
+                valueString = String.Format("{0:0.0G}", n);
+            }
+            
+            symbolCode = "btc";
+        }
+        else if (nabs >= 100000000 && includeSymbol)
+        {
+            float n = sats / 100000000f;
+            valueString = String.Format("{0:0.0}", n);
+            symbolCode = "btc";
+        }
+        else if (nabs >= 10000000)
+        {
+            float n = sats / 1000000f;
+            valueString = String.Format("{0:0M}", n);
+        }
+        else if (nabs >= 1000000)
+        {
+            float n = sats / 1000000f;
+            valueString = String.Format("{0:0.0M}", n);
+        }
+        else if (nabs >= 10000)
+        {
+            float n = sats / 1000f;
+            valueString = String.Format("{0:0K}", n);
+        }
+        else if (nabs >= 1000)
+        {
+            float n = sats / 1000f;
+            valueString = String.Format("{0:0.0K}", n);
+        }
+        else valueString = sats.ToString();
+
+        if(includeSymbol)valueString += "<sprite name=\""+symbolCode+"\"" + colorString + ">";
+
+        return valueString;
+    }
+
 }

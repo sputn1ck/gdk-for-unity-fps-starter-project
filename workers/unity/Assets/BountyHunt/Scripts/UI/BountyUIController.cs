@@ -15,46 +15,24 @@ public class BountyUIController : MonoBehaviour
 
     public void UpdateSats(long sats, long diff)
     {
-        satText.text = sats.ToString();
+        satText.text = Utility.SatsToShortString(sats, UITinter.tintDict[TintColor.Sats]);
         if (diff == 0)
             return;
         if (diff > 0)
         {
+            
 
-
-            satUpdate.text = "+"+diff.ToString();
+            satUpdate.text = "+"+ Utility.SatsToShortString(diff);
             satUpdate.color = positiveColor;
         }
         else
         {
 
-            satUpdate.text = diff.ToString();
+            satUpdate.text = Utility.SatsToShortString(diff);
             satUpdate.color = negativeColor;
         }
-
+        
         updatePanel.GetComponent<Animator>().SetTrigger("play");
     }
-    public void UpdateSats(float sats, float diff, string format = "F1")
-    {
-        satText.text = sats.ToString(format, CultureInfo.InvariantCulture);
-        if (diff == 0)
-            return;
-        if (diff > 0)
-        {
-
-
-            satUpdate.text = "+" + diff.ToString();
-            satUpdate.color = positiveColor;
-        }
-        else
-        {
-
-            satUpdate.text = diff.ToString();
-            satUpdate.color = negativeColor;
-        }
-        updatePanel.GetComponent<Animator>().SetTrigger("play");
-
-    }
-
-
+    
 }

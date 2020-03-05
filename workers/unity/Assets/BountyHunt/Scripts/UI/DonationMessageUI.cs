@@ -19,7 +19,7 @@ public class DonationMessageUI : MonoBehaviour
     private void UpdateMessage(string msg, long sats)
     {
         messageText.text = msg;
-        satsText.text = sats + " <sprite=0>";
+        satsText.text = Utility.SatsToShortString(sats, UITinter.tintDict[TintColor.Sats]);
     }
 
     private void UpdateGamepot(BalanceUpdateEventArgs e)
