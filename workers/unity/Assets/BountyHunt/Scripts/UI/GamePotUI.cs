@@ -22,7 +22,7 @@ public class GamePotUI : MonoBehaviour
 
     public void UpdateField(TextMeshProUGUI textField, long sats)
     {
-        string text = Utility.LongToShortString(sats)+ "<sprite name=\"sats\" color=#FFED92>";
+        string text = Utility.SatsToShortString(sats, UITinter.tintDict[TintColor.Sats]);
         textField.text = text; 
     }
 
