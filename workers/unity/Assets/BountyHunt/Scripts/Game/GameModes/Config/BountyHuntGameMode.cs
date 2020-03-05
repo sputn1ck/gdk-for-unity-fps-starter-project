@@ -22,7 +22,7 @@ public class BountyHuntGameMode : GameMode
         serverGameModeBehaviour.BountySpawnerCommandSender.SendStartSpawningCommand(new EntityId(2), new Bountyhunt.StartSpawningRequest()
         {
             TotalDuration = GlobalSettings.SecondDuration,
-            TimeBetweenTicks = bountyHuntSettings.timeBetweenTicks,
+            TimeBetweenTicks = bountyHuntSettings.timeBetweenSpawns,
             MinSpawns = bountyHuntSettings.minSpawns,
             MaxSpawns = bountyHuntSettings.maxSpawns,
             TotalBounty = totalSats,
@@ -62,7 +62,7 @@ public class BountyHuntGameMode : GameMode
 [Serializable]
 public struct BountyHuntSettings
 {
-    public float timeBetweenTicks;
+    public float timeBetweenSpawns;
     public int minSpawns;
     public int maxSpawns;
     public Distribution distribution;

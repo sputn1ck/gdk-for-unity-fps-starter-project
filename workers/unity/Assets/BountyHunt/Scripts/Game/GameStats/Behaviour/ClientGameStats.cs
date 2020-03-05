@@ -25,10 +25,12 @@ public class ClientGameStats : MonoBehaviour
         GameStatsReader.OnCarryoverSatsUpdate += (long obj) =>
         {
             ClientEvents.instance.onCarryoverSatsUpdate.Invoke(obj);
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(obj);
         };
         GameStatsReader.OnRemainingPotUpdate += (long obj) =>
         {
             ClientEvents.instance.onRemainingPotUpdate.Invoke(obj);
+            ClientEvents.instance.onGlobalPotUpdate.Invoke(obj);
         };
         
         sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
@@ -37,11 +39,13 @@ public class ClientGameStats : MonoBehaviour
     private void OnBountyInPlayersUpdate(long obj)
     {
         ClientEvents.instance.onBountyInPlayersUpdate.Invoke(obj);
+        ClientEvents.instance.onGlobalBountyUpdate.Invoke(obj);
     }
 
     private void OnBountyInCubesUpdate(long obj)
     {
         ClientEvents.instance.onBountyinCubesUpdate.Invoke(obj);
+        ClientEvents.instance.onGlobalLootUpdate.Invoke(obj);
     }
 
     private void OnPlayerMapUpdate(Dictionary<EntityId, PlayerItem> obj)

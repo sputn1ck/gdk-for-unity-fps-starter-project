@@ -12,8 +12,22 @@ public class ClientGameModeBehaviour : MonoBehaviour
     private void OnEnable()
     {
         GameModeManagerReader.OnStartCountdownEvent += OnStartCountdown;
+        GameModeManagerReader.OnCurrentRoundUpdate += OnCurrentRoundUpdate;
+        ClientEvents.instance.onRoundUpdate.Invoke(new RoundUpdateEventArgs()
+        {
+           remainingTime = (float) getRoundSeconds(),
+           gameMode = getCurrentGameMode(),
+        });
     }
 
+    private void OnCurrentRoundUpdate(RoundInfo obj)
+    {
+        ClientEvents.instance.onRoundUpdate.Invoke(new RoundUpdateEventArgs()
+        {
+            remainingTime = (float)getRoundSeconds(),
+            gameMode = getCurrentGameMode(),
+        });
+    }
 
     private void OnStartCountdown(CoundDownInfo obj)
     {
@@ -33,5 +47,20 @@ public class ClientGameModeBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         ClientEvents.instance.onAnnouncement.Invoke(gameModeName + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
 
+    }
+
+    private double getRoundSeconds()
+    {
+        var startTime = GameModeManagerReader.Data.CurrentRound.TimeInfo.StartTime;
+        var duration = GameModeManagerReader.Data.CurrentRound.TimeInfo.Duration;
+        var now = DateTime.UtcNow;
+        var diff = DateTime.FromFileTimeUtc(startTime + duration) - now;
+        return diff.TotalSeconds;
+    }
+
+    private GameMode getCurrentGameMode()
+    {
+        var id = GameModeManagerReader.Data.CurrentRound.GameModeInfo.GameModeId;
+        return GameModeDictionary.Get(id);
     }
 }

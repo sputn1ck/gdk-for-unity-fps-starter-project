@@ -17,10 +17,6 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
-    [HideInInspector] public LongEvent onBountyInPlayersUpdate = new LongEvent();
-    [HideInInspector] public LongEvent onBountyinCubesUpdate = new LongEvent();
-    [HideInInspector] public LongEvent onCarryoverSatsUpdate = new LongEvent();
-    [HideInInspector] public LongEvent onRemainingPotUpdate = new LongEvent();
 
     [HideInInspector] public UnityEvent onServicesSetup = new UnityEvent();
 
@@ -42,6 +38,12 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public LongEvent onGlobalBountyUpdate = new LongEvent();
     [HideInInspector] public LongEvent onGlobalLootUpdate = new LongEvent();
     [HideInInspector] public LongEvent onGlobalPotUpdate = new LongEvent();
+
+
+    [HideInInspector] public LongEvent onBountyInPlayersUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onBountyinCubesUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onCarryoverSatsUpdate = new LongEvent();
+    [HideInInspector] public LongEvent onRemainingPotUpdate = new LongEvent();
 
     private void Awake()
     {
