@@ -18,7 +18,7 @@ public class UITinter : MonoBehaviour
 
     public TintColor tint;
 
-    void updateColor()
+     public void updateColor()
     {
         if (!tintDict.ContainsKey(tint)) return;
 

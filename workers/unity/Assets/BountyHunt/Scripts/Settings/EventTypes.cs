@@ -65,8 +65,10 @@ public struct PaymentFailureArgs
 
 public struct BalanceUpdateEventArgs
 {
-    public long NewAmount;
-    public long OldAmount;
+    public long GameServerBalance;
+    public long BufferBalance;
+    public long DeamonBalance;
+    public long ChannelCost;
 }
 
 public struct KillEventArgs

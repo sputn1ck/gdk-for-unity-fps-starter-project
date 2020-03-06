@@ -8,7 +8,11 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
 {
 
     //player
-    public TextMeshProUGUI balanceText;
+    public TextMeshProUGUI GameServerBalanceText;
+    public TextMeshProUGUI BufferBalanceText;
+    public TextMeshProUGUI DeamonBalanceText;
+    public TextMeshProUGUI LightingChannelCostText;
+    public TextMeshProUGUI TotalBalanceText;
     public TextMeshProUGUI currentEarningsText;
     public TextMeshProUGUI currentBountyText;
     public TextMeshProUGUI currentKillsAndDeathsText;
@@ -24,7 +28,7 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     public TextMeshProUGUI allTimeMostKillsText;
     public TextMeshProUGUI totalPlayersLifetimeDeathsText;
     public TextMeshProUGUI allTimeMostDeathsText;
-    public TextMeshProUGUI TotalPlayersLifetimeEarnings;
+    public TextMeshProUGUI totalPlayersLifetimeEarnings;
     public TextMeshProUGUI allTimeMostEarnings;
 
 
@@ -59,7 +63,22 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     //player
     void onBalanceUpdate(BalanceUpdateEventArgs args)
     {
-        balanceText.text = Utility.SatsToShortString(args.NewAmount, true);
+        GameServerBalanceText.text = args.GameServerBalance + Utility.tintedSatsSymbol;
+        BufferBalanceText.text = args.BufferBalance + Utility.tintedSatsSymbol;
+        DeamonBalanceText.text = args.DeamonBalance + Utility.tintedSatsSymbol;
+        if (args.ChannelCost <= 0) LightingChannelCostText.gameObject.SetActive(false);
+        else
+        {
+            LightingChannelCostText.gameObject.SetActive(true);
+            LightingChannelCostText.text = "-" + args.BufferBalance + Utility.tintedSatsSymbol;
+        }
+
+        long total = args.GameServerBalance + args.BufferBalance + args.DeamonBalance - args.ChannelCost;
+        TotalBalanceText.text = total + Utility.tintedSatsSymbol;
+        UITinter tinter = TotalBalanceText.GetComponent<UITinter>();
+        if (total < 0) tinter.tint = TintColor.Error;
+        else tinter.tint = TintColor.Primary;
+        tinter.updateColor();
     }
 
     void onBountyUpdate(BountyUpdateEventArgs args)
@@ -126,7 +145,7 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
 
     void onAllTimeDeathsUpdate(int arg){ totalPlayersLifetimeDeathsText.text = arg.ToString(); }
     void onAllTimeMostDeathsUpdate (AllTimeScoreUpdateArgs args) { allTimeMostDeathsText.text = args.score + " by " + args.name; }
-    void onAllTimeEarningsUpdate(long arg) { TotalPlayersLifetimeEarnings.text = Utility.SatsToShortString(arg,true); }
+    void onAllTimeEarningsUpdate(long arg) { totalPlayersLifetimeEarnings.text = Utility.SatsToShortString(arg,true); }
     void onAllTimeMostEarningsUpdate(AllTimeScoreUpdateArgs args) {  allTimeMostEarnings.text = Utility.SatsToShortString(args.score, true) + " by " + args.name; }
 
 

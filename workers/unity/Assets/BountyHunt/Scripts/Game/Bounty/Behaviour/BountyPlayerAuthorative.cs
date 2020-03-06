@@ -98,8 +98,11 @@ public class BountyPlayerAuthorative : MonoBehaviour
         }
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
-            NewAmount = totalBalance,
-            OldAmount = lastBalance,
+            //TODO
+            //Add Values for server balance, buffer and channel cost
+
+            DeamonBalance = totalBalance,
+            //OldAmount = lastBalance,
         });
         lastBalance = totalBalance;
     }
