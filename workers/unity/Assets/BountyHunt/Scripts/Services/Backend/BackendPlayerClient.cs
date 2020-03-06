@@ -75,9 +75,9 @@ public class BackendPlayerClient
         int totalKills = 0;
         int totalDeaths = 0;
 
-        for (int i = 0; i > highscores.Length; i++)
+        for (int i = 0; i < highscores.Length; i++)
         {
-            var player = highscores[0];
+            var player = highscores[i];
             if(player.Pubkey == playerpubkey)
             {
                 ClientEvents.instance.onPlayerLifeTimeKillsUpdate.Invoke(player.Kills);
@@ -85,7 +85,7 @@ public class BackendPlayerClient
                 ClientEvents.instance.onPlayerLifeTimeDeathsUpdate.Invoke(player.Deaths);
                 ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.Invoke(player.Earnings);
             }
-            if(player.Earnings > highscores[highestKillsPlayerIndex].Earnings)
+            if(player.Earnings > highscores[highestEarningsPlayerIndex].Earnings)
             {
                 highestEarningsPlayerIndex = i;
             }
@@ -93,7 +93,7 @@ public class BackendPlayerClient
             {
                 highestKillsPlayerIndex = i;
             }
-            if (player.Deaths > highscores[highestKillsPlayerIndex].Deaths)
+            if (player.Deaths > highscores[highestDeathsPlayerIndex].Deaths)
             {
                 highestDeathsPlayerIndex = i;
             }
@@ -103,6 +103,9 @@ public class BackendPlayerClient
             totalDeaths += player.Deaths;
 
         }
+        ClientEvents.instance.onAllTimeMostKillsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestKillsPlayerIndex].Name,score = highscores[highestKillsPlayerIndex].Kills});
+        ClientEvents.instance.onAllTimeMostDeathsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestDeathsPlayerIndex].Name,score = highscores[highestDeathsPlayerIndex].Deaths});
+        ClientEvents.instance.onAllTimeMostEarningsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestEarningsPlayerIndex].Name,score = highscores[highestEarningsPlayerIndex].Earnings});
 
         ClientEvents.instance.onAllTimeKillsUpdate.Invoke(totalKills);
         ClientEvents.instance.onAllTimeDeathsUpdate.Invoke(totalDeaths);

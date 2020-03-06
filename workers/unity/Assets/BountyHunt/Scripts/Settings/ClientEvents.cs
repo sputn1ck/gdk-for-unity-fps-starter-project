@@ -10,10 +10,6 @@ public class ClientEvents : MonoBehaviour
 
     [HideInInspector] public UnityEvent onMapLoaded = new UnityEvent();
     [HideInInspector] public UnityEvent onGameJoined = new UnityEvent();
-    [HideInInspector] public LongEvent onUpdateCanRecieveBalance = new LongEvent();
-    [HideInInspector] public LongEvent onUpdateCurrentBalance = new LongEvent();
-    [HideInInspector] public StringEvent onUpdateSyncedState = new StringEvent();
-    [HideInInspector] public StringEvent onUpdateHasChannelState = new StringEvent();
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
@@ -53,7 +49,11 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public IntEvent onAllTimeKillsUpdate = new IntEvent();
     [HideInInspector] public IntEvent onAllTimeDeathsUpdate = new IntEvent();
     [HideInInspector] public LongEvent onAllTimeEarningsUpdate = new LongEvent();
+    [HideInInspector] public KillsAndDeathsUpdateEvent onPlayerKillsAndDeathsUpdate = new KillsAndDeathsUpdateEvent();
 
+    [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostKillsUpdate = new AllTimeScoreUpdateEvent();
+    [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostDeathsUpdate = new AllTimeScoreUpdateEvent();
+    [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostEarningsUpdate = new AllTimeScoreUpdateEvent();
 
     private void Awake()
     {

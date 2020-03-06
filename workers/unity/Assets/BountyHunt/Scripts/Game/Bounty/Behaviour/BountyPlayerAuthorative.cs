@@ -23,6 +23,9 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private long earningsThisSession;
     private long lastEarningsThisSession;
 
+    private int kills;
+    private int deaths;
+
     private CancellationTokenSource ct;
     private void Awake()
     {
@@ -33,6 +36,9 @@ public class BountyPlayerAuthorative : MonoBehaviour
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
         HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
+        HunterComponentReader.OnKillsUpdate += HunterComponentReader_OnKillsUpdate;
+        HunterComponentReader.OnDeathsUpdate += HunterComponentReader_OnDeathsUpdate;
+
 
         lastBounty = 0;
         lastEarnings = 0;
@@ -68,6 +74,18 @@ public class BountyPlayerAuthorative : MonoBehaviour
             OldAmount = lastEarningsThisSession
         });
         lastEarningsThisSession = earningsThisSession;
+    }
+
+    private void HunterComponentReader_OnKillsUpdate(int kills)
+    {
+        this.kills = kills;
+        ClientEvents.instance.onPlayerKillsAndDeathsUpdate.Invoke(new KillsAndDeathsUpdateEventArgs { kills = this.kills, deaths = this.deaths });
+    }
+
+    private void HunterComponentReader_OnDeathsUpdate(int deaths)
+    {
+        this.deaths = deaths;
+        ClientEvents.instance.onPlayerKillsAndDeathsUpdate.Invoke(new KillsAndDeathsUpdateEventArgs { kills = this.kills, deaths = this.deaths });
     }
 
     private async void UpdateTotalBalance()
