@@ -31,7 +31,7 @@ public class FlagManager : MonoBehaviour
     private const string bountyPerTickFlag = "bounty_per_tick";
     private const string timerPerBountyTickFlag = "time_per_bountyTick";
     private const string subsidizeGameFlag = "subsidize_game";
-    private const string subSidyPerMinuteFlag = "subsidy_per_min";
+    private const string baseSubsidyPerMinute = "subsidy_per_min";
     private const string lnChannelCostFlag = "ln_channel_cost";
     private const string lnTargetConfFlag = "ln_target_conf";
     private const string lnChannelSizeFlag = "ln_channel_size";
@@ -109,11 +109,11 @@ public class FlagManager : MonoBehaviour
             return subsidizeGame;
         return defaultSubsidizeGame;
     }
-    public int GetSubsidyPerMinute()
+    public int GetBaseSubsidiy()
     {
-        int subsidyPerMinute;
-        if (int.TryParse(worker.GetWorkerFlag(subSidyPerMinuteFlag), out subsidyPerMinute))
-            return subsidyPerMinute;
+        int BaseSubsidy;
+        if (int.TryParse(worker.GetWorkerFlag(baseSubsidyPerMinute), out BaseSubsidy))
+            return BaseSubsidy;
         return defaultSubsidyPerMinute;
     }
     public long GetChannelCost()

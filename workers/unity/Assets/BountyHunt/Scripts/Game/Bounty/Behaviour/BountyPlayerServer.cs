@@ -34,10 +34,17 @@ public class BountyPlayerServer : MonoBehaviour
         BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
         BountyComponentCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
         BountyComponentCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
-
+        HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
         
         Invoke("SetName", 1f);
         //StartCoroutine(BountyTick());
+    }
+
+    private void OnEarningsUpdate(long obj)
+    {
+        var amount = HunterComponentWriter.Data.Earnings;
+        ServerServiceConnections.instance.lnd.KeysendPayment(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = HunterComponentWriter.Data.Earnings - amount });
     }
 
     private void OnTeleport(HunterComponent.TeleportPlayer.ReceivedRequest obj)

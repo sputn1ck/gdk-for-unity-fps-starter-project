@@ -43,7 +43,7 @@ public class LndClient : IClientLnd
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     private ConcurrentQueue<InvoiceSettledEventArgs> invoiceSettledQueue;
     private RNGCryptoServiceProvider provider;
-
+    private const string platformPubkey = "0380e02956c9d09d2cf349bc7f5eb4610fda0775974352fa52f7d981783e45fe03";
     public LndClient()
     {
     }
@@ -442,18 +442,17 @@ public class LndClient : IClientLnd
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
-
+        
         // TODO add platform pubkey
         var req = new SendRequest
         {
-            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest(targetPubkey)),
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(platformPubkey)),
             Amt = amount,
             PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
         };
-        
         req.DestCustomRecords.Add(5482373484, Google.Protobuf.ByteString.CopyFrom(preImage));
-        //req.DestCustomRecords.Add(684568698384, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest(targetPubkey)));
-        //req.DestCustomRecords.Add(684577697779, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest("BBH payout")));
+        req.DestCustomRecords.Add(684568698384, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(targetPubkey)));
+        req.DestCustomRecords.Add(684577697779, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(DonnerUtils.StringToHexString("BBH Payout"))));
 
         return await lightningClient.SendPaymentSyncAsync(req);
     }

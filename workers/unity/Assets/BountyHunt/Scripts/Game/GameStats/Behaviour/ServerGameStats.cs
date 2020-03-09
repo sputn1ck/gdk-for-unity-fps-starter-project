@@ -15,9 +15,16 @@ public class ServerGameStats : MonoBehaviour
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
+        GameStatsCommandReceiver.OnUpdateSatsInCubesRequestReceived += GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived;
     }
 
-
+    private void GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived(GameStats.UpdateSatsInCubes.ReceivedRequest obj)
+    {
+        GameStatsWriter.SendUpdate(new GameStats.Update
+        {
+            BountyInCubes = GameStatsWriter.Data.BountyInCubes - obj.Payload.Amount,
+        });
+    }
 
     private void OnRemoveNameRequestReceived(GameStats.RemoveName.ReceivedRequest obj)
     {

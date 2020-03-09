@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Newtonsoft.Json;
+using System.Globalization;
+using System.Text;
 
 public static class DonnerUtils 
 {
@@ -99,30 +101,37 @@ public static class DonnerUtils
     {
         return new DateTime(1970, 1, 1).AddSeconds(unixTime);
     }
-    public static byte[] StringToByteArrayFastest(string hex)
+    public static byte[] HexStringToByteArray(string hexString)
     {
-        if (hex.Length % 2 == 1)
-            throw new Exception("The binary key cannot have an odd number of digits");
-
-        byte[] arr = new byte[hex.Length >> 1];
-
-        for (int i = 0; i < hex.Length >> 1; ++i)
+        if (hexString.Length % 2 != 0)
         {
-            arr[i] = (byte)((GetHexVal(hex[i << 1]) << 4) + (GetHexVal(hex[(i << 1) + 1])));
+            throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "The binary key cannot have an odd number of digits: {0}", hexString));
         }
 
-        return arr;
+        byte[] data = new byte[hexString.Length / 2];
+        for (int index = 0; index < data.Length; index++)
+        {
+            string byteValue = hexString.Substring(index * 2, 2);
+            data[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        }
+
+        return data;
     }
 
-    private static int GetHexVal(char hex)
+    public static string ByteArrayToString(byte[] ba)
     {
-        int val = (int)hex;
-        //For uppercase A-F letters:
-        return val - (val < 58 ? 48 : 55);
-        //For lowercase a-f letters:
-        //return val - (val < 58 ? 48 : 87);
-        //Or the two combined, but a bit slower:
-        //return val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
+        StringBuilder hex = new StringBuilder(ba.Length * 2);
+        foreach (byte b in ba)
+            hex.AppendFormat("{0:x2}", b);
+        return hex.ToString();
+    }
+
+    public static string StringToHexString(string s)
+    {
+        byte[] ba = Encoding.Default.GetBytes(s);
+        var hexString = BitConverter.ToString(ba);
+        hexString = hexString.Replace("-", "");
+        return hexString;
     }
 }
 
