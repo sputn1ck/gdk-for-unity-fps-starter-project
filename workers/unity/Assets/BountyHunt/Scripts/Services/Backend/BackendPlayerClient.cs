@@ -68,23 +68,6 @@ public class BackendPlayerClient
     public async void UpdateBackendStats(string playerpubkey)
     {
         var highscores = await GetHighscore();
-        /*
-        var myScore = highscores.FirstOrDefault(h => h.Pubkey == playerpubkey);
-        if(myScore != null)
-        {
-            // TODO Invoke player Events
-            ClientEvents.instance.onPlayerLifeTimeKillsUpdate.Invoke(myScore.Kills);
-            ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.Invoke(myScore.Earnings);
-        }
-        
-        var topKills = highscores.OrderBy(h => h.Kills).ToList()[0];
-        var topDeaths = highscores.OrderBy(h => h.Deaths).ToList()[0];
-        var topEarnings = highscores.OrderBy(h => h.Earnings).ToList()[0];
-        // TODO invoke total events
-       var totalDeaths= highscores.Sum(h => h.Deaths);
-        var totalKills = highscores.Sum(h => h.Kills);
-        var totalEarnings = highscores.Sum(h => h.Earnings);
-        */
         long totalEarnings = 0;
         int highestEarningsPlayerIndex = 0;
         int highestKillsPlayerIndex = 0;

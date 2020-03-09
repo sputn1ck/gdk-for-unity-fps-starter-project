@@ -41,42 +41,9 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
         ct = new CancellationTokenSource();
         UpdateTotalBalance();
-        StartCoroutine(requestPayoutEnumerator());
     }
 
     
-
-    public async void RequestPayout(long amount)
-    {
-        var res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInvoice("payout for " + HunterComponentReader.Data.Name + " Amount: " + amount, amount);
-
-        HunterComponentCommandSender.SendRequestPayoutCommand(entityId, new RequestPayoutRequest(res),OnRequestPayout);
-    }
-
-    private void OnRequestPayout(HunterComponent.RequestPayout.ReceivedResponse res)
-    {
-        Debug.LogFormat("Payout Callback: status: {0} message {1} ", res.StatusCode, res.Message);
-        if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
-        {
-            // TODO something went right
-            ClientEvents.instance.onPaymentSucces.Invoke(new PaymentSuccesArgs()
-            {
-                amount = res.ResponsePayload.Value.Amount,
-                invoice = res.RequestPayload.PayReq,
-                descripion = res.ResponsePayload.Value.Message
-            });
-            
-        }
-        else
-        {
-            // TODO something went wrong
-            ClientEvents.instance.onPaymentFailure.Invoke(new PaymentFailureArgs
-            {
-                invoice = res.RequestPayload.PayReq,
-                message = res.Message
-            });
-        }
-    }
     private void HunterComponentReader_OnEarningsUpdate(long earnings)
     {
         
@@ -106,13 +73,13 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private async void UpdateTotalBalance()
     {
         var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-        var totalBalance = lastEarnings + balance.LocalBalance;
-        if (balance.MissingBalance > 0)
+        var totalBalance = lastEarnings + balance.DaemonBalance;
+        if (balance.ChannelMissingBalance > 0)
         {
-            totalBalance -= balance.MissingBalance;
+            totalBalance -= balance.ChannelMissingBalance;
         } else
         {
-            totalBalance += balance.StashBalance;
+            totalBalance += balance.BufferBalance;
         }
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
@@ -123,17 +90,6 @@ public class BountyPlayerAuthorative : MonoBehaviour
     }
 
 
-    private IEnumerator requestPayoutEnumerator()
-    {
-        while (!ct.IsCancellationRequested)
-        {
-            yield return new WaitForSeconds(3f);
-            if(HunterComponentReader.Data.Earnings > 10)
-            {
-                RequestPayout(HunterComponentReader.Data.Earnings);
-            }
-        }
-    }
 
 
     private void OnApplicationQuit()

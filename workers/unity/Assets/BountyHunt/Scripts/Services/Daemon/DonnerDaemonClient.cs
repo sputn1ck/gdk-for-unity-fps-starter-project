@@ -22,14 +22,7 @@ public class DonnerDaemonClient
     {
         rpcChannel = new Channel("localhost:10101", ChannelCredentials.Insecure);
         client = new DaemonService.DaemonServiceClient(rpcChannel);
-        LogInfo();
     }
-    private async void LogInfo()
-    {
-        var res = await GetInfo();
-        Debug.Log(res.NodeAlive + ";" + res.NodePubkey);
-    }
-
 
     public async Task<string> Lncli(string command)
     {
@@ -43,25 +36,15 @@ public class DonnerDaemonClient
             return e.Message;
         }
     }
-    public async Task<string> GetInvoice(string memo, long amount)
-    {
-        var res = await client.CreateInvoiceAsync(new CreateInvoiceRequest() { Amt = amount, Description = memo });
-        return res.Invoice;
-    }
-
-    public async Task<GetInfoResponse> GetInfo()
-    {
-        return await client.GetInfoAsync(new GetInfoRequest());
-    }
 
     public async Task<GetConnectionResponse> GetConnection()
     {
         return await client.GetConnectionAsync(new GetConnectionRequest());
     }
 
-    public async Task<WalletBalanceResponse> GetWalletBalance()
+    public async Task<GetBalanceResponse> GetWalletBalance()
     {
-        return await client.WalletBalanceAsync(new WalletBalanceRequest());
+        return await client.GetBalanceAsync(new GetBalanceRequest());
     }
 
     public void Shutdown()

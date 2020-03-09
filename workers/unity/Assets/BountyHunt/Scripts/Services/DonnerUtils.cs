@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Newtonsoft.Json;
+using System.Globalization;
+using System.Text;
 
 public static class DonnerUtils 
 {
@@ -98,6 +100,38 @@ public static class DonnerUtils
     public static DateTime UnixTimeToDateTime(Int32 unixTime)
     {
         return new DateTime(1970, 1, 1).AddSeconds(unixTime);
+    }
+    public static byte[] HexStringToByteArray(string hexString)
+    {
+        if (hexString.Length % 2 != 0)
+        {
+            throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "The binary key cannot have an odd number of digits: {0}", hexString));
+        }
+
+        byte[] data = new byte[hexString.Length / 2];
+        for (int index = 0; index < data.Length; index++)
+        {
+            string byteValue = hexString.Substring(index * 2, 2);
+            data[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        }
+
+        return data;
+    }
+
+    public static string ByteArrayToString(byte[] ba)
+    {
+        StringBuilder hex = new StringBuilder(ba.Length * 2);
+        foreach (byte b in ba)
+            hex.AppendFormat("{0:x2}", b);
+        return hex.ToString();
+    }
+
+    public static string StringToHexString(string s)
+    {
+        byte[] ba = Encoding.Default.GetBytes(s);
+        var hexString = BitConverter.ToString(ba);
+        hexString = hexString.Replace("-", "");
+        return hexString;
     }
 }
 

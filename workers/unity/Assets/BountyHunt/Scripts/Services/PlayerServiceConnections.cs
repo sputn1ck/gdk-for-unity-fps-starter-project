@@ -56,7 +56,7 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             lnd = new LndClient();
         }
-        await lnd.Setup(confName, false, UseApdata);
+        await lnd.Setup(confName, false, UseApdata, "");
     }
 
     

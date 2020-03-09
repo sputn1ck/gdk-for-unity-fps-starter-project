@@ -17,7 +17,7 @@ public class BountyHuntGameMode : GameMode
     public override async void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
     {
         _serverGameModeBehaviour = serverGameModeBehaviour;
-        var totalSats = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundBounty() + bountyHuntSettings.baseSats + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
+        var totalSats = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundBounty() +FlagManager.instance.GetBaseSubsidiy()+ bountyHuntSettings.baseSats + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
         serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
         {
             CarryoverSats = 0
