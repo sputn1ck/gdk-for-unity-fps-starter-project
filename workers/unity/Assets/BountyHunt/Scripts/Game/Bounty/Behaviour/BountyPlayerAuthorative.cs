@@ -48,8 +48,9 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     public async void RequestPayout(long amount)
     {
-        var res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInvoice("payout for " + HunterComponentReader.Data.Name + " Amount: " + amount, amount);
-
+        //var res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInvoice("payout for " + HunterComponentReader.Data.Name + " Amount: " + amount, amount);
+        // Todo
+        var res = "";
         HunterComponentCommandSender.SendRequestPayoutCommand(entityId, new RequestPayoutRequest(res),OnRequestPayout);
     }
 
@@ -106,13 +107,13 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private async void UpdateTotalBalance()
     {
         var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-        var totalBalance = lastEarnings + balance.LocalBalance;
-        if (balance.MissingBalance > 0)
+        var totalBalance = lastEarnings + balance.DaemonBalance;
+        if (balance.ChannelMissingBalance > 0)
         {
-            totalBalance -= balance.MissingBalance;
+            totalBalance -= balance.ChannelMissingBalance;
         } else
         {
-            totalBalance += balance.StashBalance;
+            totalBalance += balance.BufferBalance;
         }
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {

@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerServiceTestBehaviour : MonoBehaviour
 {
-    [Header("Daemon Invoice")]
-    public bool getInvoiceTrigger;
-    public string invoicememo;
-    public long amount;
     [Header("Daemon Info")]
     public bool allInfoTrigger;
     [Header("lncli")]
@@ -14,11 +10,6 @@ public class PlayerServiceTestBehaviour : MonoBehaviour
     public string command;
     private void Update()
     {
-        if (getInvoiceTrigger)
-        {
-            getInvoiceTrigger = false;
-            GetInvoiceTrigger();
-        }
         if (allInfoTrigger)
         {
             allInfoTrigger = false;
@@ -31,16 +22,10 @@ public class PlayerServiceTestBehaviour : MonoBehaviour
         }
     }
 
-    public async void GetInvoiceTrigger()
-    {
-        var res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInvoice(invoicememo, amount);
-        Debug.Log(res);
-    }
 
     public async void GetAllInfoTrigger()
     {
-        var info = await PlayerServiceConnections.instance.DonnerDaemonClient.GetInfo();
-        Debug.Log(info);
+
         var connection = await PlayerServiceConnections.instance.DonnerDaemonClient.GetConnection();
         Debug.Log(connection);
         var walletBalance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();

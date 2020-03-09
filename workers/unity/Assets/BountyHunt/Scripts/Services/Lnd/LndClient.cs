@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using Fps;
@@ -18,135 +19,6 @@ public struct LnConf
     public int listenport;
     public string tlsfile;
     public string macaroonfile;
-}
-
-public class DummyLnd : IClientLnd
-{
-    string pubkey;
-
-    public event InvoiceSettledEventHandler OnInvoiceSettled;
-    public Dictionary<string, Invoice> invoices;
-
-    public DummyLnd()
-    {
-        invoices = new Dictionary<string, Invoice>();
-    }
-
-    public Task Setup(string config, bool listen, bool apdata)
-    {
-        pubkey = "pubkey" + UnityEngine.Random.Range(0, int.MaxValue);
-        return Task.CompletedTask;
-    }
-
-    public void ShutDown()
-    {
-        return;
-    }
-
-    public Task<GetInfoResponse> GetInfo()
-    {
-        return Task.FromResult(new GetInfoResponse() { IdentityPubkey = pubkey, SyncedToChain = false });
-    }
-
-    public Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port)
-    {
-        return Task.FromResult(new ConnectPeerResponse());
-    }
-
-    public Task<ListChannelsResponse> ListChannels()
-    {
-        return Task.FromResult(new ListChannelsResponse { });
-    }
-
-    public Task<string> GetInvoice(long amount, string description, long expiry)
-    {
-        var payreq = "invoice" + UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        invoices.Add(payreq, new Invoice { Memo = description, Value = amount, PaymentRequest = payreq });
-        return Task.FromResult(payreq);
-    }
-
-    public Task<SendResponse> PayInvoice(string paymentRequest)
-    {
-        return Task.FromResult(new SendResponse { PaymentError = "not using real lightning" });
-    }
-
-    public Task<PendingChannelsResponse> PendingChannels()
-    {
-        return Task.FromResult(new PendingChannelsResponse { });
-    }
-
-    public SignMessageResponse SignMessage(string message)
-    {
-        return new SignMessageResponse { Signature = "signature" };
-    }
-
-    public void AddCallback(InvoiceSettledEventHandler e)
-    {
-        OnInvoiceSettled += e;
-    }
-
-    public void RemoveCallback(InvoiceSettledEventHandler e)
-    {
-        OnInvoiceSettled -= e;
-    }
-
-    public Task<ChannelPoint> OpenChannel(string pubkey, long satAmount)
-    {
-        return Task.FromResult(new ChannelPoint { });
-    }
-
-    public string GetPubkey()
-    {
-        return this.pubkey;
-    }
-
-    public LnConf GetConfig()
-    {
-        return new LnConf();
-    }
-
-    public void SetPaid(string payreq)
-    {
-        if (invoices.ContainsKey(payreq))
-        {
-            OnInvoiceSettled.Invoke(this, new InvoiceSettledEventArgs() { Invoice = invoices[payreq] });
-        }
-    }
-
-    public async Task<PayReq> DecodePayreq(string payreq)
-    {
-        if (invoices.ContainsKey(payreq))
-        {
-            var invoice = invoices[payreq];
-            return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
-        }
-
-        return await Task.FromResult(new PayReq { NumSatoshis = 0 });
-    }
-
-    public void Dispose()
-    {
-    }
-
-    public Task<long> GetWalletBalace()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task CloseChannel(string fundingTx, uint index)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<string> SendAllCoins(string address)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerator HandleInvoices(CancellationTokenSource ct)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public class LndClient : IClientLnd
@@ -170,17 +42,18 @@ public class LndClient : IClientLnd
     private Thread listenThread;
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     private ConcurrentQueue<InvoiceSettledEventArgs> invoiceSettledQueue;
+    private RNGCryptoServiceProvider provider;
 
     public LndClient()
     {
     }
 
 
-    public async Task Setup(string config, bool listen, bool useApdata)
+    public async Task Setup(string config, bool listen, bool useApdata, string tlsString)
     {
         this.confName = config;
         this.useAppdata = useApdata;
-        LoadConfig();
+        LoadConfig(tlsString);
         var macaroonCallCredentials = new MacaroonCallCredentials(macaroon);
         var sslCreds = new SslCredentials(tlsCert);
         var channelCreds = ChannelCredentials.Create(sslCreds, macaroonCallCredentials.credentials);
@@ -188,6 +61,7 @@ public class LndClient : IClientLnd
         lightningClient = new Lightning.LightningClient(rpcChannel);
         pubkey = (await GetInfo()).IdentityPubkey;
         invoiceSettledQueue = new ConcurrentQueue<InvoiceSettledEventArgs>();
+        provider = new RNGCryptoServiceProvider();
         Debug.Log("my pubkey: " + pubkey);
 
         if (listen)
@@ -258,7 +132,7 @@ public class LndClient : IClientLnd
         }
     }
 
-    public void LoadConfig()
+    public void LoadConfig(string tlsString = "")
     {
         string path = Application.dataPath + "/StreamingAssets";
 #if UNITY_EDITOR
@@ -289,7 +163,14 @@ public class LndClient : IClientLnd
             var json = File.ReadAllText(path + "/" + confName);
             lnconf = JsonUtility.FromJson<LnConf>(json);
 
-            tlsCert = File.ReadAllText(path + "/" + lnconf.tlsfile);
+            if(tlsString == "")
+            {
+
+                tlsCert = File.ReadAllText(path + "/" + lnconf.tlsfile);
+            } else
+            {
+                tlsCert = tlsString;
+            }
             macaroon = MacaroonCallCredentials.ToHex(File.ReadAllBytes(path + "/" + lnconf.macaroonfile));
         }
 #elif UNITY_STANDALONE_OSX
@@ -556,6 +437,46 @@ public class LndClient : IClientLnd
         var res = await lightningClient.WalletBalanceAsync(new WalletBalanceRequest());
         return res.TotalBalance;
     }
+
+    public async Task<SendResponse> KeysendPayment(string targetPubkey, long amount)
+    {
+        var preImage = GetRandomBytes();
+        var rHash = GetRHash(preImage);
+
+        // TODO add platform pubkey
+        var req = new SendRequest
+        {
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest(targetPubkey)),
+            Amt = amount,
+            PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
+        };
+        
+        req.DestCustomRecords.Add(5482373484, Google.Protobuf.ByteString.CopyFrom(preImage));
+        //req.DestCustomRecords.Add(684568698384, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest(targetPubkey)));
+        //req.DestCustomRecords.Add(684577697779, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.StringToByteArrayFastest("BBH payout")));
+
+        return await lightningClient.SendPaymentSyncAsync(req);
+    }
+    private byte[] GetRandomBytes()
+    {
+        var byteArray = new byte[32];
+
+        provider.GetBytes(byteArray);
+        return byteArray;
+    }
+
+    private byte[] GetRHash(byte[] rawData)
+    {
+        using (SHA256 sha256Hash = SHA256.Create())
+        {
+            // ComputeHash - returns byte array  
+            byte[] bytes = sha256Hash.ComputeHash(rawData);
+
+            return bytes;
+        }
+    }
+
+
 }
 
 /* concurrent channel test
