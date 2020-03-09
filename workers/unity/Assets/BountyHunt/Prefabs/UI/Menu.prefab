@@ -8763,7 +8763,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 58.75
+  m_fontSize: 64
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11017,6 +11017,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1084958869611486546, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_text
+      value: Set Name
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c124bd25e6a15844788ead8d7548ac51, type: 3}
@@ -13305,6 +13310,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2994149948414772820}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: SubMenuUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751442344397192743, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1695172047687540681}
+    - target: {fileID: 1084958869611486546, guid: c124bd25e6a15844788ead8d7548ac51,
+        type: 3}
+      propertyPath: m_text
+      value: Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c124bd25e6a15844788ead8d7548ac51, type: 3}
