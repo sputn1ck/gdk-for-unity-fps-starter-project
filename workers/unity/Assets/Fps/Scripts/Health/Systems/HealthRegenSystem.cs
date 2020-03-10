@@ -94,7 +94,7 @@ namespace Fps.Health
                     continue;
                 }
 
-                if (healthEvent.Event.Payload.Modifier.Amount < 0)
+                if (healthEvent.Event.Payload.Modifier.Amount > 0)
                 {
                     recentlyDamagedCache.Add(healthEvent.EntityId);
                 }
