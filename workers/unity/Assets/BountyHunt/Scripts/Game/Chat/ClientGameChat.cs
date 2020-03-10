@@ -55,7 +55,6 @@ public class ClientGameChat : MonoBehaviour
         if (obj.Sender == "AUCTION_STARTED")
         {
             ClientEvents.instance.onNewAuctionStarted.Invoke();
-            ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, obj.Sender, "NEW AUCTION STARTED", false);
         }
 
     }

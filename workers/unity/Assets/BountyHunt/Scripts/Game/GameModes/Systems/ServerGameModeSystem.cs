@@ -64,6 +64,10 @@ public class ServerGameModeSystem : ComponentSystem
         {
             ClearPickups();
         }
+        if (gameMode.PlayerSettings.ClearStatsOnEnd)
+        {
+            ClearStats();
+        }
     }
 
     private void StartGameModeStuff()
@@ -96,6 +100,20 @@ public class ServerGameModeSystem : ComponentSystem
                 TargetEntityId = entityId.EntityId,
                 Payload = new TeleportRequest(randomPos.x, randomPos.y, randomPos.z)
             }); ;
+        });
+    }
+
+    void ClearStats()
+    {
+        Entities.With(playerBountyGroup).ForEach((
+            ref HunterComponent.Component hunter,
+            ref SpatialEntityId entityId) =>
+        {
+            componentUpdateSystem.SendUpdate(new HunterComponent.Update() {
+                SessionEarnings = 0,
+                Kills = 0,
+                Deaths = 0,
+            }, entityId.EntityId);
         });
     }
     void ClearPickups()

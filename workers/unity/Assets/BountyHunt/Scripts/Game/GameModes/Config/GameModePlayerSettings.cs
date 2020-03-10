@@ -8,6 +8,7 @@ public struct GameModePlayerSettings
 {
     public bool TeleportPlayerOnStart;
     public bool ClearBountyOnEnd;
+    public bool ClearStatsOnEnd;
 
     public double BountyTickConversion;
     public float BountyTickTime;

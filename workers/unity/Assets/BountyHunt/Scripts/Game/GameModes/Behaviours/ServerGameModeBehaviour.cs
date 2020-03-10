@@ -19,7 +19,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
     private int gameModeRotationCounter;
     public GameMode currentGameMode;
     private int nextGameModeId;
-    private ServerGameStats ServerGameStats;
 
     private void OnEnable()
     {
@@ -27,7 +26,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
         gameModeRotationCounter = 0;
 
         StartCoroutine(gameModeEnumerator());
-        ServerGameStats = GetComponent<ServerGameStats>();
     }
 
     private void StartGameMode()
@@ -100,7 +98,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 EndGameMode();
                 GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
                 yield return new WaitForSeconds(5f);
-                ServerGameStats.ResetScoreboard();
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
                 SetNextGameMode();

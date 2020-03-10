@@ -47,7 +47,7 @@ public class ServerDisconnectSystem : ComponentSystem
             if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
             {
                 commandSystem.SendCommand(new GameStats.RemoveName.Request { TargetEntityId = new EntityId(2), Payload = new RemoveNameRequest { Id = entityId.EntityId } });
-                if (donnerinfo.Bounty > 0 || donnerinfo.Earnings > 0)
+                if (donnerinfo.Bounty > 0)
                 {
                     commandSystem.SendCommand<BountySpawner.SpawnBountyPickup.Request>(new BountySpawner.SpawnBountyPickup.Request
                     {
@@ -64,8 +64,14 @@ public class ServerDisconnectSystem : ComponentSystem
                         }
                        
                     });
-                    componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
+
                 }
+                if(donnerinfo.Earnings > 0)
+                {
+                    ServerServiceConnections.instance.lnd.KeysendPayment(donnerinfo.Pubkey, donnerinfo.Earnings);
+                }
+
+                componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
             }
             /*
             if(component.Bounty > 0)
