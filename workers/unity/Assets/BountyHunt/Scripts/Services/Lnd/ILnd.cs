@@ -177,17 +177,21 @@ public class DummyLnd : IClientLnd
 
     public IEnumerator HandleInvoices(CancellationTokenSource ct)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        yield return null;
     }
 
     public Task KeysendPayment(string targetPubkey, long amount)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return null;
     }
 
     Task<SendResponse> IClientLnd.KeysendPayment(string targetPubkey, long amount)
     {
-        throw new NotImplementedException();
+        ///throw new NotImplementedException();
+        ///
+        return Task.FromResult(new SendResponse { PaymentError = "", PaymentPreimage = Google.Protobuf.ByteString.CopyFromUtf8("preimage" )});
     }
 }
 

@@ -8,11 +8,14 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
 {
 
     //player
-    public TextMeshProUGUI GameServerBalanceText;
-    public TextMeshProUGUI BufferBalanceText;
-    public TextMeshProUGUI DeamonBalanceText;
-    public TextMeshProUGUI LightingChannelCostText;
-    public TextMeshProUGUI TotalBalanceText;
+    public TextMeshProUGUI gameServerBalanceText;
+    public TextMeshProUGUI bufferBalanceText;
+    public GameObject bufferBalanceLine;
+    public TextMeshProUGUI deamonBalanceText;
+    public GameObject deamonBalanceLine;
+    public TextMeshProUGUI lightingChannelCostText;
+    public GameObject channelCostLine;
+    public TextMeshProUGUI totalBalanceText;
     public TextMeshProUGUI currentEarningsText;
     public TextMeshProUGUI currentBountyText;
     public TextMeshProUGUI currentKillsAndDeathsText;
@@ -63,19 +66,34 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     //player
     void onBalanceUpdate(BalanceUpdateEventArgs args)
     {
-        GameServerBalanceText.text = args.GameServerBalance + Utility.tintedSatsSymbol;
-        BufferBalanceText.text = args.BufferBalance + Utility.tintedSatsSymbol;
-        DeamonBalanceText.text = args.DeamonBalance + Utility.tintedSatsSymbol;
-        if (args.ChannelCost <= 0) LightingChannelCostText.gameObject.SetActive(false);
+        gameServerBalanceText.text = Utility.steppedNumberString(args.GameServerBalance) + Utility.tintedSatsSymbol;
+        deamonBalanceText.text = Utility.steppedNumberString(args.DeamonBalance) + Utility.tintedSatsSymbol;
+
+        if(args.BufferBalance > 0)
+        {
+            bufferBalanceLine.SetActive(true);
+            bufferBalanceText.text = Utility.steppedNumberString(args.BufferBalance) + Utility.tintedSatsSymbol;
+        }
         else
         {
-            LightingChannelCostText.gameObject.SetActive(true);
-            LightingChannelCostText.text = "-" + args.BufferBalance + Utility.tintedSatsSymbol;
+            bufferBalanceLine.SetActive(false);
+        }
+
+        if (args.ChannelCost <= 0)
+        {
+            deamonBalanceLine.SetActive(true);
+            channelCostLine.SetActive(false);
+        }
+        else
+        {
+            deamonBalanceLine.SetActive(false);
+            channelCostLine.SetActive(true);
+            lightingChannelCostText.text = "-" + Utility.steppedNumberString(args.ChannelCost)+ Utility.tintedSatsSymbol;
         }
 
         long total = args.GameServerBalance + args.BufferBalance + args.DeamonBalance - args.ChannelCost;
-        TotalBalanceText.text = total + Utility.tintedSatsSymbol;
-        UITinter tinter = TotalBalanceText.GetComponent<UITinter>();
+        totalBalanceText.text = Utility.steppedNumberString(total) + Utility.tintedSatsSymbol;
+        UITinter tinter = totalBalanceText.GetComponent<UITinter>();
         if (total < 0) tinter.tint = TintColor.Error;
         else tinter.tint = TintColor.Primary;
         tinter.updateColor();
@@ -83,17 +101,17 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
 
     void onBountyUpdate(BountyUpdateEventArgs args)
     {
-        currentBountyText.text = args.NewAmount + Utility.tintedSatsSymbol;
+        currentBountyText.text = Utility.steppedNumberString(args.NewAmount) + Utility.tintedSatsSymbol;
     }
 
     void onEarningsUpdate(SessionEarningsEventArgs args)
     {
-        currentEarningsText.text = args.NewAmount + Utility.tintedSatsSymbol;
+        currentEarningsText.text = Utility.steppedNumberString(args.NewAmount) + Utility.tintedSatsSymbol;
     }
 
     void onPlayerKillsAndDeathsUpdate(KillsAndDeathsUpdateEventArgs args)
     {
-        currentKillsAndDeathsText.text = args.kills + " / " + args.deaths;
+        currentKillsAndDeathsText.text = Utility.steppedNumberString(args.kills) + " / " + Utility.steppedNumberString(args.deaths);
     }
 
 
@@ -102,12 +120,12 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     void onPlayerLifeTimeKillsUpdate(int arg)
     {
         killsLT = arg;
-        lifeTimeKillsAndDeathsText.text = killsLT + " / " + deathsLT;
+        lifeTimeKillsAndDeathsText.text = Utility.steppedNumberString(killsLT) + " / " + Utility.steppedNumberString(deathsLT);
     }
     void onPlayerLifeTimeDeathsUpdate(int arg)
     {
         deathsLT = arg;
-        lifeTimeKillsAndDeathsText.text = killsLT + " / " + deathsLT;
+        lifeTimeKillsAndDeathsText.text = Utility.steppedNumberString(killsLT) + " / " + Utility.steppedNumberString(deathsLT);
     }
 
     void onPlayerLifeTimeEarningsUpdate(long arg) { lifeTimeEarningsText.text = Utility.SatsToShortString(arg, true); }
@@ -119,32 +137,32 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     void onGlobalBountyUpdate(long arg)
     {
         globalBounty = arg;
-        currentBountyOnPlayersText.text = arg + Utility.tintedSatsSymbol;
+        currentBountyOnPlayersText.text = Utility.steppedNumberString(arg) + Utility.tintedSatsSymbol;
         updateTotal();
     }
     void onGlobalLootUpdate(long arg)
     {
         globalLoot = arg;
-        currentLootOnMapText.text = arg + Utility.tintedSatsSymbol;
+        currentLootOnMapText.text = Utility.steppedNumberString(arg) + Utility.tintedSatsSymbol;
         updateTotal();
     }
     void onGlobalPotUpdate(long arg) {
         globalPot = arg;
-        currentPotText.text = arg + Utility.tintedSatsSymbol;
+        currentPotText.text = Utility.steppedNumberString(arg) + Utility.tintedSatsSymbol;
         updateTotal();
     }
 
     void updateTotal()
     {
         long total = globalBounty + globalLoot + globalPot;
-        totalGameSatsText.text = total + Utility.tintedSatsSymbol;
+        totalGameSatsText.text = Utility.steppedNumberString(total) + Utility.tintedSatsSymbol;
     }
 
     void onAllTimeKillsUpdate (int arg){ totalPlayersLifeTimeKillsText.text = arg.ToString(); }
-    void onAllTimeMostKillsUpdate (AllTimeScoreUpdateArgs args) { allTimeMostKillsText.text = args.score + " by " + args.name; }
+    void onAllTimeMostKillsUpdate (AllTimeScoreUpdateArgs args) { allTimeMostKillsText.text = Utility.steppedNumberString(args.score) + " by " + args.name; }
 
     void onAllTimeDeathsUpdate(int arg){ totalPlayersLifetimeDeathsText.text = arg.ToString(); }
-    void onAllTimeMostDeathsUpdate (AllTimeScoreUpdateArgs args) { allTimeMostDeathsText.text = args.score + " by " + args.name; }
+    void onAllTimeMostDeathsUpdate (AllTimeScoreUpdateArgs args) { allTimeMostDeathsText.text = Utility.steppedNumberString(args.score) + " by " + args.name; }
     void onAllTimeEarningsUpdate(long arg) { totalPlayersLifetimeEarnings.text = Utility.SatsToShortString(arg,true); }
     void onAllTimeMostEarningsUpdate(AllTimeScoreUpdateArgs args) {  allTimeMostEarnings.text = Utility.SatsToShortString(args.score, true) + " by " + args.name; }
 

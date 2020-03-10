@@ -19,7 +19,6 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     private long lastBounty;
     private long lastEarnings;
-    private long lastBalance;
     private long earningsThisSession;
     private long lastEarningsThisSession;
 
@@ -42,7 +41,6 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
         lastBounty = 0;
         lastEarnings = 0;
-        lastBalance = 0;
         earningsThisSession = 0;
 
         ct = new CancellationTokenSource();
@@ -91,20 +89,14 @@ public class BountyPlayerAuthorative : MonoBehaviour
     private async void UpdateTotalBalance()
     {
         var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-        var totalBalance = lastEarnings + balance.DaemonBalance + balance.BufferBalance;
-        if (balance.ChannelMissingBalance > 0)
-        {
-            totalBalance -= balance.ChannelMissingBalance;
-        }
+        
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
-            //TODO
-            //Add Values for server balance, buffer and channel cost
-
-            DeamonBalance = totalBalance,
-            //OldAmount = lastBalance,
+            GameServerBalance = HunterComponentReader.Data.Earnings,
+            BufferBalance = balance.BufferBalance,
+            DeamonBalance = balance.DaemonBalance,
+            ChannelCost = balance.ChannelMissingBalance
         });
-        lastBalance = totalBalance;
     }
 
 

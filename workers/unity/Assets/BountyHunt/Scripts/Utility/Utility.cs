@@ -155,5 +155,17 @@ public static class Utility
     }
 
     public static string tintedSatsSymbol = "<sprite name=\"sats\" tint=1>";
+    //*
+    public static string steppedNumberString(long number)
+    {
+        string newString = number.ToString();
+        int length = newString.Length;
 
+        for(int i = 3; i< length; i += 3)
+        {
+            newString  = newString.Insert(length - i, " ");
+        }
+        return newString;
+    }
+    //*/
 }
