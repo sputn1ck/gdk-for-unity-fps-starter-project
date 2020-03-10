@@ -62,16 +62,25 @@ public static class Utility
         return hex.ToString();
     }
 
+    /// <summary>
+    /// returns the shortened string without curccency symbol
+    /// </summary>
     public static string SatsToShortString(long sats)
     {
         return SatsToShortString(sats,false, Color.clear);
     }
-    
+
+    /// <summary>
+    /// returns the shortened string with tinted symbol (if any)
+    /// </summary>
     public static string SatsToShortString(long sats,bool includeSymbol)
     {
         return SatsToShortString(sats, includeSymbol, Color.clear);
     }
 
+    /// <summary>
+    /// returns the shortened string with a colored symbol
+    /// </summary>
     public static string SatsToShortString(long sats, Color symbolColor)
     {
         return SatsToShortString(sats, true, symbolColor);
@@ -145,4 +154,18 @@ public static class Utility
         return valueString;
     }
 
+    public static string tintedSatsSymbol = "<sprite name=\"sats\" tint=1>";
+    //*
+    public static string steppedNumberString(long number)
+    {
+        string newString = number.ToString();
+        int length = newString.Length;
+
+        for(int i = 3; i< length; i += 3)
+        {
+            newString  = newString.Insert(length - i, " ");
+        }
+        return newString;
+    }
+    //*/
 }

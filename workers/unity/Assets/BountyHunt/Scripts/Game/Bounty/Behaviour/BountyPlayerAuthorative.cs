@@ -19,9 +19,11 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     private long lastBounty;
     private long lastEarnings;
-    private long lastBalance;
     private long earningsThisSession;
     private long lastEarningsThisSession;
+
+    private int kills;
+    private int deaths;
 
     private CancellationTokenSource ct;
     private void Awake()
@@ -33,10 +35,12 @@ public class BountyPlayerAuthorative : MonoBehaviour
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
         HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
+        HunterComponentReader.OnKillsUpdate += HunterComponentReader_OnKillsUpdate;
+        HunterComponentReader.OnDeathsUpdate += HunterComponentReader_OnDeathsUpdate;
+
 
         lastBounty = 0;
         lastEarnings = 0;
-        lastBalance = 0;
         earningsThisSession = 0;
 
         ct = new CancellationTokenSource();
@@ -70,20 +74,29 @@ public class BountyPlayerAuthorative : MonoBehaviour
         lastEarningsThisSession = earningsThisSession;
     }
 
+    private void HunterComponentReader_OnKillsUpdate(int kills)
+    {
+        this.kills = kills;
+        ClientEvents.instance.onPlayerKillsAndDeathsUpdate.Invoke(new KillsAndDeathsUpdateEventArgs { kills = this.kills, deaths = this.deaths });
+    }
+
+    private void HunterComponentReader_OnDeathsUpdate(int deaths)
+    {
+        this.deaths = deaths;
+        ClientEvents.instance.onPlayerKillsAndDeathsUpdate.Invoke(new KillsAndDeathsUpdateEventArgs { kills = this.kills, deaths = this.deaths });
+    }
+
     private async void UpdateTotalBalance()
     {
         var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-        var totalBalance = lastEarnings + balance.DaemonBalance + balance.BufferBalance;
-        if (balance.ChannelMissingBalance > 0)
-        {
-            totalBalance -= balance.ChannelMissingBalance;
-        }
+        
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
-            NewAmount = totalBalance,
-            OldAmount = lastBalance,
+            GameServerBalance = HunterComponentReader.Data.Earnings,
+            BufferBalance = balance.BufferBalance,
+            DeamonBalance = balance.DaemonBalance,
+            ChannelCost = balance.ChannelMissingBalance
         });
-        lastBalance = totalBalance;
     }
 
 

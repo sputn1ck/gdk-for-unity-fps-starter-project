@@ -29,6 +29,10 @@ public class KillEvent : UnityEvent<KillEventArgs> { }
 
 public class RoundUpdateEvent : UnityEvent<RoundUpdateEventArgs> { }
 
+public class KillsAndDeathsUpdateEvent : UnityEvent<KillsAndDeathsUpdateEventArgs> { }
+
+public class AllTimeScoreUpdateEvent : UnityEvent<AllTimeScoreUpdateArgs> { }
+
 [Serializable]
 public struct BountyUpdateEventArgs
 {
@@ -61,8 +65,10 @@ public struct PaymentFailureArgs
 
 public struct BalanceUpdateEventArgs
 {
-    public long NewAmount;
-    public long OldAmount;
+    public long GameServerBalance;
+    public long BufferBalance;
+    public long DeamonBalance;
+    public long ChannelCost;
 }
 
 public struct KillEventArgs
@@ -78,5 +84,17 @@ public struct RoundUpdateEventArgs
     /// </summary>
     public float remainingTime;
     public GameMode gameMode;
+}
+
+public struct KillsAndDeathsUpdateEventArgs
+{
+    public int kills;
+    public int deaths;
+}
+
+public struct AllTimeScoreUpdateArgs
+{
+    public string name;
+    public long score;
 }
 

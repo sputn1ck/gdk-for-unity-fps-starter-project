@@ -42,11 +42,14 @@ public class FlagManager : MonoBehaviour
     private const string minSatsForDonationAnnouncementFlag = "min_sats_for_donation_announcement";
     private const string satoshiDropRateFlag = "satoshi_drop_rate_on_death";
 
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     async void Start()
     {
 
-        instance = this;
         var tmp = GetComponent<BBHGameLogicWorkerConnector>();
         if(tmp == null)
         {
