@@ -28,7 +28,11 @@ public class GameTabWindowUI : TabMenuWindowUI
     Auction currentAuction = null;
     AuctionEntry currentBid = null;
 
-    //TODO
+    //Tip
+    public TMP_InputField TipPlayerNameField;
+    public TMP_InputField TipPlayerAmountField;
+    public Button TipPlayerButton;
+
     
     public void Start()
     {
@@ -69,6 +73,14 @@ public class GameTabWindowUI : TabMenuWindowUI
         PlayerServiceConnections.instance.AuctionClient.AddDonation(message, amount);
     }
 
+    //TIP
+    public void Tip()
+    {
+        string name = TipPlayerNameField.text;
+        long amount = long.Parse(TipPlayerAmountField.text);
+
+
+    }
 
     //AUCTION
     public async void Bid()
