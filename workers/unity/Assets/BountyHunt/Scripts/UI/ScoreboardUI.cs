@@ -19,6 +19,7 @@ public class ScoreboardUI : ScreenUI
     public Toggle sortBtnBounty;
     public Toggle sortBtnKills;
     public Toggle sortBtnDeaths;
+    public Toggle sortBtnEarnings;
 
     EntityId playerID;
 
@@ -45,6 +46,7 @@ public class ScoreboardUI : ScreenUI
         sortBtnBounty.onValueChanged.AddListener(SetSortingToBounty);
         sortBtnKills.onValueChanged.AddListener(SetSortingToKills);
         sortBtnDeaths.onValueChanged.AddListener(SetSortingToDeaths);
+        sortBtnEarnings.onValueChanged.AddListener(SetSortingToEarnings);
     }
 
     public void Enable()
@@ -93,6 +95,14 @@ public class ScoreboardUI : ScreenUI
         if (value)
         {
             UpdateSorting(ScoreBoardSorting.DEATHS);
+        }
+    }
+
+    void SetSortingToEarnings(bool value)
+    {
+        if (value)
+        {
+            UpdateSorting(ScoreBoardSorting.EARNINGS);
         }
     }
 
@@ -215,5 +225,5 @@ public class ScoreboardUI : ScreenUI
 
 public enum ScoreBoardSorting
 {
-    BOUNTY,KILLS,DEATHS
+    BOUNTY,KILLS,DEATHS,EARNINGS
 }

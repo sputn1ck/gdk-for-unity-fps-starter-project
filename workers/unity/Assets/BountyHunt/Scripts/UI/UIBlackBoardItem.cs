@@ -11,6 +11,7 @@ public class UIBlackBoardItem : MonoBehaviour
     public TextMeshProUGUI rankText;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI bountyText;
+    public TextMeshProUGUI earningsText;
     public TextMeshProUGUI killsText;
     public TextMeshProUGUI deathsText;
     public Image backGroundImage;
@@ -56,6 +57,7 @@ public class UIBlackBoardItem : MonoBehaviour
         bountyText.text = item.item.Bounty.ToString();
         killsText.text = item.item.Kills.ToString();
         deathsText.text = item.item.Deaths.ToString();
+        earningsText.text = item.item.Earnings.ToString();
 
         if (item.highlight)
         {
@@ -102,15 +104,17 @@ public struct ScoreboardItem
 {
     public EntityId Entity;
     public long Bounty;
+    public long Earnings;
     public int Kills;
     public int Deaths;
 
-    public ScoreboardItem(EntityId entity, long bounty, int kills, int deaths)
+    public ScoreboardItem(EntityId entity, long bounty, int kills, int deaths , long earnings)
     {
         Entity = entity;
         Bounty = bounty;
         Kills = kills;
         Deaths = deaths;
+        Earnings = earnings;
     }
 }
 
