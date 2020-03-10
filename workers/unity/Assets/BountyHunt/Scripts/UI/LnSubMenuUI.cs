@@ -72,21 +72,9 @@ public class LnSubMenuUI : SubMenuUI
     {
         try
         {
-            await GetDonnerChannel();
-            //onChainBalance = await lnClient.lnd.GetWalletBalace();
-            if (DonnerChannel != null)
-            {
-
-                LightningBalance = DonnerChannel.LocalBalance - DonnerChannel.LocalChanReserveSat;
-
-                BalanceText.text = "Lightning Balance: " + LightningBalance;
-                //BalanceText.text = "Lightning Balance: " + 0;
-            }
-            else
-            {
-                //BalanceText.text = "Bitcoin Balance: " + onChainBalance;
-                BalanceText.text = "Lightning Balance: " + 0;
-            }
+            var balance = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+            BalanceText.text = "Lightning Balance: " + balance.DaemonBalance;
+                
         } catch(Exception e)
         {
 
@@ -100,11 +88,6 @@ public class LnSubMenuUI : SubMenuUI
     {
         try
         {
-            await UpdateBalance();
-            if (DonnerChannel == null)
-            {
-                throw new Exception("No lightning channel found");
-            }
             var invoice = await lnClient.lnd.DecodePayreq(InvoiceInput.text);
             if(invoice.NumSatoshis > LightningBalance)
             {
