@@ -22,7 +22,7 @@ public class ServerGameStats : MonoBehaviour
     {
         GameStatsWriter.SendUpdate(new GameStats.Update
         {
-            BountyInCubes = GameStatsWriter.Data.BountyInCubes - obj.Payload.Amount,
+            BountyInCubes = GameStatsWriter.Data.BountyInCubes + obj.Payload.Amount,
         });
     }
 
