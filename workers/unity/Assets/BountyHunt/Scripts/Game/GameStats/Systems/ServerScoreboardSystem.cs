@@ -38,13 +38,12 @@ public class ServerScoreboardSystem : ComponentSystem
 
     protected override void OnUpdate()
     {
-
         Entities.With(statsGroup).ForEach((ref GameStats.Component gamestats) =>
         {
             var updates = componentUpdateSystem.GetComponentUpdatesReceived<HunterComponent.Update>();
             if (updates.Count == 0)
                 return;
-            
+         
             Dictionary<EntityId, PlayerItem> newPairs = new Dictionary<EntityId, PlayerItem>();
             for (int i = 0; i < updates.Count; i++)
             {
@@ -62,7 +61,7 @@ public class ServerScoreboardSystem : ComponentSystem
             {
                 if (newPairs.ContainsKey(entityId.EntityId))
                 {
-                    newPairs[entityId.EntityId] = new PlayerItem() { Bounty = hunter.Bounty, Deaths = hunter.Deaths, Kills = hunter.Kills,Name = hunter.Name, Pubkey = hunter.Pubkey};
+                    newPairs[entityId.EntityId] = new PlayerItem() { Bounty = hunter.Bounty, Deaths = hunter.Deaths, Kills = hunter.Kills,Name = hunter.Name, Pubkey = hunter.Pubkey, RoundEarnings = hunter.SessionEarnings};
                 }
                 activeBounty += hunter.Bounty;
                 activeClasses[gun.GunId]++;
@@ -77,10 +76,10 @@ public class ServerScoreboardSystem : ComponentSystem
                     newPlayer.Deaths = player.Value.Deaths;
                     newPlayer.Name = player.Value.Name;
                     newPlayer.Pubkey = player.Value.Pubkey;
+                    newPlayer.RoundEarnings = player.Value.RoundEarnings;
                     newMap[player.Key] = newPlayer;
                 }
             }
-
             gamestats.PlayerMap = newMap;
             gamestats.BountyOnPlayers = activeBounty;
             PrometheusManager.ActivePlayers.Set(newMap.Count);
@@ -88,8 +87,6 @@ public class ServerScoreboardSystem : ComponentSystem
             PrometheusManager.ActiveSoldiers.Set(activeClasses[0]);
             PrometheusManager.ActiveSnipers.Set(activeClasses[1]);
             PrometheusManager.ActiveScouts.Set(activeClasses[2]);
-
-
         });
     }
 

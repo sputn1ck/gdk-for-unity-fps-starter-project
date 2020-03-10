@@ -86,12 +86,14 @@ public class ClientGameStats : MonoBehaviour
 
         foreach (var i in obj)
         {
+            Utility.Log(i.Value.Name + " earnings: " + i.Value.RoundEarnings, Color.cyan);
             var scoreboarditem = new ScoreboardItem()
             {
                 Entity = i.Key,
                 Bounty = i.Value.Bounty,
                 Kills = i.Value.Kills,
-                Deaths = i.Value.Deaths
+                Deaths = i.Value.Deaths,
+                Earnings = i.Value.RoundEarnings
             };
             itemList.Add(new ScoreboardUIItem(i.Value.Name, scoreboarditem));
         }
