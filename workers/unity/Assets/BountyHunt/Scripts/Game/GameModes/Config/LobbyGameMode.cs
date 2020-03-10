@@ -12,6 +12,7 @@ public class LobbyGameMode : GameMode
         Debug.Log("start lobby");
         _serverGameModeBehaviour = serverGameModeBehaviour;
         var res = await ServerServiceConnections.instance.AuctionController.StartAuction((int)GlobalSettings.SecondDuration);
+        ServerGameChat.instance.SendAuctionStartedChatMessage("new auction started, check escape menu to participate");
         ServerEvents.instance.OnAuctionInvoicePaid.AddListener(OnAuctionPaid);
         ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
     }

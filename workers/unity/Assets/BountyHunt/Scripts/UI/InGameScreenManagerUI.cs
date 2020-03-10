@@ -14,6 +14,7 @@ public class InGameScreenManagerUI : MonoBehaviour
     public ScreenUI ScoreBoardScreen;
     public ReticleUI Reticle;
     public HealthBarController Healthbar;
+    public GameObject DebugPanel;
 
     //TODO
     //public GameObject BountyUi;
@@ -156,6 +157,11 @@ public class InGameScreenManagerUI : MonoBehaviour
         if (Input.GetKey(KeyCode.Tab)!=ScoreBoardScreen.activated){
             ScoreBoardScreen.activated = Input.GetKey(KeyCode.Tab);
             UpdateScreens();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            DebugPanel.SetActive(!DebugPanel.activeInHierarchy);
         }
     }
 

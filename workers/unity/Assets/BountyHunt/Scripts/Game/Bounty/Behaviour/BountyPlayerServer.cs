@@ -40,11 +40,19 @@ public class BountyPlayerServer : MonoBehaviour
         //StartCoroutine(BountyTick());
     }
 
-    private void OnEarningsUpdate(long obj)
+    private async void OnEarningsUpdate(long obj)
     {
         var amount = HunterComponentWriter.Data.Earnings;
-        ServerServiceConnections.instance.lnd.KeysendPayment(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
-        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = HunterComponentWriter.Data.Earnings - amount });
+        if (amount == 0)
+            return;
+        var res = await ServerServiceConnections.instance.lnd.KeysendPayment(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
+        if (res.PaymentError != "")
+        {
+            ChatPanelUI.instance.PaymentFailuer(new PaymentFailureArgs { message = "error while paying out: " + res.PaymentError});
+        } else
+        {
+            HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = HunterComponentWriter.Data.Earnings - amount });
+        }
     }
 
     private void OnTeleport(HunterComponent.TeleportPlayer.ReceivedRequest obj)

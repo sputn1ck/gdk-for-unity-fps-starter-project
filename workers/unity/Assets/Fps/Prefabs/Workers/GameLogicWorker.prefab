@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5171795202252606609}
   - component: {fileID: 3078217333959010984}
   - component: {fileID: 4427303356334879966}
+  - component: {fileID: 921699764}
   m_Layer: 0
   m_Name: GameLogicWorker
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MonoBehaviour:
   defaultBountyPerTick: 0.05
   defualtTimePerBountyTick: 5
   defaultSubsidizeGame: 0
-  defaultSubsidyPerMinute: 100
+  defaultSubsidyPerMinute: 1000
   defaultChannelCost: 1000
   defaultChannelSize: 25000
   defaultTargetConf: 0
@@ -118,3 +119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b1ce1a344257148b6d74b666f61ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &921699764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455626031769568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e3eb86baf03f6419e0b88d3567930b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPubkey: 02004111b64ca4c268811f116112bf930b6f0fac452e28bc874a4762a11220cf4e
+  targetAmount: 123
+  sendKeysend: 0

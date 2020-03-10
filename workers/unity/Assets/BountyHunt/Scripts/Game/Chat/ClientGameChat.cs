@@ -43,7 +43,6 @@ public class ClientGameChat : MonoBehaviour
             ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, obj.Sender, obj.Message);
         }
         else if (obj.Sender == "AUCTION_STARTED") {
-            ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, obj.Sender, obj.Message);
             ClientEvents.instance.onNewAuctionStarted.Invoke();
         }
         else
@@ -56,6 +55,7 @@ public class ClientGameChat : MonoBehaviour
         if (obj.Sender == "AUCTION_STARTED")
         {
             ClientEvents.instance.onNewAuctionStarted.Invoke();
+            ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, obj.Sender, "NEW AUCTION STARTED", false);
         }
 
     }
