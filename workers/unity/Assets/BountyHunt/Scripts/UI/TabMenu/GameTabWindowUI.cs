@@ -40,6 +40,7 @@ public class GameTabWindowUI : TabMenuWindowUI
         ClientEvents.instance.onNewAuctionStarted.AddListener(GetActiveAuction);
         donateButton.onClick.AddListener(Donate);
         bidButton.onClick.AddListener(Bid);
+        TipPlayerButton.onClick.AddListener(Tip);
         cancelButton.onClick.AddListener(CancelBid);
         statusButton.onClick.AddListener(BidStatus);
         ClientEvents.instance.onGameJoined.AddListener(GameJoined);
