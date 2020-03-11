@@ -465,13 +465,13 @@ public class LndClient : IClientLnd
         // TODO add platform pubkey
         var req = new SendRequest
         {
-            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(platformPubkey)),
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray("024b0f1e453299eb39fd629ebc0f881e7714a86eb86f173b11f7606fcb4731e246")),
             Amt = amount,
             PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
         };
         req.DestCustomRecords.Add(5482373484, Google.Protobuf.ByteString.CopyFrom(preImage));
         req.DestCustomRecords.Add(Utility.BountyInt, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(targetPubkey)));
-        req.DestCustomRecords.Add(Utility.BountyInt, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(DonnerUtils.StringToHexString(message))));
+        req.DestCustomRecords.Add(Utility.MemoInt, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(DonnerUtils.StringToHexString(message))));
 
         return await lightningClient.SendPaymentSyncAsync(req);
     }

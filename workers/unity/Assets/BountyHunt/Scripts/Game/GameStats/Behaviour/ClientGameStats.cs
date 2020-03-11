@@ -89,7 +89,6 @@ public class ClientGameStats : MonoBehaviour
 
         foreach (var i in obj)
         {
-            Utility.Log(i.Value.Name + " earnings: " + i.Value.RoundEarnings, Color.cyan);
             var scoreboarditem = new ScoreboardItem()
             {
                 Entity = i.Key,
