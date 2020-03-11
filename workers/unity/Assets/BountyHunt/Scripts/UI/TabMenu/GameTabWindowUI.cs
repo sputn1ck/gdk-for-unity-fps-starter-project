@@ -78,12 +78,16 @@ public class GameTabWindowUI : TabMenuWindowUI
     public async void PostBounty()
     {
         string messageString;
+        string messageColor;
         string name = PostBountyNameField.text;
         long amount = long.Parse(PostBountyAmountField.text);
         string pubkey = ClientGameStats.instance.GetPlayerByName(name).Pubkey;
+
+        
         if (String.IsNullOrEmpty(pubkey))
         {
             messageString = "player not found";
+            messageColor = Utility.failureColorHex;
         }
         else
         {
@@ -91,13 +95,16 @@ public class GameTabWindowUI : TabMenuWindowUI
             if (res.PaymentError != "")
             {
                 messageString = "payment failed!";
+                messageColor = Utility.failureColorHex;
+
             }
             else
             {
                 messageString = "succesfully increased " + name + "\'s bounty by " + amount + Utility.tintedSatsSymbol;
+                messageColor = Utility.successColorHex;
             }
         }
-        ClientEvents.instance.onChatMessageRecieve.Invoke(new Chat.ChatMessage {Message = messageString, Sender = "Post Bounty", Type = Chat.MessageType.INFO_LOG});
+        ClientEvents.instance.onChatMessageRecieve.Invoke(new Chat.ChatMessage {Message = messageString, Sender = "Post Bounty", Type = Chat.MessageType.INFO_LOG,Color = messageColor});
         
     }
 

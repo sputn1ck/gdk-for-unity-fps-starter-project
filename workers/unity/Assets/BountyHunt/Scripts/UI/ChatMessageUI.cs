@@ -12,15 +12,19 @@ public class ChatMessageUI : MonoBehaviour
     public MessageType type;
     public string sender;
     public string message;
+    public Color color;
 
     bool disappear = false;
     float disappearTime;
 
-    public void setMessage(MessageType type, string sender, string message)
+    
+    /// <param name="color">default Color if Color == Color.Clear</param>
+    public void setMessage(MessageType type, string sender, string message,Color color)
     {
         this.type = type;
         this.sender = sender;
         this.message = message;
+        this.color = color;
 
         updateMessage();
     }
@@ -34,7 +38,13 @@ public class ChatMessageUI : MonoBehaviour
         }
         text += message;
         chatText.text = text;
-        chatText.color = chatPanel.GetColorFormLogType(type);
+
+        if (color == Color.clear)
+        {
+            chatText.color = chatPanel.GetColorFormLogType(type);
+        }
+        else chatText.color = color;
+
 
     }
 
@@ -68,5 +78,3 @@ public class ChatMessageUI : MonoBehaviour
         }
     }
 }
-
-

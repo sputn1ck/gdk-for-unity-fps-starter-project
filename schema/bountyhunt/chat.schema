@@ -27,6 +27,7 @@ type ChatMessage {
     string message = 4;
     MessageType type = 5;
     bool show_announcement = 6;
+    string color = 7;
 }
 
 enum MessageType{
