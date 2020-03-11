@@ -20,12 +20,13 @@ MonoBehaviour:
   PlayerSettings:
     TeleportPlayerOnStart: 1
     ClearBountyOnEnd: 1
+    ClearStatsOnEnd: 0
     BountyTickConversion: 0.1
     BountyTickTime: 5
     BountyDropPercentageOnDeath: 1
   bountyHuntSettings:
     timeBetweenSpawns: 30
-    minSpawns: 5
-    maxSpawns: 20
+    minSpawns: 20
+    maxSpawns: 40
     distribution: 0
     baseSats: 0

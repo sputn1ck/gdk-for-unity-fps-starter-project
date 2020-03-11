@@ -159,10 +159,6 @@ public class InGameScreenManagerUI : MonoBehaviour
             UpdateScreens();
         }
         
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            DebugPanel.SetActive(!DebugPanel.activeInHierarchy);
-        }
     }
 
     IEnumerator SetCursorLockstateAtFrameEnd(CursorLockMode mode)

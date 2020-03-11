@@ -50,7 +50,8 @@ namespace Fps.Health
                 var healthModifiedInfo = new HealthModifiedInfo
                 {
                     Modifier = modifier,
-                    HealthBefore = health.Health
+                    HealthBefore = health.Health,
+                   
                 };
 
                 health.Health = Mathf.Clamp(health.Health + modifier.Amount, 0, health.MaxHealth);

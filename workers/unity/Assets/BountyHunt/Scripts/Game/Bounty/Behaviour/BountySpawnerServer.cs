@@ -104,13 +104,14 @@ public class BountySpawnerServer : MonoBehaviour
 
     }
 
-    private void SpawnTick(long satsPerTick, int minSpawns = 1, int maxSpawns = 20)
+    private void SpawnTick(long satsPerTick, int minSpawns, int maxSpawns)
     {
         Debug.LogFormat("spawning tick with {0} sats per tick {1} min spawns {2} max spawns ", satsPerTick, minSpawns, maxSpawns);
         long totalSats = 0;
         long remainingSats = satsPerTick;
         long carrySats = satsPerTick % maxSpawns;
-        long satsPerSpawn = (long)Mathf.Clamp((int)satsPerTick / (int)maxSpawns, minSpawns, int.MaxValue);
+        int plannedSpawns = Random.Range(minSpawns, maxSpawns);
+        long satsPerSpawn = (long)Mathf.Clamp((int)satsPerTick / (int)plannedSpawns, 1, int.MaxValue);
         int spawns = 0;
         for (spawns = 0; spawns < maxSpawns; spawns++)
         {
