@@ -28,10 +28,10 @@ public class GameTabWindowUI : TabMenuWindowUI
     Auction currentAuction = null;
     AuctionEntry currentBid = null;
 
-    //Tip
-    public TMP_InputField TipPlayerNameField;
-    public TMP_InputField TipPlayerAmountField;
-    public Button TipPlayerButton;
+    //Post Bounty
+    public TMP_InputField PostBountyNameField;
+    public TMP_InputField PostBountyAmountField;
+    public Button PostBountyButton;
 
     
     public void Start()
@@ -40,7 +40,7 @@ public class GameTabWindowUI : TabMenuWindowUI
         ClientEvents.instance.onNewAuctionStarted.AddListener(GetActiveAuction);
         donateButton.onClick.AddListener(Donate);
         bidButton.onClick.AddListener(Bid);
-        TipPlayerButton.onClick.AddListener(Tip);
+        PostBountyButton.onClick.AddListener(PostBounty);
         cancelButton.onClick.AddListener(CancelBid);
         statusButton.onClick.AddListener(BidStatus);
         ClientEvents.instance.onGameJoined.AddListener(GameJoined);
@@ -74,13 +74,31 @@ public class GameTabWindowUI : TabMenuWindowUI
         PlayerServiceConnections.instance.AuctionClient.AddDonation(message, amount);
     }
 
-    //TIP
-    public void Tip()
+    //POST BOUNTY
+    public async void PostBounty()
     {
-        string name = TipPlayerNameField.text;
-        long amount = long.Parse(TipPlayerAmountField.text);
-
-
+        string messageString;
+        string name = PostBountyNameField.text;
+        long amount = long.Parse(PostBountyAmountField.text);
+        string pubkey = ClientGameStats.instance.GetPlayerByName(name).Pubkey;
+        if (String.IsNullOrEmpty(pubkey))
+        {
+            messageString = "player not found";
+        }
+        else
+        {
+            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(pubkey, amount);
+            if (res.PaymentError != "")
+            {
+                messageString = "payment failed!";
+            }
+            else
+            {
+                messageString = "succesfully increased " + name + "\'s bounty by " + amount + Utility.tintedSatsSymbol;
+            }
+        }
+        ClientEvents.instance.onChatMessageRecieve.Invoke(new Chat.ChatMessage {Message = messageString, Sender = "Post Bounty", Type = Chat.MessageType.INFO_LOG});
+        
     }
 
     //AUCTION

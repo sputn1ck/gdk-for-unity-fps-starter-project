@@ -50,13 +50,13 @@ public class ClientPaymentManager : MonoBehaviour
         } else
         {
 
-            var player = ClientGameStats.instance.IdToName(new EntityId(obj.ReceiverId));
+            var player = ClientGameStats.instance.GetPlayerByID(new EntityId(obj.ReceiverId));
             ClientEvents.instance.onChatMessageRecieve.Invoke(new Chat.ChatMessage()
             {
                 EntityId = 2,
                 Timestamp = 0,
                 Sender = "Payments",
-                Message = player + " bounty was increased by " + obj.Sats + "sats",
+                Message = player.Name + " bounty was increased by " + obj.Sats + "sats",
                 Type = Chat.MessageType.INFO_LOG
             });
         }
