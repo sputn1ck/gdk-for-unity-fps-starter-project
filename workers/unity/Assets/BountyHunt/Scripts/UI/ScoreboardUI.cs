@@ -60,7 +60,7 @@ public class ScoreboardUI : ScreenUI
 
     public void UpdateScoreboard(List<ScoreboardUIItem> update, EntityId playerID)
     {
-        this.playerID = playerID;  
+        this.playerID = playerID;
         ScoreboardUIItems = update;
         RefreshScoreBoard();
     }
@@ -123,6 +123,9 @@ public class ScoreboardUI : ScreenUI
                 case ScoreBoardSorting.DEATHS:
                     ScoreboardUIItems = ScoreboardUIItems.OrderByDescending(o => o.item.Deaths).ToList();
                     break;
+                case ScoreBoardSorting.EARNINGS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderByDescending(o => o.item.Earnings).ToList();
+                    break;
                 default:
                     break;
             }
@@ -139,6 +142,9 @@ public class ScoreboardUI : ScreenUI
                     break;
                 case ScoreBoardSorting.DEATHS:
                     ScoreboardUIItems = ScoreboardUIItems.OrderBy(o => o.item.Deaths).ToList();
+                    break;
+                case ScoreBoardSorting.EARNINGS:
+                    ScoreboardUIItems = ScoreboardUIItems.OrderBy(o => o.item.Earnings).ToList();
                     break;
                 default:
                     break;
