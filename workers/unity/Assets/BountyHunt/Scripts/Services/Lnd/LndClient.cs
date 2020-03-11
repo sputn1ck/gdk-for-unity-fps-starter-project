@@ -438,7 +438,7 @@ public class LndClient : IClientLnd
         return res.TotalBalance;
     }
 
-    public async Task<SendResponse> KeysendPayment(string targetPubkey, long amount)
+    public async Task<SendResponse> KeysendBufferDeposit(string targetPubkey, long amount)
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
@@ -453,6 +453,25 @@ public class LndClient : IClientLnd
         req.DestCustomRecords.Add(5482373484, Google.Protobuf.ByteString.CopyFrom(preImage));
         req.DestCustomRecords.Add(684568698384, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(targetPubkey)));
         req.DestCustomRecords.Add(684577697779, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(DonnerUtils.StringToHexString("BBH Payout"))));
+
+        return await lightningClient.SendPaymentSyncAsync(req);
+    }
+
+    public async Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
+    {
+        var preImage = GetRandomBytes();
+        var rHash = GetRHash(preImage);
+
+        // TODO add platform pubkey
+        var req = new SendRequest
+        {
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(platformPubkey)),
+            Amt = amount,
+            PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
+        };
+        req.DestCustomRecords.Add(5482373484, Google.Protobuf.ByteString.CopyFrom(preImage));
+        req.DestCustomRecords.Add(Utility.BountyInt, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(targetPubkey)));
+        req.DestCustomRecords.Add(Utility.BountyInt, Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(DonnerUtils.StringToHexString(message))));
 
         return await lightningClient.SendPaymentSyncAsync(req);
     }

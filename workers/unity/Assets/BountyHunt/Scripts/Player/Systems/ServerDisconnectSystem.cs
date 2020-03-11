@@ -68,7 +68,7 @@ public class ServerDisconnectSystem : ComponentSystem
                 }
                 if(donnerinfo.Earnings > 0)
                 {
-                    ServerServiceConnections.instance.lnd.KeysendPayment(donnerinfo.Pubkey, donnerinfo.Earnings);
+                    ServerServiceConnections.instance.lnd.KeysendBufferDeposit(donnerinfo.Pubkey, donnerinfo.Earnings);
                 }
 
                 componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);

@@ -28,7 +28,7 @@ public class DevServiceTestBehaviour : MonoBehaviour
 
     async void SendKeysend(string target, long amount)
     {
-        var res = await ServerServiceConnections.instance.lnd.KeysendPayment(target, amount);
+        var res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(target, amount);
         Debug.LogFormat("Payment: error: {0} preimage: {1}", res.PaymentError, DonnerUtils.ByteArrayToString(res.PaymentPreimage.ToByteArray()));
     }
 }
