@@ -67,7 +67,7 @@ public struct BalanceUpdateEventArgs
 {
     public long GameServerBalance;
     public long BufferBalance;
-    public long DeamonBalance;
+    public long DaemonBalance;
     public long ChannelCost;
 }
 

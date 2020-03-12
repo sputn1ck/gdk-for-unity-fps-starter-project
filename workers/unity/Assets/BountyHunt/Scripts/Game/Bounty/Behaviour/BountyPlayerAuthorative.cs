@@ -94,7 +94,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
         {
             GameServerBalance = HunterComponentReader.Data.Earnings,
             BufferBalance = balance.BufferBalance,
-            DeamonBalance = balance.DaemonBalance,
+            DaemonBalance = balance.DaemonBalance,
             ChannelCost = balance.ChannelMissingBalance
         });
     }
