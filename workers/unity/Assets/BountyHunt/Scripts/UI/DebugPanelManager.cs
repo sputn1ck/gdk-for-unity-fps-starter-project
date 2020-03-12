@@ -15,7 +15,7 @@ public class DebugPanelManager : MonoBehaviour
     {
         ClientEvents.instance.onBalanceUpdate.AddListener((BalanceUpdateEventArgs e) =>
         {
-            balancePanel.UpdateText("Balance", e.DeamonBalance.ToString());
+            balancePanel.UpdateText("Balance", e.DaemonBalance.ToString());
         });
 
         ClientEvents.instance.onBountyUpdate.AddListener((BountyUpdateEventArgs e) =>

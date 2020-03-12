@@ -67,7 +67,7 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
     void onBalanceUpdate(BalanceUpdateEventArgs args)
     {
         gameServerBalanceText.text = Utility.steppedNumberString(args.GameServerBalance) + Utility.tintedSatsSymbol;
-        deamonBalanceText.text = Utility.steppedNumberString(args.DeamonBalance) + Utility.tintedSatsSymbol;
+        deamonBalanceText.text = Utility.steppedNumberString(args.DaemonBalance) + Utility.tintedSatsSymbol;
 
         if(args.BufferBalance > 0)
         {
@@ -91,7 +91,7 @@ public class StatisticsTabWindowUI : TabMenuWindowUI
             lightingChannelCostText.text = "-" + Utility.steppedNumberString(args.ChannelCost)+ Utility.tintedSatsSymbol;
         }
 
-        long total = args.GameServerBalance + args.BufferBalance + args.DeamonBalance - args.ChannelCost;
+        long total = args.GameServerBalance + args.BufferBalance + args.DaemonBalance - args.ChannelCost;
         totalBalanceText.text = Utility.steppedNumberString(total) + Utility.tintedSatsSymbol;
         UITinter tinter = totalBalanceText.GetComponent<UITinter>();
         if (total < 0) tinter.tint = TintColor.Error;

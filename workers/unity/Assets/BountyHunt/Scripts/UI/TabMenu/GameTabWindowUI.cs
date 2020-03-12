@@ -12,7 +12,7 @@ public class GameTabWindowUI : TabMenuWindowUI
     public TMP_InputField donationMessageInput;
     public TMP_InputField donationAmountInput;
     public Button donateButton;
-
+    long donationAmount;
 
     //Auction
     public TextMeshProUGUI highestBidText;
@@ -27,20 +27,40 @@ public class GameTabWindowUI : TabMenuWindowUI
     DateTime AuctionEndTime;
     Auction currentAuction = null;
     AuctionEntry currentBid = null;
+    long bidAmount;
 
-    //TODO
+    //Post Bounty
+    public TMP_InputField PostBountyNameInput;
+    public TMP_InputField PostBountyAmountInput;
+    public Button PostBountyButton;
+    long postBountyAmount;
+
+    //Balance
+    public TextMeshProUGUI BalanceText;
+    long balance;
     
     public void Start()
     {
+        donationAmount = long.Parse(donationAmountInput.text);
+        bidAmount = long.Parse(auctionAmountInput.text);
+        postBountyAmount = long.Parse(PostBountyAmountInput.text);
+        UpdateDonationButton();
+        UpdateBidButton();
+        UpdatePostBountyButton();
 
         ClientEvents.instance.onNewAuctionStarted.AddListener(GetActiveAuction);
         donateButton.onClick.AddListener(Donate);
         bidButton.onClick.AddListener(Bid);
+        PostBountyButton.onClick.AddListener(PostBounty);
         cancelButton.onClick.AddListener(CancelBid);
         statusButton.onClick.AddListener(BidStatus);
         ClientEvents.instance.onGameJoined.AddListener(GameJoined);
         //Invoke("GameJoined", 1f);
-        
+        ClientEvents.instance.onBalanceUpdate.AddListener(OnBalanceUpdate);
+
+        donationAmountInput.onValueChanged.AddListener(OnUpdateDonationNumber);
+        auctionAmountInput.onValueChanged.AddListener(OnUpdateBidNumber);
+        PostBountyAmountInput.onValueChanged.AddListener(OnUpdatePostBountyNumber);
     }
 
     public void GameJoined()
@@ -58,15 +78,97 @@ public class GameTabWindowUI : TabMenuWindowUI
         timeLeftText.text = "time left: " + auctionTimeLeft;
     }
 
+    //BALANCE
+    public void OnBalanceUpdate(BalanceUpdateEventArgs args)
+    {
+        BalanceText.text = args.DaemonBalance + Utility.tintedSatsSymbol;
+        balance = args.DaemonBalance;
 
-    
+        UpdateDonationButton();
+        UpdateBidButton();
+        UpdatePostBountyButton();
+
+    }
+
     //DONATION
     public void Donate()
     {
         string message = donationMessageInput.text;
-        long amount = long.Parse(donationAmountInput.text);
 
-        PlayerServiceConnections.instance.AuctionClient.AddDonation(message, amount);
+        PlayerServiceConnections.instance.AuctionClient.AddDonation(message, donationAmount);
+    }
+
+    void OnUpdateDonationNumber(string input)
+    {
+        if (input == "") donationAmount = 0;
+        else donationAmount = long.Parse(input);
+        UpdateDonationButton();
+        
+    }
+
+    public void UpdateDonationButton()
+    {
+        if (donationAmount < 1 || donationAmount > balance)
+        {
+            donateButton.interactable = false;
+        }
+        else
+        {
+            donateButton.interactable = true;
+        }
+    }
+
+
+    //POST BOUNTY
+    public async void PostBounty()
+    {
+        string messageString;
+        string messageColor;
+        string name = PostBountyNameInput.text;
+        string pubkey = ClientGameStats.instance.GetPlayerByName(name).Pubkey;
+
+        
+        if (String.IsNullOrEmpty(pubkey))
+        {
+            messageString = "player not found";
+            messageColor = Utility.failureColorHex;
+        }
+        else
+        {
+            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(pubkey, postBountyAmount);
+            if (res.PaymentError != "")
+            {
+                messageString = "payment failed!";
+                messageColor = Utility.failureColorHex;
+
+            }
+            else
+            {
+                messageString = "succesfully increased " + name + "\'s bounty by " + postBountyAmount + Utility.tintedSatsSymbol;
+                messageColor = Utility.successColorHex;
+            }
+        }
+        ClientEvents.instance.onChatMessageRecieve.Invoke(new Chat.ChatMessage {Message = messageString, Sender = "Post Bounty", Type = Chat.MessageType.INFO_LOG,Color = messageColor});
+        
+    }
+
+    void OnUpdatePostBountyNumber(string input)
+    {
+        if (input == "") postBountyAmount = 0;
+        else postBountyAmount = long.Parse(input);
+        UpdatePostBountyButton();
+    }
+    void UpdatePostBountyButton()
+    {
+
+        if (postBountyAmount < 1 || postBountyAmount > balance)
+        {
+            PostBountyButton.interactable = false;
+        }
+        else
+        {
+            PostBountyButton.interactable = true;
+        }
     }
 
 
@@ -75,8 +177,7 @@ public class GameTabWindowUI : TabMenuWindowUI
     {
         var lastBid = currentBid;
         string message = auctionMessageInput.text;
-        long amount = long.Parse(auctionAmountInput.text);
-        currentBid = await PlayerServiceConnections.instance.AuctionClient.AddBid(message, amount);
+        currentBid = await PlayerServiceConnections.instance.AuctionClient.AddBid(message, bidAmount);
         
         if(lastBid != null)
         {
@@ -84,6 +185,28 @@ public class GameTabWindowUI : TabMenuWindowUI
         }
         BidStatus();
     }
+
+    void OnUpdateBidNumber(string input)
+    {
+        if (input == "") bidAmount = 0;
+        else bidAmount = long.Parse(input);
+
+        UpdateBidButton();
+    }
+
+    void UpdateBidButton()
+    {
+        if (bidAmount < 1 || bidAmount > balance)
+        {
+            bidButton.interactable = false;
+        }
+        else
+        {
+            bidButton.interactable = true;
+        }
+    }
+
+
 
     public async void BidStatus()
     {

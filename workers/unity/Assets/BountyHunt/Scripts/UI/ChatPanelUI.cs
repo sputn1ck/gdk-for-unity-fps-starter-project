@@ -30,6 +30,7 @@ public class ChatPanelUI : MonoBehaviour
     public string placeHolderText = "Press T to chat...";
     bool justSubmittedChat;
 
+
     public bool chatting => chatInput.isFocused||justSubmittedChat;
 
     private void Awake()
@@ -48,15 +49,17 @@ public class ChatPanelUI : MonoBehaviour
 
     public void PaymentSucces(PaymentSuccesArgs e)
     {
-        SpawnMessage(MessageType.DEBUG_LOG, "PAYMENT SUCCESS", e.amount + " " + e.descripion);
+        SpawnMessage(MessageType.DEBUG_LOG, "PAYMENT SUCCESS", e.amount + " " + e.descripion,Utility.successColor);
     }
 
     public void PaymentFailuer(PaymentFailureArgs e)
     {
-        SpawnMessage(MessageType.ERROR_LOG, "PAYMENT FAILURE", e.message);
+        SpawnMessage(MessageType.ERROR_LOG, "PAYMENT FAILURE", e.message,Utility.failureColor);
 
     }
-    public void SpawnMessage(MessageType type, string sender, string message)
+
+    /// <param name="color">default Color if Color == Color.Clear</param>
+    public void SpawnMessage(MessageType type, string sender, string message,Color color)
     {
         if (!showLogType(type)) return;
 
@@ -75,26 +78,43 @@ public class ChatPanelUI : MonoBehaviour
             msg.transform.SetAsLastSibling();
         }
 
-        msg.setMessage(type, sender, message);
+        msg.setMessage(type, sender, message,color);
 
         allMessages.Add(msg);
         msg.Activate();
         msg.DeactivateAfterTime(showMessageTime);
 
     }
+    public void SpawnMessage(MessageType type, string sender, string message)
+    {
+        SpawnMessage(type, sender, message, Color.clear);
+    }
+
+    public void SpawnMessage(MessageType type, string sender, string message, bool announce, Color color)
+    {
+        SpawnMessage(type, sender, message, color);
+
+        Color col;
+        if (color == Color.clear) col = GetColorFormLogType(type);
+        else col = color;
+
+        if (announce)
+        {
+            ClientEvents.instance.onAnnouncement.Invoke(message,col );
+        }
+    }
 
     public void SpawnMessage(MessageType type, string sender, string message, bool announce)
     {
-        SpawnMessage(type, sender, message);
-        if (announce)
-        {
-            ClientEvents.instance.onAnnouncement.Invoke(message, GetColorFormLogType(type));
-        }
+        SpawnMessage(type, sender, message, announce, Color.clear);
     }
 
     public void SpawnMessage(ChatMessage message)
     {
-        SpawnMessage(message.Type, message.Sender, message.Message, message.ShowAnnouncement);
+        Color c;
+        if (String.IsNullOrEmpty(message.Color)) c = Color.clear;
+        else c = Utility.HexToColor(message.Color);
+        SpawnMessage(message.Type, message.Sender, message.Message, message.ShowAnnouncement, c);
     }
 
     public Color GetColorFormLogType(MessageType type)
@@ -193,7 +213,5 @@ public class ChatPanelUI : MonoBehaviour
                 break;
         }
     }
-
-
 
 }

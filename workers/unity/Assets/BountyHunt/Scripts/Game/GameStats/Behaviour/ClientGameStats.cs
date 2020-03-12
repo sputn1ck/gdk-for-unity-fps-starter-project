@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
 using Improbable.Gdk.Core;
+using System.Linq;
 
 public class ClientGameStats : MonoBehaviour
 {
@@ -75,8 +76,8 @@ public class ClientGameStats : MonoBehaviour
     private void OnKillEvent(KillInfo obj)
     {
 
-        string killer = IdToName(obj.Killer);
-        string victim = IdToName(obj.Victim);
+        string killer = GetPlayerByID(obj.Killer).Name;
+        string victim = GetPlayerByID(obj.Victim).Name;
         KillEventArgs args = new KillEventArgs { killer = killer, victim =  victim };
         ClientEvents.instance.onAnyKill.Invoke(args);
         Debug.Log(killer + " killed " + victim);
@@ -88,7 +89,6 @@ public class ClientGameStats : MonoBehaviour
 
         foreach (var i in obj)
         {
-            Utility.Log(i.Value.Name + " earnings: " + i.Value.RoundEarnings, Color.cyan);
             var scoreboarditem = new ScoreboardItem()
             {
                 Entity = i.Key,
@@ -113,18 +113,31 @@ public class ClientGameStats : MonoBehaviour
         
     }
 
-    public string IdToName(EntityId id)
+    public PlayerItem GetPlayerByID(EntityId id)
     {
+        
         if (GameStatsReader == null)
         {
             Debug.LogError("No GameStatsReader found!");
-            return "ERROR: GameStatsReader not found!";
+            return new PlayerItem();
         }
 
         if (GameStatsReader.Data.PlayerMap.ContainsKey(id))
         {
-            return GameStatsReader.Data.PlayerMap[id].Name;
+            return GameStatsReader.Data.PlayerMap[id];
         }
-        return "";
+        return new PlayerItem();
+    }
+
+    public PlayerItem GetPlayerByName(string playerName)
+    {
+        if (GameStatsReader == null)
+        {
+            Debug.LogError("No GameStatsReader found!");
+            return new PlayerItem();
+        }
+
+        return GameStatsReader.Data.PlayerMap.FirstOrDefault(x => x.Value.Name == playerName).Value;
+
     }
 }
