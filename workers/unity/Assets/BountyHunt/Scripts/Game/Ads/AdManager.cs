@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
+using YamlDotNet;
 
 public class AdManager : MonoBehaviour
 {
@@ -37,6 +42,8 @@ public class AdManager : MonoBehaviour
     {
         AdBillboard[] banners = FindObjectsOfType<AdBillboard>();
         Debug.Log("Total ad billboards Count: " + banners.Length);
+        Debug.Log("Total advertisers Count: " + advertisers.Count);
+
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
@@ -90,9 +97,79 @@ public class AdManager : MonoBehaviour
         return advertisers[0];
     }
 
+    public async void UpdateAdvertisers(List<AdvertiserAdressAndValue> args)
+    {
+        
+        advertisers.Clear();
+        foreach(AdvertiserAdressAndValue aav in args)
+        {
+            Advertiser addy = new Advertiser();
+            
+            string yamlString = await AwaitRequestText.SendAsyncWebRequest(this, aav.url);
+
+            if (string.IsNullOrEmpty(yamlString))
+            {
+                continue;
+            }
+
+            YamlDotNet.Serialization.Deserializer deserializer = new YamlDotNet.Serialization.Deserializer();
+            AdvertiserDownloadHelper adh = deserializer.Deserialize<AdvertiserDownloadHelper>(yamlString);
+            addy.name = adh.name;
+            addy.description = adh.dectription;
+
+            addy.squareAdTextures = await getTexturesFromURLArray(aav.url,adh.squareTextureLocations);
+            addy.horizontalAdTextures = await getTexturesFromURLArray(aav.url,adh.horizontalTextureLocations);
+            addy.verticalAdTextures= await getTexturesFromURLArray(aav.url,adh.verticalTextureLocations);
+            addy.pickupAdTextures = await getTexturesFromURLArray(aav.url,adh.pickupTextureLocations);
+
+            advertisers.Add(addy);
+        }
+
+        Initialize();
+    }
+
+    public static async Task<List<Texture2D>> getTexturesFromURLArray(string urlRoot, string[] urls)
+    {
+        List<Texture2D> textures  = new List<Texture2D>();
+        if (urls == null)
+        {
+            Debug.LogWarning("url list is null");
+            return textures;
+        }
+        foreach (string url in urls)
+        {
+            Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(instance, Path.Combine(urlRoot,url));
+
+            if (tex == null)
+            {
+                continue;
+            }
+
+            textures.Add(tex);
+
+        }
+
+        return textures;
+    }
+
 }
 
+[System.Serializable]
+public struct AdvertiserAdressAndValue
+{
+    public string url;
+    public long sats;
+}
 
+public class AdvertiserDownloadHelper
+{
+    public string name;
+    public string dectription;
+    public string[] squareTextureLocations = new string[] { "", "" } ;
+    public string[] pickupTextureLocations;
+    public string[] horizontalTextureLocations;
+    public string[] verticalTextureLocations;
+}
 
 [System.Serializable]
 public class Advertiser
@@ -149,3 +226,4 @@ public class Advertiser
         
     public enum AdMaterialType { PICKUP, SQUARE, HORIZONTAL, VERTICAL}
 }
+
