@@ -12,6 +12,7 @@ using UnityEngine;
 public class PlayerServiceConnections : MonoBehaviour
 {
     public string confName;
+    public string lndConnectString;
     public bool UseDummy;
     public static PlayerServiceConnections instance;
     public IClientLnd lnd;
@@ -56,7 +57,7 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             lnd = new LndClient();
         }
-        await lnd.Setup(confName, false, UseApdata, "");
+        await lnd.Setup(confName, false, UseApdata, "", lndConnectString);
     }
 
     

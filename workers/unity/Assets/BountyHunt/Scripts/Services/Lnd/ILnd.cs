@@ -9,7 +9,7 @@ using System.Threading;
 public interface IClientLnd :IDisposable
 {
 
-    Task Setup(string config, bool listen, bool useApdata, string tlsString);
+    Task Setup(string config, bool listen, bool useApdata, string tlsString, string lndConnect = "");
     void ShutDown();
     Task<GetInfoResponse> GetInfo();
 
@@ -65,7 +65,7 @@ public class DummyLnd : IClientLnd
         invoices = new Dictionary<string, Invoice>();
     }
 
-    public Task Setup(string config, bool listen, bool apdata, string tlsString)
+    public Task Setup(string config, bool listen, bool apdata, string tlsString, string lndConnect)
     {
         pubkey = "pubkey" + UnityEngine.Random.Range(0, int.MaxValue);
         return Task.CompletedTask;

@@ -11,6 +11,7 @@ using UnityEngine;
 public class ServerServiceConnections : MonoBehaviour
 {
     public string confName;
+    public string lndConnectString;
     public bool UseDummy;
     public static ServerServiceConnections instance;
     public IClientLnd lnd;
@@ -57,7 +58,7 @@ public class ServerServiceConnections : MonoBehaviour
             lnd = new LndClient();
         }
 
-        await lnd.Setup(confName, true, false, "");
+        await lnd.Setup(confName, true, false, "", lndConnectString);
         StartCoroutine(lnd.HandleInvoices(ct));
     }
 
