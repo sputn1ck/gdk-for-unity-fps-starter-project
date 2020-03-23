@@ -17,7 +17,8 @@ public class AdManager : MonoBehaviour
     public Material defaultHorizontalAdMaterial;
     public Material defaultVerticalAdMaterial;
 
-    [SerializeField] public List<Advertiser> advertisers;
+    public Dictionary<string, Advertiser> advertisers;
+    public List<AdvertiserInvestmentInfos> investments;
 
     [HideInInspector] public long totalSponsoredSats;
 
@@ -25,35 +26,36 @@ public class AdManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(this);
+        advertisers = new Dictionary<string, Advertiser>();
     }
 
     private void Start()
     {
-        ClientEvents.instance.onMapLoaded.AddListener(Initialize);
+        //ClientEvents.instance.onMapLoaded.AddListener(Initialize);
     }
 
     void Initialize()
     {
-        InitializeAdvertizers();
+        SortInvestments();
         InitializeAllAds();
     }
     void InitializeAllAds()
     {
         AdBillboard[] banners = FindObjectsOfType<AdBillboard>();
         Debug.Log("Total ad billboards Count: " + banners.Length);
-        Debug.Log("Total advertisers Count: " + advertisers.Count);
+        Debug.Log("Total investments Count: " + investments.Count);
 
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
-        for (int  i = advertisers.Count-1; i > 0; i--)
+        foreach (AdvertiserInvestmentInfos inv in investments)
         {
-            Advertiser advertiser = advertisers[i];
-            int count = Mathf.Max(1, (int)(banners.Length * advertiser.satsDonation / totalSponsoredSats));
+            Advertiser advertiser = advertisers[inv.key];
+            int count = Mathf.Max(1, (int)(banners.Length * inv.sats / totalSponsoredSats));
 
-            for(int j = 0; j< count; j++)
+            for (int j = 0; j < count; j++)
             {
-                if(bannersLeft.Count == 0)
+                if (bannersLeft.Count == 0)
                 {
                     Debug.LogWarning("no BannersLeft!");
                     break;
@@ -62,57 +64,59 @@ public class AdManager : MonoBehaviour
                 bannersLeft.RemoveAt(0);
             }
         }
-        
-        foreach(AdBillboard ab in bannersLeft)
+
+        foreach (AdBillboard ab in bannersLeft)
         {
-            ab.SetAdvertiser(advertisers[0]);
+            ab.SetAdvertiser(advertisers[investments[0].key]);
         }
-        
+
     }
 
-    void InitializeAdvertizers()
+    void SortInvestments()
     {
         totalSponsoredSats = 0;
-        foreach (Advertiser advertiser in advertisers)
+        foreach (AdvertiserInvestmentInfos inv in investments)
         {
-            totalSponsoredSats += advertiser.satsDonation;
-            advertiser.Initialize();
+            totalSponsoredSats += inv.sats;
         }
 
-        advertisers = advertisers.OrderByDescending(o => o.satsDonation).ToList<Advertiser>();
+        investments = investments.OrderByDescending(o => o.sats).ToList<AdvertiserInvestmentInfos>();
     }
 
     public Advertiser GetRandomAdvertiser()
     {
         var winningTicket = Random.Range(0, totalSponsoredSats);
         long ticket = 0;
-        foreach (var advertiser in advertisers)
+        foreach (var inv in investments)
         {
-            ticket += advertiser.satsDonation;
+            ticket += inv.sats;
             if (ticket > winningTicket)
-                return advertiser;
+                return advertisers[inv.key];
 
         }
-        return advertisers[0];
+        return advertisers[investments[0].key];
     }
 
-    public async void UpdateAdvertisers(List<AdvertiseInvestmentInfos> args)
+    public async void UpdateAdvertisers(List<AdvertiserInvestmentInfos> args)
     {
-        
-        advertisers.Clear();
-        foreach(AdvertiseInvestmentInfos aav in args)
+        investments = args;
+        List<string> advKeys = new List<string>();
+
+        foreach (AdvertiserInvestmentInfos aiv in args)
         {
-            Advertiser addy = await RequestAdvertiser(aav.key);
-            addy.satsDonation = aav.sats;
-            advertisers.Add(addy);
+            if (!advertisers.ContainsKey(aiv.key))
+            {
+                advKeys.Add(aiv.key);
+            }
         }
+        await AddAdvertisers(advKeys);
 
         Initialize();
     }
 
     public static async Task<List<Texture2D>> getTexturesFromURLArray(string[] urls)
     {
-        List<Texture2D> textures  = new List<Texture2D>();
+        List<Texture2D> textures = new List<Texture2D>();
         if (urls == null)
         {
             Debug.LogWarning("url list is null");
@@ -134,22 +138,40 @@ public class AdManager : MonoBehaviour
         return textures;
     }
 
-    public static async Task<Advertiser> RequestAdvertiser(string key)
+    public async Task AddAdvertisers(List<string> keys)
     {
-        Advertiser advertiser = new Advertiser();
-
 
         //Todo get AdvertiserClientInfos from backend
-        AdvertiserClientInfos aci = new AdvertiserClientInfos(); 
+        Dictionary<string, AdvertiserClientInfos> advertiserDict = new Dictionary<string, AdvertiserClientInfos>();
 
+        List<Task> tasks = new List<Task>();
+
+        foreach (string key in keys)
+        {
+            if (!advertiserDict.ContainsKey(key))
+            {
+                Debug.LogWarning("advertiser key " + key + " does not exist!");
+                continue;
+            }
+
+            AdvertiserClientInfos aci = advertiserDict[key];
+            tasks.Add(loadAdvertiser(key, aci));
+        }
+        await Task.WhenAll(tasks);
+    }
+
+    private async Task loadAdvertiser(string key, AdvertiserClientInfos aci)
+    {
+        Advertiser advertiser = new Advertiser();
         advertiser.name = aci.name;
         advertiser.description = aci.description;
         advertiser.squareAdTextures = await getTexturesFromURLArray(aci.squareTextureLocations);
         advertiser.horizontalAdTextures = await getTexturesFromURLArray(aci.horizontalTextureLocations);
-        advertiser.verticalAdTextures= await getTexturesFromURLArray(aci.verticalTextureLocations);
-        advertiser.pickupAdTextures= await getTexturesFromURLArray(aci.pickupTextureLocations);
+        advertiser.verticalAdTextures = await getTexturesFromURLArray(aci.verticalTextureLocations);
+        advertiser.pickupAdTextures = await getTexturesFromURLArray(aci.pickupTextureLocations);
 
-        return advertiser;
+        advertiser.Initialize();
+        advertisers[key] = advertiser;
     }
 
 }
@@ -157,7 +179,7 @@ public class AdManager : MonoBehaviour
 
 
 [System.Serializable]
-public struct AdvertiseInvestmentInfos
+public struct AdvertiserInvestmentInfos
 {
     public string key;
     public long sats;
@@ -177,8 +199,8 @@ public class AdvertiserClientInfos
 [System.Serializable]
 public class Advertiser
 {
+    public string key;
     public string name;
-    public long satsDonation;
     public string description;
     public List<Texture2D> squareAdTextures;
     public List<Texture2D> pickupAdTextures;
