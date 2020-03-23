@@ -40,8 +40,8 @@ public interface IClientLnd :IDisposable
     Task<long> GetWalletBalace();
     Task<string> SendAllCoins(string address);
     Task CloseChannel(string channelPoint, uint index);
-    Task<SendResponse> KeysendBufferDeposit(string targetPubkey, long amount);
-    Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "");
+    Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount);
+    Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "");
 
 }
 
@@ -188,14 +188,17 @@ public class DummyLnd : IClientLnd
         return null;
     }
 
-    Task<SendResponse> IClientLnd.KeysendBufferDeposit(string targetPubkey, long amount)
+    public Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
     {
-        ///throw new NotImplementedException();
-        ///
-        return Task.FromResult(new SendResponse { PaymentError = "", PaymentPreimage = Google.Protobuf.ByteString.CopyFromUtf8("preimage" )});
+        throw new NotImplementedException();
     }
 
-    public Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
+    public Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "")
     {
         throw new NotImplementedException();
     }

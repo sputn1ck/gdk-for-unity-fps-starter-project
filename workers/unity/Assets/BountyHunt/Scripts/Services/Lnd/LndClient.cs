@@ -44,8 +44,6 @@ public class LndClient : IClientLnd
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     private ConcurrentQueue<InvoiceSettledEventArgs> invoiceSettledQueue;
     private RNGCryptoServiceProvider provider;
-    private object HttpUtility;
-    private const string platformPubkey = "0380e02956c9d09d2cf349bc7f5eb4610fda0775974352fa52f7d981783e45fe03";
     public LndClient()
     {
     }
@@ -507,7 +505,7 @@ public class LndClient : IClientLnd
         return res.TotalBalance;
     }
 
-    public async Task<SendResponse> KeysendBufferDeposit(string targetPubkey, long amount)
+    public async Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
@@ -526,7 +524,7 @@ public class LndClient : IClientLnd
         return await lightningClient.SendPaymentSyncAsync(req);
     }
 
-    public async Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
+    public async Task<SendResponse> KeysendBountyIncrease(string serverPubkey, string targetPubkey, long amount, string message = "")
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
@@ -534,7 +532,7 @@ public class LndClient : IClientLnd
         // TODO add platform pubkey
         var req = new SendRequest
         {
-            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray("024b0f1e453299eb39fd629ebc0f881e7714a86eb86f173b11f7606fcb4731e246")),
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(serverPubkey)),
             Amt = amount,
             PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
         };

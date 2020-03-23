@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class ServerServiceConnections : MonoBehaviour
 {
+    public string PlatformPubkey;
     public string confName;
     public string lndConnectString;
     public bool UseDummy;
@@ -17,8 +18,8 @@ public class ServerServiceConnections : MonoBehaviour
     public IClientLnd lnd;
 
     public string BackendHost;
+    public int BackendPort;
     public string PrometheusHost;
-
     public AuctionController AuctionController;
 
 
@@ -69,13 +70,13 @@ public class ServerServiceConnections : MonoBehaviour
 
         // Game Server Client
         BackendGameServerClient = new BackendGameserverClient();
-        BackendGameServerClient.Setup(BackendHost, lnd.GetPubkey(), sig.Signature);
+        BackendGameServerClient.Setup(BackendHost,BackendPort, lnd.GetPubkey(), sig.Signature);
         BackendGameServerClient.StartListening();
 
         // Player Client
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient = new BackendPlayerClient();
-        BackendPlayerClient.Setup(BackendHost, lnd.GetPubkey(), sig.Signature);
+        BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
 
         // Auction Controller
         AuctionController = new AuctionController();

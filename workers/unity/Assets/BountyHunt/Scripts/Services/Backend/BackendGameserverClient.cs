@@ -23,9 +23,9 @@ public class BackendGameserverClient
     private string pubkey;
     private string message;
 
-    public void Setup(string target, string pubkey, string message)
+    public void Setup(string target, int port, string pubkey, string message)
     {
-        rpcChannel = new Grpc.Core.Channel(target, 8899,Grpc.Core.ChannelCredentials.Insecure);
+        rpcChannel = new Grpc.Core.Channel(target, port,Grpc.Core.ChannelCredentials.Insecure);
         _client = new GameService.GameServiceClient(rpcChannel);
         eventQueue = new ConcurrentQueue<EventStreamRequest>();
         ct = new CancellationTokenSource();

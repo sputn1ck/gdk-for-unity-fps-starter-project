@@ -19,6 +19,7 @@ public class PlayerServiceConnections : MonoBehaviour
     public bool UseApdata;
 
     public string BackendHost;
+    public int BackendPort;
     public BackendPlayerClient BackendPlayerClient;
 
     public DonnerDaemonClient DonnerDaemonClient;
@@ -78,7 +79,7 @@ public class PlayerServiceConnections : MonoBehaviour
         // Player Client
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient = new BackendPlayerClient();
-        BackendPlayerClient.Setup(BackendHost, lnd.GetPubkey(), sig.Signature);
+        BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
 
         // Auction Client
         AuctionClient = new AuctionClient();

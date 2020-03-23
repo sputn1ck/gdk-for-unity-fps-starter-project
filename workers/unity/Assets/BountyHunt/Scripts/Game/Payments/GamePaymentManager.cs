@@ -88,8 +88,4 @@ public class GamePaymentManager : MonoBehaviour
         PrometheusManager.TotalChatPaidSats.Inc(e.Invoice.AmtPaidSat);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }
