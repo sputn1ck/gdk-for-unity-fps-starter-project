@@ -11,14 +11,9 @@ public class AdManager : MonoBehaviour
 {
     public static AdManager instance;
 
-
     public Material defaultSquareAdMaterial;
-    public Material defaultPickupAdMaterial;
-    public Material defaultHorizontalAdMaterial;
-    public Material defaultVerticalAdMaterial;
 
-    public Dictionary<string, Advertiser> advertisers;
-    public List<AdvertiserInvestmentInfos> investments;
+    private List<Advertiser> advertisers;
 
     [HideInInspector] public long totalSponsoredSats;
 
@@ -26,7 +21,7 @@ public class AdManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(this);
-        advertisers = new Dictionary<string, Advertiser>();
+        advertisers = new List <Advertiser>();
     }
 
     private void Start()
@@ -41,17 +36,17 @@ public class AdManager : MonoBehaviour
     }
     void InitializeAllAds()
     {
+        //Todo maybe don't search all ads every time?
         AdBillboard[] banners = FindObjectsOfType<AdBillboard>();
         Debug.Log("Total ad billboards Count: " + banners.Length);
-        Debug.Log("Total investments Count: " + investments.Count);
+        Debug.Log("Total advertisers Count: " + advertisers.Count);
 
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
-        foreach (AdvertiserInvestmentInfos inv in investments)
+        foreach (Advertiser adv in advertisers)
         {
-            Advertiser advertiser = advertisers[inv.key];
-            int count = Mathf.Max(1, (int)(banners.Length * inv.sats / totalSponsoredSats));
+            int count = Mathf.Max(1, (int)(banners.Length * adv.investment / totalSponsoredSats));
 
             for (int j = 0; j < count; j++)
             {
@@ -60,14 +55,14 @@ public class AdManager : MonoBehaviour
                     Debug.LogWarning("no BannersLeft!");
                     break;
                 }
-                bannersLeft[0].SetAdvertiser(advertiser);
+                bannersLeft[0].SetAdvertiser(adv);
                 bannersLeft.RemoveAt(0);
             }
         }
 
         foreach (AdBillboard ab in bannersLeft)
         {
-            ab.SetAdvertiser(advertisers[investments[0].key]);
+            ab.SetAdvertiser(GetRandomAdvertiser());
         }
 
     }
@@ -75,46 +70,45 @@ public class AdManager : MonoBehaviour
     void SortInvestments()
     {
         totalSponsoredSats = 0;
-        foreach (AdvertiserInvestmentInfos inv in investments)
+        foreach (Advertiser adv in advertisers)
         {
-            totalSponsoredSats += inv.sats;
+            totalSponsoredSats += adv.investment;
         }
 
-        investments = investments.OrderByDescending(o => o.sats).ToList<AdvertiserInvestmentInfos>();
+        advertisers = advertisers.OrderByDescending(o => o.investment).ToList<Advertiser>();
     }
 
     public Advertiser GetRandomAdvertiser()
     {
         var winningTicket = Random.Range(0, totalSponsoredSats);
         long ticket = 0;
-        foreach (var inv in investments)
+        foreach (var adv in advertisers)
         {
-            ticket += inv.sats;
+            ticket += adv.investment;
             if (ticket > winningTicket)
-                return advertisers[inv.key];
+                return adv;
 
         }
-        return advertisers[investments[0].key];
+        return advertisers[0];
     }
 
-    public async void UpdateAdvertisers(List<AdvertiserInvestmentInfos> args)
+    public async void UpdateAdvertisers(List<AdvertiserClientInfo> args)
     {
-        investments = args;
-        List<string> advKeys = new List<string>();
+        
+        List<Task> tasks = new List<Task>();
 
-        foreach (AdvertiserInvestmentInfos aiv in args)
+        advertisers.Clear();
+        foreach (AdvertiserClientInfo aci in args)
         {
-            if (!advertisers.ContainsKey(aiv.key))
-            {
-                advKeys.Add(aiv.key);
-            }
+            tasks.Add(loadAdvertiser(aci));
         }
-        await AddAdvertisers(advKeys);
+        await Task.WhenAll(tasks);
+
 
         Initialize();
     }
 
-    public static async Task<List<Texture2D>> getTexturesFromURLArray(string[] urls)
+    private static async Task<List<Texture2D>> getTexturesFromURLArray(string[] urls)
     {
         List<Texture2D> textures = new List<Texture2D>();
         if (urls == null)
@@ -132,81 +126,39 @@ public class AdManager : MonoBehaviour
             }
 
             textures.Add(tex);
-
         }
 
         return textures;
     }
 
-    public async Task AddAdvertisers(List<string> keys)
-    {
-
-        //Todo get AdvertiserClientInfos from backend
-        Dictionary<string, AdvertiserClientInfos> advertiserDict = new Dictionary<string, AdvertiserClientInfos>();
-
-        List<Task> tasks = new List<Task>();
-
-        foreach (string key in keys)
-        {
-            if (!advertiserDict.ContainsKey(key))
-            {
-                Debug.LogWarning("advertiser key " + key + " does not exist!");
-                continue;
-            }
-
-            AdvertiserClientInfos aci = advertiserDict[key];
-            tasks.Add(loadAdvertiser(key, aci));
-        }
-        await Task.WhenAll(tasks);
-    }
-
-    private async Task loadAdvertiser(string key, AdvertiserClientInfos aci)
+    private async Task loadAdvertiser(AdvertiserClientInfo aci)
     {
         Advertiser advertiser = new Advertiser();
         advertiser.name = aci.name;
-        advertiser.description = aci.description;
+        advertiser.investment = aci.investment;
         advertiser.squareAdTextures = await getTexturesFromURLArray(aci.squareTextureLocations);
-        advertiser.horizontalAdTextures = await getTexturesFromURLArray(aci.horizontalTextureLocations);
-        advertiser.verticalAdTextures = await getTexturesFromURLArray(aci.verticalTextureLocations);
-        advertiser.pickupAdTextures = await getTexturesFromURLArray(aci.pickupTextureLocations);
-
+        
         advertiser.Initialize();
-        advertisers[key] = advertiser;
+        advertisers.Add(advertiser);
     }
 
 }
 
-
-
 [System.Serializable]
-public struct AdvertiserInvestmentInfos
-{
-    public string key;
-    public long sats;
-}
-
-[System.Serializable]
-public class AdvertiserClientInfos
+public class AdvertiserClientInfo
 {
     public string name;
-    public string description;
-    public string[] squareTextureLocations = new string[] { "", "" } ;
-    public string[] pickupTextureLocations;
-    public string[] horizontalTextureLocations;
-    public string[] verticalTextureLocations;
+    public long investment;
+    public string[] squareTextureLocations;
 }
 
 [System.Serializable]
 public class Advertiser
 {
-    public string key;
+    public long investment;
     public string name;
     public string description;
     public List<Texture2D> squareAdTextures;
-    public List<Texture2D> pickupAdTextures;
-    public List<Texture2D> horizontalAdTextures;
-    public List<Texture2D> verticalAdTextures;
-    //public GameObject AdPrefab;
 
     Dictionary<AdMaterialType, List<Material>> materials;
 
@@ -214,9 +166,9 @@ public class Advertiser
     {
         materials = new Dictionary<AdMaterialType, List<Material>>();
         InitializeMatrials(squareAdTextures, AdMaterialType.SQUARE, AdManager.instance.defaultSquareAdMaterial, "_EmissionMap");
-        InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
-        InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
-        InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
+        //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
+        //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
+        //InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
 
     }
     public void InitializeMatrials(List<Texture2D> textures, AdMaterialType type, Material defaultMaterial, string TextureToReplace)
@@ -249,6 +201,6 @@ public class Advertiser
         return materials[type];
     }
         
-    public enum AdMaterialType { PICKUP, SQUARE, HORIZONTAL, VERTICAL}
+    public enum AdMaterialType { SQUARE, HORIZONTAL, VERTICAL}
 }
 
