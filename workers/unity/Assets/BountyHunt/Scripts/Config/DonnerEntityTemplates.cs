@@ -15,6 +15,7 @@ using Fps.SchemaExtensions;
 using Bountyhunt;
 using System.Collections.Generic;
 using Chat;
+using Bountyhunt.Ads;
 using Improbable.Gdk.QueryBasedInterest;
 
 public class DonnerEntityTemplates
@@ -234,6 +235,8 @@ public class DonnerEntityTemplates
         var roundInfoComponent = new Bountyhunt.GameModeManager.Snapshot();
         var paymentComponent = new PaymentManagerComponent.Snapshot();
 
+        var advertisingComponent = new AdvertisingConmponent.Snapshot();
+
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("GameManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
@@ -244,6 +247,8 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(roundInfoComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(paymentComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(advertisingComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

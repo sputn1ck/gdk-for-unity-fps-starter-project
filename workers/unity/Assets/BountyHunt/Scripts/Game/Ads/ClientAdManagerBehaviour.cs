@@ -1,3 +1,4 @@
+using Improbable.Gdk.Subscriptions;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,10 +7,13 @@ using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using Bountyhunt.Ads;
 
-public class AdManager : MonoBehaviour
+public class ClientAdManagerBehaviour : MonoBehaviour
 {
-    public static AdManager instance;
+    [Require] AdvertisingConmponentReader advertisingConmponentReader;
+
+    public static ClientAdManagerBehaviour instance;
 
     public Material defaultSquareAdMaterial;
 
@@ -17,11 +21,17 @@ public class AdManager : MonoBehaviour
 
     [HideInInspector] public long totalSponsoredSats;
 
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(this);
         advertisers = new List <Advertiser>();
+    }
+
+    private void OnEnable()
+    {
+        advertisingConmponentReader.OnCurrentAdvertisersUpdate += UpdateAdvertisers;
     }
 
     private void Start()
@@ -92,15 +102,15 @@ public class AdManager : MonoBehaviour
         return advertisers[0];
     }
 
-    public async void UpdateAdvertisers(List<AdvertiserClientInfo> args)
+    public async void UpdateAdvertisers(List<AdvertiserSource> advertiserSources)
     {
         
         List<Task> tasks = new List<Task>();
 
         advertisers.Clear();
-        foreach (AdvertiserClientInfo aci in args)
+        foreach (AdvertiserSource source in advertiserSources)
         {
-            tasks.Add(loadAdvertiser(aci));
+            tasks.Add(loadAdvertiser(source));
         }
         await Task.WhenAll(tasks);
 
@@ -108,7 +118,7 @@ public class AdManager : MonoBehaviour
         Initialize();
     }
 
-    private static async Task<List<Texture2D>> getTexturesFromURLArray(string[] urls)
+    private static async Task<List<Texture2D>> getTexturesFromURLList(List<string> urls)
     {
         List<Texture2D> textures = new List<Texture2D>();
         if (urls == null)
@@ -131,12 +141,12 @@ public class AdManager : MonoBehaviour
         return textures;
     }
 
-    private async Task loadAdvertiser(AdvertiserClientInfo aci)
+    private async Task loadAdvertiser(AdvertiserSource source)
     {
         Advertiser advertiser = new Advertiser();
-        advertiser.name = aci.name;
-        advertiser.investment = aci.investment;
-        advertiser.squareAdTextures = await getTexturesFromURLArray(aci.squareTextureLocations);
+        advertiser.name = source.Name;
+        advertiser.investment = source.Investment;
+        advertiser.squareAdTextures = await getTexturesFromURLList(source.SquareTextureLinks);
         
         advertiser.Initialize();
         advertisers.Add(advertiser);
@@ -144,13 +154,6 @@ public class AdManager : MonoBehaviour
 
 }
 
-[System.Serializable]
-public class AdvertiserClientInfo
-{
-    public string name;
-    public long investment;
-    public string[] squareTextureLocations;
-}
 
 [System.Serializable]
 public class Advertiser
@@ -165,7 +168,7 @@ public class Advertiser
     public void Initialize()
     {
         materials = new Dictionary<AdMaterialType, List<Material>>();
-        InitializeMatrials(squareAdTextures, AdMaterialType.SQUARE, AdManager.instance.defaultSquareAdMaterial, "_EmissionMap");
+        InitializeMatrials(squareAdTextures, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
         //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
         //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
         //InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
@@ -176,7 +179,7 @@ public class Advertiser
         materials[type] = new List<Material>();
         foreach (var texture in textures)
         {
-            var material = AdManager.Instantiate(defaultMaterial);
+            var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
             material.SetTexture(TextureToReplace, texture);
             materials[type].Add(material);
         }
