@@ -57,8 +57,8 @@ public class BountyKillSystem : ComponentSystem
             {
                 Kills = killerDonnerInfo.Kills + 1
             };
-            int added = (int)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.PlayerSettings.BountyDropPercentageOnDeath) % 2;
-            var satsToDrop = (long)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.PlayerSettings.BountyDropPercentageOnDeath);
+            int added = (int)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.GameModeSettings.BountySettings.BountyDropPercentageDeath) % 2;
+            var satsToDrop = (long)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.GameModeSettings.BountySettings.BountyDropPercentageDeath);
             var victimModifiedInfo = new HunterComponent.Update()
             {
                 Bounty = victimDonnerInfo.Bounty - satsToDrop,

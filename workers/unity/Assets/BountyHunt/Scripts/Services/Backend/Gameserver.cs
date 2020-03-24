@@ -35,21 +35,52 @@ namespace Bbh {
             "AiABKA4yHi5iYmguUGxheWVySW5mb0V2ZW50LkV2ZW50VHlwZRIWCg5jdXJy",
             "ZW50X2JvdW50eRgDIAEoAxIVCg1jdXJyZW50X2tpbGxzGAQgASgFEhYKDmN1",
             "cnJlbnRfZGVhdGhzGAUgASgFIioKCUV2ZW50VHlwZRINCglIRUFSVEJFQVQQ",
-            "ABIOCgpESVNDT05ORUNUEAEiIAoOR2V0VXNlclJlcXVlc3QSDgoGcHVia2V5",
-            "GAEgASgJIioKD0dldFVzZXJSZXNwb25zZRIXCgR1c2VyGAEgASgLMgkuYmJo",
-            "LlVzZXIiJAoEVXNlchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCTKH",
-            "AQoLR2FtZVNlcnZpY2USQgoLRXZlbnRTdHJlYW0SFy5iYmguRXZlbnRTdHJl",
-            "YW1SZXF1ZXN0GhguYmJoLkV2ZW50U3RyZWFtUmVzcG9uc2UoARI0CgdHZXRV",
-            "c2VyEhMuYmJoLkdldFVzZXJSZXF1ZXN0GhQuYmJoLkdldFVzZXJSZXNwb25z",
-            "ZWIGcHJvdG8z"));
+            "ABIOCgpESVNDT05ORUNUEAEiaAoTR2V0Um91bmRJbmZvUmVxdWVzdBIXCg9i",
+            "YW5uZXJzX2luX2dhbWUYASABKAUSFgoOcGxheWVyX2luX2dhbWUYAiABKAUS",
+            "IAoJZ2FtZV9tb2RlGAMgASgOMg0uYmJoLkdhbWVNb2RlInoKFEdldFJvdW5k",
+            "SW5mb1Jlc3BvbnNlEg8KB3N1YnNpZHkYASABKAMSJwoIc2V0dGluZ3MYAiAB",
+            "KAsyFS5iYmguR2FtZU1vZGVTZXR0aW5ncxIoCgthZHZlcnRpc2VycxgDIAMo",
+            "CzITLmJiaC5BZHZlcnRpc2VySW5mbyKvAQoQR2FtZU1vZGVTZXR0aW5ncxIX",
+            "Cg9zZWNvbmRfZHVyYXRpb24YASABKAMSKAoNYmFzZV9zZXR0aW5ncxgCIAEo",
+            "CzIRLmJiaC5CYXNlU2V0dGluZ3MSLAoPYm91bnR5X3NldHRpbmdzGAMgASgL",
+            "MhMuYmJoLkJvdW50eVNldHRpbmdzEioKDnNwYXduX3NldHRpbmdzGAQgASgL",
+            "MhIuYmJoLlNwYXduU2V0dGluZ3MihwEKDEJhc2VTZXR0aW5ncxIgChh0ZWxl",
+            "cG9ydF9wbGF5ZXJfb25fc3RhcnQYASABKAgSGwoTY2xlYXJfYm91bnR5X29u",
+            "X2VuZBgCIAEoCBIaChJjbGVhcl9zdGF0c19vbl9lbmQYAyABKAgSHAoUY2xl",
+            "YXJfcGlja3Vwc19vbl9lbmQYBCABKAgieAoOQm91bnR5U2V0dGluZ3MSHgoW",
+            "Ym91bnR5X3RpY2tfY29udmVyc2lvbhgBIAEoARIgChhib3VudHlfdGlja190",
+            "aW1lX3NlY29uZHMYAiABKAISJAocYm91bnR5X2Ryb3BfcGVyY2VudGFnZV9k",
+            "ZWF0aBgDIAEoASKXAQoNU3Bhd25TZXR0aW5ncxIbChN0aW1lX2JldHdlZW5f",
+            "c3Bhd25zGAEgASgCEhwKFG1pbl9zcGF3bnNfcGVyX3NwYXduGAIgASgFEhwK",
+            "FG1heF9zcGF3bnNfcGVyX3NwYXduGAMgASgFEi0KDGRpc3RyaWJ1dGlvbhgE",
+            "IAEoDjIXLmJiaC5Cb3VudHlEaXN0cmlidXRpb24icAoOQWR2ZXJ0aXNlcklu",
+            "Zm8SDAoEbmFtZRgBIAEoCRISCgpzcG9uc29yaW5nGAIgASgDEhoKEnNxdWFy",
+            "ZV9iYW5uZXJfdXJscxgDIAMoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRILCgN1",
+            "cmwYCiABKAkiIAoOR2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJIioK",
+            "D0dldFVzZXJSZXNwb25zZRIXCgR1c2VyGAEgASgLMgkuYmJoLlVzZXIiJAoE",
+            "VXNlchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSolCghHYW1lTW9k",
+            "ZRIJCgVMT0JCWRAAEg4KCkJPVU5UWUhVTlQQASohChJCb3VudHlEaXN0cmli",
+            "dXRpb24SCwoHVU5JRk9STRAAMswBCgtHYW1lU2VydmljZRJCCgtFdmVudFN0",
+            "cmVhbRIXLmJiaC5FdmVudFN0cmVhbVJlcXVlc3QaGC5iYmguRXZlbnRTdHJl",
+            "YW1SZXNwb25zZSgBEjQKB0dldFVzZXISEy5iYmguR2V0VXNlclJlcXVlc3Qa",
+            "FC5iYmguR2V0VXNlclJlc3BvbnNlEkMKDEdldFJvdW5kSW5mbxIYLmJiaC5H",
+            "ZXRSb3VuZEluZm9SZXF1ZXN0GhkuYmJoLkdldFJvdW5kSW5mb1Jlc3BvbnNl",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbh.GameMode), typeof(global::Bbh.BountyDistribution), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamRequest), global::Bbh.EventStreamRequest.Parser, new[]{ "Kill", "Earnings", "PlayerInfo" }, new[]{ "Event" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EventStreamResponse), global::Bbh.EventStreamResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.KillEvent), global::Bbh.KillEvent.Parser, new[]{ "Killer", "Victim", "Cause" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.EarningsEvent), global::Bbh.EarningsEvent.Parser, new[]{ "User", "Amt" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.PlayerInfoEvent), global::Bbh.PlayerInfoEvent.Parser, new[]{ "User", "EventType", "CurrentBounty", "CurrentKills", "CurrentDeaths" }, null, new[]{ typeof(global::Bbh.PlayerInfoEvent.Types.EventType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetRoundInfoRequest), global::Bbh.GetRoundInfoRequest.Parser, new[]{ "BannersInGame", "PlayerInGame", "GameMode" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetRoundInfoResponse), global::Bbh.GetRoundInfoResponse.Parser, new[]{ "Subsidy", "Settings", "Advertisers" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GameModeSettings), global::Bbh.GameModeSettings.Parser, new[]{ "SecondDuration", "BaseSettings", "BountySettings", "SpawnSettings" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.BaseSettings), global::Bbh.BaseSettings.Parser, new[]{ "TeleportPlayerOnStart", "ClearBountyOnEnd", "ClearStatsOnEnd", "ClearPickupsOnEnd" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.BountySettings), global::Bbh.BountySettings.Parser, new[]{ "BountyTickConversion", "BountyTickTimeSeconds", "BountyDropPercentageDeath" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.SpawnSettings), global::Bbh.SpawnSettings.Parser, new[]{ "TimeBetweenSpawns", "MinSpawnsPerSpawn", "MaxSpawnsPerSpawn", "Distribution" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.AdvertiserInfo), global::Bbh.AdvertiserInfo.Parser, new[]{ "Name", "Sponsoring", "SquareBannerUrls", "Discription", "Url" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetUserRequest), global::Bbh.GetUserRequest.Parser, new[]{ "Pubkey" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.GetUserResponse), global::Bbh.GetUserResponse.Parser, new[]{ "User" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbh.User), global::Bbh.User.Parser, new[]{ "Name", "Pubkey" }, null, null, null)
@@ -58,6 +89,18 @@ namespace Bbh {
     #endregion
 
   }
+  #region Enums
+  public enum GameMode {
+    [pbr::OriginalName("LOBBY")] Lobby = 0,
+    [pbr::OriginalName("BOUNTYHUNT")] Bountyhunt = 1,
+  }
+
+  public enum BountyDistribution {
+    [pbr::OriginalName("UNIFORM")] Uniform = 0,
+  }
+
+  #endregion
+
   #region Messages
   public sealed partial class EventStreamRequest : pb::IMessage<EventStreamRequest> {
     private static readonly pb::MessageParser<EventStreamRequest> _parser = new pb::MessageParser<EventStreamRequest>(() => new EventStreamRequest());
@@ -998,6 +1041,1449 @@ namespace Bbh {
 
   }
 
+  public sealed partial class GetRoundInfoRequest : pb::IMessage<GetRoundInfoRequest> {
+    private static readonly pb::MessageParser<GetRoundInfoRequest> _parser = new pb::MessageParser<GetRoundInfoRequest>(() => new GetRoundInfoRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetRoundInfoRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoRequest(GetRoundInfoRequest other) : this() {
+      bannersInGame_ = other.bannersInGame_;
+      playerInGame_ = other.playerInGame_;
+      gameMode_ = other.gameMode_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoRequest Clone() {
+      return new GetRoundInfoRequest(this);
+    }
+
+    /// <summary>Field number for the "banners_in_game" field.</summary>
+    public const int BannersInGameFieldNumber = 1;
+    private int bannersInGame_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int BannersInGame {
+      get { return bannersInGame_; }
+      set {
+        bannersInGame_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "player_in_game" field.</summary>
+    public const int PlayerInGameFieldNumber = 2;
+    private int playerInGame_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PlayerInGame {
+      get { return playerInGame_; }
+      set {
+        playerInGame_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "game_mode" field.</summary>
+    public const int GameModeFieldNumber = 3;
+    private global::Bbh.GameMode gameMode_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.GameMode GameMode {
+      get { return gameMode_; }
+      set {
+        gameMode_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetRoundInfoRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetRoundInfoRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (BannersInGame != other.BannersInGame) return false;
+      if (PlayerInGame != other.PlayerInGame) return false;
+      if (GameMode != other.GameMode) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (BannersInGame != 0) hash ^= BannersInGame.GetHashCode();
+      if (PlayerInGame != 0) hash ^= PlayerInGame.GetHashCode();
+      if (GameMode != 0) hash ^= GameMode.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BannersInGame != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(BannersInGame);
+      }
+      if (PlayerInGame != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(PlayerInGame);
+      }
+      if (GameMode != 0) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) GameMode);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (BannersInGame != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BannersInGame);
+      }
+      if (PlayerInGame != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerInGame);
+      }
+      if (GameMode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) GameMode);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetRoundInfoRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.BannersInGame != 0) {
+        BannersInGame = other.BannersInGame;
+      }
+      if (other.PlayerInGame != 0) {
+        PlayerInGame = other.PlayerInGame;
+      }
+      if (other.GameMode != 0) {
+        GameMode = other.GameMode;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BannersInGame = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            PlayerInGame = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            GameMode = (global::Bbh.GameMode) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetRoundInfoResponse : pb::IMessage<GetRoundInfoResponse> {
+    private static readonly pb::MessageParser<GetRoundInfoResponse> _parser = new pb::MessageParser<GetRoundInfoResponse>(() => new GetRoundInfoResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetRoundInfoResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoResponse(GetRoundInfoResponse other) : this() {
+      subsidy_ = other.subsidy_;
+      settings_ = other.settings_ != null ? other.settings_.Clone() : null;
+      advertisers_ = other.advertisers_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetRoundInfoResponse Clone() {
+      return new GetRoundInfoResponse(this);
+    }
+
+    /// <summary>Field number for the "subsidy" field.</summary>
+    public const int SubsidyFieldNumber = 1;
+    private long subsidy_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Subsidy {
+      get { return subsidy_; }
+      set {
+        subsidy_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "settings" field.</summary>
+    public const int SettingsFieldNumber = 2;
+    private global::Bbh.GameModeSettings settings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.GameModeSettings Settings {
+      get { return settings_; }
+      set {
+        settings_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "advertisers" field.</summary>
+    public const int AdvertisersFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Bbh.AdvertiserInfo> _repeated_advertisers_codec
+        = pb::FieldCodec.ForMessage(26, global::Bbh.AdvertiserInfo.Parser);
+    private readonly pbc::RepeatedField<global::Bbh.AdvertiserInfo> advertisers_ = new pbc::RepeatedField<global::Bbh.AdvertiserInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Bbh.AdvertiserInfo> Advertisers {
+      get { return advertisers_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetRoundInfoResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetRoundInfoResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Subsidy != other.Subsidy) return false;
+      if (!object.Equals(Settings, other.Settings)) return false;
+      if(!advertisers_.Equals(other.advertisers_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Subsidy != 0L) hash ^= Subsidy.GetHashCode();
+      if (settings_ != null) hash ^= Settings.GetHashCode();
+      hash ^= advertisers_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Subsidy != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Subsidy);
+      }
+      if (settings_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Settings);
+      }
+      advertisers_.WriteTo(output, _repeated_advertisers_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Subsidy != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Subsidy);
+      }
+      if (settings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
+      }
+      size += advertisers_.CalculateSize(_repeated_advertisers_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetRoundInfoResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Subsidy != 0L) {
+        Subsidy = other.Subsidy;
+      }
+      if (other.settings_ != null) {
+        if (settings_ == null) {
+          Settings = new global::Bbh.GameModeSettings();
+        }
+        Settings.MergeFrom(other.Settings);
+      }
+      advertisers_.Add(other.advertisers_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Subsidy = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (settings_ == null) {
+              Settings = new global::Bbh.GameModeSettings();
+            }
+            input.ReadMessage(Settings);
+            break;
+          }
+          case 26: {
+            advertisers_.AddEntriesFrom(input, _repeated_advertisers_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameModeSettings : pb::IMessage<GameModeSettings> {
+    private static readonly pb::MessageParser<GameModeSettings> _parser = new pb::MessageParser<GameModeSettings>(() => new GameModeSettings());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameModeSettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameModeSettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameModeSettings(GameModeSettings other) : this() {
+      secondDuration_ = other.secondDuration_;
+      baseSettings_ = other.baseSettings_ != null ? other.baseSettings_.Clone() : null;
+      bountySettings_ = other.bountySettings_ != null ? other.bountySettings_.Clone() : null;
+      spawnSettings_ = other.spawnSettings_ != null ? other.spawnSettings_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameModeSettings Clone() {
+      return new GameModeSettings(this);
+    }
+
+    /// <summary>Field number for the "second_duration" field.</summary>
+    public const int SecondDurationFieldNumber = 1;
+    private long secondDuration_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long SecondDuration {
+      get { return secondDuration_; }
+      set {
+        secondDuration_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "base_settings" field.</summary>
+    public const int BaseSettingsFieldNumber = 2;
+    private global::Bbh.BaseSettings baseSettings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.BaseSettings BaseSettings {
+      get { return baseSettings_; }
+      set {
+        baseSettings_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bounty_settings" field.</summary>
+    public const int BountySettingsFieldNumber = 3;
+    private global::Bbh.BountySettings bountySettings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.BountySettings BountySettings {
+      get { return bountySettings_; }
+      set {
+        bountySettings_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "spawn_settings" field.</summary>
+    public const int SpawnSettingsFieldNumber = 4;
+    private global::Bbh.SpawnSettings spawnSettings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.SpawnSettings SpawnSettings {
+      get { return spawnSettings_; }
+      set {
+        spawnSettings_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameModeSettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameModeSettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SecondDuration != other.SecondDuration) return false;
+      if (!object.Equals(BaseSettings, other.BaseSettings)) return false;
+      if (!object.Equals(BountySettings, other.BountySettings)) return false;
+      if (!object.Equals(SpawnSettings, other.SpawnSettings)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SecondDuration != 0L) hash ^= SecondDuration.GetHashCode();
+      if (baseSettings_ != null) hash ^= BaseSettings.GetHashCode();
+      if (bountySettings_ != null) hash ^= BountySettings.GetHashCode();
+      if (spawnSettings_ != null) hash ^= SpawnSettings.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SecondDuration != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(SecondDuration);
+      }
+      if (baseSettings_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(BaseSettings);
+      }
+      if (bountySettings_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(BountySettings);
+      }
+      if (spawnSettings_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(SpawnSettings);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SecondDuration != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SecondDuration);
+      }
+      if (baseSettings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BaseSettings);
+      }
+      if (bountySettings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BountySettings);
+      }
+      if (spawnSettings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpawnSettings);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameModeSettings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SecondDuration != 0L) {
+        SecondDuration = other.SecondDuration;
+      }
+      if (other.baseSettings_ != null) {
+        if (baseSettings_ == null) {
+          BaseSettings = new global::Bbh.BaseSettings();
+        }
+        BaseSettings.MergeFrom(other.BaseSettings);
+      }
+      if (other.bountySettings_ != null) {
+        if (bountySettings_ == null) {
+          BountySettings = new global::Bbh.BountySettings();
+        }
+        BountySettings.MergeFrom(other.BountySettings);
+      }
+      if (other.spawnSettings_ != null) {
+        if (spawnSettings_ == null) {
+          SpawnSettings = new global::Bbh.SpawnSettings();
+        }
+        SpawnSettings.MergeFrom(other.SpawnSettings);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            SecondDuration = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (baseSettings_ == null) {
+              BaseSettings = new global::Bbh.BaseSettings();
+            }
+            input.ReadMessage(BaseSettings);
+            break;
+          }
+          case 26: {
+            if (bountySettings_ == null) {
+              BountySettings = new global::Bbh.BountySettings();
+            }
+            input.ReadMessage(BountySettings);
+            break;
+          }
+          case 34: {
+            if (spawnSettings_ == null) {
+              SpawnSettings = new global::Bbh.SpawnSettings();
+            }
+            input.ReadMessage(SpawnSettings);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BaseSettings : pb::IMessage<BaseSettings> {
+    private static readonly pb::MessageParser<BaseSettings> _parser = new pb::MessageParser<BaseSettings>(() => new BaseSettings());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BaseSettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BaseSettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BaseSettings(BaseSettings other) : this() {
+      teleportPlayerOnStart_ = other.teleportPlayerOnStart_;
+      clearBountyOnEnd_ = other.clearBountyOnEnd_;
+      clearStatsOnEnd_ = other.clearStatsOnEnd_;
+      clearPickupsOnEnd_ = other.clearPickupsOnEnd_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BaseSettings Clone() {
+      return new BaseSettings(this);
+    }
+
+    /// <summary>Field number for the "teleport_player_on_start" field.</summary>
+    public const int TeleportPlayerOnStartFieldNumber = 1;
+    private bool teleportPlayerOnStart_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool TeleportPlayerOnStart {
+      get { return teleportPlayerOnStart_; }
+      set {
+        teleportPlayerOnStart_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "clear_bounty_on_end" field.</summary>
+    public const int ClearBountyOnEndFieldNumber = 2;
+    private bool clearBountyOnEnd_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ClearBountyOnEnd {
+      get { return clearBountyOnEnd_; }
+      set {
+        clearBountyOnEnd_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "clear_stats_on_end" field.</summary>
+    public const int ClearStatsOnEndFieldNumber = 3;
+    private bool clearStatsOnEnd_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ClearStatsOnEnd {
+      get { return clearStatsOnEnd_; }
+      set {
+        clearStatsOnEnd_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "clear_pickups_on_end" field.</summary>
+    public const int ClearPickupsOnEndFieldNumber = 4;
+    private bool clearPickupsOnEnd_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ClearPickupsOnEnd {
+      get { return clearPickupsOnEnd_; }
+      set {
+        clearPickupsOnEnd_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BaseSettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BaseSettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TeleportPlayerOnStart != other.TeleportPlayerOnStart) return false;
+      if (ClearBountyOnEnd != other.ClearBountyOnEnd) return false;
+      if (ClearStatsOnEnd != other.ClearStatsOnEnd) return false;
+      if (ClearPickupsOnEnd != other.ClearPickupsOnEnd) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TeleportPlayerOnStart != false) hash ^= TeleportPlayerOnStart.GetHashCode();
+      if (ClearBountyOnEnd != false) hash ^= ClearBountyOnEnd.GetHashCode();
+      if (ClearStatsOnEnd != false) hash ^= ClearStatsOnEnd.GetHashCode();
+      if (ClearPickupsOnEnd != false) hash ^= ClearPickupsOnEnd.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TeleportPlayerOnStart != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(TeleportPlayerOnStart);
+      }
+      if (ClearBountyOnEnd != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(ClearBountyOnEnd);
+      }
+      if (ClearStatsOnEnd != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(ClearStatsOnEnd);
+      }
+      if (ClearPickupsOnEnd != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(ClearPickupsOnEnd);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TeleportPlayerOnStart != false) {
+        size += 1 + 1;
+      }
+      if (ClearBountyOnEnd != false) {
+        size += 1 + 1;
+      }
+      if (ClearStatsOnEnd != false) {
+        size += 1 + 1;
+      }
+      if (ClearPickupsOnEnd != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BaseSettings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TeleportPlayerOnStart != false) {
+        TeleportPlayerOnStart = other.TeleportPlayerOnStart;
+      }
+      if (other.ClearBountyOnEnd != false) {
+        ClearBountyOnEnd = other.ClearBountyOnEnd;
+      }
+      if (other.ClearStatsOnEnd != false) {
+        ClearStatsOnEnd = other.ClearStatsOnEnd;
+      }
+      if (other.ClearPickupsOnEnd != false) {
+        ClearPickupsOnEnd = other.ClearPickupsOnEnd;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TeleportPlayerOnStart = input.ReadBool();
+            break;
+          }
+          case 16: {
+            ClearBountyOnEnd = input.ReadBool();
+            break;
+          }
+          case 24: {
+            ClearStatsOnEnd = input.ReadBool();
+            break;
+          }
+          case 32: {
+            ClearPickupsOnEnd = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BountySettings : pb::IMessage<BountySettings> {
+    private static readonly pb::MessageParser<BountySettings> _parser = new pb::MessageParser<BountySettings>(() => new BountySettings());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BountySettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BountySettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BountySettings(BountySettings other) : this() {
+      bountyTickConversion_ = other.bountyTickConversion_;
+      bountyTickTimeSeconds_ = other.bountyTickTimeSeconds_;
+      bountyDropPercentageDeath_ = other.bountyDropPercentageDeath_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BountySettings Clone() {
+      return new BountySettings(this);
+    }
+
+    /// <summary>Field number for the "bounty_tick_conversion" field.</summary>
+    public const int BountyTickConversionFieldNumber = 1;
+    private double bountyTickConversion_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double BountyTickConversion {
+      get { return bountyTickConversion_; }
+      set {
+        bountyTickConversion_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bounty_tick_time_seconds" field.</summary>
+    public const int BountyTickTimeSecondsFieldNumber = 2;
+    private float bountyTickTimeSeconds_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float BountyTickTimeSeconds {
+      get { return bountyTickTimeSeconds_; }
+      set {
+        bountyTickTimeSeconds_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bounty_drop_percentage_death" field.</summary>
+    public const int BountyDropPercentageDeathFieldNumber = 3;
+    private double bountyDropPercentageDeath_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double BountyDropPercentageDeath {
+      get { return bountyDropPercentageDeath_; }
+      set {
+        bountyDropPercentageDeath_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BountySettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BountySettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(BountyTickConversion, other.BountyTickConversion)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(BountyTickTimeSeconds, other.BountyTickTimeSeconds)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(BountyDropPercentageDeath, other.BountyDropPercentageDeath)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (BountyTickConversion != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(BountyTickConversion);
+      if (BountyTickTimeSeconds != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(BountyTickTimeSeconds);
+      if (BountyDropPercentageDeath != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(BountyDropPercentageDeath);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BountyTickConversion != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(BountyTickConversion);
+      }
+      if (BountyTickTimeSeconds != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(BountyTickTimeSeconds);
+      }
+      if (BountyDropPercentageDeath != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(BountyDropPercentageDeath);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (BountyTickConversion != 0D) {
+        size += 1 + 8;
+      }
+      if (BountyTickTimeSeconds != 0F) {
+        size += 1 + 4;
+      }
+      if (BountyDropPercentageDeath != 0D) {
+        size += 1 + 8;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BountySettings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.BountyTickConversion != 0D) {
+        BountyTickConversion = other.BountyTickConversion;
+      }
+      if (other.BountyTickTimeSeconds != 0F) {
+        BountyTickTimeSeconds = other.BountyTickTimeSeconds;
+      }
+      if (other.BountyDropPercentageDeath != 0D) {
+        BountyDropPercentageDeath = other.BountyDropPercentageDeath;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 9: {
+            BountyTickConversion = input.ReadDouble();
+            break;
+          }
+          case 21: {
+            BountyTickTimeSeconds = input.ReadFloat();
+            break;
+          }
+          case 25: {
+            BountyDropPercentageDeath = input.ReadDouble();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SpawnSettings : pb::IMessage<SpawnSettings> {
+    private static readonly pb::MessageParser<SpawnSettings> _parser = new pb::MessageParser<SpawnSettings>(() => new SpawnSettings());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SpawnSettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpawnSettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpawnSettings(SpawnSettings other) : this() {
+      timeBetweenSpawns_ = other.timeBetweenSpawns_;
+      minSpawnsPerSpawn_ = other.minSpawnsPerSpawn_;
+      maxSpawnsPerSpawn_ = other.maxSpawnsPerSpawn_;
+      distribution_ = other.distribution_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpawnSettings Clone() {
+      return new SpawnSettings(this);
+    }
+
+    /// <summary>Field number for the "time_between_spawns" field.</summary>
+    public const int TimeBetweenSpawnsFieldNumber = 1;
+    private float timeBetweenSpawns_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float TimeBetweenSpawns {
+      get { return timeBetweenSpawns_; }
+      set {
+        timeBetweenSpawns_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "min_spawns_per_spawn" field.</summary>
+    public const int MinSpawnsPerSpawnFieldNumber = 2;
+    private int minSpawnsPerSpawn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MinSpawnsPerSpawn {
+      get { return minSpawnsPerSpawn_; }
+      set {
+        minSpawnsPerSpawn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_spawns_per_spawn" field.</summary>
+    public const int MaxSpawnsPerSpawnFieldNumber = 3;
+    private int maxSpawnsPerSpawn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxSpawnsPerSpawn {
+      get { return maxSpawnsPerSpawn_; }
+      set {
+        maxSpawnsPerSpawn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "distribution" field.</summary>
+    public const int DistributionFieldNumber = 4;
+    private global::Bbh.BountyDistribution distribution_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbh.BountyDistribution Distribution {
+      get { return distribution_; }
+      set {
+        distribution_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SpawnSettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SpawnSettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(TimeBetweenSpawns, other.TimeBetweenSpawns)) return false;
+      if (MinSpawnsPerSpawn != other.MinSpawnsPerSpawn) return false;
+      if (MaxSpawnsPerSpawn != other.MaxSpawnsPerSpawn) return false;
+      if (Distribution != other.Distribution) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TimeBetweenSpawns != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(TimeBetweenSpawns);
+      if (MinSpawnsPerSpawn != 0) hash ^= MinSpawnsPerSpawn.GetHashCode();
+      if (MaxSpawnsPerSpawn != 0) hash ^= MaxSpawnsPerSpawn.GetHashCode();
+      if (Distribution != 0) hash ^= Distribution.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TimeBetweenSpawns != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(TimeBetweenSpawns);
+      }
+      if (MinSpawnsPerSpawn != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(MinSpawnsPerSpawn);
+      }
+      if (MaxSpawnsPerSpawn != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(MaxSpawnsPerSpawn);
+      }
+      if (Distribution != 0) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) Distribution);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TimeBetweenSpawns != 0F) {
+        size += 1 + 4;
+      }
+      if (MinSpawnsPerSpawn != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MinSpawnsPerSpawn);
+      }
+      if (MaxSpawnsPerSpawn != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxSpawnsPerSpawn);
+      }
+      if (Distribution != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Distribution);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SpawnSettings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TimeBetweenSpawns != 0F) {
+        TimeBetweenSpawns = other.TimeBetweenSpawns;
+      }
+      if (other.MinSpawnsPerSpawn != 0) {
+        MinSpawnsPerSpawn = other.MinSpawnsPerSpawn;
+      }
+      if (other.MaxSpawnsPerSpawn != 0) {
+        MaxSpawnsPerSpawn = other.MaxSpawnsPerSpawn;
+      }
+      if (other.Distribution != 0) {
+        Distribution = other.Distribution;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            TimeBetweenSpawns = input.ReadFloat();
+            break;
+          }
+          case 16: {
+            MinSpawnsPerSpawn = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            MaxSpawnsPerSpawn = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Distribution = (global::Bbh.BountyDistribution) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class AdvertiserInfo : pb::IMessage<AdvertiserInfo> {
+    private static readonly pb::MessageParser<AdvertiserInfo> _parser = new pb::MessageParser<AdvertiserInfo>(() => new AdvertiserInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AdvertiserInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AdvertiserInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AdvertiserInfo(AdvertiserInfo other) : this() {
+      name_ = other.name_;
+      sponsoring_ = other.sponsoring_;
+      squareBannerUrls_ = other.squareBannerUrls_.Clone();
+      discription_ = other.discription_;
+      url_ = other.url_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AdvertiserInfo Clone() {
+      return new AdvertiserInfo(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "sponsoring" field.</summary>
+    public const int SponsoringFieldNumber = 2;
+    private long sponsoring_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Sponsoring {
+      get { return sponsoring_; }
+      set {
+        sponsoring_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "square_banner_urls" field.</summary>
+    public const int SquareBannerUrlsFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_squareBannerUrls_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> squareBannerUrls_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> SquareBannerUrls {
+      get { return squareBannerUrls_; }
+    }
+
+    /// <summary>Field number for the "discription" field.</summary>
+    public const int DiscriptionFieldNumber = 9;
+    private string discription_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Discription {
+      get { return discription_; }
+      set {
+        discription_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "url" field.</summary>
+    public const int UrlFieldNumber = 10;
+    private string url_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Url {
+      get { return url_; }
+      set {
+        url_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AdvertiserInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AdvertiserInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Sponsoring != other.Sponsoring) return false;
+      if(!squareBannerUrls_.Equals(other.squareBannerUrls_)) return false;
+      if (Discription != other.Discription) return false;
+      if (Url != other.Url) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Sponsoring != 0L) hash ^= Sponsoring.GetHashCode();
+      hash ^= squareBannerUrls_.GetHashCode();
+      if (Discription.Length != 0) hash ^= Discription.GetHashCode();
+      if (Url.Length != 0) hash ^= Url.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Sponsoring != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Sponsoring);
+      }
+      squareBannerUrls_.WriteTo(output, _repeated_squareBannerUrls_codec);
+      if (Discription.Length != 0) {
+        output.WriteRawTag(74);
+        output.WriteString(Discription);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Url);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Sponsoring != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Sponsoring);
+      }
+      size += squareBannerUrls_.CalculateSize(_repeated_squareBannerUrls_codec);
+      if (Discription.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Discription);
+      }
+      if (Url.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Url);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AdvertiserInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Sponsoring != 0L) {
+        Sponsoring = other.Sponsoring;
+      }
+      squareBannerUrls_.Add(other.squareBannerUrls_);
+      if (other.Discription.Length != 0) {
+        Discription = other.Discription;
+      }
+      if (other.Url.Length != 0) {
+        Url = other.Url;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Sponsoring = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            squareBannerUrls_.AddEntriesFrom(input, _repeated_squareBannerUrls_codec);
+            break;
+          }
+          case 74: {
+            Discription = input.ReadString();
+            break;
+          }
+          case 82: {
+            Url = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class GetUserRequest : pb::IMessage<GetUserRequest> {
     private static readonly pb::MessageParser<GetUserRequest> _parser = new pb::MessageParser<GetUserRequest>(() => new GetUserRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -1006,7 +2492,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1135,7 +2621,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1270,7 +2756,7 @@ namespace Bbh {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Bbh.GameserverReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

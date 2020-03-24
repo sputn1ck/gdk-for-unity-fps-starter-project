@@ -10,7 +10,6 @@ public class ServerGameStats : MonoBehaviour
 {
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
-    [Require] GameModeManagerReader GameModeManagerReader;
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;

@@ -139,6 +139,11 @@ public class BackendGameserverClient
             await call.RequestStream.CompleteAsync();
         }
     }
+
+    public async Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request)
+    {
+        return await _client.GetRoundInfoAsync(request,GetPubkeyCalloptions());
+    }
     
 
     private CallOptions GetPubkeyCalloptions()

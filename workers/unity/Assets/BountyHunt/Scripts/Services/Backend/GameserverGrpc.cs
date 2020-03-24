@@ -16,6 +16,8 @@ namespace Bbh {
     static readonly grpc::Marshaller<global::Bbh.EventStreamResponse> __Marshaller_bbh_EventStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.EventStreamResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.GetUserRequest> __Marshaller_bbh_GetUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetUserRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbh.GetUserResponse> __Marshaller_bbh_GetUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetUserResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetRoundInfoRequest> __Marshaller_bbh_GetRoundInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetRoundInfoRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbh.GetRoundInfoResponse> __Marshaller_bbh_GetRoundInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbh.GetRoundInfoResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse> __Method_EventStream = new grpc::Method<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse>(
         grpc::MethodType.ClientStreaming,
@@ -30,6 +32,13 @@ namespace Bbh {
         "GetUser",
         __Marshaller_bbh_GetUserRequest,
         __Marshaller_bbh_GetUserResponse);
+
+    static readonly grpc::Method<global::Bbh.GetRoundInfoRequest, global::Bbh.GetRoundInfoResponse> __Method_GetRoundInfo = new grpc::Method<global::Bbh.GetRoundInfoRequest, global::Bbh.GetRoundInfoResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetRoundInfo",
+        __Marshaller_bbh_GetRoundInfoRequest,
+        __Marshaller_bbh_GetRoundInfoResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -47,6 +56,11 @@ namespace Bbh {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbh.GetUserResponse> GetUser(global::Bbh.GetUserRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbh.GetRoundInfoResponse> GetRoundInfo(global::Bbh.GetRoundInfoRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -100,6 +114,22 @@ namespace Bbh {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetUser, null, options, request);
       }
+      public virtual global::Bbh.GetRoundInfoResponse GetRoundInfo(global::Bbh.GetRoundInfoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRoundInfo(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbh.GetRoundInfoResponse GetRoundInfo(global::Bbh.GetRoundInfoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetRoundInfo, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetRoundInfoResponse> GetRoundInfoAsync(global::Bbh.GetRoundInfoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRoundInfoAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbh.GetRoundInfoResponse> GetRoundInfoAsync(global::Bbh.GetRoundInfoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetRoundInfo, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -113,7 +143,8 @@ namespace Bbh {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_EventStream, serviceImpl.EventStream)
-          .AddMethod(__Method_GetUser, serviceImpl.GetUser).Build();
+          .AddMethod(__Method_GetUser, serviceImpl.GetUser)
+          .AddMethod(__Method_GetRoundInfo, serviceImpl.GetRoundInfo).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -124,6 +155,7 @@ namespace Bbh {
     {
       serviceBinder.AddMethod(__Method_EventStream, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::Bbh.EventStreamRequest, global::Bbh.EventStreamResponse>(serviceImpl.EventStream));
       serviceBinder.AddMethod(__Method_GetUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetUserRequest, global::Bbh.GetUserResponse>(serviceImpl.GetUser));
+      serviceBinder.AddMethod(__Method_GetRoundInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbh.GetRoundInfoRequest, global::Bbh.GetRoundInfoResponse>(serviceImpl.GetRoundInfo));
     }
 
   }

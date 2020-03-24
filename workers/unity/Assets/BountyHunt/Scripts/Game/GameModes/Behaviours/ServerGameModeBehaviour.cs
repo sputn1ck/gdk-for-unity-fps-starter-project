@@ -28,21 +28,25 @@ public class ServerGameModeBehaviour : MonoBehaviour
         StartCoroutine(gameModeEnumerator());
     }
 
-    private void StartGameMode()
+    private async void StartGameMode()
     {
-
+        
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
+        currentGameMode = gameMode;
+
+        // TODO Get Settings
+
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbh.GetRoundInfoRequest { GameMode = (Bbh.GameMode)gameModeRotationCounter });
+        currentGameMode.ServerOnGameModeStart(this, roundInfo.Settings, roundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
         {
             GameModeInfo = new GameModeInfo(gameModeRotationCounter),
             TimeInfo = new TimeInfo()
             {
                 StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GlobalSettings.NanoSeconds,
+                Duration = gameMode.GameModeSettings.SecondDuration * 10000000,
             }
         };
-        currentGameMode = gameMode;
-        currentGameMode.ServerOnGameModeStart(this);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
@@ -55,34 +59,11 @@ public class ServerGameModeBehaviour : MonoBehaviour
     {
         currentGameMode.ServerOnGameModeEnd(this);
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
-        var RoundInfo = new RoundInfo()
-        {
-            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
-            TimeInfo = new TimeInfo()
-            {
-                StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GlobalSettings.NanoSeconds,
-            }
-        };
-        GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has ended", MessageType.INFO_LOG);
     }
     private void SetNextGameMode()
     {
         nextGameModeId = getNextGameModeInt();
-        var gameMode = GameModeDictionary.Get(nextGameModeId);
-        GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
-        {
-            NextRound = new RoundInfo()
-            {
-                GameModeInfo = new GameModeInfo(nextGameModeId),
-                TimeInfo = new TimeInfo()
-                {
-                    StartTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime + GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration,
-                    Duration = gameMode.GlobalSettings.NanoSeconds,
-                }
-            }
-        });
     }
 
     private IEnumerator gameModeEnumerator()
