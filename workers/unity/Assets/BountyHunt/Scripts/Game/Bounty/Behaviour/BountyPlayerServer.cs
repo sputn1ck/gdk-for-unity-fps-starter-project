@@ -45,7 +45,7 @@ public class BountyPlayerServer : MonoBehaviour
         var amount = HunterComponentWriter.Data.Earnings;
         if (amount == 0)
             return;
-        var res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
+        var res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(ServerServiceConnections.instance.PlatformPubkey, HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
         if (res.PaymentError != "")
         {
             ChatPanelUI.instance.PaymentFailuer(new PaymentFailureArgs { message = "error while paying out: " + res.PaymentError});

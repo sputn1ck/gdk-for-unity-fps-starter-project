@@ -17,9 +17,9 @@ public class BackendPlayerClient
 
     private string pubkey;
     private string signature;
-    public void Setup(string target, string pubkey, string signature)
+    public void Setup(string target,int port, string pubkey, string signature)
     {
-        rpcChannel = new Grpc.Core.Channel(target, 8899, Grpc.Core.ChannelCredentials.Insecure);
+        rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new ClientService.ClientServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
@@ -74,7 +74,8 @@ public class BackendPlayerClient
         int highestDeathsPlayerIndex = 0;
         int totalKills = 0;
         int totalDeaths = 0;
-
+        if (highscores.Length == 0)
+            return;
         for (int i = 0; i < highscores.Length; i++)
         {
             var player = highscores[i];

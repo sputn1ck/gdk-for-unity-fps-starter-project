@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Fps;
@@ -43,17 +44,22 @@ public class LndClient : IClientLnd
     private AsyncServerStreamingCall<Invoice> _invoiceStream;
     private ConcurrentQueue<InvoiceSettledEventArgs> invoiceSettledQueue;
     private RNGCryptoServiceProvider provider;
-    private const string platformPubkey = "0380e02956c9d09d2cf349bc7f5eb4610fda0775974352fa52f7d981783e45fe03";
     public LndClient()
     {
     }
 
 
-    public async Task Setup(string config, bool listen, bool useApdata, string tlsString)
+    public async Task Setup(string config, bool listen, bool useApdata, string tlsString, string lndConnect = "")
     {
         this.confName = config;
         this.useAppdata = useApdata;
-        LoadConfig(tlsString);
+        if (lndConnect == "")
+        {
+            LoadConfig(tlsString);
+        } else
+        {
+            LoadLndConnect(lndConnect);
+        }
         var macaroonCallCredentials = new MacaroonCallCredentials(macaroon);
         var sslCreds = new SslCredentials(tlsCert);
         var channelCreds = ChannelCredentials.Create(sslCreds, macaroonCallCredentials.credentials);
@@ -207,6 +213,67 @@ public class LndClient : IClientLnd
 #endif
     }
 
+    public void LoadLndConnect(string lndConnectString)
+    {
+        Uri uri = new Uri(lndConnectString);
+        lnconf = new LnConf();
+        var hostStr = uri.Host.Split(':');
+        lnconf.host = uri.DnsSafeHost;
+        lnconf.rpcport = uri.Port;
+        var dataStrings = getTlsAndMacaroonString(lndConnectString);
+        tlsCert = dataStrings.certString;
+        macaroon = MacaroonCallCredentials.ToHex(dataStrings.macaroonBytes);
+    }
+    private (string certString,byte[] macaroonBytes) getTlsAndMacaroonString(string lndConnectString)
+    {
+        var queryString = lndConnectString.Split('?')[1];
+        var certString = queryString.Split('&')[0].Substring(5);
+        var macString = queryString.Split('&')[1].Substring(9);
+        
+        certString = certStringToFormat(certString);
+        var macBytes = macStringToBytes(macString);
+        return (certString, macBytes);
+    }
+
+    private string urlSafeToUnsafe(string input)
+    {
+        string incoming = input
+    .Replace('_', '/').Replace('-', '+');
+        switch (input.Length % 4)
+        {
+            case 2: incoming += "=="; break;
+            case 3: incoming += "="; break;
+        }
+        return incoming;
+    }
+    private string certStringToFormat(string certString)
+    {
+        certString = urlSafeToUnsafe(certString);
+        var newString = "";
+        var lines = (int)(certString.Length / 64);
+        int remainingChars = certString.Length;
+        for(int i = 0; i <= lines; i++)
+        {
+            if(remainingChars < 64)
+            {
+                newString = newString + certString.Substring(i * 64, remainingChars) + "\n";
+            } else
+            {
+
+                newString = newString + certString.Substring(i * 64, 64) + "\n";
+                remainingChars -= 64;
+            }
+        }
+        newString = "\n-----BEGIN CERTIFICATE-----\n" + newString + "-----END CERTIFICATE-----\n";
+        return newString;
+    }
+    private byte[] macStringToBytes(string macString)
+    {
+        macString = urlSafeToUnsafe(macString);
+        var macBytes = Convert.FromBase64String(macString);
+        return macBytes;
+
+    }
     public async Task<GetInfoResponse> GetInfo()
     {
         return await lightningClient.GetInfoAsync(new GetInfoRequest { });
@@ -438,7 +505,7 @@ public class LndClient : IClientLnd
         return res.TotalBalance;
     }
 
-    public async Task<SendResponse> KeysendBufferDeposit(string targetPubkey, long amount)
+    public async Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
@@ -457,7 +524,7 @@ public class LndClient : IClientLnd
         return await lightningClient.SendPaymentSyncAsync(req);
     }
 
-    public async Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
+    public async Task<SendResponse> KeysendBountyIncrease(string serverPubkey, string targetPubkey, long amount, string message = "")
     {
         var preImage = GetRandomBytes();
         var rHash = GetRHash(preImage);
@@ -465,7 +532,7 @@ public class LndClient : IClientLnd
         // TODO add platform pubkey
         var req = new SendRequest
         {
-            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray("024b0f1e453299eb39fd629ebc0f881e7714a86eb86f173b11f7606fcb4731e246")),
+            Dest = Google.Protobuf.ByteString.CopyFrom(DonnerUtils.HexStringToByteArray(serverPubkey)),
             Amt = amount,
             PaymentHash = Google.Protobuf.ByteString.CopyFrom(rHash),
         };
