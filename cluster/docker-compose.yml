@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=local
       - POSTGRES_PASSWORD=local
   bbh-backend:
-    image: 'docker.pkg.github.com/donnerlab1/bbh-backend/bbh-backend:docker_geficke'
+    image: 'docker.pkg.github.com/donnerlab1/bbh-backend/bbh-backend:master'
     environment:
       - 'DPF_DSN=postgres://local:local@db:5432/cluster?sslmode=disable'
       - DPF_GRPC_PORT=8898
