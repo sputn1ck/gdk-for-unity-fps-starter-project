@@ -7,11 +7,11 @@ using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
-using Bountyhunt.Ads;
+using Bountyhunt;
 
 public class ClientAdManagerBehaviour : MonoBehaviour
 {
-    [Require] AdvertisingConmponentReader advertisingConmponentReader;
+    [Require] AdvertisingComponentReader advertisingConmponentReader;
 
     public static ClientAdManagerBehaviour instance;
 

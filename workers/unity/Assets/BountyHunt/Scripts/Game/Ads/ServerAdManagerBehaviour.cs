@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Bountyhunt.Ads;
+using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 
 public class ServerAdManagerBehaviour : MonoBehaviour
 {
-    [Require] AdvertisingConmponentWriter advertisingConmponentWriter;
+    [Require] AdvertisingComponentWriter advertisingConmponentWriter;
 
     private void OnEnable()
     {
@@ -20,7 +20,7 @@ public class ServerAdManagerBehaviour : MonoBehaviour
         //List<AdvertiserSource> sources = new List<AdvertiserSource>();
         List<AdvertiserSource> sources = testSources;
 
-        advertisingConmponentWriter.SendUpdate(new AdvertisingConmponent.Update()
+        advertisingConmponentWriter.SendUpdate(new AdvertisingComponent.Update()
         {
             CurrentAdvertisers = sources
         });
