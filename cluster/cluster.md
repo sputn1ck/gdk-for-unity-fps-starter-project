@@ -14,7 +14,7 @@
 
 4. Open a shell (powershell or command prompt)
     - type in `docker login docker.pkg.github.com`
-    - user your github credentials to log in
+    - user your github username and a github access token with read:packages permission as password https://github.com/settings/tokens
     - pull images:
         - `docker pull docker.pkg.github.com/donnerlab1/bbh-backend/bbh-backend:master`
         - `docker pull docker.pkg.github.com/donnerlab1/platform-v2/platform-v2:master`
