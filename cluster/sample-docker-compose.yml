@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  db:
+    image: 'postgres:11-alpine'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=cluster
+      - POSTGRES_USER=local
+      - POSTGRES_PASSWORD=local
+  bbh-backend:
+    image: 'docker.pkg.github.com/donnerlab1/bbh-backend/bbh-backend:master'
+    environment:
+      - 'DPF_DSN=postgres://local:local@db:5432/cluster?sslmode=disable'
+      - DPF_GRPC_PORT=8898
+      - >-
+        DPF_LNDCONNECT=lndconnect://carol:10009?cert=MIIB4zCCAYigAwIBAgIRAMloFzA4-VMkjv3xczjtk2wwCgYIKoZIzj0EAwIwMTEfMB0GA1UEChMWbG5kIGF1dG9nZW5lcmF0ZWQgY2VydDEOMAwGA1UEAxMFY2Fyb2wwHhcNMjAwMzI0MTEyMjM2WhcNMjEwNTE5MTEyMjM2WjAxMR8wHQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MQ4wDAYDVQQDEwVjYXJvbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBcIsDP_7OtpC8u9Fveb8v90gjCDiOIzaKV4myKFL81RySNvJDRqDhDBpHe7tia33_Ln_Mj-ic8BR_aMGMgHdVWjgYAwfjAOBgNVHQ8BAf8EBAMCAqQwDwYDVR0TAQH_BAUwAwEB_zBbBgNVHREEVDBSggVjYXJvbIIJbG9jYWxob3N0ggVjYXJvbIIEdW5peIIKdW5peHBhY2tldIIHYnVmY29ubocEfwAAAYcQAAAAAAAAAAAAAAAAAAAAAYcErBIAAjAKBggqhkjOPQQDAgNJADBGAiEA5CpnB4Q-oYMgIn2eZEKsXVzMgu69mgI2FXMPBoPVenkCIQCwg7e3_lrNzM5rkneJXLnOrEMpT3higpwvE3PMjsae5g&macaroon=AgEDbG5kAusBAwoQEPY-ag8SZqPz6pdWCfwp0BIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaFAoIbWFjYXJvb24SCGdlbmVyYXRlGhYKB21lc3NhZ2USBHJlYWQSBXdyaXRlGhcKCG9mZmNoYWluEgRyZWFkEgV3cml0ZRoWCgdvbmNoYWluEgRyZWFkEgV3cml0ZRoUCgVwZWVycxIEcmVhZBIFd3JpdGUaGAoGc2lnbmVyEghnZW5lcmF0ZRIEcmVhZAAABiBw81NsWHVJgLN9n_oNNpNlA17q-VseG83JLFa0lOSLEg
+    ports:
+      - '8898:8898'
+  platform:
+    image: 'docker.pkg.github.com/donnerlab1/platform-v2/platform-v2:master'
+    volumes:
+      - './platform/invoices.log:/invoices.log'
+      - './platform/server.key:/platform/cert/server.key'
+      - './platform/server.crt:/platform/cert/server.crt'
+    ports:
+      - '8899:8899'
+    environment:
+      - 'DPF_DSN=postgres://local:local@db:5432/cluster?sslmode=disable'
+      - DPF_GRPC_PORT=8899
+      - >-
+        DPF_LNDCONNECT=lndconnect://alice:10009?cert=MIIB4TCCAYegAwIBAgIQTXrPL_Xj4kRFXFiMuY1FtTAKBggqhkjOPQQDAjAxMR8wHQYDVQQKExZsbmQgYXV0b2dlbmVyYXRlZCBjZXJ0MQ4wDAYDVQQDEwVhbGljZTAeFw0yMDAzMjQxMTIzMTNaFw0yMTA1MTkxMTIzMTNaMDExHzAdBgNVBAoTFmxuZCBhdXRvZ2VuZXJhdGVkIGNlcnQxDjAMBgNVBAMTBWFsaWNlMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAELLconhldtGmK9VPZ96AX0fkYe97kKVCn43SA3JcWW6bajOb51bCJxNTtyrtbWZgWXF_3NTBA3sTbaY4wpLXDuaOBgDB-MA4GA1UdDwEB_wQEAwICpDAPBgNVHRMBAf8EBTADAQH_MFsGA1UdEQRUMFKCBWFsaWNlgglsb2NhbGhvc3SCBWFsaWNlggR1bml4ggp1bml4cGFja2V0ggdidWZjb25uhwR_AAABhxAAAAAAAAAAAAAAAAAAAAABhwSsEgACMAoGCCqGSM49BAMCA0gAMEUCIQCoA9AKdp6myyUOHhI3_QHh7QCFMOnhJPtZyutJ9ReO1gIgI_gox6KOHPn3Yzf5L-lqaYawuND3VxK-yeyCcqStgwQ&macaroon=AgEDbG5kAusBAwoQtwKp17PwBuDxCQ_X9XLLoxIBMBoWCgdhZGRyZXNzEgRyZWFkEgV3cml0ZRoTCgRpbmZvEgRyZWFkEgV3cml0ZRoXCghpbnZvaWNlcxIEcmVhZBIFd3JpdGUaFAoIbWFjYXJvb24SCGdlbmVyYXRlGhYKB21lc3NhZ2USBHJlYWQSBXdyaXRlGhcKCG9mZmNoYWluEgRyZWFkEgV3cml0ZRoWCgdvbmNoYWluEgRyZWFkEgV3cml0ZRoUCgVwZWVycxIEcmVhZBIFd3JpdGUaGAoGc2lnbmVyEghnZW5lcmF0ZRIEcmVhZAAABiCqfE2wn6jDOI8Megtl1wWtoXFNwkATkDpxWIn41lu1Mg
+      - DPF_INVOICE_LOG=/invoice.log
+networks:
+  default:
+    external: true
+    name: 1_default
