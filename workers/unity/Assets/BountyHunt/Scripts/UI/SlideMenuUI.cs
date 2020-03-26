@@ -18,10 +18,6 @@ public class SlideMenuUI : MonoBehaviour
     Rect targetSliderRect;
     SlideSubMenuUI currentSelected;
 
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
         foreach (ButtonSubMenuPair bsmp in buttonSubMenuPairs)
