@@ -9,6 +9,7 @@ public class SlideMenuUI : MonoBehaviour
     public float slidingTime;
     public AnimationCurve curve;
     public int firstButtonID = 0;
+    public LayoutGroup TabsLayoutGroup;
     public List<ButtonSubMenuPair> buttonSubMenuPairs;
 
     float sliderAnimationEndTime;
@@ -33,13 +34,19 @@ public class SlideMenuUI : MonoBehaviour
             bsmp.subMenu.menu = this;
             bsmp.button.onClick.AddListener(bsmp.subMenu.Select);
         }
-        StartCoroutine(SelesctSubmenuAtEndofframe(buttonSubMenuPairs[firstButtonID].subMenu));
+        StartCoroutine(InitializeSliderAndSelectFirstSubMenu());
     }
 
-    IEnumerator SelesctSubmenuAtEndofframe(SlideSubMenuUI subMenu)
+    IEnumerator InitializeSliderAndSelectFirstSubMenu()
     {
-        yield return new WaitForSeconds(5);
-        SelectSubMenu(subMenu);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(TabsLayoutGroup.transform as RectTransform);
+        Button b = buttonSubMenuPairs[firstButtonID].button;
+        (slider.transform as RectTransform).sizeDelta = Vector2.zero;
+        yield return new WaitForEndOfFrame();
+        (slider.transform as RectTransform).anchoredPosition = b.GetComponent<RectTransform>().anchoredPosition;
+        (slider.transform as RectTransform).sizeDelta = b.GetComponent<RectTransform>().sizeDelta * Vector2.up;
+
+        SelectSubMenu(buttonSubMenuPairs[firstButtonID].subMenu);
     }
 
     public void SelectSubMenu(SlideSubMenuUI subMenu)
@@ -50,16 +57,15 @@ public class SlideMenuUI : MonoBehaviour
 
 
         //slider animation
-        Button targetButton = buttonSubMenuPairs.Find(e => e.subMenu == subMenu).button;
+        Button button = buttonSubMenuPairs.Find(e => e.subMenu == subMenu).button;
         sliderAnimationEndTime = Time.time + slidingTime;
-        lastSliderRect = new Rect(slider.GetComponent<RectTransform>().anchoredPosition, slider.GetComponent<RectTransform>().sizeDelta);
-        targetSliderRect = new Rect(targetButton.GetComponent<RectTransform>().anchoredPosition, targetButton.GetComponent<RectTransform>().sizeDelta);
+        lastSliderRect = new Rect((slider.transform as RectTransform).anchoredPosition, (slider.transform as RectTransform).sizeDelta);
+        targetSliderRect = new Rect((button.transform as RectTransform).anchoredPosition, (button.transform as RectTransform).sizeDelta);
         animateSlider = true;
     }
 
     private void Update()
     {
-
         //slider animation
         if(animateSlider)
         {
@@ -72,7 +78,7 @@ public class SlideMenuUI : MonoBehaviour
 
             float blend = curve.Evaluate(t);
             Vector2 pos = Vector2.LerpUnclamped(lastSliderRect.position,targetSliderRect.position,  blend);
-            Vector2 size = Vector2.LerpUnclamped(lastSliderRect.size,targetSliderRect.size,  blend);
+            Vector2 size = Vector2.LerpUnclamped(lastSliderRect.size, targetSliderRect.size,  blend);
 
             slider.GetComponent<RectTransform>().anchoredPosition = pos;
             slider.GetComponent<RectTransform>().sizeDelta = size;
