@@ -10,19 +10,12 @@ public class BBHUIManager : MonoBehaviour
     public InGameScreenManagerUI inGame;
     public static BBHUIManager instance;
 
-    [SerializeField] public List<TintingPair> UITints;
-
 
     private void Awake()
     {
         instance = this;
 
         ScreenManager.gameObject.SetActive(false);
-
-        foreach(TintingPair tp in UITints)
-        {
-            UITinter.setColor(tp.tint, tp.color);
-        }
 
     }
 
