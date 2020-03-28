@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BBH/Skins/SkinsLibrary")]
 public class SkinsLibrary : ScriptableObject
 {
-    public List<SkinGroup> MaskSkins { get; private set; }
-    public List<SkinGroup> BodySkins { get; private set; }
+
+    public List<SkinGroup> _maskSkins;
+    public List<SkinGroup> _bodySkins;
+
     private Dictionary<string, SkinAndGroup> skinsByID;
 
     private void Awake()
@@ -40,7 +42,7 @@ public class SkinsLibrary : ScriptableObject
     void InitializeDictionary()
     {
         skinsByID = new Dictionary<string, SkinAndGroup>();
-        foreach(SkinGroup group in MaskSkins)
+        foreach(SkinGroup group in _maskSkins)
         {
             foreach(Skin skin in group.skins)
             {
@@ -54,7 +56,6 @@ public class SkinsLibrary : ScriptableObject
 [System.Serializable]
 public class SkinGroup
 {
-    string Tag;
     public enum skinSlot { BODY, MASK }
 
     public skinSlot slot;
