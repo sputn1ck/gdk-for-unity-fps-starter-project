@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Linq;
+using System;
 
 public class CharacterMenuUI : MonoBehaviour
 {
@@ -18,13 +19,57 @@ public class CharacterMenuUI : MonoBehaviour
     List<SkinColorButtonUI> skinColorButtons;
     public SkinColorButtonUI skinColorButtonPrefab;
 
+    public SkinGroupButtonUI skinGroupButtonPrefab;
+
+    public List<SkinGroupSelectionPanel> groupSelectionPanels;
+    Dictionary<SkinGroup.SkinSlot, SkinGroupSelectionPanel> groupSelectionPanelsDict;
+
+
     public SkinsLibrary skinsLibrary;
 
     Skin selectedSkin;
 
+    private void Awake()
+    {
+        skinsLibrary.Init();
+    }
     private void Start()
     {
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
+        groupSelectionPanelsDict = new Dictionary<SkinGroup.SkinSlot, SkinGroupSelectionPanel>();
+
+        foreach(SkinGroupSelectionPanel sgsp in groupSelectionPanels)
+        {
+            groupSelectionPanelsDict[sgsp.slot] = sgsp;
+            sgsp.buttons = sgsp.container.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
+            UpdateSkinGroupButtons(sgsp);
+        }
+
+    }
+
+    void UpdateSkinGroupButtons(SkinGroupSelectionPanel panel)
+    {
+        List<SkinGroup> groups = skinsLibrary.groupsBySlot[panel.slot];
+        int counter = 0;
+        foreach (SkinGroupButtonUI sgb in panel.buttons)
+        {
+            if (groups.Count > counter)
+            {
+                sgb.gameObject.SetActive(true);
+                sgb.set(groups[counter], SelectSkinGroup);
+            }
+            else
+            {
+                sgb.gameObject.SetActive(false);
+            }
+            counter++;
+        }
+        for (int i = counter; i < groups.Count; i++)
+        {
+            SkinGroupButtonUI sgb = Instantiate(skinGroupButtonPrefab, panel.container);
+            sgb.gameObject.SetActive(true);
+            sgb.set(groups[counter], SelectSkinGroup);
+        }
     }
 
     public void UpdateDetailsPanel(SkinGroup group, Skin skin)
@@ -95,7 +140,7 @@ public class CharacterMenuUI : MonoBehaviour
 
     string GetEquippedSkinID()
     {
-        return PlayerPrefs.GetString("EquippedSkinID","");
+        return PlayerPrefs.GetString("EquippedSkinID",skinsLibrary.defaultSkin);
     }
 
     Skin GetEquippedSkin()
@@ -120,5 +165,25 @@ public class CharacterMenuUI : MonoBehaviour
         
         UpdateDetailsPanel(group, group.skins[0]);
     }
+
+    public void SelectSkinGroup(SkinGroup group)
+    {
+        UpdateDetailsPanel(group);
+        SkinGroupSelectionPanel panel = groupSelectionPanelsDict[group.slot];
+
+        if (panel.selected) panel.selected.SetSelection(false);
+        panel.buttons.Find(o => o.group == group).SetSelection(true);
+
+    }
+
+}
+
+[System.Serializable]
+public class SkinGroupSelectionPanel
+{
+    public SkinGroup.SkinSlot slot;
+    public Transform container;
+    [HideInInspector]public List<SkinGroupButtonUI> buttons;
+    [HideInInspector]public SkinGroupButtonUI selected;
 }
 

@@ -9,14 +9,18 @@ public class SkinsLibrary : ScriptableObject
     public List<SkinGroup> _maskSkins;
     public List<SkinGroup> _bodySkins;
 
+    public Dictionary<SkinGroup.SkinSlot, List<SkinGroup>> groupsBySlot;
+
+    public string defaultSkin;
+
     private Dictionary<string, SkinAndGroup> skinsByID;
 
-    private void Awake()
+    public void Init()
     {
-        InitializeDictionary();
+        InitializeDictionaries();
     }
 
-
+    
     public Skin getSkin(string skinID)
     {
         return skinsByID[skinID].skin;
@@ -39,16 +43,29 @@ public class SkinsLibrary : ScriptableObject
         }
     }
 
-    void InitializeDictionary()
+    void InitializeDictionaries()
     {
+        
+        groupsBySlot = new Dictionary<SkinGroup.SkinSlot, List<SkinGroup>>();
+        groupsBySlot[SkinGroup.SkinSlot.MASK] = _maskSkins;
+        groupsBySlot[SkinGroup.SkinSlot.BODY] = _bodySkins;
+
         skinsByID = new Dictionary<string, SkinAndGroup>();
-        foreach(SkinGroup group in _maskSkins)
+
+        foreach(var v in groupsBySlot)
         {
-            foreach(Skin skin in group.skins)
+            foreach (SkinGroup group in v.Value)
             {
-                skinsByID.Add(skin.ID, new SkinAndGroup(skin, group));
+                foreach (Skin skin in group.skins)
+                {
+                    skinsByID[skin.ID]= new SkinAndGroup(skin, group);
+                }
             }
         }
+
+        
+
+
     }
 
 }
@@ -56,9 +73,9 @@ public class SkinsLibrary : ScriptableObject
 [System.Serializable]
 public class SkinGroup
 {
-    public enum skinSlot { BODY, MASK }
+    public enum SkinSlot { BODY, MASK }
 
-    public skinSlot slot;
+    public SkinSlot slot;
     public string name;
     public List<Skin> skins;
     public Sprite sprite;
