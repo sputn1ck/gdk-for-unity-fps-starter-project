@@ -6,12 +6,9 @@ using UnityEngine;
 public class SkinsLibrary : ScriptableObject
 {
 
-    public List<SkinGroup> _maskSkins;
-    public List<SkinGroup> _bodySkins;
+    [SerializeField] private List<SkinSlotSettings> slotSettings;
 
-    public Dictionary<SkinGroup.SkinSlot, List<SkinGroup>> groupsBySlot;
-
-    public string defaultSkin;
+    public Dictionary<SkinSlot, SkinSlotSettings> settings;
 
     private Dictionary<string, SkinAndGroup> skinsByID;
 
@@ -21,11 +18,11 @@ public class SkinsLibrary : ScriptableObject
     }
 
     
-    public Skin getSkin(string skinID)
+    public Skin GetSkin(string skinID)
     {
         return skinsByID[skinID].skin;
     }
-    public SkinGroup getGroup(string skinID)
+    public SkinGroup GetGroup(string skinID)
     {
         return skinsByID[skinID].group;
     }
@@ -46,16 +43,19 @@ public class SkinsLibrary : ScriptableObject
     void InitializeDictionaries()
     {
         
-        groupsBySlot = new Dictionary<SkinGroup.SkinSlot, List<SkinGroup>>();
-        groupsBySlot[SkinGroup.SkinSlot.MASK] = _maskSkins;
-        groupsBySlot[SkinGroup.SkinSlot.BODY] = _bodySkins;
+        settings = new Dictionary<SkinSlot, SkinSlotSettings>();
+        foreach(SkinSlotSettings sss in slotSettings)
+        {
+            settings[sss.slot] = sss;
+        }
 
         skinsByID = new Dictionary<string, SkinAndGroup>();
 
-        foreach(var v in groupsBySlot)
+        foreach(var v in settings)
         {
-            foreach (SkinGroup group in v.Value)
+            foreach (SkinGroup group in v.Value.groups)
             {
+                group.slot = v.Value.slot;
                 foreach (Skin skin in group.skins)
                 {
                     skinsByID[skin.ID]= new SkinAndGroup(skin, group);
@@ -63,29 +63,38 @@ public class SkinsLibrary : ScriptableObject
             }
         }
 
-        
-
-
     }
 
+}
+[System.Serializable]
+public class SkinSlotSettings
+{
+    public SkinSlot slot;
+    public string defaultSkinID;
+    public List<SkinGroup> groups;
+
+    public static implicit operator List<SkinGroup>(SkinSlotSettings s)
+    {
+        return s.groups;
+    }
 }
 
 [System.Serializable]
 public class SkinGroup
 {
-    public enum SkinSlot { BODY, MASK }
-
-    public SkinSlot slot;
     public string name;
-    public List<Skin> skins;
     public Sprite sprite;
+    public List<Skin> skins;
+    [HideInInspector] public SkinSlot slot;
 }
 
 [System.Serializable]
 public class Skin
 {
     public string ID;
-    public Color identificationColor;
+    public Color identificationColor = Color.white;
     public long price;
     public bool owned;
 }
+
+public enum SkinSlot { BODY, MASK }

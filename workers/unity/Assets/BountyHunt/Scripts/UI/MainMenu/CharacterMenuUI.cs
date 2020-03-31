@@ -22,34 +22,41 @@ public class CharacterMenuUI : MonoBehaviour
     public SkinGroupButtonUI skinGroupButtonPrefab;
 
     public List<SkinGroupSelectionPanel> groupSelectionPanels;
-    Dictionary<SkinGroup.SkinSlot, SkinGroupSelectionPanel> groupSelectionPanelsDict;
+    Dictionary<SkinSlot, SkinGroupSelectionPanel> groupSelectionPanelsDict;
 
 
     public SkinsLibrary skinsLibrary;
 
-    Skin selectedSkin;
+    SkinSlot selectedSlot = SkinSlot.MASK;
+
 
     private void Awake()
     {
+        skinsLibrary = Instantiate(skinsLibrary);
         skinsLibrary.Init();
+
     }
     private void Start()
     {
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
-        groupSelectionPanelsDict = new Dictionary<SkinGroup.SkinSlot, SkinGroupSelectionPanel>();
+        groupSelectionPanelsDict = new Dictionary<SkinSlot, SkinGroupSelectionPanel>();
 
         foreach(SkinGroupSelectionPanel sgsp in groupSelectionPanels)
         {
             groupSelectionPanelsDict[sgsp.slot] = sgsp;
             sgsp.buttons = sgsp.container.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
-            UpdateSkinGroupButtons(sgsp);
+            sgsp.selectedSkin = skinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + sgsp.slot, skinsLibrary.settings[sgsp.slot].defaultSkinID));
+            sgsp.subMenu.onActivate.AddListener(delegate{ selectedSlot = sgsp.slot; });
+            
         }
-
+        UpdateSelectionPanels();
     }
 
     void UpdateSkinGroupButtons(SkinGroupSelectionPanel panel)
     {
-        List<SkinGroup> groups = skinsLibrary.groupsBySlot[panel.slot];
+        List<SkinGroup> groups = skinsLibrary.settings[panel.slot];
+        SkinGroup equippedGroup = skinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID_" + panel.slot, skinsLibrary.settings[panel.slot].defaultSkinID));
+        SkinGroup selectedGroup = skinsLibrary.GetGroup(panel.selectedSkin.ID);
         int counter = 0;
         foreach (SkinGroupButtonUI sgb in panel.buttons)
         {
@@ -57,6 +64,13 @@ public class CharacterMenuUI : MonoBehaviour
             {
                 sgb.gameObject.SetActive(true);
                 sgb.set(groups[counter], SelectSkinGroup);
+
+                if (groups[counter] == equippedGroup) sgb.SetEquippedState(true);
+                else sgb.SetEquippedState(false);
+
+                if (groups[counter] == selectedGroup) sgb.SetSelection(true);
+                else sgb.SetSelection(false);
+
             }
             else
             {
@@ -68,27 +82,36 @@ public class CharacterMenuUI : MonoBehaviour
         {
             SkinGroupButtonUI sgb = Instantiate(skinGroupButtonPrefab, panel.container);
             sgb.gameObject.SetActive(true);
-            sgb.set(groups[counter], SelectSkinGroup);
+            sgb.set(groups[i], SelectSkinGroup);
+
+            if (groups[i] == equippedGroup) sgb.SetEquippedState(true);
+            else sgb.SetEquippedState(false);
+
+            if (groups[i] == selectedGroup) sgb.SetSelection(true);
+            else sgb.SetSelection(false);
         }
     }
 
     public void UpdateDetailsPanel(SkinGroup group, Skin skin)
     {
-        selectedSkin = skin;
+        groupSelectionPanelsDict[group.slot].selectedSkin = skin;
         detailsHeaderText.text = group.name;
         detailsPreviewImage.sprite = group.sprite;
         BuyAndEquipButton.interactable = true;
 
+        BuyAndEquipButton.gameObject.SetActive(true);
+
         if (skin.owned)
         {
-            buyStateText.text = "owned";
-            if (skin == GetEquippedSkin())
+            
+            if (skin == GetEquippedSkin(group.slot))
             {
-                BuyAndEquipButtonText.text = "equipped";
+                buyStateText.text = "equipped";
                 BuyAndEquipButton.gameObject.SetActive(false);
             }
             else
             {
+                buyStateText.text = "owned";
                 BuyAndEquipButtonText.text = "equip";
                 BuyAndEquipButton.onClick.RemoveAllListeners();
                 BuyAndEquipButton.onClick.AddListener(equip);
@@ -99,13 +122,14 @@ public class CharacterMenuUI : MonoBehaviour
             buyStateText.text = Utility.SatsToShortString(skin.price, UITinter.tintDict[TintColor.Sats]);
             BuyAndEquipButtonText.text = "buy";
             BuyAndEquipButton.onClick.RemoveAllListeners();
-            BuyAndEquipButton.onClick.AddListener(equip);
+            BuyAndEquipButton.onClick.AddListener(buy);
         }
+        UpdateSkinGroupColors(group);
     }
 
     public void UpdateSkinGroupColors(SkinGroup group)
     {
-        Skin equipped = GetEquippedSkin();
+        Skin equipped = GetEquippedSkin(group.slot);
         
         for (int i = 0; i<group.skins.Count || i < skinColorButtons.Count;i++)
         {
@@ -129,37 +153,51 @@ public class CharacterMenuUI : MonoBehaviour
                 scb = skinColorButtons[i];
             }
             scb.image.color = skn.identificationColor;
+            scb.skin = skn;
 
             if (equipped == skn) scb.frame.SetActive(true);
             else scb.frame.SetActive(false);
 
-            if (selectedSkin == skn) scb.underLine.SetActive(false);
+            if (groupSelectionPanelsDict[group.slot].selectedSkin == skn) scb.underLine.SetActive(true);
+            else scb.underLine.SetActive(false);
 
+            scb.onClick.RemoveAllListeners();
+            scb.onClick.AddListener(selectSkin);
         }
     }
 
-    string GetEquippedSkinID()
+    string GetEquippedSkinID(SkinSlot slot)
     {
-        return PlayerPrefs.GetString("EquippedSkinID",skinsLibrary.defaultSkin);
+        return PlayerPrefs.GetString("EquippedSkinID_"+slot,skinsLibrary.settings[slot].defaultSkinID);
     }
 
-    Skin GetEquippedSkin()
+    Skin GetEquippedSkin(SkinSlot slot)
     {
-        string id = GetEquippedSkinID();
-        return skinsLibrary.getSkin(id);
+        string id = GetEquippedSkinID(slot);
+        return skinsLibrary.GetSkin(id);
     }
 
 
     private void buy()
     {
-        selectedSkin.owned = true; //just for testing
+        groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
+        UpdateDetailsPanel();
+        UpdateSelectionPanels();
     }
 
     private void equip()
     {
-
+        PlayerPrefs.SetString("EquippedSkinID_"+skinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID).slot, groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
+        PlayerPrefs.Save();
+        UpdateDetailsPanel();
+        UpdateSelectionPanels();
     }
-
+    public void UpdateDetailsPanel()
+    {
+        SkinGroup g = skinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
+        Skin s = groupSelectionPanelsDict[selectedSlot].selectedSkin;
+        UpdateDetailsPanel(g,s);
+    }
     public void UpdateDetailsPanel(SkinGroup group)
     {
         
@@ -171,9 +209,25 @@ public class CharacterMenuUI : MonoBehaviour
         UpdateDetailsPanel(group);
         SkinGroupSelectionPanel panel = groupSelectionPanelsDict[group.slot];
 
-        if (panel.selected) panel.selected.SetSelection(false);
+        if (panel.selectedGroup) panel.selectedGroup.SetSelection(false);
+        panel.selectedGroup = panel.buttons.Find(o => o.group == group);
         panel.buttons.Find(o => o.group == group).SetSelection(true);
+        UpdateSelectionPanels();
+        
 
+    }
+
+    public void selectSkin(Skin skin)
+    {
+        UpdateDetailsPanel(skinsLibrary.GetGroup(skin.ID),skin);
+    }
+
+    void UpdateSelectionPanels()
+    {
+        foreach (SkinGroupSelectionPanel p in groupSelectionPanels)
+        {
+            UpdateSkinGroupButtons(p);
+        }
     }
 
 }
@@ -181,9 +235,11 @@ public class CharacterMenuUI : MonoBehaviour
 [System.Serializable]
 public class SkinGroupSelectionPanel
 {
-    public SkinGroup.SkinSlot slot;
+    public SkinSlot slot;
     public Transform container;
     [HideInInspector]public List<SkinGroupButtonUI> buttons;
-    [HideInInspector]public SkinGroupButtonUI selected;
+    [HideInInspector]public SkinGroupButtonUI selectedGroup;
+    [HideInInspector] public Skin selectedSkin;
+    public SlideSubMenuUI subMenu;
 }
 

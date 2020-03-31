@@ -9,8 +9,8 @@ public class SlideSubMenuUI : MonoBehaviour
     [HideInInspector]
     public SlideMenuUI menu;
 
-    public UnityEvent onActivate;
-    public UnityEvent onDeactivate;
+    public UnityEvent onActivate = new UnityEvent();
+    public UnityEvent onDeactivate = new UnityEvent();
 
     [HideInInspector]
     public CanvasGroup canvasGroup;

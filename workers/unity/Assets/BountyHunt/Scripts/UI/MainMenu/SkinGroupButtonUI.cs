@@ -62,7 +62,7 @@ public class SkinGroupButtonUI : MonoBehaviour
     }
     public void SetEquippedState(bool equipped)
     {
-        underLine.gameObject.SetActive(equipped);
+        frame.gameObject.SetActive(equipped);
 
     }
 

@@ -12,49 +12,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a8db288f42128646a7b1de08095d95b, type: 3}
   m_Name: Test Skins Library
   m_EditorClassIdentifier: 
-  _maskSkins:
+  slotSettings:
   - slot: 1
-    name: skull
-    skins:
-    - ID: sk01
-      identificationColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
-      price: 300
-      owned: 1
-    - ID: sk02
-      identificationColor: {r: 0.15477037, g: 0.6981132, b: 0.597169, a: 1}
-      price: 400
-      owned: 0
-    - ID: sk03
-      identificationColor: {r: 0.9056604, g: 0.50342035, b: 0.09825563, a: 1}
-      price: 600
-      owned: 0
-    sprite: {fileID: -9140471093589001447, guid: 312e028401f5ef5489f508714445b3d5,
-      type: 3}
-  - slot: 1
-    name: other
-    skins:
-    - ID: o1
-      identificationColor: {r: 0.3063813, g: 0.50864345, b: 0.8018868, a: 1}
-      price: 0
-      owned: 0
-    - ID: o2
-      identificationColor: {r: 1, g: 0.4198113, b: 0.9205589, a: 1}
-      price: 0
-      owned: 0
-    sprite: {fileID: -3470358838525946003, guid: 312e028401f5ef5489f508714445b3d5,
-      type: 3}
-  _bodySkins:
+    defaultSkinID: hs0
+    groups:
+    - name: Hunter Skull
+      sprite: {fileID: 21300000, guid: 3321f8947bbba784c9c1af58a38e7b09, type: 3}
+      skins:
+      - ID: hs0
+        identificationColor: {r: 1, g: 1, b: 1, a: 1}
+        price: 0
+        owned: 1
+      - ID: hs1
+        identificationColor: {r: 0.748932, g: 0.9622642, b: 0.9599356, a: 1}
+        price: 400
+        owned: 0
+      - ID: hs2
+        identificationColor: {r: 0.8490566, g: 0.27634388, b: 0.6219292, a: 1}
+        price: 1000
+        owned: 0
+      slot: 1
+    - name: Marmelade
+      sprite: {fileID: -8430313788917241573, guid: 312e028401f5ef5489f508714445b3d5,
+        type: 3}
+      skins:
+      - ID: strawberry
+        identificationColor: {r: 0.9150943, g: 0.28920433, b: 0.30086526, a: 1}
+        price: 12
+        owned: 0
+      - ID: plum
+        identificationColor: {r: 0.49754485, g: 0.28555533, b: 0.6509434, a: 1}
+        price: 34
+        owned: 0
+      - ID: mango
+        identificationColor: {r: 0.9528302, g: 0.77622706, b: 0.35506406, a: 1}
+        price: 56
+        owned: 0
+      slot: 1
   - slot: 0
-    name: default
-    skins:
-    - ID: bd1
-      identificationColor: {r: 1, g: 0.5267917, b: 0, a: 1}
-      price: 0
-      owned: 1
-    - ID: bd2
-      identificationColor: {r: 0.5707547, g: 1, b: 0.97091895, a: 1}
-      price: 1000
-      owned: 0
-    sprite: {fileID: -5673618120071735642, guid: 312e028401f5ef5489f508714445b3d5,
-      type: 3}
-  defaultSkin: 
+    defaultSkinID: robo0
+    groups:
+    - name: Robot
+      sprite: {fileID: 21300000, guid: 1e56a90b5e1ba484b92f731e0a551463, type: 3}
+      skins:
+      - ID: robo0
+        identificationColor: {r: 1, g: 1, b: 1, a: 1}
+        price: 0
+        owned: 1
+      - ID: robo1
+        identificationColor: {r: 1, g: 0.80037385, b: 0.1462264, a: 1}
+        price: 100000000
+        owned: 0
+      slot: 0
+    - name: Dude
+      sprite: {fileID: -5673618120071735642, guid: 312e028401f5ef5489f508714445b3d5,
+        type: 3}
+      skins:
+      - ID: dude0
+        identificationColor: {r: 1, g: 0.78120166, b: 0.6650944, a: 1}
+        price: 0
+        owned: 0
+      slot: 0
