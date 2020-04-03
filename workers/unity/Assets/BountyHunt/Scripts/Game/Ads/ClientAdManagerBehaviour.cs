@@ -32,6 +32,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     private void OnEnable()
     {
         advertisingConmponentReader.OnCurrentAdvertisersUpdate += UpdateAdvertisers;
+        UpdateAdvertisers(advertisingConmponentReader.Data.CurrentAdvertisers);
     }
 
     private void Start()

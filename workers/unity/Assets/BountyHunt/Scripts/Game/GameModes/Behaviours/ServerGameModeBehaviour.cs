@@ -16,6 +16,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
     [Require] public BountySpawnerCommandSender BountySpawnerCommandSender;
     [Require] public GameStatsWriter GameStatsWriter;
 
+
+    [Require] AdvertisingComponentWriter advertisingConmponentWriter;
     private int gameModeRotationCounter;
     public GameMode currentGameMode;
     private int nextGameModeId;
@@ -34,9 +36,11 @@ public class ServerGameModeBehaviour : MonoBehaviour
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         currentGameMode = gameMode;
 
-        // TODO Get Settings
 
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbh.GetRoundInfoRequest { GameMode = (Bbh.GameMode)gameModeRotationCounter });
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbh.GetRoundInfoRequest { GameMode = (Bbh.GameMode)gameModeRotationCounter,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        if (roundInfo.Advertisers != null) {
+            SendAdvertisers(roundInfo.Advertisers);
+        }
         currentGameMode.ServerOnGameModeStart(this, roundInfo.Settings, roundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
         {
@@ -53,8 +57,28 @@ public class ServerGameModeBehaviour : MonoBehaviour
         });
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
+        SetNextGameMode();
     }
-
+    public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbh.AdvertiserInfo> advertiserInfos)
+    {
+        List<AdvertiserSource> advertiserSources = new List<AdvertiserSource>();
+        foreach(var advertiserInfo in advertiserInfos)
+        {
+            var advertiserSource = new AdvertiserSource
+            {
+                Investment = advertiserInfo.Sponsoring,
+                Name = advertiserInfo.Name,
+                SquareTextureLinks = new List<string>(),
+            };
+            
+            foreach(var imgUrl in advertiserInfo.SquareBannerUrls)
+            {
+                advertiserSource.SquareTextureLinks.Add("http://"+imgUrl);
+            }
+            advertiserSources.Add(advertiserSource);
+        }
+        advertisingConmponentWriter.SendUpdate(new AdvertisingComponent.Update() { CurrentAdvertisers = advertiserSources });
+    }
     private void EndGameMode()
     {
         currentGameMode.ServerOnGameModeEnd(this);
@@ -69,7 +93,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
     private IEnumerator gameModeEnumerator()
     {
         StartGameMode();
-        SetNextGameMode();
         while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
             var endTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime +
@@ -81,7 +104,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 yield return new WaitForSeconds(5f);
                 gameModeRotationCounter = getNextGameModeInt();
                 StartGameMode();
-                SetNextGameMode();
+                
             }
 
             yield return new WaitForEndOfFrame();

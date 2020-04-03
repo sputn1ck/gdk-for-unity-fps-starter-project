@@ -16,6 +16,8 @@ public class BountyHuntGameMode : GameMode
     private ServerGameModeBehaviour _serverGameModeBehaviour;
     public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
+
+        Debug.Log("start bbh");
         // TODO get gamemode from backend
         this.GameModeSettings = settings;
 
@@ -40,6 +42,7 @@ public class BountyHuntGameMode : GameMode
     public override void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
     {
 
+        Debug.Log("end bbh");
         ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
     }
 
