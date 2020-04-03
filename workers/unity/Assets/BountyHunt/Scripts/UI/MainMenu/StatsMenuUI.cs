@@ -37,7 +37,32 @@ public class StatsMenuUI : MonoBehaviour
 
     void AddListeners()
     {
+        /*
+        //player
+        ClientEvents.instance.onBalanceUpdate.AddListener(onBalanceUpdate);
+        ClientEvents.instance.onBountyUpdate.AddListener(onBountyUpdate);
+        ClientEvents.instance.onSessionEarningsUpdate.AddListener(onEarningsUpdate);
 
+        ClientEvents.instance.onPlayerKillsAndDeathsUpdate.AddListener(onPlayerKillsAndDeathsUpdate);
+
+        ClientEvents.instance.onPlayerLifeTimeKillsUpdate.AddListener(onPlayerLifeTimeKillsUpdate);
+        ClientEvents.instance.onPlayerLifeTimeDeathsUpdate.AddListener(onPlayerLifeTimeDeathsUpdate);
+        ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.AddListener(onPlayerLifeTimeEarningsUpdate);
+
+        //game
+        ClientEvents.instance.onGlobalBountyUpdate.AddListener(onGlobalBountyUpdate);
+        ClientEvents.instance.onGlobalLootUpdate.AddListener(onGlobalLootUpdate);
+        ClientEvents.instance.onGlobalPotUpdate.AddListener(onGlobalPotUpdate);
+
+        ClientEvents.instance.onAllTimeKillsUpdate.AddListener(onAllTimeKillsUpdate);
+        ClientEvents.instance.onAllTimeMostKillsUpdate.AddListener(onAllTimeMostKillsUpdate);
+
+        ClientEvents.instance.onAllTimeDeathsUpdate.AddListener(onAllTimeDeathsUpdate);
+        ClientEvents.instance.onAllTimeMostDeathsUpdate.AddListener(onAllTimeMostDeathsUpdate);
+
+        ClientEvents.instance.onAllTimeEarningsUpdate.AddListener(onAllTimeEarningsUpdate);
+        ClientEvents.instance.onAllTimeMostEarningsUpdate.AddListener(onAllTimeMostEarningsUpdate);
+        */
     }
 
     void NewLine(string name, string value, Transform container,string key = "")

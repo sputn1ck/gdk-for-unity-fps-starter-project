@@ -33,6 +33,8 @@ public class KillsAndDeathsUpdateEvent : UnityEvent<KillsAndDeathsUpdateEventArg
 
 public class AllTimeScoreUpdateEvent : UnityEvent<AllTimeScoreUpdateArgs> { }
 
+public class LeaderboardUpdateEvent : UnityEvent<LeaderboardUpdateArgs> { }
+
 public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
 
 [Serializable]
@@ -98,5 +100,10 @@ public struct AllTimeScoreUpdateArgs
 {
     public string name;
     public long score;
+}
+public struct LeaderboardUpdateArgs
+{
+    public Bbh.Highscore[] highscores;
+    public string PlayerPubKey;
 }
 

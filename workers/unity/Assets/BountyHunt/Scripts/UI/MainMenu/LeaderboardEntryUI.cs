@@ -11,7 +11,7 @@ public class LeaderboardEntryUI : MonoBehaviour
     public List<TextMeshProUGUI> values;
     public CanvasGroup canvasGroup;
 
-    public void Set(int rank, string playerName, List<string> values)
+    public void Set(long rank, string playerName, List<string> values)
     {
         canvasGroup.alpha = 1;
         if(values.Count != this.values.Count)
