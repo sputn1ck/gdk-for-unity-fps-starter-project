@@ -7,6 +7,7 @@ using Chat;
 using Grpc.Core;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
+using System.Threading.Tasks;
 
 public class ServerGameModeBehaviour : MonoBehaviour
 {
@@ -27,10 +28,11 @@ public class ServerGameModeBehaviour : MonoBehaviour
         instance = this;
         gameModeRotationCounter = 0;
 
-        StartCoroutine(gameModeEnumerator());
+        //StartCoroutine(gameModeEnumerator());
+        gameModeRoutine();
     }
 
-    private async void StartGameMode()
+    private async Task StartGameMode()
     {
         
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
@@ -90,10 +92,11 @@ public class ServerGameModeBehaviour : MonoBehaviour
         nextGameModeId = getNextGameModeInt();
     }
 
-    private IEnumerator gameModeEnumerator()
+
+    private async void gameModeRoutine()
     {
-        StartGameMode();
-        while (!ServerServiceConnections.ct.IsCancellationRequested)
+        await StartGameMode();
+        while(!ServerServiceConnections.ct.IsCancellationRequested)
         {
             var endTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime +
                 GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration;
@@ -101,16 +104,13 @@ public class ServerGameModeBehaviour : MonoBehaviour
             {
                 EndGameMode();
                 GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
-                yield return new WaitForSeconds(5f);
+                await Task.Delay(5000);
                 gameModeRotationCounter = getNextGameModeInt();
-                StartGameMode();
-                
+                await StartGameMode();
+
             }
-
-            yield return new WaitForEndOfFrame();
+            await Task.Delay(10);
         }
-
-        yield return null;
     }
 
     private int getNextGameModeInt()
