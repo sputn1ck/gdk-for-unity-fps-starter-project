@@ -70,10 +70,13 @@ public class ClientAdManagerBehaviour : MonoBehaviour
                 bannersLeft.RemoveAt(0);
             }
         }
-
-        foreach (AdBillboard ab in bannersLeft)
+        if(advertisers.Count >= 1)
         {
-            ab.SetAdvertiser(GetRandomAdvertiser());
+
+            foreach (AdBillboard ab in bannersLeft)
+            {
+                ab.SetAdvertiser(GetRandomAdvertiser());
+            }
         }
 
     }

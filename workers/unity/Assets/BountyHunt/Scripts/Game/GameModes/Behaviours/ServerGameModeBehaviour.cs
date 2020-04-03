@@ -72,10 +72,9 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 Name = advertiserInfo.Name,
                 SquareTextureLinks = new List<string>(),
             };
-            
             foreach(var imgUrl in advertiserInfo.SquareBannerUrls)
             {
-                advertiserSource.SquareTextureLinks.Add("http://"+imgUrl);
+                advertiserSource.SquareTextureLinks.Add(imgUrl);
             }
             advertiserSources.Add(advertiserSource);
         }

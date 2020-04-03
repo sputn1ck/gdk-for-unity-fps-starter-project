@@ -135,7 +135,7 @@ public class GameTabWindowUI : TabMenuWindowUI
         }
         else
         {
-            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(ServerServiceConnections.instance.GetPubkey(),pubkey, postBountyAmount);
+            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(PlayerServiceConnections.instance.BackendPubkey,pubkey, postBountyAmount);
             if (res.PaymentError != "")
             {
                 messageString = "payment failed!";
