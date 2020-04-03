@@ -8,28 +8,33 @@ using UnityEngine;
 using Improbable.Gdk.Core;
 using Bountyhunt;
 using Fps.Respawning;
+using Bbh;
 
 [CreateAssetMenu(fileName = "BountyHuntGameMode", menuName = "BBH/GameModes/BountyHunt", order = 2)]
 public class BountyHuntGameMode : GameMode
 {
-    public BountyHuntSettings bountyHuntSettings;
     private ServerGameModeBehaviour _serverGameModeBehaviour;
-    public override async void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
+
+        Debug.Log("start bbh");
+        // TODO get gamemode from backend
+        this.GameModeSettings = settings;
+
         _serverGameModeBehaviour = serverGameModeBehaviour;
-        var totalSats = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundBounty() +FlagManager.instance.GetBaseSubsidiy()+ bountyHuntSettings.baseSats + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
+        var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
         serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
         {
             CarryoverSats = 0
         });
         serverGameModeBehaviour.BountySpawnerCommandSender.SendStartSpawningCommand(new EntityId(2), new Bountyhunt.StartSpawningRequest()
         {
-            TotalDuration = GlobalSettings.SecondDuration,
-            TimeBetweenTicks = bountyHuntSettings.timeBetweenSpawns,
-            MinSpawns = bountyHuntSettings.minSpawns,
-            MaxSpawns = bountyHuntSettings.maxSpawns,
+            TotalDuration = GameModeSettings.SecondDuration,
+            TimeBetweenTicks = GameModeSettings.SpawnSettings.TimeBetweenSpawns,
+            MinSpawns = GameModeSettings.SpawnSettings.MinSpawnsPerSpawn,
+            MaxSpawns = GameModeSettings.SpawnSettings.MaxSpawnsPerSpawn,
             TotalBounty = totalSats,
-            Distribution = bountyHuntSettings.distribution
+            Distribution = (Distribution)GameModeSettings.SpawnSettings.Distribution
         });
         ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
     }
@@ -37,6 +42,7 @@ public class BountyHuntGameMode : GameMode
     public override void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
     {
 
+        Debug.Log("end bbh");
         ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
     }
 

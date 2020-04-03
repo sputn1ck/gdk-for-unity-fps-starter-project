@@ -7,6 +7,7 @@ using Chat;
 using Grpc.Core;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
+using System.Threading.Tasks;
 
 public class ServerGameModeBehaviour : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
     [Require] public BountySpawnerCommandSender BountySpawnerCommandSender;
     [Require] public GameStatsWriter GameStatsWriter;
 
+
+    [Require] AdvertisingComponentWriter advertisingConmponentWriter;
     private int gameModeRotationCounter;
     public GameMode currentGameMode;
     private int nextGameModeId;
@@ -25,71 +28,74 @@ public class ServerGameModeBehaviour : MonoBehaviour
         instance = this;
         gameModeRotationCounter = 0;
 
-        StartCoroutine(gameModeEnumerator());
+        //StartCoroutine(gameModeEnumerator());
+        gameModeRoutine();
     }
 
-    private void StartGameMode()
+    private async Task StartGameMode()
     {
-
+        
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
+        currentGameMode = gameMode;
+
+
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbh.GetRoundInfoRequest { GameMode = (Bbh.GameMode)gameModeRotationCounter,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        if (roundInfo.Advertisers != null) {
+            SendAdvertisers(roundInfo.Advertisers);
+        }
+        currentGameMode.ServerOnGameModeStart(this, roundInfo.Settings, roundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
         {
             GameModeInfo = new GameModeInfo(gameModeRotationCounter),
             TimeInfo = new TimeInfo()
             {
                 StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GlobalSettings.NanoSeconds,
+                Duration = gameMode.GameModeSettings.SecondDuration * 10000000,
             }
         };
-        currentGameMode = gameMode;
-        currentGameMode.ServerOnGameModeStart(this);
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
         });
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
+        SetNextGameMode();
     }
-
+    public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbh.AdvertiserInfo> advertiserInfos)
+    {
+        List<AdvertiserSource> advertiserSources = new List<AdvertiserSource>();
+        foreach(var advertiserInfo in advertiserInfos)
+        {
+            var advertiserSource = new AdvertiserSource
+            {
+                Investment = advertiserInfo.Sponsoring,
+                Name = advertiserInfo.Name,
+                SquareTextureLinks = new List<string>(),
+            };
+            foreach(var imgUrl in advertiserInfo.SquareBannerUrls)
+            {
+                advertiserSource.SquareTextureLinks.Add(imgUrl);
+            }
+            advertiserSources.Add(advertiserSource);
+        }
+        advertisingConmponentWriter.SendUpdate(new AdvertisingComponent.Update() { CurrentAdvertisers = advertiserSources });
+    }
     private void EndGameMode()
     {
         currentGameMode.ServerOnGameModeEnd(this);
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
-        var RoundInfo = new RoundInfo()
-        {
-            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
-            TimeInfo = new TimeInfo()
-            {
-                StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GlobalSettings.NanoSeconds,
-            }
-        };
-        GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has ended", MessageType.INFO_LOG);
     }
     private void SetNextGameMode()
     {
         nextGameModeId = getNextGameModeInt();
-        var gameMode = GameModeDictionary.Get(nextGameModeId);
-        GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
-        {
-            NextRound = new RoundInfo()
-            {
-                GameModeInfo = new GameModeInfo(nextGameModeId),
-                TimeInfo = new TimeInfo()
-                {
-                    StartTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime + GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration,
-                    Duration = gameMode.GlobalSettings.NanoSeconds,
-                }
-            }
-        });
     }
 
-    private IEnumerator gameModeEnumerator()
+
+    private async void gameModeRoutine()
     {
-        StartGameMode();
-        SetNextGameMode();
-        while (!ServerServiceConnections.ct.IsCancellationRequested)
+        await StartGameMode();
+        while(!ServerServiceConnections.ct.IsCancellationRequested)
         {
             var endTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime +
                 GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration;
@@ -97,16 +103,13 @@ public class ServerGameModeBehaviour : MonoBehaviour
             {
                 EndGameMode();
                 GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
-                yield return new WaitForSeconds(5f);
+                await Task.Delay(5000);
                 gameModeRotationCounter = getNextGameModeInt();
-                StartGameMode();
-                SetNextGameMode();
+                await StartGameMode();
+
             }
-
-            yield return new WaitForEndOfFrame();
+            await Task.Delay(10);
         }
-
-        yield return null;
     }
 
     private int getNextGameModeInt()

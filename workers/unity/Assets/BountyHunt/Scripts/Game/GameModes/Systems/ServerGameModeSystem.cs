@@ -60,11 +60,11 @@ public class ServerGameModeSystem : ComponentSystem
         if (events.Count < 1)
             return;
         var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
-        if (gameMode.GlobalSettings.ClearPickups)
+        if (gameMode.GameModeSettings.BaseSettings.ClearPickupsOnEnd)
         {
             ClearPickups();
         }
-        if (gameMode.PlayerSettings.ClearStatsOnEnd)
+        if (gameMode.GameModeSettings.BaseSettings.ClearStatsOnEnd)
         {
             ClearStats();
         }
@@ -75,7 +75,7 @@ public class ServerGameModeSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameModeManager.NewRound.Event>();
         if (events.Count < 1)
             return;
-        if (GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId).PlayerSettings.TeleportPlayerOnStart)
+        if (GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId).GameModeSettings.BaseSettings.TeleportPlayerOnStart)
         {
             TeleportPlayers();
         }

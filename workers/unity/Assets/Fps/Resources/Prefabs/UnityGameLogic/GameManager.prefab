@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5211544773741508025}
   - component: {fileID: -6059206683614005622}
   - component: {fileID: -1711190198637151961}
+  - component: {fileID: -2575720577932031098}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,8 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c60151199898e44d98ec59baac27cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAmount: 0
-  spawnTrigger: 0
 --- !u!114 &-5192710837073992374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,3 +99,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2652fd4ae191e486facf4d433ec5e0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentGameMode: {fileID: 0}
+--- !u!114 &-2575720577932031098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138815752769483736}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b77b0b05dec06145b6810c652c94e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
+  testSources:
+  - Name: nyan
+    Investment: 100
+    SquareTextureLinks:
+    - https://pbs.twimg.com/profile_images/2370446440/6e2jwf7ztbr5t1yjq4c5.jpeg
+    - https://target.scene7.com/is/image/Target/GUEST_7f86ff7a-22f0-4556-997c-b6dc907a1940?wid=488&hei=488&fmt=pjpeg
+  - Name: grumpy
+    Investment: 100
+    SquareTextureLinks:
+    - https://pbs.twimg.com/profile_images/1080545769034108928/CEzHCTpI_400x400.jpg

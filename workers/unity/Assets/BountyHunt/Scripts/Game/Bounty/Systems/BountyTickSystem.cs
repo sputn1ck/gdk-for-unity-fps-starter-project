@@ -48,23 +48,27 @@ public class BountyTickSystem : ComponentSystem
         var endEvents = componentUpdateSystem.GetEventsReceived<GameModeManager.EndRound.Event>();
         var startEvents = componentUpdateSystem.GetEventsReceived<GameModeManager.NewRound.Event>();
         var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
-        if (endEvents.Count > 0 && gameMode.PlayerSettings.ClearBountyOnEnd)
+        if (endEvents.Count > 0 && gameMode.GameModeSettings.BaseSettings.ClearBountyOnEnd)
         {
             AddTicks(1);
             return;
         }
-        if (gameMode.PlayerSettings.BountyTickConversion == 0)
+        if(gameMode.GameModeSettings == null)
+        {
+            return;
+        }
+        if (gameMode.GameModeSettings.BountySettings.BountyTickConversion == 0)
             return;
         if(startEvents.Count > 0)
         {
             timeSum = 0;
         }
         timeSum += Time.deltaTime;
-        tickTime = gameMode.PlayerSettings.BountyTickTime;
+        tickTime = gameMode.GameModeSettings.BountySettings.BountyTickTimeSeconds;
         if (timeSum < tickTime)
             return;
         timeSum = 0;
-        AddTicks(gameMode.PlayerSettings.BountyTickConversion);
+        AddTicks(gameMode.GameModeSettings.BountySettings.BountyTickConversion);
     }
 
 

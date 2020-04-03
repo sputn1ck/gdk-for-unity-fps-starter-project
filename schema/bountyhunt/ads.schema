@@ -1,0 +1,12 @@
+package bountyhunt;
+
+component AdvertisingComponent {
+    id = 520001;
+    list<AdvertiserSource> current_advertisers = 1;
+}
+
+type AdvertiserSource{
+    string name = 1;
+    int64 investment = 2;
+    list<string> square_texture_links = 3;
+}

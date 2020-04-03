@@ -19,6 +19,7 @@ public class PlayerServiceConnections : MonoBehaviour
     public bool UseApdata;
 
     public string BackendHost;
+    public string BackendPubkey;
     public int BackendPort;
     public BackendPlayerClient BackendPlayerClient;
 
