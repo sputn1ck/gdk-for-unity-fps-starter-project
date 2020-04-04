@@ -85,6 +85,11 @@ public class ServerGameModeBehaviour : MonoBehaviour
         currentGameMode.ServerOnGameModeEnd(this);
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has ended", MessageType.INFO_LOG);
+        var RoundInfo = new RoundInfo()
+        {
+            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
+        };
+        GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
     }
     private void SetNextGameMode()
     {
