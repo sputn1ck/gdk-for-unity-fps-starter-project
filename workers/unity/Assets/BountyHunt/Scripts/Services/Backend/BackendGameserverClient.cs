@@ -17,7 +17,6 @@ public class BackendGameserverClient
 
     private ConcurrentQueue<Bbh.EventStreamRequest> eventQueue;
 
-    private CancellationTokenSource ct;
     private Thread listenThread;
 
     private string pubkey;
@@ -28,7 +27,6 @@ public class BackendGameserverClient
         rpcChannel = new Grpc.Core.Channel(target, port,Grpc.Core.ChannelCredentials.Insecure);
         _client = new GameService.GameServiceClient(rpcChannel);
         eventQueue = new ConcurrentQueue<EventStreamRequest>();
-        ct = new CancellationTokenSource();
         this.pubkey = pubkey;
         this.message = message;
     }
@@ -42,9 +40,6 @@ public class BackendGameserverClient
     public void Shutdown()
     {
         Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
-
-        
-        ct.Cancel();
         Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
         t.Wait(5000);
         Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
@@ -54,7 +49,7 @@ public class BackendGameserverClient
     {
         listenThread = new Thread(async () =>
         {
-            while (!ct.IsCancellationRequested)
+            while (!ServerServiceConnections.ct.IsCancellationRequested)
             {
                 await eventStream();
                 Thread.Sleep(1000);
@@ -108,7 +103,7 @@ public class BackendGameserverClient
         {
             Debug.Log("opening stream");
             eventQueue.Enqueue(new EventStreamRequest());
-            while (!ct.IsCancellationRequested)
+            while (!ServerServiceConnections.ct.IsCancellationRequested)
             {
                 EventStreamRequest current;
                 if (eventQueue.TryDequeue(out current))
