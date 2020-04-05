@@ -79,7 +79,6 @@ public class BountyTickSystem : ComponentSystem
                 return;
         Entities.With(tickGroup).ForEach((Entity entity, ref HunterComponent.Component hunterComponent) =>
         {
-            Debug.Log("adding bounty tick");
             var tickComponent = new TickComponent()
             {
                 TickAmount = tickamount

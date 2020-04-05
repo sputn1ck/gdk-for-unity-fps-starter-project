@@ -165,7 +165,7 @@ namespace Fps.Health
                     }
 
                     // If not damaged recently, and not already fully healed, regen.
-                    if (healthComponent.Health < healthComponent.MaxHealth)
+                    if (healthComponent.Health < healthComponent.MaxHealth && !regenComponent.DamagedRecently)
                     {
                         regenData.NextRegenTimer -= Time.deltaTime;
                         if (regenData.NextRegenTimer <= 0)
