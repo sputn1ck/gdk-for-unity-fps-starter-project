@@ -78,18 +78,7 @@ public class GamePaymentManager : MonoBehaviour
             PrometheusManager.TotalBountyPaidSats.Inc(e.Invoice.AmtPaidSat);
             return;
         }
-        if (e.Invoice.Memo.Contains(";"))
-        {
-            return;
-        }
 
-        ServerEvents.instance.OnRandomInvoicePaid.Invoke(new RandomInvoice {
-            amount = e.Invoice.AmtPaidSat,
-            message = e.Invoice.Memo
-        });
 
-        PrometheusManager.TotalChatPaidAmount.Inc();
-        PrometheusManager.TotalChatPaidSats.Inc(e.Invoice.AmtPaidSat);
-    }
 
 }

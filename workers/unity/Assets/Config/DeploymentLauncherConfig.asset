@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssemblyConfig:
     ProjectName: beta_spring_september_495
-    AssemblyName: lhackday-rc1
+    AssemblyName: lhackday-rc2
     ShouldForceUpload: 0
   DeploymentConfigs:
   - ProjectName: beta_spring_september_495
-    AssemblyName: lhackday-rc1
+    AssemblyName: lhackday-rc2
     Deployment:
       Name: live_new
       SnapshotPath: snapshots/cloud.snapshot
@@ -26,9 +26,10 @@ MonoBehaviour:
       Region: 1
       Tags:
       - dev_login
+      - nightly
     SimulatedPlayerDeploymentConfigs: []
   - ProjectName: beta_spring_september_495
-    AssemblyName: lhackday-rc1
+    AssemblyName: lhackday-rc2
     Deployment:
       Name: live_newsim
       SnapshotPath: snapshots/cloud.snapshot
