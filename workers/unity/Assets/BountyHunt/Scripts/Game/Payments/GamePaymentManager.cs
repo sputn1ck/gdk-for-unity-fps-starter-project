@@ -78,6 +78,7 @@ public class GamePaymentManager : MonoBehaviour
             PrometheusManager.TotalBountyPaidSats.Inc(e.Invoice.AmtPaidSat);
             return;
         }
+    }
 
 
 
