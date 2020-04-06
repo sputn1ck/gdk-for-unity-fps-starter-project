@@ -13,7 +13,6 @@ public class SimpleSliderUI : MonoBehaviour
     [SerializeField] private int firstButtonID = 0;
     [SerializeField] private LayoutGroup TabsLayoutGroup;
     public List<Button> buttons;
-    public bool triggerFirstButtonOnStart;
     public Dictionary<Button, SlideButtonEvents> buttonEvents = new Dictionary<Button, SlideButtonEvents>();
     
 
@@ -23,14 +22,13 @@ public class SimpleSliderUI : MonoBehaviour
     TransformationInfo targetSliderTransformation;
     Button currentSelected;
 
-    private void Start()
+    private void Awake()
     {
 
         int i = 0;
         foreach(Button b in buttons)
         {
             buttonEvents[b] = new SlideButtonEvents();
-            Debug.Log("counter: " + i);
             b.onClick.AddListener(() => { SelectButton(b); }) ;
             i++;
         }
@@ -47,7 +45,6 @@ public class SimpleSliderUI : MonoBehaviour
         (slider.transform as RectTransform).anchoredPosition = b.GetComponent<RectTransform>().anchoredPosition;
         (slider.transform as RectTransform).sizeDelta = b.GetComponent<RectTransform>().sizeDelta * Vector2.up;
 
-        if(triggerFirstButtonOnStart) buttons[firstButtonID].onClick.Invoke();
     }
 
     public void SelectButton(Button btn)
@@ -84,7 +81,10 @@ public class SimpleSliderUI : MonoBehaviour
         }
     }
 
-    
+    public SlideButtonEvents GetSlideButtonEvents(int btnID)
+    {
+        return buttonEvents[buttons[btnID]];
+    }
 
 }
 public class TransformationInfo

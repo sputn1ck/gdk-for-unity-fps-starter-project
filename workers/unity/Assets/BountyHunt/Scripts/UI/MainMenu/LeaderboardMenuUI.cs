@@ -10,19 +10,25 @@ public class LeaderboardMenuUI : MonoBehaviour
 {
     public LeaderboardEntryUI headLine;
     public Transform entryContainer;
+    public SimpleSliderUI slideLine;
     List<LeaderboardEntryUI> entries;
 
     Highscore[] highscores;
     string PlayerPubKey;
 
     HighscoreOrderPriority priority = HighscoreOrderPriority.EARNIGNS;
-    bool orderDescending = false;
+    bool orderAscending = false;
 
     // Start is called before the first frame update
     void Start()
     {
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
         headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "k/d" });
+        slideLine.GetSlideButtonEvents(0).onClick.AddListener( () => SetOrderPriority(HighscoreOrderPriority.EARNIGNS));
+        slideLine.GetSlideButtonEvents(1).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.KILLS));
+        slideLine.GetSlideButtonEvents(2).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.DEATHS));
+        slideLine.GetSlideButtonEvents(3).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.KDRATIO));
+
 
         int counter = 0;
         foreach (LeaderboardEntryUI entry in entries)
@@ -67,19 +73,19 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         if (this.priority == priority)
         {
-            orderDescending = !orderDescending;
+            orderAscending = !orderAscending;
         }
         else
         {
-            orderDescending = false;
+            orderAscending = false;
             this.priority = priority;
         }
-
+        UpdateList();
     }
 
     public void SortScores()
     {
-        highscores = SortScores(highscores, priority, orderDescending);
+        highscores = SortScores(highscores, priority, !orderAscending);
     }
     public static Highscore[] SortScores(Highscore[] scores, HighscoreOrderPriority priority, bool descending)
     {
@@ -116,6 +122,38 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
     }
 
+
+    //TEST
+
+    public int testPlayers = 20;
+    public bool test;
+
+    void onTest()
+    {
+        test = false;
+
+        List<Highscore> hs = new List<Highscore>();
+        for (int i = 0; i < testPlayers; i++)
+        {
+            hs.Add(new Highscore
+            {
+                Pubkey = "fakeKey" + i,
+                Name = "fakePlayer_" + i,
+                Earnings = Random.Range(0, 130000000),
+                Kills = Random.Range(0,200),
+                Deaths = Random.Range(0, 200)
+            }) ;
+        }
+
+        LeaderboardUpdateArgs args = new LeaderboardUpdateArgs { highscores = hs.ToArray(), PlayerPubKey = "fakeKey0"};
+
+        ClientEvents.instance.onLeaderboardUpdate.Invoke(args);
+    }
+
+    private void Update()
+    {
+        if (Time.time>0.1f && test) onTest();
+    }
 
 }
 
