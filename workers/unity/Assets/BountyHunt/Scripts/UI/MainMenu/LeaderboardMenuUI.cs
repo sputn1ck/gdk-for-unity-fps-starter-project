@@ -3,6 +3,7 @@ using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class LeaderboardMenuUI : MonoBehaviour
@@ -21,7 +22,7 @@ public class LeaderboardMenuUI : MonoBehaviour
     void Start()
     {
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
-        headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "kills/deaths" });
+        headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "k/d" });
 
         int counter = 0;
         foreach (LeaderboardEntryUI entry in entries)
@@ -31,7 +32,6 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
 
         ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateLeaderBoard);
-
     }
 
     void setEntry(LeaderboardEntryUI entry, Highscore score, long rank)
