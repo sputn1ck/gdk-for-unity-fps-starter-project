@@ -30,7 +30,8 @@ public class BountyConversionSystem : ComponentSystem
                 ComponentType.ReadWrite<HunterComponent.Component>(),
                 ComponentType.ReadOnly<SpatialEntityId>(),
                 ComponentType.ReadOnly<GunComponent.Component>(),
-                ComponentType.ReadOnly<TickComponent>()
+                ComponentType.ReadOnly<TickComponent>(),
+                ComponentType.ReadOnly<HealthComponent.Component>()
             );
         gameStatsGroup = GetEntityQuery(
                 ComponentType.ReadWrite<GameStats.Component>(),
@@ -54,9 +55,9 @@ public class BountyConversionSystem : ComponentSystem
 
             Entities.With(conversionGroup).ForEach(
             (ref SpatialEntityId entityId,
-            ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent) =>
+            ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent, ref HealthComponent.Component healthComponent) =>
             {
-                if (hunterComponent.Bounty != 0)
+                if (hunterComponent.Bounty != 0 && healthComponent.Health != 0)
                 {
                     var tick = calculateTick(hunterComponent.Bounty, tickComponent.TickAmount);
                     Debug.Log("ticking with " + tick + " from component: " + tickComponent.TickAmount);

@@ -14,6 +14,7 @@ namespace Fps
         [Require] private BountyPickupWriter bountyPickupWriter;
 
         [Require] private HunterComponentCommandSender hunterComponentCommandSender;
+        [Require] private HealthComponentCommandSender HealthComponentCommandSender;
 
         [Require] private WorldCommandSender commandSender;
         [Require] private GameStatsCommandSender GameStatsCommandSender;
@@ -87,6 +88,10 @@ namespace Fps
             hunterComponentCommandSender.SendAddBountyCommand(playerSpatialOsComponent.EntityId, new AddBountyRequest {
                 Reason = BountyReason.PICKUP,
                 Amount = bountyPickupWriter.Data.BountyValue,
+            });
+            HealthComponentCommandSender.SendModifyHealthCommand(playerSpatialOsComponent.EntityId, new HealthModifier
+            {
+                Amount = 10
             });
             GameStatsCommandSender.SendUpdateSatsInCubesCommand(new EntityId(2), new UpdateSatsInCubesRequest { Amount = -1*bountyPickupWriter.Data.BountyValue });
             PrometheusManager.ActiveSats.Dec(bountyPickupWriter.Data.BountyValue);

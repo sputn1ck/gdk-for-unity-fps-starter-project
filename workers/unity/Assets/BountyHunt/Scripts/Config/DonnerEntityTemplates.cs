@@ -77,7 +77,7 @@ public class DonnerEntityTemplates
             RegenAmount = PlayerHealthSettings.RegenAmount,
             RegenCooldownTimer = PlayerHealthSettings.RegenAfterDamageCooldown,
             RegenInterval = PlayerHealthSettings.RegenInterval,
-            RegenPauseTime = PlayerHealthSettings.RegenAfterDamageCooldown,
+            RegenPauseTime = 1,
         };
 
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));

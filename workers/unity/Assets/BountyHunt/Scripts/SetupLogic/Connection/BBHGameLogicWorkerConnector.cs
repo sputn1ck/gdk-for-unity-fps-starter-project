@@ -61,7 +61,7 @@ public class BBHGameLogicWorkerConnector : WorkerConnectorBase
 
         // Health
         world.GetOrCreateSystem<ServerHealthModifierSystem>();
-        world.GetOrCreateSystem<HealthRegenSystem>();
+        //world.GetOrCreateSystem<HealthRegenSystem>();
         // Donner
         //world.GetOrCreateSystem<ServerBountyKillSystem>();
         //world.GetOrCreateSystem<ServerBountyBoardSystem>();
