@@ -99,7 +99,15 @@ public class ServerGameModeSystem : ComponentSystem
             {
                 TargetEntityId = entityId.EntityId,
                 Payload = new TeleportRequest(randomPos.x, randomPos.y, randomPos.z)
-            }); ;
+            });
+            commandSystem.SendCommand(new HealthComponent.ModifyHealth.Request()
+            {
+                TargetEntityId = entityId.EntityId,
+                Payload = new HealthModifier()
+                {
+                    Amount = 100
+                }
+            });
         });
     }
 
