@@ -34,6 +34,9 @@ public class StatsMenuUI : MonoBehaviour
     {
         Transform ctr = PlayerStatsContainer;
 
+        NewLine("Rank", "0", ctr);
+        NewLine("Relative Ranking", "0", ctr);
+        NewLine("League", "0", ctr);
         NewLine("Lifetime Kills", "0", ctr);
         NewLine("Lifetime Earnings", "0", ctr);
         NewLine("Lifetime Deaths", "0", ctr);
@@ -87,7 +90,7 @@ public class StatsMenuUI : MonoBehaviour
 
     void UpdateBadge(LeaderboardUpdateArgs args)
     {
-        Highscore[] scores = args.highscores.OrderBy(o => o.Earnings).ToArray();
+        Highscore[] scores = args.highscores.OrderByDescending(o => o.Earnings).ToArray();
         int playerRank = Array.FindIndex(scores, o => o.Pubkey == args.PlayerPubKey);
         float factor = (float)playerRank / (float)scores.Length;
 
@@ -104,6 +107,10 @@ public class StatsMenuUI : MonoBehaviour
 
         badgeImage.sprite = badge.sprite;
 
+        stats["Rank"].UpdateValue((playerRank+1).ToString());
+        stats["Relative Ranking"].UpdateValue((int)(factor * 100) + "%");
+        stats["League"].UpdateValue(badge.League);
+
     }
 
 }
@@ -111,7 +118,7 @@ public class StatsMenuUI : MonoBehaviour
 [System.Serializable]
 public class Badge
 {
-    public string badgeName;
+    public string League;
     public Sprite sprite;
     [Range(0, 100)]
     public int maxPercantageAbove;
