@@ -75,6 +75,10 @@ public class LeaderboardMenuUI : MonoBehaviour
             if (i < highscores.Length)
             {
                 setEntry(entries[i], highscores[i], i+1);
+                if (i == playerID)
+                {
+                    entries[i].Highlight();
+                }
             }
             else
             {
@@ -90,6 +94,7 @@ public class LeaderboardMenuUI : MonoBehaviour
             for(int i = 1; i < occupiedSlots;i++)
             {
                 setEntry(entries[eID+i],highscores[pID+i], pID+i+1);
+                if (pID + i == playerID) entries[eID + i].Highlight();
             }
         }
 

@@ -1,5 +1,8 @@
+using Bbh;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +14,14 @@ public class StatsMenuUI : MonoBehaviour
     Dictionary<string, StatsValueUI> stats = new Dictionary<string, StatsValueUI>();
 
     public List<Badge> badges;
-    public Image badgeImage; 
+    public Image badgeImage;
+
+    private void Awake()
+    {
+        badges = badges.OrderBy(o => o.maxPercantageAbove).ToList();
+        ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateBadge);
+    }
+
 
     void Start()
     {
@@ -73,6 +83,27 @@ public class StatsMenuUI : MonoBehaviour
         if (key == "") key = name;
         stats[key] = Instantiate(statsValuePrefab, container);
         stats[key].Set(name, value);
+    }
+
+    void UpdateBadge(LeaderboardUpdateArgs args)
+    {
+        Highscore[] scores = args.highscores.OrderBy(o => o.Earnings).ToArray();
+        int playerRank = Array.FindIndex(scores, o => o.Pubkey == args.PlayerPubKey);
+        float factor = (float)playerRank / (float)scores.Length;
+
+        Badge badge = badges[badges.Count - 1];
+
+        foreach (Badge b in badges)
+        {
+            if (factor*100 <= b.maxPercantageAbove)
+            {
+                badge = b;
+                break;
+            }
+        }
+
+        badgeImage.sprite = badge.sprite;
+
     }
 
 }

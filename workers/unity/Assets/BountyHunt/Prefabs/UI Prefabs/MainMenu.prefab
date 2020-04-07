@@ -366,6 +366,20 @@ MonoBehaviour:
   GameStatsContainer: {fileID: 5777535319668889274}
   statsValuePrefab: {fileID: 3362183534850930560, guid: cf1d16b7a3f490841a92715d4b428847,
     type: 3}
+  badges:
+  - badgeName: Gold
+    sprite: {fileID: 21300000, guid: 6eb9d964dbcf55e4fb7e258a3ef1cb58, type: 3}
+    maxPercantageAbove: 10
+  - badgeName: Silver
+    sprite: {fileID: 21300000, guid: 8be4463400a9f3945b676d62f159a58f, type: 3}
+    maxPercantageAbove: 30
+  - badgeName: Bronze
+    sprite: {fileID: 21300000, guid: 5f2a83c6b905ddb42a4dbf3920171de3, type: 3}
+    maxPercantageAbove: 70
+  - badgeName: None
+    sprite: {fileID: 21300000, guid: 68d68de6e357d114ebf604ff7b9bdef9, type: 3}
+    maxPercantageAbove: 100
+  badgeImage: {fileID: 1828556031693791366}
 --- !u!1 &567932579947373493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1089,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 30
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
