@@ -1,5 +1,6 @@
 using Bbh;
 using Improbable.Gdk.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         foreach (LeaderboardEntryUI entry in entries)
         {
             counter++;
-            entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(Random.Range(0, 130000000), true), Random.Range(0, 100).ToString(), Random.Range(0, 100).ToString(), "something" });
+            entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(UnityEngine.Random.Range(0, 130000000), true), UnityEngine.Random.Range(0, 100).ToString(), UnityEngine.Random.Range(0, 100).ToString(), "something" });
         }
 
         ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateLeaderBoard);
@@ -56,17 +57,42 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         SortScores();
 
-        for (int i = 0; i < entries.Count; i++)
+        int playerID = Array.FindIndex(highscores, h => h.Pubkey == PlayerPubKey);
+
+        int occupiedSlots = 0;
+        if(playerID  >= entries.Count)
+        {
+            if (playerID == highscores.Length - 1)
+            {
+                occupiedSlots = 3;
+            }
+            else occupiedSlots = 4;
+        }
+
+
+        for (int i = 0; i < entries.Count - occupiedSlots; i++)
         {
             if (i < highscores.Length)
             {
-                setEntry(entries[i], highscores[i], i);
+                setEntry(entries[i], highscores[i], i+1);
             }
             else
             {
                 entries[i].Hide();
             }
         }
+
+        if (occupiedSlots > 0)
+        {
+            int eID = entries.Count - occupiedSlots;
+            int pID = playerID - 2;
+            entries[eID].Hide();
+            for(int i = 1; i < occupiedSlots;i++)
+            {
+                setEntry(entries[eID+i],highscores[pID+i], pID+i+1);
+            }
+        }
+
     }
 
     public void SetOrderPriority(HighscoreOrderPriority priority)
@@ -139,9 +165,9 @@ public class LeaderboardMenuUI : MonoBehaviour
             {
                 Pubkey = "fakeKey" + i,
                 Name = "fakePlayer_" + i,
-                Earnings = Random.Range(0, 130000000),
-                Kills = Random.Range(0,200),
-                Deaths = Random.Range(0, 200)
+                Earnings = UnityEngine.Random.Range(0, 130000000),
+                Kills = UnityEngine.Random.Range(0,200),
+                Deaths = UnityEngine.Random.Range(0, 200)
             }) ;
         }
 
@@ -165,3 +191,4 @@ public enum HighscoreOrderPriority
         DEATHS = 3,
         KDRATIO = 4
     }
+

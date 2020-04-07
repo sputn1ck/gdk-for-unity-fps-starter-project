@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsMenuUI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class StatsMenuUI : MonoBehaviour
     public StatsValueUI statsValuePrefab;
     Dictionary<string, StatsValueUI> stats = new Dictionary<string, StatsValueUI>();
 
+    public List<Badge> badges;
+    public Image badgeImage; 
 
     void Start()
     {
@@ -72,4 +75,13 @@ public class StatsMenuUI : MonoBehaviour
         stats[key].Set(name, value);
     }
 
+}
+
+[System.Serializable]
+public class Badge
+{
+    public string badgeName;
+    public Sprite sprite;
+    [Range(0, 100)]
+    public int maxPercantageAbove;
 }
