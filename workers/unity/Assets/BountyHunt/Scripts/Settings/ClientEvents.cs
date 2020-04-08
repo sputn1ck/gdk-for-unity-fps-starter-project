@@ -58,6 +58,10 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public LeaderboardUpdateEvent onLeaderboardUpdate = new LeaderboardUpdateEvent();
     [HideInInspector] public UpdateAdvertisersEvent onUpdateAdvertisers = new UpdateAdvertisersEvent();
 
+
+    [HideInInspector] public PopUpEvent onPopUp = new PopUpEvent();
+    [HideInInspector] public YesNoPopUpEvent onYesNoPopUp = new YesNoPopUpEvent();
+
     private void Awake()
     {
         if (instance == null) instance = this;

@@ -37,6 +37,9 @@ public class LeaderboardUpdateEvent : UnityEvent<LeaderboardUpdateArgs> { }
 
 public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
 
+public class PopUpEvent : UnityEvent<PopUpEventArgs> { }
+public class YesNoPopUpEvent : UnityEvent<YesNoPopUpEventArgs> { }
+
 [Serializable]
 public struct BountyUpdateEventArgs
 {
@@ -105,5 +108,55 @@ public struct LeaderboardUpdateArgs
 {
     public Bbh.Highscore[] highscores;
     public string PlayerPubKey;
+}
+
+public struct PopUpEventArgs
+{
+    public string headline;
+    public string text;
+    public bool showX;
+    public List<LabelAndAction> actions;
+
+    public PopUpEventArgs(string headline, string text, List<LabelAndAction> actions, bool showX = true)
+    {
+        this.headline = headline;
+        this.text = text;
+        this.showX = showX;
+        this.actions = actions;
+    }
+    public PopUpEventArgs(string headline, string text)
+    {
+        this.headline = headline;
+        this.text = text;
+        this.showX = true;
+        this.actions = new List<LabelAndAction>();
+    }
+}
+
+public struct YesNoPopUpEventArgs
+{
+    public string headline;
+    public string text;
+    public bool showX;
+    public UnityAction yesAction;
+    public UnityAction noAction;
+
+    public YesNoPopUpEventArgs(string headline, string text, UnityAction<bool> action, bool showX = true)
+    {
+        this.headline = headline;
+        this.text = text;
+        this.showX = showX;
+        this.yesAction = delegate { action.Invoke(true); };
+        this.noAction = delegate { action.Invoke(false); };
+    }
+
+    public YesNoPopUpEventArgs(string headline, string text, UnityAction yesAction, UnityAction noAction, bool showX = true)
+    {
+        this.headline = headline;
+        this.text = text;
+        this.showX = showX;
+        this.yesAction = yesAction;
+        this.noAction = noAction;
+    }
 }
 
