@@ -20,14 +20,14 @@ MonoBehaviour:
   bulletLineRenderer: {fileID: 1329646125381318, guid: 83c59510b5e4d474b86ffa5ed0c02a69,
     type: 3}
   shotColour: {r: 0.07971394, g: 1, b: 0, a: 1}
-  shotDamage: 7
+  shotDamage: 5
   shotRange: 40
   pelletsPerShot: 16
   bulletRenderLength: 10
   shotRenderTime: 0.1
   isAutomatic: 0
-  rateOfFire: 1
-  shotCooldown: 1
+  rateOfFire: 0.8
+  shotCooldown: 1.25
   hipRecoil:
     FirstPersonRecoil:
       MinXVariance: -1
@@ -59,6 +59,6 @@ MonoBehaviour:
   aimFov: 36
   fovChangeTime: 0.1
   inaccuracyFromHip: 8
-  inaccuracyWhileAiming: 4
+  inaccuracyWhileAiming: 6
   aimPitchSpeed: 1
   aimYawSpeed: 1
