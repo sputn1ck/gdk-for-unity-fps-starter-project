@@ -55,6 +55,8 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostDeathsUpdate = new AllTimeScoreUpdateEvent();
     [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostEarningsUpdate = new AllTimeScoreUpdateEvent();
 
+    [HideInInspector] public UpdateAdvertisersEvent onUpdateAdvertisers = new UpdateAdvertisersEvent();
+
     private void Awake()
     {
         if (instance == null) instance = this;
