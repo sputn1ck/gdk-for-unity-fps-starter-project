@@ -18,7 +18,7 @@ public class ClientPaymentManager : MonoBehaviour
         PaymentManagerComponentReader.OnAuctionWinnerUpdate += OnAuctionWinner;
         PaymentManagerComponentReader.OnBountyIncreaseEvent += OnBountyIncrease;
         PaymentManagerComponentReader.OnRandomInvoicePaidEvent += OnRandomInvoicePaidEvent;
-        ClientEvents.instance.onDonationMessageUpdate.Invoke(PaymentManagerComponentReader.Data.AuctionWinner.Text, PaymentManagerComponentReader.Data.AuctionWinner.Sats);
+        ClientEvents.instance.onAuctionMessageUpdate.Invoke(PaymentManagerComponentReader.Data.AuctionWinner.Text, PaymentManagerComponentReader.Data.AuctionWinner.Sats);
     }
 
     private void OnRandomInvoicePaidEvent(NewWinnerMessage obj)
@@ -64,7 +64,7 @@ public class ClientPaymentManager : MonoBehaviour
 
     private void OnAuctionWinner(NewWinnerMessage obj)
     {
-        ClientEvents.instance.onDonationMessageUpdate.Invoke(obj.Text, obj.Sats);
+        ClientEvents.instance.onAuctionMessageUpdate.Invoke(obj.Text, obj.Sats);
     }
 
     // Start is called before the first frame update

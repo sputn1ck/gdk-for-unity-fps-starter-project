@@ -29,12 +29,12 @@ public class DonationMessageUI : MonoBehaviour
     void Start()
     {
         nextID = -2;
-        ClientEvents.instance.onDonationMessageUpdate.AddListener(UpdateDonationMessage);
+        ClientEvents.instance.onAuctionMessageUpdate.AddListener(UpdateAuctionMessage);
         ClientEvents.instance.onUpdateAdvertisers.AddListener(UpdateAdvertiserMessages);
         InvokeRepeating("Next", 0, secondsPerAd);
     }
 
-    private void UpdateDonationMessage(string msg, long sats)
+    private void UpdateAuctionMessage(string msg, long sats)
     {
         auctionText = msg;
         auctionSats = sats;
@@ -48,14 +48,19 @@ public class DonationMessageUI : MonoBehaviour
 
     void Next()
     {
-        if (nextID >= advertiserCount) nextID = -2;
-
+        if (nextID >= advertiserCount) {
+            nextID = -2;
+        }
+        if(auctionText == "" && nextID < 0)
+        {
+            nextID = 0;
+        }
         if(nextID < 0)
         {
             messageText.text = auctionText;
             satsText.text = Utility.SatsToShortString( auctionSats, UITinter.tintDict[TintColor.Sats]);
         }
-        else
+        else if (nextID < advertisers.Count)
         {
             messageText.text = advertisers[nextID].name + "    " + advertisers[nextID].url;
             satsText.text = Utility.SatsToShortString(advertisers[nextID].investment, UITinter.tintDict[TintColor.Sats]);
