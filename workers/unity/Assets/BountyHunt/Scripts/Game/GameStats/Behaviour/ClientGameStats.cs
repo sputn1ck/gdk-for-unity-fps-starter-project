@@ -24,7 +24,7 @@ public class ClientGameStats : MonoBehaviour
         sendScoreBoardEvent(GameStatsReader.Data.PlayerMap);
         sendOutEvents();
 
-        PlayerServiceConnections.instance.BackendPlayerClient.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
+        PlayerServiceConnections.instance.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
     }
 
     private void initEvents()

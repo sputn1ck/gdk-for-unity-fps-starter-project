@@ -8,7 +8,7 @@ using System;
 
 
 // TODO try catch blocks every rpc call
-public class DonnerDaemonClient
+public class DonnerDaemonClient : IDonnerDaemonClient
 {
     public Channel rpcChannel;
     public DaemonService.DaemonServiceClient client;

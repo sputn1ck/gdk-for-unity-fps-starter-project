@@ -13,7 +13,7 @@ public class PrometheusManager
     HttpClient httpClient;
     string monitoringEndpoint;
 
-
+    private bool hasStarted;
     // Gauges
     public static readonly Gauge ActivePlayers = Metrics.CreateGauge("bbh_active_players", "active players");
     public static readonly Gauge ActiveBounty = Metrics.CreateGauge("bbh_active_bounty", "active bounty");
@@ -51,7 +51,8 @@ public class PrometheusManager
 
     public void Setup(string monitorEndpoint)
     {
-
+        if (monitorEndpoint == "")
+            return;
         var headerValue = Convert.ToBase64String(Encoding.UTF8.GetBytes("user:"+ FlagManager.instance.GetMonitoringPassword()));
         httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", headerValue);
@@ -72,7 +73,7 @@ public class PrometheusManager
             IntervalMilliseconds = 5000,
         });
         metricPusher.Start();
-
+        hasStarted = true;
         Debug.Log("Prometheus started");
     }
 
@@ -83,6 +84,8 @@ public class PrometheusManager
     }
     private void ShutdownTask()
     {
+        if (!hasStarted)
+            return;
         metricPusher = new MetricPusher(new MetricPusherOptions
         {
             Endpoint = monitoringEndpoint,

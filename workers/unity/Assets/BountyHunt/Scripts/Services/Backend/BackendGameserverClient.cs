@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 
-public class BackendGameserverClient
+public class BackendGameserverClient : IBackendServerClient
 {
 
     private GameService.GameServiceClient _client;
@@ -58,10 +58,7 @@ public class BackendGameserverClient
         listenThread.Start();
     }
 
-    public async Task<long> GetRoundBounty()
-    {
-        return 0;
-    }
+
     public void AddKill(string killer, string victim)
     {
         AddToQueue(new Bbh.EventStreamRequest { Kill = new Bbh.KillEvent() { Killer = killer, Victim = victim } });

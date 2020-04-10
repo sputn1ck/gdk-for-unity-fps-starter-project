@@ -72,7 +72,7 @@ public class BountyHuntGameMode : GameMode
 
     public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
     {
-        PlayerServiceConnections.instance.BackendPlayerClient.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
+        PlayerServiceConnections.instance.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
     }
 }
 

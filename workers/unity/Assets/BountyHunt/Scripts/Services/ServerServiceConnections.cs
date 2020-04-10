@@ -10,21 +10,22 @@ using UnityEngine;
 
 public class ServerServiceConnections : MonoBehaviour
 {
+
+    public bool UseDummy;
     public string PlatformPubkey;
     public string confName;
     public string lndConnectString;
-    public bool UseDummy;
     public static ServerServiceConnections instance;
     public IClientLnd lnd;
 
     public string BackendHost;
     public int BackendPort;
     public string PrometheusHost;
-    public AuctionController AuctionController;
+    public IAuctionController AuctionController;
 
 
-    public BackendGameserverClient BackendGameServerClient;
-    public BackendPlayerClient BackendPlayerClient;
+    public IBackendServerClient BackendGameServerClient;
+    public IBackendClientClient BackendPlayerClient;
     public PrometheusManager Prometheus;
 
     public static CancellationTokenSource ct;
@@ -40,9 +41,29 @@ public class ServerServiceConnections : MonoBehaviour
             Destroy(this);
             return;
         }
-        Setup();
-    }
+        if (UseDummy)
+        {
+            SetupDummies();
+        }else {
+            Setup();
+        }
 
+    }
+    public async void SetupDummies()
+    {
+        var dummyGO = Instantiate(new GameObject(), this.transform);
+        lnd = dummyGO.AddComponent<DummyLnd>();
+        await lnd.Setup(confName, true, false, "", lndConnectString);
+        BackendGameServerClient = dummyGO.AddComponent<DummyBackendServerClient>();
+        BackendGameServerClient.Setup("", 0, "", "");
+        BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
+        BackendPlayerClient.Setup("", 0, "", "");
+        AuctionController = dummyGO.AddComponent<DummyAuctionController>();
+        AuctionController.Setup();
+        Prometheus = new PrometheusManager();
+        Prometheus.Setup("");
+
+    }
     public async void Setup()
     {
         await SetupLnd();
@@ -50,14 +71,8 @@ public class ServerServiceConnections : MonoBehaviour
     }
     public async Task SetupLnd()
     {
-        if (UseDummy)
-        {
-            lnd = new DummyLnd();
-        }
-        else
-        {
+
             lnd = new LndClient();
-        }
 
         await lnd.Setup(confName, true, false, "", lndConnectString);
         StartCoroutine(lnd.HandleInvoices(ct));
@@ -74,7 +89,6 @@ public class ServerServiceConnections : MonoBehaviour
         BackendGameServerClient.StartListening();
 
         // Player Client
-        BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient = new BackendPlayerClient();
         BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
 
@@ -97,11 +111,11 @@ public class ServerServiceConnections : MonoBehaviour
     public void OnApplicationQuit()
     {
         ct.Cancel();
-        Prometheus.Shutdown();
         lnd.ShutDown();
         BackendGameServerClient.Shutdown();
         BackendPlayerClient.Shutdown();
         AuctionController.Shutdown();
+        Prometheus.Shutdown();
         Debug.Log("server quit cleanly");
     }
 

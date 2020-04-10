@@ -2250,7 +2250,7 @@ namespace Bbh {
     }
 
   }
-
+    
   public sealed partial class AdvertiserInfo : pb::IMessage<AdvertiserInfo> {
     private static readonly pb::MessageParser<AdvertiserInfo> _parser = new pb::MessageParser<AdvertiserInfo>(() => new AdvertiserInfo());
     private pb::UnknownFieldSet _unknownFields;

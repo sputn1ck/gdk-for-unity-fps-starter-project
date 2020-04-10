@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class AuctionClient
+public class AuctionClient : IAuctionClient
 {
     Channel rpcChannel;
     LightningAuctionBidder.LightningAuctionBidderClient auctionClient;

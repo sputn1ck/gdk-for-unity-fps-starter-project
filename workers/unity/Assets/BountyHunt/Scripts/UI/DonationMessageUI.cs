@@ -48,6 +48,9 @@ public class DonationMessageUI : MonoBehaviour
 
     void Next()
     {
+        if (advertisers == null) {
+            return;
+        }
         if (nextID >= advertiserCount) {
             nextID = -2;
         }
