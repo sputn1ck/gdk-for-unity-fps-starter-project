@@ -51,7 +51,7 @@ public class ServerServiceConnections : MonoBehaviour
     }
     public async void SetupDummies()
     {
-        var dummyGO = Instantiate(new GameObject(), this.transform);
+        var dummyGO = new GameObject("1_ServerDummies");
         lnd = dummyGO.AddComponent<DummyLnd>();
         await lnd.Setup(confName, true, false, "", lndConnectString);
         BackendGameServerClient = dummyGO.AddComponent<DummyBackendServerClient>();
@@ -62,6 +62,8 @@ public class ServerServiceConnections : MonoBehaviour
         AuctionController.Setup();
         Prometheus = new PrometheusManager();
         Prometheus.Setup("");
+
+        Instantiate(dummyGO, this.transform);
 
     }
     public async void Setup()

@@ -48,7 +48,8 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public async void SetupDummies()
     {
-        var dummyGO = Instantiate(new GameObject(), this.transform);
+
+        var dummyGO = new GameObject("0_PlayerDummies");
         lnd = dummyGO.AddComponent<DummyLnd>();
         await lnd.Setup(confName, true, false, "", lndConnectString);
         BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
@@ -57,6 +58,8 @@ public class PlayerServiceConnections : MonoBehaviour
         AuctionClient.Setup();
         DonnerDaemonClient = dummyGO.AddComponent<DummyDaemonClient>();
         DonnerDaemonClient.Setup();
+
+        Instantiate(dummyGO, this.transform);
     }
     public async void Setup()
     {
