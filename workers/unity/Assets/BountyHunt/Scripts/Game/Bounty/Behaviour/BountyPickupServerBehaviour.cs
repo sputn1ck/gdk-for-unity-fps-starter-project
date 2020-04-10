@@ -91,7 +91,7 @@ namespace Fps
             });
             HealthComponentCommandSender.SendModifyHealthCommand(playerSpatialOsComponent.EntityId, new HealthModifier
             {
-                Amount = 10
+                Amount = 15
             });
             GameStatsCommandSender.SendUpdateSatsInCubesCommand(new EntityId(2), new UpdateSatsInCubesRequest { Amount = -1*bountyPickupWriter.Data.BountyValue });
             PrometheusManager.ActiveSats.Dec(bountyPickupWriter.Data.BountyValue);
