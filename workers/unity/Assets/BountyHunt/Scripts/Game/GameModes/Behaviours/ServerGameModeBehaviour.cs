@@ -71,6 +71,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 Investment = advertiserInfo.Sponsoring,
                 Name = advertiserInfo.Name,
                 SquareTextureLinks = new List<string>(),
+                Url = advertiserInfo.Url
             };
             foreach(var imgUrl in advertiserInfo.SquareBannerUrls)
             {

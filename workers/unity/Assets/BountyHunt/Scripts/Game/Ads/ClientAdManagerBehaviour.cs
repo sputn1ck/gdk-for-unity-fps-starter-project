@@ -44,6 +44,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     {
         SortInvestments();
         InitializeAllAds();
+        ClientEvents.instance.onUpdateAdvertisers.Invoke(advertisers);
     }
     void InitializeAllAds()
     {
@@ -150,8 +151,8 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         Advertiser advertiser = new Advertiser();
         advertiser.name = source.Name;
         advertiser.investment = source.Investment;
+        advertiser.url = source.Url;
         advertiser.squareAdTextures = await getTexturesFromURLList(source.SquareTextureLinks);
-        
         advertiser.Initialize();
         advertisers.Add(advertiser);
     }
@@ -165,6 +166,7 @@ public class Advertiser
     public long investment;
     public string name;
     public string description;
+    public string url;
     public List<Texture2D> squareAdTextures;
 
     Dictionary<AdMaterialType, List<Material>> materials;

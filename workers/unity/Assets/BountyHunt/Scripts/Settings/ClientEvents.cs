@@ -23,7 +23,7 @@ public class ClientEvents : MonoBehaviour
 
     [HideInInspector] public ChatMessageEvent onChatMessageRecieve = new ChatMessageEvent();
     [HideInInspector] public StringColorEvent onAnnouncement = new StringColorEvent();
-    [HideInInspector] public StringLongEvent onDonationMessageUpdate = new StringLongEvent();
+    [HideInInspector] public StringLongEvent onAuctionMessageUpdate = new StringLongEvent();
     [HideInInspector] public UnityEvent onOpponentHit = new UnityEvent();
 
     [HideInInspector] public PaymentSuccessEvent onPaymentSucces = new PaymentSuccessEvent();
@@ -54,6 +54,8 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostKillsUpdate = new AllTimeScoreUpdateEvent();
     [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostDeathsUpdate = new AllTimeScoreUpdateEvent();
     [HideInInspector] public AllTimeScoreUpdateEvent onAllTimeMostEarningsUpdate = new AllTimeScoreUpdateEvent();
+
+    [HideInInspector] public UpdateAdvertisersEvent onUpdateAdvertisers = new UpdateAdvertisersEvent();
 
     private void Awake()
     {

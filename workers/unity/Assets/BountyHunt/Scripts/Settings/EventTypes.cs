@@ -33,6 +33,8 @@ public class KillsAndDeathsUpdateEvent : UnityEvent<KillsAndDeathsUpdateEventArg
 
 public class AllTimeScoreUpdateEvent : UnityEvent<AllTimeScoreUpdateArgs> { }
 
+public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
+
 [Serializable]
 public struct BountyUpdateEventArgs
 {
