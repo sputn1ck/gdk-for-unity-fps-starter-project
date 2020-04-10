@@ -51,7 +51,8 @@ public class PrometheusManager
 
     public void Setup(string monitorEndpoint)
     {
-
+        if (monitorEndpoint == "")
+            return;
         var headerValue = Convert.ToBase64String(Encoding.UTF8.GetBytes("user:"+ FlagManager.instance.GetMonitoringPassword()));
         httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", headerValue);

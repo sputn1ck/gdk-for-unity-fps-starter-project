@@ -11,9 +11,9 @@ using UnityEngine;
 
 public class PlayerServiceConnections : MonoBehaviour
 {
+    public bool UseDummy;
     public string confName;
     public string lndConnectString;
-    public bool UseDummy;
     public static PlayerServiceConnections instance;
     public IClientLnd lnd;
     public bool UseApdata;
@@ -21,11 +21,11 @@ public class PlayerServiceConnections : MonoBehaviour
     public string BackendHost;
     public string BackendPubkey;
     public int BackendPort;
-    public BackendPlayerClient BackendPlayerClient;
+    public IBackendClientClient BackendPlayerClient;
 
-    public DonnerDaemonClient DonnerDaemonClient;
+    public IDonnerDaemonClient DonnerDaemonClient;
 
-    public AuctionClient AuctionClient;
+    public IAuctionClient AuctionClient;
     void Awake()
     {
         if(instance == null)
@@ -36,10 +36,28 @@ public class PlayerServiceConnections : MonoBehaviour
             Destroy(this);
             return;
         }
-        Setup();
+        if (UseDummy)
+        {
+            SetupDummies();
+        } else
+        {
+            Setup();
+        }
+        
     }
 
-
+    public async void SetupDummies()
+    {
+        var dummyGO = Instantiate(new GameObject(), this.transform);
+        lnd = dummyGO.AddComponent<DummyLnd>();
+        await lnd.Setup(confName, true, false, "", lndConnectString);
+        BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
+        BackendPlayerClient.Setup("", 0, "", "");
+        AuctionClient = dummyGO.AddComponent<DummyAuctionClient>();
+        AuctionClient.Setup();
+        DonnerDaemonClient = dummyGO.AddComponent<DummyDaemonClient>();
+        DonnerDaemonClient.Setup();
+    }
     public async void Setup()
     {
         SetupDonnerDaemon();
@@ -48,17 +66,11 @@ public class PlayerServiceConnections : MonoBehaviour
         ClientEvents.instance.onServicesSetup.Invoke();
     }
 
+
     public async Task SetupLnd()
     {
 
-        if (UseDummy)
-        {
-            lnd = new DummyLnd();
-        }
-        else
-        {
-            lnd = new LndClient();
-        }
+        lnd = new LndClient();
         await lnd.Setup(confName, false, UseApdata, "", lndConnectString);
     }
 
@@ -110,6 +122,52 @@ public class PlayerServiceConnections : MonoBehaviour
         return lnd.GetConfig();
     }
 
-    
+    public async void UpdateBackendStats(string playerpubkey)
+    {
+        var highscores = await BackendPlayerClient.GetHighscore();
+        long totalEarnings = 0;
+        int highestEarningsPlayerIndex = 0;
+        int highestKillsPlayerIndex = 0;
+        int highestDeathsPlayerIndex = 0;
+        int totalKills = 0;
+        int totalDeaths = 0;
+        if (highscores.Length == 0)
+            return;
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            var player = highscores[i];
+            if (player.Pubkey == playerpubkey)
+            {
+                ClientEvents.instance.onPlayerLifeTimeKillsUpdate.Invoke(player.Kills);
+
+                ClientEvents.instance.onPlayerLifeTimeDeathsUpdate.Invoke(player.Deaths);
+                ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.Invoke(player.Earnings);
+            }
+            if (player.Earnings > highscores[highestEarningsPlayerIndex].Earnings)
+            {
+                highestEarningsPlayerIndex = i;
+            }
+            if (player.Kills > highscores[highestKillsPlayerIndex].Kills)
+            {
+                highestKillsPlayerIndex = i;
+            }
+            if (player.Deaths > highscores[highestDeathsPlayerIndex].Deaths)
+            {
+                highestDeathsPlayerIndex = i;
+            }
+
+            totalEarnings += player.Earnings;
+            totalKills += player.Kills;
+            totalDeaths += player.Deaths;
+
+        }
+        ClientEvents.instance.onAllTimeMostKillsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestKillsPlayerIndex].Name, score = highscores[highestKillsPlayerIndex].Kills });
+        ClientEvents.instance.onAllTimeMostDeathsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestDeathsPlayerIndex].Name, score = highscores[highestDeathsPlayerIndex].Deaths });
+        ClientEvents.instance.onAllTimeMostEarningsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestEarningsPlayerIndex].Name, score = highscores[highestEarningsPlayerIndex].Earnings });
+
+        ClientEvents.instance.onAllTimeKillsUpdate.Invoke(totalKills);
+        ClientEvents.instance.onAllTimeDeathsUpdate.Invoke(totalDeaths);
+        ClientEvents.instance.onAllTimeEarningsUpdate.Invoke(totalEarnings);
+    }
 
 }

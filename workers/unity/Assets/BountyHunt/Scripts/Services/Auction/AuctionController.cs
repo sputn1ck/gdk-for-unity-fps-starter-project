@@ -9,7 +9,7 @@ using Improbable.Gdk.Subscriptions;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class AuctionController 
+public class AuctionController :IAuctionController
 {
 
     public string host = "167.172.175.172:5113";
