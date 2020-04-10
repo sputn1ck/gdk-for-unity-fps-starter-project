@@ -19,6 +19,8 @@ public class BountySpawnerServer : MonoBehaviour
     [Require] GameStatsWriter GameStatsWriter;
     [Require] PaymentManagerComponentWriter PaymentManagerComponentWriter;
 
+    public bool spawnPickupTrigger;
+    public long spawnSats;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -27,6 +29,15 @@ public class BountySpawnerServer : MonoBehaviour
         ServerEvents.instance.OnBountyInvoicePaid.AddListener(OnBountyInvoicePaid);
     }
 
+
+    void Update()
+    {
+        if (spawnPickupTrigger)
+        {
+            spawnPickupTrigger = false;
+            SpawnPickupAtRandomPosition(spawnSats);
+        }
+    }
     
     private void OnBountyInvoicePaid(BountyInvoice bounty)
     {
