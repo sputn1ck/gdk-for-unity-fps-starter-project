@@ -38,7 +38,7 @@ namespace Fps.Guns
                     continue;
                 }
 
-                var shooterSpatialID = shotInfo.EntityId;
+                var shooterSpatialID = shotEvent.EntityId;
                 if (!workerSystem.TryGetEntity(shooterSpatialID, out var shooterEntity))
                 {
                     continue;
