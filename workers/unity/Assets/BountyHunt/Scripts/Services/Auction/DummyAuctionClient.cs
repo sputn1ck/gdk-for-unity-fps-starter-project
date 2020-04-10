@@ -34,7 +34,7 @@ public class DummyAuctionClient : MonoBehaviour, IAuctionClient
 
     public Task<Auction> GetActiveAuction()
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(new Auction { });
     }
 
     public void CancelBid(string BidId)
