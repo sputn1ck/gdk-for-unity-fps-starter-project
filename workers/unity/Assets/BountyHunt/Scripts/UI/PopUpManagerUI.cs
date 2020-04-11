@@ -18,7 +18,7 @@ public class PopUpManagerUI : MonoBehaviour
     public void OpenPopUp(PopUpEventArgs args)
     {
         PopUpUI popup = Instantiate(popUpPrefab, container);
-        popup.Set(args.headline, args.showX, args.text, args.actions);
+        popup.Set(args.headline, args.showX, args.text, args.actions,args.verticalButtonLayout);
     }
 
     public void OpenYesNoPopUp(YesNoPopUpEventArgs args)
@@ -29,7 +29,7 @@ public class PopUpManagerUI : MonoBehaviour
         actions.Add(new LabelAndAction("yes", args.yesAction));
         actions.Add(new LabelAndAction("no", args.noAction));
 
-        popup.Set(args.headline, args.showX, args.text, actions);
+        popup.Set(args.headline, args.showX, args.text, actions,false);
     }
 
     //TEST
@@ -38,6 +38,7 @@ public class PopUpManagerUI : MonoBehaviour
     public string header;
     public string text;
     public bool showX;
+    public bool verticalButtons;
     public bool btn1;
     public bool btn2;
     public bool btn3;
@@ -61,7 +62,7 @@ public class PopUpManagerUI : MonoBehaviour
             PopUpEventArgs args;
             switch (variant)
             {
-                case 0: default: args = new PopUpEventArgs("header",text,actions,showX);break;
+                case 0: default: args = new PopUpEventArgs("header",text,actions,verticalButtons,showX);break;
                 case 1: args = new PopUpEventArgs(header,text); break;
             }
 

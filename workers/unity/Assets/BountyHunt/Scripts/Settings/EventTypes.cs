@@ -114,15 +114,17 @@ public struct PopUpEventArgs
 {
     public string headline;
     public string text;
+    public bool verticalButtonLayout;
     public bool showX;
     public List<LabelAndAction> actions;
 
-    public PopUpEventArgs(string headline, string text, List<LabelAndAction> actions, bool showX = true)
+    public PopUpEventArgs(string headline, string text, List<LabelAndAction> actions, bool verticalButtonlayout, bool showX = true)
     {
         this.headline = headline;
         this.text = text;
         this.showX = showX;
         this.actions = actions;
+        this.verticalButtonLayout = verticalButtonlayout;
     }
     public PopUpEventArgs(string headline, string text)
     {
@@ -130,6 +132,8 @@ public struct PopUpEventArgs
         this.text = text;
         this.showX = true;
         this.actions = new List<LabelAndAction>();
+        this.verticalButtonLayout = false;
+
     }
 }
 

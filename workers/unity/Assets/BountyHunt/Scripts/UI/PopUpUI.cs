@@ -9,36 +9,48 @@ public class PopUpUI : MonoBehaviour
 {
     public TextMeshProUGUI headline;
     public TextMeshProUGUI text;
-    public Transform buttonsContainer;
+    public Transform horizontalButtonsContainer;
+    public Transform verticalButtonsContainer;
     public Button buttonPrefab;
     public Button xButton;
 
-    public void Set(string headline, bool showX, string text, List<LabelAndAction> buttonActions)
+    public void Set(string headline, bool showX, string text, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons)
     {
         this.headline.text = headline;
+
+        if (text == "") this.text.gameObject.SetActive(false);
         this.text.text = text;
 
-        if (showX)
+        if (showX) xButton.onClick.AddListener(Close);
+        else xButton.gameObject.SetActive(false);
+
+
+        Transform btnContainer;
+        if (buttonActions.Count == 0)
         {
-            xButton.onClick.AddListener(Close);
+            horizontalButtonsContainer.gameObject.SetActive(false);
+            verticalButtonsContainer.gameObject.SetActive(false);
+            return;
+        }
+        else if (verticalLayoutedButtons)
+        {
+            horizontalButtonsContainer.gameObject.SetActive(false);
+            btnContainer = verticalButtonsContainer;
         }
         else
         {
-            xButton.gameObject.SetActive(false);
+            verticalButtonsContainer.gameObject.SetActive(false);
+            btnContainer = horizontalButtonsContainer;
         }
 
-
-        if (buttonActions.Count == 0)
-        {
-            buttonsContainer.gameObject.SetActive(false);
-        }
         foreach (LabelAndAction la in buttonActions)
         {
-            Button b = Instantiate(buttonPrefab, buttonsContainer);
+            Button b = Instantiate(buttonPrefab, btnContainer);
             b.GetComponentInChildren<TextMeshProUGUI>().text = la.label;
             b.onClick.AddListener(la.action);
             b.onClick.AddListener(Close);
         }
+        
     }
 
     public void Close()
