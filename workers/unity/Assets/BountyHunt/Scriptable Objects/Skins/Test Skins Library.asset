@@ -23,14 +23,32 @@ MonoBehaviour:
         identificationColor: {r: 1, g: 1, b: 1, a: 1}
         price: 0
         owned: 1
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       - ID: hs1
         identificationColor: {r: 0.748932, g: 0.9622642, b: 0.9599356, a: 1}
         price: 400
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       - ID: hs2
         identificationColor: {r: 0.8490566, g: 0.27634388, b: 0.6219292, a: 1}
         price: 1000
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       slot: 1
     - name: Marmelade
       sprite: {fileID: -8430313788917241573, guid: 312e028401f5ef5489f508714445b3d5,
@@ -40,14 +58,32 @@ MonoBehaviour:
         identificationColor: {r: 0.9150943, g: 0.28920433, b: 0.30086526, a: 1}
         price: 12
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       - ID: plum
         identificationColor: {r: 0.49754485, g: 0.28555533, b: 0.6509434, a: 1}
         price: 34
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       - ID: mango
         identificationColor: {r: 0.9528302, g: 0.77622706, b: 0.35506406, a: 1}
         price: 56
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       slot: 1
   - slot: 0
     defaultSkinID: robo0
@@ -56,13 +92,45 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 1e56a90b5e1ba484b92f731e0a551463, type: 3}
       skins:
       - ID: robo0
-        identificationColor: {r: 1, g: 1, b: 1, a: 1}
+        identificationColor: {r: 0.46226418, g: 0.39466894, b: 0.39466894, a: 1}
         price: 0
         owned: 1
-      - ID: robo1
-        identificationColor: {r: 1, g: 0.80037385, b: 0.1462264, a: 1}
-        price: 100000000
+        material: {fileID: 2100000, guid: 9e28b01b6766f34458b1498585f6bcc4, type: 2}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
+      - ID: roboBronze
+        identificationColor: {r: 0.8207547, g: 0.47097942, b: 0.13550194, a: 1}
+        price: 100
         owned: 0
+        material: {fileID: 2100000, guid: d8542acf2a8deb8409230852dd4a5698, type: 2}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
+      - ID: roboSilver
+        identificationColor: {r: 0.83281416, g: 0.8849454, b: 0.8962264, a: 1}
+        price: 1000
+        owned: 0
+        material: {fileID: 2100000, guid: f22c8d63b4961704595c13e26953be66, type: 2}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
+      - ID: roboGold
+        identificationColor: {r: 0.9150943, g: 0.70880294, b: 0.23740657, a: 1}
+        price: 10000
+        owned: 0
+        material: {fileID: 2100000, guid: 02858b25be597d04aa3a7b4282fbb517, type: 2}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       slot: 0
     - name: Dude
       sprite: {fileID: -5673618120071735642, guid: 312e028401f5ef5489f508714445b3d5,
@@ -72,4 +140,10 @@ MonoBehaviour:
         identificationColor: {r: 1, g: 0.78120166, b: 0.6650944, a: 1}
         price: 0
         owned: 0
+        material: {fileID: 0}
+        group:
+          name: 
+          sprite: {fileID: 0}
+          skins: []
+          slot: 0
       slot: 0

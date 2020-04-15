@@ -58,6 +58,7 @@ public class SkinsLibrary : ScriptableObject
                 group.slot = v.Value.slot;
                 foreach (Skin skin in group.skins)
                 {
+                    skin.group = group;
                     skinsByID[skin.ID]= new SkinAndGroup(skin, group);
                 }
             }
@@ -95,6 +96,8 @@ public class Skin
     public Color identificationColor = Color.white;
     public long price;
     public bool owned;
+    public Material material;
+    [HideInInspector]public SkinGroup group;
 }
 
 public enum SkinSlot { BODY, MASK }

@@ -34,7 +34,6 @@ public class CharacterMenuUI : MonoBehaviour
     {
         skinsLibrary = Instantiate(skinsLibrary);
         skinsLibrary.Init();
-
     }
     private void Start()
     {
@@ -140,7 +139,6 @@ public class CharacterMenuUI : MonoBehaviour
             }
             Skin skn = group.skins[i];
 
-            skinColorButtons[i].gameObject.SetActive(true);
 
             SkinColorButtonUI scb;
             if (i >= skinColorButtons.Count)
@@ -152,6 +150,7 @@ public class CharacterMenuUI : MonoBehaviour
             {
                 scb = skinColorButtons[i];
             }
+            skinColorButtons[i].gameObject.SetActive(true);
             scb.image.color = skn.identificationColor;
             scb.skin = skn;
 
@@ -220,6 +219,7 @@ public class CharacterMenuUI : MonoBehaviour
     public void selectSkin(Skin skin)
     {
         UpdateDetailsPanel(skinsLibrary.GetGroup(skin.ID),skin);
+        PreviewSpot.Instance.SetSkin(skin);
     }
 
     void UpdateSelectionPanels()
