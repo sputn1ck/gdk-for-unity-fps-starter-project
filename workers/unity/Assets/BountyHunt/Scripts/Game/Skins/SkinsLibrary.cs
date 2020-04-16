@@ -12,14 +12,12 @@ public class SkinsLibrary : ScriptableObject
 
     private Dictionary<string, Skin> skinsByID;
 
-    public void Init()
-    {
-        InitializeDictionaries();
-    }
-
-    
     public Skin GetSkin(string skinID, SkinSlot slot)
     {
+        Debug.Log("slot: " + slot);
+        Debug.Log("skin: " + skinID);
+        Debug.Log("default: " + settings[slot].defaultSkinID);
+
         if (!skinsByID.ContainsKey(skinID)) return skinsByID[settings[slot].defaultSkinID];
         return skinsByID[skinID];
     }
@@ -31,31 +29,69 @@ public class SkinsLibrary : ScriptableObject
     }
 
 
-    void InitializeDictionaries()
+    public void Initialize()
     {
-        
+        Initialize(new List<string>());
+    }
+
+    public void Initialize(List<string> IDs)
+    {
+
         settings = new Dictionary<SkinSlot, SkinSlotSettings>();
-        foreach(SkinSlotSettings sss in slotSettings)
+        foreach (SkinSlotSettings sss in slotSettings)
         {
             settings[sss.slot] = sss;
         }
 
         skinsByID = new Dictionary<string, Skin>();
 
-        foreach(var v in settings)
-        {
-            foreach (SkinGroup group in v.Value.groups)
-            {
 
+        foreach (var v in settings)
+        {
+            for (int g = v.Value.groups.Count-1;g>=0;g--)
+            {
+                SkinGroup group = Instantiate(v.Value.groups[g]);
                 group.slot = v.Value.slot;
-                foreach (Skin skin in group.skins)
+
+                List<Skin> skins = new List<Skin>(group.skins);
+                group.skins.Clear();
+                foreach (Skin s in skins)
                 {
+                    if (IDs.Count>0 && !IDs.Contains(s.ID)) {
+                        continue;
+                    }
+                    Skin skin = Instantiate(s);
                     skin.group = group;
-                    skinsByID[skin.ID]= skin;
+                    group.skins.Add(skin);
+                    skinsByID[skin.ID] = skin;
+                }
+                if (group.skins.Count == 0)
+                {
+                    v.Value.groups.Remove(group);
                 }
             }
         }
+    }
 
+    public void Initialize(List<string> AllIDs, List<string> OwnedIDs)
+    {
+        Initialize(AllIDs);
+        SetOwnedStates(OwnedIDs);
+    }
+
+    public void SetOwnedStates(List<string> IDs)
+    {
+        foreach(var sk in skinsByID)
+        {
+            if (IDs.Contains(sk.Key))
+            {
+                sk.Value.owned = true;
+            }
+            else
+            {
+                sk.Value.owned = false;
+            }
+        }
     }
 
 }
