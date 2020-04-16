@@ -44,7 +44,7 @@ public class CharacterMenuUI : MonoBehaviour
         {
             groupSelectionPanelsDict[sgsp.slot] = sgsp;
             sgsp.buttons = sgsp.container.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
-            sgsp.selectedSkin = skinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + sgsp.slot, skinsLibrary.settings[sgsp.slot].defaultSkinID));
+            sgsp.selectedSkin = skinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + sgsp.slot, skinsLibrary.settings[sgsp.slot].defaultSkinID),sgsp.slot);
             sgsp.subMenu.onActivate.AddListener(delegate{ selectedSlot = sgsp.slot; });
             
         }
@@ -54,8 +54,8 @@ public class CharacterMenuUI : MonoBehaviour
     void UpdateSkinGroupButtons(SkinGroupSelectionPanel panel)
     {
         List<SkinGroup> groups = skinsLibrary.settings[panel.slot];
-        SkinGroup equippedGroup = skinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID_" + panel.slot, skinsLibrary.settings[panel.slot].defaultSkinID));
-        SkinGroup selectedGroup = skinsLibrary.GetGroup(panel.selectedSkin.ID);
+        SkinGroup equippedGroup = skinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID_" + panel.slot, skinsLibrary.settings[panel.slot].defaultSkinID),panel.slot);
+        SkinGroup selectedGroup = skinsLibrary.GetGroup(panel.selectedSkin.ID,panel.slot);
         int counter = 0;
         foreach (SkinGroupButtonUI sgb in panel.buttons)
         {
@@ -173,7 +173,7 @@ public class CharacterMenuUI : MonoBehaviour
     Skin GetEquippedSkin(SkinSlot slot)
     {
         string id = GetEquippedSkinID(slot);
-        return skinsLibrary.GetSkin(id);
+        return skinsLibrary.GetSkin(id,slot);
     }
 
 
@@ -186,14 +186,14 @@ public class CharacterMenuUI : MonoBehaviour
 
     private void equip()
     {
-        PlayerPrefs.SetString("EquippedSkinID_"+skinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID).slot, groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
+        PlayerPrefs.SetString("EquippedSkinID_"+selectedSlot, groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
         PlayerPrefs.Save();
         UpdateDetailsPanel();
         UpdateSelectionPanels();
     }
     public void UpdateDetailsPanel()
     {
-        SkinGroup g = skinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
+        SkinGroup g = skinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID,selectedSlot);
         Skin s = groupSelectionPanelsDict[selectedSlot].selectedSkin;
         UpdateDetailsPanel(g,s);
     }
@@ -218,7 +218,7 @@ public class CharacterMenuUI : MonoBehaviour
 
     public void selectSkin(Skin skin)
     {
-        UpdateDetailsPanel(skinsLibrary.GetGroup(skin.ID),skin);
+        UpdateDetailsPanel(skinsLibrary.GetGroup(skin.ID,selectedSlot),skin);
         PreviewSpot.Instance.SetSkin(skin);
     }
 

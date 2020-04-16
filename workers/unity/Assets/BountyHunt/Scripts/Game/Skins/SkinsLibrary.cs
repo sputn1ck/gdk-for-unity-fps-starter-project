@@ -10,7 +10,7 @@ public class SkinsLibrary : ScriptableObject
 
     public Dictionary<SkinSlot, SkinSlotSettings> settings;
 
-    private Dictionary<string, SkinAndGroup> skinsByID;
+    private Dictionary<string, Skin> skinsByID;
 
     public void Init()
     {
@@ -18,27 +18,18 @@ public class SkinsLibrary : ScriptableObject
     }
 
     
-    public Skin GetSkin(string skinID)
+    public Skin GetSkin(string skinID, SkinSlot slot)
     {
-        return skinsByID[skinID].skin;
+        if (!skinsByID.ContainsKey(skinID)) return skinsByID[settings[slot].defaultSkinID];
+        return skinsByID[skinID];
     }
-    public SkinGroup GetGroup(string skinID)
+
+    public SkinGroup GetGroup(string skinID,SkinSlot slot)
     {
+        if (!skinsByID.ContainsKey(skinID)) return null;
         return skinsByID[skinID].group;
     }
 
-
-    public struct SkinAndGroup
-    {
-        public Skin skin;
-        public SkinGroup group;
-
-        public SkinAndGroup(Skin skin, SkinGroup group)
-        {
-            this.skin = skin;
-            this.group = group;
-        }
-    }
 
     void InitializeDictionaries()
     {
@@ -49,17 +40,18 @@ public class SkinsLibrary : ScriptableObject
             settings[sss.slot] = sss;
         }
 
-        skinsByID = new Dictionary<string, SkinAndGroup>();
+        skinsByID = new Dictionary<string, Skin>();
 
         foreach(var v in settings)
         {
             foreach (SkinGroup group in v.Value.groups)
             {
+
                 group.slot = v.Value.slot;
                 foreach (Skin skin in group.skins)
                 {
                     skin.group = group;
-                    skinsByID[skin.ID]= new SkinAndGroup(skin, group);
+                    skinsByID[skin.ID]= skin;
                 }
             }
         }
@@ -80,24 +72,6 @@ public class SkinSlotSettings
     }
 }
 
-[System.Serializable]
-public class SkinGroup
-{
-    public string name;
-    public Sprite sprite;
-    public List<Skin> skins;
-    [HideInInspector] public SkinSlot slot;
-}
 
-[System.Serializable]
-public class Skin
-{
-    public string ID;
-    public Color identificationColor = Color.white;
-    public long price;
-    public bool owned;
-    public Material material;
-    [HideInInspector]public SkinGroup group;
-}
 
 public enum SkinSlot { BODY, MASK }
