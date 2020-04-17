@@ -53,7 +53,7 @@ public class CharacterMenuUI : MonoBehaviour
             sgsp.buttons = sgsp.container.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
             sgsp.selectedSkin = skinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + sgsp.slot, skinsLibrary.settings[sgsp.slot].defaultSkinID), sgsp.slot);
             sgsp.subMenu.onActivate.AddListener(delegate { selectedSlot = sgsp.slot; });
-            PreviewSpot.Instance.SetSkin(sgsp.selectedSkin);
+            
         }
         UpdateSelectionPanels();
         UpdateDetailsPanel();
@@ -132,6 +132,7 @@ public class CharacterMenuUI : MonoBehaviour
             BuyAndEquipButton.onClick.AddListener(buy);
         }
         UpdateSkinGroupColors(group);
+        PreviewSpot.Instance.SetSkin(skin);
     }
 
     public void UpdateSkinGroupColors(SkinGroup group)
@@ -161,6 +162,7 @@ public class CharacterMenuUI : MonoBehaviour
             skinColorButtons[i].gameObject.SetActive(true);
             scb.image.color = skn.identificationColor;
             scb.skin = skn;
+            scb.lockedImage.gameObject.SetActive(!skn.owned);
 
             if (equipped == skn) scb.frame.SetActive(true);
             else scb.frame.SetActive(false);
@@ -227,7 +229,6 @@ public class CharacterMenuUI : MonoBehaviour
     public void selectSkin(Skin skin)
     {
         UpdateDetailsPanel(skinsLibrary.GetGroup(skin.ID,selectedSlot),skin);
-        PreviewSpot.Instance.SetSkin(skin);
     }
 
     void UpdateSelectionPanels()

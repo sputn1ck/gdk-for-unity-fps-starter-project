@@ -10,7 +10,8 @@ public class SkinColorButtonUI : MonoBehaviour
     public Image image;
     public GameObject frame;
     public GameObject underLine;
-    public Skin skin;
+    public Image lockedImage;
+    [HideInInspector]public Skin skin;
 
     private void Awake()
     {

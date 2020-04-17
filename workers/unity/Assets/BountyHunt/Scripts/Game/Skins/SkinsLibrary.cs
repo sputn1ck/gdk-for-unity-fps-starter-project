@@ -48,9 +48,11 @@ public class SkinsLibrary : ScriptableObject
 
         foreach (var v in settings)
         {
-            for (int g = v.Value.groups.Count-1;g>=0;g--)
+            List<SkinGroup> groups = new List<SkinGroup>(v.Value.groups);
+            v.Value.groups.Clear();
+            foreach (SkinGroup g in groups)
             {
-                SkinGroup group = Instantiate(v.Value.groups[g]);
+                SkinGroup group = Instantiate(g);
                 group.slot = v.Value.slot;
 
                 List<Skin> skins = new List<Skin>(group.skins);
@@ -65,9 +67,9 @@ public class SkinsLibrary : ScriptableObject
                     group.skins.Add(skin);
                     skinsByID[skin.ID] = skin;
                 }
-                if (group.skins.Count == 0)
+                if (group.skins.Count > 0)
                 {
-                    v.Value.groups.Remove(group);
+                    v.Value.groups.Add(group);
                 }
             }
         }
@@ -96,7 +98,7 @@ public class SkinsLibrary : ScriptableObject
 
 }
 [System.Serializable]
-public class SkinSlotSettings
+public struct SkinSlotSettings
 {
     public SkinSlot slot;
     public string defaultSkinID;
