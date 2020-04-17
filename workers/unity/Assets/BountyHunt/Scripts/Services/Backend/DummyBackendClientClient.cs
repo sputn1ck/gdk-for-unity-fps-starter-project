@@ -2,7 +2,7 @@ using Bbhrpc;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DummyBackendClientClient : MonoBehaviour, IBackendClientClient
+public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
     public string getUsernameResponse;
     public string setUsernameResponse;
@@ -52,6 +52,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendClientClient
                 Earnings = Random.Range(0, 1000000),
                 Name = "Player: " + Random.Range(1, int.MaxValue),
                 Pubkey = "Pubkey: " + Random.Range(1, int.MaxValue),
+           
             };
         }
         return highscores;

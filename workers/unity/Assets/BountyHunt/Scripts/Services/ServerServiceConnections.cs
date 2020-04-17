@@ -25,7 +25,7 @@ public class ServerServiceConnections : MonoBehaviour
 
 
     public IBackendServerClient BackendGameServerClient;
-    public IBackendClientClient BackendPlayerClient;
+    public IBackendPlayerClient BackendPlayerClient;
     public PrometheusManager Prometheus;
 
     public static CancellationTokenSource ct;

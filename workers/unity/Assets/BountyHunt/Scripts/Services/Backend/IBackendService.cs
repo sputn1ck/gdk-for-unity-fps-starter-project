@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface IBackendClientClient
+public interface IBackendPlayerClient
 {
     void Setup(string target, int port, string pubkey, string signature);
     void Shutdown();

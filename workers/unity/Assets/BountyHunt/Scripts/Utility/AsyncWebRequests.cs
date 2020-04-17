@@ -10,8 +10,8 @@ public class AwaitRequestText
     private int maxTries;
     public AwaitRequestText(MonoBehaviour mb, string url, int maxTries = 50)
     {
-        mb.StartCoroutine(GetRequest(url));
         this.maxTries = maxTries;
+        mb.StartCoroutine(GetRequest(url));
     }
 
     public async Task<RequestTextResult> GetResult()

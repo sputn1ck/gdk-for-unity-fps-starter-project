@@ -21,7 +21,7 @@ public class PlayerServiceConnections : MonoBehaviour
     public string BackendHost;
     public string BackendPubkey;
     public int BackendPort;
-    public IBackendClientClient BackendPlayerClient;
+    public IBackendPlayerClient BackendPlayerClient;
 
     public IDonnerDaemonClient DonnerDaemonClient;
 

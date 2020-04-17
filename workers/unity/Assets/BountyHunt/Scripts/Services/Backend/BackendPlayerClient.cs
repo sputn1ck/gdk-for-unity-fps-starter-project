@@ -9,7 +9,7 @@ using Grpc.Core;
 using System.Threading.Tasks;
 using System.Linq;
 
-public class BackendPlayerClient : IBackendClientClient
+public class BackendPlayerClient : IBackendPlayerClient
 {
     public GameClientService.GameClientServiceClient client;
     public PublicService.PublicServiceClient publicCLient;

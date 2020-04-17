@@ -37,6 +37,7 @@ public class LndConnector : MonoBehaviour
 
     public DeploymentList deploymentList;
 
+    private IGameConnector gameConnector;
     private void Awake()
     {
         if (!Instance) Instance = this;
@@ -46,7 +47,29 @@ public class LndConnector : MonoBehaviour
     {
         
     }
-
+    
+    public async Task<string> NewConnect()
+    {
+        var clientWorker = UnityEngine.Object.Instantiate(ClientWorkerConnectorPrefab, this.transform.position, Quaternion.identity);
+        clientConnector = clientWorker.GetComponent<ClientWorkerConnectorLnd>();
+        clientConnector.OnWorkerCreationFinished += GetComponent<ClientFlagManager>().WorkerCreated;
+        clientConnector.OnWorkerCreationFinished += ClientConnector_OnWorkerCreationFinished1;
+        if(connectLocal)
+        {
+            gameConnector = new LocalGameConnector();
+        }
+        var res = await gameConnector.JoinGame(clientConnector);
+        if (!res.Ok)
+        {
+            return res.ErrorMessage;
+        }
+        return "";
+    }
+    void NewSpawn(string Playername, int GunId)
+    {
+        Debug.Log("trying to spawn player");
+        clientConnector.SpawnPlayer(Playername, GunId, OnPlayerResponse);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -77,45 +100,15 @@ public class LndConnector : MonoBehaviour
             spawnPlayerTrigger = false;
             SpawnPlayer(pubkey,0);
         }
-        if (doAllTrigger)
-        {
-            doAllTrigger = false;
-            DoAll();
-        }
     }
 
-    public async void DoAll()
-    {
-
-        var getInfo = await PlayerServiceConnections.instance.lnd.GetInfo();
-        pubkey = getInfo.IdentityPubkey;
-        StartCoroutine(DoAllEnumerator());
-    }
-    IEnumerator DoAllEnumerator()
-    {
-        yield return GetPit();
-        yield return ListDeployments();
-        yield return GetLoginToken();
-        Debug.Log("trying to connect");
-        Connect();
-        Debug.Log("connect");
-        yield return new WaitForSeconds(2f);
-        SpawnPlayer(pubkey, 0);
-    }
-
+    
     public void Disconnect()
     {
         clientConnector.DisconnectPlayer();
         mainMenu.SetActive(true);
         BBHUIManager.instance.ShowFrontEnd();
         mainMenu.GetComponent<MenuUI>().Reset();
-    }
-    public IEnumerator DoStep1Enumerator()
-    {
-        yield return GetPit();
-        yield return ListDeployments();
-        yield return GetLoginToken();
-        Connect();
     }
 
     public IEnumerator GetPit()
@@ -195,6 +188,7 @@ public class LndConnector : MonoBehaviour
         }
     }
 
+    // Here is where we should use the correct Connector and then 
     public async void Connect()
     {
         var clientWorker = UnityEngine.Object.Instantiate(ClientWorkerConnectorPrefab, this.transform.position, Quaternion.identity);
@@ -218,7 +212,7 @@ public class LndConnector : MonoBehaviour
         mainMenu.GetComponent<MenuUI>().Reset();
     }
 
-    public async void SpawnPlayer(string playername, int gunId)
+    public void SpawnPlayer(string playername, int gunId)
     {
         Debug.Log("trying to spawn player");
         clientConnector.SpawnPlayer(playername, gunId, OnPlayerResponse);
