@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Bbh;
+using Bbhrpc;
 using System.Collections.Concurrent;
 using System.Threading;
 using System;
@@ -11,16 +11,17 @@ using System.Linq;
 
 public class BackendPlayerClient : IBackendClientClient
 {
-    public ClientService.ClientServiceClient client;
+    public GameClientService.GameClientServiceClient client;
+    public PublicService.PublicServiceClient publicCLient;
 
-    private Grpc.Core.Channel rpcChannel;
+    private Channel rpcChannel;
 
     private string pubkey;
     private string signature;
     public void Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
-        client = new ClientService.ClientServiceClient(rpcChannel);
+        client = new GameClientService.GameClientServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
 
@@ -39,12 +40,12 @@ public class BackendPlayerClient : IBackendClientClient
         return res.Name;
     }
 
-    public async Task<Highscore[]> GetHighscore()
+    public async Task<Ranking[]> ListRankings()
     {
-        var res = await client.GetHighscoreAsync(new GetHighscoreRequest() { });
-        Highscore[] highscores = new Highscore[res.Highscores.Count];
-        res.Highscores.CopyTo(highscores, 0);
-        return highscores;
+        var res = await publicCLient.ListRankingsAsync(new ListRankingsRequest() { });
+        Ranking[] rankings = new Ranking[res.Rankings.Count];
+        res.Rankings.CopyTo(rankings, 0);
+        return rankings;
     }
 
     private CallOptions GetPubkeyCalloptions()

@@ -1,4 +1,4 @@
-using Bbh;
+using Bbhrpc;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -35,17 +35,17 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendClientClient
         return Task.FromResult(this.setUsernameResponse);
     }
 
-    public Task<Highscore[]> GetHighscore()
+    public Task<Ranking[]> ListRankings()
     {
         return Task.FromResult(GetHighscores());
     }
 
-    Highscore[] GetHighscores()
+    Ranking[] GetHighscores()
     {
-        var highscores =new Highscore[this.HighscoreAmount];
+        var highscores =new Ranking[this.HighscoreAmount];
         for(int i = 0; i < highscores.Length;i++)
         {
-            highscores[i] = new Highscore()
+            highscores[i] = new Ranking()
             {
                 Deaths = Random.Range(0, 1000),
                 Kills = Random.Range(0, 1000),

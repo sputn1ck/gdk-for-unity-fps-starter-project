@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Bbh;
+using Bbhrpc;
 using System.Collections.Concurrent;
 using System.Threading;
 using System;
@@ -11,11 +11,11 @@ using Grpc.Core;
 public class BackendGameserverClient : IBackendServerClient
 {
 
-    private GameService.GameServiceClient _client;
+    private GameServerService.GameServerServiceClient _client;
 
     private Grpc.Core.Channel rpcChannel;
 
-    private ConcurrentQueue<Bbh.EventStreamRequest> eventQueue;
+    private ConcurrentQueue<EventStreamRequest> eventQueue;
 
     private Thread listenThread;
 
@@ -25,7 +25,7 @@ public class BackendGameserverClient : IBackendServerClient
     public void Setup(string target, int port, string pubkey, string message)
     {
         rpcChannel = new Grpc.Core.Channel(target, port,Grpc.Core.ChannelCredentials.Insecure);
-        _client = new GameService.GameServiceClient(rpcChannel);
+        _client = new GameServerService.GameServerServiceClient(rpcChannel);
         eventQueue = new ConcurrentQueue<EventStreamRequest>();
         this.pubkey = pubkey;
         this.message = message;
@@ -61,22 +61,22 @@ public class BackendGameserverClient : IBackendServerClient
 
     public void AddKill(string killer, string victim)
     {
-        AddToQueue(new Bbh.EventStreamRequest { Kill = new Bbh.KillEvent() { Killer = killer, Victim = victim } });
+        AddToQueue(new EventStreamRequest { Kill = new Bbhrpc.KillEvent() { Killer = killer, Victim = victim } });
     }
 
     public void AddEarnings(string user, long earnings)
     {
-        AddToQueue(new Bbh.EventStreamRequest { Earnings = new Bbh.EarningsEvent { Amt = earnings, User = user } });
+        AddToQueue(new EventStreamRequest { Earnings = new Bbhrpc.EarningsEvent { Amt = earnings, User = user } });
     }
 
     public void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths)
     {
-        AddToQueue(new Bbh.EventStreamRequest
+        AddToQueue(new EventStreamRequest
         {
-            PlayerInfo = new Bbh.PlayerInfoEvent()
+            PlayerInfo = new Bbhrpc.PlayerInfoEvent()
             {
                 User = user,
-                EventType = Bbh.PlayerInfoEvent.Types.EventType.Heartbeat,
+                EventType = PlayerInfoEvent.Types.EventType.Heartbeat,
                 CurrentBounty = bounty,
                 CurrentDeaths = deaths,
                 CurrentKills = kills
@@ -85,7 +85,7 @@ public class BackendGameserverClient : IBackendServerClient
     }
     public void AddPlayerDisconnect(string user)
     {
-        AddToQueue(new Bbh.EventStreamRequest { PlayerInfo = new Bbh.PlayerInfoEvent() { User = user, EventType = Bbh.PlayerInfoEvent.Types.EventType.Disconnect } });
+        AddToQueue(new EventStreamRequest { PlayerInfo = new PlayerInfoEvent() { User = user, EventType = PlayerInfoEvent.Types.EventType.Disconnect } });
     }
 
     private void AddToQueue(EventStreamRequest request)

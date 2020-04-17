@@ -1,4 +1,4 @@
-using Bbh;
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ public interface IBackendClientClient
 
     Task<string> GetUsername(string pubkey);
     Task<string> SetUsername(string pubkey, string userName);
-    Task<Highscore[]> GetHighscore();
+    Task<Ranking[]> ListRankings();
 
 }
 
