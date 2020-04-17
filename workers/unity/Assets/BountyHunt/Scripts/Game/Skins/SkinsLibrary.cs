@@ -14,9 +14,9 @@ public class SkinsLibrary : ScriptableObject
 
     public Skin GetSkin(string skinID, SkinSlot slot)
     {
-        Debug.Log("slot: " + slot);
-        Debug.Log("skin: " + skinID);
-        Debug.Log("default: " + settings[slot].defaultSkinID);
+        //Debug.Log("slot: " + slot);
+        //Debug.Log("skin: " + skinID);
+        //Debug.Log("default: " + settings[slot].defaultSkinID);
 
         if (!skinsByID.ContainsKey(skinID)) return skinsByID[settings[slot].defaultSkinID];
         return skinsByID[skinID];
