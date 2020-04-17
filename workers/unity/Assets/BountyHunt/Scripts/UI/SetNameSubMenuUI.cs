@@ -34,7 +34,7 @@ public class SetNameSubMenuUI : SubMenuUI
         try
         {
             var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(pubkey, playerName);
-            StartCoroutine(ConnectEnumerator());
+            Connect();
 
         } catch(RpcException e)
         {
@@ -57,22 +57,18 @@ public class SetNameSubMenuUI : SubMenuUI
         pubkey = PlayerServiceConnections.instance.GetPubkey();
     }
 
-    public IEnumerator ConnectEnumerator()
+    public async void Connect()
     {
+        var res = await LndConnector.Instance.Connect();
+        if (res != "")
+        {
+            //SHOW ERROR
+            Debug.LogError("Error while connecting: " + res);
 
-            if (LndConnector.Instance.connectLocal)
-            {
-                yield return LndConnector.Instance.GetPit();
-                LndConnector.Instance.deploymentId = "";
-                yield return LndConnector.Instance.GetLoginToken();
-                LndConnector.Instance.Connect();
-                spawnMenu.Select();
-            }
-            else
-            {
-                yield return LndConnector.Instance.GetPit();
-                serverMenu.Select();
-            }
+            ErrorText.text = res;
+            return;
         }
+    }
+
  
 }

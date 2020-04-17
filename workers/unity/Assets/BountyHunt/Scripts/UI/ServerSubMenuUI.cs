@@ -47,9 +47,10 @@ public class ServerSubMenuUI : SubMenuUI
 
     IEnumerator RequestDeployments()
     {
-        yield return LndConnector.Instance.ListDeployments();
+        //yield return LndConnector.Instance.ListDeployments();
         List<DeploymentJson> dList = LndConnector.Instance.deploymentList.deployments.Where(d=>d.status == 200 && !d.tag.Contains("sim")).ToList();
         UpdateServerList(dList.ToArray());
+        yield return null;
 
     }
 
@@ -122,11 +123,12 @@ public class ServerSubMenuUI : SubMenuUI
 
     IEnumerator JoinEnumerator(string deploymentID)
     {
-        LndConnector.Instance.deploymentId = deploymentID;
-        yield return LndConnector.Instance.GetLoginToken();
+        //LndConnector.Instance.deploymentId = deploymentID;
+        //yield return LndConnector.Instance.GetLoginToken();
 
-        LndConnector.Instance.Connect();
-        spawnMenu.Select();
+        //LndConnector.Instance.Connect();
+        //spawnMenu.Select();
+        yield return null;
     }
 
 }

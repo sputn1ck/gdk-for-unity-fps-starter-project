@@ -20,39 +20,22 @@ public class ConnectSubMenuUI : SubMenuUI
     {
         ClientEvents.instance.onServicesSetup.AddListener(getNameAndPubkey);
     }
-    public void Connect()
+    public async void Connect()
     {
 
         SetButtonFalse();
-        StartCoroutine(ConnectEnumerator());
-    }
-
-    public IEnumerator ConnectEnumerator()
-    {
-        if (setName)
+        var res = await LndConnector.Instance.Connect();
+        if(res != "")
         {
-            nameMenu.Select();
-        }else
-        {
-
-            if (LndConnector.Instance.connectLocal)
-            {
-                yield return LndConnector.Instance.GetPit();
-                LndConnector.Instance.deploymentId = "";
-                yield return LndConnector.Instance.GetLoginToken();
-                LndConnector.Instance.Connect();
-                spawnMenu.Select();
-            }
-            else
-            {
-                yield return LndConnector.Instance.GetPit();
-                serverMenu.Select();
-            }
+            //SHOW ERROR
+            Debug.LogError("Error while connecting: " + res);
+            Invoke("SetButtonTrue", 2f);
+            return;
         }
-        
-        
+        spawnMenu.Select();
     }
 
+    
 
     public void SetButtonFalse()
     {
