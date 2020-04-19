@@ -12,7 +12,8 @@ using System.Linq;
 public class BackendPlayerClient : IBackendPlayerClient
 {
     public GameClientService.GameClientServiceClient client;
-    public PublicService.PublicServiceClient publicCLient;
+    public PublicService.PublicServiceClient publicClient;
+    public SkinService.SkinServiceClient skinClient;
 
     private Channel rpcChannel;
 
@@ -22,6 +23,8 @@ public class BackendPlayerClient : IBackendPlayerClient
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new GameClientService.GameClientServiceClient(rpcChannel);
+        publicClient = new PublicService.PublicServiceClient(rpcChannel);
+        skinClient = new SkinService.SkinServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
 
@@ -42,17 +45,37 @@ public class BackendPlayerClient : IBackendPlayerClient
 
     public async Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType)
     {
-        var res = await publicCLient.ListRankingsAsync(new ListRankingsRequest
+        var res = await publicClient.ListRankingsAsync(new ListRankingsRequest
         {
             RankType = rankType,
             Length = length,
             StartIndex = startIndex
         });
-        Ranking[] rankings = new Ranking[res.Rankings.Count];
-        res.Rankings.CopyTo(rankings, 0);
-        return rankings;
+        return res.Rankings.ToArray();
     }
-   
+
+    public async Task<SkinInventory> GetSkinInventory()
+    {
+        var res = await skinClient.GetSkinInventoryAsync(new GetSkinInventoryRequest(), GetPubkeyCalloptions());
+        return res.SkinInventory;
+    }
+
+    public async Task<ShopSkin[]> GetAllSkins()
+    {
+        var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
+        return res.ShopItems.ToArray();
+    }
+
+    public async void EquipSkin(string skinId)
+    {
+        await skinClient.EquipSkinAsync(new EquipSkinRequest() { Id = skinId }, GetPubkeyCalloptions());
+    }
+
+    public async Task<string> GetSkinInvoice(string skinId)
+    {
+        var res = await skinClient.BuySkinAsync(new BuySkinRequest { Id = skinId }, GetPubkeyCalloptions());
+        return res.Invoice;
+    }
 
     private CallOptions GetPubkeyCalloptions()
     {

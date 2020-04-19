@@ -13,6 +13,10 @@ public interface IBackendPlayerClient
     Task<string> SetUsername(string pubkey, string userName);
     Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType);
 
+    Task<SkinInventory> GetSkinInventory();
+    void EquipSkin(string skinId);
+    Task<ShopSkin[]> GetAllSkins();
+    Task<string> GetSkinInvoice(string skinId);
 
 }
 

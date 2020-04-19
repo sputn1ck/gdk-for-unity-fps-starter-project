@@ -58,4 +58,24 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     {
         return Task.FromResult(GetHighscores());
     }
+
+    public Task<SkinInventory> GetSkinInventory()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void EquipSkin(string skinId)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<ShopSkin[]> GetAllSkins()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<string> GetSkinInvoice(string skinId)
+    {
+        throw new System.NotImplementedException();
+    }
 }
