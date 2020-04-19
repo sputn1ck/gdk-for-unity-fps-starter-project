@@ -40,13 +40,19 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res.Name;
     }
 
-    public async Task<Ranking[]> ListRankings()
+    public async Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType)
     {
-        var res = await publicCLient.ListRankingsAsync(new ListRankingsRequest() { });
+        var res = await publicCLient.ListRankingsAsync(new ListRankingsRequest
+        {
+            RankType = rankType,
+            Length = length,
+            StartIndex = startIndex
+        });
         Ranking[] rankings = new Ranking[res.Rankings.Count];
         res.Rankings.CopyTo(rankings, 0);
         return rankings;
     }
+   
 
     private CallOptions GetPubkeyCalloptions()
     {

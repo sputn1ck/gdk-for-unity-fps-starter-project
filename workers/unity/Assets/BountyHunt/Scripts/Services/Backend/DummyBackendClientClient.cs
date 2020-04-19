@@ -35,10 +35,6 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(this.setUsernameResponse);
     }
 
-    public Task<Ranking[]> ListRankings()
-    {
-        return Task.FromResult(GetHighscores());
-    }
 
     Ranking[] GetHighscores()
     {
@@ -56,5 +52,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             };
         }
         return highscores;
+    }
+
+    public Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType)
+    {
+        return Task.FromResult(GetHighscores());
     }
 }
