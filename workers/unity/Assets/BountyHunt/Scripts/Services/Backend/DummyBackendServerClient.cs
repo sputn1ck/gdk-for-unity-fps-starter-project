@@ -72,4 +72,9 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
             
         };
     }
+
+    public Task<string> GetUserSkin(string pubkey)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -130,8 +130,10 @@ public class BountyPlayerServer : MonoBehaviour
     {
         var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
         var user = await bbhbackend.GetUser(HunterComponentWriter.Data.Pubkey);
-        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = user.Name });
+        var skin = await bbhbackend.GetUserSkin(HunterComponentWriter.Data.Pubkey);
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = user.Name, EquippedSkin = skin });
         GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(HunterComponentWriter.Data.Name, LinkedEntityComponent.EntityId, HunterComponentWriter.Data.Pubkey));
+
         StartCoroutine(hearbeatCoroutine());
     }
 
