@@ -12,6 +12,7 @@ using UnityEngine;
 public class PlayerServiceConnections : MonoBehaviour
 {
     public bool UseDummy;
+    public GameObject DummyServices;
     public string confName;
     public string lndConnectString;
     public static PlayerServiceConnections instance;
@@ -48,18 +49,47 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public async void SetupDummies()
     {
+        if(DummyServices == null)
+        {
 
-        var dummyGO = new GameObject("0_PlayerDummies");
-        lnd = dummyGO.AddComponent<DummyLnd>();
-        await lnd.Setup(confName, true, false, "", lndConnectString);
-        BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
-        BackendPlayerClient.Setup("", 0, "", "");
-        AuctionClient = dummyGO.AddComponent<DummyAuctionClient>();
-        AuctionClient.Setup();
-        DonnerDaemonClient = dummyGO.AddComponent<DummyDaemonClient>();
-        DonnerDaemonClient.Setup();
+            var dummyGO = new GameObject("0_PlayerDummies");
+            lnd = dummyGO.AddComponent<DummyLnd>();
+            await lnd.Setup(confName, true, false, "", lndConnectString);
+            BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
+            BackendPlayerClient.Setup("", 0, "", "");
+            AuctionClient = dummyGO.AddComponent<DummyAuctionClient>();
+            AuctionClient.Setup();
+            DonnerDaemonClient = dummyGO.AddComponent<DummyDaemonClient>();
+            DonnerDaemonClient.Setup();
 
-        Instantiate(dummyGO, this.transform);
+            Instantiate(dummyGO, this.transform);
+        } else
+        {
+            lnd = DummyServices.GetComponent<DummyLnd>();
+            if(lnd == null)
+            {
+                lnd = DummyServices.AddComponent<DummyLnd>();
+            }
+            await lnd.Setup(confName, true, false, "", lndConnectString);
+            BackendPlayerClient = DummyServices.GetComponent<DummyBackendClientClient>();
+            if (BackendPlayerClient == null) {
+                BackendPlayerClient = DummyServices.AddComponent<DummyBackendClientClient>();
+            }
+            BackendPlayerClient.Setup("", 0, "", "");
+            DonnerDaemonClient = DummyServices.GetComponent<DummyDaemonClient>();
+            if (DonnerDaemonClient == null)
+            {
+                DonnerDaemonClient = DummyServices.AddComponent<DummyDaemonClient>();
+            }
+            DonnerDaemonClient.Setup();
+            AuctionClient = DummyServices.GetComponent<DummyAuctionClient>();
+            if (AuctionClient == null)
+            {
+                AuctionClient = DummyServices.AddComponent<DummyAuctionClient>();
+            }
+            AuctionClient.Setup();
+        }
+
     }
     public async void Setup()
     {
