@@ -9,6 +9,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public int bbhDuration = 30;
     public int lobbyDuration = 10;
+
     public void Setup(string target, int port, string pubkey, string message)
     {
         

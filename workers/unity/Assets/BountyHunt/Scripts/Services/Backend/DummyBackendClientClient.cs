@@ -1,6 +1,8 @@
 using Bbhrpc;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
@@ -8,7 +10,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public string setUsernameResponse;
 
     public long HighscoreAmount;
-    
+
+    public string[] allSkins = new string[] { "robot_default", "robot_2" };
+    public List<string> ownedSkins = new List<string>{ "robot_default" };
+    public string equippedSkin = "robot_default";
     // Update is called once per frame
     void Update()
     {
@@ -59,14 +64,20 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(GetHighscores());
     }
 
-    public Task<SkinInventory> GetSkinInventory()
+    public async Task<SkinInventory> GetSkinInventory()
     {
-        throw new System.NotImplementedException();
+        var skinInventory = new SkinInventory { EquippedSkin = equippedSkin };
+        skinInventory.OwnedSkins.Add(ownedSkins);
+        return skinInventory;
     }
 
     public void EquipSkin(string skinId)
     {
-        throw new System.NotImplementedException();
+        if(!ownedSkins.Contains(skinId))
+        {
+            equippedSkin = "robot_default";
+        }
+        equippedSkin = skinId;
     }
 
     public Task<ShopSkin[]> GetAllSkins()
@@ -74,8 +85,28 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         throw new System.NotImplementedException();
     }
 
-    public Task<string> GetSkinInvoice(string skinId)
+    public async Task<string> GetSkinInvoice(string skinId)
+    {
+        Debug.Log("Want to buy skin: " + skinId);
+        if(ownedSkins.Contains(skinId))
+        {
+            return "already owned";
+        }
+        if (!allSkins.Contains(skinId))
+        {
+            return "unknown skin";
+        }
+        ownedSkins.Add(skinId);
+        return "invoice";
+    }
+
+    public Task<Ranking[]> GetTop100EarningsRankings()
     {
         throw new System.NotImplementedException();
+    }
+
+    public async Task<string[]> GetAllSkinIds()
+    {
+        return allSkins;
     }
 }

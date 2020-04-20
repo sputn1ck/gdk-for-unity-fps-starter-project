@@ -1,4 +1,4 @@
-using Bbh;
+using Bbhrpc;
 using Improbable.Gdk.Core;
 using System;
 using System.Collections;
@@ -14,7 +14,7 @@ public class LeaderboardMenuUI : MonoBehaviour
     public SimpleSliderUI slideLine;
     List<LeaderboardEntryUI> entries;
 
-    Highscore[] highscores;
+    Ranking[] highscores;
     string PlayerPubKey;
 
     HighscoreOrderPriority priority = HighscoreOrderPriority.EARNIGNS;
@@ -41,7 +41,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateLeaderBoard);
     }
 
-    void setEntry(LeaderboardEntryUI entry, Highscore score, long rank)
+    void setEntry(LeaderboardEntryUI entry, Ranking score, long rank)
     {
         entry.Set(rank, score.Name, new List<string> { Utility.SatsToShortString(score.Earnings, true), score.Kills.ToString(), score.Deaths.ToString(), "?" });
     }
@@ -118,9 +118,9 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         highscores = SortScores(highscores, priority, !orderAscending);
     }
-    public static Highscore[] SortScores(Highscore[] scores, HighscoreOrderPriority priority, bool descending)
+    public static Ranking[] SortScores(Ranking[] scores, HighscoreOrderPriority priority, bool descending)
     {
-        System.Func<Highscore, long> order;
+        System.Func<Ranking, long> order;
 
 
         switch (priority)
@@ -163,10 +163,10 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         test = false;
 
-        List<Highscore> hs = new List<Highscore>();
+        List<Ranking> hs = new List<Ranking>();
         for (int i = 0; i < testPlayers; i++)
         {
-            hs.Add(new Highscore
+            hs.Add(new Ranking
             {
                 Pubkey = "fakeKey" + i,
                 Name = "fakePlayer_" + i,

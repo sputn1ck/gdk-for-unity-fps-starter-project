@@ -1,4 +1,4 @@
-using Bbh;
+using Bbhrpc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -90,7 +90,7 @@ public class StatsMenuUI : MonoBehaviour
 
     void UpdateBadge(LeaderboardUpdateArgs args)
     {
-        Highscore[] scores = args.highscores.OrderByDescending(o => o.Earnings).ToArray();
+        Ranking[] scores = args.highscores.OrderByDescending(o => o.Earnings).ToArray();
         int playerRank = Array.FindIndex(scores, o => o.Pubkey == args.PlayerPubKey);
         float factor = (float)playerRank / (float)scores.Length;
 

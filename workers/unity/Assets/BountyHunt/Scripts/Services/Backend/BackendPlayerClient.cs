@@ -95,5 +95,19 @@ public class BackendPlayerClient : IBackendPlayerClient
         //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
     }
 
-   
+    public async Task<Ranking[]> GetTop100EarningsRankings()
+    {
+        var res = await publicClient.ListRankingsAsync(new ListRankingsRequest
+        {
+            RankType = RankType.Earnings,
+            Length = 100,
+            StartIndex = 0
+        });
+        return res.Rankings.ToArray();
+    }
+
+    public Task<string[]> GetAllSkinIds()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -37,12 +37,13 @@ public class CharacterMenuUI : MonoBehaviour
     async void Init()
     {
         skinsLibrary = Instantiate(AllSkinsLibrary);
-
         //Todo get from backend instead
+        var testIds = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkinIds();
+        var testOwnedIDs = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
         //List<string> testIDs = new List<string> { "robot_default", "robot_gold", "robot_6", "hs_default","robot_3","robot_bronze" };
         //List<string> testOwnedIDs = new List<string> { "robot_default", "robot_6", "hs_default", "robot_bronze" };
-        //skinsLibrary.Initialize(testIDs,testOwnedIDs);
-        skinsLibrary.Initialize();
+        skinsLibrary.Initialize(testIds.ToList(), testOwnedIDs.OwnedSkins.ToList());
+        //skinsLibrary.Initialize();
 
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
         groupSelectionPanelsDict = new Dictionary<SkinSlot, SkinGroupSelectionPanel>();
@@ -187,15 +188,20 @@ public class CharacterMenuUI : MonoBehaviour
     }
 
 
-    private void buy()
+    private async void buy()
     {
-        groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
+        // Todo popup
+        var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
+        Debug.Log("buy button result: " + res);
+        //groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
         UpdateDetailsPanel();
         UpdateSelectionPanels();
     }
 
     private void equip()
     {
+        // Todo check for errors
+        PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
         PlayerPrefs.SetString("EquippedSkinID_"+selectedSlot, groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
         PlayerPrefs.Save();
         UpdateDetailsPanel();

@@ -107,7 +107,7 @@ public struct AllTimeScoreUpdateArgs
 }
 public struct LeaderboardUpdateArgs
 {
-    public Bbh.Highscore[] highscores;
+    public Bbhrpc.Ranking[] highscores;
     public string PlayerPubKey;
 }
 

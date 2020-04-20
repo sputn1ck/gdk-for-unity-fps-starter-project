@@ -76,9 +76,9 @@ public class GraphicSettingsMenuUI : MonoBehaviour
     }
     public enum GraphicsQuality
     {
-        low = 0,
+        low = 2,
         medium = 1,
-        high = 2
+        high = 0
     }
     LabelAndAction QualityLabelAndAction(GraphicsQuality quality)
     {

@@ -50,12 +50,21 @@ public class LndConnector : MonoBehaviour
         {
             gameConnector = new SimpleGameConnector(host);
         }
-        var res = await gameConnector.JoinGame(clientConnector);
+        JoinGameResponse res = new JoinGameResponse { Ok = false};
+        try
+        {
+            await gameConnector.JoinGame(clientConnector);
+        } catch(Exception e)
+        {
+            Debug.Log("Exception: " + e.Message);
+            return "FUCKING ERORROR";
+        }
+        
         if (!res.Ok)
         {
             return res.ErrorMessage;
         }
-        return "";
+        return "ok";
     }
     
     public void Disconnect()

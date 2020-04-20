@@ -21,8 +21,8 @@ public class MainMenuUI : MonoBehaviour
     public async void OnPlayButtonPress()
     {
         connectingInfoObject.gameObject.SetActive(true);
-
-        string answer = "Todo: server Connection";
+        string answer = await LndConnector.Instance.Connect();
+        //string answer = "Todo: server Connection";
 
         if (answer == "ok")
         {
@@ -30,7 +30,7 @@ public class MainMenuUI : MonoBehaviour
         }
         else
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", "answer");
+            PopUpEventArgs args = new PopUpEventArgs("Error", answer);
             ClientEvents.instance.onPopUp.Invoke(args);
             connectingInfoObject.SetActive(false);
         }
@@ -39,6 +39,6 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnConnectionSuccesss()
     {
-
+        LndConnector.Instance.SpawnPlayer("gude", 0);
     }
 }
