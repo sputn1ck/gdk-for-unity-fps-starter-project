@@ -14,6 +14,7 @@ public class CharacterMenuUI : MonoBehaviour
     public Image detailsPreviewImage;
     public Button BuyAndEquipButton;
     public TextMeshProUGUI BuyAndEquipButtonText;
+    public Button refreshButton;
 
     public GameObject ColorButtonsContainer;
     List<SkinColorButtonUI> skinColorButtons;
@@ -31,6 +32,7 @@ public class CharacterMenuUI : MonoBehaviour
 
     private void Start()
     {
+        refreshButton.onClick.AddListener(Init);
         Init();
     }
 
