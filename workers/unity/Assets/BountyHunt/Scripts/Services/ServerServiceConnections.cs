@@ -12,6 +12,8 @@ public class ServerServiceConnections : MonoBehaviour
 {
 
     public bool UseDummy;
+
+    public GameObject DummyServices;
     public string PlatformPubkey;
     public string confName;
     public string lndConnectString;
@@ -51,19 +53,54 @@ public class ServerServiceConnections : MonoBehaviour
     }
     public async void SetupDummies()
     {
-        var dummyGO = new GameObject("1_ServerDummies");
-        lnd = dummyGO.AddComponent<DummyLnd>();
-        await lnd.Setup(confName, true, false, "", lndConnectString);
-        BackendGameServerClient = dummyGO.AddComponent<DummyBackendServerClient>();
-        BackendGameServerClient.Setup("", 0, "", "");
-        BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
-        BackendPlayerClient.Setup("", 0, "", "");
-        AuctionController = dummyGO.AddComponent<DummyAuctionController>();
-        AuctionController.Setup();
-        Prometheus = new PrometheusManager();
-        Prometheus.Setup("");
+        if(DummyServices == null)
+        {
 
-        Instantiate(dummyGO, this.transform);
+            var dummyGO = new GameObject("1_ServerDummies");
+            lnd = dummyGO.AddComponent<DummyLnd>();
+            await lnd.Setup(confName, true, false, "", lndConnectString);
+            BackendGameServerClient = dummyGO.AddComponent<DummyBackendServerClient>();
+            BackendGameServerClient.Setup("", 0, "", "");
+            BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
+            BackendPlayerClient.Setup("", 0, "", "");
+            AuctionController = dummyGO.AddComponent<DummyAuctionController>();
+            AuctionController.Setup();
+            Prometheus = new PrometheusManager();
+            Prometheus.Setup("");
+
+            Instantiate(dummyGO, this.transform);
+        } else
+        {
+            lnd = DummyServices.GetComponent<DummyLnd>();
+            if (lnd == null)
+            {
+                lnd = DummyServices.AddComponent<DummyLnd>();
+            }
+            await lnd.Setup(confName, true, false, "", lndConnectString);
+
+            BackendGameServerClient = DummyServices.GetComponent<DummyBackendServerClient>();
+            if (BackendGameServerClient == null)
+            {
+                BackendGameServerClient = DummyServices.AddComponent<DummyBackendServerClient>();
+            }
+            BackendGameServerClient.Setup("", 0, "", "");
+
+            BackendPlayerClient = DummyServices.GetComponent<DummyBackendClientClient>();
+            if (BackendPlayerClient == null)
+            {
+                BackendPlayerClient = DummyServices.AddComponent<DummyBackendClientClient>();
+            }
+            BackendPlayerClient.Setup("", 0, "", "");
+
+            AuctionController = DummyServices.GetComponent<DummyAuctionController>();
+            if (AuctionController == null)
+            {
+                AuctionController = DummyServices.AddComponent<DummyAuctionController>();
+            }
+            AuctionController.Setup();
+            Prometheus = new PrometheusManager();
+            Prometheus.Setup("");
+        }
 
     }
     public async void Setup()
