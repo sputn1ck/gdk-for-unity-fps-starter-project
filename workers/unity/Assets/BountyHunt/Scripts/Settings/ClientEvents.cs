@@ -61,22 +61,18 @@ public class ClientEvents : MonoBehaviour
 
     [HideInInspector] public PopUpEvent onPopUp = new PopUpEvent();
     [HideInInspector] public YesNoPopUpEvent onYesNoPopUp = new YesNoPopUpEvent();
+    [HideInInspector] public ImagePopUpEvent onImagePopUp = new ImagePopUpEvent();
 
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(this);
-
-        
     }
 
     public void MapLoaded()
     {
         onMapLoaded.Invoke();
     }
-
-
-    
 
 
 }

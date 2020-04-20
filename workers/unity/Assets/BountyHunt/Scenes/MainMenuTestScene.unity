@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4331403391451840342, guid: f7bcff9c5abaa8248a1e561d9e6acd8f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
     - target: {fileID: 1548131726573342299, guid: f7bcff9c5abaa8248a1e561d9e6acd8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3689,15 +3694,25 @@ MonoBehaviour:
     type: 3}
   container: {fileID: 1050654573}
   header: it's a header
-  text: "bli bla blub, hola adi\xF3s!"
+  text: this is text 1 !
+  text2: 'text 2 text 2 text 2 text 2 text 2 text 2 text 2 text 2 text 2 text 2 text
+    2 text 2 '
+  sprite: {fileID: -9140471093589001447, guid: 312e028401f5ef5489f508714445b3d5, type: 3}
   showX: 1
   verticalButtons: 0
   btn1: 1
   btn2: 1
   btn3: 1
+  ID: 
+  tintImage: 0
+  imageSizeMultiplier: 1
   variant: 0
   testPopUp: 0
   testYesNoPopup: 0
+  testImagePopup: 0
+  closeWithID: 0
+  closeAllWithID: 0
+  closeAll: 0
 --- !u!222 &1584384301
 CanvasRenderer:
   m_ObjectHideFlags: 0
