@@ -52,6 +52,11 @@ public class PlayerServiceConnections : MonoBehaviour
     {
         return (true,"");
     }
+
+    public async Task<bool> CheckName()
+    {
+        return true;
+    }
     public async void SetupDummies()
     {
         if(DummyServices == null)

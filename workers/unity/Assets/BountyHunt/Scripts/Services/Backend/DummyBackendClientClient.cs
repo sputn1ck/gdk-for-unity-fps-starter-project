@@ -30,12 +30,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         
     }
 
-    public Task<string> GetUsername(string pubkey)
+    public Task<string> GetUsername()
     {
         return Task.FromResult(this.getUsernameResponse);
     }
 
-    public Task<string> SetUsername(string pubkey, string userName)
+    public Task<string> SetUsername()
     {
         return Task.FromResult(this.setUsernameResponse);
     }

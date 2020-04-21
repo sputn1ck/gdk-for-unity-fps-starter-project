@@ -9,8 +9,8 @@ public interface IBackendPlayerClient
     void Setup(string target, int port, string pubkey, string signature);
     void Shutdown();
 
-    Task<string> GetUsername(string pubkey);
-    Task<string> SetUsername(string pubkey, string userName);
+    Task<string> GetUsername();
+    Task<string> SetUsername(string userName);
     Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType);
 
     Task<Ranking[]> GetTop100EarningsRankings();
