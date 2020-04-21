@@ -29,6 +29,15 @@ public class PlayerServiceConnections : MonoBehaviour
     public IAuctionClient AuctionClient;
     void Awake()
     {
+        if(UseDummy && DummyServices == null)
+        {
+            var dummyGO = new GameObject("0_PlayerDummies");
+            dummyGO.AddComponent<DummyLnd>();
+            dummyGO.AddComponent<DummyBackendClientClient>();
+            dummyGO.AddComponent<DummyAuctionClient>();
+            dummyGO.AddComponent<DummyDaemonClient>();
+            DummyServices = Instantiate(dummyGO, this.transform);
+        }
         if(instance == null)
         {
             instance = this;
@@ -37,20 +46,13 @@ public class PlayerServiceConnections : MonoBehaviour
             Destroy(this);
             return;
         }
-        if (UseDummy)
-        {
-            SetupDummies();
-        } else
-        {
-            SetupServices();
-        }
         
     }
 
     
     public async Task<(bool ok, string errMsg)> Setup(StringFunc stringFunc)
     {
-        return (true,"");
+        return await SetupServices(stringFunc);
     }
 
     public async Task<bool> CheckName()
@@ -64,91 +66,134 @@ public class PlayerServiceConnections : MonoBehaviour
         return (true,"");
     }
 
-    public async void SetupDummies()
+    public async Task<(bool ok, string errMsg)> SetupServices(StringFunc stringFunc)
     {
-        if(DummyServices == null)
+        stringFunc("Setting up connections");
+        // DonnerDaemon
+        stringFunc("Connecting to daemon");
+        try
+        {
+            await SetupDonnerDaemon();
+        } catch(Exception e)
+        {
+            return (false, "Daemon connection failed: " + e.Message);
+        }
+        
+
+        // Lnd
+        stringFunc("Connecting to lnd");
+        
+        try
+        {
+            await SetupLnd();
+        }
+        catch (Exception e)
+        {
+            return (false, "Lnd connection failed: " + e.Message);
+        }
+
+        // Backend
+        stringFunc("Conncting to game server");
+        try
         {
 
-            var dummyGO = new GameObject("0_PlayerDummies");
-            lnd = dummyGO.AddComponent<DummyLnd>();
-
-            await lnd.Setup(confName, true, false, "", lndConnectString);
-            BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
-            BackendPlayerClient.Setup("", 0, "", "");
-            AuctionClient = dummyGO.AddComponent<DummyAuctionClient>();
-            AuctionClient.Setup();
-            DonnerDaemonClient = dummyGO.AddComponent<DummyDaemonClient>();
-            DonnerDaemonClient.Setup();
-
-            Instantiate(dummyGO, this.transform);
-        } else
+            await SetupBackend();
+        }
+        catch (Exception e)
         {
-            lnd = DummyServices.GetComponent<DummyLnd>();
-            if(lnd == null)
-            {
-                lnd = DummyServices.AddComponent<DummyLnd>();
-            }
-            await lnd.Setup(confName, true, false, "", lndConnectString);
+            return (false, "Backend connection failed: " + e.Message);
+        }
+
+        // Auction
+        stringFunc("Connecting to payment server");
+        try
+        {
+            await SetupAuctionClient();
+        }
+        catch (Exception e)
+        {
+            return (false, "Payment connection failed: " + e.Message);
+        }
+        ClientEvents.instance.onServicesSetup.Invoke();
+        return (true, "");
+    }
+
+    private async Task SetupBackend()
+    {
+        SignMessageResponse sig = new SignMessageResponse() { Signature = "" };
+        if (UseDummy)
+        {
             BackendPlayerClient = DummyServices.GetComponent<DummyBackendClientClient>();
-            if (BackendPlayerClient == null) {
+            if (BackendPlayerClient == null)
+            {
                 BackendPlayerClient = DummyServices.AddComponent<DummyBackendClientClient>();
             }
-            BackendPlayerClient.Setup("", 0, "", "");
-            DonnerDaemonClient = DummyServices.GetComponent<DummyDaemonClient>();
-            if (DonnerDaemonClient == null)
-            {
-                DonnerDaemonClient = DummyServices.AddComponent<DummyDaemonClient>();
-            }
-            DonnerDaemonClient.Setup();
+        }
+        else
+        {
+
+            var message = "DO_NOT_SIGN_DONNERDUNGEON_AUTHENTICATION_MESSAGE";
+            sig = lnd.SignMessage(message);
+            // Player Client
+            BackendPlayerClient = new BackendPlayerClient();
+            BackendPlayerClient = new BackendPlayerClient();
+        }
+        await BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
+    }
+
+    private async Task SetupAuctionClient()
+    {
+        if (UseDummy)
+        {
+
             AuctionClient = DummyServices.GetComponent<DummyAuctionClient>();
             if (AuctionClient == null)
             {
                 AuctionClient = DummyServices.AddComponent<DummyAuctionClient>();
             }
-            AuctionClient.Setup();
         }
-
-    }
-    public async void SetupServices()
-    {
-        SetupDonnerDaemon();
-        await SetupLnd();
-        SetupBackendServices();
-        ClientEvents.instance.onServicesSetup.Invoke();
+        else
+        {
+            AuctionClient = new AuctionClient();
+        }
+        await AuctionClient.Setup();
     }
 
-
-    public async Task SetupLnd()
+    private async Task SetupDonnerDaemon()
     {
+        if (UseDummy)
+        {
+            DonnerDaemonClient = DummyServices.GetComponent<DummyDaemonClient>();
+            if (DonnerDaemonClient == null)
+            {
+                DonnerDaemonClient = DummyServices.AddComponent<DummyDaemonClient>();
+            }
+        }
+        else
+        {
+            DonnerDaemonClient = new DonnerDaemonClient();
+        }
+        await DonnerDaemonClient.Setup();
+    }
 
-        lnd = new LndClient();
+    private async Task SetupLnd()
+    {
+        // Lnd
+        if (UseDummy)
+        {
+            lnd = DummyServices.GetComponent<DummyLnd>();
+            if (lnd == null)
+            {
+                lnd = DummyServices.AddComponent<DummyLnd>();
+            }
+        }
+        else
+        {
+            lnd = new LndClient();
+        }
         await lnd.Setup(confName, false, UseApdata, "", lndConnectString);
     }
 
-    
-
-    public void SetupDonnerDaemon()
-    {
-        DonnerDaemonClient = new DonnerDaemonClient();
-        DonnerDaemonClient.Setup();
-    }
-
-
-    public void SetupBackendServices()
-    {
-        var message = "DO_NOT_SIGN_DONNERDUNGEON_AUTHENTICATION_MESSAGE";
-        var sig = lnd.SignMessage(message);
-
-
-        // Player Client
-        BackendPlayerClient = new BackendPlayerClient();
-        BackendPlayerClient = new BackendPlayerClient();
-        BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
-
-        // Auction Client
-        AuctionClient = new AuctionClient();
-        AuctionClient.Setup();
-    }
 
 
     public void OnApplicationQuit()

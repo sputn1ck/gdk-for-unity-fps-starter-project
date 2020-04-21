@@ -6,7 +6,7 @@ using UnityEngine;
 
 public interface IBackendPlayerClient
 {
-    void Setup(string target, int port, string pubkey, string signature);
+    Task Setup(string target, int port, string pubkey, string signature);
     void Shutdown();
 
     Task<string> GetUsername();

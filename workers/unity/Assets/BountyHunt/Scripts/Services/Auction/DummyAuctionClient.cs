@@ -9,11 +9,7 @@ public class DummyAuctionClient : MonoBehaviour, IAuctionClient
     [Header("AuctionEntry Response (Add Bid, GetBidStatus)")]
     [SerializeField]
     public AuctionEntry.Types.State AuctionEntyState;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  
 
 
 
@@ -42,7 +38,7 @@ public class DummyAuctionClient : MonoBehaviour, IAuctionClient
         return;
     }
 
-    public void Setup()
+    public async Task Setup()
     {
         
     }

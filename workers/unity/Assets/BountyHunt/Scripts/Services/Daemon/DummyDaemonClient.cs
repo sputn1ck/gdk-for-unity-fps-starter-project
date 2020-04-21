@@ -9,19 +9,8 @@ public class DummyDaemonClient : MonoBehaviour, IDonnerDaemonClient
     public long bufferBalance;
     public long channelMissingBalance;
     public long daemonBalance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Setup()
+    public async Task Setup()
     {
 
     }

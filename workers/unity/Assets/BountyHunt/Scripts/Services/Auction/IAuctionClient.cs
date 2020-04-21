@@ -11,7 +11,7 @@ public interface IAuctionClient
     Task<AuctionEntry> BidStatus(string entryId);
     Task<Auction> GetActiveAuction();
     void CancelBid(string BidId);
-    void Setup();
+    Task Setup();
 
     void Shutdown();
 }

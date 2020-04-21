@@ -11,7 +11,7 @@ public class AuctionClient : IAuctionClient
 {
     Channel rpcChannel;
     LightningAuctionBidder.LightningAuctionBidderClient auctionClient;
-    public void Setup()
+    public async Task Setup()
     {
         rpcChannel = new Channel("167.172.175.172:5113", ChannelCredentials.Insecure);
         auctionClient = new LightningAuctionBidder.LightningAuctionBidderClient(rpcChannel);
