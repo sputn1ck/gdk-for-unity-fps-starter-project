@@ -19,6 +19,7 @@ public class BackendPlayerClient : IBackendPlayerClient
 
     private string pubkey;
     private string signature;
+
     public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
@@ -27,6 +28,7 @@ public class BackendPlayerClient : IBackendPlayerClient
         skinClient = new SkinService.SkinServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
+        await GetUsername();
         
     }
 
