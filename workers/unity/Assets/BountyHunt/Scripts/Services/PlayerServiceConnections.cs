@@ -42,11 +42,16 @@ public class PlayerServiceConnections : MonoBehaviour
             SetupDummies();
         } else
         {
-            Setup();
+            SetupServices();
         }
         
     }
 
+    
+    public async Task<(bool ok, string errMsg)> Setup(StringFunc stringFunc)
+    {
+        return (true,"");
+    }
     public async void SetupDummies()
     {
         if(DummyServices == null)
@@ -54,6 +59,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
             var dummyGO = new GameObject("0_PlayerDummies");
             lnd = dummyGO.AddComponent<DummyLnd>();
+
             await lnd.Setup(confName, true, false, "", lndConnectString);
             BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
             BackendPlayerClient.Setup("", 0, "", "");
@@ -91,7 +97,7 @@ public class PlayerServiceConnections : MonoBehaviour
         }
 
     }
-    public async void Setup()
+    public async void SetupServices()
     {
         SetupDonnerDaemon();
         await SetupLnd();
@@ -204,3 +210,5 @@ public class PlayerServiceConnections : MonoBehaviour
     }
 
 }
+
+public delegate void StringFunc(string s);
