@@ -57,6 +57,13 @@ public class PlayerServiceConnections : MonoBehaviour
     {
         return true;
     }
+
+    public async Task<(bool ok, string errMsg)> SetUserName(string name)
+    {
+        BackendPlayerClient.SetUsername(name);
+        return (true,"");
+    }
+
     public async void SetupDummies()
     {
         if(DummyServices == null)

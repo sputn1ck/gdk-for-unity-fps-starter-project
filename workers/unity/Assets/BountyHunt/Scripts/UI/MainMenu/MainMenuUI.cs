@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    public PreviewSpot previewSpot;
     public Button playButton;
     public GameObject connectingInfoObject;
 
@@ -16,6 +17,11 @@ public class MainMenuUI : MonoBehaviour
     private void OnEnable()
     {
         connectingInfoObject.SetActive(false);
+        previewSpot.gameObject.SetActive(true);
+    }
+    private void OnDisable()
+    {
+        previewSpot.gameObject.SetActive(false);
     }
 
     public async void OnPlayButtonPress()

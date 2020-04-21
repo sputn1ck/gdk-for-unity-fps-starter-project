@@ -109,4 +109,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     {
         return allSkins;
     }
+
+    public Task<string> SetUsername(string userName)
+    {
+        throw new System.NotImplementedException();
+    }
 }

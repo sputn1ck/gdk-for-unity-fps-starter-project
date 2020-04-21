@@ -72,7 +72,7 @@ public class ConnectSubMenuUI : SubMenuUI
         try
         {
 
-            var name = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername(pubkey);
+            var name = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
             if (pubkey == name)
             {
                 setName = true;

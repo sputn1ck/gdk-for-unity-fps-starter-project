@@ -33,7 +33,7 @@ public class SetNameSubMenuUI : SubMenuUI
         }
         try
         {
-            var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(pubkey, playerName);
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(playerName);
             Connect();
 
         } catch(RpcException e)
