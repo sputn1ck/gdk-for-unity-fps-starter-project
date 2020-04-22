@@ -75,7 +75,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public async Task<(bool ok, string errMsg)> SetUserName(string name)
     {
-        BackendPlayerClient.SetUsername(name);
+        await BackendPlayerClient.SetUsername(name);
         return (true,"");
     }
 
