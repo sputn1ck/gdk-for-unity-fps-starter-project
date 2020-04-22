@@ -100,13 +100,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return allSkins;
     }
 
-    public Task<string> GetUsername()
+    public async Task<string> GetUsername()
     {
-        throw new System.NotImplementedException();
+        return getUsernameResponse;
     }
 
-    public Task<string> SetUsername(string userName)
+    public async Task<string> SetUsername(string userName)
     {
-        throw new System.NotImplementedException();
+        return userName;
     }
 }
