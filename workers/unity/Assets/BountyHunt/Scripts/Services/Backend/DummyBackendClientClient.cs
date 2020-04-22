@@ -20,7 +20,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         
     }
 
-    public void Setup(string target, int port, string pubkey, string signature)
+    public async Task Setup(string target, int port, string pubkey, string signature)
     {
         
     }
@@ -28,16 +28,6 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public void Shutdown()
     {
         
-    }
-
-    public Task<string> GetUsername()
-    {
-        return Task.FromResult(this.getUsernameResponse);
-    }
-
-    public Task<string> SetUsername()
-    {
-        return Task.FromResult(this.setUsernameResponse);
     }
 
 
@@ -108,6 +98,11 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public async Task<string[]> GetAllSkinIds()
     {
         return allSkins;
+    }
+
+    public Task<string> GetUsername()
+    {
+        throw new System.NotImplementedException();
     }
 
     public Task<string> SetUsername(string userName)

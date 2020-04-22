@@ -18,10 +18,11 @@ public class DonnerDaemonClient : IDonnerDaemonClient
     public bool commandTrigger;
 
 
-    public void Setup()
+    public async Task Setup()
     {
         rpcChannel = new Channel("localhost:10101", ChannelCredentials.Insecure);
         client = new DaemonService.DaemonServiceClient(rpcChannel);
+        await GetWalletBalance();
     }
 
     public async Task<string> Lncli(string command)

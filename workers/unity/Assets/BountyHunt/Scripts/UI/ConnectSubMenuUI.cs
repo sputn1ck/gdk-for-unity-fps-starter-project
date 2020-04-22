@@ -18,12 +18,13 @@ public class ConnectSubMenuUI : SubMenuUI
 
     public void Awake()
     {
+
+        SetButtonFalse();
         ClientEvents.instance.onServicesSetup.AddListener(getNameAndPubkey);
     }
     public async void Connect()
     {
 
-        SetButtonFalse();
         var res = await LndConnector.Instance.Connect();
         if(res != "")
         {
@@ -67,6 +68,7 @@ public class ConnectSubMenuUI : SubMenuUI
 
     private async void getNameAndPubkey()
     {
+        SetButtonTrue();
         var getinfo = await PlayerServiceConnections.instance.lnd.GetInfo();
         var pubkey = getinfo.IdentityPubkey;
         try

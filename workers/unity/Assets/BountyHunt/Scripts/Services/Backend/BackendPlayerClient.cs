@@ -19,7 +19,8 @@ public class BackendPlayerClient : IBackendPlayerClient
 
     private string pubkey;
     private string signature;
-    public void Setup(string target,int port, string pubkey, string signature)
+
+    public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new GameClientService.GameClientServiceClient(rpcChannel);
@@ -27,7 +28,8 @@ public class BackendPlayerClient : IBackendPlayerClient
         skinClient = new SkinService.SkinServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
-
+        await GetUsername();
+        
     }
 
     public async Task<string> GetUsername()
@@ -105,8 +107,13 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res.Rankings.ToArray();
     }
 
-    public Task<string[]> GetAllSkinIds()
+    public async Task<string[]> GetAllSkinIds()
     {
-        throw new NotImplementedException();
+        var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
+        var skinIds = new string[res.ShopItems.Count];
+        for (int i = 0; i < skinIds.Length; i++) { 
+            skinIds[i] = res.ShopItems[i].Id;
+        }
+        return skinIds;
     }
 }
