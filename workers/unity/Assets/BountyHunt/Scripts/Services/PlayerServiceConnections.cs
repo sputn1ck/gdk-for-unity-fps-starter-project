@@ -55,7 +55,7 @@ public class PlayerServiceConnections : MonoBehaviour
         return await SetupServices(stringFunc);
     }
 
-    public async Task<(bool hasName, string name)> CheckName()
+    public async Task<bool> CheckName()
     {
         var getinfo = await lnd.GetInfo();
         var pubkey = getinfo.IdentityPubkey;
@@ -70,7 +70,7 @@ public class PlayerServiceConnections : MonoBehaviour
             setName = false;
 
         }
-        return (setName, name);
+        return setName;
     }
 
     public async Task<(bool ok, string errMsg)> SetUserName(string name)
