@@ -107,8 +107,13 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res.Rankings.ToArray();
     }
 
-    public Task<string[]> GetAllSkinIds()
+    public async Task<string[]> GetAllSkinIds()
     {
-        throw new NotImplementedException();
+        var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
+        var skinIds = new string[res.ShopItems.Count];
+        for (int i = 0; i < skinIds.Length; i++) { 
+            skinIds[i] = res.ShopItems[i].Id;
+        }
+        return skinIds;
     }
 }
