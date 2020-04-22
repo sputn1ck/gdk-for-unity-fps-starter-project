@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,24 +28,26 @@ public class MainMenuUI : MonoBehaviour
     public async void OnPlayButtonPress()
     {
         connectingInfoObject.gameObject.SetActive(true);
-        string answer = await LndConnector.Instance.Connect();
-        //string answer = "Todo: server Connection";
 
-        if (answer == "ok")
+        try
         {
-            OnConnectionSuccesss();
+            await LndConnector.Instance.Connect();
         }
-        else
+        catch (Exception e)
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", answer);
+            PopUpEventArgs args = new PopUpEventArgs("Error", e.Message);
             ClientEvents.instance.onPopUp.Invoke(args);
             connectingInfoObject.SetActive(false);
+            return;
         }
+        OnConnectionSuccesss();
 
     }
 
     public void OnConnectionSuccesss()
     {
+        Debug.Log("joining game");
+        BBHUIManager.instance.ShowGameView();
         LndConnector.Instance.SpawnPlayer("gude", 0);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class StartScreenUI : MonoBehaviour
 {
@@ -36,23 +37,24 @@ public class StartScreenUI : MonoBehaviour
 
         SetInitializeString("Initialize");
 
-        (bool ok, string error) answer;
-        answer = await PlayerServiceConnections.instance.Setup(SetInitializeString);
-        if (!answer.ok)
+        try
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", answer.error);
+            await PlayerServiceConnections.instance.SetupServices(SetInitializeString);
+            if (!await PlayerServiceConnections.instance.CheckName())
+            {
+                ShowSetNamePanel();
+                return;
+            }
+        }
+        catch (Exception e)
+        {
+            PopUpEventArgs args = new PopUpEventArgs("Error", e.Message);
             ClientEvents.instance.onPopUp.Invoke(args);
             ShowRetryPanel();
             return;
         }
 
-        if (!await PlayerServiceConnections.instance.CheckName())
-        {
-            ShowSetNamePanel();
-            return;
-        }
         OpenMainMenu();
-
     }
 
     public void ShowSetNamePanel()
@@ -78,10 +80,13 @@ public class StartScreenUI : MonoBehaviour
     public async void SubmitName()
     {
         string n = nameInput.text;
-        (bool ok, string error) = await PlayerServiceConnections.instance.SetUserName(n);
-        if (!ok)
+        try
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", error);
+            await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(n);
+        }
+        catch(Exception e)
+        {
+            PopUpEventArgs args = new PopUpEventArgs("Error", e.Message);
             ClientEvents.instance.onPopUp.Invoke(args);
             return;
         }

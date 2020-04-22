@@ -50,10 +50,6 @@ public class PlayerServiceConnections : MonoBehaviour
     }
 
     
-    public async Task<(bool ok, string errMsg)> Setup(StringFunc stringFunc)
-    {
-        return await SetupServices(stringFunc);
-    }
 
     public async Task<bool> CheckName()
     {
@@ -73,13 +69,8 @@ public class PlayerServiceConnections : MonoBehaviour
         return setName;
     }
 
-    public async Task<(bool ok, string errMsg)> SetUserName(string name)
-    {
-        await BackendPlayerClient.SetUsername(name);
-        return (true,"");
-    }
 
-    public async Task<(bool ok, string errMsg)> SetupServices(StringFunc stringFunc)
+    public async Task SetupServices(StringFunc stringFunc)
     {
         stringFunc("Setting up connections");
         // DonnerDaemon
@@ -89,7 +80,7 @@ public class PlayerServiceConnections : MonoBehaviour
             await SetupDonnerDaemon();
         } catch(Exception e)
         {
-            return (false, "Daemon connection failed: " + e.Message);
+            throw new Exception( "Daemon connection failed: " + e.Message,e);
         }
         
 
@@ -102,7 +93,7 @@ public class PlayerServiceConnections : MonoBehaviour
         }
         catch (Exception e)
         {
-            return (false, "Lnd connection failed: " + e.Message);
+            throw new Exception("Lnd connection failed: " + e.Message,e);
         }
 
         // Backend
@@ -114,7 +105,7 @@ public class PlayerServiceConnections : MonoBehaviour
         }
         catch (Exception e)
         {
-            return (false, "Backend connection failed: " + e.Message);
+            throw new Exception("Backend connection failed: " + e.Message,e);
         }
 
         // Auction
@@ -125,10 +116,9 @@ public class PlayerServiceConnections : MonoBehaviour
         }
         catch (Exception e)
         {
-            return (false, "Payment connection failed: " + e.Message);
+            throw new Exception ("Payment connection failed: " + e.Message,e);
         }
         ClientEvents.instance.onServicesSetup.Invoke();
-        return (true, "");
     }
 
     private async Task SetupBackend()

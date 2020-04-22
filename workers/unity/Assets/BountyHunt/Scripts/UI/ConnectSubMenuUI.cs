@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Grpc.Core;
+using System;
 
 public class ConnectSubMenuUI : SubMenuUI
 {
@@ -25,14 +26,20 @@ public class ConnectSubMenuUI : SubMenuUI
     public async void Connect()
     {
 
-        var res = await LndConnector.Instance.Connect();
-        if(res != "")
+        try
         {
-            //SHOW ERROR
-            Debug.LogError("Error while connecting: " + res);
+            await LndConnector.Instance.Connect();
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("Error while connecting: " + e.Message);
+
+            //TODO remove old stuff
             Invoke("SetButtonTrue", 2f);
             return;
         }
+
+        //TODO remove old stuff
         spawnMenu.Select();
     }
 

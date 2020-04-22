@@ -12,10 +12,6 @@ public class PreviewSpot : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
         bodyRenderers = new List<Renderer>();
         var renderers = character.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (var r in renderers)

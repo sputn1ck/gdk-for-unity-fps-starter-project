@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Grpc.Core;
+using System;
 
 public class SetNameSubMenuUI : SubMenuUI
 {
@@ -59,13 +60,15 @@ public class SetNameSubMenuUI : SubMenuUI
 
     public async void Connect()
     {
-        var res = await LndConnector.Instance.Connect();
-        if (res != "")
+        try
         {
-            //SHOW ERROR
-            Debug.LogError("Error while connecting: " + res);
-
-            ErrorText.text = res;
+            await LndConnector.Instance.Connect();
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("Error while connecting: " + e.Message);
+            //TODO removeOldStuff
+            ErrorText.text = e.Message;
             return;
         }
     }

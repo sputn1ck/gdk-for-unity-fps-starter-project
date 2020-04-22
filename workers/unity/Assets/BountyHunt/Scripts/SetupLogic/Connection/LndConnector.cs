@@ -37,7 +37,7 @@ public class LndConnector : MonoBehaviour
         
     }
     
-    public async Task<string> Connect()
+    public async Task Connect()
     {
         var clientWorker = UnityEngine.Object.Instantiate(ClientWorkerConnectorPrefab, this.transform.position, Quaternion.identity);
         clientConnector = clientWorker.GetComponent<ClientWorkerConnectorLnd>();
@@ -53,18 +53,17 @@ public class LndConnector : MonoBehaviour
         JoinGameResponse res = new JoinGameResponse { Ok = false};
         try
         {
-            await gameConnector.JoinGame(clientConnector);
-        } catch(Exception e)
+            res = await gameConnector.JoinGame(clientConnector);
+        }
+        catch(Exception e)
         {
-            Debug.Log("Exception: " + e.Message);
-            return "FUCKING ERORROR";
+            throw new Exception("Exception: " + e.Message);
         }
         
         if (!res.Ok)
         {
-            return res.ErrorMessage;
+            throw new Exception(res.ErrorMessage);
         }
-        return "ok";
     }
     
     public void Disconnect()

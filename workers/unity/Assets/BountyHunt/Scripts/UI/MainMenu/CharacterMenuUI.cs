@@ -33,11 +33,12 @@ public class CharacterMenuUI : MonoBehaviour
     private void Start()
     {
         refreshButton.onClick.AddListener(Init);
-        Init();
+        ClientEvents.instance.onServicesSetup.AddListener(Init);
     }
 
     async void Init()
     {
+        Debug.Log("initializing characterMenu");
         skinsLibrary = Instantiate(AllSkinsLibrary);
         //Todo get from backend instead
         var testIds = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkinIds();
