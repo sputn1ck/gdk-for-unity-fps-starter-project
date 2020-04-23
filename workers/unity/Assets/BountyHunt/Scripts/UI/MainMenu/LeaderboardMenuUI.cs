@@ -55,7 +55,23 @@ public class LeaderboardMenuUI : MonoBehaviour
             entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(UnityEngine.Random.Range(0, 130000000), true), UnityEngine.Random.Range(0, 100).ToString(), UnityEngine.Random.Range(0, 100).ToString(), "something" });
         }
         */
-        UpdateLeaderBoard();
+    }
+    void OnEnable()
+    {
+        Init();
+    }
+
+    async void Init()
+    {
+        try
+        {
+            PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
+            SetMyPage();
+        }
+        catch (Exception e)
+        {
+            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+        }
     }
 
     void setEntry(LeaderboardEntryUI entry, Ranking score, long position)
@@ -65,9 +81,15 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     public async void UpdateLeaderBoard()
     {
-        PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
-        (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,priority);
-        UpdateList(ranks,currentPageIndex*pageSize);
+        try
+        {
+            (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,priority);
+            UpdateList(ranks,currentPageIndex*pageSize);
+        }
+        catch (Exception e)
+        {
+            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+        }
     }
 
     void UpdateList(Ranking[] ranks, int startIndex)
@@ -108,9 +130,20 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         SetPage(currentPageIndex + 1);
     }
-    void SetMyPage()
+    async void SetMyPage()
     {
-        Debug.LogError("implementation missing");
+        try
+        {
+            int rank = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRank(PlayerName, priority);
+
+            SetPage(rank/pageSize);
+        }
+        catch (Exception e)
+        {
+            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+            return;
+        }
+        
     }
     void SetFirstPage()
     {

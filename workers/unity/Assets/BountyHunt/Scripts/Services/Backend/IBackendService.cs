@@ -13,8 +13,6 @@ public interface IBackendPlayerClient
     Task<string> SetUsername(string userName);
     Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
-    Task<Ranking[]> GetTop100EarningsRankings();
-
     Task<SkinInventory> GetSkinInventory();
     void EquipSkin(string skinId);
     Task<ShopSkin[]> GetAllSkins();
@@ -22,6 +20,8 @@ public interface IBackendPlayerClient
     Task<string> GetSkinInvoice(string skinId);
 
     Task<string> GetGameVersion();
+
+    Task<int> GetPlayerRank(string playername, RankType rankType);
 }
 
 public interface IBackendServerClient

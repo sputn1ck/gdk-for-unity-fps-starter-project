@@ -96,17 +96,6 @@ public class BackendPlayerClient : IBackendPlayerClient
         //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
     }
 
-    public async Task<Ranking[]> GetTop100EarningsRankings()
-    {
-        var res = await publicClient.ListRankingsAsync(new ListRankingsRequest
-        {
-            RankType = RankType.Earnings,
-            Length = 100,
-            StartIndex = 0
-        });
-        return res.Rankings.ToArray();
-    }
-
     public async Task<string[]> GetAllSkinIds()
     {
         var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
@@ -121,5 +110,11 @@ public class BackendPlayerClient : IBackendPlayerClient
     {
         var info = await publicClient.GetInfoAsync(new GetInfoRequest());
         return info.GameInfo.GameVersion;
+    }
+
+    public Task<int> GetPlayerRank(string playername, RankType rankType)
+    {
+        //TODO
+        throw new NotImplementedException();
     }
 }

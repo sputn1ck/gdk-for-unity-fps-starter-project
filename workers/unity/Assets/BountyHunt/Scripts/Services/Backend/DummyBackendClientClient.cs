@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
@@ -39,9 +40,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         };
         for (int i = 1; i < highscores.Length; i++)
         {
-            int k = Random.Range(killsRange.x, killsRange.y);
-            int d = Random.Range(deathsRange.x, deathsRange.y);
-            int e = Random.Range(earningsRange.x, earningsRange.y);
+            int k = UnityEngine.Random.Range(killsRange.x, killsRange.y);
+            int d = UnityEngine.Random.Range(deathsRange.x, deathsRange.y);
+            int e = UnityEngine.Random.Range(earningsRange.x, earningsRange.y);
             int kd = (k + 1) / (d + 1);
             highscores[i] = new Ranking()
             {
@@ -69,9 +70,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         
     }
 
-
-
-    public Task<(Ranking[]rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
+    void SortHighscores(RankType rankType)
     {
         switch (rankType)
         {
@@ -88,12 +87,17 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             default:
                 break;
         }
+    }
 
-        if (startIndex >= highscores.Length) return Task.FromResult((new Ranking[0],highscores.Length));
+    public async Task<(Ranking[]rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
+    {
+        SortHighscores(rankType);
+
+        if (startIndex >= highscores.Length) return (new Ranking[0],highscores.Length);
         length = Mathf.Min(length,highscores.Length-startIndex);
         Ranking[] ranks = highscores.ToList<Ranking>().GetRange(startIndex, length).ToArray();
 
-        return Task.FromResult((ranks, highscores.Length));
+        return (ranks, highscores.Length);
     }
 
     public async Task<SkinInventory> GetSkinInventory()
@@ -132,10 +136,6 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return "invoice";
     }
 
-    public Task<Ranking[]> GetTop100EarningsRankings()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public async Task<string[]> GetAllSkinIds()
     {
@@ -156,7 +156,19 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     public async Task<string> GetGameVersion()
     {
-        await Task.Delay(Random.Range(100, 1000));
+        await Task.Delay(UnityEngine.Random.Range(100, 1000));
         return GameVersion;
+    }
+
+    public async Task<int> GetPlayerRank(string playername, RankType rankType)
+    {
+        SortHighscores(rankType);
+        Ranking ranking = highscores.FirstOrDefault(r => r.Name == playername);
+        if (ranking == null) throw new Exception("player with name "+ playername +" not found");
+        else
+        {
+            int id = Array.IndexOf(highscores, ranking);
+            return id;
+        }
     }
 }
