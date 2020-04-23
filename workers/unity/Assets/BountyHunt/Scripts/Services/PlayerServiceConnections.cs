@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class PlayerServiceConnections : MonoBehaviour
 {
+    public string GameVersion;
+
     public bool UseDummy;
     public GameObject DummyServices;
     public string confName;
@@ -97,7 +99,7 @@ public class PlayerServiceConnections : MonoBehaviour
         }
 
         // Backend
-        stringFunc("Conncting to game server");
+        stringFunc("Connecting to game server");
         try
         {
 
@@ -107,7 +109,20 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             throw new Exception("Backend connection failed: " + e.Message,e);
         }
-
+        // Check Game Version
+        stringFunc("Checking game version");
+        try
+        {
+            var gv = await BackendPlayerClient.GetGameVersion();
+            if(gv != this.GameVersion)
+            {
+                throw new Exception("Invalid Game Version");
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Checking game version failed: " + e.Message, e);
+        }
         // Auction
         stringFunc("Connecting to payment server");
         try

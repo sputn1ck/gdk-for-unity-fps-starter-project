@@ -21,6 +21,7 @@ public interface IBackendPlayerClient
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
 
+    Task<string> GetGameVersion();
 }
 
 public interface IBackendServerClient

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
+    public string GameVersion;
     public string getUsernameResponse;
     public string setUsernameResponse;
 
@@ -108,5 +109,11 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public async Task<string> SetUsername(string userName)
     {
         return userName;
+    }
+
+    public async Task<string> GetGameVersion()
+    {
+        await Task.Delay(Random.Range(100, 1000));
+        return GameVersion;
     }
 }

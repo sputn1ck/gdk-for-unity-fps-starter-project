@@ -116,4 +116,9 @@ public class BackendPlayerClient : IBackendPlayerClient
         }
         return skinIds;
     }
+
+    public Task<string> GetGameVersion()
+    {
+        throw new NotImplementedException();
+    }
 }
