@@ -72,9 +72,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3456f01e69730941b6db64d80ba2c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameVersion: 
   getUsernameResponse: 
   setUsernameResponse: 
-  HighscoreAmount: 0
+  userName: 
+  HighscoresCount: 43
+  earningsRange: {x: 10, y: 10000}
+  killsRange: {x: 3, y: 200}
+  deathsRange: {x: 3, y: 200}
+  playerEarnings: 5000
+  playerKills: 201
+  playerDeaths: 2
   allSkins:
   - robot_default
   - robot_2

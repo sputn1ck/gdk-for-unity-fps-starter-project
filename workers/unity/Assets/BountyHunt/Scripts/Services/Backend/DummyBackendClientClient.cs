@@ -9,13 +9,51 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public string GameVersion;
     public string getUsernameResponse;
     public string setUsernameResponse;
+    public string userName;
 
-    public long HighscoreAmount;
+    [Header("Rankings")]
+    public int HighscoresCount;
+    public Vector2Int earningsRange;
+    public Vector2Int killsRange;
+    public Vector2Int deathsRange;
+    public long playerEarnings;
+    public int playerKills;
+    public int playerDeaths;
+    Ranking[] highscores;
 
     public string[] allSkins = new string[] { "robot_default", "robot_2" };
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
     // Update is called once per frame
+
+    private void Awake()
+    {
+        highscores = new Ranking[this.HighscoresCount + 1];
+        highscores[0] = new Ranking()
+        {
+            Deaths = playerDeaths,
+            Kills = playerKills,
+            Earnings = playerEarnings,
+            Name = userName,
+            Pubkey = "Pubkey: 0"
+        };
+        for (int i = 1; i < highscores.Length; i++)
+        {
+            int k = Random.Range(killsRange.x, killsRange.y);
+            int d = Random.Range(deathsRange.x, deathsRange.y);
+            int e = Random.Range(earningsRange.x, earningsRange.y);
+            int kd = (k + 1) / (d + 1);
+            highscores[i] = new Ranking()
+            {
+                Deaths = d,
+                Kills = k,
+                Earnings = e,
+                Name = "Player: " + i,
+                Pubkey = "Pubkey: " + i,
+                KDRanking = kd
+            };
+        }
+    }
     void Update()
     {
         
@@ -32,28 +70,30 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     }
 
 
-    Ranking[] GetHighscores()
-    {
-        var highscores =new Ranking[this.HighscoreAmount];
-        for(int i = 0; i < highscores.Length;i++)
-        {
-            highscores[i] = new Ranking()
-            {
-                Deaths = Random.Range(0, 1000),
-                Kills = Random.Range(0, 1000),
-                Earnings = Random.Range(0, 1000000),
-                Name = "Player: " + Random.Range(1, int.MaxValue),
-                Pubkey = "Pubkey: " + Random.Range(1, int.MaxValue),
-           
-            };
-        }
-        return highscores;
-    }
 
     public Task<(Ranking[]rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
     {
-        var highscores = GetHighscores();
-        return Task.FromResult((highscores, highscores.Length));
+        switch (rankType)
+        {
+            case RankType.None:
+                break;
+            case RankType.Global:
+                break;
+            case RankType.Kd:
+                highscores = highscores.OrderByDescending(p => p.KDRanking).ToArray();
+                break;
+            case RankType.Earnings:
+                highscores = highscores.OrderByDescending(p => p.Earnings).ToArray();
+                break;
+            default:
+                break;
+        }
+
+        if (startIndex >= highscores.Length) return Task.FromResult((new Ranking[0],highscores.Length));
+        length = Mathf.Min(length,highscores.Length-startIndex);
+        Ranking[] ranks = highscores.ToList<Ranking>().GetRange(startIndex, length).ToArray();
+
+        return Task.FromResult((ranks, highscores.Length));
     }
 
     public async Task<SkinInventory> GetSkinInventory()
@@ -104,11 +144,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     public async Task<string> GetUsername()
     {
-        return getUsernameResponse;
+        return userName;
     }
 
     public async Task<string> SetUsername(string userName)
     {
+        this.userName = userName;
+        highscores[0].Name = userName;
         return userName;
     }
 

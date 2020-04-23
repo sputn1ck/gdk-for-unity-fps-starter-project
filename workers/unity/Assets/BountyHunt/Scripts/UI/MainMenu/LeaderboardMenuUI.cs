@@ -6,152 +6,122 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardMenuUI : MonoBehaviour
 {
     public LeaderboardEntryUI headLine;
     public Transform entryContainer;
     public SimpleSliderUI slideLine;
+
+    public Button firstButton;
+    public Button meButton;
+    public Button previousButton;
+    public Button nextButton;
+
+
     List<LeaderboardEntryUI> entries;
 
     Ranking[] highscores;
-    string PlayerPubKey;
+    string PlayerName;
 
-    HighscoreOrderPriority priority = HighscoreOrderPriority.EARNIGNS;
+    RankType priority = RankType.Earnings;
     bool orderAscending = false;
+    int pageSize;
+    int currentPageIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
+        pageSize = entries.Count;
         headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "k/d" });
-        slideLine.GetSlideButtonEvents(0).onClick.AddListener( () => SetOrderPriority(HighscoreOrderPriority.EARNIGNS));
-        slideLine.GetSlideButtonEvents(1).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.KILLS));
-        slideLine.GetSlideButtonEvents(2).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.DEATHS));
-        slideLine.GetSlideButtonEvents(3).onClick.AddListener(() => SetOrderPriority(HighscoreOrderPriority.KDRATIO));
+        slideLine.GetSlideButtonEvents(0).onClick.AddListener( () => SetPriority(RankType.Earnings));
+        //slideLine.GetSlideButtonEvents(1).onClick.AddListener(() => priority = RankType.Kills ));
+        //slideLine.GetSlideButtonEvents(2).onClick.AddListener(() => priority = RankType.Deaths));
+        slideLine.GetSlideButtonEvents(3).onClick.AddListener(() => SetPriority(RankType.Kd)) ;
 
+        firstButton.onClick.AddListener(SetFirstPage);
+        meButton.onClick.AddListener(SetMyPage);
+        previousButton.onClick.AddListener(SetPreviousPage);
+        nextButton.onClick.AddListener(SetNextPage);
 
+        /*
         int counter = 0;
         foreach (LeaderboardEntryUI entry in entries)
         {
             counter++;
             entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(UnityEngine.Random.Range(0, 130000000), true), UnityEngine.Random.Range(0, 100).ToString(), UnityEngine.Random.Range(0, 100).ToString(), "something" });
         }
-
-        ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateLeaderBoard);
+        */
+        UpdateLeaderBoard();
     }
 
-    void setEntry(LeaderboardEntryUI entry, Ranking score, long rank)
+    void setEntry(LeaderboardEntryUI entry, Ranking score, long position)
     {
-        entry.Set(rank, score.Name, new List<string> { Utility.SatsToShortString(score.Earnings, true), score.Kills.ToString(), score.Deaths.ToString(), "?" });
+        entry.Set(position, score.Name, new List<string> { Utility.SatsToShortString(score.Earnings, true), score.Kills.ToString(), score.Deaths.ToString(), score.KDRanking.ToString() });
     }
 
-    public void UpdateLeaderBoard(LeaderboardUpdateArgs args)
+    public async void UpdateLeaderBoard()
     {
-        highscores = args.highscores;
-        PlayerPubKey = args.PlayerPubKey;
-        UpdateList();
+        PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
+        (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,priority);
+        UpdateList(ranks,currentPageIndex*pageSize);
     }
 
-    void UpdateList()
+    void UpdateList(Ranking[] ranks, int startIndex)
     {
-        SortScores();
-
-        int playerID = Array.FindIndex(highscores, h => h.Pubkey == PlayerPubKey);
-
-        int occupiedSlots = 0;
-        if(playerID  >= entries.Count)
+        int i = 0;
+        foreach(LeaderboardEntryUI entry in entries)
         {
-            if (playerID == highscores.Length - 1)
+            if (i < ranks.Length)
             {
-                occupiedSlots = 3;
-            }
-            else occupiedSlots = 4;
-        }
-
-
-        for (int i = 0; i < entries.Count - occupiedSlots; i++)
-        {
-            if (i < highscores.Length)
-            {
-                setEntry(entries[i], highscores[i], i+1);
-                if (i == playerID)
+                setEntry(entry, ranks[i], startIndex + 1 + i);
+                if(ranks[i].Name == PlayerName)
                 {
-                    entries[i].Highlight();
+                    entry.Highlight();
                 }
+                
             }
             else
             {
-                entries[i].Hide();
+                entry.Hide();
             }
-        }
 
-        if (occupiedSlots > 0)
-        {
-            int eID = entries.Count - occupiedSlots;
-            int pID = playerID - 2;
-            entries[eID].Hide();
-            for(int i = 1; i < occupiedSlots;i++)
-            {
-                setEntry(entries[eID+i],highscores[pID+i], pID+i+1);
-                if (pID + i == playerID) entries[eID + i].Highlight();
-            }
+            i++;
         }
 
     }
 
-    public void SetOrderPriority(HighscoreOrderPriority priority)
+    void SetPriority(RankType type)
     {
-        if (this.priority == priority)
-        {
-            orderAscending = !orderAscending;
-        }
-        else
-        {
-            orderAscending = false;
-            this.priority = priority;
-        }
-        UpdateList();
+        priority = type;
+        UpdateLeaderBoard();
     }
 
-    public void SortScores()
+    void SetPreviousPage()
     {
-        highscores = SortScores(highscores, priority, !orderAscending);
+        SetPage(Mathf.Max(currentPageIndex -1,0));
     }
-    public static Ranking[] SortScores(Ranking[] scores, HighscoreOrderPriority priority, bool descending)
+    void SetNextPage()
     {
-        System.Func<Ranking, long> order;
-
-
-        switch (priority)
-        {
-            case HighscoreOrderPriority.RANK:
-            default:
-                order = o => o.Earnings*o.Kills/o.Deaths;
-                break;
-            case HighscoreOrderPriority.EARNIGNS:
-                order = o => o.Earnings;
-                break;
-            case HighscoreOrderPriority.KILLS:
-                order = o => o.Kills;
-                break;
-            case HighscoreOrderPriority.DEATHS:
-                order = o => o.Deaths;
-                break;
-            case HighscoreOrderPriority.KDRATIO:
-                order = o => o.Kills / o.Deaths;
-                break;
-        }
-
-        if (descending)
-        {
-            return scores.OrderByDescending(order).ToArray();
-        }
-        else
-        {
-            return scores.OrderBy(order).ToArray();
-        }
+        SetPage(currentPageIndex + 1);
     }
+    void SetMyPage()
+    {
+        Debug.LogError("implementation missing");
+    }
+    void SetFirstPage()
+    {
+        SetPage(0);
+    }
+    void SetPage(int page)
+    {
+        currentPageIndex = page;
+        UpdateLeaderBoard();
+    }
+
 
 
     //TEST
@@ -187,13 +157,4 @@ public class LeaderboardMenuUI : MonoBehaviour
     }
 
 }
-
-public enum HighscoreOrderPriority
-    {
-        RANK = 0,
-        EARNIGNS = 1,
-        KILLS = 2,
-        DEATHS = 3,
-        KDRATIO = 4
-    }
 
