@@ -238,7 +238,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public async void UpdateBackendStats(string playerpubkey)
     {
-        var highscores = await BackendPlayerClient.ListRankings(0,0,Bbhrpc.RankType.Global);
+        var (highscores,totalElements) = await BackendPlayerClient.ListRankings(0,0,Bbhrpc.RankType.Global);
         long totalEarnings = 0;
         int highestEarningsPlayerIndex = 0;
         int highestKillsPlayerIndex = 0;

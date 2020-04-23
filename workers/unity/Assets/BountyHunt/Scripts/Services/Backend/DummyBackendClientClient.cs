@@ -50,9 +50,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return highscores;
     }
 
-    public Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType)
+    public Task<(Ranking[]rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
     {
-        return Task.FromResult(GetHighscores());
+        var highscores = GetHighscores();
+        return Task.FromResult((highscores, highscores.Length));
     }
 
     public async Task<SkinInventory> GetSkinInventory()

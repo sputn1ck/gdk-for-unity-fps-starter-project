@@ -11,7 +11,7 @@ public interface IBackendPlayerClient
 
     Task<string> GetUsername();
     Task<string> SetUsername(string userName);
-    Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType);
+    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
     Task<Ranking[]> GetTop100EarningsRankings();
 

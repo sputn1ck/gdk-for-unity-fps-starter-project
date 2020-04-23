@@ -44,8 +44,8 @@ public class BackendPlayerClient : IBackendPlayerClient
         var res = await client.SetUsernameAsync(new SetUsernameRequest() { Name = userName }, GetPubkeyCalloptions());
         return res.Name;
     }
-
-    public async Task<Ranking[]> ListRankings(int length, int startIndex, RankType rankType)
+    
+    public async Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
     {
         var res = await publicClient.ListRankingsAsync(new ListRankingsRequest
         {
@@ -53,7 +53,7 @@ public class BackendPlayerClient : IBackendPlayerClient
             Length = length,
             StartIndex = startIndex
         });
-        return res.Rankings.ToArray();
+        return (res.Rankings.ToArray(), res.TotalElements);
     }
 
     public async Task<SkinInventory> GetSkinInventory()
