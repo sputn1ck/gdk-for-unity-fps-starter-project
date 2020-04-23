@@ -38,55 +38,65 @@ namespace Bbhrpc {
             "bnQYAiABKAMSDwoHbWVzc2FnZRgDIAEoCSIkChFBZGRCb3VudHlSZXNwb25z",
             "ZRIPCgdpbnZvaWNlGAEgASgJIhMKEUxpc3RPbmxpbmVSZXF1ZXN0IjUKEkxp",
             "c3RPbmxpbmVSZXNwb25zZRIfCgdwbGF5ZXJzGAEgAygLMg4uYmJocnBjLlBs",
-            "YXllciI0ChdDcmVhdGVBZHZlcnRpc2VyUmVxdWVzdBIMCgRuYW1lGAEgASgJ",
-            "EgsKA3VybBgCIAEoCSIrChhDcmVhdGVBZHZlcnRpc2VyUmVzcG9uc2USDwoH",
-            "aW52b2ljZRgBIAEoCSI5ChhEZXBvc2l0QWR2ZXJ0aXNlclJlcXVlc3QSDQoF",
-            "cGhhc2gYASABKAkSDgoGYW1vdW50GAIgASgDIiwKGURlcG9zaXRBZHZlcnRp",
-            "c2VyUmVzcG9uc2USDwoHaW52b2ljZRgBIAEoCSIYChZMaXN0QWR2ZXJ0aXNl",
-            "cnNSZXF1ZXN0IkEKFkxpc3RBZHZlcnRpc2VyUmVzcG9uc2USJwoLYWR2ZXJ0",
-            "aXNlcnMYASADKAsyEi5iYmhycGMuQWR2ZXJ0aXNlciJtCgZQbGF5ZXISDAoE",
-            "bmFtZRgBIAEoCRIOCgZwdWJrZXkYAiABKAkSFgoOY3VycmVudF9ib3VudHkY",
-            "AyABKAMSFQoNY3VycmVudF9raWxscxgEIAEoBRIWCg5jdXJyZW50X2RlYXRo",
-            "cxgFIAEoBSKYAQoHUmFua2luZxIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgC",
-            "IAEoCRINCgVraWxscxgDIAEoBRIOCgZkZWF0aHMYBCABKAUSEwoLa19kX3Jh",
-            "bmtpbmcYBSABKAUSEAoIZWFybmluZ3MYBiABKAMSGAoQZWFybmluZ3NfcmFu",
-            "a2luZxgHIAEoBRIPCgdyYW5raW5nGAggASgFIlkKCkFkdmVydGlzZXISDQoF",
-            "cGhhc2gYASABKAkSDAoEbmFtZRgCIAEoCRILCgN1cmwYAyABKAkSDwoHYmFs",
-            "YW5jZRgEIAEoAxIQCghwaWNfdXJscxgFIAMoCSISChBMaXN0U2tpbnNSZXF1",
-            "ZXN0IjkKEUxpc3RTa2luc1Jlc3BvbnNlEiQKCnNob3BfaXRlbXMYASADKAsy",
-            "EC5iYmhycGMuU2hvcFNraW4iHAoOQnV5U2tpblJlcXVlc3QSCgoCaWQYASAB",
-            "KAkiIgoPQnV5U2tpblJlc3BvbnNlEg8KB2ludm9pY2UYASABKAkiGQoXR2V0",
-            "U2tpbkludmVudG9yeVJlcXVlc3QiSQoYR2V0U2tpbkludmVudG9yeVJlc3Bv",
-            "bnNlEi0KDnNraW5faW52ZW50b3J5GAEgASgLMhUuYmJocnBjLlNraW5JbnZl",
-            "bnRvcnkiHgoQRXF1aXBTa2luUmVxdWVzdBIKCgJpZBgBIAEoCSITChFFcXVp",
-            "cFNraW5SZXNwb25zZSJICghTaG9wU2tpbhIKCgJpZBgBIAEoCRIMCgRuYW1l",
-            "GAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEg0KBXByaWNlGAQgASgDIjsK",
-            "DVNraW5JbnZlbnRvcnkSFQoNZXF1aXBwZWRfc2tpbhgBIAEoCRITCgtvd25l",
-            "ZF9za2lucxgCIAMoCSo2CghSYW5rVHlwZRIICgROT05FEAASCgoGR0xPQkFM",
-            "EAESBgoCS0QQAhIMCghFQVJOSU5HUxADMqIBChFHYW1lQ2xpZW50U2Vydmlj",
-            "ZRJFCgtHZXRVc2VybmFtZRIaLmJiaHJwYy5HZXRVc2VybmFtZVJlcXVlc3Qa",
-            "Gi5iYmhycGMuR2V0VXNlcm5hbWVSZXBvbnNlEkYKC1NldFVzZXJuYW1lEhou",
-            "YmJocnBjLlNldFVzZXJuYW1lUmVxdWVzdBobLmJiaHJwYy5TZXRVc2VybmFt",
-            "ZVJlc3BvbnNlMpcCChFBZHZlcnRpc2VyU2VydmljZRJVChBDcmVhdGVBZHZl",
-            "cnRpc2VyEh8uYmJocnBjLkNyZWF0ZUFkdmVydGlzZXJSZXF1ZXN0GiAuYmJo",
-            "cnBjLkNyZWF0ZUFkdmVydGlzZXJSZXNwb25zZRJYChFEZXBvc2l0QWR2ZXJ0",
-            "aXNlchIgLmJiaHJwYy5EZXBvc2l0QWR2ZXJ0aXNlclJlcXVlc3QaIS5iYmhy",
-            "cGMuRGVwb3NpdEFkdmVydGlzZXJSZXNwb25zZRJRCg9MaXN0QWR2ZXJ0aXNl",
-            "cnMSHi5iYmhycGMuTGlzdEFkdmVydGlzZXJzUmVxdWVzdBoeLmJiaHJwYy5M",
-            "aXN0QWR2ZXJ0aXNlclJlc3BvbnNlMqYCCg1QdWJsaWNTZXJ2aWNlEkMKCkdl",
-            "dFJhbmtpbmcSGS5iYmhycGMuR2V0UmFua2luZ1JlcXVlc3QaGi5iYmhycGMu",
-            "R2V0UmFua2luZ1Jlc3BvbnNlEkkKDExpc3RSYW5raW5ncxIbLmJiaHJwYy5M",
-            "aXN0UmFua2luZ3NSZXF1ZXN0GhwuYmJocnBjLkxpc3RSYW5raW5nc1Jlc3Bv",
-            "bnNlEkAKCUFkZEJvdW50eRIYLmJiaHJwYy5BZGRCb3VudHlSZXF1ZXN0Ghku",
-            "YmJocnBjLkFkZEJvdW50eVJlc3BvbnNlEkMKCkxpc3RPbmxpbmUSGS5iYmhy",
-            "cGMuTGlzdE9ubGluZVJlcXVlc3QaGi5iYmhycGMuTGlzdE9ubGluZVJlc3Bv",
-            "bnNlMqQCCgtTa2luU2VydmljZRJACglMaXN0U2tpbnMSGC5iYmhycGMuTGlz",
-            "dFNraW5zUmVxdWVzdBoZLmJiaHJwYy5MaXN0U2tpbnNSZXNwb25zZRI6CgdC",
-            "dXlTa2luEhYuYmJocnBjLkJ1eVNraW5SZXF1ZXN0GhcuYmJocnBjLkJ1eVNr",
-            "aW5SZXNwb25zZRJVChBHZXRTa2luSW52ZW50b3J5Eh8uYmJocnBjLkdldFNr",
-            "aW5JbnZlbnRvcnlSZXF1ZXN0GiAuYmJocnBjLkdldFNraW5JbnZlbnRvcnlS",
-            "ZXNwb25zZRJACglFcXVpcFNraW4SGC5iYmhycGMuRXF1aXBTa2luUmVxdWVz",
-            "dBoZLmJiaHJwYy5FcXVpcFNraW5SZXNwb25zZWIGcHJvdG8z"));
+            "YXllciIQCg5HZXRJbmZvUmVxdWVzdCKLAQoPR2V0SW5mb1Jlc3BvbnNlEiMK",
+            "CWdhbWVfaW5mbxgBIAEoCzIQLmJiaHJwYy5HYW1lSW5mbxIhCghsbmRfaW5m",
+            "bxgCIAEoCzIPLmJiaHJwYy5MbmRJbmZvEjAKEHNwb25zb3JfZmVlX2luZm8Y",
+            "AyABKAsyFi5iYmhycGMuU3BvbnNvckZlZUluZm8iNAoXQ3JlYXRlQWR2ZXJ0",
+            "aXNlclJlcXVlc3QSDAoEbmFtZRgBIAEoCRILCgN1cmwYAiABKAkiKwoYQ3Jl",
+            "YXRlQWR2ZXJ0aXNlclJlc3BvbnNlEg8KB2ludm9pY2UYASABKAkiOQoYRGVw",
+            "b3NpdEFkdmVydGlzZXJSZXF1ZXN0Eg0KBXBoYXNoGAEgASgJEg4KBmFtb3Vu",
+            "dBgCIAEoAyIsChlEZXBvc2l0QWR2ZXJ0aXNlclJlc3BvbnNlEg8KB2ludm9p",
+            "Y2UYASABKAkiGAoWTGlzdEFkdmVydGlzZXJzUmVxdWVzdCJBChZMaXN0QWR2",
+            "ZXJ0aXNlclJlc3BvbnNlEicKC2FkdmVydGlzZXJzGAEgAygLMhIuYmJocnBj",
+            "LkFkdmVydGlzZXIibQoGUGxheWVyEgwKBG5hbWUYASABKAkSDgoGcHVia2V5",
+            "GAIgASgJEhYKDmN1cnJlbnRfYm91bnR5GAMgASgDEhUKDWN1cnJlbnRfa2ls",
+            "bHMYBCABKAUSFgoOY3VycmVudF9kZWF0aHMYBSABKAUimAEKB1JhbmtpbmcS",
+            "DAoEbmFtZRgBIAEoCRIOCgZwdWJrZXkYAiABKAkSDQoFa2lsbHMYAyABKAUS",
+            "DgoGZGVhdGhzGAQgASgFEhMKC2tfZF9yYW5raW5nGAUgASgFEhAKCGVhcm5p",
+            "bmdzGAYgASgDEhgKEGVhcm5pbmdzX3JhbmtpbmcYByABKAUSDwoHcmFua2lu",
+            "ZxgIIAEoBSJZCgpBZHZlcnRpc2VyEg0KBXBoYXNoGAEgASgJEgwKBG5hbWUY",
+            "AiABKAkSCwoDdXJsGAMgASgJEg8KB2JhbGFuY2UYBCABKAMSEAoIcGljX3Vy",
+            "bHMYBSADKAkiEgoQTGlzdFNraW5zUmVxdWVzdCI5ChFMaXN0U2tpbnNSZXNw",
+            "b25zZRIkCgpzaG9wX2l0ZW1zGAEgAygLMhAuYmJocnBjLlNob3BTa2luIhwK",
+            "DkJ1eVNraW5SZXF1ZXN0EgoKAmlkGAEgASgJIiIKD0J1eVNraW5SZXNwb25z",
+            "ZRIPCgdpbnZvaWNlGAEgASgJIhkKF0dldFNraW5JbnZlbnRvcnlSZXF1ZXN0",
+            "IkkKGEdldFNraW5JbnZlbnRvcnlSZXNwb25zZRItCg5za2luX2ludmVudG9y",
+            "eRgBIAEoCzIVLmJiaHJwYy5Ta2luSW52ZW50b3J5Ih4KEEVxdWlwU2tpblJl",
+            "cXVlc3QSCgoCaWQYASABKAkiEwoRRXF1aXBTa2luUmVzcG9uc2UiSAoIU2hv",
+            "cFNraW4SCgoCaWQYASABKAkSDAoEbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlv",
+            "bhgDIAEoCRINCgVwcmljZRgEIAEoAyI7Cg1Ta2luSW52ZW50b3J5EhUKDWVx",
+            "dWlwcGVkX3NraW4YASABKAkSEwoLb3duZWRfc2tpbnMYAiADKAkiIAoIR2Ft",
+            "ZUluZm8SFAoMZ2FtZV92ZXJzaW9uGAEgASgJIkgKB0xuZEluZm8SEgoKbG5k",
+            "X3B1YmtleRgBIAEoCRIQCghsbmRfaG9zdBgCIAEoCRIXCg9sbmRfbGlzdGVu",
+            "X3BvcnQYAyABKAUiYQoOU3BvbnNvckZlZUluZm8SFQoNY3JlYXRpb25fY29z",
+            "dBgBIAEoAxIbChNhY3RpdmF0aW9uX2ZlZV9yYXRlGAIgASgCEhsKE3BsYXll",
+            "cl9zYXRvc2hpX2Nvc3QYAyABKAIqNgoIUmFua1R5cGUSCAoETk9ORRAAEgoK",
+            "BkdMT0JBTBABEgYKAktEEAISDAoIRUFSTklOR1MQAzKiAQoRR2FtZUNsaWVu",
+            "dFNlcnZpY2USRQoLR2V0VXNlcm5hbWUSGi5iYmhycGMuR2V0VXNlcm5hbWVS",
+            "ZXF1ZXN0GhouYmJocnBjLkdldFVzZXJuYW1lUmVwb25zZRJGCgtTZXRVc2Vy",
+            "bmFtZRIaLmJiaHJwYy5TZXRVc2VybmFtZVJlcXVlc3QaGy5iYmhycGMuU2V0",
+            "VXNlcm5hbWVSZXNwb25zZTKXAgoRQWR2ZXJ0aXNlclNlcnZpY2USVQoQQ3Jl",
+            "YXRlQWR2ZXJ0aXNlchIfLmJiaHJwYy5DcmVhdGVBZHZlcnRpc2VyUmVxdWVz",
+            "dBogLmJiaHJwYy5DcmVhdGVBZHZlcnRpc2VyUmVzcG9uc2USWAoRRGVwb3Np",
+            "dEFkdmVydGlzZXISIC5iYmhycGMuRGVwb3NpdEFkdmVydGlzZXJSZXF1ZXN0",
+            "GiEuYmJocnBjLkRlcG9zaXRBZHZlcnRpc2VyUmVzcG9uc2USUQoPTGlzdEFk",
+            "dmVydGlzZXJzEh4uYmJocnBjLkxpc3RBZHZlcnRpc2Vyc1JlcXVlc3QaHi5i",
+            "YmhycGMuTGlzdEFkdmVydGlzZXJSZXNwb25zZTLiAgoNUHVibGljU2Vydmlj",
+            "ZRJDCgpHZXRSYW5raW5nEhkuYmJocnBjLkdldFJhbmtpbmdSZXF1ZXN0Ghou",
+            "YmJocnBjLkdldFJhbmtpbmdSZXNwb25zZRJJCgxMaXN0UmFua2luZ3MSGy5i",
+            "YmhycGMuTGlzdFJhbmtpbmdzUmVxdWVzdBocLmJiaHJwYy5MaXN0UmFua2lu",
+            "Z3NSZXNwb25zZRJACglBZGRCb3VudHkSGC5iYmhycGMuQWRkQm91bnR5UmVx",
+            "dWVzdBoZLmJiaHJwYy5BZGRCb3VudHlSZXNwb25zZRJDCgpMaXN0T25saW5l",
+            "EhkuYmJocnBjLkxpc3RPbmxpbmVSZXF1ZXN0GhouYmJocnBjLkxpc3RPbmxp",
+            "bmVSZXNwb25zZRI6CgdHZXRJbmZvEhYuYmJocnBjLkdldEluZm9SZXF1ZXN0",
+            "GhcuYmJocnBjLkdldEluZm9SZXNwb25zZTKkAgoLU2tpblNlcnZpY2USQAoJ",
+            "TGlzdFNraW5zEhguYmJocnBjLkxpc3RTa2luc1JlcXVlc3QaGS5iYmhycGMu",
+            "TGlzdFNraW5zUmVzcG9uc2USOgoHQnV5U2tpbhIWLmJiaHJwYy5CdXlTa2lu",
+            "UmVxdWVzdBoXLmJiaHJwYy5CdXlTa2luUmVzcG9uc2USVQoQR2V0U2tpbklu",
+            "dmVudG9yeRIfLmJiaHJwYy5HZXRTa2luSW52ZW50b3J5UmVxdWVzdBogLmJi",
+            "aHJwYy5HZXRTa2luSW52ZW50b3J5UmVzcG9uc2USQAoJRXF1aXBTa2luEhgu",
+            "YmJocnBjLkVxdWlwU2tpblJlcXVlc3QaGS5iYmhycGMuRXF1aXBTa2luUmVz",
+            "cG9uc2VCCFoGYmJocnBjYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.RankType), }, new pbr::GeneratedClrTypeInfo[] {
@@ -102,6 +112,8 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.AddBountyResponse), global::Bbhrpc.AddBountyResponse.Parser, new[]{ "Invoice" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListOnlineRequest), global::Bbhrpc.ListOnlineRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListOnlineResponse), global::Bbhrpc.ListOnlineResponse.Parser, new[]{ "Players" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetInfoRequest), global::Bbhrpc.GetInfoRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetInfoResponse), global::Bbhrpc.GetInfoResponse.Parser, new[]{ "GameInfo", "LndInfo", "SponsorFeeInfo" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.CreateAdvertiserRequest), global::Bbhrpc.CreateAdvertiserRequest.Parser, new[]{ "Name", "Url" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.CreateAdvertiserResponse), global::Bbhrpc.CreateAdvertiserResponse.Parser, new[]{ "Invoice" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.DepositAdvertiserRequest), global::Bbhrpc.DepositAdvertiserRequest.Parser, new[]{ "Phash", "Amount" }, null, null, null),
@@ -120,7 +132,10 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.EquipSkinRequest), global::Bbhrpc.EquipSkinRequest.Parser, new[]{ "Id" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.EquipSkinResponse), global::Bbhrpc.EquipSkinResponse.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ShopSkin), global::Bbhrpc.ShopSkin.Parser, new[]{ "Id", "Name", "Description", "Price" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SkinInventory), global::Bbhrpc.SkinInventory.Parser, new[]{ "EquippedSkin", "OwnedSkins" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SkinInventory), global::Bbhrpc.SkinInventory.Parser, new[]{ "EquippedSkin", "OwnedSkins" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GameInfo), global::Bbhrpc.GameInfo.Parser, new[]{ "GameVersion" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.LndInfo), global::Bbhrpc.LndInfo.Parser, new[]{ "LndPubkey", "LndHost", "LndListenPort" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SponsorFeeInfo), global::Bbhrpc.SponsorFeeInfo.Parser, new[]{ "CreationCost", "ActivationFeeRate", "PlayerSatoshiCost" }, null, null, null)
           }));
     }
     #endregion
@@ -1759,6 +1774,310 @@ namespace Bbhrpc {
 
   }
 
+  public sealed partial class GetInfoRequest : pb::IMessage<GetInfoRequest> {
+    private static readonly pb::MessageParser<GetInfoRequest> _parser = new pb::MessageParser<GetInfoRequest>(() => new GetInfoRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetInfoRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoRequest(GetInfoRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoRequest Clone() {
+      return new GetInfoRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetInfoRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetInfoRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetInfoRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetInfoResponse : pb::IMessage<GetInfoResponse> {
+    private static readonly pb::MessageParser<GetInfoResponse> _parser = new pb::MessageParser<GetInfoResponse>(() => new GetInfoResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetInfoResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoResponse(GetInfoResponse other) : this() {
+      gameInfo_ = other.gameInfo_ != null ? other.gameInfo_.Clone() : null;
+      lndInfo_ = other.lndInfo_ != null ? other.lndInfo_.Clone() : null;
+      sponsorFeeInfo_ = other.sponsorFeeInfo_ != null ? other.sponsorFeeInfo_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetInfoResponse Clone() {
+      return new GetInfoResponse(this);
+    }
+
+    /// <summary>Field number for the "game_info" field.</summary>
+    public const int GameInfoFieldNumber = 1;
+    private global::Bbhrpc.GameInfo gameInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.GameInfo GameInfo {
+      get { return gameInfo_; }
+      set {
+        gameInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "lnd_info" field.</summary>
+    public const int LndInfoFieldNumber = 2;
+    private global::Bbhrpc.LndInfo lndInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.LndInfo LndInfo {
+      get { return lndInfo_; }
+      set {
+        lndInfo_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sponsor_fee_info" field.</summary>
+    public const int SponsorFeeInfoFieldNumber = 3;
+    private global::Bbhrpc.SponsorFeeInfo sponsorFeeInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.SponsorFeeInfo SponsorFeeInfo {
+      get { return sponsorFeeInfo_; }
+      set {
+        sponsorFeeInfo_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetInfoResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetInfoResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(GameInfo, other.GameInfo)) return false;
+      if (!object.Equals(LndInfo, other.LndInfo)) return false;
+      if (!object.Equals(SponsorFeeInfo, other.SponsorFeeInfo)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (gameInfo_ != null) hash ^= GameInfo.GetHashCode();
+      if (lndInfo_ != null) hash ^= LndInfo.GetHashCode();
+      if (sponsorFeeInfo_ != null) hash ^= SponsorFeeInfo.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (gameInfo_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(GameInfo);
+      }
+      if (lndInfo_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(LndInfo);
+      }
+      if (sponsorFeeInfo_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(SponsorFeeInfo);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (gameInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GameInfo);
+      }
+      if (lndInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LndInfo);
+      }
+      if (sponsorFeeInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SponsorFeeInfo);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetInfoResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.gameInfo_ != null) {
+        if (gameInfo_ == null) {
+          GameInfo = new global::Bbhrpc.GameInfo();
+        }
+        GameInfo.MergeFrom(other.GameInfo);
+      }
+      if (other.lndInfo_ != null) {
+        if (lndInfo_ == null) {
+          LndInfo = new global::Bbhrpc.LndInfo();
+        }
+        LndInfo.MergeFrom(other.LndInfo);
+      }
+      if (other.sponsorFeeInfo_ != null) {
+        if (sponsorFeeInfo_ == null) {
+          SponsorFeeInfo = new global::Bbhrpc.SponsorFeeInfo();
+        }
+        SponsorFeeInfo.MergeFrom(other.SponsorFeeInfo);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (gameInfo_ == null) {
+              GameInfo = new global::Bbhrpc.GameInfo();
+            }
+            input.ReadMessage(GameInfo);
+            break;
+          }
+          case 18: {
+            if (lndInfo_ == null) {
+              LndInfo = new global::Bbhrpc.LndInfo();
+            }
+            input.ReadMessage(LndInfo);
+            break;
+          }
+          case 26: {
+            if (sponsorFeeInfo_ == null) {
+              SponsorFeeInfo = new global::Bbhrpc.SponsorFeeInfo();
+            }
+            input.ReadMessage(SponsorFeeInfo);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class CreateAdvertiserRequest : pb::IMessage<CreateAdvertiserRequest> {
     private static readonly pb::MessageParser<CreateAdvertiserRequest> _parser = new pb::MessageParser<CreateAdvertiserRequest>(() => new CreateAdvertiserRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -1767,7 +2086,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1924,7 +2243,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2053,7 +2372,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2210,7 +2529,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2339,7 +2658,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2440,7 +2759,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2561,7 +2880,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2802,7 +3121,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3127,7 +3446,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3360,7 +3679,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3461,7 +3780,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3582,7 +3901,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3711,7 +4030,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3840,7 +4159,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3941,7 +4260,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4076,7 +4395,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4205,7 +4524,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4306,7 +4625,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4519,7 +4838,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[30]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4652,6 +4971,505 @@ namespace Bbhrpc {
           }
           case 18: {
             ownedSkins_.AddEntriesFrom(input, _repeated_ownedSkins_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameInfo : pb::IMessage<GameInfo> {
+    private static readonly pb::MessageParser<GameInfo> _parser = new pb::MessageParser<GameInfo>(() => new GameInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[33]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameInfo(GameInfo other) : this() {
+      gameVersion_ = other.gameVersion_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameInfo Clone() {
+      return new GameInfo(this);
+    }
+
+    /// <summary>Field number for the "game_version" field.</summary>
+    public const int GameVersionFieldNumber = 1;
+    private string gameVersion_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GameVersion {
+      get { return gameVersion_; }
+      set {
+        gameVersion_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GameVersion != other.GameVersion) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GameVersion.Length != 0) hash ^= GameVersion.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GameVersion.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GameVersion);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GameVersion.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameVersion);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GameVersion.Length != 0) {
+        GameVersion = other.GameVersion;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            GameVersion = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class LndInfo : pb::IMessage<LndInfo> {
+    private static readonly pb::MessageParser<LndInfo> _parser = new pb::MessageParser<LndInfo>(() => new LndInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<LndInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[34]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LndInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LndInfo(LndInfo other) : this() {
+      lndPubkey_ = other.lndPubkey_;
+      lndHost_ = other.lndHost_;
+      lndListenPort_ = other.lndListenPort_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LndInfo Clone() {
+      return new LndInfo(this);
+    }
+
+    /// <summary>Field number for the "lnd_pubkey" field.</summary>
+    public const int LndPubkeyFieldNumber = 1;
+    private string lndPubkey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LndPubkey {
+      get { return lndPubkey_; }
+      set {
+        lndPubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "lnd_host" field.</summary>
+    public const int LndHostFieldNumber = 2;
+    private string lndHost_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LndHost {
+      get { return lndHost_; }
+      set {
+        lndHost_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "lnd_listen_port" field.</summary>
+    public const int LndListenPortFieldNumber = 3;
+    private int lndListenPort_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int LndListenPort {
+      get { return lndListenPort_; }
+      set {
+        lndListenPort_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as LndInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(LndInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (LndPubkey != other.LndPubkey) return false;
+      if (LndHost != other.LndHost) return false;
+      if (LndListenPort != other.LndListenPort) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (LndPubkey.Length != 0) hash ^= LndPubkey.GetHashCode();
+      if (LndHost.Length != 0) hash ^= LndHost.GetHashCode();
+      if (LndListenPort != 0) hash ^= LndListenPort.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LndPubkey.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LndPubkey);
+      }
+      if (LndHost.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(LndHost);
+      }
+      if (LndListenPort != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(LndListenPort);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (LndPubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LndPubkey);
+      }
+      if (LndHost.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LndHost);
+      }
+      if (LndListenPort != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LndListenPort);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(LndInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.LndPubkey.Length != 0) {
+        LndPubkey = other.LndPubkey;
+      }
+      if (other.LndHost.Length != 0) {
+        LndHost = other.LndHost;
+      }
+      if (other.LndListenPort != 0) {
+        LndListenPort = other.LndListenPort;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LndPubkey = input.ReadString();
+            break;
+          }
+          case 18: {
+            LndHost = input.ReadString();
+            break;
+          }
+          case 24: {
+            LndListenPort = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SponsorFeeInfo : pb::IMessage<SponsorFeeInfo> {
+    private static readonly pb::MessageParser<SponsorFeeInfo> _parser = new pb::MessageParser<SponsorFeeInfo>(() => new SponsorFeeInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SponsorFeeInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[35]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SponsorFeeInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SponsorFeeInfo(SponsorFeeInfo other) : this() {
+      creationCost_ = other.creationCost_;
+      activationFeeRate_ = other.activationFeeRate_;
+      playerSatoshiCost_ = other.playerSatoshiCost_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SponsorFeeInfo Clone() {
+      return new SponsorFeeInfo(this);
+    }
+
+    /// <summary>Field number for the "creation_cost" field.</summary>
+    public const int CreationCostFieldNumber = 1;
+    private long creationCost_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long CreationCost {
+      get { return creationCost_; }
+      set {
+        creationCost_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "activation_fee_rate" field.</summary>
+    public const int ActivationFeeRateFieldNumber = 2;
+    private float activationFeeRate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float ActivationFeeRate {
+      get { return activationFeeRate_; }
+      set {
+        activationFeeRate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "player_satoshi_cost" field.</summary>
+    public const int PlayerSatoshiCostFieldNumber = 3;
+    private float playerSatoshiCost_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float PlayerSatoshiCost {
+      get { return playerSatoshiCost_; }
+      set {
+        playerSatoshiCost_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SponsorFeeInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SponsorFeeInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CreationCost != other.CreationCost) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ActivationFeeRate, other.ActivationFeeRate)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PlayerSatoshiCost, other.PlayerSatoshiCost)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CreationCost != 0L) hash ^= CreationCost.GetHashCode();
+      if (ActivationFeeRate != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ActivationFeeRate);
+      if (PlayerSatoshiCost != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PlayerSatoshiCost);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (CreationCost != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(CreationCost);
+      }
+      if (ActivationFeeRate != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(ActivationFeeRate);
+      }
+      if (PlayerSatoshiCost != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(PlayerSatoshiCost);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (CreationCost != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreationCost);
+      }
+      if (ActivationFeeRate != 0F) {
+        size += 1 + 4;
+      }
+      if (PlayerSatoshiCost != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SponsorFeeInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CreationCost != 0L) {
+        CreationCost = other.CreationCost;
+      }
+      if (other.ActivationFeeRate != 0F) {
+        ActivationFeeRate = other.ActivationFeeRate;
+      }
+      if (other.PlayerSatoshiCost != 0F) {
+        PlayerSatoshiCost = other.PlayerSatoshiCost;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            CreationCost = input.ReadInt64();
+            break;
+          }
+          case 21: {
+            ActivationFeeRate = input.ReadFloat();
+            break;
+          }
+          case 29: {
+            PlayerSatoshiCost = input.ReadFloat();
             break;
           }
         }

@@ -117,8 +117,9 @@ public class BackendPlayerClient : IBackendPlayerClient
         return skinIds;
     }
 
-    public Task<string> GetGameVersion()
+    public async Task<string> GetGameVersion()
     {
-        throw new NotImplementedException();
+        var info = await publicClient.GetInfoAsync(new GetInfoRequest());
+        return info.GameInfo.GameVersion;
     }
 }
