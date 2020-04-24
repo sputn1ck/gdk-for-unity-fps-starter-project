@@ -118,7 +118,16 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     public Task<ShopSkin[]> GetAllSkins()
     {
-        throw new System.NotImplementedException();
+        List<ShopSkin> shopSkins = new List<ShopSkin>();
+        foreach (var id in allSkins)
+        {
+            shopSkins.Add(new ShopSkin
+            {
+                Id = id,
+                Price = Random.Range(1, 100000)
+            });
+        }
+        return Task.FromResult(shopSkins.ToArray());
     }
 
     public async Task<string> GetSkinInvoice(string skinId)

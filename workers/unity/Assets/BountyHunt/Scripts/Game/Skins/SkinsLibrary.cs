@@ -1,10 +1,13 @@
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BBH/Skins/SkinsLibrary")]
 public class SkinsLibrary : ScriptableObject
 {
+    public static SkinsLibrary Instance;
 
     [SerializeField] private List<SkinSlotSettings> slotSettings;
 
@@ -18,7 +21,10 @@ public class SkinsLibrary : ScriptableObject
         //Debug.Log("skin: " + skinID);
         //Debug.Log("default: " + settings[slot].defaultSkinID);
 
-        if (!skinsByID.ContainsKey(skinID)) return skinsByID[settings[slot].defaultSkinID];
+        if (!skinsByID.ContainsKey(skinID))
+        {
+            return skinsByID[settings[slot].defaultSkinID];
+        }
         return skinsByID[skinID];
     }
 
@@ -31,10 +37,10 @@ public class SkinsLibrary : ScriptableObject
 
     public void Initialize()
     {
-        Initialize(new List<string>());
+        Initialize(new ShopSkin[0]);
     }
 
-    public void Initialize(List<string> IDs)
+    public void Initialize(ShopSkin[] shopSkins)
     {
 
         settings = new Dictionary<SkinSlot, SkinSlotSettings>();
@@ -59,11 +65,13 @@ public class SkinsLibrary : ScriptableObject
                 group.skins.Clear();
                 foreach (Skin s in skins)
                 {
-                    if (IDs.Count>0 && !IDs.Contains(s.ID)) {
+                    var shopSkin = shopSkins.FirstOrDefault(ss => ss.Id == s.ID);
+                    if (shopSkins.Length>0 && shopSkin == null) {
                         continue;
                     }
                     Skin skin = Instantiate(s);
                     skin.group = group;
+                    skin.price = shopSkin.Price;
                     group.skins.Add(skin);
                     skinsByID[skin.ID] = skin;
                 }
@@ -75,12 +83,12 @@ public class SkinsLibrary : ScriptableObject
         }
     }
 
-    public void Initialize(List<string> AllIDs, List<string> OwnedIDs)
+
+    public void Initialize(ShopSkin[] shopSkins, List<string> OwnedIDs)
     {
-        Initialize(AllIDs);
+        Initialize(shopSkins);
         SetOwnedStates(OwnedIDs);
     }
-
     public void SetOwnedStates(List<string> IDs)
     {
         foreach(var sk in skinsByID)
@@ -95,6 +103,7 @@ public class SkinsLibrary : ScriptableObject
             }
         }
     }
+
 
 }
 [System.Serializable]
