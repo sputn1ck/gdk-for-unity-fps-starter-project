@@ -9,6 +9,7 @@ public class SkinDictionaryPublisher : MonoBehaviour, ISettingsPublisher
 
     public void Publish()
     {
-        SkinsLibrary.Instance = SkinLibrary;
+        SkinsLibrary.MasterInstance = SkinLibrary;
+        SkinLibrary.Initialize();
     }
 }
