@@ -12,13 +12,12 @@ public class LeaderboardMenuUI : MonoBehaviour
 {
     public LeaderboardEntryUI headLine;
     public Transform entryContainer;
-    public SimpleSliderUI slideLine;
-
     public Button firstButton;
     public Button meButton;
     public Button previousButton;
     public Button nextButton;
 
+    public SimpleSliderUI sliderUI;
 
     List<LeaderboardEntryUI> entries;
 
@@ -30,31 +29,56 @@ public class LeaderboardMenuUI : MonoBehaviour
     int pageSize;
     int currentPageIndex = 0;
 
+    LeaderBoardSet[] leaderboards;
+    LeaderBoardSet selectedLeaderboard;
+
     // Start is called before the first frame update
     void Start()
     {
         
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
         pageSize = entries.Count;
-        headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "k/d" });
-        slideLine.GetSlideButtonEvents(0).onClick.AddListener( () => SetPriority(RankType.Earnings));
-        //slideLine.GetSlideButtonEvents(1).onClick.AddListener(() => priority = RankType.Kills ));
-        //slideLine.GetSlideButtonEvents(2).onClick.AddListener(() => priority = RankType.Deaths));
-        slideLine.GetSlideButtonEvents(3).onClick.AddListener(() => SetPriority(RankType.Kd)) ;
-
         firstButton.onClick.AddListener(SetFirstPage);
         meButton.onClick.AddListener(SetMyPage);
         previousButton.onClick.AddListener(SetPreviousPage);
         nextButton.onClick.AddListener(SetNextPage);
 
-        /*
-        int counter = 0;
-        foreach (LeaderboardEntryUI entry in entries)
+        LeaderBoardSet GlobalLeague = new LeaderBoardSet();
+        GlobalLeague.name = "Global League";
+        GlobalLeague.values.Add(("Score", r => r.Ranking_.ToString()));
+        GlobalLeague.values.Add(("Hunting Rank", r => r.KDRanking.ToString()));
+        GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.ToString()));
+
+        LeaderBoardSet HuntersLeague = new LeaderBoardSet();
+        HuntersLeague.name = "Hunters League";
+        HuntersLeague.values.Add(("Hunter Score", r => ((r.Kills+1)/(r.Deaths+1)).ToString()));
+        HuntersLeague.values.Add(("Kills", r => r.Kills.ToString()));
+        HuntersLeague.values.Add(("Deaths", r => r.Deaths.ToString()));
+
+        LeaderBoardSet LootersLeague = new LeaderBoardSet();
+        LootersLeague.name = "Looters League";
+        LootersLeague.values.Add(("Earnings", r => r.Earnings.ToString()));
+
+        leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
+
+        sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(() => gameObject.SetActive(false));
+        for (int i = 1; i<sliderUI.buttons.Count; i++)
         {
-            counter++;
-            entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(UnityEngine.Random.Range(0, 130000000), true), UnityEngine.Random.Range(0, 100).ToString(), UnityEngine.Random.Range(0, 100).ToString(), "something" });
+            Button btn = sliderUI.buttons[i];
+            int j = i - 1;
+            if (j < leaderboards.Length)
+            {
+                btn.GetComponentInChildren<TextMeshProUGUI>().text = leaderboards[j].name;
+                sliderUI.buttonEvents[btn].onActivate.AddListener(() => SetLeaderBoard(leaderboards[j]));
+                sliderUI.buttonEvents[btn].onActivate.AddListener(() => gameObject.SetActive(true));
+            }
+            else
+            {
+                btn.gameObject.SetActive(false);
+            }
         }
-        */
+
+        gameObject.SetActive(false);
     }
     void OnEnable()
     {
@@ -66,7 +90,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         try
         {
             PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
-            SetMyPage();
+            SetLeaderBoard(leaderboards[0]);
         }
         catch (Exception e)
         {
@@ -74,9 +98,11 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
     }
 
-    void setEntry(LeaderboardEntryUI entry, Ranking score, long position)
+    void setEntry(LeaderboardEntryUI entry, Ranking ranking, long position)
     {
-        entry.Set(position, score.Name, new List<string> { Utility.SatsToShortString(score.Stats.Earnings, true), score.Stats.Kills.ToString(), score.Stats.Deaths.ToString(), score.KdRanking.Rank.ToString() });
+        List<string> strings = selectedLeaderboard.values.Select(e => e.value(ranking)).ToList();
+
+        entry.Set(position, ranking.Name, strings);
     }
 
     public async void UpdateLeaderBoard()
@@ -94,6 +120,8 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     void UpdateList(Ranking[] ranks, int startIndex)
     {
+
+
         int i = 0;
         foreach(LeaderboardEntryUI entry in entries)
         {
@@ -114,6 +142,14 @@ public class LeaderboardMenuUI : MonoBehaviour
             i++;
         }
 
+    }
+
+    void SetLeaderBoard(LeaderBoardSet set)
+    {
+        List<string> strings = set.values.Select(e => e.name).ToList();
+        headLine.Set(0, "Player", strings);
+        selectedLeaderboard = set;
+        UpdateLeaderBoard(); ;
     }
 
     void SetPriority(RankType type)
@@ -192,5 +228,10 @@ public class LeaderboardMenuUI : MonoBehaviour
         if (Time.time>0.1f && test) onTest();
     }
 
+}
+
+public class LeaderBoardSet{
+    public string name;
+    public List<(string name, Func<Ranking, string> value)> values = new List<(string name, Func<Ranking, string> value)>();
 }
 

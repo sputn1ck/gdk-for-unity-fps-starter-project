@@ -44,14 +44,14 @@ public class SimpleSliderUI : MonoBehaviour
         yield return new WaitForEndOfFrame();
         (slider.transform as RectTransform).anchoredPosition = b.GetComponent<RectTransform>().anchoredPosition;
         (slider.transform as RectTransform).sizeDelta = b.GetComponent<RectTransform>().sizeDelta * Vector2.up;
-
+        SelectButton(buttons[firstButtonID]);
     }
 
     public void SelectButton(Button btn)
     {
         buttonEvents[btn].onClick.Invoke();
         if (currentSelected == btn) return;
-        if (currentSelected) buttonEvents[currentSelected].onDeactivate.Invoke();
+        if (currentSelected != null) buttonEvents[currentSelected].onDeactivate.Invoke();
         currentSelected = btn;
         buttonEvents[currentSelected].onActivate.Invoke();
 

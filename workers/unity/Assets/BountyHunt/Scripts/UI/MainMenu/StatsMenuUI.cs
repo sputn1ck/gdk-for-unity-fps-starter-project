@@ -16,18 +16,33 @@ public class StatsMenuUI : MonoBehaviour
     public List<Badge> badges;
     public Image badgeImage;
 
+    public SimpleSliderUI sliderUI;
+
     private void Awake()
     {
-        badges = badges.OrderBy(o => o.maxPercantageAbove).ToList();
-        ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateBadge);
+        
     }
 
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
 
     void Start()
     {
+        badges = badges.OrderBy(o => o.maxPercantageAbove).ToList();
+        sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(show);
+        sliderUI.GetSlideButtonEvents(0).onDeactivate.AddListener(hide);
         WritePlayerStats();
         WriteGameStats();
         AddListeners();
+
+        ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateBadge);
     }
 
     void WritePlayerStats()
