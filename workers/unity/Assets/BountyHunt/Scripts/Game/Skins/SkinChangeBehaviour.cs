@@ -27,6 +27,13 @@ public class SkinChangeBehaviour : MonoBehaviour
 
     private void UpdateSkin(string skinId)
     {
-
+        var skin = SkinsLibrary.Instance.GetSkin(skinId, SkinSlot.BODY);
+        if (skin.material != null)
+        {
+            foreach (var renderer in renderers)
+            {
+                renderer.material = skin.material;
+            }
+        }
     }
 }

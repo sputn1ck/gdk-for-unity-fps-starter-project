@@ -10,6 +10,8 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     public int bbhDuration = 30;
     public int lobbyDuration = 10;
 
+    public string[] PlayerSkins;
+
     public void Setup(string target, int port, string pubkey, string message)
     {
         
@@ -76,6 +78,6 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public Task<string> GetUserSkin(string pubkey)
     {
-        throw new System.NotImplementedException();
+        return Task.FromResult(PlayerSkins[UnityEngine.Random.Range(0, PlayerSkins.Length - 1)]);
     }
 }
