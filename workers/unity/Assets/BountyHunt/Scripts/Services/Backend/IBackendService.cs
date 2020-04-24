@@ -11,8 +11,10 @@ public interface IBackendPlayerClient
 
     Task<string> GetUsername();
     Task<string> SetUsername(string userName);
-    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
+    Task<bool> NeedsUsernameChange();
+    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
+    
     Task<SkinInventory> GetSkinInventory();
     void EquipSkin(string skinId);
     Task<ShopSkin[]> GetAllSkins();
