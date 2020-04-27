@@ -82,7 +82,7 @@ public class LeaderboardMenuUI : MonoBehaviour
                 btn.gameObject.SetActive(false);
             }
         }
-
+        selectedLeaderboard = leaderboards[0];
         gameObject.SetActive(false);
     }
     void OnEnable()
@@ -95,7 +95,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         try
         {
             PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
-            SetLeaderBoard(leaderboards[0]);
+            SetLeaderBoard(selectedLeaderboard);
         }
         catch (Exception e)
         {
