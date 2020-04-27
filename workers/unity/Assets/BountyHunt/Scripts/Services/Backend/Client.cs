@@ -51,56 +51,61 @@ namespace Bbhrpc {
             "dmVydGlzZXJzGAEgAygLMhIuYmJocnBjLkFkdmVydGlzZXIibQoGUGxheWVy",
             "EgwKBG5hbWUYASABKAkSDgoGcHVia2V5GAIgASgJEhYKDmN1cnJlbnRfYm91",
             "bnR5GAMgASgDEhUKDWN1cnJlbnRfa2lsbHMYBCABKAUSFgoOY3VycmVudF9k",
-            "ZWF0aHMYBSABKAUimAEKB1JhbmtpbmcSDAoEbmFtZRgBIAEoCRIOCgZwdWJr",
-            "ZXkYAiABKAkSDQoFa2lsbHMYAyABKAUSDgoGZGVhdGhzGAQgASgFEhMKC2tf",
-            "ZF9yYW5raW5nGAUgASgFEhAKCGVhcm5pbmdzGAYgASgDEhgKEGVhcm5pbmdz",
-            "X3JhbmtpbmcYByABKAUSDwoHcmFua2luZxgIIAEoBSJZCgpBZHZlcnRpc2Vy",
-            "Eg0KBXBoYXNoGAEgASgJEgwKBG5hbWUYAiABKAkSCwoDdXJsGAMgASgJEg8K",
-            "B2JhbGFuY2UYBCABKAMSEAoIcGljX3VybHMYBSADKAkiEgoQTGlzdFNraW5z",
-            "UmVxdWVzdCI5ChFMaXN0U2tpbnNSZXNwb25zZRIkCgpzaG9wX2l0ZW1zGAEg",
-            "AygLMhAuYmJocnBjLlNob3BTa2luIhwKDkJ1eVNraW5SZXF1ZXN0EgoKAmlk",
-            "GAEgASgJIiIKD0J1eVNraW5SZXNwb25zZRIPCgdpbnZvaWNlGAEgASgJIhkK",
-            "F0dldFNraW5JbnZlbnRvcnlSZXF1ZXN0IkkKGEdldFNraW5JbnZlbnRvcnlS",
-            "ZXNwb25zZRItCg5za2luX2ludmVudG9yeRgBIAEoCzIVLmJiaHJwYy5Ta2lu",
-            "SW52ZW50b3J5Ih4KEEVxdWlwU2tpblJlcXVlc3QSCgoCaWQYASABKAkiEwoR",
-            "RXF1aXBTa2luUmVzcG9uc2UiSAoIU2hvcFNraW4SCgoCaWQYASABKAkSDAoE",
-            "bmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRINCgVwcmljZRgEIAEo",
-            "AyI7Cg1Ta2luSW52ZW50b3J5EhUKDWVxdWlwcGVkX3NraW4YASABKAkSEwoL",
-            "b3duZWRfc2tpbnMYAiADKAkiIAoIR2FtZUluZm8SFAoMZ2FtZV92ZXJzaW9u",
-            "GAEgASgJIkgKB0xuZEluZm8SEgoKbG5kX3B1YmtleRgBIAEoCRIQCghsbmRf",
-            "aG9zdBgCIAEoCRIXCg9sbmRfbGlzdGVuX3BvcnQYAyABKAUiYQoOU3BvbnNv",
-            "ckZlZUluZm8SFQoNY3JlYXRpb25fY29zdBgBIAEoAxIbChNhY3RpdmF0aW9u",
-            "X2ZlZV9yYXRlGAIgASgCEhsKE3BsYXllcl9zYXRvc2hpX2Nvc3QYAyABKAIq",
-            "NgoIUmFua1R5cGUSCAoETk9ORRAAEgoKBkdMT0JBTBABEgYKAktEEAISDAoI",
-            "RUFSTklOR1MQAzKiAQoRR2FtZUNsaWVudFNlcnZpY2USRQoLR2V0VXNlcm5h",
-            "bWUSGi5iYmhycGMuR2V0VXNlcm5hbWVSZXF1ZXN0GhouYmJocnBjLkdldFVz",
-            "ZXJuYW1lUmVwb25zZRJGCgtTZXRVc2VybmFtZRIaLmJiaHJwYy5TZXRVc2Vy",
-            "bmFtZVJlcXVlc3QaGy5iYmhycGMuU2V0VXNlcm5hbWVSZXNwb25zZTKXAgoR",
-            "QWR2ZXJ0aXNlclNlcnZpY2USVQoQQ3JlYXRlQWR2ZXJ0aXNlchIfLmJiaHJw",
-            "Yy5DcmVhdGVBZHZlcnRpc2VyUmVxdWVzdBogLmJiaHJwYy5DcmVhdGVBZHZl",
-            "cnRpc2VyUmVzcG9uc2USWAoRRGVwb3NpdEFkdmVydGlzZXISIC5iYmhycGMu",
-            "RGVwb3NpdEFkdmVydGlzZXJSZXF1ZXN0GiEuYmJocnBjLkRlcG9zaXRBZHZl",
-            "cnRpc2VyUmVzcG9uc2USUQoPTGlzdEFkdmVydGlzZXJzEh4uYmJocnBjLkxp",
-            "c3RBZHZlcnRpc2Vyc1JlcXVlc3QaHi5iYmhycGMuTGlzdEFkdmVydGlzZXJS",
-            "ZXNwb25zZTLiAgoNUHVibGljU2VydmljZRJDCgpHZXRSYW5raW5nEhkuYmJo",
-            "cnBjLkdldFJhbmtpbmdSZXF1ZXN0GhouYmJocnBjLkdldFJhbmtpbmdSZXNw",
-            "b25zZRJJCgxMaXN0UmFua2luZ3MSGy5iYmhycGMuTGlzdFJhbmtpbmdzUmVx",
-            "dWVzdBocLmJiaHJwYy5MaXN0UmFua2luZ3NSZXNwb25zZRJACglBZGRCb3Vu",
-            "dHkSGC5iYmhycGMuQWRkQm91bnR5UmVxdWVzdBoZLmJiaHJwYy5BZGRCb3Vu",
-            "dHlSZXNwb25zZRJDCgpMaXN0T25saW5lEhkuYmJocnBjLkxpc3RPbmxpbmVS",
-            "ZXF1ZXN0GhouYmJocnBjLkxpc3RPbmxpbmVSZXNwb25zZRI6CgdHZXRJbmZv",
-            "EhYuYmJocnBjLkdldEluZm9SZXF1ZXN0GhcuYmJocnBjLkdldEluZm9SZXNw",
-            "b25zZTKkAgoLU2tpblNlcnZpY2USQAoJTGlzdFNraW5zEhguYmJocnBjLkxp",
-            "c3RTa2luc1JlcXVlc3QaGS5iYmhycGMuTGlzdFNraW5zUmVzcG9uc2USOgoH",
-            "QnV5U2tpbhIWLmJiaHJwYy5CdXlTa2luUmVxdWVzdBoXLmJiaHJwYy5CdXlT",
-            "a2luUmVzcG9uc2USVQoQR2V0U2tpbkludmVudG9yeRIfLmJiaHJwYy5HZXRT",
-            "a2luSW52ZW50b3J5UmVxdWVzdBogLmJiaHJwYy5HZXRTa2luSW52ZW50b3J5",
-            "UmVzcG9uc2USQAoJRXF1aXBTa2luEhguYmJocnBjLkVxdWlwU2tpblJlcXVl",
-            "c3QaGS5iYmhycGMuRXF1aXBTa2luUmVzcG9uc2VCCFoGYmJocnBjYgZwcm90",
-            "bzM="));
+            "ZWF0aHMYBSABKAUi0AEKB1JhbmtpbmcSDAoEbmFtZRgBIAEoCRIOCgZwdWJr",
+            "ZXkYAiABKAkSHAoFc3RhdHMYAyABKAsyDS5iYmhycGMuU3RhdHMSLQoOZ2xv",
+            "YmFsX3JhbmtpbmcYBCABKAsyFS5iYmhycGMuTGVhZ3VlUmFua2luZxIvChBl",
+            "YXJuaW5nc19yYW5raW5nGAUgASgLMhUuYmJocnBjLkxlYWd1ZVJhbmtpbmcS",
+            "KQoKa2RfcmFua2luZxgGIAEoCzIVLmJiaHJwYy5MZWFndWVSYW5raW5nIjgK",
+            "BVN0YXRzEg0KBWtpbGxzGAEgASgFEg4KBmRlYXRocxgCIAEoBRIQCghlYXJu",
+            "aW5ncxgDIAEoAyJOCg1MZWFndWVSYW5raW5nEg0KBXNjb3JlGAEgASgDEgwK",
+            "BHJhbmsYAiABKAUSIAoFYmFkZ2UYAyABKA4yES5iYmhycGMuUmFua0JhZGdl",
+            "IlkKCkFkdmVydGlzZXISDQoFcGhhc2gYASABKAkSDAoEbmFtZRgCIAEoCRIL",
+            "CgN1cmwYAyABKAkSDwoHYmFsYW5jZRgEIAEoAxIQCghwaWNfdXJscxgFIAMo",
+            "CSISChBMaXN0U2tpbnNSZXF1ZXN0IjkKEUxpc3RTa2luc1Jlc3BvbnNlEiQK",
+            "CnNob3BfaXRlbXMYASADKAsyEC5iYmhycGMuU2hvcFNraW4iHAoOQnV5U2tp",
+            "blJlcXVlc3QSCgoCaWQYASABKAkiIgoPQnV5U2tpblJlc3BvbnNlEg8KB2lu",
+            "dm9pY2UYASABKAkiGQoXR2V0U2tpbkludmVudG9yeVJlcXVlc3QiSQoYR2V0",
+            "U2tpbkludmVudG9yeVJlc3BvbnNlEi0KDnNraW5faW52ZW50b3J5GAEgASgL",
+            "MhUuYmJocnBjLlNraW5JbnZlbnRvcnkiHgoQRXF1aXBTa2luUmVxdWVzdBIK",
+            "CgJpZBgBIAEoCSITChFFcXVpcFNraW5SZXNwb25zZSJICghTaG9wU2tpbhIK",
+            "CgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJ",
+            "Eg0KBXByaWNlGAQgASgDIjsKDVNraW5JbnZlbnRvcnkSFQoNZXF1aXBwZWRf",
+            "c2tpbhgBIAEoCRITCgtvd25lZF9za2lucxgCIAMoCSIgCghHYW1lSW5mbxIU",
+            "CgxnYW1lX3ZlcnNpb24YASABKAkiSAoHTG5kSW5mbxISCgpsbmRfcHVia2V5",
+            "GAEgASgJEhAKCGxuZF9ob3N0GAIgASgJEhcKD2xuZF9saXN0ZW5fcG9ydBgD",
+            "IAEoBSJhCg5TcG9uc29yRmVlSW5mbxIVCg1jcmVhdGlvbl9jb3N0GAEgASgD",
+            "EhsKE2FjdGl2YXRpb25fZmVlX3JhdGUYAiABKAISGwoTcGxheWVyX3NhdG9z",
+            "aGlfY29zdBgDIAEoAio2CghSYW5rVHlwZRIICgROT05FEAASCgoGR0xPQkFM",
+            "EAESBgoCS0QQAhIMCghFQVJOSU5HUxADKjsKCVJhbmtCYWRnZRIMCghVTlJB",
+            "TktFRBAAEgoKBkJST05aRRABEgoKBlNJTFZFUhACEggKBEdPTEQQAzKiAQoR",
+            "R2FtZUNsaWVudFNlcnZpY2USRQoLR2V0VXNlcm5hbWUSGi5iYmhycGMuR2V0",
+            "VXNlcm5hbWVSZXF1ZXN0GhouYmJocnBjLkdldFVzZXJuYW1lUmVwb25zZRJG",
+            "CgtTZXRVc2VybmFtZRIaLmJiaHJwYy5TZXRVc2VybmFtZVJlcXVlc3QaGy5i",
+            "YmhycGMuU2V0VXNlcm5hbWVSZXNwb25zZTKXAgoRQWR2ZXJ0aXNlclNlcnZp",
+            "Y2USVQoQQ3JlYXRlQWR2ZXJ0aXNlchIfLmJiaHJwYy5DcmVhdGVBZHZlcnRp",
+            "c2VyUmVxdWVzdBogLmJiaHJwYy5DcmVhdGVBZHZlcnRpc2VyUmVzcG9uc2US",
+            "WAoRRGVwb3NpdEFkdmVydGlzZXISIC5iYmhycGMuRGVwb3NpdEFkdmVydGlz",
+            "ZXJSZXF1ZXN0GiEuYmJocnBjLkRlcG9zaXRBZHZlcnRpc2VyUmVzcG9uc2US",
+            "UQoPTGlzdEFkdmVydGlzZXJzEh4uYmJocnBjLkxpc3RBZHZlcnRpc2Vyc1Jl",
+            "cXVlc3QaHi5iYmhycGMuTGlzdEFkdmVydGlzZXJSZXNwb25zZTLiAgoNUHVi",
+            "bGljU2VydmljZRJDCgpHZXRSYW5raW5nEhkuYmJocnBjLkdldFJhbmtpbmdS",
+            "ZXF1ZXN0GhouYmJocnBjLkdldFJhbmtpbmdSZXNwb25zZRJJCgxMaXN0UmFu",
+            "a2luZ3MSGy5iYmhycGMuTGlzdFJhbmtpbmdzUmVxdWVzdBocLmJiaHJwYy5M",
+            "aXN0UmFua2luZ3NSZXNwb25zZRJACglBZGRCb3VudHkSGC5iYmhycGMuQWRk",
+            "Qm91bnR5UmVxdWVzdBoZLmJiaHJwYy5BZGRCb3VudHlSZXNwb25zZRJDCgpM",
+            "aXN0T25saW5lEhkuYmJocnBjLkxpc3RPbmxpbmVSZXF1ZXN0GhouYmJocnBj",
+            "Lkxpc3RPbmxpbmVSZXNwb25zZRI6CgdHZXRJbmZvEhYuYmJocnBjLkdldElu",
+            "Zm9SZXF1ZXN0GhcuYmJocnBjLkdldEluZm9SZXNwb25zZTKkAgoLU2tpblNl",
+            "cnZpY2USQAoJTGlzdFNraW5zEhguYmJocnBjLkxpc3RTa2luc1JlcXVlc3Qa",
+            "GS5iYmhycGMuTGlzdFNraW5zUmVzcG9uc2USOgoHQnV5U2tpbhIWLmJiaHJw",
+            "Yy5CdXlTa2luUmVxdWVzdBoXLmJiaHJwYy5CdXlTa2luUmVzcG9uc2USVQoQ",
+            "R2V0U2tpbkludmVudG9yeRIfLmJiaHJwYy5HZXRTa2luSW52ZW50b3J5UmVx",
+            "dWVzdBogLmJiaHJwYy5HZXRTa2luSW52ZW50b3J5UmVzcG9uc2USQAoJRXF1",
+            "aXBTa2luEhguYmJocnBjLkVxdWlwU2tpblJlcXVlc3QaGS5iYmhycGMuRXF1",
+            "aXBTa2luUmVzcG9uc2VCCFoGYmJocnBjYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.RankType), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.RankType), typeof(global::Bbhrpc.RankBadge), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetUsernameRequest), global::Bbhrpc.GetUsernameRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetUsernameReponse), global::Bbhrpc.GetUsernameReponse.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SetUsernameRequest), global::Bbhrpc.SetUsernameRequest.Parser, new[]{ "Name" }, null, null, null),
@@ -122,7 +127,9 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListAdvertisersRequest), global::Bbhrpc.ListAdvertisersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListAdvertiserResponse), global::Bbhrpc.ListAdvertiserResponse.Parser, new[]{ "Advertisers" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Player), global::Bbhrpc.Player.Parser, new[]{ "Name", "Pubkey", "CurrentBounty", "CurrentKills", "CurrentDeaths" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Ranking), global::Bbhrpc.Ranking.Parser, new[]{ "Name", "Pubkey", "Kills", "Deaths", "KDRanking", "Earnings", "EarningsRanking", "Ranking_" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Ranking), global::Bbhrpc.Ranking.Parser, new[]{ "Name", "Pubkey", "Stats", "GlobalRanking", "EarningsRanking", "KdRanking" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Stats), global::Bbhrpc.Stats.Parser, new[]{ "Kills", "Deaths", "Earnings" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.LeagueRanking), global::Bbhrpc.LeagueRanking.Parser, new[]{ "Score", "Rank", "Badge" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Advertiser), global::Bbhrpc.Advertiser.Parser, new[]{ "Phash", "Name", "Url", "Balance", "PicUrls" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListSkinsRequest), global::Bbhrpc.ListSkinsRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListSkinsResponse), global::Bbhrpc.ListSkinsResponse.Parser, new[]{ "ShopItems" }, null, null, null),
@@ -148,6 +155,13 @@ namespace Bbhrpc {
     [pbr::OriginalName("GLOBAL")] Global = 1,
     [pbr::OriginalName("KD")] Kd = 2,
     [pbr::OriginalName("EARNINGS")] Earnings = 3,
+  }
+
+  public enum RankBadge {
+    [pbr::OriginalName("UNRANKED")] Unranked = 0,
+    [pbr::OriginalName("BRONZE")] Bronze = 1,
+    [pbr::OriginalName("SILVER")] Silver = 2,
+    [pbr::OriginalName("GOLD")] Gold = 3,
   }
 
   #endregion
@@ -3169,12 +3183,10 @@ namespace Bbhrpc {
     public Ranking(Ranking other) : this() {
       name_ = other.name_;
       pubkey_ = other.pubkey_;
-      kills_ = other.kills_;
-      deaths_ = other.deaths_;
-      kDRanking_ = other.kDRanking_;
-      earnings_ = other.earnings_;
-      earningsRanking_ = other.earningsRanking_;
-      ranking_ = other.ranking_;
+      stats_ = other.stats_ != null ? other.stats_.Clone() : null;
+      globalRanking_ = other.globalRanking_ != null ? other.globalRanking_.Clone() : null;
+      earningsRanking_ = other.earningsRanking_ != null ? other.earningsRanking_.Clone() : null;
+      kdRanking_ = other.kdRanking_ != null ? other.kdRanking_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3205,69 +3217,47 @@ namespace Bbhrpc {
       }
     }
 
-    /// <summary>Field number for the "kills" field.</summary>
-    public const int KillsFieldNumber = 3;
-    private int kills_;
+    /// <summary>Field number for the "stats" field.</summary>
+    public const int StatsFieldNumber = 3;
+    private global::Bbhrpc.Stats stats_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Kills {
-      get { return kills_; }
+    public global::Bbhrpc.Stats Stats {
+      get { return stats_; }
       set {
-        kills_ = value;
+        stats_ = value;
       }
     }
 
-    /// <summary>Field number for the "deaths" field.</summary>
-    public const int DeathsFieldNumber = 4;
-    private int deaths_;
+    /// <summary>Field number for the "global_ranking" field.</summary>
+    public const int GlobalRankingFieldNumber = 4;
+    private global::Bbhrpc.LeagueRanking globalRanking_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Deaths {
-      get { return deaths_; }
+    public global::Bbhrpc.LeagueRanking GlobalRanking {
+      get { return globalRanking_; }
       set {
-        deaths_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "k_d_ranking" field.</summary>
-    public const int KDRankingFieldNumber = 5;
-    private int kDRanking_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int KDRanking {
-      get { return kDRanking_; }
-      set {
-        kDRanking_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "earnings" field.</summary>
-    public const int EarningsFieldNumber = 6;
-    private long earnings_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Earnings {
-      get { return earnings_; }
-      set {
-        earnings_ = value;
+        globalRanking_ = value;
       }
     }
 
     /// <summary>Field number for the "earnings_ranking" field.</summary>
-    public const int EarningsRankingFieldNumber = 7;
-    private int earningsRanking_;
+    public const int EarningsRankingFieldNumber = 5;
+    private global::Bbhrpc.LeagueRanking earningsRanking_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int EarningsRanking {
+    public global::Bbhrpc.LeagueRanking EarningsRanking {
       get { return earningsRanking_; }
       set {
         earningsRanking_ = value;
       }
     }
 
-    /// <summary>Field number for the "ranking" field.</summary>
-    public const int Ranking_FieldNumber = 8;
-    private int ranking_;
+    /// <summary>Field number for the "kd_ranking" field.</summary>
+    public const int KdRankingFieldNumber = 6;
+    private global::Bbhrpc.LeagueRanking kdRanking_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Ranking_ {
-      get { return ranking_; }
+    public global::Bbhrpc.LeagueRanking KdRanking {
+      get { return kdRanking_; }
       set {
-        ranking_ = value;
+        kdRanking_ = value;
       }
     }
 
@@ -3286,12 +3276,10 @@ namespace Bbhrpc {
       }
       if (Name != other.Name) return false;
       if (Pubkey != other.Pubkey) return false;
-      if (Kills != other.Kills) return false;
-      if (Deaths != other.Deaths) return false;
-      if (KDRanking != other.KDRanking) return false;
-      if (Earnings != other.Earnings) return false;
-      if (EarningsRanking != other.EarningsRanking) return false;
-      if (Ranking_ != other.Ranking_) return false;
+      if (!object.Equals(Stats, other.Stats)) return false;
+      if (!object.Equals(GlobalRanking, other.GlobalRanking)) return false;
+      if (!object.Equals(EarningsRanking, other.EarningsRanking)) return false;
+      if (!object.Equals(KdRanking, other.KdRanking)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3300,12 +3288,10 @@ namespace Bbhrpc {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Pubkey.Length != 0) hash ^= Pubkey.GetHashCode();
-      if (Kills != 0) hash ^= Kills.GetHashCode();
-      if (Deaths != 0) hash ^= Deaths.GetHashCode();
-      if (KDRanking != 0) hash ^= KDRanking.GetHashCode();
-      if (Earnings != 0L) hash ^= Earnings.GetHashCode();
-      if (EarningsRanking != 0) hash ^= EarningsRanking.GetHashCode();
-      if (Ranking_ != 0) hash ^= Ranking_.GetHashCode();
+      if (stats_ != null) hash ^= Stats.GetHashCode();
+      if (globalRanking_ != null) hash ^= GlobalRanking.GetHashCode();
+      if (earningsRanking_ != null) hash ^= EarningsRanking.GetHashCode();
+      if (kdRanking_ != null) hash ^= KdRanking.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3327,29 +3313,21 @@ namespace Bbhrpc {
         output.WriteRawTag(18);
         output.WriteString(Pubkey);
       }
-      if (Kills != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Kills);
+      if (stats_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Stats);
       }
-      if (Deaths != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(Deaths);
+      if (globalRanking_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(GlobalRanking);
       }
-      if (KDRanking != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(KDRanking);
+      if (earningsRanking_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(EarningsRanking);
       }
-      if (Earnings != 0L) {
-        output.WriteRawTag(48);
-        output.WriteInt64(Earnings);
-      }
-      if (EarningsRanking != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(EarningsRanking);
-      }
-      if (Ranking_ != 0) {
-        output.WriteRawTag(64);
-        output.WriteInt32(Ranking_);
+      if (kdRanking_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(KdRanking);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3365,23 +3343,17 @@ namespace Bbhrpc {
       if (Pubkey.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Pubkey);
       }
-      if (Kills != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Kills);
+      if (stats_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stats);
       }
-      if (Deaths != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Deaths);
+      if (globalRanking_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GlobalRanking);
       }
-      if (KDRanking != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(KDRanking);
+      if (earningsRanking_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EarningsRanking);
       }
-      if (Earnings != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Earnings);
-      }
-      if (EarningsRanking != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EarningsRanking);
-      }
-      if (Ranking_ != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Ranking_);
+      if (kdRanking_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KdRanking);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3400,23 +3372,29 @@ namespace Bbhrpc {
       if (other.Pubkey.Length != 0) {
         Pubkey = other.Pubkey;
       }
-      if (other.Kills != 0) {
-        Kills = other.Kills;
+      if (other.stats_ != null) {
+        if (stats_ == null) {
+          Stats = new global::Bbhrpc.Stats();
+        }
+        Stats.MergeFrom(other.Stats);
       }
-      if (other.Deaths != 0) {
-        Deaths = other.Deaths;
+      if (other.globalRanking_ != null) {
+        if (globalRanking_ == null) {
+          GlobalRanking = new global::Bbhrpc.LeagueRanking();
+        }
+        GlobalRanking.MergeFrom(other.GlobalRanking);
       }
-      if (other.KDRanking != 0) {
-        KDRanking = other.KDRanking;
+      if (other.earningsRanking_ != null) {
+        if (earningsRanking_ == null) {
+          EarningsRanking = new global::Bbhrpc.LeagueRanking();
+        }
+        EarningsRanking.MergeFrom(other.EarningsRanking);
       }
-      if (other.Earnings != 0L) {
-        Earnings = other.Earnings;
-      }
-      if (other.EarningsRanking != 0) {
-        EarningsRanking = other.EarningsRanking;
-      }
-      if (other.Ranking_ != 0) {
-        Ranking_ = other.Ranking_;
+      if (other.kdRanking_ != null) {
+        if (kdRanking_ == null) {
+          KdRanking = new global::Bbhrpc.LeagueRanking();
+        }
+        KdRanking.MergeFrom(other.KdRanking);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3437,28 +3415,402 @@ namespace Bbhrpc {
             Pubkey = input.ReadString();
             break;
           }
-          case 24: {
+          case 26: {
+            if (stats_ == null) {
+              Stats = new global::Bbhrpc.Stats();
+            }
+            input.ReadMessage(Stats);
+            break;
+          }
+          case 34: {
+            if (globalRanking_ == null) {
+              GlobalRanking = new global::Bbhrpc.LeagueRanking();
+            }
+            input.ReadMessage(GlobalRanking);
+            break;
+          }
+          case 42: {
+            if (earningsRanking_ == null) {
+              EarningsRanking = new global::Bbhrpc.LeagueRanking();
+            }
+            input.ReadMessage(EarningsRanking);
+            break;
+          }
+          case 50: {
+            if (kdRanking_ == null) {
+              KdRanking = new global::Bbhrpc.LeagueRanking();
+            }
+            input.ReadMessage(KdRanking);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Stats : pb::IMessage<Stats> {
+    private static readonly pb::MessageParser<Stats> _parser = new pb::MessageParser<Stats>(() => new Stats());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Stats> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Stats() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Stats(Stats other) : this() {
+      kills_ = other.kills_;
+      deaths_ = other.deaths_;
+      earnings_ = other.earnings_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Stats Clone() {
+      return new Stats(this);
+    }
+
+    /// <summary>Field number for the "kills" field.</summary>
+    public const int KillsFieldNumber = 1;
+    private int kills_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Kills {
+      get { return kills_; }
+      set {
+        kills_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "deaths" field.</summary>
+    public const int DeathsFieldNumber = 2;
+    private int deaths_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Deaths {
+      get { return deaths_; }
+      set {
+        deaths_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "earnings" field.</summary>
+    public const int EarningsFieldNumber = 3;
+    private long earnings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Earnings {
+      get { return earnings_; }
+      set {
+        earnings_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Stats);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Stats other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Kills != other.Kills) return false;
+      if (Deaths != other.Deaths) return false;
+      if (Earnings != other.Earnings) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Kills != 0) hash ^= Kills.GetHashCode();
+      if (Deaths != 0) hash ^= Deaths.GetHashCode();
+      if (Earnings != 0L) hash ^= Earnings.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Kills != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Kills);
+      }
+      if (Deaths != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Deaths);
+      }
+      if (Earnings != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Earnings);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Kills != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Kills);
+      }
+      if (Deaths != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Deaths);
+      }
+      if (Earnings != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Earnings);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Stats other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Kills != 0) {
+        Kills = other.Kills;
+      }
+      if (other.Deaths != 0) {
+        Deaths = other.Deaths;
+      }
+      if (other.Earnings != 0L) {
+        Earnings = other.Earnings;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
             Kills = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 16: {
             Deaths = input.ReadInt32();
             break;
           }
-          case 40: {
-            KDRanking = input.ReadInt32();
-            break;
-          }
-          case 48: {
+          case 24: {
             Earnings = input.ReadInt64();
             break;
           }
-          case 56: {
-            EarningsRanking = input.ReadInt32();
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class LeagueRanking : pb::IMessage<LeagueRanking> {
+    private static readonly pb::MessageParser<LeagueRanking> _parser = new pb::MessageParser<LeagueRanking>(() => new LeagueRanking());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<LeagueRanking> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[23]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LeagueRanking() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LeagueRanking(LeagueRanking other) : this() {
+      score_ = other.score_;
+      rank_ = other.rank_;
+      badge_ = other.badge_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LeagueRanking Clone() {
+      return new LeagueRanking(this);
+    }
+
+    /// <summary>Field number for the "score" field.</summary>
+    public const int ScoreFieldNumber = 1;
+    private long score_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Score {
+      get { return score_; }
+      set {
+        score_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rank" field.</summary>
+    public const int RankFieldNumber = 2;
+    private int rank_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Rank {
+      get { return rank_; }
+      set {
+        rank_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "badge" field.</summary>
+    public const int BadgeFieldNumber = 3;
+    private global::Bbhrpc.RankBadge badge_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.RankBadge Badge {
+      get { return badge_; }
+      set {
+        badge_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as LeagueRanking);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(LeagueRanking other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Score != other.Score) return false;
+      if (Rank != other.Rank) return false;
+      if (Badge != other.Badge) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Score != 0L) hash ^= Score.GetHashCode();
+      if (Rank != 0) hash ^= Rank.GetHashCode();
+      if (Badge != 0) hash ^= Badge.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Score != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Score);
+      }
+      if (Rank != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Rank);
+      }
+      if (Badge != 0) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) Badge);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Score != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Score);
+      }
+      if (Rank != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Rank);
+      }
+      if (Badge != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Badge);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(LeagueRanking other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Score != 0L) {
+        Score = other.Score;
+      }
+      if (other.Rank != 0) {
+        Rank = other.Rank;
+      }
+      if (other.Badge != 0) {
+        Badge = other.Badge;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Score = input.ReadInt64();
             break;
           }
-          case 64: {
-            Ranking_ = input.ReadInt32();
+          case 16: {
+            Rank = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Badge = (global::Bbhrpc.RankBadge) input.ReadEnum();
             break;
           }
         }
@@ -3475,7 +3827,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3708,7 +4060,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3809,7 +4161,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3930,7 +4282,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4059,7 +4411,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4188,7 +4540,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4289,7 +4641,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4424,7 +4776,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4553,7 +4905,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[30]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4654,7 +5006,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[31]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[33]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4867,7 +5219,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[32]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5016,7 +5368,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[33]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5145,7 +5497,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[34]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[36]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5330,7 +5682,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[35]; }
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[37]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

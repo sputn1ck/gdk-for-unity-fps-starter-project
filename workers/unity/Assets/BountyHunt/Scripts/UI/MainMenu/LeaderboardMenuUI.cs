@@ -76,7 +76,7 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     void setEntry(LeaderboardEntryUI entry, Ranking score, long position)
     {
-        entry.Set(position, score.Name, new List<string> { Utility.SatsToShortString(score.Earnings, true), score.Kills.ToString(), score.Deaths.ToString(), score.KDRanking.ToString() });
+        entry.Set(position, score.Name, new List<string> { Utility.SatsToShortString(score.Stats.Earnings, true), score.Stats.Kills.ToString(), score.Stats.Deaths.ToString(), score.KdRanking.Rank.ToString() });
     }
 
     public async void UpdateLeaderBoard()
@@ -173,9 +173,12 @@ public class LeaderboardMenuUI : MonoBehaviour
             {
                 Pubkey = "fakeKey" + i,
                 Name = "fakePlayer_" + i,
-                Earnings = UnityEngine.Random.Range(0, 130000000),
-                Kills = UnityEngine.Random.Range(0,200),
-                Deaths = UnityEngine.Random.Range(0, 200)
+                Stats = new Stats()
+                {
+                    Earnings = UnityEngine.Random.Range(0, 130000000),
+                    Kills = UnityEngine.Random.Range(0, 200),
+                    Deaths = UnityEngine.Random.Range(0, 200)
+                },
             }) ;
         }
 

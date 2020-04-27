@@ -33,9 +33,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         highscores = new Ranking[this.HighscoresCount + 1];
         highscores[0] = new Ranking()
         {
-            Deaths = playerDeaths,
-            Kills = playerKills,
-            Earnings = playerEarnings,
+            Stats = new Stats()
+            {
+
+                Deaths = playerDeaths,
+                Kills = playerKills,
+                Earnings = playerEarnings,
+            },
             Name = userName,
             Pubkey = "Pubkey: 0"
         };
@@ -47,12 +51,19 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             int kd = (k + 1) / (d + 1);
             highscores[i] = new Ranking()
             {
-                Deaths = d,
-                Kills = k,
-                Earnings = e,
+                Stats = new Stats()
+                {
+
+                    Deaths = d,
+                    Kills = k,
+                    Earnings = e,
+                },
                 Name = "Player: " + i,
                 Pubkey = "Pubkey: " + i,
-                KDRanking = kd
+                KdRanking = new LeagueRanking()
+                {
+                    Rank = kd
+                }
             };
         }
     }
@@ -80,10 +91,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             case RankType.Global:
                 break;
             case RankType.Kd:
-                highscores = highscores.OrderByDescending(p => p.KDRanking).ToArray();
+                highscores = highscores.OrderByDescending(p => p.KdRanking.Rank).ToArray();
                 break;
             case RankType.Earnings:
-                highscores = highscores.OrderByDescending(p => p.Earnings).ToArray();
+                highscores = highscores.OrderByDescending(p => p.Stats.Earnings).ToArray();
                 break;
             default:
                 break;

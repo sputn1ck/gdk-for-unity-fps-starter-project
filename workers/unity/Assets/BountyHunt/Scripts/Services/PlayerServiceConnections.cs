@@ -235,32 +235,32 @@ public class PlayerServiceConnections : MonoBehaviour
             var player = highscores[i];
             if (player.Pubkey == playerpubkey)
             {
-                ClientEvents.instance.onPlayerLifeTimeKillsUpdate.Invoke(player.Kills);
+                ClientEvents.instance.onPlayerLifeTimeKillsUpdate.Invoke(player.Stats.Kills);
 
-                ClientEvents.instance.onPlayerLifeTimeDeathsUpdate.Invoke(player.Deaths);
-                ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.Invoke(player.Earnings);
+                ClientEvents.instance.onPlayerLifeTimeDeathsUpdate.Invoke(player.Stats.Deaths);
+                ClientEvents.instance.onPlayerLifeTimeEarningsUpdate.Invoke(player.Stats.Earnings);
             }
-            if (player.Earnings > highscores[highestEarningsPlayerIndex].Earnings)
+            if (player.Stats.Earnings > highscores[highestEarningsPlayerIndex].Stats.Earnings)
             {
                 highestEarningsPlayerIndex = i;
             }
-            if (player.Kills > highscores[highestKillsPlayerIndex].Kills)
+            if (player.Stats.Kills > highscores[highestKillsPlayerIndex].Stats.Kills)
             {
                 highestKillsPlayerIndex = i;
             }
-            if (player.Deaths > highscores[highestDeathsPlayerIndex].Deaths)
+            if (player.Stats.Deaths > highscores[highestDeathsPlayerIndex].Stats.Deaths)
             {
                 highestDeathsPlayerIndex = i;
             }
 
-            totalEarnings += player.Earnings;
-            totalKills += player.Kills;
-            totalDeaths += player.Deaths;
+            totalEarnings += player.Stats.Earnings;
+            totalKills += player.Stats.Kills;
+            totalDeaths += player.Stats.Deaths;
 
         }
-        ClientEvents.instance.onAllTimeMostKillsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestKillsPlayerIndex].Name, score = highscores[highestKillsPlayerIndex].Kills });
-        ClientEvents.instance.onAllTimeMostDeathsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestDeathsPlayerIndex].Name, score = highscores[highestDeathsPlayerIndex].Deaths });
-        ClientEvents.instance.onAllTimeMostEarningsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestEarningsPlayerIndex].Name, score = highscores[highestEarningsPlayerIndex].Earnings });
+        ClientEvents.instance.onAllTimeMostKillsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestKillsPlayerIndex].Name, score = highscores[highestKillsPlayerIndex].Stats.Kills });
+        ClientEvents.instance.onAllTimeMostDeathsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestDeathsPlayerIndex].Name, score = highscores[highestDeathsPlayerIndex].Stats.Deaths });
+        ClientEvents.instance.onAllTimeMostEarningsUpdate.Invoke(new AllTimeScoreUpdateArgs { name = highscores[highestEarningsPlayerIndex].Name, score = highscores[highestEarningsPlayerIndex].Stats.Earnings });
 
         ClientEvents.instance.onAllTimeKillsUpdate.Invoke(totalKills);
         ClientEvents.instance.onAllTimeDeathsUpdate.Invoke(totalDeaths);

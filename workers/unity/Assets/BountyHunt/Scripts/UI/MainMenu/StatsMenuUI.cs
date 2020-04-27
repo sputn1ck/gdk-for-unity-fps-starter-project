@@ -90,7 +90,7 @@ public class StatsMenuUI : MonoBehaviour
 
     void UpdateBadge(LeaderboardUpdateArgs args)
     {
-        Ranking[] scores = args.highscores.OrderByDescending(o => o.Earnings).ToArray();
+        Ranking[] scores = args.highscores.OrderByDescending(o => o.Stats.Earnings).ToArray();
         int playerRank = Array.FindIndex(scores, o => o.Pubkey == args.PlayerPubKey);
         float factor = (float)playerRank / (float)scores.Length;
 
