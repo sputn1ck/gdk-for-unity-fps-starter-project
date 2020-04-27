@@ -47,7 +47,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         LeaderBoardSet GlobalLeague = new LeaderBoardSet();
         GlobalLeague.name = "Global League";
         GlobalLeague.rankType = RankType.Global;
-        GlobalLeague.values.Add(("Score", r => r.Ranking_.ToString()));
+        GlobalLeague.values.Add(("Score", r => (r.KDRanking * r.EarningsRanking).ToString()));
         GlobalLeague.values.Add(("Hunting Rank", r => r.KDRanking.ToString()));
         GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.ToString()));
 

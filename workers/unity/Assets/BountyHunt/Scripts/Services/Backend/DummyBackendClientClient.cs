@@ -71,6 +71,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         {
             highscores[i].EarningsRanking = i + 1;
         }
+
+        highscores = highscores.OrderBy(h => h.EarningsRanking*h.KDRanking).ToArray();
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].Ranking_ = i + 1;
+        }
     }
     void Update()
     {
@@ -94,12 +100,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             case RankType.None:
                 break;
             case RankType.Global:
+                highscores = highscores.OrderBy(p => p.Ranking_).ToArray();
                 break;
             case RankType.Kd:
-                highscores = highscores.OrderByDescending(p => p.KdRanking.Rank).ToArray();
+                highscores = highscores.OrderBy(p => p.KDRanking).ToArray();
                 break;
             case RankType.Earnings:
-                highscores = highscores.OrderByDescending(p => p.Stats.Earnings).ToArray();
+                highscores = highscores.OrderBy(p => p.EarningsRanking).ToArray();
                 break;
             default:
                 break;
