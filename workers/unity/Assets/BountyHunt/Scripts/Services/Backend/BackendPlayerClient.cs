@@ -117,4 +117,20 @@ public class BackendPlayerClient : IBackendPlayerClient
         //TODO
         throw new NotImplementedException();
     }
+
+    public async Task<bool> NeedsUsernameChange()
+    {
+        var name = await GetUsername();
+        bool setName;
+        if (pubkey == name)
+        {
+            setName = true;
+        }
+        else
+        {
+            setName = false;
+
+        }
+        return setName;
+    }
 }

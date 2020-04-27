@@ -40,7 +40,7 @@ public class StartScreenUI : MonoBehaviour
         try
         {
             await PlayerServiceConnections.instance.SetupServices(SetInitializeString);
-            if (!await PlayerServiceConnections.instance.CheckName())
+            if (await PlayerServiceConnections.instance.BackendPlayerClient.NeedsUsernameChange())
             {
                 ShowSetNamePanel();
                 return;

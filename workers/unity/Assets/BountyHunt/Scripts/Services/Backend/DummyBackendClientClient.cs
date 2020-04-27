@@ -11,6 +11,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public string getUsernameResponse;
     public string setUsernameResponse;
     public string userName;
+    public bool needsUserNameChange;
 
     [Header("Rankings")]
     public int HighscoresCount;
@@ -118,7 +119,16 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     public Task<ShopSkin[]> GetAllSkins()
     {
-        throw new System.NotImplementedException();
+        List<ShopSkin> shopSkins = new List<ShopSkin>();
+        foreach (var id in allSkins)
+        {
+            shopSkins.Add(new ShopSkin
+            {
+                Id = id,
+                Price = UnityEngine.Random.Range(1, 100000)
+            });
+        }
+        return Task.FromResult(shopSkins.ToArray());
     }
 
     public async Task<string> GetSkinInvoice(string skinId)
@@ -170,5 +180,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             int id = Array.IndexOf(highscores, ranking);
             return id;
         }
+    }
+
+    public Task<bool> NeedsUsernameChange()
+    {
+        return Task.FromResult(needsUserNameChange);
     }
 }

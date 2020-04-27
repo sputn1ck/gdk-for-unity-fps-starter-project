@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: -1170277828860489674}
   - component: {fileID: 6664102670667166243}
   - component: {fileID: -3606728209907532769}
+  - component: {fileID: 8003412066021046749}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -519,6 +520,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitmarkerSound: {fileID: 8300000, guid: 5893d5274d2be024d87acdfdcd10971f, type: 3}
+--- !u!114 &8003412066021046749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627949407420470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ab071e1d5a7df46a094469469b55c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RendererParent: {fileID: 5610480118836389758}
 --- !u!1001 &898400276755741151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -705,6 +719,12 @@ Animator:
 --- !u!4 &1042047976089489413 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8798400132844595016, guid: 99c1c836e4262284d9b458f03442a4f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8389127841103034189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5610480118836389758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4156900125025456179, guid: 99c1c836e4262284d9b458f03442a4f6,
     type: 3}
   m_PrefabInstance: {fileID: 8389127841103034189}
   m_PrefabAsset: {fileID: 0}

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 205572536524406604}
   - component: {fileID: -6154128124501086661}
   - component: {fileID: 9086639326869295289}
+  - component: {fileID: 6553652760923945073}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -259,6 +260,19 @@ MonoBehaviour:
   nameCanvas: {fileID: 5847794218962667647}
   playerNameText: {fileID: 551172831124993840}
   materialSettings: {fileID: 11400000, guid: b51c515cb2c889b45a49a4b2ff47a40a, type: 2}
+--- !u!114 &6553652760923945073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807652507279196}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ab071e1d5a7df46a094469469b55c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RendererParent: {fileID: 5611314736482615095}
 --- !u!1 &336058623627102995
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,13 +506,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 551172831124993840}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -542,11 +556,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirdPersonModel
       objectReference: {fileID: 0}
-    - target: {fileID: 6904808606989008612, guid: fb231ed0cc39caf4e897380b9666c858,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e0d57925aedff664da5e7a836353a233, type: 2}
     - target: {fileID: 7462652536711723481, guid: fb231ed0cc39caf4e897380b9666c858,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -622,6 +631,11 @@ PrefabInstance:
       propertyPath: m_LODs.Array.data[3].screenRelativeHeight
       value: 0.03590262
       objectReference: {fileID: 0}
+    - target: {fileID: 6904808606989008612, guid: fb231ed0cc39caf4e897380b9666c858,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e0d57925aedff664da5e7a836353a233, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb231ed0cc39caf4e897380b9666c858, type: 3}
 --- !u!1 &7600742695259309303 stripped
@@ -639,6 +653,12 @@ Transform:
 --- !u!95 &4106212624890956373 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6904808606989008612, guid: fb231ed0cc39caf4e897380b9666c858,
+    type: 3}
+  m_PrefabInstance: {fileID: 7435157627890971825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5611314736482615095 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3094423185384262534, guid: fb231ed0cc39caf4e897380b9666c858,
     type: 3}
   m_PrefabInstance: {fileID: 7435157627890971825}
   m_PrefabAsset: {fileID: 0}

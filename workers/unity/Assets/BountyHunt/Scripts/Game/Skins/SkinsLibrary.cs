@@ -1,14 +1,17 @@
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BBH/Skins/SkinsLibrary")]
 public class SkinsLibrary : ScriptableObject
 {
+    public static SkinsLibrary MasterInstance;
 
     [SerializeField] private List<SkinSlotSettings> slotSettings;
 
-    public Dictionary<SkinSlot, SkinSlotSettings> settings;
+    public Dictionary<SkinSlot, SkinSlotSettings> skinSlotSettings;
 
     private Dictionary<string, Skin> skinsByID;
 
@@ -18,7 +21,10 @@ public class SkinsLibrary : ScriptableObject
         //Debug.Log("skin: " + skinID);
         //Debug.Log("default: " + settings[slot].defaultSkinID);
 
-        if (!skinsByID.ContainsKey(skinID)) return skinsByID[settings[slot].defaultSkinID];
+        if (!skinsByID.ContainsKey(skinID))
+        {
+            return skinsByID[skinSlotSettings[slot].defaultSkinID];
+        }
         return skinsByID[skinID];
     }
 
@@ -31,22 +37,40 @@ public class SkinsLibrary : ScriptableObject
 
     public void Initialize()
     {
-        Initialize(new List<string>());
-    }
-
-    public void Initialize(List<string> IDs)
-    {
-
-        settings = new Dictionary<SkinSlot, SkinSlotSettings>();
+        skinSlotSettings = new Dictionary<SkinSlot, SkinSlotSettings>();
         foreach (SkinSlotSettings sss in slotSettings)
         {
-            settings[sss.slot] = sss;
+            skinSlotSettings[sss.slot] = sss;
         }
 
         skinsByID = new Dictionary<string, Skin>();
 
 
-        foreach (var v in settings)
+        foreach (var setting in skinSlotSettings)
+        {
+            foreach (SkinGroup g in setting.Value.groups)
+            {
+                foreach (Skin s in g.skins)
+                {
+                    skinsByID[s.ID] = s;
+                }
+            }
+        }
+    }
+
+    private void InitializeWithShopSkins(ShopSkin[] shopSkins)
+    {
+
+        skinSlotSettings = new Dictionary<SkinSlot, SkinSlotSettings>();
+        foreach (SkinSlotSettings sss in slotSettings)
+        {
+            skinSlotSettings[sss.slot] = sss;
+        }
+
+        skinsByID = new Dictionary<string, Skin>();
+
+
+        foreach (var v in skinSlotSettings)
         {
             List<SkinGroup> groups = new List<SkinGroup>(v.Value.groups);
             v.Value.groups.Clear();
@@ -59,11 +83,13 @@ public class SkinsLibrary : ScriptableObject
                 group.skins.Clear();
                 foreach (Skin s in skins)
                 {
-                    if (IDs.Count>0 && !IDs.Contains(s.ID)) {
+                    var shopSkin = shopSkins.FirstOrDefault(ss => ss.Id == s.ID);
+                    if (shopSkins.Length>0 && shopSkin == null) {
                         continue;
                     }
                     Skin skin = Instantiate(s);
                     skin.group = group;
+                    skin.price = shopSkin.Price;
                     group.skins.Add(skin);
                     skinsByID[skin.ID] = skin;
                 }
@@ -75,13 +101,13 @@ public class SkinsLibrary : ScriptableObject
         }
     }
 
-    public void Initialize(List<string> AllIDs, List<string> OwnedIDs)
+
+    public void InitializeForCharacterMenu(ShopSkin[] shopSkins, string[] OwnedIDs)
     {
-        Initialize(AllIDs);
+        InitializeWithShopSkins(shopSkins);
         SetOwnedStates(OwnedIDs);
     }
-
-    public void SetOwnedStates(List<string> IDs)
+    public void SetOwnedStates(string[] IDs)
     {
         foreach(var sk in skinsByID)
         {
@@ -95,6 +121,7 @@ public class SkinsLibrary : ScriptableObject
             }
         }
     }
+
 
 }
 [System.Serializable]
