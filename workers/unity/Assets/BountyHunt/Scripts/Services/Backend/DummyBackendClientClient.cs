@@ -48,7 +48,6 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             int k = UnityEngine.Random.Range(killsRange.x, killsRange.y);
             int d = UnityEngine.Random.Range(deathsRange.x, deathsRange.y);
             int e = UnityEngine.Random.Range(earningsRange.x, earningsRange.y);
-            int kd = (k + 1) / (d + 1);
             highscores[i] = new Ranking()
             {
                 Stats = new Stats()
@@ -60,11 +59,17 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 },
                 Name = "Player: " + i,
                 Pubkey = "Pubkey: " + i,
-                KdRanking = new LeagueRanking()
-                {
-                    Rank = kd
-                }
             };
+        }
+        highscores = highscores.OrderByDescending(h => (h.Kills + 1f) / (h.Deaths + 1f)).ToArray();
+        for(int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].KDRanking = i + 1;
+        }
+        highscores = highscores.OrderByDescending(h => h.Earnings).ToArray();
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].EarningsRanking = i + 1;
         }
     }
     void Update()
@@ -171,7 +176,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public async Task<string> SetUsername(string userName)
     {
         this.userName = userName;
-        highscores[0].Name = userName;
+        highscores.FirstOrDefault(h => h.Pubkey == "Pubkey: 0").Name = userName;
         return userName;
     }
 
