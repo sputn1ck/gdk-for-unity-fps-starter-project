@@ -18,6 +18,7 @@ public class LeaderboardMenuUI : MonoBehaviour
     public Button nextButton;
 
     public SimpleSliderUI sliderUI;
+    public TextMeshProUGUI pageText;
 
     List<LeaderboardEntryUI> entries;
 
@@ -188,10 +189,10 @@ public class LeaderboardMenuUI : MonoBehaviour
     }
     void SetPage(int page)
     {
-
         page = Mathf.Clamp(page, 0, lastPage);
         currentPageIndex = page;
         UpdateLeaderBoard();
+        
     }
 
     void UpdateNavigationButtons()
@@ -204,6 +205,8 @@ public class LeaderboardMenuUI : MonoBehaviour
 
         if (playervisible) meButton.interactable = false;
         else meButton.interactable = true;
+
+        pageText.text = (currentPageIndex + 1).ToString();
     }
 }
 
