@@ -39,8 +39,8 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         {
             resos.Add(resolutionLabelAndAction(res));
         }
-        PopUpEventArgs args = new PopUpEventArgs("Resolution", "", resos, true);
-        ClientEvents.instance.onPopUp.Invoke(args);
+        PopUpArgs args = new PopUpArgs("Resolution", "", resos, true);
+        PopUpManagerUI.instance.OpenPopUp(args);
     }
 
     LabelAndAction resolutionLabelAndAction(Resolution res)
@@ -65,8 +65,8 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         {
             quals.Add(QualityLabelAndAction(qual));
         }
-        PopUpEventArgs args = new PopUpEventArgs("Quality", "", quals, true);
-        ClientEvents.instance.onPopUp.Invoke(args);
+        PopUpArgs args = new PopUpArgs("Quality", "", quals, true);
+        PopUpManagerUI.instance.OpenPopUp(args);
     }
     void SetQuality(GraphicsQuality quality)
     {
@@ -95,8 +95,8 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         {
             modes.Add(DisplayModeLabelAndAction(mode));
         }
-        PopUpEventArgs args = new PopUpEventArgs("Display Mode", "", modes, true);
-        ClientEvents.instance.onPopUp.Invoke(args);
+        PopUpArgs args = new PopUpArgs("Display Mode", "", modes, true);
+        PopUpManagerUI.instance.OpenPopUp(args);
     }
     void SetDisplayMode(DisplayMode mode)
     {

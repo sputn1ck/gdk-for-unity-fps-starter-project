@@ -20,17 +20,16 @@ public class VaultMenuUI : MonoBehaviour
     void OnInvoiceInfoButtonPress()
     {
         //TODO change text
-        PopUpEventArgs args = new PopUpEventArgs("pay invoice", "Here some info about invoices! Maybe Kon Has some suggestions for this text.");
-
-        ClientEvents.instance.onPopUp.Invoke(args);
+        PopUpArgs args = new PopUpArgs("pay invoice", "Here some info about invoices! Maybe Kon Has some suggestions for this text.");
+        PopUpManagerUI.instance.OpenPopUp(args);
     }
 
     void OnPayButtonPress()
     {
         //TODO show error instead if invoice is invalid or not existent
 
-        YesNoPopUpEventArgs args = new YesNoPopUpEventArgs("pay", "Do you really want to pay the invoice of XXx <sprite name=sats>?", OnPayRequest);
-        ClientEvents.instance.onYesNoPopUp.Invoke(args);
+        YesNoPopUpArgs args = new YesNoPopUpArgs("pay", "Do you really want to pay the invoice of XXx <sprite name=sats>?", OnPayRequest);
+        PopUpManagerUI.instance.OpenYesNoPopUp(args);
     }
 
     void OnPayRequest(bool pay)

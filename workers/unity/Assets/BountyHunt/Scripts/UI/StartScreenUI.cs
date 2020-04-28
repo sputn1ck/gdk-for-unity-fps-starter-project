@@ -48,8 +48,8 @@ public class StartScreenUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", e.Message);
-            ClientEvents.instance.onPopUp.Invoke(args);
+            PopUpArgs args = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args);
             ShowRetryPanel();
             return;
         }
@@ -86,8 +86,8 @@ public class StartScreenUI : MonoBehaviour
         }
         catch(Exception e)
         {
-            PopUpEventArgs args = new PopUpEventArgs("Error", e.Message);
-            ClientEvents.instance.onPopUp.Invoke(args);
+            PopUpArgs args = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args);
             return;
         }
         OpenMainMenu();

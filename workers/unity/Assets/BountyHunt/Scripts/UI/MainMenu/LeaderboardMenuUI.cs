@@ -99,7 +99,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+            PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
         }
     }
 
@@ -121,7 +121,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+        PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
         }
     }
 
@@ -178,7 +178,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
         catch (Exception e)
         {
-            ClientEvents.instance.onPopUp.Invoke(new PopUpEventArgs("Error", e.Message));
+            PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
             return;
         }
         
