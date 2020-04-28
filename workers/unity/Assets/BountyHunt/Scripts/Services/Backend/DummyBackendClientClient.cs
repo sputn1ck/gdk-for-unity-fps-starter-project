@@ -8,8 +8,8 @@ using System;
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
     public string GameVersion;
-    public string getUsernameResponse;
-    public string setUsernameResponse;
+
+    [Header("Name")]
     public string userName;
     public bool needsUserNameChange;
 
@@ -27,9 +27,18 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public float SilverThreshold;
     public float BronzeThreshold;
 
+
+    [Header("Skins")]
     public string[] allSkins = new string[] { "robot_default", "robot_2" };
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
+
+
+    [Header("Payments")]
+    public bool paymentReturnValue;
+    public bool returnPayment;
+    public int expiryInSeconds;
+    public bool triggerPaymentTest;
     // Update is called once per frame
 
     private void Awake()
@@ -117,7 +126,11 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     void Update()
     {
-        
+        if (triggerPaymentTest)
+        {
+            triggerPaymentTest = false;
+            TestPayment();
+        }
     }
 
     public async Task Setup(string target, int port, string pubkey, string signature)
@@ -245,5 +258,31 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public Task<bool> NeedsUsernameChange()
     {
         return Task.FromResult(needsUserNameChange);
+    }
+
+    public async Task<bool> WaitForPayment(string invoice, long expiry)
+    {
+        return await Task.Run(() =>
+        {
+            var startTime = DateTime.Now.ToFileTimeUtc();
+            var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
+            while (DateTime.Now.ToFileTimeUtc() < endTime)
+            {
+                if (returnPayment)
+                {
+                    returnPayment = false;
+                    return paymentReturnValue;
+                }
+            }
+
+            return false;
+        });
+    }
+
+    public async void TestPayment()
+    {
+        var testInvoice = "testp" + UnityEngine.Random.Range(0, 100000).ToString();
+        var res = await WaitForPayment(testInvoice, expiryInSeconds);
+        Debug.Log(testInvoice + ";" + res);
     }
 }

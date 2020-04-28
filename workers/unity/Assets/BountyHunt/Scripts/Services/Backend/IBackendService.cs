@@ -24,6 +24,8 @@ public interface IBackendPlayerClient
     Task<string> GetGameVersion();
 
     Task<int> GetPlayerRank(string playername, RankType rankType);
+
+    Task<bool> WaitForPayment(string invoice, long expiry);
 }
 
 public interface IBackendServerClient
