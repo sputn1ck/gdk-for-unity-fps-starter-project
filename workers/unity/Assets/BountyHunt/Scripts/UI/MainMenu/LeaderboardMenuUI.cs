@@ -48,21 +48,21 @@ public class LeaderboardMenuUI : MonoBehaviour
         LeaderBoardSet GlobalLeague = new LeaderBoardSet();
         GlobalLeague.name = "Global League";
         GlobalLeague.rankType = RankType.Global;
-        GlobalLeague.values.Add(("Score", r => (r.KDRanking * r.EarningsRanking).ToString()));
-        GlobalLeague.values.Add(("Hunting Rank", r => r.KDRanking.ToString()));
-        GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.ToString()));
+        GlobalLeague.values.Add(("Global Score", r => r.GlobalRanking.Score.ToString()));
+        GlobalLeague.values.Add(("Hunting Rank", r => r.KdRanking.Rank.ToString()));
+        GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.Rank.ToString()));
 
         LeaderBoardSet HuntersLeague = new LeaderBoardSet();
         HuntersLeague.name = "Hunters League";
         HuntersLeague.rankType = RankType.Kd;
-        HuntersLeague.values.Add(("Hunter Score", r => ((int)((r.Kills+1f)/(r.Deaths+1f)*100)).ToString()));
-        HuntersLeague.values.Add(("Kills", r => r.Kills.ToString()));
-        HuntersLeague.values.Add(("Deaths", r => r.Deaths.ToString()));
+        HuntersLeague.values.Add(("Hunter Score", r => r.KdRanking.Score.ToString()));
+        HuntersLeague.values.Add(("Kills", r => r.Stats.Kills.ToString()));
+        HuntersLeague.values.Add(("Deaths", r => r.Stats.Deaths.ToString()));
 
         LeaderBoardSet LootersLeague = new LeaderBoardSet();
         LootersLeague.name = "Looters League";
         LootersLeague.rankType = RankType.Earnings;
-        LootersLeague.values.Add(("Earnings", r => r.Earnings.ToString()));
+        LootersLeague.values.Add(("Earnings", r => r.Stats.Earnings.ToString()));
 
         leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
 
