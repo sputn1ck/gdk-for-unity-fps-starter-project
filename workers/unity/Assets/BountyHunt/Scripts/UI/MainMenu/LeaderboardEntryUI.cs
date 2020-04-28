@@ -17,16 +17,26 @@ public class LeaderboardEntryUI : MonoBehaviour
     {
         canvasGroup.alpha = 1;
         highlight.gameObject.SetActive(false);
-        if (values.Count != this.values.Count)
+        if (values.Count > this.values.Count)
         {
-            throw new ArgumentException("length of values-List has to match with the objects values");
+            throw new ArgumentException("length of values-List is larger than th ui elements count!");
         }
 
         this.rank.text = rank + ".";
+        if (rank == 0) this.rank.text = "";
         this.playerName.text = playerName;
-        for(int i = 0; i < values.Count;i++)
+        for(int i = 0; i < this.values.Count;i++)
         {
-            this.values[i].text = values[i];
+            if (i < values.Count)
+            {
+                this.values[i].gameObject.SetActive(true);
+                this.values[i].text = values[i];
+            }
+            else
+            {
+                this.values[i].gameObject.SetActive(false);
+            }
+
         }
     }
 

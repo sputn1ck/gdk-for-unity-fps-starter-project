@@ -62,6 +62,7 @@ MonoBehaviour:
   getUsernameResponse: 
   setUsernameResponse: 
   userName: 
+  needsUserNameChange: 0
   HighscoresCount: 43
   earningsRange: {x: 10, y: 10000}
   killsRange: {x: 3, y: 200}
@@ -69,6 +70,9 @@ MonoBehaviour:
   playerEarnings: 5000
   playerKills: 201
   playerDeaths: 2
+  GoldThreshold: 0.1
+  SilverThreshold: 0.3
+  BronzeThreshold: 0.6
   allSkins:
   - robot_default
   - robot_2

@@ -23,6 +23,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public int playerDeaths;
     Ranking[] highscores;
 
+    public float GoldThreshold;
+    public float SilverThreshold;
+    public float BronzeThreshold;
+
     public string[] allSkins = new string[] { "robot_default", "robot_2" };
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
@@ -33,40 +37,84 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         highscores = new Ranking[this.HighscoresCount + 1];
         highscores[0] = new Ranking()
         {
+            Name = userName,
+            Pubkey = "Pubkey: 0",
             Stats = new Stats()
             {
 
                 Deaths = playerDeaths,
                 Kills = playerKills,
                 Earnings = playerEarnings,
+
             },
-            Name = userName,
-            Pubkey = "Pubkey: 0"
+            GlobalRanking = new LeagueRanking(),
+            KdRanking = new LeagueRanking
+            {
+                Score = (int)((playerKills + 1f) / (playerDeaths + 1f))
+            },
+            EarningsRanking = new LeagueRanking
+            {
+                Score = playerEarnings
+            }
         };
         for (int i = 1; i < highscores.Length; i++)
         {
             int k = UnityEngine.Random.Range(killsRange.x, killsRange.y);
             int d = UnityEngine.Random.Range(deathsRange.x, deathsRange.y);
             int e = UnityEngine.Random.Range(earningsRange.x, earningsRange.y);
-            int kd = (k + 1) / (d + 1);
+            int kd = (int)((k + 1f) / (d + 1f) * 100);
             highscores[i] = new Ranking()
             {
+                Name = "Player: " + i,
+                Pubkey = "Pubkey: " + i,
+
                 Stats = new Stats()
                 {
-
                     Deaths = d,
                     Kills = k,
                     Earnings = e,
                 },
-                Name = "Player: " + i,
-                Pubkey = "Pubkey: " + i,
-                KdRanking = new LeagueRanking()
+
+                GlobalRanking = new LeagueRanking(),
+                KdRanking = new LeagueRanking
                 {
-                    Rank = kd
+                    Score = (int)((k + 1f) / (d + 1f))
+                },
+                EarningsRanking = new LeagueRanking
+                {
+                    Score = e
                 }
             };
         }
+        highscores = highscores.OrderByDescending(h => h.KdRanking.Score).ToArray();
+        for(int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].KdRanking.Rank = i + 1;
+        }
+        highscores = highscores.OrderByDescending(h => h.EarningsRanking.Score).ToArray();
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].EarningsRanking.Rank = i + 1;
+            highscores[i].GlobalRanking.Score = highscores[i].KdRanking.Rank * highscores[i].EarningsRanking.Rank;
+        }
+
+        highscores = highscores.OrderBy(h => h.GlobalRanking.Score).ToArray();
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].GlobalRanking.Rank = i + 1;
+            setBadge(highscores[i].GlobalRanking,highscores.Length);
+            setBadge(highscores[i].KdRanking, highscores.Length);
+            setBadge(highscores[i].EarningsRanking, highscores.Length);
+        }
     }
+
+    void setBadge(LeagueRanking ranking, int totalCount)
+    {
+        if (ranking.Rank/totalCount <= GoldThreshold) ranking.Badge = RankBadge.Gold;
+        else if (ranking.Rank/totalCount <= SilverThreshold) ranking.Badge = RankBadge.Silver;
+        if (ranking.Rank/totalCount <= BronzeThreshold ) ranking.Badge = RankBadge.Bronze;
+    }
+
     void Update()
     {
         
@@ -89,12 +137,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             case RankType.None:
                 break;
             case RankType.Global:
+                highscores = highscores.OrderBy(p => p.GlobalRanking.Rank).ToArray();
                 break;
             case RankType.Kd:
-                highscores = highscores.OrderByDescending(p => p.KdRanking.Rank).ToArray();
+                highscores = highscores.OrderBy(p => p.KdRanking.Rank).ToArray();
                 break;
             case RankType.Earnings:
-                highscores = highscores.OrderByDescending(p => p.Stats.Earnings).ToArray();
+                highscores = highscores.OrderBy(p => p.EarningsRanking.Rank).ToArray();
                 break;
             default:
                 break;
@@ -171,7 +220,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public async Task<string> SetUsername(string userName)
     {
         this.userName = userName;
-        highscores[0].Name = userName;
+        highscores.FirstOrDefault(h => h.Pubkey == "Pubkey: 0").Name = userName;
         return userName;
     }
 

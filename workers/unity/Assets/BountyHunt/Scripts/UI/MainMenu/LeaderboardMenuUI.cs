@@ -12,23 +12,27 @@ public class LeaderboardMenuUI : MonoBehaviour
 {
     public LeaderboardEntryUI headLine;
     public Transform entryContainer;
-    public SimpleSliderUI slideLine;
-
     public Button firstButton;
     public Button meButton;
     public Button previousButton;
     public Button nextButton;
 
+    public SimpleSliderUI sliderUI;
+    public TextMeshProUGUI pageText;
 
     List<LeaderboardEntryUI> entries;
 
     Ranking[] highscores;
     string PlayerName;
 
-    RankType priority = RankType.Earnings;
     bool orderAscending = false;
     int pageSize;
     int currentPageIndex = 0;
+    int lastPage;
+    bool playervisible = false;
+
+    LeaderBoardSet[] leaderboards;
+    LeaderBoardSet selectedLeaderboard;
 
     // Start is called before the first frame update
     void Start()
@@ -36,25 +40,50 @@ public class LeaderboardMenuUI : MonoBehaviour
         
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
         pageSize = entries.Count;
-        headLine.Set(0, "Player", new List<string> { "earnings", "kills", "deaths", "k/d" });
-        slideLine.GetSlideButtonEvents(0).onClick.AddListener( () => SetPriority(RankType.Earnings));
-        //slideLine.GetSlideButtonEvents(1).onClick.AddListener(() => priority = RankType.Kills ));
-        //slideLine.GetSlideButtonEvents(2).onClick.AddListener(() => priority = RankType.Deaths));
-        slideLine.GetSlideButtonEvents(3).onClick.AddListener(() => SetPriority(RankType.Kd)) ;
-
         firstButton.onClick.AddListener(SetFirstPage);
         meButton.onClick.AddListener(SetMyPage);
         previousButton.onClick.AddListener(SetPreviousPage);
         nextButton.onClick.AddListener(SetNextPage);
 
-        /*
-        int counter = 0;
-        foreach (LeaderboardEntryUI entry in entries)
+        LeaderBoardSet GlobalLeague = new LeaderBoardSet();
+        GlobalLeague.name = "Global League";
+        GlobalLeague.rankType = RankType.Global;
+        GlobalLeague.values.Add(("Global Score", r => r.GlobalRanking.Score.ToString()));
+        GlobalLeague.values.Add(("Hunting Rank", r => r.KdRanking.Rank.ToString()));
+        GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.Rank.ToString()));
+
+        LeaderBoardSet HuntersLeague = new LeaderBoardSet();
+        HuntersLeague.name = "Hunters League";
+        HuntersLeague.rankType = RankType.Kd;
+        HuntersLeague.values.Add(("Hunter Score", r => r.KdRanking.Score.ToString()));
+        HuntersLeague.values.Add(("Kills", r => r.Stats.Kills.ToString()));
+        HuntersLeague.values.Add(("Deaths", r => r.Stats.Deaths.ToString()));
+
+        LeaderBoardSet LootersLeague = new LeaderBoardSet();
+        LootersLeague.name = "Looters League";
+        LootersLeague.rankType = RankType.Earnings;
+        LootersLeague.values.Add(("Earnings", r => r.Stats.Earnings.ToString()));
+
+        leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
+
+        sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(() => gameObject.SetActive(false));
+        for (int i = 1; i<sliderUI.buttons.Count; i++)
         {
-            counter++;
-            entry.Set(counter, "player" + counter, new List<string> { Utility.SatsToShortString(UnityEngine.Random.Range(0, 130000000), true), UnityEngine.Random.Range(0, 100).ToString(), UnityEngine.Random.Range(0, 100).ToString(), "something" });
+            Button btn = sliderUI.buttons[i];
+            int j = i - 1;
+            if (j < leaderboards.Length)
+            {
+                btn.GetComponentInChildren<TextMeshProUGUI>().text = leaderboards[j].name;
+                sliderUI.buttonEvents[btn].onActivate.AddListener(() => SetLeaderBoard(leaderboards[j]));
+                sliderUI.buttonEvents[btn].onActivate.AddListener(() => gameObject.SetActive(true));
+            }
+            else
+            {
+                btn.gameObject.SetActive(false);
+            }
         }
-        */
+        selectedLeaderboard = leaderboards[0];
+        gameObject.SetActive(false);
     }
     void OnEnable()
     {
@@ -66,7 +95,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         try
         {
             PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
-            SetMyPage();
+            SetLeaderBoard(selectedLeaderboard);
         }
         catch (Exception e)
         {
@@ -74,17 +103,21 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
     }
 
-    void setEntry(LeaderboardEntryUI entry, Ranking score, long position)
+    void setEntry(LeaderboardEntryUI entry, Ranking ranking, long position)
     {
-        entry.Set(position, score.Name, new List<string> { Utility.SatsToShortString(score.Stats.Earnings, true), score.Stats.Kills.ToString(), score.Stats.Deaths.ToString(), score.KdRanking.Rank.ToString() });
+        List<string> strings = selectedLeaderboard.values.Select(e => e.value(ranking)).ToList();
+
+        entry.Set(position, ranking.Name, strings);
     }
 
     public async void UpdateLeaderBoard()
     {
         try
         {
-            (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,priority);
+            (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,selectedLeaderboard.rankType);
             UpdateList(ranks,currentPageIndex*pageSize);
+            lastPage = (int)Mathf.Ceil(count / pageSize) - 1;
+            UpdateNavigationButtons();
         }
         catch (Exception e)
         {
@@ -94,6 +127,8 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     void UpdateList(Ranking[] ranks, int startIndex)
     {
+        playervisible = false;
+
         int i = 0;
         foreach(LeaderboardEntryUI entry in entries)
         {
@@ -103,6 +138,7 @@ public class LeaderboardMenuUI : MonoBehaviour
                 if(ranks[i].Name == PlayerName)
                 {
                     entry.Highlight();
+                    playervisible = true;
                 }
                 
             }
@@ -116,10 +152,12 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     }
 
-    void SetPriority(RankType type)
+    void SetLeaderBoard(LeaderBoardSet set)
     {
-        priority = type;
-        UpdateLeaderBoard();
+        List<string> strings = set.values.Select(e => e.name).ToList();
+        headLine.Set(0, "Player", strings);
+        selectedLeaderboard = set;
+        UpdateLeaderBoard(); ;
     }
 
     void SetPreviousPage()
@@ -134,7 +172,7 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         try
         {
-            int rank = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRank(PlayerName, priority);
+            int rank = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRank(PlayerName, selectedLeaderboard.rankType);
 
             SetPage(rank/pageSize);
         }
@@ -151,46 +189,30 @@ public class LeaderboardMenuUI : MonoBehaviour
     }
     void SetPage(int page)
     {
+        page = Mathf.Clamp(page, 0, lastPage);
         currentPageIndex = page;
         UpdateLeaderBoard();
+        
     }
 
-
-
-    //TEST
-
-    public int testPlayers = 20;
-    public bool test;
-
-    void onTest()
+    void UpdateNavigationButtons()
     {
-        test = false;
+        if (currentPageIndex == 0) { previousButton.interactable = false; firstButton.interactable = false; }
+        else { previousButton.interactable = true; firstButton.interactable = true; }
 
-        List<Ranking> hs = new List<Ranking>();
-        for (int i = 0; i < testPlayers; i++)
-        {
-            hs.Add(new Ranking
-            {
-                Pubkey = "fakeKey" + i,
-                Name = "fakePlayer_" + i,
-                Stats = new Stats()
-                {
-                    Earnings = UnityEngine.Random.Range(0, 130000000),
-                    Kills = UnityEngine.Random.Range(0, 200),
-                    Deaths = UnityEngine.Random.Range(0, 200)
-                },
-            }) ;
-        }
+        if (currentPageIndex == lastPage) nextButton.interactable = false;
+        else nextButton.interactable = true;
 
-        LeaderboardUpdateArgs args = new LeaderboardUpdateArgs { highscores = hs.ToArray(), PlayerPubKey = "fakeKey0"};
+        if (playervisible) meButton.interactable = false;
+        else meButton.interactable = true;
 
-        ClientEvents.instance.onLeaderboardUpdate.Invoke(args);
+        pageText.text = (currentPageIndex + 1).ToString();
     }
+}
 
-    private void Update()
-    {
-        if (Time.time>0.1f && test) onTest();
-    }
-
+public class LeaderBoardSet{
+    public string name;
+    public RankType rankType;
+    public List<(string name, Func<Ranking, string> value)> values = new List<(string name, Func<Ranking, string> value)>();
 }
 
