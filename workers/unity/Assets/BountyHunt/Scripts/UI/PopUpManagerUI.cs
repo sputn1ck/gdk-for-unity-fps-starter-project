@@ -10,7 +10,11 @@ public class PopUpManagerUI : MonoBehaviour
     public PopUpUI popUpPrefab;
     public Transform container;
 
+
+
     public static PopUpManagerUI instance;
+
+    public static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
     private void Awake()
     {
@@ -20,7 +24,7 @@ public class PopUpManagerUI : MonoBehaviour
     public PopUpUI OpenPopUp(PopUpArgs args)
     {
         PopUpUI popup = Instantiate(popUpPrefab, container);
-        popup.Set(args.headline, args.showX, args.text, args.actions,args.verticalButtonLayout,args.popUpID);
+        popup.Set(args.headline, args.showX, args.text, args.actions,args.verticalButtonLayout);
         return popup;
     }
 
@@ -32,14 +36,14 @@ public class PopUpManagerUI : MonoBehaviour
         actions.Add(new LabelAndAction("yes", args.yesAction));
         actions.Add(new LabelAndAction("no", args.noAction));
 
-        popup.Set(args.headline, args.showX, args.text, actions,false,args.popUpID);
+        popup.Set(args.headline, args.showX, args.text, actions,false);
         return popup;
     }
 
     public PopUpUI OpenImagePopUp(ImagePopUpArgs args)
     {
         PopUpUI popup = Instantiate(popUpPrefab, container);
-        popup.Set(args.headline, args.showX, args.text1, args.sprite, args.text2, args.actions, args.verticalButtonLayout, args.imageSizeMultiplier,args.tintImage, args.popUpID);
+        popup.Set(args.headline, args.showX, args.text1, args.sprite, args.text2, args.actions, args.verticalButtonLayout, args.imageSizeMultiplier,args.tintImage);
         return popup;
     }
 
@@ -81,8 +85,8 @@ public class PopUpManagerUI : MonoBehaviour
             PopUpArgs args;
             switch (variant)
             {
-                case 0: default: args = new PopUpArgs("header",text,actions,verticalButtons,showX, ID);break;
-                case 1: args = new PopUpArgs(header,text,ID); break;
+                case 0: default: args = new PopUpArgs("header",text,actions,verticalButtons,showX);break;
+                case 1: args = new PopUpArgs(header,text); break;
             }
 
             OpenPopUp(args);
@@ -92,7 +96,7 @@ public class PopUpManagerUI : MonoBehaviour
         if (testYesNoPopup)
         {
             testYesNoPopup = false;
-            YesNoPopUpArgs args = new YesNoPopUpArgs("header", text, testYN, showX,ID);
+            YesNoPopUpArgs args = new YesNoPopUpArgs("header", text, testYN, showX);
             OpenYesNoPopUp(args);
         }
 
@@ -105,21 +109,8 @@ public class PopUpManagerUI : MonoBehaviour
             if (btn3) actions.Add(new LabelAndAction("Auslöser3", test3));
 
             testYesNoPopup = false;
-            ImagePopUpArgs args = new ImagePopUpArgs("header", text, sprite, text2,actions,verticalButtons,tintImage,imageSizeMultiplier,showX,ID);
+            ImagePopUpArgs args = new ImagePopUpArgs("header", text, sprite, text2,actions,verticalButtons,tintImage,imageSizeMultiplier,showX);
             OpenImagePopUp(args);
-        }
-
-        if (closeWithID)
-        {
-            closeWithID = false;
-            PopUpUI.CloseAllWithID(ID);
-
-        }
-
-        if (closeAllWithID)
-        {
-            closeAllWithID = false;
-            PopUpUI.CloseAllWithID(ID);
         }
 
         if (closeAll)
@@ -162,30 +153,25 @@ public struct PopUpArgs
     public bool verticalButtonLayout;
     public bool showX;
     public List<LabelAndAction> actions;
-    public string popUpID;
 
     /// <param name="actions">the button labels and their corresponding actions for OnClick()</param>
     /// <param name="verticalButtonlayout">should the buttons be layouted vertical instead of horizontal?</param>
-    /// <param name="popUpID">this is used, if you want to need acces to the created popup (such as closing it from another script) </param>
-    public PopUpArgs(string headline, string text, List<LabelAndAction> actions, bool verticalButtonlayout, bool showX = true, string popUpID = "")
+    public PopUpArgs(string headline, string text, List<LabelAndAction> actions, bool verticalButtonlayout, bool showX = true)
     {
         this.headline = headline;
         this.text = text;
         this.showX = showX;
         this.actions = actions;
         this.verticalButtonLayout = verticalButtonlayout;
-        this.popUpID = popUpID;
     }
 
-    /// <param name="popUpID">this is used, if you want to need acces to the created popup (such as closing it from another script) </param>
-    public PopUpArgs(string headline, string text, string popUpID = "")
+    public PopUpArgs(string headline, string text)
     {
         this.headline = headline;
         this.text = text;
         this.showX = true;
         this.actions = new List<LabelAndAction>();
         this.verticalButtonLayout = false;
-        this.popUpID = popUpID;
     }
 }
 
@@ -196,31 +182,27 @@ public struct YesNoPopUpArgs
     public bool showX;
     public UnityAction yesAction;
     public UnityAction noAction;
-    public string popUpID;
 
     /// <param name="action">the action for both buttons, "YES" sends true, "NO" sends false</param>
-    /// <param name="popUpID">this is used, if you want to need acces to the created popup (such as closing it from another script) </param>
-    public YesNoPopUpArgs(string headline, string text, UnityAction<bool> action, bool showX = true, string popUpID = "")
+    public YesNoPopUpArgs(string headline, string text, UnityAction<bool> action, bool showX = true)
     {
         this.headline = headline;
         this.text = text;
         this.showX = showX;
         this.yesAction = delegate { action.Invoke(true); };
         this.noAction = delegate { action.Invoke(false); };
-        this.popUpID = popUpID;
     }
 
     /// <param name="yesAction">the action, for the "YES" Button</param>
     /// <param name="noAction">the action, for the "NO" Button</param>
     /// <param name="popUpID">this is used, if you want to need acces to the created popup (such as closing it from another script) </param>
-    public YesNoPopUpArgs(string headline, string text, UnityAction yesAction, UnityAction noAction, bool showX = true, string popUpID = "")
+    public YesNoPopUpArgs(string headline, string text, UnityAction yesAction, UnityAction noAction, bool showX = true)
     {
         this.headline = headline;
         this.text = text;
         this.showX = showX;
         this.yesAction = yesAction;
         this.noAction = noAction;
-        this.popUpID = popUpID;
     }
 }
 
@@ -235,7 +217,6 @@ public struct ImagePopUpArgs
     public Sprite sprite;
     public bool tintImage;
     public float imageSizeMultiplier;
-    public string popUpID;
 
     /// <param name="text1">text above the image</param>
     /// <param name="text2">text below the image</param>
@@ -243,8 +224,7 @@ public struct ImagePopUpArgs
     /// <param name="verticalButtonlayout">should the buttons be layouted vertical instead of horizontal?</param>
     /// <param name="tintImage">should the image be tinted with the primary color? if not, the image color is white</param>
     /// <param name="imageSizeMultiplier">relative size of the image. Size 1 is a square fitted to the panel. Sprite aspect is always preserved.</param>
-    /// <param name="popUpID">this is used, if you want to need acces to the created popup (such as closing it from another script) </param>
-    public ImagePopUpArgs(string headline, string text1, Sprite sprite, string text2, List<LabelAndAction> actions, bool verticalButtonlayout, bool tintImage, float imageSizeMultiplier = 1, bool showX = true, string popUpID = "")
+    public ImagePopUpArgs(string headline, string text1, Sprite sprite, string text2, List<LabelAndAction> actions, bool verticalButtonlayout, bool tintImage, float imageSizeMultiplier = 1, bool showX = true)
     {
         this.headline = headline;
         this.text1 = text1;
@@ -255,6 +235,5 @@ public struct ImagePopUpArgs
         this.sprite = sprite;
         this.tintImage = tintImage;
         this.imageSizeMultiplier = imageSizeMultiplier;
-        this.popUpID = popUpID;
     }
 }

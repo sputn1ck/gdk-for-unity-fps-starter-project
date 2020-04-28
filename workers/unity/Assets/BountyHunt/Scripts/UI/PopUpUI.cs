@@ -14,13 +14,13 @@ public class PopUpUI : MonoBehaviour
     public Transform verticalButtonsContainer;
     public Button buttonPrefab;
     public Button xButton;
-    [HideInInspector] public string ID;
+
+    [HideInInspector] List<Button> buttons;
 
     static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
-    public void Set(string headline, bool showX, string text, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons,string ID)
+    public void Set(string headline, bool showX, string text, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons)
     {
-        this.ID = ID;
         allPopUps.Add(this);
         image.gameObject.SetActive(false);
 
@@ -57,13 +57,14 @@ public class PopUpUI : MonoBehaviour
             b.GetComponentInChildren<TextMeshProUGUI>().text = la.label;
             b.onClick.AddListener(la.action);
             b.onClick.AddListener(Close);
+            this.buttons.Add(b);
         }
         
     }
 
-    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage,string ID)
+    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage)
     {
-        Set(headline, showX, text1, buttonActions, verticalLayoutedButtons,ID);
+        Set(headline, showX, text1, buttonActions, verticalLayoutedButtons);
 
         image.gameObject.SetActive(true);
         image.sprite = sprite;
@@ -91,20 +92,6 @@ public class PopUpUI : MonoBehaviour
         allPopUps.Remove(this);
         Destroy(gameObject);
     }
-    public static void CloseFirstWithID(string popUpID)
-    {
-        PopUpUI toClose = allPopUps.Find(pop => pop.ID == popUpID);
-        toClose.Close();
-    }
-
-    public static void CloseAllWithID(string popUpID)
-    {
-        List<PopUpUI> toClose = allPopUps.FindAll(pop => pop.ID == popUpID);
-        for (int i = toClose.Count - 1; i >= 0; i--)
-        {
-            toClose[i].Close();
-        }
-    }
     public static void CloseAll()
     {
         for (int i = allPopUps.Count - 1; i >= 0; i--)
@@ -112,14 +99,7 @@ public class PopUpUI : MonoBehaviour
             allPopUps[i].Close();
         }
     }
-    public static PopUpUI GetFirstWithID(string popUpID)
-    {
-        return allPopUps.Find(pop => pop.ID == popUpID);
-    }
-    public static List<PopUpUI> GetAllWithID(string popUpID)
-    {
-        return allPopUps.FindAll(pop => pop.ID == popUpID);
-    }
+
 }
 
 public class LabelAndAction
