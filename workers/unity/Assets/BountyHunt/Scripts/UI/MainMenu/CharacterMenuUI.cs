@@ -106,6 +106,7 @@ public class CharacterMenuUI : MonoBehaviour
     public void UpdateDetailsPanel(SkinGroup group, Skin skin)
     {
         groupSelectionPanelsDict[group.slot].selectedSkin = skin;
+        groupSelectionPanelsDict[group.slot].selectedGroup = groupSelectionPanelsDict[group.slot].buttons.Find(b => b.group == skin.group);
         detailsHeaderText.text = group.groupName;
         detailsPreviewImage.sprite = group.sprite;
         BuyAndEquipButton.interactable = true;
@@ -198,7 +199,7 @@ public class CharacterMenuUI : MonoBehaviour
         // Todo popup
         try
         {
-            var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
+            string res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
 
             GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
             long balance = balanceResponse.DaemonBalance;
@@ -208,8 +209,8 @@ public class CharacterMenuUI : MonoBehaviour
             string text2 = "";
             if (balance < skn.price) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
             List<LabelAndAction> actions = new List<LabelAndAction>();
-            actions.Add(new LabelAndAction("ingame Wallet", BuyWithIngameWallet));
-            actions.Add(new LabelAndAction("external Wallet", BuyWithExternalWallet));
+            actions.Add(new LabelAndAction("ingame Wallet", () => BuyWithIngameWallet(res)));
+            actions.Add(new LabelAndAction("external Wallet", () => BuyWithExternalWallet(res)));
 
             ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
             PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
@@ -227,11 +228,11 @@ public class CharacterMenuUI : MonoBehaviour
         UpdateSelectionPanels();
     }
 
-    private async void BuyWithIngameWallet()
+    private async void BuyWithIngameWallet(string invoice)
     {
-
+        LabelAndAction copyAction = new LabelAndAction("Copy invoice", () => Utility.CopyToClipboard(invoice));
     }
-    private async void BuyWithExternalWallet()
+    private async void BuyWithExternalWallet(string invoice)
     {
 
     }

@@ -178,4 +178,13 @@ public static class Utility
         return newString;
     }
     //*/
+    public static void CopyToClipboard(string textToCopy)
+    {
+        TextEditor editor = new TextEditor
+        {
+            text = textToCopy
+        };
+        editor.SelectAll();
+        editor.Copy();
+    }
 }
