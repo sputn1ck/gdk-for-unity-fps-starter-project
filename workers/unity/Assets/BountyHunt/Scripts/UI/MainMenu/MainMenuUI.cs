@@ -22,7 +22,8 @@ public class MainMenuUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        previewSpot.gameObject.SetActive(false);
+        if(previewSpot != null)
+            previewSpot.gameObject.SetActive(false);
     }
 
     public async void OnPlayButtonPress()
