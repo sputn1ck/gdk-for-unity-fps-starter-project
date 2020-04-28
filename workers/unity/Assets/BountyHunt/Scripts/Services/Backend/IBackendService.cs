@@ -25,7 +25,7 @@ public interface IBackendPlayerClient
 
     Task<int> GetPlayerRank(string playername, RankType rankType);
 
-    Task<bool> WaitForPayment(string invoice, long expiry);
+    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
 }
 
 public interface IBackendServerClient

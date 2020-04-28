@@ -260,9 +260,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(needsUserNameChange);
     }
 
-    public async Task<bool> WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long expiry)
     {
-        return await Task.Run(() =>
+        await Task.Run(() =>
         {
             var startTime = DateTime.Now.ToFileTimeUtc();
             var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
@@ -271,18 +271,26 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 if (returnPayment)
                 {
                     returnPayment = false;
-                    return paymentReturnValue;
+                    if (!paymentReturnValue)
+                        throw new Exception("other error");
+                    return;
                 }
             }
-
-            return false;
+            throw new Exception("expired");
+           
         });
     }
 
     public async void TestPayment()
     {
         var testInvoice = "testp" + UnityEngine.Random.Range(0, 100000).ToString();
-        var res = await WaitForPayment(testInvoice, expiryInSeconds);
-        Debug.Log(testInvoice + ";" + res);
+        try
+        {
+            await WaitForPayment(testInvoice, expiryInSeconds);
+            Debug.Log(testInvoice + " succeeded");
+        } catch(Exception e)
+        {
+            Debug.Log(testInvoice + " failed: " + e.Message);
+        }
     }
 }

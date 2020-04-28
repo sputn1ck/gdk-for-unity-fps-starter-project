@@ -134,7 +134,7 @@ public class BackendPlayerClient : IBackendPlayerClient
         return setName;
     }
 
-    public Task<bool> WaitForPayment(string invoice, long expiry)
+    public Task WaitForPayment(string invoice, long expiry)
     {
         throw new NotImplementedException();
     }
