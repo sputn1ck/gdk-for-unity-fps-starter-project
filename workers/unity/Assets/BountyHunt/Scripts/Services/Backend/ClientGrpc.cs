@@ -298,6 +298,8 @@ namespace Bbhrpc {
   {
     static readonly string __ServiceName = "bbhrpc.PublicService";
 
+    static readonly grpc::Marshaller<global::Bbhrpc.GetRankingInfoRequest> __Marshaller_bbhrpc_GetRankingInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetRankingInfoRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetRankingInfoResponse> __Marshaller_bbhrpc_GetRankingInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetRankingInfoResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetRankingRequest> __Marshaller_bbhrpc_GetRankingRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetRankingRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetRankingResponse> __Marshaller_bbhrpc_GetRankingResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetRankingResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.ListRankingsRequest> __Marshaller_bbhrpc_ListRankingsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.ListRankingsRequest.Parser.ParseFrom);
@@ -308,6 +310,13 @@ namespace Bbhrpc {
     static readonly grpc::Marshaller<global::Bbhrpc.ListOnlineResponse> __Marshaller_bbhrpc_ListOnlineResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.ListOnlineResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoRequest> __Marshaller_bbhrpc_GetInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoResponse> __Marshaller_bbhrpc_GetInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoResponse.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse> __Method_GetRankingInfo = new grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetRankingInfo",
+        __Marshaller_bbhrpc_GetRankingInfoRequest,
+        __Marshaller_bbhrpc_GetRankingInfoResponse);
 
     static readonly grpc::Method<global::Bbhrpc.GetRankingRequest, global::Bbhrpc.GetRankingResponse> __Method_GetRanking = new grpc::Method<global::Bbhrpc.GetRankingRequest, global::Bbhrpc.GetRankingResponse>(
         grpc::MethodType.Unary,
@@ -354,6 +363,11 @@ namespace Bbhrpc {
     [grpc::BindServiceMethod(typeof(PublicService), "BindService")]
     public abstract partial class PublicServiceBase
     {
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetRankingInfoResponse> GetRankingInfo(global::Bbhrpc.GetRankingInfoRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetRankingResponse> GetRanking(global::Bbhrpc.GetRankingRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -404,6 +418,22 @@ namespace Bbhrpc {
       {
       }
 
+      public virtual global::Bbhrpc.GetRankingInfoResponse GetRankingInfo(global::Bbhrpc.GetRankingInfoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRankingInfo(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.GetRankingInfoResponse GetRankingInfo(global::Bbhrpc.GetRankingInfoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetRankingInfo, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetRankingInfoResponse> GetRankingInfoAsync(global::Bbhrpc.GetRankingInfoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRankingInfoAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetRankingInfoResponse> GetRankingInfoAsync(global::Bbhrpc.GetRankingInfoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetRankingInfo, null, options, request);
+      }
       public virtual global::Bbhrpc.GetRankingResponse GetRanking(global::Bbhrpc.GetRankingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetRanking(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -496,6 +526,7 @@ namespace Bbhrpc {
     public static grpc::ServerServiceDefinition BindService(PublicServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_GetRankingInfo, serviceImpl.GetRankingInfo)
           .AddMethod(__Method_GetRanking, serviceImpl.GetRanking)
           .AddMethod(__Method_ListRankings, serviceImpl.ListRankings)
           .AddMethod(__Method_AddBounty, serviceImpl.AddBounty)
@@ -509,6 +540,7 @@ namespace Bbhrpc {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, PublicServiceBase serviceImpl)
     {
+      serviceBinder.AddMethod(__Method_GetRankingInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse>(serviceImpl.GetRankingInfo));
       serviceBinder.AddMethod(__Method_GetRanking, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetRankingRequest, global::Bbhrpc.GetRankingResponse>(serviceImpl.GetRanking));
       serviceBinder.AddMethod(__Method_ListRankings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.ListRankingsRequest, global::Bbhrpc.ListRankingsResponse>(serviceImpl.ListRankings));
       serviceBinder.AddMethod(__Method_AddBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.AddBountyRequest, global::Bbhrpc.AddBountyResponse>(serviceImpl.AddBounty));
