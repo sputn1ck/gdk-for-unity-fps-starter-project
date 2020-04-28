@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Linq;
 using System;
+using Daemon;
 
 public class CharacterMenuUI : MonoBehaviour
 {
@@ -124,7 +125,7 @@ public class CharacterMenuUI : MonoBehaviour
                 buyStateText.text = "owned";
                 BuyAndEquipButtonText.text = "equip";
                 BuyAndEquipButton.onClick.RemoveAllListeners();
-                BuyAndEquipButton.onClick.AddListener(equip);
+                BuyAndEquipButton.onClick.AddListener(Equip);
             }
         }
         else
@@ -132,7 +133,7 @@ public class CharacterMenuUI : MonoBehaviour
             buyStateText.text = Utility.SatsToShortString(skin.price, UITinter.tintDict[TintColor.Sats]);
             BuyAndEquipButtonText.text = "buy";
             BuyAndEquipButton.onClick.RemoveAllListeners();
-            BuyAndEquipButton.onClick.AddListener(buy);
+            BuyAndEquipButton.onClick.AddListener(Buy);
         }
         UpdateSkinGroupColors(group);
         PreviewSpot.Instance.SetSkin(skin);
@@ -190,17 +191,52 @@ public class CharacterMenuUI : MonoBehaviour
     }
 
 
-    private async void buy()
+    private async void Buy()
     {
+        Skin skn = groupSelectionPanelsDict[selectedSlot].selectedSkin;
+        SkinGroup grp = groupSelectionPanelsDict[selectedSlot].selectedGroup.group;
         // Todo popup
-        var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
-        Debug.Log("buy button result: " + res);
+        try
+        {
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
+
+            GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+            long balance = balanceResponse.DaemonBalance;
+
+            string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
+            Sprite sprite = groupSelectionPanelsDict[selectedSlot].selectedGroup.group.sprite;
+            string text2 = "";
+            if (balance < skn.price) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+            List<LabelAndAction> actions = new List<LabelAndAction>();
+            actions.Add(new LabelAndAction("ingame Wallet", BuyWithIngameWallet));
+            actions.Add(new LabelAndAction("external Wallet", BuyWithExternalWallet));
+
+            ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
+            PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
+
+            popup.image.color = skn.identificationColor;
+            if (balance < skn.price) popup.buttons[0].interactable = false;
+        }
+        catch(Exception e)
+        {
+            PopUpArgs args = new PopUpArgs("Error",e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args);
+        }
         //groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
         UpdateDetailsPanel();
         UpdateSelectionPanels();
     }
 
-    private void equip()
+    private async void BuyWithIngameWallet()
+    {
+
+    }
+    private async void BuyWithExternalWallet()
+    {
+
+    }
+
+    private void Equip()
     {
         // Todo check for errors
         PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);

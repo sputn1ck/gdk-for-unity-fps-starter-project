@@ -15,7 +15,7 @@ public class PopUpUI : MonoBehaviour
     public Button buttonPrefab;
     public Button xButton;
 
-    [HideInInspector] List<Button> buttons;
+    [HideInInspector] public List<Button> buttons;
 
     static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
