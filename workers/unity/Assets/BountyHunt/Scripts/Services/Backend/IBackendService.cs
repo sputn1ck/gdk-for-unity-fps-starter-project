@@ -16,7 +16,7 @@ public interface IBackendPlayerClient
     Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
     
     Task<SkinInventory> GetSkinInventory();
-    void EquipSkin(string skinId);
+    Task EquipSkin(string skinId);
     Task<ShopSkin[]> GetAllSkins();
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);

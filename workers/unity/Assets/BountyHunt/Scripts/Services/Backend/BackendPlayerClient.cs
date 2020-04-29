@@ -68,9 +68,17 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res.ShopItems.ToArray();
     }
 
-    public async void EquipSkin(string skinId)
+    public async Task EquipSkin(string skinId)
     {
-        await skinClient.EquipSkinAsync(new EquipSkinRequest() { Id = skinId }, GetPubkeyCalloptions());
+        try
+        {
+            await skinClient.EquipSkinAsync(new EquipSkinRequest() { Id = skinId }, GetPubkeyCalloptions());
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+
     }
     public async Task<string> GetSkinInvoice(string skinId)
     {

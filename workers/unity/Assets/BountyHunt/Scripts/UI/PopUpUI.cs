@@ -19,7 +19,7 @@ public class PopUpUI : MonoBehaviour
 
     static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
-    public void Set(string headline, bool showX, string text, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons)
+    public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons)
     {
         allPopUps.Add(this);
         image.gameObject.SetActive(false);
@@ -51,18 +51,18 @@ public class PopUpUI : MonoBehaviour
             btnContainer = horizontalButtonsContainer;
         }
 
-        foreach (LabelAndAction la in buttonActions)
+        foreach (PopUpButtonArgs puba in buttonActions)
         {
             Button b = Instantiate(buttonPrefab, btnContainer);
-            b.GetComponentInChildren<TextMeshProUGUI>().text = la.label;
-            b.onClick.AddListener(la.action);
-            b.onClick.AddListener(Close);
+            b.GetComponentInChildren<TextMeshProUGUI>().text = puba.label;
+            b.onClick.AddListener(puba.action);
+            if (puba.closePopupOnClick) b.onClick.AddListener(Close);
             this.buttons.Add(b);
         }
         
     }
 
-    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<LabelAndAction> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage)
+    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage)
     {
         Set(headline, showX, text1, buttonActions, verticalLayoutedButtons);
 
@@ -75,9 +75,9 @@ public class PopUpUI : MonoBehaviour
             image.GetComponent<UITinter>().enabled = false;
             image.color = Color.white;
         }
-        
 
-        if (text2 != null)
+
+        if (string.IsNullOrEmpty(text2));
         {
             TextMeshProUGUI textMesh2 = Instantiate(this.text,this.text.transform.parent);
             textMesh2.transform.SetSiblingIndex(2);
@@ -102,14 +102,16 @@ public class PopUpUI : MonoBehaviour
 
 }
 
-public class LabelAndAction
+public class PopUpButtonArgs
 {
     public string label;
     public UnityAction action;
+    public bool closePopupOnClick;
 
-    public LabelAndAction(string label, UnityAction action)
+    public PopUpButtonArgs(string label, UnityAction action, bool closePopupOnClick = true)
     {
         this.label = label;
         this.action = action;
+        this.closePopupOnClick = closePopupOnClick;
     }
 }

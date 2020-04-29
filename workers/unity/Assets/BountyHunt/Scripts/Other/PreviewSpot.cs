@@ -5,7 +5,6 @@ using UnityEngine;
 public class PreviewSpot : MonoBehaviour
 {
     public GameObject character;
-    public Renderer maskRenderer;
     List<Renderer> bodyRenderers;
     public static PreviewSpot Instance;
 
@@ -16,10 +15,7 @@ public class PreviewSpot : MonoBehaviour
         var renderers = character.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (var r in renderers)
         {
-            if (r != maskRenderer)
-            {
-                bodyRenderers.Add(r);
-            }
+            bodyRenderers.Add(r);
         }
     }
 
@@ -30,14 +26,11 @@ public class PreviewSpot : MonoBehaviour
 
     public void SetSkin(Skin skin)
     {
-        if(skin.group.slot == SkinSlot.BODY)
+        if(skin.material != null)
         {
-            if(skin.material != null)
+            foreach(var renderer in bodyRenderers)
             {
-                foreach(var renderer in bodyRenderers)
-                {
-                    renderer.material = skin.material;
-                }
+                renderer.material = skin.material;
             }
         }
     }

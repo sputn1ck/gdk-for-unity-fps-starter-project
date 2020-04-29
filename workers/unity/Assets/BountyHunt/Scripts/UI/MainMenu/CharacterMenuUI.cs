@@ -7,6 +7,9 @@ using UnityEngine.Events;
 using System.Linq;
 using System;
 using Daemon;
+using QRCoder;
+using QRCoder.Unity;
+using System.Threading.Tasks;
 
 public class CharacterMenuUI : MonoBehaviour
 {
@@ -22,54 +25,65 @@ public class CharacterMenuUI : MonoBehaviour
     public SkinColorButtonUI skinColorButtonPrefab;
 
     public SkinGroupButtonUI skinGroupButtonPrefab;
+    public Transform skinGroupButtonsContainer;
 
-    public List<SkinGroupSelectionPanel> groupSelectionPanels;
-    Dictionary<SkinSlot, SkinGroupSelectionPanel> groupSelectionPanelsDict;
-
-    SkinSlot selectedSlot = SkinSlot.BODY;
     SkinsLibrary playerSkinsLibrary;
+
+    Skin selectedSkin;
+    List<SkinGroupButtonUI> skinGroupButtons;
+    SkinGroupButtonUI selectedSkinGroupButton;
+    Skin equippedSkin;
 
     private void Start()
     {
-        refreshButton.onClick.AddListener(Init);
+        refreshButton.onClick.AddListener(Refresh);
         ClientEvents.instance.onServicesSetup.AddListener(Init);
+        PlayerPrefs.DeleteAll();
     }
-
     async void Init()
     {
         Debug.Log("initializing characterMenu");
-        
-        //Todo get from backend instead
         var shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
         var testOwnedIDs = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
-        //List<string> testIDs = new List<string> { "robot_default", "robot_gold", "robot_6", "hs_default","robot_3","robot_bronze" };
-        //List<string> testOwnedIDs = new List<string> { "robot_default", "robot_6", "hs_default", "robot_bronze" };
+
         playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
         playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, testOwnedIDs.OwnedSkins.ToArray());
-        //skinsLibrary.Initialize();
 
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
-        groupSelectionPanelsDict = new Dictionary<SkinSlot, SkinGroupSelectionPanel>();
+        
+        skinGroupButtons = skinGroupButtonsContainer.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
+        equippedSkin = playerSkinsLibrary.GetSkin(testOwnedIDs.EquippedSkin);
+        selectedSkin = playerSkinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID", playerSkinsLibrary.defaultSkinID));
 
-        foreach (SkinGroupSelectionPanel sgsp in groupSelectionPanels)
-        {
-            groupSelectionPanelsDict[sgsp.slot] = sgsp;
-            sgsp.buttons = sgsp.container.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
-            sgsp.selectedSkin = playerSkinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + sgsp.slot, playerSkinsLibrary.skinSlotSettings[sgsp.slot].defaultSkinID), sgsp.slot);
-            sgsp.subMenu.onActivate.AddListener(delegate { selectedSlot = sgsp.slot; });
-            
-        }
-        UpdateSelectionPanels();
+        UpdateSkinGroupButtons();
+        UpdateDetailsPanel();
+    }
+    async void Refresh()
+    {
+        await RefreshTask();
+    }
+    async Task RefreshTask()
+    {
+        var shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
+        var testOwnedIDs = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
+
+        playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
+        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, testOwnedIDs.OwnedSkins.ToArray());
+
+        equippedSkin = playerSkinsLibrary.GetSkin(testOwnedIDs.EquippedSkin);
+        selectedSkin = playerSkinsLibrary.GetSkin(selectedSkin.ID);
+
+        UpdateSkinGroupButtons();
         UpdateDetailsPanel();
     }
 
-    void UpdateSkinGroupButtons(SkinGroupSelectionPanel panel)
+    void UpdateSkinGroupButtons()
     {
-        List<SkinGroup> groups = playerSkinsLibrary.skinSlotSettings[panel.slot];
-        SkinGroup equippedGroup = playerSkinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID_" + panel.slot, playerSkinsLibrary.skinSlotSettings[panel.slot].defaultSkinID),panel.slot);
-        SkinGroup selectedGroup = playerSkinsLibrary.GetGroup(panel.selectedSkin.ID,panel.slot);
+        List<SkinGroup> groups = playerSkinsLibrary.groups;
+        SkinGroup equippedGroup = playerSkinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID", playerSkinsLibrary.defaultSkinID));
+        SkinGroup selectedGroup = playerSkinsLibrary.GetGroup(selectedSkin.ID);
         int counter = 0;
-        foreach (SkinGroupButtonUI sgb in panel.buttons)
+        foreach (SkinGroupButtonUI sgb in skinGroupButtons)
         {
             if (groups.Count > counter)
             {
@@ -91,7 +105,7 @@ public class CharacterMenuUI : MonoBehaviour
         }
         for (int i = counter; i < groups.Count; i++)
         {
-            SkinGroupButtonUI sgb = Instantiate(skinGroupButtonPrefab, panel.container);
+            SkinGroupButtonUI sgb = Instantiate(skinGroupButtonPrefab, skinGroupButtonsContainer);
             sgb.gameObject.SetActive(true);
             sgb.set(groups[i], SelectSkinGroup);
 
@@ -103,12 +117,11 @@ public class CharacterMenuUI : MonoBehaviour
         }
     }
 
-    public void UpdateDetailsPanel(SkinGroup group, Skin skin)
+    public void UpdateDetailsPanel()
     {
-        groupSelectionPanelsDict[group.slot].selectedSkin = skin;
-        groupSelectionPanelsDict[group.slot].selectedGroup = groupSelectionPanelsDict[group.slot].buttons.Find(b => b.group == skin.group);
-        detailsHeaderText.text = group.groupName;
-        detailsPreviewImage.sprite = group.sprite;
+        Skin skin = selectedSkin;
+        detailsHeaderText.text = skin.group.groupName;
+        detailsPreviewImage.sprite = skin.group.sprite;
         BuyAndEquipButton.interactable = true;
 
         BuyAndEquipButton.gameObject.SetActive(true);
@@ -116,7 +129,7 @@ public class CharacterMenuUI : MonoBehaviour
         if (skin.owned)
         {
             
-            if (skin == GetEquippedSkin(group.slot))
+            if (skin == equippedSkin)
             {
                 buyStateText.text = "equipped";
                 BuyAndEquipButton.gameObject.SetActive(false);
@@ -136,13 +149,12 @@ public class CharacterMenuUI : MonoBehaviour
             BuyAndEquipButton.onClick.RemoveAllListeners();
             BuyAndEquipButton.onClick.AddListener(Buy);
         }
-        UpdateSkinGroupColors(group);
+        UpdateSkinGroupColors(skin.group);
         PreviewSpot.Instance.SetSkin(skin);
     }
 
     public void UpdateSkinGroupColors(SkinGroup group)
     {
-        Skin equipped = GetEquippedSkin(group.slot);
         
         for (int i = 0; i<group.skins.Count || i < skinColorButtons.Count;i++)
         {
@@ -169,10 +181,10 @@ public class CharacterMenuUI : MonoBehaviour
             scb.skin = skn;
             scb.lockedImage.gameObject.SetActive(!skn.owned);
 
-            if (equipped == skn) scb.frame.SetActive(true);
+            if (equippedSkin == skn) scb.frame.SetActive(true);
             else scb.frame.SetActive(false);
 
-            if (groupSelectionPanelsDict[group.slot].selectedSkin == skn) scb.underLine.SetActive(true);
+            if (selectedSkin == skn) scb.underLine.SetActive(true);
             else scb.underLine.SetActive(false);
 
             scb.onClick.RemoveAllListeners();
@@ -180,129 +192,149 @@ public class CharacterMenuUI : MonoBehaviour
         }
     }
 
-    string GetEquippedSkinID(SkinSlot slot)
-    {
-        return PlayerPrefs.GetString("EquippedSkinID_"+slot, playerSkinsLibrary.skinSlotSettings[slot].defaultSkinID);
-    }
-
-    Skin GetEquippedSkin(SkinSlot slot)
-    {
-        string id = GetEquippedSkinID(slot);
-        return playerSkinsLibrary.GetSkin(id,slot);
-    }
-
 
     private async void Buy()
     {
-        Skin skn = groupSelectionPanelsDict[selectedSlot].selectedSkin;
-        SkinGroup grp = groupSelectionPanelsDict[selectedSlot].selectedGroup.group;
-        // Todo popup
+        Skin skn = selectedSkin;
+        SkinGroup grp = selectedSkin.group;
+        string res;
         try
         {
-            string res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
+            res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
 
-            GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
-            long balance = balanceResponse.DaemonBalance;
-
-            string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
-            Sprite sprite = groupSelectionPanelsDict[selectedSlot].selectedGroup.group.sprite;
-            string text2 = "";
-            if (balance < skn.price) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
-            List<LabelAndAction> actions = new List<LabelAndAction>();
-            actions.Add(new LabelAndAction("ingame Wallet", () => BuyWithIngameWallet(res)));
-            actions.Add(new LabelAndAction("external Wallet", () => BuyWithExternalWallet(res)));
-
-            ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
-            PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
-
-            popup.image.color = skn.identificationColor;
-            if (balance < skn.price) popup.buttons[0].interactable = false;
         }
         catch(Exception e)
         {
-            PopUpArgs args = new PopUpArgs("Error",e.Message);
-            PopUpManagerUI.instance.OpenPopUp(args);
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error",e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
         }
+
+        GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+        long balance = balanceResponse.DaemonBalance;
+
+        string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
+        Sprite sprite = grp.sprite;
+        string text2 = "";
+        if (balance < skn.price) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+        List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
+        actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res)));
+        actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res)));
+
+        ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
+        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
+
+        popup.image.color = skn.identificationColor;
+        if (balance < skn.price) popup.buttons[0].interactable = false;
+
+
         //groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
         UpdateDetailsPanel();
-        UpdateSelectionPanels();
+        UpdateSkinGroupButtons();
+
     }
 
     private async void BuyWithIngameWallet(string invoice)
     {
-        LabelAndAction copyAction = new LabelAndAction("Copy invoice", () => Utility.CopyToClipboard(invoice));
+        try
+        {
+            //Todo await payment
+            //await PlayerServiceConnections.instance.DonnerDaemonClient.
+            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
+            PopUpManagerUI.instance.OpenPopUp(args1);
+            Refresh();
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs args1 = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args1);
+        }
     }
     private async void BuyWithExternalWallet(string invoice)
     {
+        //image
+        QRCodeGenerator qrGenerator = new QRCodeGenerator();
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode(invoice, QRCodeGenerator.ECCLevel.Q);
+        UnityQRCode qrCode = new UnityQRCode(qrCodeData);
+        Texture2D tex = qrCode.GetGraphic(1);
+        Color[] pixels = tex.GetPixels();
+        for(int i = 0; i< pixels.Length; i++)
+        {
+            if (pixels[i].r > 0.5f){
+                pixels[i] = Color.clear;
+            }
+            else
+            {
+                pixels[i] = Color.white;
+            }
+        }
+        tex.SetPixels(pixels);
+        tex.filterMode = FilterMode.Point;
+        tex.Apply();
+        Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
+
+        //copy
+        PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice),false);
+
+        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true);
+        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
+
+        try
+        {
+            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,60);
+            if (popup != null) popup.Close();
+            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
+            PopUpManagerUI.instance.OpenPopUp(args1);
+            Refresh();
+
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+            if (popup != null) popup.Close();
+            PopUpArgs args1 = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args1);
+        }
 
     }
 
-    private void Equip()
+    private async void Equip()
     {
         // Todo check for errors
-        PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
-        PlayerPrefs.SetString("EquippedSkinID_"+selectedSlot, groupSelectionPanelsDict[selectedSlot].selectedSkin.ID);
-        PlayerPrefs.Save();
-        UpdateDetailsPanel();
-        UpdateSelectionPanels();
-    }
-    public void UpdateDetailsPanel()
-    {
-        SkinGroup g = playerSkinsLibrary.GetGroup(groupSelectionPanelsDict[selectedSlot].selectedSkin.ID,selectedSlot);
-        Skin s = groupSelectionPanelsDict[selectedSlot].selectedSkin;
-        UpdateDetailsPanel(g,s);
-    }
-    public void UpdateDetailsPanel(SkinGroup group)
-    {
-        
-        UpdateDetailsPanel(group, group.skins[0]);
+        try
+        {
+            await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(selectedSkin.ID);
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+
+        }
+
+        Refresh();
     }
 
     public void SelectSkinGroup(SkinGroup group)
     {
-        UpdateDetailsPanel(group);
-        SkinGroupSelectionPanel panel = groupSelectionPanelsDict[group.slot];
+        selectedSkin = group.skins[0];
 
-        if (panel.selectedGroup) panel.selectedGroup.SetSelection(false);
-        panel.selectedGroup = panel.buttons.Find(o => o.group == group);
-        panel.buttons.Find(o => o.group == group).SetSelection(true);
-        UpdateSelectionPanels();
-        
+        if (selectedSkinGroupButton != null) selectedSkinGroupButton.SetSelection(false);
+        selectedSkinGroupButton = skinGroupButtons.Find(o => o.group == group);
+        selectedSkinGroupButton.SetSelection(true);
 
+        UpdateDetailsPanel();
+        UpdateSkinGroupButtons();
     }
 
     public void selectSkin(Skin skin)
     {
-        UpdateDetailsPanel(playerSkinsLibrary.GetGroup(skin.ID,selectedSlot),skin);
+        selectedSkin = skin;
+        UpdateDetailsPanel();
     }
 
-    void UpdateSelectionPanels()
-    {
-        foreach (SkinGroupSelectionPanel p in groupSelectionPanels)
-        {
-            UpdateSkinGroupButtons(p);
-        }
-    }
-
-    void ShowEquippedSkins()
-    {
-        foreach( var set in playerSkinsLibrary.skinSlotSettings)
-        {
-            Skin skin = playerSkinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID_" + set.Value.slot), set.Value.slot);
-            PreviewSpot.Instance.SetSkin(skin);
-        }
-    }
-    
-}
-
-[System.Serializable]
-public class SkinGroupSelectionPanel
-{
-    public SkinSlot slot;
-    public Transform container;
-    [HideInInspector]public List<SkinGroupButtonUI> buttons;
-    [HideInInspector]public SkinGroupButtonUI selectedGroup;
-    [HideInInspector] public Skin selectedSkin;
-    public SlideSubMenuUI subMenu;
 }
 

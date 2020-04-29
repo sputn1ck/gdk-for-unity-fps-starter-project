@@ -32,6 +32,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public string[] allSkins = new string[] { "robot_default", "robot_2" };
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
+    public Dictionary<string, string> activeSkinInvoices = new Dictionary<string, string>();
 
 
     [Header("Payments")]
@@ -181,11 +182,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return skinInventory;
     }
 
-    public void EquipSkin(string skinId)
+    public async Task EquipSkin(string skinId)
     {
         if(!ownedSkins.Contains(skinId))
         {
             equippedSkin = "robot_default";
+            throw new Exception("skin not owned!");
         }
         equippedSkin = skinId;
     }
@@ -209,14 +211,16 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         Debug.Log("Want to buy skin: " + skinId);
         if(ownedSkins.Contains(skinId))
         {
-            return "already owned";
+            throw new Exception( "skin already owned");
         }
         if (!allSkins.Contains(skinId))
         {
-            return "unknown skin";
+            throw new Exception("unknown skin");
+
         }
-        ownedSkins.Add(skinId);
-        return "invoice";
+        string invoice = "RandomInvoice:" + UnityEngine.Random.Range(0, 100000000);
+        activeSkinInvoices[invoice] = skinId;
+        return invoice;
     }
 
 
@@ -268,11 +272,19 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
             while (DateTime.Now.ToFileTimeUtc() < endTime)
             {
+
                 if (returnPayment)
                 {
                     returnPayment = false;
                     if (!paymentReturnValue)
                         throw new Exception("other error");
+
+                    if (activeSkinInvoices.ContainsKey(invoice))
+                    {
+                        ownedSkins.Add(activeSkinInvoices[invoice]);
+                        activeSkinInvoices.Remove(invoice);
+                    }
+
                     return;
                 }
             }
