@@ -59,6 +59,8 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         {
             throw new PaymentException("Dummy payment failed");
         }
+
+        ((DummyBackendClientClient)PlayerServiceConnections.instance.BackendPlayerClient).OnDummyInvoicePaied(paymentRequest);
         return Task.FromResult(new SendResponse());
     }
 

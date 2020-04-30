@@ -237,20 +237,21 @@ public class CharacterMenuUI : MonoBehaviour
 
     private async void BuyWithIngameWallet(string invoice)
     {
+
         try
         {
-            //Todo await payment
-            //await PlayerServiceConnections.instance.DonnerDaemonClient.
-            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
-            PopUpManagerUI.instance.OpenPopUp(args1);
-            Refresh();
+            await PlayerServiceConnections.instance.lnd.PayInvoice(invoice);
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            PopUpArgs args1 = new PopUpArgs("error", e.Message);
-            PopUpManagerUI.instance.OpenPopUp(args1);
+            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
         }
+        PopUpArgs args = new PopUpArgs("info", "payment successfull");
+        PopUpManagerUI.instance.OpenPopUp(args);
+        Refresh();
     }
     private async void BuyWithExternalWallet(string invoice)
     {

@@ -279,11 +279,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                     if (!paymentReturnValue)
                         throw new Exception("other error");
 
-                    if (activeSkinInvoices.ContainsKey(invoice))
-                    {
-                        ownedSkins.Add(activeSkinInvoices[invoice]);
-                        activeSkinInvoices.Remove(invoice);
-                    }
+                    OnDummyInvoicePaied(invoice);
 
                     return;
                 }
@@ -291,6 +287,14 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             throw new Exception("expired");
            
         });
+    }
+
+    public void OnDummyInvoicePaied(string invoice){
+        if (activeSkinInvoices.ContainsKey(invoice))
+        {
+            ownedSkins.Add(activeSkinInvoices[invoice]);
+            activeSkinInvoices.Remove(invoice);
+        }
     }
 
     public async void TestPayment()
