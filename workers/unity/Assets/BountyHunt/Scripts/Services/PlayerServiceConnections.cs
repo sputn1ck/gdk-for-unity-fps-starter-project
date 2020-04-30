@@ -29,6 +29,8 @@ public class PlayerServiceConnections : MonoBehaviour
     public IDonnerDaemonClient DonnerDaemonClient;
 
     public IAuctionClient AuctionClient;
+
+    [HideInInspector] public bool ServicesReady = false;
     void Awake()
     {
         if(UseDummy && DummyServices == null)
@@ -116,7 +118,9 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             throw new Exception ("Payment connection failed: " + e.Message,e);
         }
+        ServicesReady = true;
         ClientEvents.instance.onServicesSetup.Invoke();
+
     }
 
     private async Task SetupBackend()

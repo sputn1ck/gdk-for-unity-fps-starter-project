@@ -321,6 +321,10 @@ public class LndClient : IClientLnd
     public async Task<SendResponse> PayInvoice(string paymentRequest)
     {
         var res = await lightningClient.SendPaymentSyncAsync(new SendRequest { PaymentRequest = paymentRequest });
+        if (res.PaymentError != "")
+        {
+            throw new PaymentException(res.PaymentError);
+        }
         return res;
     }
 

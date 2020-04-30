@@ -45,7 +45,20 @@ public interface IClientLnd :IDisposable
     Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "");
 
 }
+public class PaymentException : Exception {
+    public PaymentException()
+    {
 
+    }
+    public PaymentException(string message) : base(message)
+    {
+
+    }
+    public PaymentException(string message, Exception inner) : base(message, inner)
+    {
+
+    }
+}
 
 public delegate void InvoiceSettledEventHandler(object obj, InvoiceSettledEventArgs e);
 

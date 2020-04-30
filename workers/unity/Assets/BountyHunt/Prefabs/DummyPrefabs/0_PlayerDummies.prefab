@@ -59,8 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameVersion: 
-  getUsernameResponse: 
-  setUsernameResponse: 
   userName: 
   needsUserNameChange: 0
   HighscoresCount: 43
@@ -76,9 +74,16 @@ MonoBehaviour:
   allSkins:
   - robot_default
   - robot_2
+  - robot_3
+  - robot_4
+  - robot_5
   ownedSkins:
   - robot_default
   equippedSkin: robot_default
+  paymentReturnValue: 0
+  returnPayment: 0
+  expiryInSeconds: 0
+  triggerPaymentTest: 0
 --- !u!114 &6082691775500474893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,4 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bufferBalance: 0
   channelMissingBalance: 0
-  daemonBalance: 0
+  daemonBalance: 30000

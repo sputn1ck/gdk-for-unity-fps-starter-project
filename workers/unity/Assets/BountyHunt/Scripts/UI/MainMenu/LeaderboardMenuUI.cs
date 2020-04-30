@@ -34,10 +34,8 @@ public class LeaderboardMenuUI : MonoBehaviour
     LeaderBoardSet[] leaderboards;
     LeaderBoardSet selectedLeaderboard;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
         entries = entryContainer.GetComponentsInChildren<LeaderboardEntryUI>().ToList();
         pageSize = entries.Count;
         firstButton.onClick.AddListener(SetFirstPage);
@@ -65,7 +63,13 @@ public class LeaderboardMenuUI : MonoBehaviour
         LootersLeague.values.Add(("Earnings", r => r.Stats.Earnings.ToString()));
 
         leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
+        selectedLeaderboard = leaderboards[0];
 
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
         sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(() => gameObject.SetActive(false));
         for (int i = 1; i<sliderUI.buttons.Count; i++)
         {
@@ -82,12 +86,14 @@ public class LeaderboardMenuUI : MonoBehaviour
                 btn.gameObject.SetActive(false);
             }
         }
-        selectedLeaderboard = leaderboards[0];
         gameObject.SetActive(false);
     }
     void OnEnable()
     {
-        Init();
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            Init();
+        }
     }
 
     async void Init()
@@ -95,12 +101,13 @@ public class LeaderboardMenuUI : MonoBehaviour
         try
         {
             PlayerName = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
-            SetLeaderBoard(selectedLeaderboard);
         }
         catch (Exception e)
         {
+            Debug.Log(e.Message);
             PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
         }
+        SetLeaderBoard(selectedLeaderboard);
     }
 
     void setEntry(LeaderboardEntryUI entry, Ranking ranking, long position)
@@ -112,17 +119,23 @@ public class LeaderboardMenuUI : MonoBehaviour
 
     public async void UpdateLeaderBoard()
     {
+
+        (Ranking[] ranks, int count) ranks;
         try
         {
-            (Ranking[] ranks,int count) = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,selectedLeaderboard.rankType);
-            UpdateList(ranks,currentPageIndex*pageSize);
-            lastPage = (int)Mathf.Ceil(count / pageSize) - 1;
-            UpdateNavigationButtons();
+            ranks = await PlayerServiceConnections.instance.BackendPlayerClient.ListRankings(pageSize,currentPageIndex*pageSize,selectedLeaderboard.rankType);
         }
         catch (Exception e)
         {
-        PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
+            Debug.Log(e.Message);
+            PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
+            return;
         }
+
+        UpdateList(ranks.ranks,currentPageIndex*pageSize);
+        lastPage = (int)Mathf.Ceil(ranks.count / pageSize) - 1;
+        UpdateNavigationButtons();
+
     }
 
     void UpdateList(Ranking[] ranks, int startIndex)
@@ -178,6 +191,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         }
         catch (Exception e)
         {
+            Debug.Log(e.Message);
             PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
             return;
         }

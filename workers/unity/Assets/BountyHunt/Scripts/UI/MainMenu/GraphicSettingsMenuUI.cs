@@ -34,7 +34,7 @@ public class GraphicSettingsMenuUI : MonoBehaviour
     //resolution
     void OnResolutionButtonClick()
     {
-        List<LabelAndAction> resos = new List<LabelAndAction>();
+        List<PopUpButtonArgs> resos = new List<PopUpButtonArgs>();
         foreach(Resolution res in Screen.resolutions)
         {
             resos.Add(resolutionLabelAndAction(res));
@@ -43,11 +43,11 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 
-    LabelAndAction resolutionLabelAndAction(Resolution res)
+    PopUpButtonArgs resolutionLabelAndAction(Resolution res)
     {
         string label = res.width + " x " + res.height;
         UnityAction action = delegate { SetResolution(res); };
-        return new LabelAndAction(label, action);
+        return new PopUpButtonArgs(label, action);
     }
 
     void SetResolution(Resolution res)
@@ -60,7 +60,7 @@ public class GraphicSettingsMenuUI : MonoBehaviour
     //quality
     void OnQualityButtonClick()
     {
-        List<LabelAndAction> quals = new List<LabelAndAction>();
+        List<PopUpButtonArgs> quals = new List<PopUpButtonArgs>();
         foreach (GraphicsQuality qual in (GraphicsQuality[])Enum.GetValues(typeof(GraphicsQuality)))
         {
             quals.Add(QualityLabelAndAction(qual));
@@ -80,17 +80,17 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         medium = 1,
         high = 0
     }
-    LabelAndAction QualityLabelAndAction(GraphicsQuality quality)
+    PopUpButtonArgs QualityLabelAndAction(GraphicsQuality quality)
     {
         string label = quality.ToString();
         UnityAction action = delegate { SetQuality(quality); };
-        return new LabelAndAction(label, action);
+        return new PopUpButtonArgs(label, action);
     }
 
     //display mode
     void OnDisplayModeButtonClick()
     {
-        List<LabelAndAction> modes = new List<LabelAndAction>();
+        List<PopUpButtonArgs> modes = new List<PopUpButtonArgs>();
         foreach (DisplayMode mode in (DisplayMode[])Enum.GetValues(typeof(DisplayMode)))
         {
             modes.Add(DisplayModeLabelAndAction(mode));
@@ -109,11 +109,11 @@ public class GraphicSettingsMenuUI : MonoBehaviour
         fullscreen = 1,
         windowed = 3
     }
-    LabelAndAction DisplayModeLabelAndAction(DisplayMode mode)
+    PopUpButtonArgs DisplayModeLabelAndAction(DisplayMode mode)
     {
         string label = mode.ToString();
         UnityAction action = delegate { SetDisplayMode(mode); };
-        return new LabelAndAction(label, action);
+        return new PopUpButtonArgs(label, action);
     }
 
 

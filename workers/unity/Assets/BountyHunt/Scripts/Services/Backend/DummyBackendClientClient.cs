@@ -32,6 +32,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public string[] allSkins = new string[] { "robot_default", "robot_2" };
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
+    public Dictionary<string, string> activeSkinInvoices = new Dictionary<string, string>();
 
 
     [Header("Payments")]
@@ -119,9 +120,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     void setBadge(LeagueRanking ranking, int totalCount)
     {
-        if (ranking.Rank/totalCount <= GoldThreshold) ranking.Badge = RankBadge.Gold;
-        else if (ranking.Rank/totalCount <= SilverThreshold) ranking.Badge = RankBadge.Silver;
-        if (ranking.Rank/totalCount <= BronzeThreshold ) ranking.Badge = RankBadge.Bronze;
+        if ((float)ranking.Rank / (float)totalCount <= GoldThreshold) ranking.Badge = RankBadge.Gold;
+        else if ((float)ranking.Rank / (float)totalCount <= SilverThreshold) ranking.Badge = RankBadge.Silver;
+        else if ((float)ranking.Rank / (float)totalCount <= BronzeThreshold) ranking.Badge = RankBadge.Bronze;
+        else ranking.Badge = RankBadge.Unranked;
     }
 
     void Update()
@@ -181,11 +183,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return skinInventory;
     }
 
-    public void EquipSkin(string skinId)
+    public async Task EquipSkin(string skinId)
     {
         if(!ownedSkins.Contains(skinId))
         {
             equippedSkin = "robot_default";
+            throw new Exception("skin not owned!");
         }
         equippedSkin = skinId;
     }
@@ -209,14 +212,16 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         Debug.Log("Want to buy skin: " + skinId);
         if(ownedSkins.Contains(skinId))
         {
-            return "already owned";
+            throw new Exception( "skin already owned");
         }
         if (!allSkins.Contains(skinId))
         {
-            return "unknown skin";
+            throw new Exception("unknown skin");
+
         }
-        ownedSkins.Add(skinId);
-        return "invoice";
+        string invoice = "RandomInvoice:" + UnityEngine.Random.Range(0, 100000000);
+        activeSkinInvoices[invoice] = skinId;
+        return invoice;
     }
 
 
@@ -268,17 +273,29 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
             while (DateTime.Now.ToFileTimeUtc() < endTime)
             {
+
                 if (returnPayment)
                 {
                     returnPayment = false;
                     if (!paymentReturnValue)
                         throw new Exception("other error");
+
+                    OnDummyInvoicePaied(invoice);
+
                     return;
                 }
             }
             throw new Exception("expired");
            
         });
+    }
+
+    public void OnDummyInvoicePaied(string invoice){
+        if (activeSkinInvoices.ContainsKey(invoice))
+        {
+            ownedSkins.Add(activeSkinInvoices[invoice]);
+            activeSkinInvoices.Remove(invoice);
+        }
     }
 
     public async void TestPayment()
@@ -292,5 +309,41 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         {
             Debug.Log(testInvoice + " failed: " + e.Message);
         }
+    }
+
+    public async Task<Ranking> GetPlayerRanking()
+    {
+        Ranking r;
+        try
+        {
+            r = await GetPlayerRanking(userName);
+            return r;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public async Task<Ranking> GetPlayerRanking(string playername)
+    {
+        Ranking r = highscores.FirstOrDefault(h => h.Name == playername);
+        if(r == null)
+        {
+            throw new Exception("playername doeas not exist!");
+        }
+        return r;
+    }
+
+    public async Task<GetRankingInfoResponse> GetRankingInfo()
+    {
+        GetRankingInfoResponse res = new GetRankingInfoResponse
+        {
+            BronzeThreshold = (int)(this.BronzeThreshold * 100 * highscores.Length),
+            SilverThreshold = (int)(this.SilverThreshold * 100 * highscores.Length),
+            GoldThreshold = (int)(this.GoldThreshold * 100 * highscores.Length),
+            TotalPlayers = highscores.Length
+        };
+        return res;
     }
 }

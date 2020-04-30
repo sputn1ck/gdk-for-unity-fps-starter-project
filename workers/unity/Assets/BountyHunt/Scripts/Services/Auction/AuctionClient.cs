@@ -30,11 +30,11 @@ public class AuctionClient : IAuctionClient
         try
         {
             var res = await auctionClient.SimpleChatAsync(new SimpleChatRequest { Amount = amount, Message = message });
-            var invoice = await PlayerServiceConnections.instance.lnd.PayInvoice(res.PayReq);
+            await PlayerServiceConnections.instance.lnd.PayInvoice(res.PayReq);
             // TODO  check for donation siye
 
         }
-        catch (RpcException e)
+        catch (Exception e)
         {
            
                 ChatPanelUI.instance.SpawnMessage(MessageType.ERROR_LOG ,"DONATION", e.Message, false);
@@ -49,7 +49,7 @@ public class AuctionClient : IAuctionClient
         {
             var activeAuction = await auctionClient.GetAuctionAsync(new GetAuctionRequest { AuctionId = "active" });
             var res = await auctionClient.BidAsync(new BidRequest { AuctionId = activeAuction.Auction.Id, Amount = amount, Message = message });
-            var invoice = await PlayerServiceConnections.instance.lnd.PayInvoice(res.Entry.PaymentRequest);
+            await PlayerServiceConnections.instance.lnd.PayInvoice(res.Entry.PaymentRequest);
             ChatPanelUI.instance.SpawnMessage(MessageType.INFO_LOG, "AUCTIONBID", "payment sent on route, check for payment status in ui");
             return res.Entry;
         }

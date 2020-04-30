@@ -13,9 +13,6 @@ public class PopUpManagerUI : MonoBehaviour
 
 
     public static PopUpManagerUI instance;
-
-    public static List<PopUpUI> allPopUps = new List<PopUpUI>();
-
     private void Awake()
     {
         instance = this;
@@ -32,9 +29,9 @@ public class PopUpManagerUI : MonoBehaviour
     {
         PopUpUI popup = Instantiate(popUpPrefab, container);
 
-        List<LabelAndAction> actions = new List<LabelAndAction>();
-        actions.Add(new LabelAndAction("yes", args.yesAction));
-        actions.Add(new LabelAndAction("no", args.noAction));
+        List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
+        actions.Add(new PopUpButtonArgs("yes", args.yesAction));
+        actions.Add(new PopUpButtonArgs("no", args.noAction));
 
         popup.Set(args.headline, args.showX, args.text, actions,false);
         return popup;
@@ -77,10 +74,10 @@ public class PopUpManagerUI : MonoBehaviour
         if (testPopUp)
         {
             testPopUp = false;
-            List<LabelAndAction> actions = new List<LabelAndAction>();
-            if (btn1) actions.Add(new LabelAndAction("btn1",test1));
-            if (btn2) actions.Add(new LabelAndAction("button2",test2));
-            if (btn3) actions.Add(new LabelAndAction("Auslöser3",test3));
+            List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
+            if (btn1) actions.Add(new PopUpButtonArgs("btn1",test1));
+            if (btn2) actions.Add(new PopUpButtonArgs("button2",test2));
+            if (btn3) actions.Add(new PopUpButtonArgs("Auslöser3",test3));
 
             PopUpArgs args;
             switch (variant)
@@ -103,10 +100,10 @@ public class PopUpManagerUI : MonoBehaviour
         if (testImagePopup)
         {
             testImagePopup = false;
-            List<LabelAndAction> actions = new List<LabelAndAction>();
-            if (btn1) actions.Add(new LabelAndAction("btn1", test1));
-            if (btn2) actions.Add(new LabelAndAction("button2", test2));
-            if (btn3) actions.Add(new LabelAndAction("Auslöser3", test3));
+            List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
+            if (btn1) actions.Add(new PopUpButtonArgs("btn1", test1));
+            if (btn2) actions.Add(new PopUpButtonArgs("button2", test2));
+            if (btn3) actions.Add(new PopUpButtonArgs("Auslöser3", test3));
 
             testYesNoPopup = false;
             ImagePopUpArgs args = new ImagePopUpArgs("header", text, sprite, text2,actions,verticalButtons,tintImage,imageSizeMultiplier,showX);
@@ -152,11 +149,11 @@ public struct PopUpArgs
     public string text;
     public bool verticalButtonLayout;
     public bool showX;
-    public List<LabelAndAction> actions;
+    public List<PopUpButtonArgs> actions;
 
     /// <param name="actions">the button labels and their corresponding actions for OnClick()</param>
     /// <param name="verticalButtonlayout">should the buttons be layouted vertical instead of horizontal?</param>
-    public PopUpArgs(string headline, string text, List<LabelAndAction> actions, bool verticalButtonlayout, bool showX = true)
+    public PopUpArgs(string headline, string text, List<PopUpButtonArgs> actions, bool verticalButtonlayout, bool showX = true)
     {
         this.headline = headline;
         this.text = text;
@@ -170,7 +167,7 @@ public struct PopUpArgs
         this.headline = headline;
         this.text = text;
         this.showX = true;
-        this.actions = new List<LabelAndAction>();
+        this.actions = new List<PopUpButtonArgs>();
         this.verticalButtonLayout = false;
     }
 }
@@ -213,7 +210,7 @@ public struct ImagePopUpArgs
     public string text2;
     public bool verticalButtonLayout;
     public bool showX;
-    public List<LabelAndAction> actions;
+    public List<PopUpButtonArgs> actions;
     public Sprite sprite;
     public bool tintImage;
     public float imageSizeMultiplier;
@@ -224,7 +221,7 @@ public struct ImagePopUpArgs
     /// <param name="verticalButtonlayout">should the buttons be layouted vertical instead of horizontal?</param>
     /// <param name="tintImage">should the image be tinted with the primary color? if not, the image color is white</param>
     /// <param name="imageSizeMultiplier">relative size of the image. Size 1 is a square fitted to the panel. Sprite aspect is always preserved.</param>
-    public ImagePopUpArgs(string headline, string text1, Sprite sprite, string text2, List<LabelAndAction> actions, bool verticalButtonlayout, bool tintImage, float imageSizeMultiplier = 1, bool showX = true)
+    public ImagePopUpArgs(string headline, string text1, Sprite sprite, string text2, List<PopUpButtonArgs> actions, bool verticalButtonlayout, bool tintImage, float imageSizeMultiplier = 1, bool showX = true)
     {
         this.headline = headline;
         this.text1 = text1;
