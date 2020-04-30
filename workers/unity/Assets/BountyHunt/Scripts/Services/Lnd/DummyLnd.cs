@@ -53,12 +53,13 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         return Task.FromResult(payreq);
     }
 
-    public async Task PayInvoice(string paymentRequest)
+    public Task<SendResponse> PayInvoice(string paymentRequest)
     {
         if (ThrowPaymentError)
         {
             throw new PaymentException("Dummy payment failed");
         }
+        return Task.FromResult(new SendResponse());
     }
 
     public Task<PendingChannelsResponse> PendingChannels()

@@ -110,9 +110,10 @@ public class BountyPlayerServer : MonoBehaviour
             BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "not enough sats");
             return;
         }
+        Lnrpc.SendResponse payment;
         try
         {
-            await ServerServiceConnections.instance.lnd.PayInvoice(obj.Payload.PayReq);
+            payment = await ServerServiceConnections.instance.lnd.PayInvoice(obj.Payload.PayReq);
         } catch (PaymentException pe)
         {
 
@@ -121,6 +122,10 @@ public class BountyPlayerServer : MonoBehaviour
         } catch (Exception e)
         {
             return;
+        }
+        if (payment.PaymentError != "")
+        {
+            
         }
         var newEarnings = Mathf.Clamp(HunterComponentWriter.Data.Earnings - payment.PaymentRoute.TotalAmtMsat / 1000,0, int.MaxValue);
         Debug.Log("new earnings");

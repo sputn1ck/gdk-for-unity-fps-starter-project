@@ -17,7 +17,7 @@ public interface IClientLnd :IDisposable
     Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port);
     Task<ListChannelsResponse> ListChannels();
     Task<string> GetInvoice(long amount, string description, long expiry);
-    Task PayInvoice(string paymentRequest);
+    Task<SendResponse> PayInvoice(string paymentRequest);
 
     Task<PendingChannelsResponse> PendingChannels();
 
