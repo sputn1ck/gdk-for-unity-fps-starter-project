@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class DummyLnd : MonoBehaviour, IClientLnd
 {
+    public bool ThrowPaymentError;
     string pubkey;
 
     public event InvoiceSettledEventHandler OnInvoiceSettled;
@@ -52,9 +53,12 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         return Task.FromResult(payreq);
     }
 
-    public Task<SendResponse> PayInvoice(string paymentRequest)
+    public async Task PayInvoice(string paymentRequest)
     {
-        return Task.FromResult(new SendResponse { PaymentError = "not using real lightning" });
+        if (ThrowPaymentError)
+        {
+            throw new PaymentException("Dummy payment failed");
+        }
     }
 
     public Task<PendingChannelsResponse> PendingChannels()

@@ -318,10 +318,13 @@ public class LndClient : IClientLnd
         return invoice.PaymentRequest;
     }
 
-    public async Task<SendResponse> PayInvoice(string paymentRequest)
+    public async Task PayInvoice(string paymentRequest)
     {
         var res = await lightningClient.SendPaymentSyncAsync(new SendRequest { PaymentRequest = paymentRequest });
-        return res;
+        if (res.PaymentError != "")
+        {
+            throw new PaymentException(res.PaymentError);
+        }
     }
 
     public InvoiceSettledEventHandler GetInvoiceSettledEventHandler()

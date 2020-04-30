@@ -17,7 +17,7 @@ public interface IClientLnd :IDisposable
     Task<ConnectPeerResponse> ConnectPeer(string pubkey, string ip, string port);
     Task<ListChannelsResponse> ListChannels();
     Task<string> GetInvoice(long amount, string description, long expiry);
-    Task<SendResponse> PayInvoice(string paymentRequest);
+    Task PayInvoice(string paymentRequest);
 
     Task<PendingChannelsResponse> PendingChannels();
 
@@ -45,7 +45,20 @@ public interface IClientLnd :IDisposable
     Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "");
 
 }
+public class PaymentException : Exception {
+    public PaymentException()
+    {
 
+    }
+    public PaymentException(string message) : base(message)
+    {
+
+    }
+    public PaymentException(string message, Exception inner) : base(message, inner)
+    {
+
+    }
+}
 
 public delegate void InvoiceSettledEventHandler(object obj, InvoiceSettledEventArgs e);
 

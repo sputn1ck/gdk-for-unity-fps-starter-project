@@ -98,11 +98,7 @@ public class LnSubMenuUI : SubMenuUI
                 throw new Exception("You need to specify less sats for your invoice, as you need to pay for route fees");
             }
 
-            var res = await lnClient.lnd.PayInvoice(InvoiceInput.text);
-            if(res.PaymentError != "")
-            {
-                throw new Exception(res.PaymentError);
-            }
+            await lnClient.lnd.PayInvoice(InvoiceInput.text);
             await UpdateBalance();
             OkText.text = "Succeeded payout";
             
