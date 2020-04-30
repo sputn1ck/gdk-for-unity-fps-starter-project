@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44d57a18e578b1478044ee33827d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThrowPaymentError: 0
 --- !u!114 &851089427456680485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bbhDuration: 30
   lobbyDuration: 10
+  PlayerSkins: []
 --- !u!114 &1505973134812988758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,9 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameVersion: 
-  getUsernameResponse: 
-  setUsernameResponse: 
   userName: 
+  needsUserNameChange: 0
   HighscoresCount: 43
   earningsRange: {x: 10, y: 10000}
   killsRange: {x: 3, y: 200}
@@ -83,12 +84,19 @@ MonoBehaviour:
   playerEarnings: 5000
   playerKills: 201
   playerDeaths: 2
+  GoldThreshold: 0.1
+  SilverThreshold: 0.3
+  BronzeThreshold: 0.6
   allSkins:
   - robot_default
   - robot_2
   ownedSkins:
   - robot_default
   equippedSkin: robot_default
+  paymentReturnValue: 0
+  returnPayment: 0
+  expiryInSeconds: 0
+  triggerPaymentTest: 0
 --- !u!114 &4259521829153023365
 MonoBehaviour:
   m_ObjectHideFlags: 0

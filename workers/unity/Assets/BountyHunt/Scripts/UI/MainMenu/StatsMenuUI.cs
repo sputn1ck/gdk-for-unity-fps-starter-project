@@ -14,14 +14,15 @@ public class StatsMenuUI : MonoBehaviour
     Dictionary<string, StatsValueUI> stats = new Dictionary<string, StatsValueUI>();
 
     public List<Badge> badges;
-    public Image badgeImage;
 
     public SimpleSliderUI sliderUI;
 
-    private void Awake()
-    {
-        
-    }
+    public RankingStatsPanelUI GlobalRankingPanel;
+    public RankingStatsPanelUI HunterRankingPanel;
+    public RankingStatsPanelUI LooterRankingPanel;
+
+    Ranking playerRanking;
+    int totalPlayerCount;
 
     public void show()
     {
@@ -35,27 +36,19 @@ public class StatsMenuUI : MonoBehaviour
 
     void Start()
     {
-        badges = badges.OrderBy(o => o.maxPercantageAbove).ToList();
         sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(show);
         sliderUI.GetSlideButtonEvents(0).onDeactivate.AddListener(hide);
-        WritePlayerStats();
         WriteGameStats();
         AddListeners();
 
-        ClientEvents.instance.onLeaderboardUpdate.AddListener(UpdateBadge);
     }
 
-    void WritePlayerStats()
+    private void OnEnable()
     {
-        Transform ctr = PlayerStatsContainer;
-
-        NewLine("Rank", "0", ctr);
-        NewLine("Relative Ranking", "0", ctr);
-        NewLine("League", "0", ctr);
-        NewLine("Lifetime Kills", "0", ctr);
-        NewLine("Lifetime Earnings", "0", ctr);
-        NewLine("Lifetime Deaths", "0", ctr);
-
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            Refresh();
+        }
     }
 
     void WriteGameStats()
@@ -103,38 +96,64 @@ public class StatsMenuUI : MonoBehaviour
         stats[key].Set(name, value);
     }
 
-    void UpdateBadge(LeaderboardUpdateArgs args)
+    
+
+    async void Refresh()
     {
-        Ranking[] scores = args.highscores.OrderByDescending(o => o.Stats.Earnings).ToArray();
-        int playerRank = Array.FindIndex(scores, o => o.Pubkey == args.PlayerPubKey);
-        float factor = (float)playerRank / (float)scores.Length;
-
-        Badge badge = badges[badges.Count - 1];
-
-        foreach (Badge b in badges)
+        try
         {
-            if (factor*100 <= b.maxPercantageAbove)
-            {
-                badge = b;
-                break;
-            }
+            playerRanking = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRanking();
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetRankingInfo();
+            totalPlayerCount = res.TotalPlayers;
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+            var errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
         }
 
-        badgeImage.sprite = badge.sprite;
-
-        stats["Rank"].UpdateValue((playerRank+1).ToString());
-        stats["Relative Ranking"].UpdateValue((int)(factor * 100) + "%");
-        stats["League"].UpdateValue(badge.League);
-
+        RefreshPlayerstats(playerRanking, totalPlayerCount);
     }
 
+    void RefreshPlayerstats(Ranking rank,int playerCount)
+    {
+        Badge badge = GetBadge(rank.GlobalRanking.Badge);
+        GlobalRankingPanel.BadgeImage.sprite = badge.sprite;
+        GlobalRankingPanel.BadgeImage.color = badge.color;
+        GlobalRankingPanel.stats[0].valueText.text = rank.GlobalRanking.Rank.ToString();
+        GlobalRankingPanel.HeadlineExtraValue.text = (100 * rank.GlobalRanking.Rank / playerCount) +"%";
+        GlobalRankingPanel.stats[1].valueText.text = rank.GlobalRanking.Score.ToString();
+
+        badge = GetBadge(rank.KdRanking.Badge);
+        HunterRankingPanel.BadgeImage.sprite = badge.sprite;
+        HunterRankingPanel.BadgeImage.color = badge.color;
+        HunterRankingPanel.stats[0].valueText.text = rank.KdRanking.Rank.ToString();
+        HunterRankingPanel.HeadlineExtraValue.text = (100 * rank.KdRanking.Rank / playerCount) + "%";
+        HunterRankingPanel.stats[1].valueText.text = rank.KdRanking.Score.ToString();
+        HunterRankingPanel.stats[2].valueText.text = rank.Stats.Kills.ToString();
+        HunterRankingPanel.stats[3].valueText.text = rank.Stats.Deaths.ToString();
+
+        badge = GetBadge(rank.EarningsRanking.Badge);
+        LooterRankingPanel.BadgeImage.sprite = badge.sprite;
+        LooterRankingPanel.BadgeImage.color = badge.color;
+        LooterRankingPanel.stats[0].valueText.text = rank.EarningsRanking.Rank.ToString();
+        LooterRankingPanel.HeadlineExtraValue.text = (100 * rank.EarningsRanking.Rank / playerCount) + "%";
+        LooterRankingPanel.stats[1].valueText.text = rank.Stats.Earnings.ToString();
+
+    }
+    Badge GetBadge(RankBadge rankBadge)
+    {
+        return badges.FirstOrDefault(b => b.rankBadge == rankBadge);
+    }
 }
 
 [System.Serializable]
 public class Badge
 {
+    public RankBadge rankBadge;
     public string League;
     public Sprite sprite;
-    [Range(0, 100)]
-    public int maxPercantageAbove;
+    public Color color;
 }

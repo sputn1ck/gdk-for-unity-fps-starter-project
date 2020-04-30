@@ -24,6 +24,10 @@ public interface IBackendPlayerClient
     Task<string> GetGameVersion();
 
     Task<int> GetPlayerRank(string playername, RankType rankType);
+    Task<Ranking> GetPlayerRanking();
+    Task<Ranking> GetPlayerRanking(string playername);
+
+    Task<GetRankingInfoResponse> GetRankingInfo();
 
     Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
 }

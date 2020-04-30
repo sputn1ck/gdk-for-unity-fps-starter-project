@@ -146,4 +146,19 @@ public class BackendPlayerClient : IBackendPlayerClient
     {
         throw new NotImplementedException();
     }
+
+    public Task<Ranking> GetPlayerRanking()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Ranking> GetPlayerRanking(string playername)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<GetRankingInfoResponse> GetRankingInfo()
+    {
+        throw new NotImplementedException();
+    }
 }

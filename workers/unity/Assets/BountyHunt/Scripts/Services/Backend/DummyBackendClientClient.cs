@@ -120,9 +120,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     void setBadge(LeagueRanking ranking, int totalCount)
     {
-        if (ranking.Rank/totalCount <= GoldThreshold) ranking.Badge = RankBadge.Gold;
-        else if (ranking.Rank/totalCount <= SilverThreshold) ranking.Badge = RankBadge.Silver;
-        if (ranking.Rank/totalCount <= BronzeThreshold ) ranking.Badge = RankBadge.Bronze;
+        if ((float)ranking.Rank / (float)totalCount <= GoldThreshold) ranking.Badge = RankBadge.Gold;
+        else if ((float)ranking.Rank / (float)totalCount <= SilverThreshold) ranking.Badge = RankBadge.Silver;
+        else if ((float)ranking.Rank / (float)totalCount <= BronzeThreshold) ranking.Badge = RankBadge.Bronze;
+        else ranking.Badge = RankBadge.Unranked;
     }
 
     void Update()
@@ -308,5 +309,41 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         {
             Debug.Log(testInvoice + " failed: " + e.Message);
         }
+    }
+
+    public async Task<Ranking> GetPlayerRanking()
+    {
+        Ranking r;
+        try
+        {
+            r = await GetPlayerRanking(userName);
+            return r;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public async Task<Ranking> GetPlayerRanking(string playername)
+    {
+        Ranking r = highscores.FirstOrDefault(h => h.Name == playername);
+        if(r == null)
+        {
+            throw new Exception("playername doeas not exist!");
+        }
+        return r;
+    }
+
+    public async Task<GetRankingInfoResponse> GetRankingInfo()
+    {
+        GetRankingInfoResponse res = new GetRankingInfoResponse
+        {
+            BronzeThreshold = (int)(this.BronzeThreshold * 100 * highscores.Length),
+            SilverThreshold = (int)(this.SilverThreshold * 100 * highscores.Length),
+            GoldThreshold = (int)(this.GoldThreshold * 100 * highscores.Length),
+            TotalPlayers = highscores.Length
+        };
+        return res;
     }
 }
