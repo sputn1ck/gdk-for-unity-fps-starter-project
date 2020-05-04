@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Lnrpc;
 
 public class WalletMenuUI : MonoBehaviour
 {
@@ -35,12 +36,27 @@ public class WalletMenuUI : MonoBehaviour
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 
-    void OnPayButtonPress()
+    async void OnPayButtonPress()
     {
         //TODO show error instead if invoice is invalid or not existent
         //TODO show invoice value
-        
-        YesNoPopUpArgs args = new YesNoPopUpArgs("pay", "Do you really want to pay the invoice of XXx <sprite name=sats>?", OnPayRequest);
+        string invoice = invoiceInput.text;
+        PayReq decodedInvoice;
+        try
+        {
+            decodedInvoice = await PlayerServiceConnections.instance.lnd.DecodePayreq(invoice);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+        string text = String.Format("paying invoice: \n {0} \n for {1}{2}\n are you sure?", decodedInvoice.Description, decodedInvoice.NumSatoshis.ToString(), Utility.tintedSatsSymbol);
+
+        YesNoPopUpArgs args = new YesNoPopUpArgs("pay invoice ", text, OnPayRequest);
         PopUpManagerUI.instance.OpenYesNoPopUp(args);
     }
 

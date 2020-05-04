@@ -10,6 +10,7 @@ using Daemon;
 using QRCoder;
 using QRCoder.Unity;
 using System.Threading.Tasks;
+using Bbhrpc;
 
 public class CharacterMenuUI : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class CharacterMenuUI : MonoBehaviour
     public SkinGroupButtonUI skinGroupButtonPrefab;
     public Transform skinGroupButtonsContainer;
 
+    public TextMeshProUGUI BalanceText;
+
     SkinsLibrary playerSkinsLibrary;
 
     Skin selectedSkin;
@@ -38,21 +41,35 @@ public class CharacterMenuUI : MonoBehaviour
     {
         refreshButton.onClick.AddListener(Refresh);
         ClientEvents.instance.onServicesSetup.AddListener(Init);
-        PlayerPrefs.DeleteAll();
     }
     async void Init()
     {
-        Debug.Log("initializing characterMenu");
-        var shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
-        var testOwnedIDs = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
+        ShopSkin[] shopSkins;
+        SkinInventory inventory;
+        long balance;
+        try
+        {
+            shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
+            inventory = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
+            var b = (await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance());
+            balance = b.DaemonBalance;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+        BalanceText.text = Utility.SatsToShortString(balance, true);
 
         playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
-        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, testOwnedIDs.OwnedSkins.ToArray());
+        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, inventory.OwnedSkins.ToArray());
 
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
         
         skinGroupButtons = skinGroupButtonsContainer.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
-        equippedSkin = playerSkinsLibrary.GetSkin(testOwnedIDs.EquippedSkin);
+        equippedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
         selectedSkin = playerSkinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID", playerSkinsLibrary.defaultSkinID));
 
         UpdateSkinGroupButtons();
@@ -64,13 +81,30 @@ public class CharacterMenuUI : MonoBehaviour
     }
     async Task RefreshTask()
     {
-        var shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
-        var testOwnedIDs = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
+        ShopSkin[] shopSkins;
+        SkinInventory inventory;
+        long balance;
+        try
+        {
+            shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
+            inventory = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
+            var b = (await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance());
+            balance = b.DaemonBalance;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+        BalanceText.text = Utility.SatsToShortString(balance,true);
 
         playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
-        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, testOwnedIDs.OwnedSkins.ToArray());
+        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, inventory.OwnedSkins.ToArray());
 
-        equippedSkin = playerSkinsLibrary.GetSkin(testOwnedIDs.EquippedSkin);
+        equippedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
         selectedSkin = playerSkinsLibrary.GetSkin(selectedSkin.ID);
 
         UpdateSkinGroupButtons();

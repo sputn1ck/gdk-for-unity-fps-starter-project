@@ -115,7 +115,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
             return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
         }
 
-        return await Task.FromResult(new PayReq { NumSatoshis = 0 });
+        return await Task.FromResult(new PayReq { NumSatoshis = 100, Description = "Test Invoice" });
     }
 
     public void Dispose()
