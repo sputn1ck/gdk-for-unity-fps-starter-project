@@ -22,7 +22,7 @@ public class StatsMenuUI : MonoBehaviour
     public RankingStatsPanelUI LooterRankingPanel;
 
     Ranking playerRanking;
-    int totalPlayerCount;
+    GetRankingInfoResponse rankingInfo;
 
     public void show()
     {
@@ -38,7 +38,6 @@ public class StatsMenuUI : MonoBehaviour
     {
         sliderUI.GetSlideButtonEvents(0).onActivate.AddListener(show);
         sliderUI.GetSlideButtonEvents(0).onDeactivate.AddListener(hide);
-        WriteGameStats();
         AddListeners();
 
     }
@@ -49,14 +48,6 @@ public class StatsMenuUI : MonoBehaviour
         {
             Refresh();
         }
-    }
-
-    void WriteGameStats()
-    {
-        Transform ctr = GameStatsContainer;
-
-        NewLine("Total Players Lifetime Kills", "0", ctr);
-        NewLine("Total Players Lifetime Earnings", "0", ctr);
     }
 
     void AddListeners()
@@ -89,11 +80,15 @@ public class StatsMenuUI : MonoBehaviour
         */
     }
 
-    void NewLine(string name, string value, Transform container,string key = "")
+    void WriteLine(string name, string value, Transform container,string key = "")
     {
         if (key == "") key = name;
-        stats[key] = Instantiate(statsValuePrefab, container);
+        if (!stats.ContainsKey(key))
+        {
+            stats[key] = Instantiate(statsValuePrefab, container);
+        }
         stats[key].Set(name, value);
+
     }
 
     
@@ -104,7 +99,7 @@ public class StatsMenuUI : MonoBehaviour
         {
             playerRanking = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRanking();
             var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetRankingInfo();
-            totalPlayerCount = res.TotalPlayers;
+            rankingInfo = res;
         }
         catch(Exception e)
         {
@@ -114,7 +109,8 @@ public class StatsMenuUI : MonoBehaviour
             return;
         }
 
-        RefreshPlayerstats(playerRanking, totalPlayerCount);
+        RefreshPlayerstats(playerRanking, rankingInfo.TotalPlayers);
+        RefreshGameStats();
     }
 
     void RefreshPlayerstats(Ranking rank,int playerCount)
@@ -143,6 +139,15 @@ public class StatsMenuUI : MonoBehaviour
         LooterRankingPanel.stats[1].valueText.text = rank.Stats.Earnings.ToString();
 
     }
+
+    void RefreshGameStats()
+    {
+        
+        Transform ctr = GameStatsContainer;
+
+        WriteLine("Total Players", rankingInfo.TotalPlayers.ToString(), ctr);
+    }
+
     Badge GetBadge(RankBadge rankBadge)
     {
         return badges.FirstOrDefault(b => b.rankBadge == rankBadge);
