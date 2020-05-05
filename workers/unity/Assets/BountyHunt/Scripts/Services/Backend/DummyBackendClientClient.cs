@@ -72,7 +72,11 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             int k = UnityEngine.Random.Range(killsRange.x, killsRange.y);
             int d = UnityEngine.Random.Range(deathsRange.x, deathsRange.y);
             int e = UnityEngine.Random.Range(earningsRange.x, earningsRange.y);
-            int kd = (int)((k + 1f) / (d + 1f) * 100);
+            int kdDeaths = 1;
+            if (d > 0) {
+                kdDeaths = d;
+            }
+            float kd = (float)k / kdDeaths;
             highscores[i] = new Ranking()
             {
                 Name = "Player: " + i,
@@ -88,7 +92,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 GlobalRanking = new LeagueRanking(),
                 KdRanking = new LeagueRanking
                 {
-                    Score = (int)((k + 1f) / (d + 1f))
+                    Score = (int)(kd*10000)
                 },
                 EarningsRanking = new LeagueRanking
                 {
