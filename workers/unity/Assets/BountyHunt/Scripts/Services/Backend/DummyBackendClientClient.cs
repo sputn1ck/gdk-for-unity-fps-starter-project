@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using System.Threading;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
@@ -273,7 +274,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(needsUserNameChange);
     }
 
-    public async Task WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long expiry, CancellationToken cancellationTokens)
     {
         await Task.Run(() =>
         {
@@ -311,7 +312,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         var testInvoice = "testp" + UnityEngine.Random.Range(0, 100000).ToString();
         try
         {
-            await WaitForPayment(testInvoice, expiryInSeconds);
+            await WaitForPayment(testInvoice, expiryInSeconds, new CancellationToken());
             Debug.Log(testInvoice + " succeeded");
         } catch(Exception e)
         {

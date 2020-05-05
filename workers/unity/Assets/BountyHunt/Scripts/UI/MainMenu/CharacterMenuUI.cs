@@ -11,6 +11,7 @@ using QRCoder;
 using QRCoder.Unity;
 using System.Threading.Tasks;
 using Bbhrpc;
+using System.Threading;
 
 public class CharacterMenuUI : MonoBehaviour
 {
@@ -317,14 +318,16 @@ public class CharacterMenuUI : MonoBehaviour
 
         //copy
         PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice),false);
-
-        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true);
+        var closeToken = new CancellationTokenSource();
+        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true,closeAction: ()=> {
+            closeToken.Cancel();
+        });
         PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
         
         try
         {
             var payreq = await PlayerServiceConnections.instance.lnd.DecodePayreq(invoice);
-            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,payreq.Expiry-60);
+            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,payreq.Expiry-60, closeToken.Token);
             if (popup != null) popup.Close();
             PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
             PopUpManagerUI.instance.OpenPopUp(args1);

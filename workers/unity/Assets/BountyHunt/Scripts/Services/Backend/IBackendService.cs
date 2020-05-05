@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Threading;
 
 public interface IBackendPlayerClient
 {
@@ -12,7 +13,7 @@ public interface IBackendPlayerClient
     void Shutdown();
 
     Task<string> GetGameVersion();
-    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
+    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds, CancellationToken cancellationToken);
 
     // Username
     Task<string> GetUsername();

@@ -20,15 +20,18 @@ public class BackendPlayerClient : IBackendPlayerClient
     private string pubkey;
     private string signature;
 
+    private CancellationTokenSource CancellationTokenSource;
     public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new GameClientService.GameClientServiceClient(rpcChannel);
         publicClient = new PublicService.PublicServiceClient(rpcChannel);
         skinClient = new SkinService.SkinServiceClient(rpcChannel);
+        this.CancellationTokenSource = new CancellationTokenSource();
         this.pubkey = pubkey;
         this.signature = signature;
         await GetUsername();
+        
         
     }
 
@@ -97,7 +100,7 @@ public class BackendPlayerClient : IBackendPlayerClient
 
     public void Shutdown()
     {
-
+        CancellationTokenSource?.Cancel();
         //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
         Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
         t.Wait(5000);
@@ -136,34 +139,36 @@ public class BackendPlayerClient : IBackendPlayerClient
         return setName;
     }
 
-    public async Task WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long expiry, CancellationToken cancellationToken)
     {
         await Task.Run(async () =>
         {
             var startTime = DateTime.Now;
             var endTime = DateTime.Now.AddSeconds(expiry);
             var time = endTime - startTime;
-            CancellationTokenSource ctS = new CancellationTokenSource();
-            ctS.CancelAfter(time);
-            using (var call = publicClient.SubscribeInvoiceStream(new SubscribeInvoiceStreamRequest { Invoice = invoice }))
+            CancellationTokenSource expiryToken = new CancellationTokenSource();
+            expiryToken.CancelAfter(time);
+            var callToken = CancellationTokenSource.CreateLinkedTokenSource(expiryToken.Token, cancellationToken);
+            using (var call = publicClient.SubscribeInvoiceStream(new SubscribeInvoiceStreamRequest { Invoice = invoice }, cancellationToken: CancellationTokenSource.Token))
             {
                 try
                 {
-                    var res = await call.ResponseStream.MoveNext(ctS.Token);
+                    var res = await call.ResponseStream.MoveNext(callToken.Token);
                     if (res)
                     {
                         if (call.ResponseStream.Current.Payed)
                             return;
                     }
-                } catch(RpcException e)
+                }
+                catch (RpcException e)
                 {
-                    if(e.StatusCode == StatusCode.Cancelled)
+                    if (e.StatusCode == StatusCode.Cancelled)
                     {
                         throw new ExpiredException();
                     }
                     throw e;
                 }
-                
+
             }
         });
     }
