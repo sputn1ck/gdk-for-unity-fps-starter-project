@@ -151,12 +151,12 @@ public class DummyLnd : MonoBehaviour, IClientLnd
 
     public Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "")

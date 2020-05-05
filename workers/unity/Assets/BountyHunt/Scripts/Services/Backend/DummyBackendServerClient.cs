@@ -78,6 +78,10 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public Task<string> GetUserSkin(string pubkey)
     {
+        if (PlayerSkins.Length == 0)
+        {
+            return Task.FromResult("");
+        }
         return Task.FromResult(PlayerSkins[UnityEngine.Random.Range(0, PlayerSkins.Length - 1)]);
     }
 }
