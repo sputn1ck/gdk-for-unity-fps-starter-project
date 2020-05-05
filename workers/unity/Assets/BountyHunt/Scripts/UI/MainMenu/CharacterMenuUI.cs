@@ -323,7 +323,8 @@ public class CharacterMenuUI : MonoBehaviour
         
         try
         {
-            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,240);
+            var payreq = await PlayerServiceConnections.instance.lnd.DecodePayreq(invoice);
+            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,payreq.Expiry-60);
             if (popup != null) popup.Close();
             PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
             PopUpManagerUI.instance.OpenPopUp(args1);

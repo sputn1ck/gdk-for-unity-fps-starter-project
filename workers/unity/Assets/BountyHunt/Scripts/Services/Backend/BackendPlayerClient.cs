@@ -136,10 +136,38 @@ public class BackendPlayerClient : IBackendPlayerClient
         return setName;
     }
 
-    public Task WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long expiry)
     {
-        throw new NotImplementedException();
+        await Task.Run(async () =>
+        {
+            var startTime = DateTime.Now;
+            var endTime = DateTime.Now.AddSeconds(expiry);
+            var time = endTime - startTime;
+            CancellationTokenSource ctS = new CancellationTokenSource();
+            ctS.CancelAfter(time);
+            using (var call = publicClient.SubscribeInvoiceStream(new SubscribeInvoiceStreamRequest { Invoice = invoice }))
+            {
+                try
+                {
+                    var res = await call.ResponseStream.MoveNext(ctS.Token);
+                    if (res)
+                    {
+                        if (call.ResponseStream.Current.Payed)
+                            return;
+                    }
+                } catch(RpcException e)
+                {
+                    if(e.StatusCode == StatusCode.Cancelled)
+                    {
+                        throw new ExpiredException();
+                    }
+                    throw e;
+                }
+                
+            }
+        });
     }
+
 
     public async Task<Ranking> GetPlayerRanking()
     {
