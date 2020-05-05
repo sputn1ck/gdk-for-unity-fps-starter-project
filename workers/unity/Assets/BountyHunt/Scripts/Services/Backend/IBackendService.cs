@@ -6,30 +6,33 @@ using UnityEngine;
 
 public interface IBackendPlayerClient
 {
+    // Basic
     Task Setup(string target, int port, string pubkey, string signature);
     void Shutdown();
 
+    Task<string> GetGameVersion();
+    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
+
+    // Username
     Task<string> GetUsername();
     Task<string> SetUsername(string userName);
 
     Task<bool> NeedsUsernameChange();
-    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
-    
+
+    // Skin Stuff
     Task<SkinInventory> GetSkinInventory();
     Task EquipSkin(string skinId);
     Task<ShopSkin[]> GetAllSkins();
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
 
-    Task<string> GetGameVersion();
-
-    Task<int> GetPlayerRank(string playername, RankType rankType);
+    // Ranking Stuff
     Task<Ranking> GetPlayerRanking();
-    Task<Ranking> GetPlayerRanking(string playername);
-
+    Task<Ranking> GetSpecificPlayerRanking(string pubkey);
     Task<GetRankingInfoResponse> GetRankingInfo();
+    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
-    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
+
 }
 
 public interface IBackendServerClient

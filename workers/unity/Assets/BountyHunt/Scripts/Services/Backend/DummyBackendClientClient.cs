@@ -45,6 +45,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     private void Awake()
     {
         highscores = new Ranking[this.HighscoresCount + 1];
+        var playerKdDeaths = 1;
+        if (playerDeaths > 0){
+            playerKdDeaths = playerDeaths;
+        }
         highscores[0] = new Ranking()
         {
             Name = userName,
@@ -60,7 +64,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             GlobalRanking = new LeagueRanking(),
             KdRanking = new LeagueRanking
             {
-                Score = (int)((playerKills + 1f) / (playerDeaths + 1f))
+                Score = (int)((((float)playerKills) / (playerKdDeaths))*10000)
             },
             EarningsRanking = new LeagueRanking
             {
@@ -320,7 +324,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         Ranking r;
         try
         {
-            r = await GetPlayerRanking(userName);
+            r = GetPlayerRanking(userName);
             return r;
         }
         catch(Exception e)
@@ -329,7 +333,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         }
     }
 
-    public async Task<Ranking> GetPlayerRanking(string playername)
+    private Ranking GetPlayerRanking(string playername)
     {
         Ranking r = highscores.FirstOrDefault(h => h.Name == playername);
         if(r == null)
@@ -349,5 +353,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             TotalPlayers = highscores.Length
         };
         return res;
+    }
+
+    public Task<Ranking> GetSpecificPlayerRanking(string pubkey)
+    {
+        throw new NotImplementedException();
     }
 }

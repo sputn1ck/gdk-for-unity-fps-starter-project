@@ -131,9 +131,8 @@ public class LeaderboardMenuUI : MonoBehaviour
             PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
             return;
         }
-
         UpdateList(ranks.ranks,currentPageIndex*pageSize);
-        lastPage = (int)Mathf.Ceil(ranks.count / pageSize) - 1;
+        lastPage = (int)Mathf.Ceil((float)ranks.count / pageSize) - 1;
         UpdateNavigationButtons();
 
     }
@@ -185,8 +184,24 @@ public class LeaderboardMenuUI : MonoBehaviour
     {
         try
         {
-            int rank = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRank(PlayerName, selectedLeaderboard.rankType);
-
+            var ranking = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRanking();
+            int rank = 0;
+            switch (selectedLeaderboard.rankType)
+            {
+                case RankType.None:
+                    throw new Exception("internal error");
+                case RankType.Global:
+                    rank = ranking.GlobalRanking.Rank;
+                    break;
+                case RankType.Kd:
+                    rank = ranking.KdRanking.Rank;
+                    break;
+                case RankType.Earnings:
+                    rank = ranking.EarningsRanking.Rank;
+                    break;
+                default:
+                    throw new Exception("internal error");
+            }
             SetPage(rank/pageSize);
         }
         catch (Exception e)
@@ -195,7 +210,7 @@ public class LeaderboardMenuUI : MonoBehaviour
             PopUpManagerUI.instance.OpenPopUp(new PopUpArgs("Error", e.Message));
             return;
         }
-        
+
     }
     void SetFirstPage()
     {

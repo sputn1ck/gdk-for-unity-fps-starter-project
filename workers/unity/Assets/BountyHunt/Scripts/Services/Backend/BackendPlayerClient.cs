@@ -120,12 +120,6 @@ public class BackendPlayerClient : IBackendPlayerClient
         return info.GameInfo.GameVersion;
     }
 
-    public Task<int> GetPlayerRank(string playername, RankType rankType)
-    {
-        //TODO
-        throw new NotImplementedException();
-    }
-
     public async Task<bool> NeedsUsernameChange()
     {
         var name = await GetUsername();
@@ -147,18 +141,22 @@ public class BackendPlayerClient : IBackendPlayerClient
         throw new NotImplementedException();
     }
 
-    public Task<Ranking> GetPlayerRanking()
+    public async Task<Ranking> GetPlayerRanking()
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingAsync(new GetRankingRequest() { Pubkey = this.pubkey });
+        return res.Ranking;
     }
 
-    public Task<Ranking> GetPlayerRanking(string playername)
+    public async Task<Ranking> GetSpecificPlayerRanking(string pubkey)
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingAsync(new GetRankingRequest() { Pubkey = pubkey });
+        return res.Ranking;
     }
 
-    public Task<GetRankingInfoResponse> GetRankingInfo()
+    public async Task<GetRankingInfoResponse> GetRankingInfo()
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingInfoAsync(new GetRankingInfoRequest());
+        return res;
     }
+
 }
