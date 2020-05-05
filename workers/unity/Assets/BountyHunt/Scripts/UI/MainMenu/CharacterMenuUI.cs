@@ -42,6 +42,8 @@ public class CharacterMenuUI : MonoBehaviour
     {
         refreshButton.onClick.AddListener(Refresh);
         ClientEvents.instance.onServicesSetup.AddListener(Init);
+        GetComponent<SlideSubMenuUI>().onActivate.AddListener(OnActivate);
+        GetComponent<SlideSubMenuUI>().onDeactivate.AddListener(OnDeactivate);
     }
     async void Init()
     {
@@ -110,6 +112,22 @@ public class CharacterMenuUI : MonoBehaviour
 
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
+    }
+
+    private void OnActivate()
+    {
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            Refresh();
+        }
+    }
+
+    private void OnDeactivate()
+    {
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            PreviewSpot.Instance.SetSkin(equippedSkin);
+        }
     }
 
     void UpdateSkinGroupButtons()
