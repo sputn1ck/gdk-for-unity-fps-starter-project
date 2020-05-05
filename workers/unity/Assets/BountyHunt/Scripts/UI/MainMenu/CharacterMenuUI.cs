@@ -319,9 +319,7 @@ public class CharacterMenuUI : MonoBehaviour
         //copy
         PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice),false);
         var closeToken = new CancellationTokenSource();
-        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true,closeAction: ()=> {
-            closeToken.Cancel();
-        });
+        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true,closeAction: ()=> closeToken.Cancel());
         PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
         
         try

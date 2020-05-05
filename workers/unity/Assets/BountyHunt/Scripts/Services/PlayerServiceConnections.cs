@@ -203,10 +203,10 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        DonnerDaemonClient.Shutdown();
-        lnd.ShutDown();
-        BackendPlayerClient.Shutdown();
-        AuctionClient.Shutdown();
+        DonnerDaemonClient?.Shutdown();
+        lnd?.ShutDown();
+        BackendPlayerClient?.Shutdown();
+        AuctionClient?.Shutdown();
         Debug.Log("client quit cleanly");
     }
 
