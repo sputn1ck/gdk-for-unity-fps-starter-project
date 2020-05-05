@@ -293,7 +293,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                     return;
                 }
             }
-            throw new Exception("expired");
+            throw new ExpiredException();
            
         });
     }

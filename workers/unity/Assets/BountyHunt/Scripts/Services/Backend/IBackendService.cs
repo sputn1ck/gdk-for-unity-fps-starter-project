@@ -1,4 +1,5 @@
 using Bbhrpc;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,4 +48,20 @@ public interface IBackendServerClient
     void AddPlayerDisconnect(string user);
     Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request);
     Task<string> GetUserSkin(string pubkey);
+}
+
+public class ExpiredException : Exception
+{
+    public ExpiredException()
+    {
+
+    }
+    public ExpiredException(string message) : base(message)
+    {
+
+    }
+    public ExpiredException(string message, Exception inner) : base(message, inner)
+    {
+
+    }
 }

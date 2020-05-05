@@ -53,15 +53,15 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         return Task.FromResult(payreq);
     }
 
-    public Task<SendResponse> PayInvoice(string paymentRequest)
+    public async Task<SendResponse> PayInvoice(string paymentRequest)
     {
         if (ThrowPaymentError)
         {
             throw new PaymentException("Dummy payment failed");
         }
-
+        await Task.Delay(UnityEngine.Random.Range(1000, 5000));
         ((DummyBackendClientClient)PlayerServiceConnections.instance.BackendPlayerClient).OnDummyInvoicePaied(paymentRequest);
-        return Task.FromResult(new SendResponse());
+        return new SendResponse();
     }
 
     public Task<PendingChannelsResponse> PendingChannels()
