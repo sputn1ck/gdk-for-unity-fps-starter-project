@@ -310,6 +310,8 @@ namespace Bbhrpc {
     static readonly grpc::Marshaller<global::Bbhrpc.ListOnlineResponse> __Marshaller_bbhrpc_ListOnlineResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.ListOnlineResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoRequest> __Marshaller_bbhrpc_GetInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoResponse> __Marshaller_bbhrpc_GetInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.SubscribeInvoiceStreamRequest> __Marshaller_bbhrpc_SubscribeInvoiceStreamRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SubscribeInvoiceStreamRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.SubscribeInvioceStreamResponse> __Marshaller_bbhrpc_SubscribeInvioceStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SubscribeInvioceStreamResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse> __Method_GetRankingInfo = new grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse>(
         grpc::MethodType.Unary,
@@ -353,6 +355,13 @@ namespace Bbhrpc {
         __Marshaller_bbhrpc_GetInfoRequest,
         __Marshaller_bbhrpc_GetInfoResponse);
 
+    static readonly grpc::Method<global::Bbhrpc.SubscribeInvoiceStreamRequest, global::Bbhrpc.SubscribeInvioceStreamResponse> __Method_SubscribeInvoiceStream = new grpc::Method<global::Bbhrpc.SubscribeInvoiceStreamRequest, global::Bbhrpc.SubscribeInvioceStreamResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SubscribeInvoiceStream",
+        __Marshaller_bbhrpc_SubscribeInvoiceStreamRequest,
+        __Marshaller_bbhrpc_SubscribeInvioceStreamResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -389,6 +398,11 @@ namespace Bbhrpc {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetInfoResponse> GetInfo(global::Bbhrpc.GetInfoRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task SubscribeInvoiceStream(global::Bbhrpc.SubscribeInvoiceStreamRequest request, grpc::IServerStreamWriter<global::Bbhrpc.SubscribeInvioceStreamResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -514,6 +528,14 @@ namespace Bbhrpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetInfo, null, options, request);
       }
+      public virtual grpc::AsyncServerStreamingCall<global::Bbhrpc.SubscribeInvioceStreamResponse> SubscribeInvoiceStream(global::Bbhrpc.SubscribeInvoiceStreamRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SubscribeInvoiceStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Bbhrpc.SubscribeInvioceStreamResponse> SubscribeInvoiceStream(global::Bbhrpc.SubscribeInvoiceStreamRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SubscribeInvoiceStream, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override PublicServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -531,7 +553,8 @@ namespace Bbhrpc {
           .AddMethod(__Method_ListRankings, serviceImpl.ListRankings)
           .AddMethod(__Method_AddBounty, serviceImpl.AddBounty)
           .AddMethod(__Method_ListOnline, serviceImpl.ListOnline)
-          .AddMethod(__Method_GetInfo, serviceImpl.GetInfo).Build();
+          .AddMethod(__Method_GetInfo, serviceImpl.GetInfo)
+          .AddMethod(__Method_SubscribeInvoiceStream, serviceImpl.SubscribeInvoiceStream).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -546,6 +569,7 @@ namespace Bbhrpc {
       serviceBinder.AddMethod(__Method_AddBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.AddBountyRequest, global::Bbhrpc.AddBountyResponse>(serviceImpl.AddBounty));
       serviceBinder.AddMethod(__Method_ListOnline, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.ListOnlineRequest, global::Bbhrpc.ListOnlineResponse>(serviceImpl.ListOnline));
       serviceBinder.AddMethod(__Method_GetInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetInfoRequest, global::Bbhrpc.GetInfoResponse>(serviceImpl.GetInfo));
+      serviceBinder.AddMethod(__Method_SubscribeInvoiceStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Bbhrpc.SubscribeInvoiceStreamRequest, global::Bbhrpc.SubscribeInvioceStreamResponse>(serviceImpl.SubscribeInvoiceStream));
     }
 
   }
