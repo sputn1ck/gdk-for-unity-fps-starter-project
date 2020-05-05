@@ -1,18 +1,35 @@
-using Bbh;
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface IBackendClientClient
+public interface IBackendPlayerClient
 {
-    void Setup(string target, int port, string pubkey, string signature);
+    Task Setup(string target, int port, string pubkey, string signature);
     void Shutdown();
 
-    Task<string> GetUsername(string pubkey);
-    Task<string> SetUsername(string pubkey, string userName);
-    Task<Highscore[]> GetHighscore();
+    Task<string> GetUsername();
+    Task<string> SetUsername(string userName);
 
+    Task<bool> NeedsUsernameChange();
+    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
+    
+    Task<SkinInventory> GetSkinInventory();
+    Task EquipSkin(string skinId);
+    Task<ShopSkin[]> GetAllSkins();
+    Task<string[]> GetAllSkinIds();
+    Task<string> GetSkinInvoice(string skinId);
+
+    Task<string> GetGameVersion();
+
+    Task<int> GetPlayerRank(string playername, RankType rankType);
+    Task<Ranking> GetPlayerRanking();
+    Task<Ranking> GetPlayerRanking(string playername);
+
+    Task<GetRankingInfoResponse> GetRankingInfo();
+
+    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
 }
 
 public interface IBackendServerClient
@@ -26,4 +43,5 @@ public interface IBackendServerClient
     void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths);
     void AddPlayerDisconnect(string user);
     Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request);
+    Task<string> GetUserSkin(string pubkey);
 }

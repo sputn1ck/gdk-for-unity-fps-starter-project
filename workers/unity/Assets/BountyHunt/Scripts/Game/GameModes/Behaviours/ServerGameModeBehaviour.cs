@@ -39,7 +39,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
         currentGameMode = gameMode;
 
 
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbh.GetRoundInfoRequest { GameMode = (Bbh.GameMode)gameModeRotationCounter,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { GameMode = (Bbhrpc.GameMode)gameModeRotationCounter,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
         if (roundInfo.Advertisers != null) {
             SendAdvertisers(roundInfo.Advertisers);
         }
@@ -61,7 +61,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
         SetNextGameMode();
     }
-    public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbh.AdvertiserInfo> advertiserInfos)
+    public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
     {
         List<AdvertiserSource> advertiserSources = new List<AdvertiserSource>();
         foreach(var advertiserInfo in advertiserInfos)

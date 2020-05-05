@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &302241656598969916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3531109477819745427}
+  - component: {fileID: 212973259964900785}
+  - component: {fileID: 851089427456680485}
+  - component: {fileID: 1505973134812988758}
+  - component: {fileID: 4259521829153023365}
+  m_Layer: 0
+  m_Name: 1_ServerDummies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3531109477819745427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302241656598969916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &212973259964900785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302241656598969916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44d57a18e578b1478044ee33827d24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThrowPaymentError: 0
+--- !u!114 &851089427456680485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302241656598969916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711b27c51ec22ba49905b6bb887664b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bbhDuration: 30
+  lobbyDuration: 10
+  PlayerSkins: []
+--- !u!114 &1505973134812988758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302241656598969916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3456f01e69730941b6db64d80ba2c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameVersion: 
+  userName: 
+  needsUserNameChange: 0
+  HighscoresCount: 43
+  earningsRange: {x: 10, y: 10000}
+  killsRange: {x: 3, y: 200}
+  deathsRange: {x: 3, y: 200}
+  playerEarnings: 5000
+  playerKills: 201
+  playerDeaths: 2
+  GoldThreshold: 0.1
+  SilverThreshold: 0.3
+  BronzeThreshold: 0.6
+  allSkins:
+  - robot_default
+  - robot_2
+  ownedSkins:
+  - robot_default
+  equippedSkin: robot_default
+  paymentReturnValue: 0
+  returnPayment: 0
+  expiryInSeconds: 0
+  triggerPaymentTest: 0
+--- !u!114 &4259521829153023365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302241656598969916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ccd12d5946c9747b52e6a79c8a5741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

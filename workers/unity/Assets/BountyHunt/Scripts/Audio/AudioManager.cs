@@ -56,7 +56,11 @@ public class AudioManager : MonoBehaviour
         AudioObject ao = Instantiate(audioObject2DPrefab);
         ao.Play(clip);
     }
-
+    /// <summary>
+    /// values from 0 to  100
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="value"></param>
     public void SetVolume(VolumeType type, float value)
     {
         PlayerPrefs.SetFloat(keys[type].playerPrefsKey, value);
@@ -64,7 +68,11 @@ public class AudioManager : MonoBehaviour
         float volume = Mathf.Log10(Mathf.Clamp(value, 0.01f, 100)/100) * 20;
         mixer.SetFloat(keys[type].mixerKey, volume);
     }
-
+    /// <summary>
+    /// values from 0 to 100
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public float GetVolume (VolumeType type)
     {
         return PlayerPrefs.GetFloat(keys[type].playerPrefsKey, 80);

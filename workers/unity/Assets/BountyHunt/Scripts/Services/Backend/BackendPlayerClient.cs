@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Bbh;
+using Bbhrpc;
 using System.Collections.Concurrent;
 using System.Threading;
 using System;
@@ -9,42 +9,81 @@ using Grpc.Core;
 using System.Threading.Tasks;
 using System.Linq;
 
-public class BackendPlayerClient : IBackendClientClient
+public class BackendPlayerClient : IBackendPlayerClient
 {
-    public ClientService.ClientServiceClient client;
+    public GameClientService.GameClientServiceClient client;
+    public PublicService.PublicServiceClient publicClient;
+    public SkinService.SkinServiceClient skinClient;
 
-    private Grpc.Core.Channel rpcChannel;
+    private Channel rpcChannel;
 
     private string pubkey;
     private string signature;
-    public void Setup(string target,int port, string pubkey, string signature)
+
+    public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
-        client = new ClientService.ClientServiceClient(rpcChannel);
+        client = new GameClientService.GameClientServiceClient(rpcChannel);
+        publicClient = new PublicService.PublicServiceClient(rpcChannel);
+        skinClient = new SkinService.SkinServiceClient(rpcChannel);
         this.pubkey = pubkey;
         this.signature = signature;
-
+        await GetUsername();
+        
     }
 
-    public async Task<string> GetUsername(string pubkey)
+    public async Task<string> GetUsername()
     {
         
         var res = await client.GetUsernameAsync(new GetUsernameRequest() { }, GetPubkeyCalloptions());
         return res.Name;
     }
 
-    public async Task<string> SetUsername(string pubkey, string userName)
+    public async Task<string> SetUsername(string userName)
     {
         var res = await client.SetUsernameAsync(new SetUsernameRequest() { Name = userName }, GetPubkeyCalloptions());
         return res.Name;
     }
-
-    public async Task<Highscore[]> GetHighscore()
+    
+    public async Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType)
     {
-        var res = await client.GetHighscoreAsync(new GetHighscoreRequest() { });
-        Highscore[] highscores = new Highscore[res.Highscores.Count];
-        res.Highscores.CopyTo(highscores, 0);
-        return highscores;
+        var res = await publicClient.ListRankingsAsync(new ListRankingsRequest
+        {
+            RankType = rankType,
+            Length = length,
+            StartIndex = startIndex
+        });
+        return (res.Rankings.ToArray(), res.TotalElements);
+    }
+
+    public async Task<SkinInventory> GetSkinInventory()
+    {
+        var res = await skinClient.GetSkinInventoryAsync(new GetSkinInventoryRequest(), GetPubkeyCalloptions());
+        return res.SkinInventory;
+    }
+
+    public async Task<ShopSkin[]> GetAllSkins()
+    {
+        var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
+        return res.ShopItems.ToArray();
+    }
+
+    public async Task EquipSkin(string skinId)
+    {
+        try
+        {
+            await skinClient.EquipSkinAsync(new EquipSkinRequest() { Id = skinId }, GetPubkeyCalloptions());
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+
+    }
+    public async Task<string> GetSkinInvoice(string skinId)
+    {
+        var res = await skinClient.BuySkinAsync(new BuySkinRequest { Id = skinId }, GetPubkeyCalloptions());
+        return res.Invoice;
     }
 
     private CallOptions GetPubkeyCalloptions()
@@ -65,5 +104,61 @@ public class BackendPlayerClient : IBackendClientClient
         //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
     }
 
-   
+    public async Task<string[]> GetAllSkinIds()
+    {
+        var res = await skinClient.ListSkinsAsync(new ListSkinsRequest(), GetPubkeyCalloptions());
+        var skinIds = new string[res.ShopItems.Count];
+        for (int i = 0; i < skinIds.Length; i++) { 
+            skinIds[i] = res.ShopItems[i].Id;
+        }
+        return skinIds;
+    }
+
+    public async Task<string> GetGameVersion()
+    {
+        var info = await publicClient.GetInfoAsync(new GetInfoRequest());
+        return info.GameInfo.GameVersion;
+    }
+
+    public Task<int> GetPlayerRank(string playername, RankType rankType)
+    {
+        //TODO
+        throw new NotImplementedException();
+    }
+
+    public async Task<bool> NeedsUsernameChange()
+    {
+        var name = await GetUsername();
+        bool setName;
+        if (pubkey == name)
+        {
+            setName = true;
+        }
+        else
+        {
+            setName = false;
+
+        }
+        return setName;
+    }
+
+    public Task WaitForPayment(string invoice, long expiry)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Ranking> GetPlayerRanking()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Ranking> GetPlayerRanking(string playername)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<GetRankingInfoResponse> GetRankingInfo()
+    {
+        throw new NotImplementedException();
+    }
 }

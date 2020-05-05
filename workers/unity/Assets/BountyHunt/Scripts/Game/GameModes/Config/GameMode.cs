@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Bbh;
+using Bbhrpc;
 
 public abstract class GameMode : ScriptableObject
 {

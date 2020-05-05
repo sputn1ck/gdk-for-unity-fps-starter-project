@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Grpc.Core;
+using System;
 
 public class SetNameSubMenuUI : SubMenuUI
 {
@@ -33,8 +34,8 @@ public class SetNameSubMenuUI : SubMenuUI
         }
         try
         {
-            var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(pubkey, playerName);
-            StartCoroutine(ConnectEnumerator());
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.SetUsername(playerName);
+            Connect();
 
         } catch(RpcException e)
         {
@@ -57,22 +58,20 @@ public class SetNameSubMenuUI : SubMenuUI
         pubkey = PlayerServiceConnections.instance.GetPubkey();
     }
 
-    public IEnumerator ConnectEnumerator()
+    public async void Connect()
     {
-
-            if (LndConnector.Instance.connectLocal)
-            {
-                yield return LndConnector.Instance.GetPit();
-                LndConnector.Instance.deploymentId = "";
-                yield return LndConnector.Instance.GetLoginToken();
-                LndConnector.Instance.Connect();
-                spawnMenu.Select();
-            }
-            else
-            {
-                yield return LndConnector.Instance.GetPit();
-                serverMenu.Select();
-            }
+        try
+        {
+            await LndConnector.Instance.Connect();
         }
+        catch(Exception e)
+        {
+            Debug.LogError("Error while connecting: " + e.Message);
+            //TODO removeOldStuff
+            ErrorText.text = e.Message;
+            return;
+        }
+    }
+
  
 }

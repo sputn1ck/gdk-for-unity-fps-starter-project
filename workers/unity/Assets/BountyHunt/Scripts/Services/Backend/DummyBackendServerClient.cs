@@ -1,4 +1,4 @@
-using Bbh;
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +9,9 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public int bbhDuration = 30;
     public int lobbyDuration = 10;
+
+    public string[] PlayerSkins;
+
     public void Setup(string target, int port, string pubkey, string message)
     {
         
@@ -64,12 +67,21 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
             Subsidy = 100,
             Settings = new GameModeSettings
             {
-                SecondDuration = req.GameMode == Bbh.GameMode.Bountyhunt ? bbhDuration: lobbyDuration,
+                SecondDuration = req.GameMode == Bbhrpc.GameMode.Bountyhunt ? bbhDuration: lobbyDuration,
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
                 BountySettings = new BountySettings { BountyDropPercentageDeath = 1, BountyTickConversion = 0.05, BountyTickTimeSeconds = 5},
                 SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 40, MinSpawnsPerSpawn = 10, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 10},
             },
             
         };
+    }
+
+    public Task<string> GetUserSkin(string pubkey)
+    {
+        if (PlayerSkins.Length == 0)
+        {
+            return Task.FromResult("");
+        }
+        return Task.FromResult(PlayerSkins[UnityEngine.Random.Range(0, PlayerSkins.Length - 1)]);
     }
 }

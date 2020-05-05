@@ -6,7 +6,7 @@ using UnityEngine;
 
 public interface IDonnerDaemonClient
 {
-    void Setup();
+    Task Setup();
     void Shutdown();
     Task<GetBalanceResponse> GetWalletBalance();
     Task<GetConnectionResponse> GetConnection();

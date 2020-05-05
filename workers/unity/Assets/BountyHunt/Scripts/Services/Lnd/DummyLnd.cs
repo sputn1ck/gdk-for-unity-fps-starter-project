@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class DummyLnd : MonoBehaviour, IClientLnd
 {
+    public bool ThrowPaymentError;
     string pubkey;
 
     public event InvoiceSettledEventHandler OnInvoiceSettled;
@@ -54,7 +55,13 @@ public class DummyLnd : MonoBehaviour, IClientLnd
 
     public Task<SendResponse> PayInvoice(string paymentRequest)
     {
-        return Task.FromResult(new SendResponse { PaymentError = "not using real lightning" });
+        if (ThrowPaymentError)
+        {
+            throw new PaymentException("Dummy payment failed");
+        }
+
+        ((DummyBackendClientClient)PlayerServiceConnections.instance.BackendPlayerClient).OnDummyInvoicePaied(paymentRequest);
+        return Task.FromResult(new SendResponse());
     }
 
     public Task<PendingChannelsResponse> PendingChannels()
@@ -108,7 +115,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
             return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
         }
 
-        return await Task.FromResult(new PayReq { NumSatoshis = 0 });
+        return await Task.FromResult(new PayReq { NumSatoshis = 100, Description = "Test Invoice" });
     }
 
     public void Dispose()
@@ -144,12 +151,12 @@ public class DummyLnd : MonoBehaviour, IClientLnd
 
     public Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "")

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Grpc.Core;
+using System;
 
 public class ConnectSubMenuUI : SubMenuUI
 {
@@ -18,41 +19,31 @@ public class ConnectSubMenuUI : SubMenuUI
 
     public void Awake()
     {
-        ClientEvents.instance.onServicesSetup.AddListener(getNameAndPubkey);
-    }
-    public void Connect()
-    {
 
         SetButtonFalse();
-        StartCoroutine(ConnectEnumerator());
+        ClientEvents.instance.onServicesSetup.AddListener(getNameAndPubkey);
     }
-
-    public IEnumerator ConnectEnumerator()
+    public async void Connect()
     {
-        if (setName)
-        {
-            nameMenu.Select();
-        }else
-        {
 
-            if (LndConnector.Instance.connectLocal)
-            {
-                yield return LndConnector.Instance.GetPit();
-                LndConnector.Instance.deploymentId = "";
-                yield return LndConnector.Instance.GetLoginToken();
-                LndConnector.Instance.Connect();
-                spawnMenu.Select();
-            }
-            else
-            {
-                yield return LndConnector.Instance.GetPit();
-                serverMenu.Select();
-            }
+        try
+        {
+            await LndConnector.Instance.Connect();
         }
-        
-        
+        catch(Exception e)
+        {
+            Debug.LogError("Error while connecting: " + e.Message);
+
+            //TODO remove old stuff
+            Invoke("SetButtonTrue", 2f);
+            return;
+        }
+
+        //TODO remove old stuff
+        spawnMenu.Select();
     }
 
+    
 
     public void SetButtonFalse()
     {
@@ -84,12 +75,13 @@ public class ConnectSubMenuUI : SubMenuUI
 
     private async void getNameAndPubkey()
     {
+        SetButtonTrue();
         var getinfo = await PlayerServiceConnections.instance.lnd.GetInfo();
         var pubkey = getinfo.IdentityPubkey;
         try
         {
 
-            var name = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername(pubkey);
+            var name = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
             if (pubkey == name)
             {
                 setName = true;

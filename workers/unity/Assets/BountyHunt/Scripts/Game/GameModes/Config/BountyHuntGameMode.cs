@@ -8,7 +8,7 @@ using UnityEngine;
 using Improbable.Gdk.Core;
 using Bountyhunt;
 using Fps.Respawning;
-using Bbh;
+using Bbhrpc;
 
 [CreateAssetMenu(fileName = "BountyHuntGameMode", menuName = "BBH/GameModes/BountyHunt", order = 2)]
 public class BountyHuntGameMode : GameMode
