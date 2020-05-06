@@ -69,8 +69,11 @@ namespace Fps.UI
             EscapeScreen.SetActive(inEscapeScreen);
             Reticle.SetActive(!inEscapeScreen && !isPlayerAiming);
 
-            Cursor.visible = inEscapeScreen;
-            Cursor.lockState = inEscapeScreen ? CursorLockMode.Confined : CursorLockMode.Locked;
+
+            Cursor.lockState = inEscapeScreen ? CursorLockMode.None : CursorLockMode.Locked;
+
+            if (inEscapeScreen) CursorUI.Instance.Show();
+            else CursorUI.Instance.Hide();
 
             InEscapeMenu = inEscapeScreen;
         }
