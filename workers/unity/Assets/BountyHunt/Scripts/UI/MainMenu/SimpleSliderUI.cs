@@ -33,19 +33,12 @@ public class SimpleSliderUI : MonoBehaviour
             i++;
         }
 
-        StartCoroutine(InitializeSliderAndSelectFirstSubMenu());
+        slider.transform.parent = buttons[firstButtonID].transform;
+        (slider.transform as RectTransform).ApplyTransformation(TransformationInfo.FitParent);
+        SelectButton(buttons[firstButtonID]);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(TabsLayoutGroup.transform as RectTransform);
     }
 
-    IEnumerator InitializeSliderAndSelectFirstSubMenu()
-    {
-        if(TabsLayoutGroup) LayoutRebuilder.ForceRebuildLayoutImmediate(TabsLayoutGroup.transform as RectTransform);
-        Button b = buttons[firstButtonID];
-        (slider.transform as RectTransform).sizeDelta = Vector2.zero;
-        yield return new WaitForEndOfFrame();
-        (slider.transform as RectTransform).anchoredPosition = b.GetComponent<RectTransform>().anchoredPosition;
-        (slider.transform as RectTransform).sizeDelta = b.GetComponent<RectTransform>().sizeDelta * Vector2.up;
-        SelectButton(buttons[firstButtonID]);
-    }
 
     public void SelectButton(Button btn)
     {
@@ -55,9 +48,10 @@ public class SimpleSliderUI : MonoBehaviour
         currentSelected = btn;
         buttonEvents[currentSelected].onActivate.Invoke();
 
+        slider.transform.parent = btn.transform;
         sliderAnimationEndTime = Time.time + slidingTime;
         lastSliderTransformation = slider.transform as RectTransform;
-        targetSliderTransformation = btn.transform as RectTransform;
+        targetSliderTransformation = TransformationInfo.FitParent;
         animateSlider = true;
     }
 
@@ -95,6 +89,15 @@ public class TransformationInfo
     public Vector2 sizeDelta;
     public Vector2 pivot;
 
+    public static TransformationInfo FitParent = new TransformationInfo
+    {
+        anchoredPosition = new Vector2(0, 0),
+        anchorMax = new Vector2(1, 1),
+        anchorMin = new Vector2(0, 0),
+        pivot = new Vector2(0.5f, 0.5f),
+        sizeDelta = new Vector2(0, 0)
+    };
+
     public static implicit operator TransformationInfo(RectTransform rectTrans)
     {
         return new TransformationInfo
@@ -119,6 +122,8 @@ public class TransformationInfo
             pivot = Vector2.LerpUnclamped(a.pivot, b.pivot, t),
         };
     }
+
+
 }
 
 public static class TransformationUtility
