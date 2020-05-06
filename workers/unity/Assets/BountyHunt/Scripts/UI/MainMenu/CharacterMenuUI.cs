@@ -264,7 +264,22 @@ public class CharacterMenuUI : MonoBehaviour
             return;
         }
 
-        GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+        GetBalanceResponse balanceResponse;
+
+        try
+        {
+            balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+
         long balance = balanceResponse.DaemonBalance;
 
         string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
@@ -280,11 +295,6 @@ public class CharacterMenuUI : MonoBehaviour
 
         popup.image.color = skn.identificationColor;
         if (balance < skn.price) popup.buttons[0].interactable = false;
-
-
-        //groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
-        UpdateDetailsPanel();
-        UpdateSkinGroupButtons();
 
     }
 

@@ -41,7 +41,6 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public bool returnPayment;
     public int expiryInSeconds;
     public bool triggerPaymentTest;
-    // Update is called once per frame
 
     private void Awake()
     {
@@ -359,5 +358,11 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public Task<Ranking> GetSpecificPlayerRanking(string pubkey)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    {
+        string invoice =String.Format("Donation_Game{0}_Devs{1}",gameDonation,devsDonation);
+        return invoice;
     }
 }

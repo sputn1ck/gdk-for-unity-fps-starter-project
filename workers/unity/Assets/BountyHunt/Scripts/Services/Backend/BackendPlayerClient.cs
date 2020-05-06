@@ -192,4 +192,8 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res;
     }
 
+    public Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    {
+        throw new NotImplementedException();
+    }
 }

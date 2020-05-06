@@ -27,6 +27,7 @@ public interface IBackendPlayerClient
     Task<ShopSkin[]> GetAllSkins();
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
+    Task<string> GetDonationInvoice(long gameDonation,long devsDonation);
 
     // Ranking Stuff
     Task<Ranking> GetPlayerRanking();

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Lnrpc;
+using Daemon;
 
 public class WalletMenuUI : MonoBehaviour
 {
@@ -13,12 +14,24 @@ public class WalletMenuUI : MonoBehaviour
     public Button InvoiceInfoButton;
     public Button PayButton;
 
+    public Button DonationInfoButton;
+    public Slider DonationSlider;
+    public TMP_InputField DonationInput;
+    public Button DonateButton;
+    public TextMeshProUGUI GameDonationPercentageText;
+    public TextMeshProUGUI DeveloperDonationPercentageText;
+
     long balance;
 
     private void Start()
     {
         InvoiceInfoButton.onClick.AddListener(OnInvoiceInfoButtonPress);
         PayButton.onClick.AddListener(OnPayButtonPress);
+
+        DonationInfoButton.onClick.AddListener(OnDonationInfoButtonPress);
+        DonationSlider.onValueChanged.AddListener(OnDonationSliderValueChange);
+        DonateButton.onClick.AddListener(OnDonateButtonPress);
+
     }
 
     private void OnEnable()
@@ -99,5 +112,79 @@ public class WalletMenuUI : MonoBehaviour
         balanceText.text = balance + Utility.tintedSatsSymbol;
 
     }
+
+    void OnDonationInfoButtonPress()
+    {
+        //TODO change text
+        PopUpArgs args = new PopUpArgs("donation","with the slider, you can adjust, how much of the Donation goes into the game pot and how much the game developers will recieve");
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
+
+    void OnDonationSliderValueChange(float value)
+    {
+        int devs = (int)value;
+        int game = 100-devs;
+        GameDonationPercentageText.text = game + "%";
+        DeveloperDonationPercentageText.text = devs + "%";
+    }
+
+    async void OnDonateButtonPress()
+    {
+        int devs = (int)DonationSlider.value;
+        int game = 100 - devs;
+        long totalSats = long.Parse(DonationInput.text);
+        long gameSats = (long)((float)totalSats * (float)game / (100f));
+        long devsSats = totalSats - gameSats;
+        string invoice;
+
+        try
+        {
+            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetDonationInvoice(gameSats, devsSats);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+        GetBalanceResponse balanceResponse;
+        try
+        {
+            balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+
+        long balance = balanceResponse.DaemonBalance;
+
+        string text = "You are going to Donate {0}{1} to the game pot and {2}{1} to the developers.";
+
+
+
+        if (balance < totalSats) text += "\n \n Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+
+        /*
+        List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
+        actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res)));
+        actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res)));
+
+        ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
+        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
+
+        popup.image.color = skn.identificationColor;
+        if (balance < totalSats) popup.buttons[0].interactable = false;
+        */
+    }
+
+
 
 }
