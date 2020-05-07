@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowPaymentError: 0
-  invoiceExpiry: 300
 --- !u!114 &5732215415702532855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +83,7 @@ MonoBehaviour:
   equippedSkin: robot_default
   paymentReturnValue: 0
   returnPayment: 0
-  expiryInSeconds: 0
+  expiryInSeconds: 300
   triggerPaymentTest: 0
 --- !u!114 &6082691775500474893
 MonoBehaviour:
