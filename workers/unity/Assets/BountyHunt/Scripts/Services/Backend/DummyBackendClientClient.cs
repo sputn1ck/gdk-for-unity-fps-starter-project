@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Threading;
+using Lnrpc;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
@@ -34,6 +35,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
     public Dictionary<string, string> activeSkinInvoices = new Dictionary<string, string>();
+    List<ShopSkin> shopSkins = new List<ShopSkin>();
 
 
     [Header("Payments")]
@@ -41,7 +43,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public bool returnPayment;
     public int expiryInSeconds;
     public bool triggerPaymentTest;
-    // Update is called once per frame
+
 
     private void Awake()
     {
@@ -125,6 +127,15 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             setBadge(highscores[i].KdRanking, highscores.Length);
             setBadge(highscores[i].EarningsRanking, highscores.Length);
         }
+
+        foreach (var id in allSkins)
+        {
+            shopSkins.Add(new ShopSkin
+            {
+                Id = id,
+                Price = UnityEngine.Random.Range(1, 100000)
+            });
+        }
     }
 
     void setBadge(LeagueRanking ranking, int totalCount)
@@ -202,18 +213,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         equippedSkin = skinId;
     }
 
-    public Task<ShopSkin[]> GetAllSkins()
+    public async Task<ShopSkin[]> GetAllSkins()
     {
-        List<ShopSkin> shopSkins = new List<ShopSkin>();
-        foreach (var id in allSkins)
-        {
-            shopSkins.Add(new ShopSkin
-            {
-                Id = id,
-                Price = UnityEngine.Random.Range(1, 100000)
-            });
-        }
-        return Task.FromResult(shopSkins.ToArray());
+        return shopSkins.ToArray();
     }
 
     public async Task<string> GetSkinInvoice(string skinId)
@@ -228,8 +230,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             throw new Exception("unknown skin");
 
         }
-        string invoice = "RandomInvoice:" + UnityEngine.Random.Range(0, 100000000);
+        long price = 0;
+        ShopSkin shopskin = shopSkins.FirstOrDefault(s => s.Id == skinId);
+        if (shopskin != null) price = shopskin.Price;
+
+        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(price, "Buy skin " + skinId, expiryInSeconds);
         activeSkinInvoices[invoice] = skinId;
+
         return invoice;
     }
 
@@ -274,13 +281,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(needsUserNameChange);
     }
 
-    public async Task WaitForPayment(string invoice, long expiry, CancellationToken cancellationTokens)
+    public async Task WaitForPayment(string invoice, long timestamp, CancellationToken cancellationTokens)
     {
         await Task.Run(() =>
         {
-            var startTime = DateTime.Now.ToFileTimeUtc();
-            var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
-            while (DateTime.Now.ToFileTimeUtc() < endTime)
+
+            while (DateTimeOffset.UtcNow.ToUnixTimeSeconds() < timestamp)
             {
 
                 if (returnPayment)
@@ -312,7 +318,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         var testInvoice = "testp" + UnityEngine.Random.Range(0, 100000).ToString();
         try
         {
-            await WaitForPayment(testInvoice, expiryInSeconds, new CancellationToken());
+            await WaitForPayment(testInvoice, DateTimeOffset.UtcNow.ToUnixTimeSeconds()+expiryInSeconds, new CancellationToken());
             Debug.Log(testInvoice + " succeeded");
         } catch(Exception e)
         {
@@ -359,5 +365,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public Task<Ranking> GetSpecificPlayerRanking(string pubkey)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    {
+        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(gameDonation + devsDonation, "Donation " + gameDonation + "/" + devsDonation, expiryInSeconds);
+
+        return invoice;
     }
 }

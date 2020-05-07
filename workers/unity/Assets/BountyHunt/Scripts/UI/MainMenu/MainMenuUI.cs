@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     public PreviewSpot previewSpot;
     public Button playButton;
     public GameObject connectingInfoObject;
+    public TextMeshProUGUI versionText; 
 
     private void Awake()
     {
@@ -19,6 +21,10 @@ public class MainMenuUI : MonoBehaviour
     {
         connectingInfoObject.SetActive(false);
         previewSpot.gameObject.SetActive(true);
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            RefreshVersion();
+        }
     }
     private void OnDisable()
     {
@@ -50,5 +56,23 @@ public class MainMenuUI : MonoBehaviour
         Debug.Log("joining game");
         BBHUIManager.instance.ShowGameView();
         LndConnector.Instance.SpawnPlayer("gude", 0);
+    }
+
+    async void RefreshVersion()
+    {
+        string version;
+        try
+        {
+            version = await PlayerServiceConnections.instance.BackendPlayerClient.GetGameVersion();
+        }
+        catch (Exception e)
+        {
+            PopUpArgs args = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args);
+            connectingInfoObject.SetActive(false);
+            return;
+        }
+
+        versionText.text = version;
     }
 }

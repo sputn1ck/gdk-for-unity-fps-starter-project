@@ -33,8 +33,8 @@ public class BBHUIManager : MonoBehaviour
         inGame.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(false);
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        CursorUI.Instance.Hide();
     }
 
     public void ShowFrontEnd()
@@ -43,8 +43,8 @@ public class BBHUIManager : MonoBehaviour
         ScreenManager.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
         startScreen.gameObject.SetActive(true);
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        CursorUI.Instance.Show();
     }
 
     public void ShowMainMenu()
@@ -53,8 +53,8 @@ public class BBHUIManager : MonoBehaviour
         ScreenManager.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
         startScreen.gameObject.SetActive(false);
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        CursorUI.Instance.Show();
     }
 
 }

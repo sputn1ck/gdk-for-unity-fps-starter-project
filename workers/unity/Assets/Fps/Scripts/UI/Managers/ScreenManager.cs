@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Fps.UI
@@ -52,8 +52,8 @@ namespace Fps.UI
         private void OnEnable()
         {
             FrontEndCamera.SetActive(true);
-            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            CursorUI.Instance.Show();
         }
 
         private void OnDisable()

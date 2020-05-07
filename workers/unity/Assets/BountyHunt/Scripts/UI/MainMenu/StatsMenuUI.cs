@@ -119,14 +119,14 @@ public class StatsMenuUI : MonoBehaviour
         GlobalRankingPanel.BadgeImage.sprite = badge.sprite;
         GlobalRankingPanel.BadgeImage.color = badge.color;
         GlobalRankingPanel.stats[0].valueText.text = rank.GlobalRanking.Rank.ToString();
-        GlobalRankingPanel.HeadlineExtraValue.text = (100 * rank.GlobalRanking.Rank / playerCount) +"%";
+        GlobalRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)", (100 * rank.GlobalRanking.Rank / playerCount));
         GlobalRankingPanel.stats[1].valueText.text = rank.GlobalRanking.Score.ToString();
 
         badge = GetBadge(rank.KdRanking.Badge);
         HunterRankingPanel.BadgeImage.sprite = badge.sprite;
         HunterRankingPanel.BadgeImage.color = badge.color;
         HunterRankingPanel.stats[0].valueText.text = rank.KdRanking.Rank.ToString();
-        HunterRankingPanel.HeadlineExtraValue.text = (100 * rank.KdRanking.Rank / playerCount) + "%";
+        HunterRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)",(100 * rank.KdRanking.Rank / playerCount));
         HunterRankingPanel.stats[1].valueText.text = rank.KdRanking.Score.ToString();
         HunterRankingPanel.stats[2].valueText.text = rank.Stats.Kills.ToString();
         HunterRankingPanel.stats[3].valueText.text = rank.Stats.Deaths.ToString();
@@ -135,7 +135,7 @@ public class StatsMenuUI : MonoBehaviour
         LooterRankingPanel.BadgeImage.sprite = badge.sprite;
         LooterRankingPanel.BadgeImage.color = badge.color;
         LooterRankingPanel.stats[0].valueText.text = rank.EarningsRanking.Rank.ToString();
-        LooterRankingPanel.HeadlineExtraValue.text = (100 * rank.EarningsRanking.Rank / playerCount) + "%";
+        LooterRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)", (100 * rank.EarningsRanking.Rank / playerCount)); 
         LooterRankingPanel.stats[1].valueText.text = rank.Stats.Earnings.ToString();
 
     }

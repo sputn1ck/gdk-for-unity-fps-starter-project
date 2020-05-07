@@ -12,10 +12,11 @@ public class SlideMenuUI : MonoBehaviour
     public LayoutGroup TabsLayoutGroup;
     public List<ButtonSubMenuPair> buttonSubMenuPairs;
 
+
     float sliderAnimationEndTime;
     bool animateSlider;
-    Rect lastSliderRect;
-    Rect targetSliderRect;
+    TransformationInfo lastSliderTransformation;
+    TransformationInfo targetSliderTransformation;
     SlideSubMenuUI currentSelected;
 
     private void Start()
@@ -30,20 +31,13 @@ public class SlideMenuUI : MonoBehaviour
             bsmp.subMenu.menu = this;
             bsmp.button.onClick.AddListener(bsmp.subMenu.Select);
         }
-        StartCoroutine(InitializeSliderAndSelectFirstSubMenu());
-    }
 
-    IEnumerator InitializeSliderAndSelectFirstSubMenu()
-    {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(TabsLayoutGroup.transform as RectTransform);
-        Button b = buttonSubMenuPairs[firstButtonID].button;
-        (slider.transform as RectTransform).sizeDelta = Vector2.zero;
-        yield return new WaitForEndOfFrame();
-        (slider.transform as RectTransform).anchoredPosition = b.GetComponent<RectTransform>().anchoredPosition;
-        (slider.transform as RectTransform).sizeDelta = b.GetComponent<RectTransform>().sizeDelta * Vector2.up;
-
+        slider.transform.parent = buttonSubMenuPairs[firstButtonID].button.transform;
+        (slider.transform as RectTransform).ApplyTransformation(TransformationInfo.FitParent);
         SelectSubMenu(buttonSubMenuPairs[firstButtonID].subMenu);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(TabsLayoutGroup.transform as RectTransform);
     }
+
 
     public void SelectSubMenu(SlideSubMenuUI subMenu)
     {
@@ -54,18 +48,20 @@ public class SlideMenuUI : MonoBehaviour
 
         //slider animation
         Button button = buttonSubMenuPairs.Find(e => e.subMenu == subMenu).button;
+
+        slider.transform.parent = button.transform;
         sliderAnimationEndTime = Time.time + slidingTime;
-        lastSliderRect = new Rect((slider.transform as RectTransform).anchoredPosition, (slider.transform as RectTransform).sizeDelta);
-        targetSliderRect = new Rect((button.transform as RectTransform).anchoredPosition, (button.transform as RectTransform).sizeDelta);
+        lastSliderTransformation = slider.transform as RectTransform;
+        targetSliderTransformation = TransformationInfo.FitParent;
         animateSlider = true;
     }
 
     private void Update()
     {
         //slider animation
-        if(animateSlider)
+        if (animateSlider)
         {
-            float t = 1 - (sliderAnimationEndTime - Time.time)/slidingTime;
+            float t = 1 - (sliderAnimationEndTime - Time.time) / slidingTime;
             if (t > 1)
             {
                 t = 1;
@@ -73,11 +69,8 @@ public class SlideMenuUI : MonoBehaviour
             }
 
             float blend = curve.Evaluate(t);
-            Vector2 pos = Vector2.LerpUnclamped(lastSliderRect.position,targetSliderRect.position,  blend);
-            Vector2 size = Vector2.LerpUnclamped(lastSliderRect.size, targetSliderRect.size,  blend);
-
-            slider.GetComponent<RectTransform>().anchoredPosition = pos;
-            slider.GetComponent<RectTransform>().sizeDelta = size;
+            TransformationInfo ti = TransformationInfo.LerpUnclamped(lastSliderTransformation, targetSliderTransformation, blend);
+            (slider.transform as RectTransform).ApplyTransformation(ti);
         }
     }
 }

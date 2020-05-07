@@ -13,7 +13,7 @@ public interface IBackendPlayerClient
     void Shutdown();
 
     Task<string> GetGameVersion();
-    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds, CancellationToken cancellationToken);
+    Task WaitForPayment(string invoice, long expiryTimestamp, CancellationToken cancellationToken);
 
     // Username
     Task<string> GetUsername();
@@ -27,6 +27,7 @@ public interface IBackendPlayerClient
     Task<ShopSkin[]> GetAllSkins();
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
+    Task<string> GetDonationInvoice(long gameDonation,long devsDonation);
 
     // Ranking Stuff
     Task<Ranking> GetPlayerRanking();

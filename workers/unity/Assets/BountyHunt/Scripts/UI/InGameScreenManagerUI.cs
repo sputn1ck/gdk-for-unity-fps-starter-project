@@ -116,7 +116,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             EscapeScreen.Show(false);
             RespawnScreen.Show(false);
             Reticle.showReticle(false);
-            Cursor.visible = true;
+            CursorUI.Instance.Show();
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
         else if (EscapeScreen.activated)
@@ -125,7 +125,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             EscapeScreen.Show(true);
             RespawnScreen.Show(false);
             Reticle.showReticle(false);
-            Cursor.visible = true;
+            CursorUI.Instance.Show();
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
         else if (RespawnScreen.activated)
@@ -134,7 +134,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             EscapeScreen.Show(false);
             RespawnScreen.Show(true);
             Reticle.showReticle(false);
-            Cursor.visible = true;
+            CursorUI.Instance.Show();
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.None));
         }
         else
@@ -143,7 +143,7 @@ public class InGameScreenManagerUI : MonoBehaviour
             EscapeScreen.Show(false);
             RespawnScreen.Show(false);
             Reticle.showReticle(!isPlayerAiming);
-            Cursor.visible = false;
+            CursorUI.Instance.Hide();
             StartCoroutine(SetCursorLockstateAtFrameEnd(CursorLockMode.Locked));
         }
 
