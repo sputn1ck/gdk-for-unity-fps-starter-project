@@ -13,7 +13,7 @@ public interface IBackendPlayerClient
     void Shutdown();
 
     Task<string> GetGameVersion();
-    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds, CancellationToken cancellationToken);
+    Task WaitForPayment(string invoice, long expiryTimestamp, CancellationToken cancellationToken);
 
     // Username
     Task<string> GetUsername();

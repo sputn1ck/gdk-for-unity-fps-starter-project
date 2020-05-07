@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using Lnrpc;
 using Daemon;
+using System.Threading;
 
 public class WalletMenuUI : MonoBehaviour
 {
@@ -163,28 +164,75 @@ public class WalletMenuUI : MonoBehaviour
             return;
         }
 
+        PayReq payreq;
+        try
+        {
+            payreq = await PlayerServiceConnections.instance.lnd.DecodePayreq(invoice);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+
 
         long balance = balanceResponse.DaemonBalance;
 
-        string text = "You are going to Donate {0}{1} to the game pot and {2}{1} to the developers.";
+        string text = String.Format("You are going to Donate {0}{1} to the game pot and {2}{1} to the developers.",gameSats,Utility.tintedSatsSymbol,devsSats);
 
 
 
-        if (balance < totalSats) text += "\n \n Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+        if (balance < payreq.NumSatoshis) text += "\n \n Your Ingame Wallet doesent cover the required amount!";
 
-        /*
+        
         List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
-        actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res)));
-        actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res)));
+        actions.Add(new PopUpButtonArgs("ingame Wallet", () => PaymentUIHelper.IngamePayment(invoice, payreq)));
+        actions.Add(new PopUpButtonArgs("external Wallet", () => PaymentUIHelper.ExternalPayment(invoice, payreq)));
 
-        ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
-        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
+        PopUpArgs args = new PopUpArgs("Donation", text, actions, false);
+        PopUpUI popup = PopUpManagerUI.instance.OpenPopUp(args);
 
-        popup.image.color = skn.identificationColor;
         if (balance < totalSats) popup.buttons[0].interactable = false;
-        */
+        
     }
 
+    private async void DonateWithExternalWallet(string invoice, PayReq payreq)
+    {
+        Sprite qrCode = Utility.GetInvertedQRCode(invoice);
+        //copy
+        PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice), false);
+        var closeToken = new CancellationTokenSource();
+        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", qrCode, "", new List<PopUpButtonArgs> { copyAction }, true, true, closeAction: () => closeToken.Cancel());
+        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
 
+        try
+        {
+            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice, payreq.Expiry - 60, closeToken.Token);
+            if (popup != null) popup.Close();
+            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
+            PopUpManagerUI.instance.OpenPopUp(args1);
+
+        }
+        catch (ExpiredException e)
+        {
+            Debug.Log(e.Message);
+            if (popup == null)
+                return;
+            if (popup != null) popup.Close();
+            PopUpArgs args1 = new PopUpArgs("error", "payment has expired");
+            PopUpManagerUI.instance.OpenPopUp(args1);
+        }
+        catch (Exception e)
+        {
+            if (popup != null) popup.Close();
+            PopUpArgs args1 = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(args1);
+        }
+
+    }
 
 }

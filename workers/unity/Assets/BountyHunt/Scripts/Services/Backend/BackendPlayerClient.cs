@@ -139,13 +139,13 @@ public class BackendPlayerClient : IBackendPlayerClient
         return setName;
     }
 
-    public async Task WaitForPayment(string invoice, long expiry, CancellationToken cancellationToken)
+    public async Task WaitForPayment(string invoice, long expiryTimestamp, CancellationToken cancellationToken)
     {
         await Task.Run(async () =>
         {
-            var startTime = DateTime.Now;
-            var endTime = DateTime.Now.AddSeconds(expiry);
-            var time = endTime - startTime;
+            long startTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long endTime = expiryTimestamp;
+            int time = (int)(endTime - startTime);
             CancellationTokenSource expiryToken = new CancellationTokenSource();
             expiryToken.CancelAfter(time);
             var callToken = CancellationTokenSource.CreateLinkedTokenSource(expiryToken.Token, cancellationToken);

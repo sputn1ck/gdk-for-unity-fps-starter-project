@@ -1,3 +1,5 @@
+using QRCoder;
+using QRCoder.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -187,4 +189,30 @@ public static class Utility
         editor.SelectAll();
         editor.Copy();
     }
+
+    public static Sprite GetInvertedQRCode(string text)
+    {
+        QRCodeGenerator qrGenerator = new QRCodeGenerator();
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+        UnityQRCode qrCode = new UnityQRCode(qrCodeData);
+        Texture2D tex = qrCode.GetGraphic(1);
+        Color[] pixels = tex.GetPixels();
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            if (pixels[i].r > 0.5f)
+            {
+                pixels[i] = Color.clear;
+            }
+            else
+            {
+                pixels[i] = Color.white;
+            }
+        }
+        tex.SetPixels(pixels);
+        tex.filterMode = FilterMode.Point;
+        tex.Apply();
+        Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
+        return sprite;
+    }
+
 }

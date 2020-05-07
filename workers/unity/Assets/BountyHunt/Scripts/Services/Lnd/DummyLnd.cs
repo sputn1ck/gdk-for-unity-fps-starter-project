@@ -49,7 +49,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
     public Task<string> GetInvoice(long amount, string description, long expiry)
     {
         var payreq = "invoice" + UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        invoices.Add(payreq, new Invoice { Memo = description, Value = amount, PaymentRequest = payreq });
+        invoices.Add(payreq, new Invoice { Memo = description, Value = amount, PaymentRequest = payreq, Expiry = expiry, CreationDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds() });
         return Task.FromResult(payreq);
     }
 
@@ -112,7 +112,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         if (invoices.ContainsKey(payreq))
         {
             var invoice = invoices[payreq];
-            return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo });
+            return await Task.FromResult(new PayReq { NumSatoshis = invoice.Value, Description = invoice.Memo, Expiry = invoice.Expiry, Timestamp =  invoice.CreationDate });
         }
 
         return await Task.FromResult(new PayReq { NumSatoshis = 100, Description = "Test Invoice" });
