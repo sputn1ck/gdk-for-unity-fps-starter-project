@@ -192,8 +192,13 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res;
     }
 
-    public Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetDonationInvoiceAsync(new GetDonationInvoiceRequest
+        {
+            DevAmount = devsDonation,
+            GameAmount = gameDonation
+        });
+        return res.Invoice;
     }
 }
