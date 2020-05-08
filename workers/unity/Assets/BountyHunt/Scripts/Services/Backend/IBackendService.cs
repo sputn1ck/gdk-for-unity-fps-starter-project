@@ -35,6 +35,7 @@ public interface IBackendPlayerClient
     Task<GetRankingInfoResponse> GetRankingInfo();
     Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
+    Task<GetInfoResponse> GetInfo();
 
 }
 

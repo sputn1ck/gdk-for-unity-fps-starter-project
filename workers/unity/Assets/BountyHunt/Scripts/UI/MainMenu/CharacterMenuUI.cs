@@ -14,7 +14,7 @@ using Bbhrpc;
 using System.Threading;
 using Lnrpc;
 
-public class CharacterMenuUI : MonoBehaviour
+public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 {
     public TextMeshProUGUI detailsHeaderText;
     public TextMeshProUGUI buyStateText;
@@ -79,7 +79,7 @@ public class CharacterMenuUI : MonoBehaviour
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
     }
-    async void Refresh()
+    public async void Refresh()
     {
         await RefreshTask();
     }

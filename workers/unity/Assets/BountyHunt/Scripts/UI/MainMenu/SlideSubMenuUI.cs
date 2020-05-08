@@ -31,6 +31,9 @@ public class SlideSubMenuUI : MonoBehaviour
         canvasGroup.interactable =  true;
         canvasGroup.blocksRaycasts = true;
         onActivate.Invoke();
+        var refreshables = GetComponentsInChildren<IRefreshableUI>();
+        foreach (var refreshable in refreshables)
+            refreshable.Refresh();
     }
 
     public void Deactivate()

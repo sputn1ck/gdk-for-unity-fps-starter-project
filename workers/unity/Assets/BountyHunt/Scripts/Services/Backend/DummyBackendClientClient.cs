@@ -373,4 +373,35 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
         return invoice;
     }
+
+    public async Task<Bbhrpc.GetInfoResponse> GetInfo()
+    {
+        await Task.Delay(UnityEngine.Random.Range(50, 500));
+        return new Bbhrpc.GetInfoResponse
+        {
+            GameInfo = new GameInfo
+            {
+                GameVersion = "alpha-1"
+            },
+            LndInfo = new LndInfo
+            {
+                LndHost = "lndhost",
+                LndListenPort = 1337,
+                LndPubkey = "backend-pubkey"
+            },
+            SponsorFeeInfo = new SponsorFeeInfo
+            {
+                ActivationFeeRate = 500,
+                CreationCost = 1000,
+                PlayerSatoshiCost = 2
+            },
+            PoolInfo = new PoolInfo
+            {
+                DonationPayoutPercentage = 0.5,
+                DonationPool = UnityEngine.Random.Range(100, int.MaxValue),
+                ShopPayoutPercentage = 0.01,
+                ShopPool = UnityEngine.Random.Range(100, int.MaxValue),
+            }
+        };
+    }
 }

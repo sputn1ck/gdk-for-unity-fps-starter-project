@@ -8,7 +8,7 @@ using Lnrpc;
 using Daemon;
 using System.Threading;
 
-public class WalletMenuUI : MonoBehaviour
+public class WalletMenuUI : MonoBehaviour, IRefreshableUI
 {
     public TextMeshProUGUI balanceText;
     public TMP_InputField invoiceInput;
@@ -73,7 +73,7 @@ public class WalletMenuUI : MonoBehaviour
         YesNoPopUpArgs args = new YesNoPopUpArgs("pay invoice ", text, OnPayRequest);
         PopUpManagerUI.instance.OpenYesNoPopUp(args);
     }
-
+    
     async void OnPayRequest(bool pay)
     {
 
@@ -190,7 +190,9 @@ public class WalletMenuUI : MonoBehaviour
 
         
         List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
-        actions.Add(new PopUpButtonArgs("ingame Wallet", () => PaymentUIHelper.IngamePayment(invoice, payreq)));
+        actions.Add(new PopUpButtonArgs("ingame Wallet", () => PaymentUIHelper.IngamePayment(invoice, payreq,() => {
+            RefreshBalance();
+        })));
         actions.Add(new PopUpButtonArgs("external Wallet", () => PaymentUIHelper.ExternalPayment(invoice, payreq)));
 
         PopUpArgs args = new PopUpArgs("Donation", text, actions, false);
@@ -200,39 +202,8 @@ public class WalletMenuUI : MonoBehaviour
         
     }
 
-    private async void DonateWithExternalWallet(string invoice, PayReq payreq)
+    public void Refresh()
     {
-        Sprite qrCode = Utility.GetInvertedQRCode(invoice);
-        //copy
-        PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice), false);
-        var closeToken = new CancellationTokenSource();
-        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", qrCode, "", new List<PopUpButtonArgs> { copyAction }, true, true, closeAction: () => closeToken.Cancel());
-        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
-
-        try
-        {
-            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice, payreq.Expiry - 60, closeToken.Token);
-            if (popup != null) popup.Close();
-            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
-            PopUpManagerUI.instance.OpenPopUp(args1);
-
-        }
-        catch (ExpiredException e)
-        {
-            Debug.Log(e.Message);
-            if (popup == null)
-                return;
-            if (popup != null) popup.Close();
-            PopUpArgs args1 = new PopUpArgs("error", "payment has expired");
-            PopUpManagerUI.instance.OpenPopUp(args1);
-        }
-        catch (Exception e)
-        {
-            if (popup != null) popup.Close();
-            PopUpArgs args1 = new PopUpArgs("error", e.Message);
-            PopUpManagerUI.instance.OpenPopUp(args1);
-        }
-
+        RefreshBalance();
     }
-
 }

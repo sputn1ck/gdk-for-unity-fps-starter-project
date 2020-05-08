@@ -201,4 +201,10 @@ public class BackendPlayerClient : IBackendPlayerClient
         });
         return res.Invoice;
     }
+
+    public async Task<GetInfoResponse> GetInfo()
+    {
+        var res = await publicClient.GetInfoAsync(new GetInfoRequest());
+        return res;
+    }
 }
