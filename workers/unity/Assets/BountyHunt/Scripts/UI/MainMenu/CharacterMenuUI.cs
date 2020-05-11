@@ -11,8 +11,10 @@ using QRCoder;
 using QRCoder.Unity;
 using System.Threading.Tasks;
 using Bbhrpc;
+using System.Threading;
+using Lnrpc;
 
-public class CharacterMenuUI : MonoBehaviour
+public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 {
     public TextMeshProUGUI detailsHeaderText;
     public TextMeshProUGUI buyStateText;
@@ -37,12 +39,15 @@ public class CharacterMenuUI : MonoBehaviour
     SkinGroupButtonUI selectedSkinGroupButton;
     Skin equippedSkin;
 
+    private bool isInit;
     private void Start()
     {
         refreshButton.onClick.AddListener(Refresh);
-        ClientEvents.instance.onServicesSetup.AddListener(Init);
+        //ClientEvents.instance.onServicesSetup.AddListener(Init);
+        GetComponent<SlideSubMenuUI>().onActivate.AddListener(OnActivate);
+        GetComponent<SlideSubMenuUI>().onDeactivate.AddListener(OnDeactivate);
     }
-    async void Init()
+    async Task Init()
     {
         ShopSkin[] shopSkins;
         SkinInventory inventory;
@@ -75,8 +80,13 @@ public class CharacterMenuUI : MonoBehaviour
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
     }
-    async void Refresh()
+    public async void Refresh()
     {
+        if (!isInit)
+        {
+            await Init();
+            isInit = true;
+        }
         await RefreshTask();
     }
     async Task RefreshTask()
@@ -109,6 +119,22 @@ public class CharacterMenuUI : MonoBehaviour
 
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
+    }
+
+    private void OnActivate()
+    {
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            Refresh();
+        }
+    }
+
+    private void OnDeactivate()
+    {
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            PreviewSpot.Instance.SetSkin(equippedSkin);
+        }
     }
 
     void UpdateSkinGroupButtons()
@@ -245,94 +271,62 @@ public class CharacterMenuUI : MonoBehaviour
             return;
         }
 
-        GetBalanceResponse balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+        GetBalanceResponse balanceResponse;
+
+        try
+        {
+            balanceResponse = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+        PayReq payreq;
+        try
+        {
+            payreq = await PlayerServiceConnections.instance.lnd.DecodePayreq(res);
+            
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+
+
         long balance = balanceResponse.DaemonBalance;
 
         string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
         Sprite sprite = grp.sprite;
         string text2 = "";
-        if (balance < skn.price) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+        if (balance < payreq.NumSatoshis) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
         List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
-        actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res)));
-        actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res)));
+        actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res,payreq)));
+        actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res, payreq)));
 
         ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
         PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
 
         popup.image.color = skn.identificationColor;
-        if (balance < skn.price) popup.buttons[0].interactable = false;
-
-
-        //groupSelectionPanelsDict[selectedSlot].selectedSkin.owned = true; //just for testing
-        UpdateDetailsPanel();
-        UpdateSkinGroupButtons();
+        if (balance < payreq.NumSatoshis) popup.buttons[0].interactable = false;
 
     }
 
-    private async void BuyWithIngameWallet(string invoice)
+    private async void BuyWithIngameWallet(string invoice, PayReq payreq)
     {
-
-        try
-        {
-            await PlayerServiceConnections.instance.lnd.PayInvoice(invoice);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
-            PopUpManagerUI.instance.OpenPopUp(errArgs);
-            return;
-        }
-        PopUpArgs args = new PopUpArgs("info", "payment successfull");
-        PopUpManagerUI.instance.OpenPopUp(args);
-        Refresh();
+        PaymentUIHelper.IngamePayment(invoice, payreq, onSuccess: Refresh);
     }
-    private async void BuyWithExternalWallet(string invoice)
+    private async void BuyWithExternalWallet(string invoice, PayReq payreq)
     {
-        //image
-        QRCodeGenerator qrGenerator = new QRCodeGenerator();
-        QRCodeData qrCodeData = qrGenerator.CreateQrCode(invoice, QRCodeGenerator.ECCLevel.Q);
-        UnityQRCode qrCode = new UnityQRCode(qrCodeData);
-        Texture2D tex = qrCode.GetGraphic(1);
-        Color[] pixels = tex.GetPixels();
-        for(int i = 0; i< pixels.Length; i++)
-        {
-            if (pixels[i].r > 0.5f){
-                pixels[i] = Color.clear;
-            }
-            else
-            {
-                pixels[i] = Color.white;
-            }
-        }
-        tex.SetPixels(pixels);
-        tex.filterMode = FilterMode.Point;
-        tex.Apply();
-        Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
-
-        //copy
-        PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice),false);
-
-        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", "", sprite, "", new List<PopUpButtonArgs> { copyAction },true, true);
-        PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
-
-        try
-        {
-            await PlayerServiceConnections.instance.BackendPlayerClient.WaitForPayment(invoice,60);
-            if (popup != null) popup.Close();
-            PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
-            PopUpManagerUI.instance.OpenPopUp(args1);
-            Refresh();
-
-        }
-        catch(Exception e)
-        {
-            Debug.Log(e.Message);
-            if (popup != null) popup.Close();
-            PopUpArgs args1 = new PopUpArgs("error", e.Message);
-            PopUpManagerUI.instance.OpenPopUp(args1);
-        }
-
+        PaymentUIHelper.ExternalPayment(invoice, payreq, onSuccess: Refresh);
     }
 
     private async void Equip()

@@ -32,7 +32,14 @@ public class SimpleGameConnector : IGameConnector
         {
             return new JoinGameResponse(false, pitRes.errMsg);
         }
-        return new JoinGameResponse(false, "not implemented");
+        try
+        {
+            await connector.Connect(deploymentRes.deployment, loginRes.loginToken, pitRes.pit, false);
+        } catch(Exception e)
+        {
+            return new JoinGameResponse(true, e.Message);
+        }
+        return new JoinGameResponse(true, "");
     }
 
     private async Task<(bool ok, string pit, string errMsg)> GetPit()
@@ -60,7 +67,7 @@ public class SimpleGameConnector : IGameConnector
             return (false, "", webRes.error);
         }
         var res = JsonUtility.FromJson<DeploymentList>(webRes.response);
-        var deployment = res.deployments.FirstOrDefault(d => d.status == 200 && d.name == "live");
+        var deployment = res.deployments.FirstOrDefault(d => d.status == 200);
         if (deployment == null)
         {
             return (false, "", "all servers offline");

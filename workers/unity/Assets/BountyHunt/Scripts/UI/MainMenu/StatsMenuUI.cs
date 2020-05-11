@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsMenuUI : MonoBehaviour
+public class StatsMenuUI : MonoBehaviour, IRefreshableUI
 {
     public Transform PlayerStatsContainer;
     public Transform GameStatsContainer;
@@ -23,10 +23,12 @@ public class StatsMenuUI : MonoBehaviour
 
     Ranking playerRanking;
     GetRankingInfoResponse rankingInfo;
+    GetInfoResponse generalInfo;
 
     public void show()
     {
         gameObject.SetActive(true);
+        Refresh();
     }
 
     public void hide()
@@ -44,10 +46,7 @@ public class StatsMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlayerServiceConnections.instance.ServicesReady)
-        {
-            Refresh();
-        }
+        Refresh();
     }
 
     void AddListeners()
@@ -93,13 +92,15 @@ public class StatsMenuUI : MonoBehaviour
 
     
 
-    async void Refresh()
+    public async void Refresh()
     {
+        if (!PlayerServiceConnections.instance.ServicesReady)
+            return;
         try
         {
             playerRanking = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRanking();
-            var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetRankingInfo();
-            rankingInfo = res;
+            rankingInfo = await PlayerServiceConnections.instance.BackendPlayerClient.GetRankingInfo();
+            generalInfo = await PlayerServiceConnections.instance.BackendPlayerClient.GetInfo();
         }
         catch(Exception e)
         {
@@ -119,14 +120,14 @@ public class StatsMenuUI : MonoBehaviour
         GlobalRankingPanel.BadgeImage.sprite = badge.sprite;
         GlobalRankingPanel.BadgeImage.color = badge.color;
         GlobalRankingPanel.stats[0].valueText.text = rank.GlobalRanking.Rank.ToString();
-        GlobalRankingPanel.HeadlineExtraValue.text = (100 * rank.GlobalRanking.Rank / playerCount) +"%";
+        GlobalRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)", (100 * rank.GlobalRanking.Rank / playerCount));
         GlobalRankingPanel.stats[1].valueText.text = rank.GlobalRanking.Score.ToString();
 
         badge = GetBadge(rank.KdRanking.Badge);
         HunterRankingPanel.BadgeImage.sprite = badge.sprite;
         HunterRankingPanel.BadgeImage.color = badge.color;
         HunterRankingPanel.stats[0].valueText.text = rank.KdRanking.Rank.ToString();
-        HunterRankingPanel.HeadlineExtraValue.text = (100 * rank.KdRanking.Rank / playerCount) + "%";
+        HunterRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)",(100 * rank.KdRanking.Rank / playerCount));
         HunterRankingPanel.stats[1].valueText.text = rank.KdRanking.Score.ToString();
         HunterRankingPanel.stats[2].valueText.text = rank.Stats.Kills.ToString();
         HunterRankingPanel.stats[3].valueText.text = rank.Stats.Deaths.ToString();
@@ -135,7 +136,7 @@ public class StatsMenuUI : MonoBehaviour
         LooterRankingPanel.BadgeImage.sprite = badge.sprite;
         LooterRankingPanel.BadgeImage.color = badge.color;
         LooterRankingPanel.stats[0].valueText.text = rank.EarningsRanking.Rank.ToString();
-        LooterRankingPanel.HeadlineExtraValue.text = (100 * rank.EarningsRanking.Rank / playerCount) + "%";
+        LooterRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)", (100 * rank.EarningsRanking.Rank / playerCount)); 
         LooterRankingPanel.stats[1].valueText.text = rank.Stats.Earnings.ToString();
 
     }
@@ -144,8 +145,11 @@ public class StatsMenuUI : MonoBehaviour
     {
         
         Transform ctr = GameStatsContainer;
-
+        WriteLine("---Player Stats---", "", ctr);
         WriteLine("Total Players", rankingInfo.TotalPlayers.ToString(), ctr);
+        WriteLine("---Pool Stats---", "", ctr);
+        WriteLine("Donation Pool", Utility.SatsToShortString(generalInfo.PoolInfo.DonationPool,true), ctr);
+        WriteLine("Shop Pool", Utility.SatsToShortString(generalInfo.PoolInfo.ShopPool, true), ctr);
     }
 
     Badge GetBadge(RankBadge rankBadge)

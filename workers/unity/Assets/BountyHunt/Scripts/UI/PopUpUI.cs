@@ -15,12 +15,14 @@ public class PopUpUI : MonoBehaviour
     public Button buttonPrefab;
     public Button xButton;
 
+    public UnityAction closeAction;
     [HideInInspector] public List<Button> buttons;
 
     static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
-    public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons)
+    public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, UnityAction closeAction = null)
     {
+        this.closeAction = closeAction;
         allPopUps.Add(this);
         image.gameObject.SetActive(false);
 
@@ -62,9 +64,9 @@ public class PopUpUI : MonoBehaviour
         
     }
 
-    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage)
+    public void Set(string headline, bool showX, string text1,Sprite sprite, string text2, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, float imageSizeMultiplier, bool tintImage, UnityAction closeAction = null)
     {
-        Set(headline, showX, text1, buttonActions, verticalLayoutedButtons);
+        Set(headline, showX, text1, buttonActions, verticalLayoutedButtons, closeAction);
 
         image.gameObject.SetActive(true);
         image.sprite = sprite;
@@ -89,6 +91,7 @@ public class PopUpUI : MonoBehaviour
 
     public void Close()
     {
+        closeAction?.Invoke();
         allPopUps.Remove(this);
         Destroy(gameObject);
     }
@@ -107,7 +110,6 @@ public class PopUpButtonArgs
     public string label;
     public UnityAction action;
     public bool closePopupOnClick;
-
     public PopUpButtonArgs(string label, UnityAction action, bool closePopupOnClick = true)
     {
         this.label = label;
@@ -115,3 +117,4 @@ public class PopUpButtonArgs
         this.closePopupOnClick = closePopupOnClick;
     }
 }
+

@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using System.Threading;
+using Lnrpc;
 
 public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 {
@@ -33,6 +35,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public List<string> ownedSkins = new List<string>{ "robot_default" };
     public string equippedSkin = "robot_default";
     public Dictionary<string, string> activeSkinInvoices = new Dictionary<string, string>();
+    List<ShopSkin> shopSkins = new List<ShopSkin>();
 
 
     [Header("Payments")]
@@ -40,11 +43,15 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public bool returnPayment;
     public int expiryInSeconds;
     public bool triggerPaymentTest;
-    // Update is called once per frame
+
 
     private void Awake()
     {
         highscores = new Ranking[this.HighscoresCount + 1];
+        var playerKdDeaths = 1;
+        if (playerDeaths > 0){
+            playerKdDeaths = playerDeaths;
+        }
         highscores[0] = new Ranking()
         {
             Name = userName,
@@ -60,7 +67,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             GlobalRanking = new LeagueRanking(),
             KdRanking = new LeagueRanking
             {
-                Score = (int)((playerKills + 1f) / (playerDeaths + 1f))
+                Score = (int)((((float)playerKills) / (playerKdDeaths))*10000)
             },
             EarningsRanking = new LeagueRanking
             {
@@ -119,6 +126,15 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             setBadge(highscores[i].GlobalRanking,highscores.Length);
             setBadge(highscores[i].KdRanking, highscores.Length);
             setBadge(highscores[i].EarningsRanking, highscores.Length);
+        }
+
+        foreach (var id in allSkins)
+        {
+            shopSkins.Add(new ShopSkin
+            {
+                Id = id,
+                Price = UnityEngine.Random.Range(1, 100000)
+            });
         }
     }
 
@@ -197,18 +213,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         equippedSkin = skinId;
     }
 
-    public Task<ShopSkin[]> GetAllSkins()
+    public async Task<ShopSkin[]> GetAllSkins()
     {
-        List<ShopSkin> shopSkins = new List<ShopSkin>();
-        foreach (var id in allSkins)
-        {
-            shopSkins.Add(new ShopSkin
-            {
-                Id = id,
-                Price = UnityEngine.Random.Range(1, 100000)
-            });
-        }
-        return Task.FromResult(shopSkins.ToArray());
+        return shopSkins.ToArray();
     }
 
     public async Task<string> GetSkinInvoice(string skinId)
@@ -223,8 +230,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             throw new Exception("unknown skin");
 
         }
-        string invoice = "RandomInvoice:" + UnityEngine.Random.Range(0, 100000000);
+        long price = 0;
+        ShopSkin shopskin = shopSkins.FirstOrDefault(s => s.Id == skinId);
+        if (shopskin != null) price = shopskin.Price;
+
+        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(price, "Buy skin " + skinId, expiryInSeconds);
         activeSkinInvoices[invoice] = skinId;
+
         return invoice;
     }
 
@@ -269,13 +281,12 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(needsUserNameChange);
     }
 
-    public async Task WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long timestamp, CancellationToken cancellationTokens)
     {
         await Task.Run(() =>
         {
-            var startTime = DateTime.Now.ToFileTimeUtc();
-            var endTime = DateTime.Now.AddSeconds(expiry).ToFileTimeUtc();
-            while (DateTime.Now.ToFileTimeUtc() < endTime)
+
+            while (DateTimeOffset.UtcNow.ToUnixTimeSeconds() < timestamp)
             {
 
                 if (returnPayment)
@@ -289,7 +300,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                     return;
                 }
             }
-            throw new Exception("expired");
+            throw new ExpiredException();
            
         });
     }
@@ -307,7 +318,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         var testInvoice = "testp" + UnityEngine.Random.Range(0, 100000).ToString();
         try
         {
-            await WaitForPayment(testInvoice, expiryInSeconds);
+            await WaitForPayment(testInvoice, DateTimeOffset.UtcNow.ToUnixTimeSeconds()+expiryInSeconds, new CancellationToken());
             Debug.Log(testInvoice + " succeeded");
         } catch(Exception e)
         {
@@ -320,7 +331,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         Ranking r;
         try
         {
-            r = await GetPlayerRanking(userName);
+            r = GetPlayerRanking(userName);
             return r;
         }
         catch(Exception e)
@@ -329,7 +340,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         }
     }
 
-    public async Task<Ranking> GetPlayerRanking(string playername)
+    private Ranking GetPlayerRanking(string playername)
     {
         Ranking r = highscores.FirstOrDefault(h => h.Name == playername);
         if(r == null)
@@ -349,5 +360,48 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             TotalPlayers = highscores.Length
         };
         return res;
+    }
+
+    public Task<Ranking> GetSpecificPlayerRanking(string pubkey)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    {
+        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(gameDonation + devsDonation, "Donation " + gameDonation + "/" + devsDonation, expiryInSeconds);
+
+        return invoice;
+    }
+
+    public async Task<Bbhrpc.GetInfoResponse> GetInfo()
+    {
+        await Task.Delay(UnityEngine.Random.Range(50, 500));
+        return new Bbhrpc.GetInfoResponse
+        {
+            GameInfo = new GameInfo
+            {
+                GameVersion = "alpha-1"
+            },
+            LndInfo = new LndInfo
+            {
+                LndHost = "lndhost",
+                LndListenPort = 1337,
+                LndPubkey = "backend-pubkey"
+            },
+            SponsorFeeInfo = new SponsorFeeInfo
+            {
+                ActivationFeeRate = 500,
+                CreationCost = 1000,
+                PlayerSatoshiCost = 2
+            },
+            PoolInfo = new PoolInfo
+            {
+                DonationPayoutPercentage = 0.5,
+                DonationPool = UnityEngine.Random.Range(100, int.MaxValue),
+                ShopPayoutPercentage = 0.01,
+                ShopPool = UnityEngine.Random.Range(100, int.MaxValue),
+            }
+        };
     }
 }

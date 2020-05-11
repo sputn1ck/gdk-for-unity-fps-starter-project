@@ -78,7 +78,7 @@ namespace Fps.Movement
         private void OnEnable()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorUI.Instance.Hide();
             serverMovement.OnForcedRotationEvent += OnForcedRotation;
             health.OnRespawnEvent += OnRespawn;
             UnityEngine.EventSystems.EventSystem.current.sendNavigationEvents = false;

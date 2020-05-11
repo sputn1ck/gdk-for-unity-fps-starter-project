@@ -20,15 +20,18 @@ public class BackendPlayerClient : IBackendPlayerClient
     private string pubkey;
     private string signature;
 
+    private CancellationTokenSource CancellationTokenSource;
     public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new GameClientService.GameClientServiceClient(rpcChannel);
         publicClient = new PublicService.PublicServiceClient(rpcChannel);
         skinClient = new SkinService.SkinServiceClient(rpcChannel);
+        this.CancellationTokenSource = new CancellationTokenSource();
         this.pubkey = pubkey;
         this.signature = signature;
         await GetUsername();
+        
         
     }
 
@@ -97,7 +100,7 @@ public class BackendPlayerClient : IBackendPlayerClient
 
     public void Shutdown()
     {
-
+        CancellationTokenSource?.Cancel();
         //Debug.Log(rpcChannel.State + "state, shutdownToken: " + rpcChannel.ShutdownToken.IsCancellationRequested);
         Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
         t.Wait(5000);
@@ -120,12 +123,6 @@ public class BackendPlayerClient : IBackendPlayerClient
         return info.GameInfo.GameVersion;
     }
 
-    public Task<int> GetPlayerRank(string playername, RankType rankType)
-    {
-        //TODO
-        throw new NotImplementedException();
-    }
-
     public async Task<bool> NeedsUsernameChange()
     {
         var name = await GetUsername();
@@ -142,23 +139,72 @@ public class BackendPlayerClient : IBackendPlayerClient
         return setName;
     }
 
-    public Task WaitForPayment(string invoice, long expiry)
+    public async Task WaitForPayment(string invoice, long expiryTimestamp, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await Task.Run(async () =>
+        {
+            long startTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long endTime = expiryTimestamp;
+            int time = (int)(endTime - startTime);
+            CancellationTokenSource expiryToken = new CancellationTokenSource();
+            expiryToken.CancelAfter(time*1000);
+            var callToken = CancellationTokenSource.CreateLinkedTokenSource(expiryToken.Token, cancellationToken);
+            using (var call = publicClient.SubscribeInvoiceStream(new SubscribeInvoiceStreamRequest { Invoice = invoice }, cancellationToken: CancellationTokenSource.Token))
+            {
+                try
+                {
+                    var res = await call.ResponseStream.MoveNext(callToken.Token);
+                    if (res)
+                    {
+                        if (call.ResponseStream.Current.Payed)
+                            return;
+                    }
+                }
+                catch (RpcException e)
+                {
+                    if (e.StatusCode == StatusCode.Cancelled)
+                    {
+                        throw new ExpiredException();
+                    }
+                    throw e;
+                }
+
+            }
+        });
     }
 
-    public Task<Ranking> GetPlayerRanking()
+
+    public async Task<Ranking> GetPlayerRanking()
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingAsync(new GetRankingRequest() { Pubkey = this.pubkey });
+        return res.Ranking;
     }
 
-    public Task<Ranking> GetPlayerRanking(string playername)
+    public async Task<Ranking> GetSpecificPlayerRanking(string pubkey)
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingAsync(new GetRankingRequest() { Pubkey = pubkey });
+        return res.Ranking;
     }
 
-    public Task<GetRankingInfoResponse> GetRankingInfo()
+    public async Task<GetRankingInfoResponse> GetRankingInfo()
     {
-        throw new NotImplementedException();
+        var res = await publicClient.GetRankingInfoAsync(new GetRankingInfoRequest());
+        return res;
+    }
+
+    public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)
+    {
+        var res = await publicClient.GetDonationInvoiceAsync(new GetDonationInvoiceRequest
+        {
+            DevAmount = devsDonation,
+            GameAmount = gameDonation
+        });
+        return res.Invoice;
+    }
+
+    public async Task<GetInfoResponse> GetInfo()
+    {
+        var res = await publicClient.GetInfoAsync(new GetInfoRequest());
+        return res;
     }
 }

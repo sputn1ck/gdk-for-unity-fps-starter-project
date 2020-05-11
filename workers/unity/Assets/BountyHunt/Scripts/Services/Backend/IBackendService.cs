@@ -1,35 +1,42 @@
 using Bbhrpc;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Threading;
 
 public interface IBackendPlayerClient
 {
+    // Basic
     Task Setup(string target, int port, string pubkey, string signature);
     void Shutdown();
 
+    Task<string> GetGameVersion();
+    Task WaitForPayment(string invoice, long expiryTimestamp, CancellationToken cancellationToken);
+
+    // Username
     Task<string> GetUsername();
     Task<string> SetUsername(string userName);
 
     Task<bool> NeedsUsernameChange();
-    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
-    
+
+    // Skin Stuff
     Task<SkinInventory> GetSkinInventory();
     Task EquipSkin(string skinId);
     Task<ShopSkin[]> GetAllSkins();
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
+    Task<string> GetDonationInvoice(long gameDonation,long devsDonation);
 
-    Task<string> GetGameVersion();
-
-    Task<int> GetPlayerRank(string playername, RankType rankType);
+    // Ranking Stuff
     Task<Ranking> GetPlayerRanking();
-    Task<Ranking> GetPlayerRanking(string playername);
-
+    Task<Ranking> GetSpecificPlayerRanking(string pubkey);
     Task<GetRankingInfoResponse> GetRankingInfo();
+    Task<(Ranking[] rankings, int totalElements)> ListRankings(int length, int startIndex, RankType rankType);
 
-    Task WaitForPayment(string invoice, long maxWaitTimeInSeconds);
+    Task<GetInfoResponse> GetInfo();
+
 }
 
 public interface IBackendServerClient
@@ -44,4 +51,20 @@ public interface IBackendServerClient
     void AddPlayerDisconnect(string user);
     Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request);
     Task<string> GetUserSkin(string pubkey);
+}
+
+public class ExpiredException : Exception
+{
+    public ExpiredException()
+    {
+
+    }
+    public ExpiredException(string message) : base(message)
+    {
+
+    }
+    public ExpiredException(string message, Exception inner) : base(message, inner)
+    {
+
+    }
 }
