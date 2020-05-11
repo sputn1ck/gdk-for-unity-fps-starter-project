@@ -26,6 +26,7 @@ public class QuitTabWindowUI : TabMenuWindowUI
     public void MainMenu()
     {
         LndConnector.Instance.Disconnect();
+        BBHUIManager.instance.ShowMainMenu();
     }
 
     public void payOutAllEarnings()
