@@ -49,6 +49,7 @@ public class StartScreenUI : MonoBehaviour
             PopUpArgs args = new PopUpArgs("Error", e.Message);
             PopUpManagerUI.instance.OpenPopUp(args);
             ShowRetryPanel();
+            Debug.LogError(e);
             return;
         }
 

@@ -39,14 +39,15 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
     SkinGroupButtonUI selectedSkinGroupButton;
     Skin equippedSkin;
 
+    private bool isInit;
     private void Start()
     {
         refreshButton.onClick.AddListener(Refresh);
-        ClientEvents.instance.onServicesSetup.AddListener(Init);
+        //ClientEvents.instance.onServicesSetup.AddListener(Init);
         GetComponent<SlideSubMenuUI>().onActivate.AddListener(OnActivate);
         GetComponent<SlideSubMenuUI>().onDeactivate.AddListener(OnDeactivate);
     }
-    async void Init()
+    async Task Init()
     {
         ShopSkin[] shopSkins;
         SkinInventory inventory;
@@ -81,6 +82,11 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
     }
     public async void Refresh()
     {
+        if (!isInit)
+        {
+            await Init();
+            isInit = true;
+        }
         await RefreshTask();
     }
     async Task RefreshTask()

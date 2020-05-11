@@ -10,7 +10,7 @@ public static class PaymentUIHelper
 {
     public static async void ExternalPayment(string invoice,PayReq payreq,UnityAction onSuccess = null,UnityAction onFailure = null)
     {
-        string text = payreq.Description + "\n for " + payreq.NumSatoshis + Utility.tintedSatsSymbol;
+        string text = "payment for " + payreq.NumSatoshis + Utility.tintedSatsSymbol;
         Sprite qrCode = Utility.GetInvertedQRCode(invoice);
 
 

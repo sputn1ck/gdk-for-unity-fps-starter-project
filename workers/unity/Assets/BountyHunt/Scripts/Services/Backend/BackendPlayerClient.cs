@@ -147,7 +147,7 @@ public class BackendPlayerClient : IBackendPlayerClient
             long endTime = expiryTimestamp;
             int time = (int)(endTime - startTime);
             CancellationTokenSource expiryToken = new CancellationTokenSource();
-            expiryToken.CancelAfter(time);
+            expiryToken.CancelAfter(time*1000);
             var callToken = CancellationTokenSource.CreateLinkedTokenSource(expiryToken.Token, cancellationToken);
             using (var call = publicClient.SubscribeInvoiceStream(new SubscribeInvoiceStreamRequest { Invoice = invoice }, cancellationToken: CancellationTokenSource.Token))
             {
