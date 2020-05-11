@@ -46,6 +46,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         LeaderBoardSet GlobalLeague = new LeaderBoardSet();
         GlobalLeague.name = "Global League";
         GlobalLeague.rankType = RankType.Global;
+        GlobalLeague.badge = r => r.GlobalRanking.Badge;
         GlobalLeague.values.Add(("Global Score", r => r.GlobalRanking.Score.ToString()));
         GlobalLeague.values.Add(("Hunting Rank", r => r.KdRanking.Rank.ToString()));
         GlobalLeague.values.Add(("Looting Rank", r => r.EarningsRanking.Rank.ToString()));
@@ -53,6 +54,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         LeaderBoardSet HuntersLeague = new LeaderBoardSet();
         HuntersLeague.name = "Hunters League";
         HuntersLeague.rankType = RankType.Kd;
+        HuntersLeague.badge = r => r.KdRanking.Badge;
         HuntersLeague.values.Add(("Hunter Score", r => r.KdRanking.Score.ToString()));
         HuntersLeague.values.Add(("Kills", r => r.Stats.Kills.ToString()));
         HuntersLeague.values.Add(("Deaths", r => r.Stats.Deaths.ToString()));
@@ -60,6 +62,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         LeaderBoardSet LootersLeague = new LeaderBoardSet();
         LootersLeague.name = "Looters League";
         LootersLeague.rankType = RankType.Earnings;
+        LootersLeague.badge = r => r.EarningsRanking.Badge;
         LootersLeague.values.Add(("Earnings", r => r.Stats.Earnings.ToString()));
 
         leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
@@ -113,8 +116,10 @@ public class LeaderboardMenuUI : MonoBehaviour
     void setEntry(LeaderboardEntryUI entry, Ranking ranking, long position)
     {
         List<string> strings = selectedLeaderboard.values.Select(e => e.value(ranking)).ToList();
+        RankBadge rankbadge = selectedLeaderboard.badge(ranking);
+        Badge badge = BadgeManager.GetBadge(rankbadge);
 
-        entry.Set(position, ranking.Name, strings);
+        entry.Set(position,badge, ranking.Name, strings);
     }
 
     public async void UpdateLeaderBoard()
@@ -167,7 +172,7 @@ public class LeaderboardMenuUI : MonoBehaviour
     void SetLeaderBoard(LeaderBoardSet set)
     {
         List<string> strings = set.values.Select(e => e.name).ToList();
-        headLine.Set(0, "Player", strings);
+        headLine.Set(0, null,"Player", strings);
         selectedLeaderboard = set;
         UpdateLeaderBoard(); ;
     }
@@ -242,6 +247,7 @@ public class LeaderboardMenuUI : MonoBehaviour
 public class LeaderBoardSet{
     public string name;
     public RankType rankType;
+    public Func<Ranking, RankBadge> badge;
     public List<(string name, Func<Ranking, string> value)> values = new List<(string name, Func<Ranking, string> value)>();
 }
 
