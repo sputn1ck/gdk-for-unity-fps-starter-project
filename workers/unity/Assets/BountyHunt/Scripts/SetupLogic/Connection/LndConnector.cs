@@ -18,7 +18,6 @@ public class LndConnector : MonoBehaviour
 
     public GameObject ClientWorkerConnectorPrefab;
     public string pubkey;
-    public GameObject mainMenu;
 
     public ClientWorkerConnectorLnd clientConnector;
 
@@ -69,9 +68,7 @@ public class LndConnector : MonoBehaviour
     public void Disconnect()
     {
         clientConnector.DisconnectPlayer();
-        mainMenu.SetActive(true);
-        BBHUIManager.instance.ShowFrontEnd();
-        mainMenu.GetComponent<MenuUI>().Reset();
+        BBHUIManager.instance.ShowMainMenu();
     }
 
    
@@ -85,9 +82,7 @@ public class LndConnector : MonoBehaviour
     private void Worker_OnDisconnect(string obj)
     {
         Debug.Log("Disconnected");
-        mainMenu.SetActive(true);
-        BBHUIManager.instance.ShowFrontEnd();
-        mainMenu.GetComponent<MenuUI>().Reset();
+        BBHUIManager.instance.ShowMainMenu();
     }
 
     public void SpawnPlayer(string playername, int gunId)

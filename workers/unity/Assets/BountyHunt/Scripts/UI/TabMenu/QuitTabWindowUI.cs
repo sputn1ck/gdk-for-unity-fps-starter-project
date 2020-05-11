@@ -16,6 +16,8 @@ public class QuitTabWindowUI : TabMenuWindowUI
 
     public void QuitGame()
     {
+        LndConnector.Instance.Disconnect();
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -26,7 +28,6 @@ public class QuitTabWindowUI : TabMenuWindowUI
     public void MainMenu()
     {
         LndConnector.Instance.Disconnect();
-        BBHUIManager.instance.ShowMainMenu();
     }
 
     public void payOutAllEarnings()
