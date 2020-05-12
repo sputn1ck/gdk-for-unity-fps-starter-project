@@ -100,11 +100,14 @@ public class BackendGameserverClient : IBackendServerClient
 
         try
         {
-            using (var _eventStream = _client.BackendStreamAsync(request, cancellationToken: rpcChannel.ShutdownToken))
+            using (var _eventStream = _client.BackendStream(request, GetPubkeyCalloptions()))
             {
                 Debug.Log("Backend  Stream listening successfully started");
-                var res = await _eventStream.ResponseAsync;
-                fromBackendQueue.Enqueue(res);
+                while (!rpcChannel.ShutdownToken.IsCancellationRequested)
+                {
+                    var res = await _eventStream.ResponseStream.MoveNext();
+                    fromBackendQueue.Enqueue(_eventStream.ResponseStream.Current);
+                }
 
             }
         }
@@ -204,7 +207,7 @@ public class BackendGameserverClient : IBackendServerClient
         var md = new Metadata();
         md.Add("pubkey", pubkey);
         md.Add("sig", message);
-        var co = new CallOptions(headers: md);
+        var co = new CallOptions(headers: md,  cancellationToken: rpcChannel.ShutdownToken);
         return co;
     }
 
