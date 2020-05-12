@@ -21,7 +21,7 @@ public class ServerPaymentManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(AuctionEnumerator());
+        //StartCoroutine(AuctionEnumerator());
     }
 
     IEnumerator AuctionEnumerator()
