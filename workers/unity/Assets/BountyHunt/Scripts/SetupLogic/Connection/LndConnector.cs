@@ -77,6 +77,13 @@ public class LndConnector : MonoBehaviour
     {
         Debug.Log("worker created");
         clientConnector.Worker.OnDisconnect += Worker_OnDisconnect;
+        clientConnector.OnLostPlayerEntity += ClientConnector_OnLostPlayerEntity;
+    }
+
+    private void ClientConnector_OnLostPlayerEntity()
+    {
+        clientConnector.DisconnectPlayer();
+        BBHUIManager.instance.ShowMainMenu();
     }
 
     private void Worker_OnDisconnect(string obj)

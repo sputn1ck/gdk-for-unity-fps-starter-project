@@ -32,6 +32,7 @@ public class ServerGameStats : MonoBehaviour
         if(user.Value.Name == e.UserName)
         {
             HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+            RemovePlayer(user.Key);
         } else
         {
             user = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == e.UserPubkey);
@@ -39,6 +40,7 @@ public class ServerGameStats : MonoBehaviour
             {
                 HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
             }
+            RemovePlayer(user.Key);
         }
         
     }
@@ -48,6 +50,7 @@ public class ServerGameStats : MonoBehaviour
         {
             //TODO user  name
             ServerGameChat.instance.SendGlobalMessage("KICK", res.RequestPayload.PlayerName+" has been kicked", Chat.MessageType.INFO_LOG);
+            
         }
     }
     private void GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived(GameStats.UpdateSatsInCubes.ReceivedRequest obj)
@@ -62,14 +65,19 @@ public class ServerGameStats : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
+        RemovePlayer(obj.EntityId);
+
+    }
+
+    private void RemovePlayer(EntityId id)
+    {
         var playerMap = GameStatsWriter.Data.PlayerMap;
-        if (playerMap.ContainsKey(obj.Payload.Id))
+        if (playerMap.ContainsKey(id))
         {
-            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[obj.Payload.Id].Pubkey);
-            playerMap.Remove(obj.Payload.Id);
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[id].Pubkey);
+            playerMap.Remove(id);
             GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
         }
-
     }
 
     private void OnSetNameRequestReceived(GameStats.SetName.ReceivedRequest obj)
