@@ -15,9 +15,10 @@ public class BackendGameserverClient : IBackendServerClient
 
     private Grpc.Core.Channel rpcChannel;
 
-    private ConcurrentQueue<EventStreamRequest> eventQueue;
-
-    private Thread listenThread;
+    private ConcurrentQueue<EventStreamRequest> toBackendQueue;
+    private ConcurrentQueue<BackendStreamResponse> fromBackendQueue;
+    private Thread gameServerListenThread;
+    private Thread backendListenThread;
 
     private string pubkey;
     private string message;
@@ -26,9 +27,28 @@ public class BackendGameserverClient : IBackendServerClient
     {
         rpcChannel = new Grpc.Core.Channel(target, port,Grpc.Core.ChannelCredentials.Insecure);
         _client = new GameServerService.GameServerServiceClient(rpcChannel);
-        eventQueue = new ConcurrentQueue<EventStreamRequest>();
+        toBackendQueue = new ConcurrentQueue<EventStreamRequest>();
+        fromBackendQueue = new ConcurrentQueue<BackendStreamResponse>();
         this.pubkey = pubkey;
         this.message = message;
+    }
+    public IEnumerator HandleBackendEvents(CancellationTokenSource ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            if (fromBackendQueue.TryDequeue(out BackendStreamResponse e))
+            {
+                switch (e.EventCase)
+                {
+                    case BackendStreamResponse.EventOneofCase.Kick:
+                        ServerEvents.instance.OnBackendKickEvent.Invoke(e.Kick);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public async Task<User> GetUser(string pubkey)
@@ -47,7 +67,12 @@ public class BackendGameserverClient : IBackendServerClient
     }
     public void StartListening()
     {
-        listenThread = new Thread(async () =>
+        StartGameServerStream();
+        StartBackendListening();
+    }
+    public void StartGameServerStream()
+    {
+        gameServerListenThread = new Thread(async () =>
         {
             while (!ServerServiceConnections.ct.IsCancellationRequested)
             {
@@ -55,9 +80,45 @@ public class BackendGameserverClient : IBackendServerClient
                 Thread.Sleep(1000);
             }
         });
-        listenThread.Start();
+        gameServerListenThread.Start();
     }
+    public void StartBackendListening()
+    {
+        backendListenThread = new Thread(async () =>
+        {
+            while (!ServerServiceConnections.ct.IsCancellationRequested)
+            {
+                await ListenBackend();
+                Thread.Sleep(1000);
+            }
+        });
+        backendListenThread.Start();
+    }
+    public async Task ListenBackend()
+    {
+        var request = new BackendStreamRequest();
 
+        try
+        {
+            using (var _eventStream = _client.BackendStreamAsync(request, cancellationToken: rpcChannel.ShutdownToken))
+            {
+                Debug.Log("Backend  Stream listening successfully started");
+                var res = await _eventStream.ResponseAsync;
+                fromBackendQueue.Enqueue(res);
+
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+
+        if (!rpcChannel.ShutdownToken.IsCancellationRequested)
+        {
+            await Task.Delay(1000);
+            StartBackendListening();
+        }
+    }
 
     public void AddKill(string killer, string victim)
     {
@@ -90,7 +151,7 @@ public class BackendGameserverClient : IBackendServerClient
 
     private void AddToQueue(EventStreamRequest request)
     {
-        eventQueue.Enqueue(request);
+        toBackendQueue.Enqueue(request);
         
     }
 
@@ -99,11 +160,11 @@ public class BackendGameserverClient : IBackendServerClient
         using (var call = _client.EventStream(GetPubkeyCalloptions()))
         {
             Debug.Log("opening stream");
-            eventQueue.Enqueue(new EventStreamRequest());
+            toBackendQueue.Enqueue(new EventStreamRequest());
             while (!ServerServiceConnections.ct.IsCancellationRequested)
             {
                 EventStreamRequest current;
-                if (eventQueue.TryDequeue(out current))
+                if (toBackendQueue.TryDequeue(out current))
                 {
                     if (current != null)
                     {
@@ -116,7 +177,7 @@ public class BackendGameserverClient : IBackendServerClient
                             if (e.Status.Detail == "failed to connect to all addresses")
                             {
                                 Debug.Log("failed to connect");
-                                eventQueue.Enqueue(current);
+                                toBackendQueue.Enqueue(current);
                                 await call.RequestStream.CompleteAsync();
 
                             }

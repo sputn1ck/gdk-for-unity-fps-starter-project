@@ -16,6 +16,7 @@ component HunterComponent {
     command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
     command RequestPayoutResponse request_payout(RequestPayoutRequest);
     command bountyhunt.Empty teleport_player(TeleportRequest);
+    command bountyhunt.Empty kick_player(KickPlayerRequest);
 }
 
 
@@ -37,6 +38,10 @@ type RequestPayoutResponse {
     string pre_image = 2;
     string message = 3;
     int64 amount = 4;
+}
+
+type  KickPlayerRequest {
+    string player_name = 1;
 }
 
 type NextBountyTick {

@@ -120,6 +120,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 {
                     Score = dg + dd
                 }
+
             };
         }
         highscores = highscores.OrderByDescending(h => h.KdRanking.Score).ToArray();

@@ -17,11 +17,14 @@ public class BountyPlayerServer : MonoBehaviour
 {
 
     [Require] public HunterComponentWriter HunterComponentWriter;
-    [Require] public HunterComponentCommandReceiver BountyComponentCommandReceiver;
+    [Require] public HunterComponentCommandReceiver HunterCommandReceiver;
     [Require] public GameStatsCommandSender GameStatsCommandSender;
     [Require] public PlayerHeartbeatClientCommandSender PlayerHeartbeatClientCommandSender;
     [Require] public ServerMovementWriter ServerMovementWriter;
     [Require] public PositionWriter spatialPosition;
+    [Require] public WorldCommandSender wcs;
+
+    public bool kickTrigger;
 
 
     private LinkedEntityComponent LinkedEntityComponent;
@@ -31,15 +34,30 @@ public class BountyPlayerServer : MonoBehaviour
     {
 
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        BountyComponentCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
-        BountyComponentCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
-        BountyComponentCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
+        HunterCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
+        HunterCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
+        HunterCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
         HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
-        
+        HunterCommandReceiver.OnKickPlayerRequestReceived += OnKickPlayer;
         Invoke("SetName", 1f);
         //StartCoroutine(BountyTick());
     }
 
+    private void OnKickPlayer(HunterComponent.KickPlayer.ReceivedRequest obj)
+    {
+        if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
+            return;
+        KickPlayer();
+    }
+
+    void  Update()
+    {
+        if(kickTrigger)
+        {
+            kickTrigger = false;
+            KickPlayer();
+        }
+    }
     private async void OnEarningsUpdate(long obj)
     {
         var amount = HunterComponentWriter.Data.Earnings;
@@ -97,17 +115,17 @@ public class BountyPlayerServer : MonoBehaviour
         }
         catch (Exception e)
         {
-            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice: " + e.Message);
+            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice: " + e.Message);
             return;
         }
         if(invoice == null)
         {
-            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice:");
+            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice:");
             return;
         }
         if (invoice.NumSatoshis > HunterComponentWriter.Data.Earnings)
         {
-            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "not enough sats");
+            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "not enough sats");
             return;
         }
         Lnrpc.SendResponse payment;
@@ -117,7 +135,7 @@ public class BountyPlayerServer : MonoBehaviour
         } catch (PaymentException pe)
         {
 
-            BountyComponentCommandReceiver.SendRequestPayoutFailure(obj.RequestId, pe.Message);
+            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, pe.Message);
             return;
         } catch (Exception e)
         {
@@ -130,7 +148,7 @@ public class BountyPlayerServer : MonoBehaviour
         var newEarnings = Mathf.Clamp(HunterComponentWriter.Data.Earnings - payment.PaymentRoute.TotalAmtMsat / 1000,0, int.MaxValue);
         Debug.Log("new earnings");
         HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = (long)newEarnings });
-        BountyComponentCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), invoice.Description,payment.PaymentRoute.TotalAmtMsat / 1000));
+        HunterCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), invoice.Description,payment.PaymentRoute.TotalAmtMsat / 1000));
         PrometheusManager.TotalEarnings.Inc(invoice.NumSatoshis);
 
     }
@@ -177,5 +195,8 @@ public class BountyPlayerServer : MonoBehaviour
         StopCoroutine(hearbeatCoroutine());
     }
 
-
+    public void KickPlayer()
+    {
+        wcs.SendDeleteEntityCommand(new Improbable.Gdk.Core.Commands.WorldCommands.DeleteEntity.Request { EntityId = this.LinkedEntityComponent.EntityId });
+    }
 }

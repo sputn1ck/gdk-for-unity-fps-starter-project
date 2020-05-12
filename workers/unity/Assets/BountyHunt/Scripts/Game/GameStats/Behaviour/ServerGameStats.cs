@@ -5,18 +5,51 @@ using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using System.Linq;
 using Improbable.Gdk.Core;
+using Bbhrpc;
 
 public class ServerGameStats : MonoBehaviour
 {
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
+    [Require] HunterComponentCommandSender HunterCommandSender;
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
         GameStatsCommandReceiver.OnUpdateSatsInCubesRequestReceived += GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived;
+
+        ServerEvents.instance.OnBackendKickEvent.AddListener(OnKickEvent);
+    }
+    private void OnDisable()
+    {
+        ServerEvents.instance.OnBackendKickEvent.RemoveListener(OnKickEvent);
     }
 
+    private void  OnKickEvent(KickEvent e)
+    {
+
+        var user = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Name == e.UserName);
+        if(user.Value.Name == e.UserName)
+        {
+            HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+        } else
+        {
+            user = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == e.UserPubkey);
+            if (user.Value.Pubkey == e.UserPubkey)
+            {
+                HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+            }
+        }
+        
+    }
+    private void OnKickCallback(HunterComponent.KickPlayer.ReceivedResponse res)
+    {
+        if  (res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
+        {
+            //TODO user  name
+            ServerGameChat.instance.SendGlobalMessage("KICK", res.RequestPayload.PlayerName+" has been kicked", Chat.MessageType.INFO_LOG);
+        }
+    }
     private void GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived(GameStats.UpdateSatsInCubes.ReceivedRequest obj)
     {
         GameStatsWriter.SendUpdate(new GameStats.Update
@@ -33,7 +66,6 @@ public class ServerGameStats : MonoBehaviour
         if (playerMap.ContainsKey(obj.Payload.Id))
         {
             ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[obj.Payload.Id].Pubkey);
-
             playerMap.Remove(obj.Payload.Id);
             GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
         }
