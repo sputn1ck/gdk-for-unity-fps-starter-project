@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
 
 public class GraphicSettingsMenuUI : MonoBehaviour
 {
@@ -14,20 +15,28 @@ public class GraphicSettingsMenuUI : MonoBehaviour
 
     public Button displayModeButton;
 
+    public Button frameRateButton;
+
+    Resolution targetResolution;
+
     private void Start()
     {
         resolutionButton.onClick.AddListener(OnResolutionButtonClick);
         qualityButton.onClick.AddListener(OnQualityButtonClick);
         displayModeButton.onClick.AddListener(OnDisplayModeButtonClick);
+        frameRateButton.onClick.AddListener(OnFramerateButtonClick);
 
         resolutionButton.GetComponentInChildren<TextMeshProUGUI>().text = Screen.currentResolution.width + " x " + Screen.currentResolution.height;
         qualityButton.GetComponentInChildren<TextMeshProUGUI>().text = ((GraphicsQuality)QualitySettings.GetQualityLevel()).ToString();
         displayModeButton.GetComponentInChildren<TextMeshProUGUI>().text = ((DisplayMode)Screen.fullScreenMode).ToString();
+        frameRateButton.GetComponentInChildren<TextMeshProUGUI>().text = Screen.currentResolution.refreshRate + " Hz";
 
         resolutionButton.GetComponentInChildren<TextSizer>().Refresh();
         qualityButton.GetComponentInChildren<TextSizer>().Refresh();
         displayModeButton.GetComponentInChildren<TextSizer>().Refresh();
+        frameRateButton.GetComponentInChildren<TextSizer>().Refresh();
 
+        targetResolution = Screen.currentResolution;
 
     }
 
@@ -35,7 +44,9 @@ public class GraphicSettingsMenuUI : MonoBehaviour
     void OnResolutionButtonClick()
     {
         List<PopUpButtonArgs> resos = new List<PopUpButtonArgs>();
-        foreach(Resolution res in Screen.resolutions)
+
+        var resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct();
+        foreach (Resolution res in resolutions)
         {
             resos.Add(resolutionLabelAndAction(res));
         }
@@ -52,9 +63,43 @@ public class GraphicSettingsMenuUI : MonoBehaviour
 
     void SetResolution(Resolution res)
     {
-        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+        int fps = Screen.currentResolution.refreshRate;
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode,fps);
         resolutionButton.GetComponentInChildren<TextMeshProUGUI>().text = res.width + " x " + res.height;
+        frameRateButton.GetComponentInChildren<TextMeshProUGUI>().text = Screen.currentResolution.refreshRate + " Hz";
         resolutionButton.GetComponentInChildren<TextSizer>().Refresh();
+        frameRateButton.GetComponentInChildren<TextSizer>().Refresh();
+        targetResolution.width = res.width;
+        targetResolution.height = res.height;
+    }
+
+    void OnFramerateButtonClick()
+    {
+        List<PopUpButtonArgs> resos = new List<PopUpButtonArgs>();
+        List<Resolution> listedRes = new List<Resolution>();
+
+        var framerates = Screen.resolutions.Select(resolution => resolution.refreshRate).Distinct();
+        foreach (int fr in framerates)
+        {
+            resos.Add(framerateLabelAndAction(fr));
+        }
+        PopUpArgs args = new PopUpArgs("Framerate", "", resos, true);
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
+
+    PopUpButtonArgs framerateLabelAndAction(int framerate)
+    {
+        string label = framerate + " Hz";
+        UnityAction action = delegate { SetFramerate(framerate); };
+        return new PopUpButtonArgs(label, action);
+    }
+
+    void SetFramerate(int framerate)
+    {
+        Screen.SetResolution(targetResolution.width,targetResolution.height,Screen.fullScreenMode, framerate);
+        frameRateButton.GetComponentInChildren<TextMeshProUGUI>().text = framerate + " Hz";
+        frameRateButton.GetComponentInChildren<TextSizer>().Refresh();
+        targetResolution.refreshRate = framerate;
     }
 
     //quality
