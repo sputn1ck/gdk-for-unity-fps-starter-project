@@ -66,9 +66,13 @@ MonoBehaviour:
   earningsRange: {x: 10, y: 10000}
   killsRange: {x: 3, y: 200}
   deathsRange: {x: 3, y: 200}
+  gameDonationSqrtRange: {x: 1, y: 120}
+  devsDonationSqrtRange: {x: 1, y: 120}
   playerEarnings: 5000
   playerKills: 201
   playerDeaths: 2
+  playerDonationsGame: 8000
+  playerDonationsDevs: 5000
   GoldThreshold: 0.1
   SilverThreshold: 0.3
   BronzeThreshold: 0.6
@@ -113,3 +117,4 @@ MonoBehaviour:
   bufferBalance: 0
   channelMissingBalance: 0
   daemonBalance: 30000
+  randomBalance: 0

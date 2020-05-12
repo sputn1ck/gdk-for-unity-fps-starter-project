@@ -65,7 +65,16 @@ public class LeaderboardMenuUI : MonoBehaviour
         LootersLeague.badge = r => r.EarningsRanking.Badge;
         LootersLeague.values.Add(("Earnings", r => r.Stats.Earnings.ToString()));
 
-        leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague };
+        LeaderBoardSet Patrons = new LeaderBoardSet();
+        Patrons.name = "Patrons";
+        Patrons.rankType = RankType.Donations;
+        Patrons.badge = r => r.DonorsRanking.Badge;
+        Patrons.showBadges = false;
+        Patrons.values.Add(("Total Donation", r =>r.DonorsRanking.Score + " " + Utility.tintedSatsSymbol));
+        Patrons.values.Add(("Game Donation", r =>r.Stats.DonatedGame + " " + Utility.tintedSatsSymbol));
+        Patrons.values.Add(("Devs Donation", r =>r.Stats.DonatedDev + " " + Utility.tintedSatsSymbol));
+
+        leaderboards = new LeaderBoardSet[] { GlobalLeague, HuntersLeague, LootersLeague,Patrons};
         selectedLeaderboard = leaderboards[0];
 
     }
@@ -116,10 +125,14 @@ public class LeaderboardMenuUI : MonoBehaviour
     void setEntry(LeaderboardEntryUI entry, Ranking ranking, long position)
     {
         List<string> strings = selectedLeaderboard.values.Select(e => e.value(ranking)).ToList();
+        
         RankBadge rankbadge = selectedLeaderboard.badge(ranking);
-        Badge badge = BadgeManager.GetBadge(rankbadge);
-
-        entry.Set(position,badge, ranking.Name, strings);
+        Badge badge = null;
+        if (selectedLeaderboard.showBadges)
+        {
+            badge = BadgeManager.GetBadge(rankbadge);
+        }
+        entry.Set(position,badge,ranking.Name, strings);
     }
 
     public async void UpdateLeaderBoard()
@@ -204,6 +217,9 @@ public class LeaderboardMenuUI : MonoBehaviour
                 case RankType.Earnings:
                     rank = ranking.EarningsRanking.Rank;
                     break;
+                case RankType.Donations:
+                    rank = ranking.DonorsRanking.Rank;
+                    break;
                 default:
                     throw new Exception("internal error");
             }
@@ -249,5 +265,6 @@ public class LeaderBoardSet{
     public RankType rankType;
     public Func<Ranking, RankBadge> badge;
     public List<(string name, Func<Ranking, string> value)> values = new List<(string name, Func<Ranking, string> value)>();
+    public bool showBadges = true;
 }
 

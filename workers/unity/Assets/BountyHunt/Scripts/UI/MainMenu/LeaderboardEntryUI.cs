@@ -26,14 +26,20 @@ public class LeaderboardEntryUI : MonoBehaviour
         if (rank == 0)
         {
             this.rank.text = "rank";
-            badgeImage.enabled = false;
         }
         else
         {
             this.rank.text = rank + ".";
-            badgeImage.enabled = true;
-            badgeImage.sprite = badge.sprite;
-            badgeImage.color = badge.color;
+            if (badge!=null)
+            {
+                badgeImage.enabled = true;
+                badgeImage.sprite = badge.sprite;
+                badgeImage.color = badge.color;
+            }
+            else
+            {
+                badgeImage.enabled = false;
+            }
         }
 
         this.playerName.text = playerName;
