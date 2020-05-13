@@ -87,8 +87,12 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
 
     protected override void HandleWorkerConnectionFailure(string errorMessage)
     {
+
+        BBHUIManager.instance.ShowMainMenu();
+        PopUpManagerUI.instance.OpenPopUp(new PopUpArgs { showX = true, headline = "ERROR", text = "SERVER FULL, sorry this is bugged you need to restart the game" });
         Debug.LogError($"Connection failed: {errorMessage}");
         Destroy(gameObject);
+
     }
 
     protected override IEnumerator LoadWorld()
