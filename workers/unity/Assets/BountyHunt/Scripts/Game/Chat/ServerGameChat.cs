@@ -22,6 +22,16 @@ public class ServerGameChat : MonoBehaviour
         if (!Equals(instance, this))
             instance = this;
         ChatCommandReceiver.OnSendMessageRequestReceived += ChatCommandReceiver_OnSendMessageRequestReceived;
+        ServerEvents.instance.OnBackendChatEvent.AddListener(OnBackendChatEvent);
+    }
+    private void OnDisable()
+    {
+        ServerEvents.instance.OnBackendChatEvent.RemoveListener(OnBackendChatEvent);
+    }
+
+    private void OnBackendChatEvent(Bbhrpc.ChatEvent e)
+    {
+        SendGlobalMessage(e.Sender, e.Message, MessageType.INFO_LOG, e.Announce);
     }
 
     private void ChatCommandReceiver_OnSendMessageRequestReceived(Chat.ChatComponent.SendMessage.ReceivedRequest obj)

@@ -51,7 +51,10 @@ public interface IBackendServerClient
     void AddPlayerDisconnect(string user);
     Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request);
     Task<string> GetUserSkin(string pubkey);
+    IEnumerator HandleBackendEvents(CancellationTokenSource ct);
 }
+
+public delegate void BackendEventHandler(object obj, BackendStreamResponse e);
 
 public class ExpiredException : Exception
 {

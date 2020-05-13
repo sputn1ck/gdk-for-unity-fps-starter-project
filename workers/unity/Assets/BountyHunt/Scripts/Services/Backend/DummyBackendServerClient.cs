@@ -1,6 +1,7 @@
 using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,11 +13,42 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public string[] PlayerSkins;
 
+    public bool invokeKick;
+    public string nameKick;
+    public string pubkeyKick;
+
+    public string sender;
+    public string message;
+    public bool announce;
+    public bool messageTrigger;
     public void Setup(string target, int port, string pubkey, string message)
     {
         
     }
-
+    public void Update()
+    {
+        if (invokeKick)
+        {
+            invokeKick = false;
+            ServerEvents.instance.OnBackendKickEvent.Invoke(
+                new KickEvent
+                {
+                    UserName = nameKick,
+                    UserPubkey = pubkeyKick,
+                }
+            );
+        }
+        if(messageTrigger)
+        {
+            messageTrigger = false;
+            ServerEvents.instance.OnBackendChatEvent.Invoke(new ChatEvent
+            {
+                Announce = announce,
+                Sender = sender,
+                Message = message
+            });
+        }
+    }
     public void Shutdown()
     {
         
@@ -31,8 +63,8 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
         return Task.FromResult(new User
         {
-            Name = "Player: " + Random.Range(1, int.MaxValue),
-            Pubkey = "Pubkey: " + Random.Range(1, int.MaxValue),
+            Name = "" + Random.Range(1, 200),
+            Pubkey = "pk" + Random.Range(1, int.MaxValue),
         });
     }
 
@@ -83,5 +115,10 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
             return Task.FromResult("");
         }
         return Task.FromResult(PlayerSkins[UnityEngine.Random.Range(0, PlayerSkins.Length - 1)]);
+    }
+
+    public IEnumerator HandleBackendEvents(CancellationTokenSource ct)
+    {
+        return null;
     }
 }

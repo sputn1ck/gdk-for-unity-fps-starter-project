@@ -796,5 +796,100 @@ namespace Bbhrpc {
     }
 
   }
+  public static partial class AdminService
+  {
+    static readonly string __ServiceName = "bbhrpc.AdminService";
+
+    static readonly grpc::Marshaller<global::Bbhrpc.KickUserRequest> __Marshaller_bbhrpc_KickUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.KickUserRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.KickUserResponse> __Marshaller_bbhrpc_KickUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.KickUserResponse.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse> __Method_KickUser = new grpc::Method<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "KickUser",
+        __Marshaller_bbhrpc_KickUserRequest,
+        __Marshaller_bbhrpc_KickUserResponse);
+
+    /// <summary>Service descriptor</summary>
+    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
+    {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.Services[4]; }
+    }
+
+    /// <summary>Base class for server-side implementations of AdminService</summary>
+    [grpc::BindServiceMethod(typeof(AdminService), "BindService")]
+    public abstract partial class AdminServiceBase
+    {
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.KickUserResponse> KickUser(global::Bbhrpc.KickUserRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+    }
+
+    /// <summary>Client for AdminService</summary>
+    public partial class AdminServiceClient : grpc::ClientBase<AdminServiceClient>
+    {
+      /// <summary>Creates a new client for AdminService</summary>
+      /// <param name="channel">The channel to use to make remote calls.</param>
+      public AdminServiceClient(grpc::ChannelBase channel) : base(channel)
+      {
+      }
+      /// <summary>Creates a new client for AdminService that uses a custom <c>CallInvoker</c>.</summary>
+      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+      public AdminServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
+      {
+      }
+      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+      protected AdminServiceClient() : base()
+      {
+      }
+      /// <summary>Protected constructor to allow creation of configured clients.</summary>
+      /// <param name="configuration">The client configuration.</param>
+      protected AdminServiceClient(ClientBaseConfiguration configuration) : base(configuration)
+      {
+      }
+
+      public virtual global::Bbhrpc.KickUserResponse KickUser(global::Bbhrpc.KickUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return KickUser(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.KickUserResponse KickUser(global::Bbhrpc.KickUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_KickUser, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.KickUserResponse> KickUserAsync(global::Bbhrpc.KickUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return KickUserAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.KickUserResponse> KickUserAsync(global::Bbhrpc.KickUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_KickUser, null, options, request);
+      }
+      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+      protected override AdminServiceClient NewInstance(ClientBaseConfiguration configuration)
+      {
+        return new AdminServiceClient(configuration);
+      }
+    }
+
+    /// <summary>Creates service definition that can be registered with a server</summary>
+    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    public static grpc::ServerServiceDefinition BindService(AdminServiceBase serviceImpl)
+    {
+      return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_KickUser, serviceImpl.KickUser).Build();
+    }
+
+    /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+    /// Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+    /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+    public static void BindService(grpc::ServiceBinderBase serviceBinder, AdminServiceBase serviceImpl)
+    {
+      serviceBinder.AddMethod(__Method_KickUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse>(serviceImpl.KickUser));
+    }
+
+  }
 }
 #endregion

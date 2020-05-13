@@ -16,6 +16,8 @@ public class QuitTabWindowUI : TabMenuWindowUI
 
     public void QuitGame()
     {
+        LndConnector.Instance.Disconnect();
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

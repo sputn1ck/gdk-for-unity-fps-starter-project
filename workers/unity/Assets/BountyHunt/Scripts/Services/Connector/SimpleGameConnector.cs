@@ -68,7 +68,7 @@ public class SimpleGameConnector : IGameConnector
         }
         var res = JsonUtility.FromJson<DeploymentList>(webRes.response);
         var deployment = res.deployments.FirstOrDefault(d => d.status == 200);
-        if (deployment == null)
+        if (deployment == null || deployment.tags[2] != PlayerServiceConnections.instance.GameVersion)
         {
             return (false, "", "all servers offline");
         }
@@ -159,7 +159,7 @@ public class DeploymentJson
     public string clusterCode;
     public string assemblyId;
     public string startingSnapshotId;
-    public List<string> tag;
+    public List<string> tags;
     public int status;
     public LaunchConfig launchConfig;
     public List<WorkerFlag> workerFlags;

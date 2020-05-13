@@ -22,6 +22,10 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     public TextMeshProUGUI GameDonationPercentageText;
     public TextMeshProUGUI DeveloperDonationPercentageText;
 
+    public GameObject LicenceMissingPanel;
+    public TextMeshProUGUI missingValueText;
+    public Button LicenceMissingInfoButton;
+
     long balance;
 
     private void Start()
@@ -32,6 +36,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
         DonationInfoButton.onClick.AddListener(OnDonationInfoButtonPress);
         DonationSlider.onValueChanged.AddListener(OnDonationSliderValueChange);
         DonateButton.onClick.AddListener(OnDonateButtonPress);
+        LicenceMissingInfoButton.onClick.AddListener(OnLicenceMissingInfoButtonPress);
 
     }
 
@@ -46,7 +51,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     void OnInvoiceInfoButtonPress()
     {
         //TODO change text
-        PopUpArgs args = new PopUpArgs("pay invoice", "Here some info about invoices! Maybe Kon Has some suggestions for this text.");
+        PopUpArgs args = new PopUpArgs("pay invoice", GameText.PayInvoiceInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 
@@ -68,7 +73,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
             PopUpManagerUI.instance.OpenPopUp(errArgs);
             return;
         }
-        string text = String.Format("paying invoice: \n {0} \n for {1}{2}\n are you sure?", decodedInvoice.Description, decodedInvoice.NumSatoshis.ToString(), Utility.tintedSatsSymbol);
+        string text = String.Format(GameText.PayInvoicePopup, decodedInvoice.Description, decodedInvoice.NumSatoshis.ToString() + Utility.tintedSatsSymbol);
 
         YesNoPopUpArgs args = new YesNoPopUpArgs("pay invoice ", text, OnPayRequest);
         PopUpManagerUI.instance.OpenYesNoPopUp(args);
@@ -99,9 +104,11 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     }
     async void RefreshBalance()
     {
+        GetBalanceResponse res;
+        
         try
         {
-            balance = (await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance()).DaemonBalance;
+            res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
         }
         catch(Exception e)
         {
@@ -110,14 +117,35 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
             PopUpManagerUI.instance.OpenPopUp(errArgs);
             return;
         }
-        balanceText.text = balance + Utility.tintedSatsSymbol;
+
+        if(res.ChannelMissingBalance > 0)
+        {
+            LicenceMissingPanel.SetActive(true);
+            balanceText.text = "0" + Utility.tintedSatsSymbol;
+            missingValueText.text = res.ChannelMissingBalance + Utility.tintedSatsSymbol;
+        }
+        else
+        {
+            LicenceMissingPanel.SetActive(false);
+
+            balanceText.text = res.DaemonBalance + Utility.tintedSatsSymbol;
+
+        }
+
+
 
     }
 
+    void OnLicenceMissingInfoButtonPress()
+    {
+        PopUpArgs args = new PopUpArgs("Licence Missing", GameText.LicenceMissingInfo);
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
+
+
     void OnDonationInfoButtonPress()
     {
-        //TODO change text
-        PopUpArgs args = new PopUpArgs("donation","with the slider, you can adjust, how much of the Donation goes into the game pot and how much the game developers will recieve");
+        PopUpArgs args = new PopUpArgs("donation",GameText.DonationInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 

@@ -304,10 +304,10 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
         long balance = balanceResponse.DaemonBalance;
 
-        string text1 = "You are going to buy: \n " + grp.groupName +" \n for "+ Utility.SatsToShortString(skn.price,UITinter.tintDict[TintColor.Sats]);
+        string text1 = String.Format(GameText.BuySkinPopup, grp.groupName, Utility.SatsToShortString(skn.price, UITinter.tintDict[TintColor.Sats]));
         Sprite sprite = grp.sprite;
         string text2 = "";
-        if (balance < payreq.NumSatoshis) text2 = "Your Ingame Wallet doesent cover the required amount!"; //Todo hint when there is no channel, or to less balance
+        if (balance < payreq.NumSatoshis) text2 = GameText.BuySkinPopupWarning;
         List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
         actions.Add(new PopUpButtonArgs("ingame Wallet", () => BuyWithIngameWallet(res,payreq)));
         actions.Add(new PopUpButtonArgs("external Wallet", () => BuyWithExternalWallet(res, payreq)));

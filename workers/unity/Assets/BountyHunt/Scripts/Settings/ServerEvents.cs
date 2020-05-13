@@ -1,3 +1,4 @@
+using Bbhrpc;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class ServerEvents : MonoBehaviour
     public AuctionInvoicePaidEvent OnAuctionInvoicePaid = new AuctionInvoicePaidEvent();
     public BountyInvoicePaidEvent OnBountyInvoicePaid = new BountyInvoicePaidEvent();
     public RandomInvoicePaidEvent OnRandomInvoicePaid = new RandomInvoicePaidEvent();
+    public BackendKickEvent OnBackendKickEvent = new BackendKickEvent();
+    public BackendChatEvent OnBackendChatEvent = new BackendChatEvent();
 
     private void Awake()
     {
@@ -25,4 +28,6 @@ public class BountyInvoicePaidEvent : UnityEvent<BountyInvoice> { };
 public class RandomInvoicePaidEvent : UnityEvent<RandomInvoice> { };
 
 public class InvoicePaidEvent : UnityEvent<InvoiceSettledEventArgs> { };
+public class BackendKickEvent : UnityEvent<Bbhrpc.KickEvent> { };
+public class BackendChatEvent : UnityEvent<ChatEvent> { };
 

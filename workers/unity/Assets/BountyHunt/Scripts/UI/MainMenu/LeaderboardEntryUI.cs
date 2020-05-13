@@ -8,12 +8,13 @@ using UnityEngine.UI;
 public class LeaderboardEntryUI : MonoBehaviour
 {
     public TextMeshProUGUI rank;
+    public Image badgeImage;
     public TextMeshProUGUI playerName;
     public List<TextMeshProUGUI> values;
     public CanvasGroup canvasGroup;
     public Image highlight;
 
-    public void Set(long rank, string playerName, List<string> values)
+    public void Set(long rank, Badge badge, string playerName, List<string> values)
     {
         canvasGroup.alpha = 1;
         highlight.gameObject.SetActive(false);
@@ -22,8 +23,25 @@ public class LeaderboardEntryUI : MonoBehaviour
             throw new ArgumentException("length of values-List is larger than th ui elements count!");
         }
 
-        this.rank.text = rank + ".";
-        if (rank == 0) this.rank.text = "";
+        if (rank == 0)
+        {
+            this.rank.text = "rank";
+        }
+        else
+        {
+            this.rank.text = rank + ".";
+            if (badge!=null)
+            {
+                badgeImage.enabled = true;
+                badgeImage.sprite = badge.sprite;
+                badgeImage.color = badge.color;
+            }
+            else
+            {
+                badgeImage.enabled = false;
+            }
+        }
+
         this.playerName.text = playerName;
         for(int i = 0; i < this.values.Count;i++)
         {

@@ -62,23 +62,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de307f2f2561c249b4f93dc94b974c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunId: 0
   connectLocal: 0
   host: http://167.172.175.172:5111
-  playername: bob
-  pit: 
-  deploymentId: 
-  loginToken: 
-  getPitTrigger: 0
-  listDeploymentsTrigger: 0
-  loginTokenTrigger: 0
-  connectTrigger: 0
-  spawnPlayerTrigger: 0
-  doAllTrigger: 0
   ClientWorkerConnectorPrefab: {fileID: 2049478701278950836, guid: 4394a34e02f6d0a4e8ca0b613fd1cc97,
     type: 3}
   pubkey: 
-  mainMenu: {fileID: 0}
   clientConnector: {fileID: 0}
   deploymentList:
     deployments: []
@@ -94,13 +82,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78dad89147db8834b82734b95ef62e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameVersion: alpha_rc2
   UseDummy: 0
+  DummyServices: {fileID: 0}
   confName: 
   lndConnectString: 
   UseApdata: 1
   BackendHost: 167.172.175.172
   BackendPubkey: 024b0f1e453299eb39fd629ebc0f881e7714a86eb86f173b11f7606fcb4731e246
   BackendPort: 8898
+  ServicesReady: 0
 --- !u!114 &3231388491131628992
 MonoBehaviour:
   m_ObjectHideFlags: 0

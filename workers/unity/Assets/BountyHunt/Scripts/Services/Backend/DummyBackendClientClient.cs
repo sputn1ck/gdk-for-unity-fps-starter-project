@@ -20,9 +20,13 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public Vector2Int earningsRange;
     public Vector2Int killsRange;
     public Vector2Int deathsRange;
+    public Vector2Int gameDonationSqrtRange;
+    public Vector2Int devsDonationSqrtRange;
     public long playerEarnings;
     public int playerKills;
     public int playerDeaths;
+    public long playerDonationsGame;
+    public long playerDonationsDevs;
     Ranking[] highscores;
 
     public float GoldThreshold;
@@ -62,16 +66,22 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 Deaths = playerDeaths,
                 Kills = playerKills,
                 Earnings = playerEarnings,
+                DonatedGame = playerDonationsGame,
+                DonatedDev = playerDonationsDevs
 
             },
             GlobalRanking = new LeagueRanking(),
             KdRanking = new LeagueRanking
             {
-                Score = (int)((((float)playerKills) / (playerKdDeaths))*10000)
+                Score = (int)((((float)playerKills) / (playerKdDeaths)) * 10000)
             },
             EarningsRanking = new LeagueRanking
             {
                 Score = playerEarnings
+            },
+            DonorsRanking = new LeagueRanking
+            {
+                Score = playerDonationsDevs + playerDonationsGame,
             }
         };
         for (int i = 1; i < highscores.Length; i++)
@@ -79,11 +89,10 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             int k = UnityEngine.Random.Range(killsRange.x, killsRange.y);
             int d = UnityEngine.Random.Range(deathsRange.x, deathsRange.y);
             int e = UnityEngine.Random.Range(earningsRange.x, earningsRange.y);
-            int kdDeaths = 1;
-            if (d > 0) {
-                kdDeaths = d;
-            }
-            float kd = (float)k / kdDeaths;
+            int dg = UnityEngine.Random.Range(0, 2) * (int)Mathf.Pow(UnityEngine.Random.Range(gameDonationSqrtRange.x, gameDonationSqrtRange.y),2);
+            int dd = UnityEngine.Random.Range(0, 2) * (int)Mathf.Pow(UnityEngine.Random.Range(devsDonationSqrtRange.x,devsDonationSqrtRange.y),2);
+
+            float kd =(k+5)/(d+5);
             highscores[i] = new Ranking()
             {
                 Name = "Player: " + i,
@@ -94,17 +103,24 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                     Deaths = d,
                     Kills = k,
                     Earnings = e,
+                    DonatedGame = dg,
+                    DonatedDev = dd
                 },
 
                 GlobalRanking = new LeagueRanking(),
                 KdRanking = new LeagueRanking
                 {
-                    Score = (int)(kd*10000)
+                    Score = (int)(kd * 10000)
                 },
                 EarningsRanking = new LeagueRanking
                 {
                     Score = e
+                },
+                DonorsRanking = new LeagueRanking
+                {
+                    Score = dg + dd
                 }
+
             };
         }
         highscores = highscores.OrderByDescending(h => h.KdRanking.Score).ToArray();
@@ -112,12 +128,20 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         {
             highscores[i].KdRanking.Rank = i + 1;
         }
+
+        highscores = highscores.OrderByDescending(h => h.DonorsRanking.Score).ToArray();
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i].DonorsRanking.Rank = i + 1;
+        }
+
         highscores = highscores.OrderByDescending(h => h.EarningsRanking.Score).ToArray();
         for (int i = 0; i < highscores.Length; i++)
         {
             highscores[i].EarningsRanking.Rank = i + 1;
             highscores[i].GlobalRanking.Score = highscores[i].KdRanking.Rank * highscores[i].EarningsRanking.Rank;
         }
+
 
         highscores = highscores.OrderBy(h => h.GlobalRanking.Score).ToArray();
         for (int i = 0; i < highscores.Length; i++)
@@ -127,6 +151,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             setBadge(highscores[i].KdRanking, highscores.Length);
             setBadge(highscores[i].EarningsRanking, highscores.Length);
         }
+
 
         foreach (var id in allSkins)
         {
@@ -179,6 +204,9 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 break;
             case RankType.Earnings:
                 highscores = highscores.OrderBy(p => p.EarningsRanking.Rank).ToArray();
+                break;
+            case RankType.Donations:
+                highscores = highscores.OrderBy(p => p.DonorsRanking.Rank).ToArray();
                 break;
             default:
                 break;

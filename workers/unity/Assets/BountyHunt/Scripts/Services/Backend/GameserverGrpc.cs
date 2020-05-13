@@ -14,6 +14,8 @@ namespace Bbhrpc {
 
     static readonly grpc::Marshaller<global::Bbhrpc.EventStreamRequest> __Marshaller_bbhrpc_EventStreamRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.EventStreamRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.EventStreamResponse> __Marshaller_bbhrpc_EventStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.EventStreamResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.BackendStreamRequest> __Marshaller_bbhrpc_BackendStreamRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.BackendStreamRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.BackendStreamResponse> __Marshaller_bbhrpc_BackendStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.BackendStreamResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetUserRequest> __Marshaller_bbhrpc_GetUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetUserRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetUserResponse> __Marshaller_bbhrpc_GetUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetUserResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetUserSkinRequest> __Marshaller_bbhrpc_GetUserSkinRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetUserSkinRequest.Parser.ParseFrom);
@@ -27,6 +29,13 @@ namespace Bbhrpc {
         "EventStream",
         __Marshaller_bbhrpc_EventStreamRequest,
         __Marshaller_bbhrpc_EventStreamResponse);
+
+    static readonly grpc::Method<global::Bbhrpc.BackendStreamRequest, global::Bbhrpc.BackendStreamResponse> __Method_BackendStream = new grpc::Method<global::Bbhrpc.BackendStreamRequest, global::Bbhrpc.BackendStreamResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "BackendStream",
+        __Marshaller_bbhrpc_BackendStreamRequest,
+        __Marshaller_bbhrpc_BackendStreamResponse);
 
     static readonly grpc::Method<global::Bbhrpc.GetUserRequest, global::Bbhrpc.GetUserResponse> __Method_GetUser = new grpc::Method<global::Bbhrpc.GetUserRequest, global::Bbhrpc.GetUserResponse>(
         grpc::MethodType.Unary,
@@ -60,6 +69,11 @@ namespace Bbhrpc {
     public abstract partial class GameServerServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.EventStreamResponse> EventStream(grpc::IAsyncStreamReader<global::Bbhrpc.EventStreamRequest> requestStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task BackendStream(global::Bbhrpc.BackendStreamRequest request, grpc::IServerStreamWriter<global::Bbhrpc.BackendStreamResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -111,6 +125,14 @@ namespace Bbhrpc {
       public virtual grpc::AsyncClientStreamingCall<global::Bbhrpc.EventStreamRequest, global::Bbhrpc.EventStreamResponse> EventStream(grpc::CallOptions options)
       {
         return CallInvoker.AsyncClientStreamingCall(__Method_EventStream, null, options);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Bbhrpc.BackendStreamResponse> BackendStream(global::Bbhrpc.BackendStreamRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BackendStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Bbhrpc.BackendStreamResponse> BackendStream(global::Bbhrpc.BackendStreamRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_BackendStream, null, options, request);
       }
       public virtual global::Bbhrpc.GetUserResponse GetUser(global::Bbhrpc.GetUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
@@ -173,6 +195,7 @@ namespace Bbhrpc {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_EventStream, serviceImpl.EventStream)
+          .AddMethod(__Method_BackendStream, serviceImpl.BackendStream)
           .AddMethod(__Method_GetUser, serviceImpl.GetUser)
           .AddMethod(__Method_GetUserSkin, serviceImpl.GetUserSkin)
           .AddMethod(__Method_GetRoundInfo, serviceImpl.GetRoundInfo).Build();
@@ -185,6 +208,7 @@ namespace Bbhrpc {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GameServerServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_EventStream, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::Bbhrpc.EventStreamRequest, global::Bbhrpc.EventStreamResponse>(serviceImpl.EventStream));
+      serviceBinder.AddMethod(__Method_BackendStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Bbhrpc.BackendStreamRequest, global::Bbhrpc.BackendStreamResponse>(serviceImpl.BackendStream));
       serviceBinder.AddMethod(__Method_GetUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetUserRequest, global::Bbhrpc.GetUserResponse>(serviceImpl.GetUser));
       serviceBinder.AddMethod(__Method_GetUserSkin, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetUserSkinRequest, global::Bbhrpc.GetUserSkinResponse>(serviceImpl.GetUserSkin));
       serviceBinder.AddMethod(__Method_GetRoundInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetRoundInfoRequest, global::Bbhrpc.GetRoundInfoResponse>(serviceImpl.GetRoundInfo));

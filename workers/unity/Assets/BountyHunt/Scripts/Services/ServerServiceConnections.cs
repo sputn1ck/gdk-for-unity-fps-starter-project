@@ -106,7 +106,7 @@ public class ServerServiceConnections : MonoBehaviour
     public async void Setup()
     {
         await SetupLnd();
-        SetupBackendServices();
+        await SetupBackendServices();
     }
     public async Task SetupLnd()
     {
@@ -117,7 +117,7 @@ public class ServerServiceConnections : MonoBehaviour
         StartCoroutine(lnd.HandleInvoices(ct));
     }
 
-    public void SetupBackendServices()
+    public async Task SetupBackendServices()
     {
         var message = "DO_NOT_SIGN_DONNERDUNGEON_AUTHENTICATION_MESSAGE";
         var sig = lnd.SignMessage(message);
@@ -126,10 +126,10 @@ public class ServerServiceConnections : MonoBehaviour
         BackendGameServerClient = new BackendGameserverClient();
         BackendGameServerClient.Setup(BackendHost,BackendPort, lnd.GetPubkey(), sig.Signature);
         BackendGameServerClient.StartListening();
-
+        StartCoroutine(BackendGameServerClient.HandleBackendEvents(ct));
         // Player Client
         BackendPlayerClient = new BackendPlayerClient();
-        BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
+        await BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
 
         // Auction Controller
         AuctionController = new AuctionController();

@@ -13,8 +13,6 @@ public class StatsMenuUI : MonoBehaviour, IRefreshableUI
     public StatsValueUI statsValuePrefab;
     Dictionary<string, StatsValueUI> stats = new Dictionary<string, StatsValueUI>();
 
-    public List<Badge> badges;
-
     public SimpleSliderUI sliderUI;
 
     public RankingStatsPanelUI GlobalRankingPanel;
@@ -116,14 +114,14 @@ public class StatsMenuUI : MonoBehaviour, IRefreshableUI
 
     void RefreshPlayerstats(Ranking rank,int playerCount)
     {
-        Badge badge = GetBadge(rank.GlobalRanking.Badge);
+        Badge badge = BadgeManager.GetBadge(rank.GlobalRanking.Badge);
         GlobalRankingPanel.BadgeImage.sprite = badge.sprite;
         GlobalRankingPanel.BadgeImage.color = badge.color;
         GlobalRankingPanel.stats[0].valueText.text = rank.GlobalRanking.Rank.ToString();
         GlobalRankingPanel.HeadlineExtraValue.text = String.Format("(Top {0}%)", (100 * rank.GlobalRanking.Rank / playerCount));
         GlobalRankingPanel.stats[1].valueText.text = rank.GlobalRanking.Score.ToString();
 
-        badge = GetBadge(rank.KdRanking.Badge);
+        badge = BadgeManager.GetBadge(rank.KdRanking.Badge);
         HunterRankingPanel.BadgeImage.sprite = badge.sprite;
         HunterRankingPanel.BadgeImage.color = badge.color;
         HunterRankingPanel.stats[0].valueText.text = rank.KdRanking.Rank.ToString();
@@ -132,7 +130,7 @@ public class StatsMenuUI : MonoBehaviour, IRefreshableUI
         HunterRankingPanel.stats[2].valueText.text = rank.Stats.Kills.ToString();
         HunterRankingPanel.stats[3].valueText.text = rank.Stats.Deaths.ToString();
 
-        badge = GetBadge(rank.EarningsRanking.Badge);
+        badge = BadgeManager.GetBadge(rank.EarningsRanking.Badge);
         LooterRankingPanel.BadgeImage.sprite = badge.sprite;
         LooterRankingPanel.BadgeImage.color = badge.color;
         LooterRankingPanel.stats[0].valueText.text = rank.EarningsRanking.Rank.ToString();
@@ -152,17 +150,4 @@ public class StatsMenuUI : MonoBehaviour, IRefreshableUI
         WriteLine("Shop Pool", Utility.SatsToShortString(generalInfo.PoolInfo.ShopPool, true), ctr);
     }
 
-    Badge GetBadge(RankBadge rankBadge)
-    {
-        return badges.FirstOrDefault(b => b.rankBadge == rankBadge);
-    }
-}
-
-[System.Serializable]
-public class Badge
-{
-    public RankBadge rankBadge;
-    public string League;
-    public Sprite sprite;
-    public Color color;
 }

@@ -13,9 +13,6 @@ public class DonationMessageUI : MonoBehaviour
     List<Advertiser> advertisers;
     int nextID;
 
-    string auctionText = "";
-    long auctionSats = 0;
-
 
     int advertiserCount
     {
@@ -28,46 +25,30 @@ public class DonationMessageUI : MonoBehaviour
 
     void Start()
     {
-        nextID = -2;
-        ClientEvents.instance.onAuctionMessageUpdate.AddListener(UpdateAuctionMessage);
+        nextID = 0;
         ClientEvents.instance.onUpdateAdvertisers.AddListener(UpdateAdvertiserMessages);
         InvokeRepeating("Next", 0, secondsPerAd);
-    }
-
-    private void UpdateAuctionMessage(string msg, long sats)
-    {
-        auctionText = msg;
-        auctionSats = sats;
     }
 
     private void UpdateAdvertiserMessages(List<Advertiser> advertisers)
     {
         this.advertisers = advertisers;
-        nextID = -2;
+        nextID = 0;
     }
 
     void Next()
     {
-        if (advertisers == null) {
+        if (advertisers == null || advertisers.Count == 0) {
+            nextID = 0;
+            messageText.text = "";
+            satsText.text = "";
             return;
         }
-        if (nextID >= advertiserCount) {
-            nextID = -2;
-        }
-        if(auctionText == "" && nextID < 0)
-        {
-            nextID = 0;
-        }
-        if(nextID < 0)
-        {
-            messageText.text = auctionText;
-            satsText.text = Utility.SatsToShortString( auctionSats, UITinter.tintDict[TintColor.Sats]);
-        }
-        else if (nextID < advertisers.Count)
-        {
-            messageText.text = advertisers[nextID].name + "    " + advertisers[nextID].url;
-            satsText.text = Utility.SatsToShortString(advertisers[nextID].investment, UITinter.tintDict[TintColor.Sats]);
-        }
+
+        if (nextID >= advertisers.Count) nextID = 0;
+        messageText.text = advertisers[nextID].name + "    " + advertisers[nextID].url;
+        satsText.text = Utility.SatsToShortString(advertisers[nextID].investment, UITinter.tintDict[TintColor.Sats]);
+        
         nextID++;
     }
 

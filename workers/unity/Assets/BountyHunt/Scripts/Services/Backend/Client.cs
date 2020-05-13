@@ -55,13 +55,15 @@ namespace Bbhrpc {
             "ZRInCgthZHZlcnRpc2VycxgBIAMoCzISLmJiaHJwYy5BZHZlcnRpc2VyIm0K",
             "BlBsYXllchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCRIWCg5jdXJy",
             "ZW50X2JvdW50eRgDIAEoAxIVCg1jdXJyZW50X2tpbGxzGAQgASgFEhYKDmN1",
-            "cnJlbnRfZGVhdGhzGAUgASgFItABCgdSYW5raW5nEgwKBG5hbWUYASABKAkS",
+            "cnJlbnRfZGVhdGhzGAUgASgFIv8BCgdSYW5raW5nEgwKBG5hbWUYASABKAkS",
             "DgoGcHVia2V5GAIgASgJEhwKBXN0YXRzGAMgASgLMg0uYmJocnBjLlN0YXRz",
             "Ei0KDmdsb2JhbF9yYW5raW5nGAQgASgLMhUuYmJocnBjLkxlYWd1ZVJhbmtp",
             "bmcSLwoQZWFybmluZ3NfcmFua2luZxgFIAEoCzIVLmJiaHJwYy5MZWFndWVS",
             "YW5raW5nEikKCmtkX3JhbmtpbmcYBiABKAsyFS5iYmhycGMuTGVhZ3VlUmFu",
-            "a2luZyI4CgVTdGF0cxINCgVraWxscxgBIAEoBRIOCgZkZWF0aHMYAiABKAUS",
-            "EAoIZWFybmluZ3MYAyABKAMiTgoNTGVhZ3VlUmFua2luZxINCgVzY29yZRgB",
+            "a2luZxItCg5kb25vcnNfcmFua2luZxgHIAEoCzIVLmJiaHJwYy5MZWFndWVS",
+            "YW5raW5nImMKBVN0YXRzEg0KBWtpbGxzGAEgASgFEg4KBmRlYXRocxgCIAEo",
+            "BRIQCghlYXJuaW5ncxgDIAEoAxITCgtkb25hdGVkX2RldhgEIAEoAxIUCgxk",
+            "b25hdGVkX2dhbWUYBSABKAMiTgoNTGVhZ3VlUmFua2luZxINCgVzY29yZRgB",
             "IAEoAxIMCgRyYW5rGAIgASgFEiAKBWJhZGdlGAMgASgOMhEuYmJocnBjLlJh",
             "bmtCYWRnZSJZCgpBZHZlcnRpc2VyEg0KBXBoYXNoGAEgASgJEgwKBG5hbWUY",
             "AiABKAkSCwoDdXJsGAMgASgJEg8KB2JhbGFuY2UYBCABKAMSEAoIcGljX3Vy",
@@ -84,43 +86,48 @@ namespace Bbhrpc {
             "dGl2YXRpb25fZmVlX3JhdGUYAiABKAISGwoTcGxheWVyX3NhdG9zaGlfY29z",
             "dBgDIAEoAiIwCh1TdWJzY3JpYmVJbnZvaWNlU3RyZWFtUmVxdWVzdBIPCgdp",
             "bnZvaWNlGAEgASgJIi8KHlN1YnNjcmliZUludmlvY2VTdHJlYW1SZXNwb25z",
-            "ZRINCgVwYXllZBgBIAEoCCJEChlHZXREb25hdGlvbkludm9pY2VSZXF1ZXN0",
-            "EhIKCmRldl9hbW91bnQYASABKAMSEwoLZ2FtZV9hbW91bnQYAiABKAMiLQoa",
-            "R2V0RG9uYXRpb25JbnZvaWNlUmVzcG9uc2USDwoHaW52b2ljZRgBIAEoCSo2",
-            "CghSYW5rVHlwZRIICgROT05FEAASCgoGR0xPQkFMEAESBgoCS0QQAhIMCghF",
-            "QVJOSU5HUxADKjsKCVJhbmtCYWRnZRIMCghVTlJBTktFRBAAEgoKBkJST05a",
-            "RRABEgoKBlNJTFZFUhACEggKBEdPTEQQAzKiAQoRR2FtZUNsaWVudFNlcnZp",
-            "Y2USRQoLR2V0VXNlcm5hbWUSGi5iYmhycGMuR2V0VXNlcm5hbWVSZXF1ZXN0",
-            "GhouYmJocnBjLkdldFVzZXJuYW1lUmVwb25zZRJGCgtTZXRVc2VybmFtZRIa",
-            "LmJiaHJwYy5TZXRVc2VybmFtZVJlcXVlc3QaGy5iYmhycGMuU2V0VXNlcm5h",
-            "bWVSZXNwb25zZTKXAgoRQWR2ZXJ0aXNlclNlcnZpY2USVQoQQ3JlYXRlQWR2",
-            "ZXJ0aXNlchIfLmJiaHJwYy5DcmVhdGVBZHZlcnRpc2VyUmVxdWVzdBogLmJi",
-            "aHJwYy5DcmVhdGVBZHZlcnRpc2VyUmVzcG9uc2USWAoRRGVwb3NpdEFkdmVy",
-            "dGlzZXISIC5iYmhycGMuRGVwb3NpdEFkdmVydGlzZXJSZXF1ZXN0GiEuYmJo",
-            "cnBjLkRlcG9zaXRBZHZlcnRpc2VyUmVzcG9uc2USUQoPTGlzdEFkdmVydGlz",
-            "ZXJzEh4uYmJocnBjLkxpc3RBZHZlcnRpc2Vyc1JlcXVlc3QaHi5iYmhycGMu",
-            "TGlzdEFkdmVydGlzZXJSZXNwb25zZTL7BAoNUHVibGljU2VydmljZRJPCg5H",
-            "ZXRSYW5raW5nSW5mbxIdLmJiaHJwYy5HZXRSYW5raW5nSW5mb1JlcXVlc3Qa",
-            "Hi5iYmhycGMuR2V0UmFua2luZ0luZm9SZXNwb25zZRJDCgpHZXRSYW5raW5n",
-            "EhkuYmJocnBjLkdldFJhbmtpbmdSZXF1ZXN0GhouYmJocnBjLkdldFJhbmtp",
-            "bmdSZXNwb25zZRJJCgxMaXN0UmFua2luZ3MSGy5iYmhycGMuTGlzdFJhbmtp",
-            "bmdzUmVxdWVzdBocLmJiaHJwYy5MaXN0UmFua2luZ3NSZXNwb25zZRJACglB",
-            "ZGRCb3VudHkSGC5iYmhycGMuQWRkQm91bnR5UmVxdWVzdBoZLmJiaHJwYy5B",
-            "ZGRCb3VudHlSZXNwb25zZRJDCgpMaXN0T25saW5lEhkuYmJocnBjLkxpc3RP",
-            "bmxpbmVSZXF1ZXN0GhouYmJocnBjLkxpc3RPbmxpbmVSZXNwb25zZRI6CgdH",
-            "ZXRJbmZvEhYuYmJocnBjLkdldEluZm9SZXF1ZXN0GhcuYmJocnBjLkdldElu",
-            "Zm9SZXNwb25zZRJpChZTdWJzY3JpYmVJbnZvaWNlU3RyZWFtEiUuYmJocnBj",
-            "LlN1YnNjcmliZUludm9pY2VTdHJlYW1SZXF1ZXN0GiYuYmJocnBjLlN1YnNj",
-            "cmliZUludmlvY2VTdHJlYW1SZXNwb25zZTABElsKEkdldERvbmF0aW9uSW52",
-            "b2ljZRIhLmJiaHJwYy5HZXREb25hdGlvbkludm9pY2VSZXF1ZXN0GiIuYmJo",
-            "cnBjLkdldERvbmF0aW9uSW52b2ljZVJlc3BvbnNlMqQCCgtTa2luU2Vydmlj",
-            "ZRJACglMaXN0U2tpbnMSGC5iYmhycGMuTGlzdFNraW5zUmVxdWVzdBoZLmJi",
-            "aHJwYy5MaXN0U2tpbnNSZXNwb25zZRI6CgdCdXlTa2luEhYuYmJocnBjLkJ1",
-            "eVNraW5SZXF1ZXN0GhcuYmJocnBjLkJ1eVNraW5SZXNwb25zZRJVChBHZXRT",
-            "a2luSW52ZW50b3J5Eh8uYmJocnBjLkdldFNraW5JbnZlbnRvcnlSZXF1ZXN0",
-            "GiAuYmJocnBjLkdldFNraW5JbnZlbnRvcnlSZXNwb25zZRJACglFcXVpcFNr",
-            "aW4SGC5iYmhycGMuRXF1aXBTa2luUmVxdWVzdBoZLmJiaHJwYy5FcXVpcFNr",
-            "aW5SZXNwb25zZUIIWgZiYmhycGNiBnByb3RvMw=="));
+            "ZRINCgVwYXllZBgBIAEoCCJYChlHZXREb25hdGlvbkludm9pY2VSZXF1ZXN0",
+            "EhIKCmRldl9hbW91bnQYASABKAMSEwoLZ2FtZV9hbW91bnQYAiABKAMSEgoK",
+            "YmVuZWZhY3RvchgDIAEoCSItChpHZXREb25hdGlvbkludm9pY2VSZXNwb25z",
+            "ZRIPCgdpbnZvaWNlGAEgASgJIkYKD0tpY2tVc2VyUmVxdWVzdBIRCgl1c2Vy",
+            "X25hbWUYASABKAkSEwoLdXNlcl9wdWJrZXkYAiABKAkSCwoDYmFuGAMgASgI",
+            "IhIKEEtpY2tVc2VyUmVzcG9uc2UqRQoIUmFua1R5cGUSCAoETk9ORRAAEgoK",
+            "BkdMT0JBTBABEgYKAktEEAISDAoIRUFSTklOR1MQAxINCglET05BVElPTlMQ",
+            "BCo7CglSYW5rQmFkZ2USDAoIVU5SQU5LRUQQABIKCgZCUk9OWkUQARIKCgZT",
+            "SUxWRVIQAhIICgRHT0xEEAMyogEKEUdhbWVDbGllbnRTZXJ2aWNlEkUKC0dl",
+            "dFVzZXJuYW1lEhouYmJocnBjLkdldFVzZXJuYW1lUmVxdWVzdBoaLmJiaHJw",
+            "Yy5HZXRVc2VybmFtZVJlcG9uc2USRgoLU2V0VXNlcm5hbWUSGi5iYmhycGMu",
+            "U2V0VXNlcm5hbWVSZXF1ZXN0GhsuYmJocnBjLlNldFVzZXJuYW1lUmVzcG9u",
+            "c2UylwIKEUFkdmVydGlzZXJTZXJ2aWNlElUKEENyZWF0ZUFkdmVydGlzZXIS",
+            "Hy5iYmhycGMuQ3JlYXRlQWR2ZXJ0aXNlclJlcXVlc3QaIC5iYmhycGMuQ3Jl",
+            "YXRlQWR2ZXJ0aXNlclJlc3BvbnNlElgKEURlcG9zaXRBZHZlcnRpc2VyEiAu",
+            "YmJocnBjLkRlcG9zaXRBZHZlcnRpc2VyUmVxdWVzdBohLmJiaHJwYy5EZXBv",
+            "c2l0QWR2ZXJ0aXNlclJlc3BvbnNlElEKD0xpc3RBZHZlcnRpc2VycxIeLmJi",
+            "aHJwYy5MaXN0QWR2ZXJ0aXNlcnNSZXF1ZXN0Gh4uYmJocnBjLkxpc3RBZHZl",
+            "cnRpc2VyUmVzcG9uc2Uy+wQKDVB1YmxpY1NlcnZpY2USTwoOR2V0UmFua2lu",
+            "Z0luZm8SHS5iYmhycGMuR2V0UmFua2luZ0luZm9SZXF1ZXN0Gh4uYmJocnBj",
+            "LkdldFJhbmtpbmdJbmZvUmVzcG9uc2USQwoKR2V0UmFua2luZxIZLmJiaHJw",
+            "Yy5HZXRSYW5raW5nUmVxdWVzdBoaLmJiaHJwYy5HZXRSYW5raW5nUmVzcG9u",
+            "c2USSQoMTGlzdFJhbmtpbmdzEhsuYmJocnBjLkxpc3RSYW5raW5nc1JlcXVl",
+            "c3QaHC5iYmhycGMuTGlzdFJhbmtpbmdzUmVzcG9uc2USQAoJQWRkQm91bnR5",
+            "EhguYmJocnBjLkFkZEJvdW50eVJlcXVlc3QaGS5iYmhycGMuQWRkQm91bnR5",
+            "UmVzcG9uc2USQwoKTGlzdE9ubGluZRIZLmJiaHJwYy5MaXN0T25saW5lUmVx",
+            "dWVzdBoaLmJiaHJwYy5MaXN0T25saW5lUmVzcG9uc2USOgoHR2V0SW5mbxIW",
+            "LmJiaHJwYy5HZXRJbmZvUmVxdWVzdBoXLmJiaHJwYy5HZXRJbmZvUmVzcG9u",
+            "c2USaQoWU3Vic2NyaWJlSW52b2ljZVN0cmVhbRIlLmJiaHJwYy5TdWJzY3Jp",
+            "YmVJbnZvaWNlU3RyZWFtUmVxdWVzdBomLmJiaHJwYy5TdWJzY3JpYmVJbnZp",
+            "b2NlU3RyZWFtUmVzcG9uc2UwARJbChJHZXREb25hdGlvbkludm9pY2USIS5i",
+            "YmhycGMuR2V0RG9uYXRpb25JbnZvaWNlUmVxdWVzdBoiLmJiaHJwYy5HZXRE",
+            "b25hdGlvbkludm9pY2VSZXNwb25zZTKkAgoLU2tpblNlcnZpY2USQAoJTGlz",
+            "dFNraW5zEhguYmJocnBjLkxpc3RTa2luc1JlcXVlc3QaGS5iYmhycGMuTGlz",
+            "dFNraW5zUmVzcG9uc2USOgoHQnV5U2tpbhIWLmJiaHJwYy5CdXlTa2luUmVx",
+            "dWVzdBoXLmJiaHJwYy5CdXlTa2luUmVzcG9uc2USVQoQR2V0U2tpbkludmVu",
+            "dG9yeRIfLmJiaHJwYy5HZXRTa2luSW52ZW50b3J5UmVxdWVzdBogLmJiaHJw",
+            "Yy5HZXRTa2luSW52ZW50b3J5UmVzcG9uc2USQAoJRXF1aXBTa2luEhguYmJo",
+            "cnBjLkVxdWlwU2tpblJlcXVlc3QaGS5iYmhycGMuRXF1aXBTa2luUmVzcG9u",
+            "c2UyTQoMQWRtaW5TZXJ2aWNlEj0KCEtpY2tVc2VyEhcuYmJocnBjLktpY2tV",
+            "c2VyUmVxdWVzdBoYLmJiaHJwYy5LaWNrVXNlclJlc3BvbnNlQghaBmJiaHJw",
+            "Y2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.RankType), typeof(global::Bbhrpc.RankBadge), }, new pbr::GeneratedClrTypeInfo[] {
@@ -147,8 +154,8 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListAdvertisersRequest), global::Bbhrpc.ListAdvertisersRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListAdvertiserResponse), global::Bbhrpc.ListAdvertiserResponse.Parser, new[]{ "Advertisers" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Player), global::Bbhrpc.Player.Parser, new[]{ "Name", "Pubkey", "CurrentBounty", "CurrentKills", "CurrentDeaths" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Ranking), global::Bbhrpc.Ranking.Parser, new[]{ "Name", "Pubkey", "Stats", "GlobalRanking", "EarningsRanking", "KdRanking" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Stats), global::Bbhrpc.Stats.Parser, new[]{ "Kills", "Deaths", "Earnings" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Ranking), global::Bbhrpc.Ranking.Parser, new[]{ "Name", "Pubkey", "Stats", "GlobalRanking", "EarningsRanking", "KdRanking", "DonorsRanking" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Stats), global::Bbhrpc.Stats.Parser, new[]{ "Kills", "Deaths", "Earnings", "DonatedDev", "DonatedGame" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.LeagueRanking), global::Bbhrpc.LeagueRanking.Parser, new[]{ "Score", "Rank", "Badge" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.Advertiser), global::Bbhrpc.Advertiser.Parser, new[]{ "Phash", "Name", "Url", "Balance", "PicUrls" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ListSkinsRequest), global::Bbhrpc.ListSkinsRequest.Parser, null, null, null, null),
@@ -167,8 +174,10 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SponsorFeeInfo), global::Bbhrpc.SponsorFeeInfo.Parser, new[]{ "CreationCost", "ActivationFeeRate", "PlayerSatoshiCost" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SubscribeInvoiceStreamRequest), global::Bbhrpc.SubscribeInvoiceStreamRequest.Parser, new[]{ "Invoice" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SubscribeInvioceStreamResponse), global::Bbhrpc.SubscribeInvioceStreamResponse.Parser, new[]{ "Payed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetDonationInvoiceRequest), global::Bbhrpc.GetDonationInvoiceRequest.Parser, new[]{ "DevAmount", "GameAmount" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetDonationInvoiceResponse), global::Bbhrpc.GetDonationInvoiceResponse.Parser, new[]{ "Invoice" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetDonationInvoiceRequest), global::Bbhrpc.GetDonationInvoiceRequest.Parser, new[]{ "DevAmount", "GameAmount", "Benefactor" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetDonationInvoiceResponse), global::Bbhrpc.GetDonationInvoiceResponse.Parser, new[]{ "Invoice" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.KickUserRequest), global::Bbhrpc.KickUserRequest.Parser, new[]{ "UserName", "UserPubkey", "Ban" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.KickUserResponse), global::Bbhrpc.KickUserResponse.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -180,6 +189,7 @@ namespace Bbhrpc {
     [pbr::OriginalName("GLOBAL")] Global = 1,
     [pbr::OriginalName("KD")] Kd = 2,
     [pbr::OriginalName("EARNINGS")] Earnings = 3,
+    [pbr::OriginalName("DONATIONS")] Donations = 4,
   }
 
   public enum RankBadge {
@@ -3560,6 +3570,7 @@ namespace Bbhrpc {
       globalRanking_ = other.globalRanking_ != null ? other.globalRanking_.Clone() : null;
       earningsRanking_ = other.earningsRanking_ != null ? other.earningsRanking_.Clone() : null;
       kdRanking_ = other.kdRanking_ != null ? other.kdRanking_.Clone() : null;
+      donorsRanking_ = other.donorsRanking_ != null ? other.donorsRanking_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3634,6 +3645,17 @@ namespace Bbhrpc {
       }
     }
 
+    /// <summary>Field number for the "donors_ranking" field.</summary>
+    public const int DonorsRankingFieldNumber = 7;
+    private global::Bbhrpc.LeagueRanking donorsRanking_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.LeagueRanking DonorsRanking {
+      get { return donorsRanking_; }
+      set {
+        donorsRanking_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Ranking);
@@ -3653,6 +3675,7 @@ namespace Bbhrpc {
       if (!object.Equals(GlobalRanking, other.GlobalRanking)) return false;
       if (!object.Equals(EarningsRanking, other.EarningsRanking)) return false;
       if (!object.Equals(KdRanking, other.KdRanking)) return false;
+      if (!object.Equals(DonorsRanking, other.DonorsRanking)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3665,6 +3688,7 @@ namespace Bbhrpc {
       if (globalRanking_ != null) hash ^= GlobalRanking.GetHashCode();
       if (earningsRanking_ != null) hash ^= EarningsRanking.GetHashCode();
       if (kdRanking_ != null) hash ^= KdRanking.GetHashCode();
+      if (donorsRanking_ != null) hash ^= DonorsRanking.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3702,6 +3726,10 @@ namespace Bbhrpc {
         output.WriteRawTag(50);
         output.WriteMessage(KdRanking);
       }
+      if (donorsRanking_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(DonorsRanking);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3727,6 +3755,9 @@ namespace Bbhrpc {
       }
       if (kdRanking_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(KdRanking);
+      }
+      if (donorsRanking_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DonorsRanking);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3768,6 +3799,12 @@ namespace Bbhrpc {
           KdRanking = new global::Bbhrpc.LeagueRanking();
         }
         KdRanking.MergeFrom(other.KdRanking);
+      }
+      if (other.donorsRanking_ != null) {
+        if (donorsRanking_ == null) {
+          DonorsRanking = new global::Bbhrpc.LeagueRanking();
+        }
+        DonorsRanking.MergeFrom(other.DonorsRanking);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3816,6 +3853,13 @@ namespace Bbhrpc {
             input.ReadMessage(KdRanking);
             break;
           }
+          case 58: {
+            if (donorsRanking_ == null) {
+              DonorsRanking = new global::Bbhrpc.LeagueRanking();
+            }
+            input.ReadMessage(DonorsRanking);
+            break;
+          }
         }
       }
     }
@@ -3850,6 +3894,8 @@ namespace Bbhrpc {
       kills_ = other.kills_;
       deaths_ = other.deaths_;
       earnings_ = other.earnings_;
+      donatedDev_ = other.donatedDev_;
+      donatedGame_ = other.donatedGame_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3891,6 +3937,28 @@ namespace Bbhrpc {
       }
     }
 
+    /// <summary>Field number for the "donated_dev" field.</summary>
+    public const int DonatedDevFieldNumber = 4;
+    private long donatedDev_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long DonatedDev {
+      get { return donatedDev_; }
+      set {
+        donatedDev_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "donated_game" field.</summary>
+    public const int DonatedGameFieldNumber = 5;
+    private long donatedGame_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long DonatedGame {
+      get { return donatedGame_; }
+      set {
+        donatedGame_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Stats);
@@ -3907,6 +3975,8 @@ namespace Bbhrpc {
       if (Kills != other.Kills) return false;
       if (Deaths != other.Deaths) return false;
       if (Earnings != other.Earnings) return false;
+      if (DonatedDev != other.DonatedDev) return false;
+      if (DonatedGame != other.DonatedGame) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3916,6 +3986,8 @@ namespace Bbhrpc {
       if (Kills != 0) hash ^= Kills.GetHashCode();
       if (Deaths != 0) hash ^= Deaths.GetHashCode();
       if (Earnings != 0L) hash ^= Earnings.GetHashCode();
+      if (DonatedDev != 0L) hash ^= DonatedDev.GetHashCode();
+      if (DonatedGame != 0L) hash ^= DonatedGame.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3941,6 +4013,14 @@ namespace Bbhrpc {
         output.WriteRawTag(24);
         output.WriteInt64(Earnings);
       }
+      if (DonatedDev != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(DonatedDev);
+      }
+      if (DonatedGame != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(DonatedGame);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3957,6 +4037,12 @@ namespace Bbhrpc {
       }
       if (Earnings != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Earnings);
+      }
+      if (DonatedDev != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(DonatedDev);
+      }
+      if (DonatedGame != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(DonatedGame);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3977,6 +4063,12 @@ namespace Bbhrpc {
       }
       if (other.Earnings != 0L) {
         Earnings = other.Earnings;
+      }
+      if (other.DonatedDev != 0L) {
+        DonatedDev = other.DonatedDev;
+      }
+      if (other.DonatedGame != 0L) {
+        DonatedGame = other.DonatedGame;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3999,6 +4091,14 @@ namespace Bbhrpc {
           }
           case 24: {
             Earnings = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            DonatedDev = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            DonatedGame = input.ReadInt64();
             break;
           }
         }
@@ -6730,6 +6830,7 @@ namespace Bbhrpc {
     public GetDonationInvoiceRequest(GetDonationInvoiceRequest other) : this() {
       devAmount_ = other.devAmount_;
       gameAmount_ = other.gameAmount_;
+      benefactor_ = other.benefactor_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6760,6 +6861,17 @@ namespace Bbhrpc {
       }
     }
 
+    /// <summary>Field number for the "benefactor" field.</summary>
+    public const int BenefactorFieldNumber = 3;
+    private string benefactor_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Benefactor {
+      get { return benefactor_; }
+      set {
+        benefactor_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GetDonationInvoiceRequest);
@@ -6775,6 +6887,7 @@ namespace Bbhrpc {
       }
       if (DevAmount != other.DevAmount) return false;
       if (GameAmount != other.GameAmount) return false;
+      if (Benefactor != other.Benefactor) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -6783,6 +6896,7 @@ namespace Bbhrpc {
       int hash = 1;
       if (DevAmount != 0L) hash ^= DevAmount.GetHashCode();
       if (GameAmount != 0L) hash ^= GameAmount.GetHashCode();
+      if (Benefactor.Length != 0) hash ^= Benefactor.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6804,6 +6918,10 @@ namespace Bbhrpc {
         output.WriteRawTag(16);
         output.WriteInt64(GameAmount);
       }
+      if (Benefactor.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Benefactor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6817,6 +6935,9 @@ namespace Bbhrpc {
       }
       if (GameAmount != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameAmount);
+      }
+      if (Benefactor.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Benefactor);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6835,6 +6956,9 @@ namespace Bbhrpc {
       if (other.GameAmount != 0L) {
         GameAmount = other.GameAmount;
       }
+      if (other.Benefactor.Length != 0) {
+        Benefactor = other.Benefactor;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -6852,6 +6976,10 @@ namespace Bbhrpc {
           }
           case 16: {
             GameAmount = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            Benefactor = input.ReadString();
             break;
           }
         }
@@ -6983,6 +7111,292 @@ namespace Bbhrpc {
             Invoice = input.ReadString();
             break;
           }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class KickUserRequest : pb::IMessage<KickUserRequest> {
+    private static readonly pb::MessageParser<KickUserRequest> _parser = new pb::MessageParser<KickUserRequest>(() => new KickUserRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<KickUserRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[45]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserRequest(KickUserRequest other) : this() {
+      userName_ = other.userName_;
+      userPubkey_ = other.userPubkey_;
+      ban_ = other.ban_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserRequest Clone() {
+      return new KickUserRequest(this);
+    }
+
+    /// <summary>Field number for the "user_name" field.</summary>
+    public const int UserNameFieldNumber = 1;
+    private string userName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserName {
+      get { return userName_; }
+      set {
+        userName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "user_pubkey" field.</summary>
+    public const int UserPubkeyFieldNumber = 2;
+    private string userPubkey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserPubkey {
+      get { return userPubkey_; }
+      set {
+        userPubkey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "ban" field.</summary>
+    public const int BanFieldNumber = 3;
+    private bool ban_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Ban {
+      get { return ban_; }
+      set {
+        ban_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as KickUserRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(KickUserRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserName != other.UserName) return false;
+      if (UserPubkey != other.UserPubkey) return false;
+      if (Ban != other.Ban) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserName.Length != 0) hash ^= UserName.GetHashCode();
+      if (UserPubkey.Length != 0) hash ^= UserPubkey.GetHashCode();
+      if (Ban != false) hash ^= Ban.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(UserName);
+      }
+      if (UserPubkey.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(UserPubkey);
+      }
+      if (Ban != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Ban);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
+      }
+      if (UserPubkey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserPubkey);
+      }
+      if (Ban != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(KickUserRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserName.Length != 0) {
+        UserName = other.UserName;
+      }
+      if (other.UserPubkey.Length != 0) {
+        UserPubkey = other.UserPubkey;
+      }
+      if (other.Ban != false) {
+        Ban = other.Ban;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            UserName = input.ReadString();
+            break;
+          }
+          case 18: {
+            UserPubkey = input.ReadString();
+            break;
+          }
+          case 24: {
+            Ban = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class KickUserResponse : pb::IMessage<KickUserResponse> {
+    private static readonly pb::MessageParser<KickUserResponse> _parser = new pb::MessageParser<KickUserResponse>(() => new KickUserResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<KickUserResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.ClientReflection.Descriptor.MessageTypes[46]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserResponse(KickUserResponse other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public KickUserResponse Clone() {
+      return new KickUserResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as KickUserResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(KickUserResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(KickUserResponse other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
         }
       }
     }

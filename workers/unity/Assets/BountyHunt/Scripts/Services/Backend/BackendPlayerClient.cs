@@ -197,7 +197,8 @@ public class BackendPlayerClient : IBackendPlayerClient
         var res = await publicClient.GetDonationInvoiceAsync(new GetDonationInvoiceRequest
         {
             DevAmount = devsDonation,
-            GameAmount = gameDonation
+            GameAmount = gameDonation,
+            Benefactor = pubkey,
         });
         return res.Invoice;
     }

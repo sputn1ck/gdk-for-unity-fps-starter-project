@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c60151199898e44d98ec59baac27cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPickupTrigger: 0
+  spawnSats: 0
 --- !u!114 &-5192710837073992374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,14 +114,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b77b0b05dec06145b6810c652c94e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 0
+  test: 1
   testSources:
   - Name: nyan
-    Investment: 100
+    Investment: 300
     SquareTextureLinks:
     - https://pbs.twimg.com/profile_images/2370446440/6e2jwf7ztbr5t1yjq4c5.jpeg
     - https://target.scene7.com/is/image/Target/GUEST_7f86ff7a-22f0-4556-997c-b6dc907a1940?wid=488&hei=488&fmt=pjpeg
+    - https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4
+    - https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4
+    - https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4
+    - https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4
+    Url: https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4
   - Name: grumpy
     Investment: 100
     SquareTextureLinks:
     - https://pbs.twimg.com/profile_images/1080545769034108928/CEzHCTpI_400x400.jpg
+    Url: 

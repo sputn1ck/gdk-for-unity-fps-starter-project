@@ -82,6 +82,7 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
     {
         Debug.LogError($"Player entity got removed while still being connected. Disconnecting...");
         OnLostPlayerEntity?.Invoke();
+        
     }
 
     protected override void HandleWorkerConnectionFailure(string errorMessage)

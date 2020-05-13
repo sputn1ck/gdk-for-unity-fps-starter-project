@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using Bountyhunt;
+using UnityEngine.Video;
 
 public class ClientAdManagerBehaviour : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     private List<Advertiser> advertisers;
 
     [HideInInspector] public long totalSponsoredSats;
+
+    List<VideoPlayer> usedVideoPlayers = new List<VideoPlayer>();
+    List<VideoPlayer> freeVideoPlayers = new List<VideoPlayer>();
 
 
     private void Awake()
@@ -113,6 +117,8 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         List<Task> tasks = new List<Task>();
 
         advertisers.Clear();
+        foreach(VideoPlayer player in usedVideoPlayers)freeVideoPlayers.Add(player);
+        usedVideoPlayers.Clear();
         foreach (AdvertiserSource source in advertiserSources)
         {
             tasks.Add(loadAdvertiser(source));
@@ -123,27 +129,67 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         Initialize();
     }
 
-    private static async Task<List<Texture2D>> getTexturesFromURLList(List<string> urls)
+    private static async Task<(List<Texture2D>,List<string>)> getTexturesFromURLList(List<string> urls)
     {
         List<Texture2D> textures = new List<Texture2D>();
+        List<string> videoUrls= new List<string>();
         if (urls == null)
         {
             Debug.LogWarning("url list is null");
-            return textures;
+            return (textures,videoUrls);
         }
         foreach (string url in urls)
         {
-            Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(instance, url);
-
-            if (tex == null)
+            string extension = Path.GetExtension(url);
+            switch (extension)
             {
-                continue;
+                case ".png":
+                case ".jpg":
+                case ".jpeg":
+                case ".bmp":
+                case ".exr":
+                case ".hdr":
+                case ".iff":
+                case ".pict":
+                case ".psd":
+                case ".tga":
+                case ".tiff":
+                case ".gif":
+
+                    Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(instance, url);
+
+                    if (tex == null)
+                    {
+                        continue;
+                    }
+
+                    textures.Add(tex);
+
+                    break;
+
+                case ".dv":
+                case ".m4v":
+                case ".mov":
+                case ".mp4":
+                case ".mpg":
+                case ".mpeg":
+                case ".ogv":
+                case ".vp8":
+                case ".webm":
+
+                    videoUrls.Add(url);
+
+                    break;
+
+                default:
+                    Debug.LogError("File Type not " + extension + "supportet!");
+                    break;
             }
 
-            textures.Add(tex);
+            
         }
 
-        return textures;
+        return (textures,videoUrls);
     }
 
     private async Task loadAdvertiser(AdvertiserSource source)
@@ -152,11 +198,27 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         advertiser.name = source.Name;
         advertiser.investment = source.Investment;
         advertiser.url = source.Url;
-        advertiser.squareAdTextures = await getTexturesFromURLList(source.SquareTextureLinks);
+        advertiser.squareMedia = await getTexturesFromURLList(source.SquareTextureLinks);
         advertiser.Initialize();
         advertisers.Add(advertiser);
     }
 
+    public VideoPlayer GetNewVideoPlayer()
+    {
+        if (freeVideoPlayers.Count>0)
+        {
+            VideoPlayer p = freeVideoPlayers[0];
+
+            usedVideoPlayers.Add(p);
+            freeVideoPlayers.Remove(p);
+            return p;
+        }
+        VideoPlayer vp = gameObject.AddComponent<VideoPlayer>();
+        vp.source = VideoSource.Url;
+        vp.isLooping = true;
+        vp.renderMode = VideoRenderMode.RenderTexture;
+        return vp;
+    }
 }
 
 
@@ -167,26 +229,37 @@ public class Advertiser
     public string name;
     public string description;
     public string url;
-    public List<Texture2D> squareAdTextures;
+    public (List<Texture2D>, List<string>) squareMedia;
 
     Dictionary<AdMaterialType, List<Material>> materials;
 
     public void Initialize()
     {
         materials = new Dictionary<AdMaterialType, List<Material>>();
-        InitializeMatrials(squareAdTextures, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
+        InitializeMatrials(squareMedia, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
         //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
         //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
         //InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
 
     }
-    public void InitializeMatrials(List<Texture2D> textures, AdMaterialType type, Material defaultMaterial, string TextureToReplace)
+    public void InitializeMatrials((List<Texture2D>textures,List<string>videolinks) media, AdMaterialType type, Material defaultMaterial, string TextureToReplace)
     {
         materials[type] = new List<Material>();
-        foreach (var texture in textures)
+        foreach (var texture in media.textures)
         {
             var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
             material.SetTexture(TextureToReplace, texture);
+            materials[type].Add(material);
+        }
+
+        foreach(string link in media.videolinks)
+        {
+            var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
+            VideoPlayer vp = ClientAdManagerBehaviour.instance.GetNewVideoPlayer();
+            vp.url = link;
+            RenderTexture rt = new RenderTexture(512, 512, 0);
+            vp.targetTexture = rt;
+            material.SetTexture(TextureToReplace, rt);
             materials[type].Add(material);
         }
     }
@@ -209,6 +282,7 @@ public class Advertiser
     {
         return materials[type];
     }
+
         
     public enum AdMaterialType { SQUARE, HORIZONTAL, VERTICAL}
 }

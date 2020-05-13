@@ -30,7 +30,7 @@ public class CursorUI : MonoBehaviour
 
     private void Update()
     {
-        transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
         image.sprite = Input.GetMouseButton(0) ? onClickSprite : defaultSprite;
     }
 }

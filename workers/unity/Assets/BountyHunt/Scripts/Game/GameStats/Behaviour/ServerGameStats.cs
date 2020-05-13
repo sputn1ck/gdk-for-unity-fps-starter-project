@@ -5,18 +5,54 @@ using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using System.Linq;
 using Improbable.Gdk.Core;
+using Bbhrpc;
 
 public class ServerGameStats : MonoBehaviour
 {
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
+    [Require] HunterComponentCommandSender HunterCommandSender;
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
         GameStatsCommandReceiver.OnUpdateSatsInCubesRequestReceived += GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived;
+
+        ServerEvents.instance.OnBackendKickEvent.AddListener(OnKickEvent);
+    }
+    private void OnDisable()
+    {
+        ServerEvents.instance.OnBackendKickEvent.RemoveListener(OnKickEvent);
     }
 
+    private void  OnKickEvent(KickEvent e)
+    {
+
+        var user = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Name == e.UserName);
+        if(user.Value.Name == e.UserName)
+        {
+            HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+            RemovePlayer(user.Key);
+        } else
+        {
+            user = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == e.UserPubkey);
+            if (user.Value.Pubkey == e.UserPubkey)
+            {
+                HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+            }
+            RemovePlayer(user.Key);
+        }
+        
+    }
+    private void OnKickCallback(HunterComponent.KickPlayer.ReceivedResponse res)
+    {
+        if  (res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
+        {
+            //TODO user  name
+            ServerGameChat.instance.SendGlobalMessage("KICK", res.RequestPayload.PlayerName+" has been kicked", Chat.MessageType.INFO_LOG);
+            
+        }
+    }
     private void GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived(GameStats.UpdateSatsInCubes.ReceivedRequest obj)
     {
         GameStatsWriter.SendUpdate(new GameStats.Update
@@ -29,15 +65,19 @@ public class ServerGameStats : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        var playerMap = GameStatsWriter.Data.PlayerMap;
-        if (playerMap.ContainsKey(obj.Payload.Id))
-        {
-            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[obj.Payload.Id].Pubkey);
+        RemovePlayer(obj.EntityId);
 
-            playerMap.Remove(obj.Payload.Id);
+    }
+
+    private void RemovePlayer(EntityId id)
+    {
+        var playerMap = GameStatsWriter.Data.PlayerMap;
+        if (playerMap.ContainsKey(id))
+        {
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[id].Pubkey);
+            playerMap.Remove(id);
             GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
         }
-
     }
 
     private void OnSetNameRequestReceived(GameStats.SetName.ReceivedRequest obj)
