@@ -10,7 +10,7 @@ public class MainMenuUI : MonoBehaviour
     public PreviewSpot previewSpot;
     public Button playButton;
     public GameObject connectingInfoObject;
-    public TextMeshProUGUI versionText; 
+    public TextMeshProUGUI versionText;
 
     private void Awake()
     {
@@ -35,10 +35,12 @@ public class MainMenuUI : MonoBehaviour
     public async void OnPlayButtonPress()
     {
         connectingInfoObject.gameObject.SetActive(true);
-
+        string playername;
         try
         {
             await LndConnector.Instance.Connect();
+            playername = await PlayerServiceConnections.instance.BackendPlayerClient.GetUsername();
+
         }
         catch (Exception e)
         {
@@ -47,15 +49,15 @@ public class MainMenuUI : MonoBehaviour
             connectingInfoObject.SetActive(false);
             return;
         }
-        OnConnectionSuccesss();
+        OnConnectionSuccesss(playername);
 
     }
 
-    public void OnConnectionSuccesss()
+    public async void OnConnectionSuccesss(string playername)
     {
         Debug.Log("joining game");
         BBHUIManager.instance.ShowGameView();
-        LndConnector.Instance.SpawnPlayer("gude", 0);
+        LndConnector.Instance.SpawnPlayer(playername, 0);
     }
 
     async void RefreshVersion()
