@@ -2,6 +2,9 @@
 public static class GameText
 {
     /// Main Menu > Wallet > Pay Invoice > (i)
+    public const string LicenceMissingInfo = "To fully enjoy the game, you have to gather enough sats to open a lightning channel to the game";
+
+    /// Main Menu > Wallet > Pay Invoice > (i)
     public const string PayInvoiceInfo = "Here some info about invoices! Maybe Kon Has some suggestions for this text.";
 
     /// Main Menu > Wallet > Pay Invoice > [PAY] > Popup

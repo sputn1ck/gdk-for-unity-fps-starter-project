@@ -22,6 +22,10 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     public TextMeshProUGUI GameDonationPercentageText;
     public TextMeshProUGUI DeveloperDonationPercentageText;
 
+    public GameObject LicenceMissingPanel;
+    public TextMeshProUGUI missingValueText;
+    public Button LicenceMissingInfoButton;
+
     long balance;
 
     private void Start()
@@ -32,6 +36,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
         DonationInfoButton.onClick.AddListener(OnDonationInfoButtonPress);
         DonationSlider.onValueChanged.AddListener(OnDonationSliderValueChange);
         DonateButton.onClick.AddListener(OnDonateButtonPress);
+        LicenceMissingInfoButton.onClick.AddListener(OnLicenceMissingInfoButtonPress);
 
     }
 
@@ -99,9 +104,11 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     }
     async void RefreshBalance()
     {
+        GetBalanceResponse res;
+        
         try
         {
-            balance = (await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance()).DaemonBalance;
+            res = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
         }
         catch(Exception e)
         {
@@ -110,13 +117,34 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
             PopUpManagerUI.instance.OpenPopUp(errArgs);
             return;
         }
-        balanceText.text = balance + Utility.tintedSatsSymbol;
+
+        if(res.ChannelMissingBalance > 0)
+        {
+            LicenceMissingPanel.SetActive(true);
+            balanceText.text = "0" + Utility.tintedSatsSymbol;
+            missingValueText.text = res.ChannelMissingBalance + Utility.tintedSatsSymbol;
+        }
+        else
+        {
+            LicenceMissingPanel.SetActive(false);
+
+            balanceText.text = res.DaemonBalance + Utility.tintedSatsSymbol;
+
+        }
+
+
 
     }
 
+    void OnLicenceMissingInfoButtonPress()
+    {
+        PopUpArgs args = new PopUpArgs("Licence Missing", GameText.LicenceMissingInfo);
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
+
+
     void OnDonationInfoButtonPress()
     {
-        //TODO change text
         PopUpArgs args = new PopUpArgs("donation",GameText.DonationInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
