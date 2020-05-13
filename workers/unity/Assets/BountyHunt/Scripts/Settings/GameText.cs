@@ -5,7 +5,7 @@ public static class GameText
     public const string LicenceMissingInfo = "To fully enjoy the game, you have to gather enough sats to open a lightning channel to the game";
 
     /// Main Menu > Wallet > Pay Invoice > (i)
-    public const string PayInvoiceInfo = "Here some info about invoices! Maybe Kon Has some suggestions for this text.";
+    public const string PayInvoiceInfo = "Create an Invoice and add it here to pay. NOTE: the payment can fail for a lot of reasons. Try creating an Invoice with small amounts first";
 
     /// Main Menu > Wallet > Pay Invoice > [PAY] > Popup
     /// {0} = invoice description
@@ -13,7 +13,7 @@ public static class GameText
     public const string PayInvoicePopup = "paying invoice: \n {0} \n for {1}\n are you sure?";
 
     /// Main Menu > Wallet > Donation > (i)
-    public const string DonationInfo = "with the slider, you can adjust, how much of the Donation goes into the game pot and how much the game developers will recieve";
+    public const string DonationInfo = "with the slider, you can adjust, how much of the donation goes into the game pot and how much the game developers will recieve";
 
     /// text above the Image in the Buy Skin Popup
     /// {0} = skin name
