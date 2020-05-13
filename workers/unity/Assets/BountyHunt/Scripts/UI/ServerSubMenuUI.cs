@@ -48,7 +48,7 @@ public class ServerSubMenuUI : SubMenuUI
     IEnumerator RequestDeployments()
     {
         //yield return LndConnector.Instance.ListDeployments();
-        List<DeploymentJson> dList = LndConnector.Instance.deploymentList.deployments.Where(d=>d.status == 200 && !d.tag.Contains("sim")).ToList();
+        List<DeploymentJson> dList = LndConnector.Instance.deploymentList.deployments.Where(d=>d.status == 200 && !d.tags.Contains("sim")).ToList();
         UpdateServerList(dList.ToArray());
         yield return null;
 
