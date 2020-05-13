@@ -65,7 +65,7 @@ public class ServerGameStats : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        RemovePlayer(obj.EntityId);
+        RemovePlayer(obj.Payload.Id);
 
     }
 
@@ -74,9 +74,10 @@ public class ServerGameStats : MonoBehaviour
         var playerMap = GameStatsWriter.Data.PlayerMap;
         if (playerMap.ContainsKey(id))
         {
-            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[id].Pubkey);
             playerMap.Remove(id);
             GameStatsWriter.SendUpdate(new GameStats.Update() { PlayerMap = playerMap });
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerDisconnect(playerMap[id].Pubkey);
+            
         }
     }
 
