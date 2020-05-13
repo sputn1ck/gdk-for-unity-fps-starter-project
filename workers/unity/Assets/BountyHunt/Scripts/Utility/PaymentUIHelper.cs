@@ -10,7 +10,7 @@ public static class PaymentUIHelper
 {
     public static async void ExternalPayment(string invoice,PayReq payreq,UnityAction onSuccess = null,UnityAction onFailure = null)
     {
-        string text = "payment for " + payreq.NumSatoshis + Utility.tintedSatsSymbol;
+        string text =  String.Format(GameText.ExternalPaymentPopup,payreq.NumSatoshis + Utility.tintedSatsSymbol);
         Sprite qrCode = Utility.GetInvertedQRCode(invoice);
 
 
@@ -32,7 +32,7 @@ public static class PaymentUIHelper
             if (popup == null)return;
             else popup.Close();
 
-            PopUpArgs errArgs = new PopUpArgs("error", "payment has expired");
+            PopUpArgs errArgs = new PopUpArgs("error", GameText.PaymentExpiredPopup);
             PopUpManagerUI.instance.OpenPopUp(errArgs);
 
             return;
@@ -47,14 +47,14 @@ public static class PaymentUIHelper
         }
 
         if (popup != null) popup.Close();
-        PopUpArgs args1 = new PopUpArgs("info", "payment successfull");
+        PopUpArgs args1 = new PopUpArgs("info", GameText.PaymentSuccessPopup);
         PopUpManagerUI.instance.OpenPopUp(args1);
         if(onSuccess != null) onSuccess.Invoke();
     }
 
     public static async void IngamePayment(string invoice, PayReq payreq, UnityAction onSuccess = null, UnityAction onFailure = null)
     {
-        PopUpArgs args = new PopUpArgs("Info", "waiting for payment...");
+        PopUpArgs args = new PopUpArgs("Info", GameText.WaitingForPaymentPopup);
         PopUpUI popup = PopUpManagerUI.instance.OpenPopUp(args);
         try
         {
@@ -71,7 +71,7 @@ public static class PaymentUIHelper
         }
         if(onSuccess != null) onSuccess.Invoke();
         if (popup != null) popup.Close();
-        PopUpArgs args2 = new PopUpArgs("info", "payment successfull");
+        PopUpArgs args2 = new PopUpArgs("info", GameText.PaymentSuccessPopup);
         PopUpManagerUI.instance.OpenPopUp(args2);
     }
 }

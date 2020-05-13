@@ -46,7 +46,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     void OnInvoiceInfoButtonPress()
     {
         //TODO change text
-        PopUpArgs args = new PopUpArgs("pay invoice", "Here some info about invoices! Maybe Kon Has some suggestions for this text.");
+        PopUpArgs args = new PopUpArgs("pay invoice", GameText.PayInvoiceInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 
@@ -68,7 +68,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
             PopUpManagerUI.instance.OpenPopUp(errArgs);
             return;
         }
-        string text = String.Format("paying invoice: \n {0} \n for {1}{2}\n are you sure?", decodedInvoice.Description, decodedInvoice.NumSatoshis.ToString(), Utility.tintedSatsSymbol);
+        string text = String.Format(GameText.PayInvoicePopup, decodedInvoice.Description, decodedInvoice.NumSatoshis.ToString() + Utility.tintedSatsSymbol);
 
         YesNoPopUpArgs args = new YesNoPopUpArgs("pay invoice ", text, OnPayRequest);
         PopUpManagerUI.instance.OpenYesNoPopUp(args);
@@ -117,7 +117,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     void OnDonationInfoButtonPress()
     {
         //TODO change text
-        PopUpArgs args = new PopUpArgs("donation","with the slider, you can adjust, how much of the Donation goes into the game pot and how much the game developers will recieve");
+        PopUpArgs args = new PopUpArgs("donation",GameText.DonationInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
 
