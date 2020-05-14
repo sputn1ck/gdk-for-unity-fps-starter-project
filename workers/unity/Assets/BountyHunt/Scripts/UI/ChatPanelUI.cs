@@ -92,11 +92,12 @@ public class ChatPanelUI : MonoBehaviour
 
     public void SpawnMessage(MessageType type, string sender, string message, bool announce, Color color)
     {
-        SpawnMessage(type, sender, message, color);
 
         Color col;
         if (color == Color.clear) col = GetColorFormLogType(type);
         else col = color;
+
+        SpawnMessage(type, sender, message, col);
 
         if (announce)
         {
@@ -167,6 +168,7 @@ public class ChatPanelUI : MonoBehaviour
         foreach (ChatMessageUI msg in allMessages)
         {
             msg.Activate();
+            msg.DeactivateAfterTime(showMessageTime);
         }
     }
 
