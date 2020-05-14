@@ -121,7 +121,8 @@ namespace Fps.Movement
             {
                 if (controller.RespawnPressed)
                 {
-                    Respawn();
+                    ((RespawnScreenUI)BBHUIManager.instance.inGame.RespawnScreen).Respawn();
+                    //Respawn();
                 }
 
                 return;
