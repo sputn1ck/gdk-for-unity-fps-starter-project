@@ -163,6 +163,17 @@ public class ClientAdManagerBehaviour : MonoBehaviour
                         continue;
                     }
 
+                    Color backgroundColor = Color.white; 
+                    var pixels = tex.GetPixels();
+
+                    for (int i = 0; i < pixels.Length; i++)
+                    {
+                        float a = pixels[i].a;
+                        pixels[i] = Color.Lerp(backgroundColor,pixels[i],a);
+                        pixels[i].a = a;
+                    }
+                    tex.SetPixels(pixels);
+                    tex.Apply();
                     textures.Add(tex);
 
                     break;
