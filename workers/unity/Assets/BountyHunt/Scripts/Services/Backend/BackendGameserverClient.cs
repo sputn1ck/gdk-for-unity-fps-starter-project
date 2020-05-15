@@ -70,7 +70,7 @@ public class BackendGameserverClient : IBackendServerClient
         StartGameServerStream();
         StartBackendListening();
     }
-    public void StartGameServerStream()
+    public async void StartGameServerStream()
     {
         gameServerListenThread = new Thread(async () =>
         {
@@ -82,7 +82,7 @@ public class BackendGameserverClient : IBackendServerClient
         });
         gameServerListenThread.Start();
     }
-    public void StartBackendListening()
+    public async void StartBackendListening()
     {
         backendListenThread = new Thread(async () =>
         {

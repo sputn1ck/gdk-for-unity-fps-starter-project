@@ -122,7 +122,7 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
         {
             LicenceMissingPanel.SetActive(true);
             balanceText.text = "0" + Utility.tintedSatsSymbol;
-            missingValueText.text = res.ChannelMissingBalance + Utility.tintedSatsSymbol;
+            missingValueText.text = (res.ChannelMissingBalance-res.BufferBalance) + Utility.tintedSatsSymbol;
         }
         else
         {
