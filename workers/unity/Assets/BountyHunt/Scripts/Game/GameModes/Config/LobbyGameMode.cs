@@ -14,30 +14,16 @@ public class LobbyGameMode : GameMode
         Debug.Log("start lobby");
         this.GameModeSettings = settings;
         _serverGameModeBehaviour = serverGameModeBehaviour;
-        var res = await ServerServiceConnections.instance.AuctionController.StartAuction((int)this.GameModeSettings.SecondDuration);
         //ServerGameChat.instance.SendAuctionStartedChatMessage("new auction started, check escape menu to participate");
-        ServerEvents.instance.OnAuctionInvoicePaid.AddListener(OnAuctionPaid);
-        ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
+
     }
 
     public override async void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
     {
         Debug.Log("end lobby");
         await Task.Delay(2000);
-        RemoveListeners();
     }
 
-    private void OnAuctionPaid(AuctionInvoice auctionInvoice)
-    {
-        AddCarryOverSats(auctionInvoice.Amount);
-    }
-
-    private void OnDonationPaid(RandomInvoice e)
-    {
-        AddCarryOverSats(e.amount);
-
-        ServerGameChat.instance.SendGlobalMessage("DONATION", e.message, Chat.MessageType.INFO_LOG, e.amount >= 250);
-    }
 
     private void AddCarryOverSats(long sats)
     {
@@ -47,11 +33,6 @@ public class LobbyGameMode : GameMode
         });
     }
 
-    private void RemoveListeners()
-    {
-        ServerEvents.instance.OnAuctionInvoicePaid.RemoveListener(OnAuctionPaid);
-        ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
-    }
 
     public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
     {

@@ -23,7 +23,6 @@ public class ServerServiceConnections : MonoBehaviour
     public string BackendHost;
     public int BackendPort;
     public string PrometheusHost;
-    public IAuctionController AuctionController;
 
 
     public IBackendServerClient BackendGameServerClient;
@@ -63,8 +62,6 @@ public class ServerServiceConnections : MonoBehaviour
             BackendGameServerClient.Setup("", 0, "", "");
             BackendPlayerClient = dummyGO.AddComponent<DummyBackendClientClient>();
             BackendPlayerClient.Setup("", 0, "", "");
-            AuctionController = dummyGO.AddComponent<DummyAuctionController>();
-            AuctionController.Setup();
             Prometheus = new PrometheusManager();
             Prometheus.Setup("");
 
@@ -92,12 +89,6 @@ public class ServerServiceConnections : MonoBehaviour
             }
             BackendPlayerClient.Setup("", 0, "", "");
 
-            AuctionController = DummyServices.GetComponent<DummyAuctionController>();
-            if (AuctionController == null)
-            {
-                AuctionController = DummyServices.AddComponent<DummyAuctionController>();
-            }
-            AuctionController.Setup();
             Prometheus = new PrometheusManager();
             Prometheus.Setup("");
         }
@@ -131,10 +122,6 @@ public class ServerServiceConnections : MonoBehaviour
         BackendPlayerClient = new BackendPlayerClient();
         await BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
 
-        // Auction Controller
-        AuctionController = new AuctionController();
-        AuctionController.Setup();
-
         //Prometheus
         Prometheus = new PrometheusManager();
         Prometheus.Setup(PrometheusHost);
@@ -153,7 +140,6 @@ public class ServerServiceConnections : MonoBehaviour
         lnd.ShutDown();
         BackendGameServerClient.Shutdown();
         BackendPlayerClient.Shutdown();
-        AuctionController.Shutdown();
         Prometheus.Shutdown();
         Debug.Log("server quit cleanly");
     }

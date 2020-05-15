@@ -28,7 +28,6 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public IDonnerDaemonClient DonnerDaemonClient;
 
-    public IAuctionClient AuctionClient;
 
     [HideInInspector] public bool ServicesReady = false;
     void Awake()
@@ -38,7 +37,6 @@ public class PlayerServiceConnections : MonoBehaviour
             var dummyGO = new GameObject("0_PlayerDummies");
             dummyGO.AddComponent<DummyLnd>();
             dummyGO.AddComponent<DummyBackendClientClient>();
-            dummyGO.AddComponent<DummyAuctionClient>();
             dummyGO.AddComponent<DummyDaemonClient>();
             DummyServices = Instantiate(dummyGO, this.transform);
         }
@@ -108,16 +106,6 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             throw new Exception("Checking game version failed: " + e.Message, e);
         }
-        // Auction
-        stringFunc("Connecting to payment server");
-        try
-        {
-            await SetupAuctionClient();
-        }
-        catch (Exception e)
-        {
-            throw new Exception ("Payment connection failed: " + e.Message,e);
-        }
         ServicesReady = true;
         ClientEvents.instance.onServicesSetup.Invoke();
 
@@ -144,24 +132,6 @@ public class PlayerServiceConnections : MonoBehaviour
             BackendPlayerClient = new BackendPlayerClient();
         }
         await BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
-    }
-
-    private async Task SetupAuctionClient()
-    {
-        if (UseDummy)
-        {
-
-            AuctionClient = DummyServices.GetComponent<DummyAuctionClient>();
-            if (AuctionClient == null)
-            {
-                AuctionClient = DummyServices.AddComponent<DummyAuctionClient>();
-            }
-        }
-        else
-        {
-            AuctionClient = new AuctionClient();
-        }
-        await AuctionClient.Setup();
     }
 
     private async Task SetupDonnerDaemon()
@@ -206,7 +176,6 @@ public class PlayerServiceConnections : MonoBehaviour
         DonnerDaemonClient?.Shutdown();
         lnd?.ShutDown();
         BackendPlayerClient?.Shutdown();
-        AuctionClient?.Shutdown();
         Debug.Log("client quit cleanly");
     }
 
