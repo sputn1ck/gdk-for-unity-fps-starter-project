@@ -46,11 +46,19 @@ public class SimpleGameConnector : IGameConnector
     {
         var message = "heyho";
         var sigfunc = PlayerServiceConnections.instance.lnd.SignMessage(message);
-        var webReq = new AwaitRequestText(_connector, this._host + "/spatial/pit/" + message + "/" + sigfunc.Signature);
+        var webReq = new AwaitRequestText(_connector, this._host + "/spatial/pit/" + message + "/" + sigfunc.Signature+"/"+PlayerServiceConnections.instance.GameVersion);
         var webRes = await webReq.GetResult();
         if (webRes.hasError)
         {
             return (false, "", webRes.error);
+        }
+        if (webRes.response == "version mismatch")
+        {
+            return (false, "", "Version Mismatch, please update your Game");
+        }
+        if (webRes.response == "banned")
+        {
+            return (false, "", "You are banned from playing the game, please contact an admin");
         }
         // TODO Get Pit here
         var pit = webRes.response;
