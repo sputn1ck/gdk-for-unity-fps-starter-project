@@ -32,6 +32,8 @@ public class BountyPlayerAuthorative : MonoBehaviour
     }
     void OnEnable()
     {
+        ClientGameObjectManager.Instance.SetAuthorativePlayer(this.gameObject);
+
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
         HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
@@ -45,6 +47,12 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
         ct = new CancellationTokenSource();
         UpdateTotalBalance();
+        
+    }
+
+    void OnDisable()
+    {
+        ClientGameObjectManager.Instance.SetAuthorativePlayer(null);
     }
 
     
