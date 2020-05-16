@@ -47,5 +47,10 @@ namespace Fps
             }
         }
 
+        private void OnDisable()
+        {
+            bountyPickUpReader.OnUpdate -= OnBountyPickupComponentUpdated;
+        }
+
     }
 }

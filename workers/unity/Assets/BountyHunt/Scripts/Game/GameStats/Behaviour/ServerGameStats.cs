@@ -12,19 +12,52 @@ public class ServerGameStats : MonoBehaviour
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
     [Require] HunterComponentCommandSender HunterCommandSender;
+
+    private Dictionary<EntityId, GameObject> PlayerDict;
+    public static ServerGameStats Instance;
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
         GameStatsCommandReceiver.OnUpdateSatsInCubesRequestReceived += GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived;
 
+        PlayerDict = new Dictionary<EntityId, GameObject>();
         ServerEvents.instance.OnBackendKickEvent.AddListener(OnKickEvent);
+        Instance = this;
     }
     private void OnDisable()
     {
         ServerEvents.instance.OnBackendKickEvent.RemoveListener(OnKickEvent);
+        Instance = null;
     }
 
+    public void AttachPlayer(EntityId playerId, GameObject playerGO)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            PlayerDict[playerId] = playerGO;
+        } else
+        {
+            PlayerDict.Add(playerId, playerGO);
+        }
+    }
+
+    public GameObject GetPlayerGameObject(EntityId playerId)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            return PlayerDict[playerId];
+        }
+        return null;
+    }
+
+    public void RemovePlayerGameObject(EntityId playerId)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            PlayerDict.Remove(playerId);
+        }
+    }
     private void  OnKickEvent(KickEvent e)
     {
 

@@ -11,6 +11,7 @@ using System;
 using Fps;
 using Fps.SchemaExtensions;
 using Improbable;
+using Improbable.Gdk.Core.Commands;
 
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountyPlayerServer : MonoBehaviour
@@ -26,6 +27,7 @@ public class BountyPlayerServer : MonoBehaviour
 
     public bool kickTrigger;
 
+    private BountyTracerServerBehaviour bountyTracer;
 
     private LinkedEntityComponent LinkedEntityComponent;
 
@@ -40,8 +42,22 @@ public class BountyPlayerServer : MonoBehaviour
         HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
         HunterCommandReceiver.OnKickPlayerRequestReceived += OnKickPlayer;
         Invoke("SetName", 1f);
+
         //StartCoroutine(BountyTick());
+        ServerGameStats.Instance.AttachPlayer(LinkedEntityComponent.EntityId, this.gameObject);
+        SpawnTracer();
     }
+    private void OnDisable()
+    {
+        StopCoroutine(hearbeatCoroutine());
+        ServerGameStats.Instance.RemovePlayerGameObject(LinkedEntityComponent.EntityId);
+    }
+    private void SpawnTracer()
+    {
+        var bountyTracer = DonnerEntityTemplates.BountyTracer(this.transform.position, this.LinkedEntityComponent.EntityId.Id);
+        wcs.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountyTracer));
+    }
+
 
     private void OnKickPlayer(HunterComponent.KickPlayer.ReceivedRequest obj)
     {
@@ -190,10 +206,7 @@ public class BountyPlayerServer : MonoBehaviour
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + obj.Payload.Amount });
     }
 
-    private void OnDisable()
-    {
-        StopCoroutine(hearbeatCoroutine());
-    }
+   
 
     public void KickPlayer()
     {
