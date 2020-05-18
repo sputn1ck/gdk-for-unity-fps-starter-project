@@ -23,7 +23,7 @@ public class CompassUI : MonoBehaviour
     Camera cam;
     Vector2 camDirection;
 
-    List<TrackObject> _objectsToTrack = new List<TrackObject>();
+    Dictionary<GameObject,TrackObject> _objectsToTrack = new Dictionary<GameObject, TrackObject>();
     List<TrackObject> _trackObjectPool = new List<TrackObject>();
     List<CardinalPoint> _cardinalPoints = new List<CardinalPoint>();
 
@@ -54,6 +54,8 @@ public class CompassUI : MonoBehaviour
 
     private void Update()
     {
+        cam = Camera.main;
+
         camDirection = new Vector2(cam.transform.forward.x, cam.transform.forward.z);
 
         foreach(CardinalPoint cp in _cardinalPoints)
@@ -61,6 +63,50 @@ public class CompassUI : MonoBehaviour
             UpdateCardinalPoint(cp);
         }
 
+        Dictionary<GameObject, TrackObject> tempDict = new Dictionary<GameObject, TrackObject>(_objectsToTrack);
+        foreach (var t in ClientGameObjectManager.Instance.BountyTracers)
+        {
+            if (tempDict.ContainsKey(t.Value))
+            {
+                UpdateTrackObject(tempDict[t.Value]);
+                tempDict.Remove(t.Value);
+            }
+            else
+            {
+                var tO = AddNewTrackObject(t.Value);
+                UpdateTrackObject(tO);
+            }
+
+        }
+        foreach(var trob in tempDict)
+        {
+            RemoveTrackObject(trob);
+        }
+    }
+
+    void RemoveTrackObject(KeyValuePair<GameObject,TrackObject> trob)
+    {
+        trob.Value.marker.gameObject.SetActive(false);
+        _trackObjectPool.Add(trob.Value);
+        _objectsToTrack.Remove(trob.Key);
+    }
+
+    TrackObject AddNewTrackObject(GameObject obj)
+    {
+        TrackObject trackObj;
+        if (_trackObjectPool.Count > 0)
+        {
+            trackObj = _trackObjectPool[0];
+            _trackObjectPool.RemoveAt(0);
+        }
+        else
+        {
+            var marker = Instantiate(MarkerPrefab, MarkerContainer);
+            trackObj = new TrackObject { marker = marker.GetComponent<RectTransform>(), gameObject = obj };
+        }
+        trackObj.marker.gameObject.SetActive(true);
+        _objectsToTrack[obj] = trackObj;
+        return trackObj;
     }
 
     void UpdateTrackObject(TrackObject trackObject)
@@ -88,11 +134,10 @@ public class CompassUI : MonoBehaviour
         t.anchorMin = new Vector2(pos, 0.5f);
         t.anchorMax = t.anchorMin;
         t.localScale = Vector3.one * size;
-
     }
 
 
-    struct TrackObject
+    class TrackObject
     {
         public GameObject gameObject;
         public RectTransform marker;
