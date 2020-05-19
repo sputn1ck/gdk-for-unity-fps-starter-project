@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -7981115213208184163}
   - component: {fileID: -5714114463533236348}
   - component: {fileID: -4285135601225101584}
+  - component: {fileID: 5457489843231901760}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3047cb131062145b8338c1d55acf8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kickTrigger: 0
 --- !u!114 &-5714114463533236348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +157,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsValid: 0
+--- !u!114 &5457489843231901760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777598867489458}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b593e112ffd53e4eb0ebad61fc0b8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modifyHealthTrigger: 0
+  modifyHealthAmount: 0
+  modifyBountyTrigger: 0
+  modifiyBounty: 0

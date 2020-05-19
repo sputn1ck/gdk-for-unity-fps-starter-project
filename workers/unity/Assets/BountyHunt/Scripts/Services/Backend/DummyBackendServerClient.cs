@@ -10,7 +10,10 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     public int bbhDuration = 30;
     public int lobbyDuration = 10;
-
+    public long subsidy = 10000;
+    public double bountyDropOnDeath = 1.0;
+    public double bountyConversion = 0.1;
+    public float bountyConversionTimeSeconds = 10;
     public string[] PlayerSkins;
 
     public bool invokeKick;
@@ -96,12 +99,12 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
         return new GetRoundInfoResponse()
         {
-            Subsidy = 100,
+            Subsidy = subsidy,
             Settings = new GameModeSettings
             {
                 SecondDuration = req.GameMode == Bbhrpc.GameMode.Bountyhunt ? bbhDuration: lobbyDuration,
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
-                BountySettings = new BountySettings { BountyDropPercentageDeath = 1, BountyTickConversion = 0.05, BountyTickTimeSeconds = 5},
+                BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds},
                 SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 40, MinSpawnsPerSpawn = 10, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 10},
             },
             
