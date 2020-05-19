@@ -57,7 +57,7 @@ public class BountyConversionSystem : ComponentSystem
             (ref SpatialEntityId entityId,
             ref HunterComponent.Component hunterComponent, ref GunComponent.Component gun, ref TickComponent tickComponent, ref HealthComponent.Component healthComponent) =>
             {
-                if (hunterComponent.Bounty != 0 && healthComponent.Health != 0)
+                if (hunterComponent.Bounty != 0)
                 {
                     var tick = calculateTick(hunterComponent.Bounty, tickComponent.TickAmount);
                     Debug.Log("ticking with " + tick + " from component: " + tickComponent.TickAmount);
