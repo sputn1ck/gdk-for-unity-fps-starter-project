@@ -203,10 +203,16 @@ public class BountyPlayerServer : MonoBehaviour
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
             return;
-        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + obj.Payload.Amount });
+        IncreaseBounty(obj.Payload.Amount);
     }
-
-   
+    public void IncreaseBounty(long amount)
+    {
+        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + amount });
+    }
+    private void OnDisable()
+    {
+        StopCoroutine(hearbeatCoroutine());
+    }
 
     public void KickPlayer()
     {

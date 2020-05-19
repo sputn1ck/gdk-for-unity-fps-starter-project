@@ -17,7 +17,6 @@ public class BountyHuntGameMode : GameMode
     public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
 
-        Debug.Log("start bbh");
         // TODO get gamemode from backend
         this.GameModeSettings = settings;
 
