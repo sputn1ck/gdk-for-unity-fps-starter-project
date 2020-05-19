@@ -308,6 +308,8 @@ namespace Bbhrpc {
     static readonly grpc::Marshaller<global::Bbhrpc.AddBountyResponse> __Marshaller_bbhrpc_AddBountyResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.AddBountyResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.ListOnlineRequest> __Marshaller_bbhrpc_ListOnlineRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.ListOnlineRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.ListOnlineResponse> __Marshaller_bbhrpc_ListOnlineResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.ListOnlineResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetOnlineUserRequest> __Marshaller_bbhrpc_GetOnlineUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetOnlineUserRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetOnlineUserResponse> __Marshaller_bbhrpc_GetOnlineUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetOnlineUserResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoRequest> __Marshaller_bbhrpc_GetInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetInfoResponse> __Marshaller_bbhrpc_GetInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetInfoResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.SubscribeInvoiceStreamRequest> __Marshaller_bbhrpc_SubscribeInvoiceStreamRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SubscribeInvoiceStreamRequest.Parser.ParseFrom);
@@ -349,6 +351,13 @@ namespace Bbhrpc {
         "ListOnline",
         __Marshaller_bbhrpc_ListOnlineRequest,
         __Marshaller_bbhrpc_ListOnlineResponse);
+
+    static readonly grpc::Method<global::Bbhrpc.GetOnlineUserRequest, global::Bbhrpc.GetOnlineUserResponse> __Method_GetOnlineUser = new grpc::Method<global::Bbhrpc.GetOnlineUserRequest, global::Bbhrpc.GetOnlineUserResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetOnlineUser",
+        __Marshaller_bbhrpc_GetOnlineUserRequest,
+        __Marshaller_bbhrpc_GetOnlineUserResponse);
 
     static readonly grpc::Method<global::Bbhrpc.GetInfoRequest, global::Bbhrpc.GetInfoResponse> __Method_GetInfo = new grpc::Method<global::Bbhrpc.GetInfoRequest, global::Bbhrpc.GetInfoResponse>(
         grpc::MethodType.Unary,
@@ -402,6 +411,11 @@ namespace Bbhrpc {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.ListOnlineResponse> ListOnline(global::Bbhrpc.ListOnlineRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetOnlineUserResponse> GetOnlineUser(global::Bbhrpc.GetOnlineUserRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -526,6 +540,22 @@ namespace Bbhrpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_ListOnline, null, options, request);
       }
+      public virtual global::Bbhrpc.GetOnlineUserResponse GetOnlineUser(global::Bbhrpc.GetOnlineUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetOnlineUser(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.GetOnlineUserResponse GetOnlineUser(global::Bbhrpc.GetOnlineUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetOnlineUser, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetOnlineUserResponse> GetOnlineUserAsync(global::Bbhrpc.GetOnlineUserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetOnlineUserAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetOnlineUserResponse> GetOnlineUserAsync(global::Bbhrpc.GetOnlineUserRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetOnlineUser, null, options, request);
+      }
       public virtual global::Bbhrpc.GetInfoResponse GetInfo(global::Bbhrpc.GetInfoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetInfo(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -583,6 +613,7 @@ namespace Bbhrpc {
           .AddMethod(__Method_ListRankings, serviceImpl.ListRankings)
           .AddMethod(__Method_AddBounty, serviceImpl.AddBounty)
           .AddMethod(__Method_ListOnline, serviceImpl.ListOnline)
+          .AddMethod(__Method_GetOnlineUser, serviceImpl.GetOnlineUser)
           .AddMethod(__Method_GetInfo, serviceImpl.GetInfo)
           .AddMethod(__Method_SubscribeInvoiceStream, serviceImpl.SubscribeInvoiceStream)
           .AddMethod(__Method_GetDonationInvoice, serviceImpl.GetDonationInvoice).Build();
@@ -599,6 +630,7 @@ namespace Bbhrpc {
       serviceBinder.AddMethod(__Method_ListRankings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.ListRankingsRequest, global::Bbhrpc.ListRankingsResponse>(serviceImpl.ListRankings));
       serviceBinder.AddMethod(__Method_AddBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.AddBountyRequest, global::Bbhrpc.AddBountyResponse>(serviceImpl.AddBounty));
       serviceBinder.AddMethod(__Method_ListOnline, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.ListOnlineRequest, global::Bbhrpc.ListOnlineResponse>(serviceImpl.ListOnline));
+      serviceBinder.AddMethod(__Method_GetOnlineUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetOnlineUserRequest, global::Bbhrpc.GetOnlineUserResponse>(serviceImpl.GetOnlineUser));
       serviceBinder.AddMethod(__Method_GetInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetInfoRequest, global::Bbhrpc.GetInfoResponse>(serviceImpl.GetInfo));
       serviceBinder.AddMethod(__Method_SubscribeInvoiceStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Bbhrpc.SubscribeInvoiceStreamRequest, global::Bbhrpc.SubscribeInvioceStreamResponse>(serviceImpl.SubscribeInvoiceStream));
       serviceBinder.AddMethod(__Method_GetDonationInvoice, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetDonationInvoiceRequest, global::Bbhrpc.GetDonationInvoiceResponse>(serviceImpl.GetDonationInvoice));

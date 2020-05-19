@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "BountyKingGameMode", menuName = "BBH/GameModes/BountyKing", order = 3)]
-public class BountyKingGameMode : GameMode
+[CreateAssetMenu(fileName = "BountyBossGameMode", menuName = "BBH/GameModes/BountyBoss", order = 3)]
+public class BountyBossGameMode : GameMode
 {
 
     private ServerGameModeBehaviour _serverGameModeBehaviour;

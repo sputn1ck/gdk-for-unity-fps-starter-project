@@ -10,8 +10,8 @@ using Bountyhunt;
 using Fps.Respawning;
 using Bbhrpc;
 
-[CreateAssetMenu(fileName = "BountyHuntGameMode", menuName = "BBH/GameModes/BountyHunt", order = 2)]
-public class BountyHuntGameMode : GameMode
+[CreateAssetMenu(fileName = "SatsStackerGameMode", menuName = "BBH/GameModes/SatsStacker", order = 2)]
+public class SatsStackerGameMode : GameMode
 {
     private ServerGameModeBehaviour _serverGameModeBehaviour;
     public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)

@@ -39,7 +39,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
         currentGameMode = gameMode;
 
 
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { GameMode = (Bbhrpc.GameMode)gameModeRotationCounter,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { GameModeId = currentGameMode.GameModeId,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
         if (roundInfo.Advertisers != null) {
             SendAdvertisers(roundInfo.Advertisers);
         }

@@ -8,8 +8,9 @@ using UnityEngine;
 public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 {
 
-    public int bbhDuration = 30;
+    public int ssDuration = 30;
     public int lobbyDuration = 10;
+    public int bbDuration = 30;
     public long subsidy = 10000;
     public double bountyDropOnDeath = 1.0;
     public double bountyConversion = 0.1;
@@ -111,7 +112,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
             Subsidy = subsidy,
             Settings = new GameModeSettings
             {
-                SecondDuration = req.GameMode == Bbhrpc.GameMode.Bountyhunt ? bbhDuration : lobbyDuration,
+                SecondDuration = GetGameModeDuration(req.GameModeId),
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
                 BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
                 SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 0, MinSpawnsPerSpawn = 0, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
@@ -121,7 +122,18 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         roundinfo.Advertisers.Add(advertisers);
         return roundinfo;
     }
-
+    public int GetGameModeDuration(string gameModeId)
+    {
+        switch (gameModeId) {
+            case "satsstacker":
+                return ssDuration;
+            case "bountyboss":
+                return bbDuration;
+            case "lobby":
+                return lobbyDuration;
+        }
+        return lobbyDuration;
+    }
     public Task<string> GetUserSkin(string pubkey)
     {
         if (PlayerSkins.Length == 0)
