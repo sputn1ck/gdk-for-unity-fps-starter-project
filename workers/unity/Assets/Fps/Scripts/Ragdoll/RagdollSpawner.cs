@@ -1,12 +1,14 @@
-﻿using Fps.ObjectPooling;
+using Fps.ObjectPooling;
 using Improbable.Gdk.Subscriptions;
 using UnityEngine;
+using Bountyhunt;
 
 namespace Fps.Ragdoll
 {
     public class RagdollSpawner : MonoBehaviour
     {
         [Require] private HealthComponentReader health;
+        [Require] private HunterComponentReader hunter;
 
         [SerializeField] private GameObject ragdollPrefab;
         [SerializeField] private Transform transformToMatch;
@@ -46,6 +48,7 @@ namespace Fps.Ragdoll
             OnRagdollSpawned?.Invoke(ragdoll.gameObject);
 
             ragdoll.LaunchRagdoll(deathDetails);
+            ragdoll.GetComponent<SkinChanger>().UpdateSkin(hunter.Data.EquippedSkin);
         }
 
         private void OnValidate()
