@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    public static MainMenuUI instance;
     public PreviewSpot previewSpot;
     public Button playButton;
     public GameObject connectingInfoObject;
     public TextMeshProUGUI versionText;
+    public GameObject uiCam;
+    public GameObject blendImage;
+        
 
     private void Awake()
     {
+        instance = this;
         playButton.onClick.AddListener(OnPlayButtonPress);
     }
 
@@ -76,5 +82,11 @@ public class MainMenuUI : MonoBehaviour
         }
 
         versionText.text = version;
+    }
+
+    public void BlendImage(bool show)
+    {
+        uiCam.GetComponent<PostProcessVolume>().enabled = !show;
+        blendImage.SetActive(show);
     }
 }

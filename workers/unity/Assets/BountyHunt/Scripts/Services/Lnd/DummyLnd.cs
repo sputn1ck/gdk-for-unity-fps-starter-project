@@ -48,7 +48,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
 
     public Task<string> GetInvoice(long amount, string description, long expiry)
     {
-        var payreq = "invoice" + UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        var payreq = "lnbc100u1p0vgq0rpp5mrepqm283pf4zufr4mx8lw9td89vz8jggkrmd9ntrsdnqgkppqdqdgavf6hjgzndehhwgzndakxg6t9wgakjvrpxserxvpnxvenwd33xcervvenxcengve5xv6nxdfkxcmr2ve5xvurxd3nxqmr2ve4xccnvd3nxvenjvesxvmnxwfnxcmrvd3nxcerxwpkxgenzd33xv6nxwfnxgenjve4xc6rvvfkx5enjve3xvenxwpn8ymrxvecxvurvdpnxcmrxve4xvcrxvenx5enqd3kxvenvd3nxvmrxd3jxvmrxwf3xgcrwdejxenrvv3kvcmngdtxxvmrzwr98qcrwcqzpgxqzfvsp5ht29kfy0fe52perqetsx37a2c2zu8vnzaqmcpkpm0ajh9zjhjg2s9qy9qsqxxhk0rcn856azlr3c9l4mgy6y74crgw80guplzf58dqqgszf66ur9gnghmwd3wdaqv5sg887cn05ehxzty2g5572fdlv0vg6grtn2wcqnaj572";
         invoices.Add(payreq, new Invoice { Memo = description, Value = amount, PaymentRequest = payreq, Expiry = expiry, CreationDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds() });
         return Task.FromResult(payreq);
     }
