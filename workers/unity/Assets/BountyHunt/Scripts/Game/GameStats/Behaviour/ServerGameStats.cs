@@ -15,20 +15,25 @@ public class ServerGameStats : MonoBehaviour
 
     private Dictionary<EntityId, GameObject> PlayerDict;
     public static ServerGameStats Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        PlayerDict = new Dictionary<EntityId, GameObject>();
+
+    }
+
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
         GameStatsCommandReceiver.OnRemoveNameRequestReceived += OnRemoveNameRequestReceived;
         GameStatsCommandReceiver.OnUpdateSatsInCubesRequestReceived += GameStatsCommandReceiver_OnUpdateSatsInCubesRequestReceived;
 
-        PlayerDict = new Dictionary<EntityId, GameObject>();
         ServerEvents.instance.OnBackendKickEvent.AddListener(OnKickEvent);
-        Instance = this;
     }
     private void OnDisable()
     {
         ServerEvents.instance.OnBackendKickEvent.RemoveListener(OnKickEvent);
-        Instance = null;
     }
 
     public void AttachPlayer(EntityId playerId, GameObject playerGO)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Fps.Movement;
 
 public class CompassUI : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CompassUI : MonoBehaviour
     float delataScaleDist;
 
     float minScale = 0.3f;
+    float maxScale = 1f;
 
 
     Camera cam;
@@ -29,7 +31,7 @@ public class CompassUI : MonoBehaviour
 
     private void Awake()
     {
-        cam = Camera.main;
+        ClientEvents.instance.onPlayerSpawn.AddListener((GameObject o) => cam = FpsDriver.instance.camera) ;
         delataScaleDist = maxScaleDist - minScaleDist;
         halfViewAngle = ViewAngle / 2;
     }
@@ -54,7 +56,8 @@ public class CompassUI : MonoBehaviour
 
     private void Update()
     {
-        cam = Camera.main;
+        //cam = FpsDriver.instance.camera;
+        if (cam == null) return;
 
         camDirection = new Vector2(cam.transform.forward.x, cam.transform.forward.z);
 
@@ -66,7 +69,17 @@ public class CompassUI : MonoBehaviour
         Dictionary<GameObject, TrackObject> tempDict = new Dictionary<GameObject, TrackObject>(_objectsToTrack);
         foreach (var t in ClientGameObjectManager.Instance.BountyTracers)
         {
-            if (tempDict.ContainsKey(t.Value))
+            Utility.Log("object " + (t.Value != null).ToString(), Color.blue);
+        }
+        foreach (var t in ClientGameObjectManager.Instance.BountyTracers)
+        {
+
+            if (t.Value == null)
+            {
+                continue;
+            }
+
+            else if (tempDict.ContainsKey(t.Value))
             {
                 UpdateTrackObject(tempDict[t.Value]);
                 tempDict.Remove(t.Value);
@@ -111,9 +124,20 @@ public class CompassUI : MonoBehaviour
 
     void UpdateTrackObject(TrackObject trackObject)
     {
+        Utility.Log("object " + (trackObject.gameObject != null).ToString(), Color.cyan);
+
+
+        Utility.Log((trackObject.gameObject != null).ToString(),Color.cyan) ;
+
         Vector3 objDir3 = trackObject.gameObject.transform.position - cam.transform.position;
         Vector2 objDir2 = new Vector2(objDir3.x, objDir3.z);
+
+        Utility.Log(objDir3.ToString(), Color.yellow);
+        Utility.Log(objDir2.ToString(), Color.yellow);
+
         float angle = Vector2.SignedAngle(objDir2, camDirection);
+        Utility.Log(angle.ToString(), Color.green);
+
         UpdateMarker(trackObject.marker,objDir2.magnitude,angle);
     }
 
@@ -125,11 +149,21 @@ public class CompassUI : MonoBehaviour
 
     void UpdateMarker(RectTransform t, float distance, float angle)
     {
+        Utility.Log(ViewAngle.ToString(), Color.magenta);
+        Utility.Log(halfViewAngle.ToString(), Color.magenta);
+
         float pos = (angle + halfViewAngle)/ViewAngle;
+        Utility.Log(pos.ToString(), Color.red);
+
         pos = Mathf.Clamp01(pos);
-        pos = Mathf.SmoothStep(pos, 0, 1);
+        Utility.Log(pos.ToString(), Color.red);
+
+        pos = Mathf.SmoothStep(0, 1, pos);
+        Utility.Log(pos.ToString(), Color.red);
+
+
         float size = Mathf.Clamp01((distance - minScaleDist) / delataScaleDist);
-        size = Mathf.Lerp(minScale, 1, size);
+        size = Mathf.Lerp(minScale, maxScale, 1-size);
 
         t.anchorMin = new Vector2(pos, 0.5f);
         t.anchorMax = t.anchorMin;
