@@ -12,8 +12,6 @@ public class CompassUI : MonoBehaviour
     public Transform MarkerContainer;
     public Image MarkerPrefab;
     public TextMeshProUGUI CardinalPointPrefab;
-    public Sprite HunterMarkerSprite;
-    public Sprite LootMarkerSprite;
     public int ViewAngle;
     int halfViewAngle;
     public float minScaleDist;
