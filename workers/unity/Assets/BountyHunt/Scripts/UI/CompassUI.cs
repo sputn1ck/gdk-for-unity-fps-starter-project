@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fps.Movement;
+using System.Linq;
+using Improbable.Gdk.Core;
 
 public class CompassUI : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class CompassUI : MonoBehaviour
     int halfViewAngle;
     public float minScaleDist;
     public float maxScaleDist;
+    public int playersToTrack;
+    public BountyPickUpMaterialSettings materialSettings;
+
     float delataScaleDist;
 
     float minScale = 0.3f;
@@ -25,7 +30,7 @@ public class CompassUI : MonoBehaviour
     Camera cam;
     Vector2 camDirection;
 
-    Dictionary<GameObject,TrackObject> _objectsToTrack = new Dictionary<GameObject, TrackObject>();
+    Dictionary<EntityId,TrackObject> _objectsToTrack = new Dictionary<EntityId, TrackObject>();
     List<TrackObject> _trackObjectPool = new List<TrackObject>();
     List<CardinalPoint> _cardinalPoints = new List<CardinalPoint>();
 
@@ -52,6 +57,8 @@ public class CompassUI : MonoBehaviour
         _cardinalPoints.Add(new CardinalPoint {marker = s.transform as RectTransform, direction = Vector2.down });
         _cardinalPoints.Add(new CardinalPoint {marker = e.transform as RectTransform, direction = Vector2.right });
         _cardinalPoints.Add(new CardinalPoint {marker = w.transform as RectTransform, direction = Vector2.left });
+
+        ClientEvents.instance.onScoreboardUpdate.AddListener(OnScoreBoardUpdate);
     }
 
     private void Update()
@@ -66,45 +73,59 @@ public class CompassUI : MonoBehaviour
             UpdateCardinalPoint(cp);
         }
 
-        Dictionary<GameObject, TrackObject> tempDict = new Dictionary<GameObject, TrackObject>(_objectsToTrack);
-        foreach (var t in ClientGameObjectManager.Instance.BountyTracers)
+        
+        foreach(var trob in _objectsToTrack)
         {
-            Utility.Log("object " + (t.Value != null).ToString(), Color.blue);
+            UpdateTrackObject(trob.Value);
         }
-        foreach (var t in ClientGameObjectManager.Instance.BountyTracers)
-        {
+    }
 
-            if (t.Value == null)
+    void OnScoreBoardUpdate(List<ScoreboardUIItem> items,EntityId playerId)
+    {
+        Dictionary<EntityId, TrackObject> tempDict = new Dictionary<EntityId, TrackObject>(_objectsToTrack);
+
+        items = items.OrderByDescending(i => i.item.Earnings).ToList();
+        for(int i = 0; i<items.Count&& i < playersToTrack;i++)
+        {
+            EntityId id = new EntityId(items[i].item.Entity.Id);
+
+            if (!ClientGameObjectManager.Instance.BountyTracers.ContainsKey(id)||id==playerId||items[i].item.Earnings<1) continue;
+
+            GameObject tracer = ClientGameObjectManager.Instance.BountyTracers[id];
+
+            if (tracer == null)
             {
                 continue;
             }
 
-            else if (tempDict.ContainsKey(t.Value))
+            else if (tempDict.ContainsKey(id))
             {
-                UpdateTrackObject(tempDict[t.Value]);
-                tempDict.Remove(t.Value);
+                tempDict[id].marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Earnings);
+                UpdateTrackObject(tempDict[id]);
+                tempDict.Remove(id);
             }
             else
             {
-                var tO = AddNewTrackObject(t.Value);
+
+                var tO = AddNewTrackObject(id);
+                tO.marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Earnings);
                 UpdateTrackObject(tO);
             }
-
         }
-        foreach(var trob in tempDict)
+        foreach (var trob in tempDict)
         {
             RemoveTrackObject(trob);
         }
     }
 
-    void RemoveTrackObject(KeyValuePair<GameObject,TrackObject> trob)
+    void RemoveTrackObject(KeyValuePair<EntityId,TrackObject> trob)
     {
         trob.Value.marker.gameObject.SetActive(false);
         _trackObjectPool.Add(trob.Value);
         _objectsToTrack.Remove(trob.Key);
     }
 
-    TrackObject AddNewTrackObject(GameObject obj)
+    TrackObject AddNewTrackObject(EntityId id)
     {
         TrackObject trackObj;
         if (_trackObjectPool.Count > 0)
@@ -115,10 +136,11 @@ public class CompassUI : MonoBehaviour
         else
         {
             var marker = Instantiate(MarkerPrefab, MarkerContainer);
-            trackObj = new TrackObject { marker = marker.GetComponent<RectTransform>(), gameObject = obj };
+            trackObj = new TrackObject { marker = marker.GetComponent<RectTransform>()};
         }
         trackObj.marker.gameObject.SetActive(true);
-        _objectsToTrack[obj] = trackObj;
+        trackObj.gameObject = ClientGameObjectManager.Instance.GetBountyTracer(id);
+        _objectsToTrack[id] = trackObj;
         return trackObj;
     }
 
