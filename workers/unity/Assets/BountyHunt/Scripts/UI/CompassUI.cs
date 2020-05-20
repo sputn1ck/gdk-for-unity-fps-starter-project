@@ -83,13 +83,13 @@ public class CompassUI : MonoBehaviour
     void OnScoreBoardUpdate(List<ScoreboardUIItem> items,EntityId playerId)
     {
         Dictionary<EntityId, TrackObject> tempDict = new Dictionary<EntityId, TrackObject>(_objectsToTrack);
-
-        items = items.OrderByDescending(i => i.item.Earnings).ToList();
+        
+        items = items.OrderByDescending(i => i.item.Bounty).ToList();
         for(int i = 0; i<items.Count&& i < playersToTrack;i++)
         {
             EntityId id = new EntityId(items[i].item.Entity.Id);
 
-            if (!ClientGameObjectManager.Instance.BountyTracers.ContainsKey(id)||id==playerId||items[i].item.Earnings<1) continue;
+            if (!ClientGameObjectManager.Instance.BountyTracers.ContainsKey(id)||id==playerId||items[i].item.Bounty<1) continue;
 
             GameObject tracer = ClientGameObjectManager.Instance.BountyTracers[id];
 
@@ -100,7 +100,7 @@ public class CompassUI : MonoBehaviour
 
             else if (tempDict.ContainsKey(id))
             {
-                tempDict[id].marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Earnings);
+                tempDict[id].marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Bounty);
                 UpdateTrackObject(tempDict[id]);
                 tempDict.Remove(id);
             }
@@ -108,7 +108,7 @@ public class CompassUI : MonoBehaviour
             {
 
                 var tO = AddNewTrackObject(id);
-                tO.marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Earnings);
+                tO.marker.GetComponent<Image>().color = materialSettings.getColorByValue(items[i].item.Bounty);
                 UpdateTrackObject(tO);
             }
         }
@@ -146,19 +146,11 @@ public class CompassUI : MonoBehaviour
 
     void UpdateTrackObject(TrackObject trackObject)
     {
-        Utility.Log("object " + (trackObject.gameObject != null).ToString(), Color.cyan);
-
-
-        Utility.Log((trackObject.gameObject != null).ToString(),Color.cyan) ;
 
         Vector3 objDir3 = trackObject.gameObject.transform.position - cam.transform.position;
         Vector2 objDir2 = new Vector2(objDir3.x, objDir3.z);
 
-        Utility.Log(objDir3.ToString(), Color.yellow);
-        Utility.Log(objDir2.ToString(), Color.yellow);
-
         float angle = Vector2.SignedAngle(objDir2, camDirection);
-        Utility.Log(angle.ToString(), Color.green);
 
         UpdateMarker(trackObject.marker,objDir2.magnitude,angle);
     }
@@ -171,17 +163,11 @@ public class CompassUI : MonoBehaviour
 
     void UpdateMarker(RectTransform t, float distance, float angle)
     {
-        Utility.Log(ViewAngle.ToString(), Color.magenta);
-        Utility.Log(halfViewAngle.ToString(), Color.magenta);
-
         float pos = (angle + halfViewAngle)/ViewAngle;
-        Utility.Log(pos.ToString(), Color.red);
 
         pos = Mathf.Clamp01(pos);
-        Utility.Log(pos.ToString(), Color.red);
 
         pos = Mathf.SmoothStep(0, 1, pos);
-        Utility.Log(pos.ToString(), Color.red);
 
 
         float size = Mathf.Clamp01((distance - minScaleDist) / delataScaleDist);
