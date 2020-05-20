@@ -13,19 +13,18 @@ public class BountyTracerServerBehaviour : MonoBehaviour
     [Require] TracerComponentWriter tracerWriter;
     [Require] private EntityId entityId;
     [Require] private WorldCommandSender worldCommandSender;
-
+    LinkedEntityComponent LinkedEntityComponent;
     private GameObject playerObj;
     public void OnEnable()
     {
-        playerObj = ServerGameStats.Instance.GetPlayerGameObject(new EntityId(tracerWriter.Data.AttachedHunter));
+        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         StartCoroutine(MoveBountyTracerEnumerator());          
     }
     public void UpdatePosition(Vector3 newPos)
     {
-
         var spatialPositionUpdate = new Position.Update
         {
-            Coords = Coordinates.FromUnityVector(newPos)
+            Coords = Coordinates.FromUnityVector(newPos - LinkedEntityComponent.Worker.Origin)
         };
         positionWriter.SendUpdate(spatialPositionUpdate);
         transform.position = newPos;
@@ -35,7 +34,8 @@ public class BountyTracerServerBehaviour : MonoBehaviour
     {
         while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
-            if(playerObj != null)
+            playerObj = ServerGameStats.Instance.GetPlayerGameObject(new EntityId(tracerWriter.Data.AttachedHunter));
+            if (playerObj != null)
             {
                 UpdatePosition(playerObj.transform.position);
             } else
@@ -44,7 +44,7 @@ public class BountyTracerServerBehaviour : MonoBehaviour
                 worldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(this.entityId));
                 Destroy(this.gameObject);
             }
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
         }
     }
 }
