@@ -193,7 +193,7 @@ public static class Utility
     public static Sprite GetInvertedQRCode(string text)
     {
         QRCodeGenerator qrGenerator = new QRCodeGenerator();
-        QRCodeData qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+        QRCodeData qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.M);
         UnityQRCode qrCode = new UnityQRCode(qrCodeData);
         Texture2D tex = qrCode.GetGraphic(1);
         Color[] pixels = tex.GetPixels();

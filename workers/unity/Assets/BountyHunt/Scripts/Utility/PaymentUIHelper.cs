@@ -10,13 +10,17 @@ public static class PaymentUIHelper
 {
     public static async void ExternalPayment(string invoice,PayReq payreq,UnityAction onSuccess = null,UnityAction onFailure = null)
     {
+        BBHUIManager.instance.mainMenu.BlendImage(true);
         string text =  String.Format(GameText.ExternalPaymentPopup,payreq.NumSatoshis + Utility.tintedSatsSymbol);
         Sprite qrCode = Utility.GetInvertedQRCode(invoice);
 
 
         PopUpButtonArgs copyAction = new PopUpButtonArgs("copy invoice", () => Utility.CopyToClipboard(invoice), false);
         var closeToken = new CancellationTokenSource();
-        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", text, qrCode, "", new List<PopUpButtonArgs> { copyAction }, true, true, closeAction: () => closeToken.Cancel());
+        ImagePopUpArgs args = new ImagePopUpArgs("Lightning Payment", text, qrCode, "", new List<PopUpButtonArgs> { copyAction }, true, true, closeAction: () => {
+            BBHUIManager.instance.mainMenu.BlendImage(false);
+            closeToken.Cancel();
+        });
         PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
 
         
@@ -28,7 +32,6 @@ public static class PaymentUIHelper
         {
             if (onFailure != null) onFailure.Invoke();
             Debug.Log(e.Message);
-
             if (popup == null)return;
             else popup.Close();
 
@@ -40,18 +43,25 @@ public static class PaymentUIHelper
         catch (Exception e)
         {
             if(onFailure != null) onFailure.Invoke();
+
             if (popup != null) popup.Close();
             PopUpArgs errArgs = new PopUpArgs("error", e.Message);
             PopUpManagerUI.instance.OpenPopUp(errArgs);
             return;
+        } finally
+        {
+            BBHUIManager.instance.mainMenu.BlendImage(false);
         }
 
         if (popup != null) popup.Close();
+
         PopUpArgs args1 = new PopUpArgs("info", GameText.PaymentSuccessPopup);
         PopUpManagerUI.instance.OpenPopUp(args1);
         if(onSuccess != null) onSuccess.Invoke();
-    }
 
+        BBHUIManager.instance.mainMenu.BlendImage(false);
+    }
+    
     public static async void IngamePayment(string invoice, PayReq payreq, UnityAction onSuccess = null, UnityAction onFailure = null)
     {
         PopUpArgs args = new PopUpArgs("Info", GameText.WaitingForPaymentPopup);
