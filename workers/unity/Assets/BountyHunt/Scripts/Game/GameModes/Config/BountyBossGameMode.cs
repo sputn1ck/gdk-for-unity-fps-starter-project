@@ -29,7 +29,7 @@ public class BountyBossGameMode : GameMode
         // Get Random Player
         // TODO use server game mode objects
         var playerGOs = GameObject.FindGameObjectsWithTag("Player");
-  
+        
         List<BountyPlayerServer> bountyPlayers = new List<BountyPlayerServer>();
         foreach (var go in playerGOs)
         {
@@ -41,6 +41,7 @@ public class BountyBossGameMode : GameMode
         var bountyKing = bountyPlayers[UnityEngine.Random.Range(0, bountyPlayers.Count)];
         bountyKing.IncreaseBounty(subsidy);
         ServerGameChat.instance.SendGlobalMessage("SERVER", bountyKing.HunterComponentWriter.Data.Name + " IS THE NEW BOUNTY KING, HUNT HIM DOWN", Chat.MessageType.INFO_LOG);
+        ServerGameChat.instance.SendPrivateMessage(bountyKing.entityId.Id, 2, "SERVER", "YOU ARE THE BOUNTY KING", Chat.MessageType.ERROR_LOG, true);
     }
 
 

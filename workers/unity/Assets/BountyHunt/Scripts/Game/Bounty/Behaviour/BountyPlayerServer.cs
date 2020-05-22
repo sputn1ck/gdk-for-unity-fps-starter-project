@@ -24,7 +24,7 @@ public class BountyPlayerServer : MonoBehaviour
     [Require] public ServerMovementWriter ServerMovementWriter;
     [Require] public PositionWriter spatialPosition;
     [Require] public WorldCommandSender wcs;
-
+    [Require] public EntityId entityId;
     public bool kickTrigger;
 
     private BountyTracerServerBehaviour bountyTracer;
@@ -208,10 +208,6 @@ public class BountyPlayerServer : MonoBehaviour
     public void IncreaseBounty(long amount)
     {
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + amount });
-    }
-    private void OnDisable()
-    {
-        StopCoroutine(hearbeatCoroutine());
     }
 
     public void KickPlayer()

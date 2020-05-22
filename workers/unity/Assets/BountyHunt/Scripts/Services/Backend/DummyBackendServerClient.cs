@@ -115,7 +115,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
                 SecondDuration = GetGameModeDuration(req.GameModeId),
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
                 BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
-                SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 0, MinSpawnsPerSpawn = 0, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
+                SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 10, MinSpawnsPerSpawn = 20, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
             },
             
         };
