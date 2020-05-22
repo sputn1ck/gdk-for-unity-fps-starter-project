@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfdb0b950e11427fbc4ae6e5416aaf90, type: 3}
-  m_Name: LobbyGameMode
+  m_Script: {fileID: 11500000, guid: 2f094bcd533fa4603a1a582c076bf52c, type: 3}
+  m_Name: LobbyAndBountyKingRotation
   m_EditorClassIdentifier: 
-  Name: Lobby
-  GameModeId: lobby
-  Icon: {fileID: 7429914694830084677, guid: 312e028401f5ef5489f508714445b3d5, type: 3}
+  gameModes:
+  - {fileID: 11400000, guid: fcce7d5b88b9e4943931949d12420cd8, type: 2}
+  - {fileID: 11400000, guid: 9995e88231003ff46b08e13e5641db05, type: 2}

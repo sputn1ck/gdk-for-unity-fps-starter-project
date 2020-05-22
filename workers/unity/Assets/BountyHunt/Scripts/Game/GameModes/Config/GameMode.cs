@@ -6,6 +6,7 @@ using Bbhrpc;
 public abstract class GameMode : ScriptableObject
 {
     public string Name;
+    public string GameModeId;
     public Sprite Icon;
     public GameModeSettings GameModeSettings;
     public abstract void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy);
