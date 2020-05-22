@@ -12,6 +12,17 @@ public class ServerGameStats : MonoBehaviour
     [Require] GameStatsCommandReceiver GameStatsCommandReceiver;
     [Require] GameStatsWriter GameStatsWriter;
     [Require] HunterComponentCommandSender HunterCommandSender;
+
+    private Dictionary<EntityId, GameObject> PlayerDict;
+    public static ServerGameStats Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        PlayerDict = new Dictionary<EntityId, GameObject>();
+
+    }
+
     private void OnEnable()
     {
         GameStatsCommandReceiver.OnSetNameRequestReceived += OnSetNameRequestReceived;
@@ -25,6 +36,33 @@ public class ServerGameStats : MonoBehaviour
         ServerEvents.instance.OnBackendKickEvent.RemoveListener(OnKickEvent);
     }
 
+    public void AttachPlayer(EntityId playerId, GameObject playerGO)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            PlayerDict[playerId] = playerGO;
+        } else
+        {
+            PlayerDict.Add(playerId, playerGO);
+        }
+    }
+
+    public GameObject GetPlayerGameObject(EntityId playerId)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            return PlayerDict[playerId];
+        }
+        return null;
+    }
+
+    public void RemovePlayerGameObject(EntityId playerId)
+    {
+        if (PlayerDict.ContainsKey(playerId))
+        {
+            PlayerDict.Remove(playerId);
+        }
+    }
     private void  OnKickEvent(KickEvent e)
     {
 

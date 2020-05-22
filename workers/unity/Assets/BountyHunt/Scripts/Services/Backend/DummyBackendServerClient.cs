@@ -97,18 +97,29 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     private GetRoundInfoResponse getRes(GetRoundInfoRequest req)
     {
-        return new GetRoundInfoResponse()
+        var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
+        advertisers.Add(new AdvertiserInfo()
+        {
+            Discription = "",
+            Name = "Become a BBH sponsor",
+            Url = " https://bitcoinbountyhunt.com/sponsors",
+            Sponsoring = 1000,
+        });
+        advertisers[0].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");
+        var roundinfo = new GetRoundInfoResponse()
         {
             Subsidy = subsidy,
             Settings = new GameModeSettings
             {
-                SecondDuration = req.GameMode == Bbhrpc.GameMode.Bountyhunt ? bbhDuration: lobbyDuration,
+                SecondDuration = req.GameMode == Bbhrpc.GameMode.Bountyhunt ? bbhDuration : lobbyDuration,
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
-                BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds},
-                SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 40, MinSpawnsPerSpawn = 10, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 10},
+                BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
+                SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 0, MinSpawnsPerSpawn = 0, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
             },
             
         };
+        roundinfo.Advertisers.Add(advertisers);
+        return roundinfo;
     }
 
     public Task<string> GetUserSkin(string pubkey)

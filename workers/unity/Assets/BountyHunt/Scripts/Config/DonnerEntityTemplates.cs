@@ -82,7 +82,8 @@ public class DonnerEntityTemplates
 
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
-        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery);
+        var bountyTracerQuery = InterestQuery.Query(Constraint.Component(TracerComponent.ComponentId));
+        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
         var interestComponent = interestTemplate.ToSnapshot();
 
         // NEW STUFF
@@ -249,6 +250,22 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(paymentComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(advertisingComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
+        entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
+
+        return entityTemplate;
+    }
+
+    public static EntityTemplate BountyTracer(Vector3 position, long attachedHunter)
+    {
+        var tracerComponent = new TracerComponent.Snapshot() { AttachedHunter = attachedHunter };
+
+        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Metadata.Snapshot("BountyTracer"), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(tracerComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

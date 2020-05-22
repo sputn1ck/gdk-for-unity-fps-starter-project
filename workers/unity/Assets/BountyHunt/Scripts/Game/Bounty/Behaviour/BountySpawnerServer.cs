@@ -117,6 +117,8 @@ public class BountySpawnerServer : MonoBehaviour
 
     private void SpawnTick(long satsPerTick, int minSpawns, int maxSpawns)
     {
+        if (maxSpawns == 0)
+            return;
         Debug.LogFormat("spawning tick with {0} sats per tick {1} min spawns {2} max spawns ", satsPerTick, minSpawns, maxSpawns);
         long totalSats = 0;
         long remainingSats = satsPerTick;

@@ -19,6 +19,11 @@ component HunterComponent {
     command bountyhunt.Empty kick_player(KickPlayerRequest);
 }
 
+component TracerComponent {
+    id = 430002;
+    int64 attached_hunter = 1;
+    command bountyhunt.Empty update_position(UpdatePositionRequest);
+}
 
 type AddBountyRequest {
     int64 amount = 1;
@@ -54,6 +59,11 @@ type TeleportRequest {
     float z = 3;
 }
 
+type UpdatePositionRequest {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
 enum BountyReason {
     PICKUP = 0;
     DONATION = 1;
