@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
 using Improbable;
+using System;
 
 public class BountyTracerClientBehaviour : MonoBehaviour
 {
@@ -12,10 +13,19 @@ public class BountyTracerClientBehaviour : MonoBehaviour
     [Require] TracerComponentReader tracerComponentReader;
     [Require] PositionReader spatialPosition;
     LinkedEntityComponent linkedEntity;
-
+    EntityId attachedHunter;
     private void OnEnable()
     {
-        ClientGameObjectManager.Instance.AddBountyTracerGO(new EntityId(tracerComponentReader.Data.AttachedHunter), this.gameObject);
+        try
+        {
+            attachedHunter = new EntityId(tracerComponentReader.Data.AttachedHunter);
+        } catch(Exception e)
+        {
+            Destroy(this.gameObject);
+            Debug.Log("cube excepction");
+        }
+        
+        ClientGameObjectManager.Instance.AddBountyTracerGO(attachedHunter, this.gameObject);
         linkedEntity = GetComponent<LinkedEntityComponent>();
         spatialPosition.OnUpdate += SpatialPosition_OnUpdate;
     }
@@ -30,6 +40,6 @@ public class BountyTracerClientBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        ClientGameObjectManager.Instance.RemoveBountyTracerGO(new EntityId(tracerComponentReader.Data.AttachedHunter));
+        ClientGameObjectManager.Instance.RemoveBountyTracerGO(attachedHunter);
     }
 }
