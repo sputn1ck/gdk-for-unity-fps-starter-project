@@ -29,7 +29,8 @@ public class BountyBossGameMode : GameMode
         // Get Random Player
         // TODO use server game mode objects
         var playerGOs = GameObject.FindGameObjectsWithTag("Player");
-        
+        if (playerGOs.Length < 1)
+            return;
         List<BountyPlayerServer> bountyPlayers = new List<BountyPlayerServer>();
         foreach (var go in playerGOs)
         {

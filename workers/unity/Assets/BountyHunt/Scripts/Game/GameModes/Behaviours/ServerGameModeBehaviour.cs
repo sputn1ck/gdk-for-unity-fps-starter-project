@@ -34,7 +34,12 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private async Task StartGameMode()
     {
-        
+        if(GameStatsWriter.Data.PlayerMap.Count < 2)
+        {
+            ServerGameChat.instance.SendGlobalMessage("SERVER", "NOT ENOUGH PLAYERS TO SPAWN SATOSHIS, 2 PLAYERS REQUIRED", MessageType.ERROR_LOG);
+        }
+
+        gameModeRotationCounter = getNextGameModeInt();
         var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
         currentGameMode = gameMode;
 
@@ -110,7 +115,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
                 EndGameMode();
                 GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
                 await Task.Delay(5000);
-                gameModeRotationCounter = getNextGameModeInt();
                 await StartGameMode();
 
             }
