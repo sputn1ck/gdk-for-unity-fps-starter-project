@@ -53,7 +53,7 @@ namespace Fps.UI
         {
             FrontEndCamera.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-            CursorUI.Instance.Show();
+            CursorUI.Instance?.Show();
         }
 
         private void OnDisable()

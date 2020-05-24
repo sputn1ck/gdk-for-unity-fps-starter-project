@@ -63,7 +63,7 @@ public class BountyTickSystem : ComponentSystem
         {
             timeSum = 0;
         }
-        timeSum += Time.deltaTime;
+        timeSum += UnityEngine.Time.deltaTime;
         tickTime = gameMode.GameModeSettings.BountySettings.BountyTickTimeSeconds;
         if (timeSum < tickTime)
             return;
