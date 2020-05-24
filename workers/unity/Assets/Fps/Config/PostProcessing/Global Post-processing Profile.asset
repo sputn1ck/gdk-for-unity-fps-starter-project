@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5311037557913818759
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93845973620c224ca88f6937c8f011a, type: 3}
+  m_Name: LowHealthVignette
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  health:
+    overrideState: 1
+    value: 0.5
+  damageYaw:
+    overrideState: 1
+    value: 0
+  damageFocus:
+    overrideState: 1
+    value: 0
+  damageIntensity:
+    overrideState: 1
+    value: 0
+  VignetteMask:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 86980ed9ce32c09439512cfa13a7b122, type: 3}
+    defaultState: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,7 +56,7 @@ MonoBehaviour:
   - {fileID: 114390826565068546}
   - {fileID: 114887101565337324}
   - {fileID: 114582840937339978}
-  - {fileID: 114993796420491314}
+  - {fileID: -5311037557913818759}
 --- !u!114 &114011796723465700
 MonoBehaviour:
   m_ObjectHideFlags: 3
