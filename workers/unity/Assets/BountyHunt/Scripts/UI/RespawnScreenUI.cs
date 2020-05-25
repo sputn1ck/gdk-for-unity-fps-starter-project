@@ -14,8 +14,17 @@ public class RespawnScreenUI : ScreenUI
     public Button respawnButton;
     public TextMeshProUGUI respawnTimerText;
     public int respawnCooldown = 5;
+    public Image killerBadge;
+    public TextMeshProUGUI killerNameText;
+    public List<RespawnScreenAdUI> adObjects;
+    public int adsCount;
+
+
+
+
     private bool isOn;
 
+    
     bool waiting;
 
     private void Awake()
@@ -23,6 +32,7 @@ public class RespawnScreenUI : ScreenUI
         base.Awake();
 
         ClientEvents.instance.onPlayerDie.AddListener(StartCooldown);
+        ClientEvents.instance.onPlayerDie.AddListener(RefreshAds);
         respawnButton.onClick.AddListener(Respawn);
 
     }
@@ -96,5 +106,22 @@ public class RespawnScreenUI : ScreenUI
         if (!FpsDriver.instance || waiting) return;
         waiting = true;
         FpsDriver.instance.Respawn();
+    }
+
+    public void RefreshAds()
+    {
+        Advertiser[] advs = ClientAdManagerBehaviour.instance.GetRandomAdvertisers(adsCount);
+        int i = 0;
+        foreach(RespawnScreenAdUI Ad in adObjects)
+        {
+            if (i < advs.Length)
+            {
+                Ad.Set(advs[i]);
+            }
+            else {
+                Ad.Set(null);
+            }
+            i++;
+        }
     }
 }

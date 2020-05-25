@@ -7,7 +7,7 @@ using TMPro;
 
 [System.Serializable] public enum TintColor
 {
-    Primary,Panel,MenuPanel,Secondary,Input,HighlightedPanel,Error,Sats
+    Primary,Panel,MenuPanel,Secondary,Input,HighlightedPanel,Error,Sats,Link
 }
 
 //[ExecuteInEditMode]
@@ -36,6 +36,11 @@ public class UITinter : MonoBehaviour
         {
             text.color = color;
         }
+    }
+    public void updateColor(TintColor tint)
+    {
+        this.tint = tint;
+        updateColor();
     }
 
     private void OnEnable()

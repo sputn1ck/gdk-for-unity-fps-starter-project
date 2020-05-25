@@ -25,11 +25,13 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     List<VideoPlayer> usedVideoPlayers = new List<VideoPlayer>();
     List<VideoPlayer> freeVideoPlayers = new List<VideoPlayer>();
 
+    static List<string> urlQueue = new List<string>();
 
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(this);
+
         advertisers = new List <Advertiser>();
     }
 
@@ -42,6 +44,19 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     private void Start()
     {
         //ClientEvents.instance.onMapLoaded.AddListener(Initialize);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            OpenAllUrls();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+            OpenAllUrls();
     }
 
     void Initialize()
@@ -109,6 +124,34 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
         }
         return advertisers[0];
+    }
+
+    public Advertiser[] GetRandomAdvertisers(int count)
+    {
+        Advertiser[] answer = new Advertiser[Mathf.Min(count, this.advertisers.Count)];
+
+        long totSats = totalSponsoredSats;
+        List<Advertiser> tempAdvertisers = new List<Advertiser>(this.advertisers);
+
+        for(int i = 0; i<answer.Length; i++)
+        {
+            var winningTicket = Random.Range(0, totalSponsoredSats);
+            long ticket = 0;
+            foreach (var adv in tempAdvertisers)
+            {
+                ticket += adv.investment;
+                if (ticket > winningTicket)
+                {
+                    answer[i] = adv;
+                    tempAdvertisers.Remove(adv);
+                    totSats -= adv.investment;
+                    break;
+                }
+
+            }
+        }
+        return answer;
+
     }
 
     public async void UpdateAdvertisers(List<AdvertiserSource> advertiserSources)
@@ -230,6 +273,28 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         vp.renderMode = VideoRenderMode.RenderTexture;
         return vp;
     }
+
+    public void AddUrl(string url)
+    {
+        if (!urlQueue.Contains(url))
+        {
+            urlQueue.Add(url);
+        }
+    }
+
+    public bool UrlInQueue(string url)
+    {
+        return urlQueue.Contains(url);
+    }
+
+    public static void OpenAllUrls()
+    {
+        foreach (string link in urlQueue)
+        {
+            Application.OpenURL(link);
+        }
+        urlQueue.Clear();
+    }
 }
 
 
@@ -268,10 +333,12 @@ public class Advertiser
             var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
             VideoPlayer vp = ClientAdManagerBehaviour.instance.GetNewVideoPlayer();
             vp.url = link;
+            vp.renderMode = VideoRenderMode.RenderTexture;
             RenderTexture rt = new RenderTexture(512, 512, 0);
             vp.targetTexture = rt;
             material.SetTexture(TextureToReplace, rt);
             materials[type].Add(material);
+
         }
     }
     public Material GetRandomMaterial(AdMaterialType type)
