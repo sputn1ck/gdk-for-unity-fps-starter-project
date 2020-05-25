@@ -12,6 +12,7 @@ using Fps;
 using Fps.SchemaExtensions;
 using Improbable;
 using Improbable.Gdk.Core.Commands;
+using Lnrpc;
 
 [WorkerType(WorkerUtils.UnityGameLogic)]
 public class BountyPlayerServer : MonoBehaviour
@@ -77,9 +78,37 @@ public class BountyPlayerServer : MonoBehaviour
     private async void OnEarningsUpdate(long obj)
     {
         var amount = HunterComponentWriter.Data.Earnings;
-        if (amount == 0)
+        if (amount < 1)
+        {
+            HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = 0 });
             return;
-        var res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(ServerServiceConnections.instance.PlatformPubkey, HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Earnings);
+        }
+        
+        SendResponse res = new SendResponse() { PaymentError = "something went wrong" };
+        bool payed = false;
+        // Try paying player 
+        try
+        {
+            res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Pubkey, amount);
+            payed = true;
+        } catch (Exception e)
+        {
+            payed = false;
+        }
+        // Pay to platform
+        try
+        {
+            if (!payed)
+            {
+                res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(ServerServiceConnections.instance.PlatformPubkey, HunterComponentWriter.Data.Pubkey, amount);
+                payed = true;
+            }
+             
+
+        } catch (Exception e)
+        {
+
+        }
         if (res.PaymentError != "")
         {
             ChatPanelUI.instance.PaymentFailuer(new PaymentFailureArgs { message = "error while paying out: " + res.PaymentError});
