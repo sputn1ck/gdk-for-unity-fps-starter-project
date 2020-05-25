@@ -85,6 +85,7 @@ public class BountyPlayerServer : MonoBehaviour
         }
         
         SendResponse res = new SendResponse() { PaymentError = "something went wrong" };
+        ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "trying to pay out " + res.PaymentError, Chat.MessageType.DEBUG_LOG, false);
         bool payed = false;
         // Try paying player 
         try
@@ -93,6 +94,7 @@ public class BountyPlayerServer : MonoBehaviour
             payed = true;
         } catch (Exception e)
         {
+            res.PaymentError = "PLATFORM_KEYSEND:" + e.Message;
             payed = false;
         }
         // Pay to platform
@@ -104,14 +106,13 @@ public class BountyPlayerServer : MonoBehaviour
                 payed = true;
             }
              
-
         } catch (Exception e)
         {
-
+            res.PaymentError += ";PLATFORM_KEYSEND:" + e.Message;
         }
         if (res.PaymentError != "")
         {
-            ChatPanelUI.instance.PaymentFailuer(new PaymentFailureArgs { message = "error while paying out: " + res.PaymentError});
+            ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "error while paying out: " + res.PaymentError, Chat.MessageType.DEBUG_LOG,false);
         } else
         {
             HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = HunterComponentWriter.Data.Earnings - amount });
