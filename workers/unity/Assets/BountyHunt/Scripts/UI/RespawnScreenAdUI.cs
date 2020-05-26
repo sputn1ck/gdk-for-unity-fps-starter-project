@@ -10,7 +10,6 @@ public class RespawnScreenAdUI : MonoBehaviour
     public RawImage image;
     public Button button;
     public TextMeshProUGUI text;
-    static List<string> urls;
     Advertiser advertiser;
 
     private void Awake()
@@ -20,40 +19,38 @@ public class RespawnScreenAdUI : MonoBehaviour
 
     public void Set(Advertiser advertiser)
     {
-        if (advertiser == null) gameObject.SetActive(false);
-        else
+        if (advertiser == null)
         {
             gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
 
         this.advertiser = advertiser;
-
-        if (!urls.Contains(advertiser.url))
+        if (!UrlMemory.UrlInQueue(advertiser.url))
         {
             text.GetComponent<UITinter>().updateColor(TintColor.Link);
+            text.text = advertiser.url;
             button.interactable = true;
         }
         else{
             text.GetComponent<UITinter>().updateColor(TintColor.Primary);
+            text.text = GameText.AdOpenInfo;
             button.interactable = false;
         }
-        image.material = advertiser.GetRandomMaterial(Advertiser.AdMaterialType.SQUARE);
+        image.texture = advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
 
     }
 
     void OnClick()
     {
         text.GetComponent<UITinter>().updateColor(TintColor.Primary);
-        ClientAdManagerBehaviour.instance.AddUrl(advertiser.url);
+        text.text = GameText.AdOpenInfo;
+        UrlMemory.AddUrl(advertiser.url);
         button.interactable = false;
     }
 
-    public static void OpenAllLinks()
-    {
-        foreach(string link in urls)
-        {
-            Application.OpenURL(link);
-        }
-        urls.Clear();
-    }
 }

@@ -76,10 +76,18 @@ public class ClientGameStats : MonoBehaviour
     private void OnKillEvent(KillInfo obj)
     {
 
+
+
         string killer = GetPlayerByID(obj.Killer).Name;
         string victim = GetPlayerByID(obj.Victim).Name;
         KillEventArgs args = new KillEventArgs { killer = killer, victim =  victim };
         ClientEvents.instance.onAnyKill.Invoke(args);
+
+        if(obj.Victim.Id == ClientGameObjectManager.Instance.AuthorativePlayerEntityId.Id)
+        {
+            ClientEvents.instance.onPlayerKilled.Invoke(new PlayerKilledArgs {killerName = killer});
+        }
+
         Debug.Log(killer + " killed " + victim);
     }
 

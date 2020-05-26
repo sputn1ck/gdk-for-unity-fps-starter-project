@@ -25,8 +25,6 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     List<VideoPlayer> usedVideoPlayers = new List<VideoPlayer>();
     List<VideoPlayer> freeVideoPlayers = new List<VideoPlayer>();
 
-    static List<string> urlQueue = new List<string>();
-
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -46,18 +44,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         //ClientEvents.instance.onMapLoaded.AddListener(Initialize);
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (!focus)
-        {
-            OpenAllUrls();
-        }
-    }
-
-    private void OnApplicationQuit()
-    {
-            OpenAllUrls();
-    }
+    
 
     void Initialize()
     {
@@ -135,7 +122,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
         for(int i = 0; i<answer.Length; i++)
         {
-            var winningTicket = Random.Range(0, totalSponsoredSats);
+            var winningTicket = Random.Range(0, totSats);
             long ticket = 0;
             foreach (var adv in tempAdvertisers)
             {
@@ -160,7 +147,11 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         List<Task> tasks = new List<Task>();
 
         advertisers.Clear();
-        foreach(VideoPlayer player in usedVideoPlayers)freeVideoPlayers.Add(player);
+        foreach (VideoPlayer player in usedVideoPlayers)
+        {
+            freeVideoPlayers.Add(player);
+            player.enabled = false;
+        }
         usedVideoPlayers.Clear();
         foreach (AdvertiserSource source in advertiserSources)
         {
@@ -174,6 +165,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
     private static async Task<(List<Texture2D>,List<string>)> getTexturesFromURLList(List<string> urls)
     {
+
         List<Texture2D> textures = new List<Texture2D>();
         List<string> videoUrls= new List<string>();
         if (urls == null)
@@ -198,6 +190,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
                 case ".tga":
                 case ".tiff":
                 case ".gif":
+                
 
                     Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(instance, url);
 
@@ -265,36 +258,17 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
             usedVideoPlayers.Add(p);
             freeVideoPlayers.Remove(p);
+            p.enabled = true;
             return p;
         }
         VideoPlayer vp = gameObject.AddComponent<VideoPlayer>();
         vp.source = VideoSource.Url;
         vp.isLooping = true;
         vp.renderMode = VideoRenderMode.RenderTexture;
+        vp.audioOutputMode = VideoAudioOutputMode.None;
         return vp;
     }
 
-    public void AddUrl(string url)
-    {
-        if (!urlQueue.Contains(url))
-        {
-            urlQueue.Add(url);
-        }
-    }
-
-    public bool UrlInQueue(string url)
-    {
-        return urlQueue.Contains(url);
-    }
-
-    public static void OpenAllUrls()
-    {
-        foreach (string link in urlQueue)
-        {
-            Application.OpenURL(link);
-        }
-        urlQueue.Clear();
-    }
 }
 
 
@@ -307,11 +281,11 @@ public class Advertiser
     public string url;
     public (List<Texture2D>, List<string>) squareMedia;
 
-    Dictionary<AdMaterialType, List<Material>> materials;
+    Dictionary<AdMaterialType, List<MaterialInfo>> materials;
 
     public void Initialize()
     {
-        materials = new Dictionary<AdMaterialType, List<Material>>();
+        materials = new Dictionary<AdMaterialType, List<MaterialInfo>>();
         InitializeMatrials(squareMedia, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
         //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
         //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
@@ -320,12 +294,12 @@ public class Advertiser
     }
     public void InitializeMatrials((List<Texture2D>textures,List<string>videolinks) media, AdMaterialType type, Material defaultMaterial, string TextureToReplace)
     {
-        materials[type] = new List<Material>();
+        materials[type] = new List<MaterialInfo>();
         foreach (var texture in media.textures)
         {
             var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
             material.SetTexture(TextureToReplace, texture);
-            materials[type].Add(material);
+            materials[type].Add(new MaterialInfo(material,texture));
         }
 
         foreach(string link in media.videolinks)
@@ -337,17 +311,26 @@ public class Advertiser
             RenderTexture rt = new RenderTexture(512, 512, 0);
             vp.targetTexture = rt;
             material.SetTexture(TextureToReplace, rt);
-            materials[type].Add(material);
+            materials[type].Add(new MaterialInfo(material,rt));
 
         }
     }
+
     public Material GetRandomMaterial(AdMaterialType type)
     {
-        List<Material> mats = GetMaterials(type);
+        return GetRandomMaterialInfo(type).Material;
+    }
+    public Texture GetRandomTexture(AdMaterialType type)
+    {
+        return GetRandomMaterialInfo(type).Texture;
+    }
+    public MaterialInfo GetRandomMaterialInfo(AdMaterialType type)
+    {
+        List<MaterialInfo> mats = GetMaterials(type);
         if (mats.Count == 0)
         {
             Debug.LogError(name + " has no Material of type " + type);
-            return null;
+            return new MaterialInfo();
         }
 
         var rnd = Random.Range(0, mats.Count);
@@ -356,12 +339,23 @@ public class Advertiser
         return mats[rnd];
     }
 
-    public List<Material> GetMaterials (AdMaterialType type)
+    public List<MaterialInfo> GetMaterials (AdMaterialType type)
     {
         return materials[type];
     }
 
-        
     public enum AdMaterialType { SQUARE, HORIZONTAL, VERTICAL}
+}
+
+public struct MaterialInfo
+{
+    public Material Material;
+    public Texture Texture;
+
+    public MaterialInfo(Material mat,Texture tex)
+    {
+        Material = mat;
+        Texture = tex;
+    }
 }
 

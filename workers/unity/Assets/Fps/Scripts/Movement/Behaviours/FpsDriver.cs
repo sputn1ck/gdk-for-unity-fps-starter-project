@@ -280,6 +280,12 @@ namespace Fps.Movement
         {
             gunState.SendUpdate(new GunStateComponent.Update() {  NewGunId= newGunId });
         }
+
+        public int GetGunId()
+        {
+            return gunState.Data.NewGunId;
+        }
+
         private void OnForcedRotation(RotationUpdate forcedRotation)
         {
             var newPitch = Mathf.Clamp(forcedRotation.Pitch.ToFloat1k(), -cameraSettings.MaxPitch,

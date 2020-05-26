@@ -37,9 +37,23 @@ public class RespawnScreenUI : ScreenUI
 
     }
 
-    // Start is called before the first frame update
-    private void OnEnable()
+    protected override void OnShow()
     {
+        int gunID = FpsDriver.instance.GetGunId();
+        switch (gunID)
+        {
+            case 0:
+            default:
+                RifleToggle.SetIsOnWithoutNotify(true);
+                break;
+            case 1:
+                SniperToggle.SetIsOnWithoutNotify(true);
+                break;
+            case 2:
+                ShotGunToggle.SetIsOnWithoutNotify(true);
+                break;
+        }
+
         RifleToggle.onValueChanged.AddListener(SelectRifle);
         SniperToggle.onValueChanged.AddListener(SelectSniper);
         ShotGunToggle.onValueChanged.AddListener(SelectShotgun);
@@ -51,7 +65,7 @@ public class RespawnScreenUI : ScreenUI
     }
 
 
-    private void OnDisable()
+    protected override void OnHide()
     {
         RifleToggle.onValueChanged.RemoveAllListeners();
         SniperToggle.onValueChanged.RemoveAllListeners();

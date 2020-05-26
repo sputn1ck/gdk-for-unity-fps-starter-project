@@ -37,6 +37,8 @@ public class LeaderboardUpdateEvent : UnityEvent<LeaderboardUpdateArgs> { }
 
 public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
 
+public class PlayerKilledEvent : UnityEvent<PlayerKilledArgs> { }
+
 
 [Serializable]
 public struct BountyUpdateEventArgs
@@ -106,4 +108,9 @@ public struct LeaderboardUpdateArgs
 {
     public Bbhrpc.Ranking[] highscores;
     public string PlayerPubKey;
+}
+
+public struct PlayerKilledArgs
+{
+    public string killerName;
 }

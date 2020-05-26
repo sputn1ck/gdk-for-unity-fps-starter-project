@@ -13,6 +13,7 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
     [HideInInspector] public GameObjectEvent onPlayerSpawn = new GameObjectEvent();
     [HideInInspector] public UnityEvent onPlayerDie = new UnityEvent();
+    [HideInInspector] public PlayerKilledEvent onPlayerKilled = new PlayerKilledEvent();
 
     [HideInInspector] public UnityEvent onServicesSetup = new UnityEvent();
 

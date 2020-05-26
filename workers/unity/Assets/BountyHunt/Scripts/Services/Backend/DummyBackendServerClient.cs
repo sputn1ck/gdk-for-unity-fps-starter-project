@@ -1,4 +1,5 @@
 using Bbhrpc;
+using Bountyhunt;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -25,6 +26,8 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     public string message;
     public bool announce;
     public bool messageTrigger;
+
+    [SerializeField] public List<AdvertiserSource> testAdvertisers;
     public void Setup(string target, int port, string pubkey, string message)
     {
         
@@ -99,14 +102,27 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     private GetRoundInfoResponse getRes(GetRoundInfoRequest req)
     {
         var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
-        advertisers.Add(new AdvertiserInfo()
+
+        foreach (var adv in testAdvertisers)
         {
-            Discription = "",
-            Name = "Become a BBH sponsor",
-            Url = " https://bitcoinbountyhunt.com/sponsors",
-            Sponsoring = 1000,
-        });
-        advertisers[0].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");
+            AdvertiserInfo advInfo = new AdvertiserInfo { Discription = "", Name = adv.Name, Url = adv.Url, Sponsoring = adv.Investment};
+            foreach(string s in adv.SquareTextureLinks)
+            {
+                advInfo.SquareBannerUrls.Add(s);
+            }
+            advertisers.Add(advInfo);
+
+        }
+
+        //advertisers.Add(new AdvertiserInfo()
+        //{
+        //    Discription = "",
+        //    Name = "Become a BBH sponsor",
+        //    Url = " https://bitcoinbountyhunt.com/sponsors",
+        //    Sponsoring = 1000,
+        //});
+        //advertisers[0].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");
+
         var roundinfo = new GetRoundInfoResponse()
         {
             Subsidy = subsidy,
@@ -147,4 +163,5 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
         return null;
     }
+
 }
