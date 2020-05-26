@@ -81,9 +81,10 @@ public class DonnerEntityTemplates
         };
 
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
+        var serverCheckoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(500));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
         var bountyTracerQuery = InterestQuery.Query(Constraint.Component(TracerComponent.ComponentId));
-        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
+        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverCheckoutQuery).AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
         var interestComponent = interestTemplate.ToSnapshot();
 
         // NEW STUFF
