@@ -43,6 +43,12 @@ public class BackendGameserverClient : IBackendServerClient
                     case BackendStreamResponse.EventOneofCase.Kick:
                         ServerEvents.instance.OnBackendKickEvent.Invoke(e.Kick);
                         break;
+                    case BackendStreamResponse.EventOneofCase.Chat:
+                        ServerGameChat.instance.SendGlobalMessage(e.Chat.Sender, e.Chat.Message, Chat.MessageType.INFO_LOG, false);
+                        break;
+                    case BackendStreamResponse.EventOneofCase.Bounty:
+                        ServerEvents.instance.OnBountyInvoicePaid.Invoke(new BountyInvoice { amount = e.Bounty.Amount, pubkey = e.Bounty.User });
+                        break;
                     default:
                         break;
                 }
