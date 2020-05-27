@@ -15,13 +15,14 @@ public class RespawnScreenUI : ScreenUI
     public Button respawnButton;
     public TextMeshProUGUI respawnTimerText;
     public int respawnCooldown = 5;
+    public int forceRespawnCooldownAddition = 10;
     public Image killerBadge;
     public TextMeshProUGUI killerNameText;
     public List<RespawnScreenAdUI> adObjects;
     public int adsCount;
 
 
-
+    public bool alreadyRespawned;
 
     private bool isOn;
 
@@ -36,7 +37,7 @@ public class RespawnScreenUI : ScreenUI
         ClientEvents.instance.onPlayerDie.AddListener(RefreshAds);
         ClientEvents.instance.onPlayerKilled.AddListener(SetKiller);
         respawnButton.onClick.AddListener(Respawn);
-
+        
     }
 
     protected override void OnShow()
@@ -46,13 +47,17 @@ public class RespawnScreenUI : ScreenUI
         {
             case 0:
             default:
-                RifleToggle.SetIsOnWithoutNotify(true);
+                RifleToggle.isOn = false;
+                RifleToggle.isOn = true;
                 break;
             case 1:
-                SniperToggle.SetIsOnWithoutNotify(true);
+                SniperToggle.isOn = false;
+                SniperToggle.isOn = true;
+
                 break;
             case 2:
-                ShotGunToggle.SetIsOnWithoutNotify(true);
+                ShotGunToggle.isOn = false;
+                ShotGunToggle.isOn = true;
                 break;
         }
 
@@ -88,10 +93,14 @@ public class RespawnScreenUI : ScreenUI
             await Task.Delay(1000);
         }
 
+        alreadyRespawned = false;
         respawnTimerText.gameObject.SetActive(false);
         waiting = false;
         respawnButton.gameObject.SetActive(true);
 
+        await Task.Delay(forceRespawnCooldownAddition *1000);
+
+        if (!alreadyRespawned) Respawn();
     }
 
     public void SelectRifle(bool doIt)
@@ -122,6 +131,7 @@ public class RespawnScreenUI : ScreenUI
         if (!FpsDriver.instance || waiting) return;
         waiting = true;
         FpsDriver.instance.Respawn();
+        alreadyRespawned = true;
     }
 
     public void RefreshAds()

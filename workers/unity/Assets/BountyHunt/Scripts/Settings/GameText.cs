@@ -37,7 +37,7 @@ public static class GameText
     public const string PaymentExpiredPopup = "payment has expired!";
 
     /// text to see, when clicked on a link (to open it later)
-    public const string AdOpenInfo = "opens after game";
+    public const string AdOpenInfo = "Link Remembered";
 
     /// text in the Quit Game Popup
     public const string QuitGamePopup = "Do you really want to quit the game?";

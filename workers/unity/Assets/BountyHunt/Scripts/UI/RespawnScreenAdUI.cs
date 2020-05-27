@@ -33,7 +33,7 @@ public class RespawnScreenAdUI : MonoBehaviour
         if (!UrlMemory.UrlInQueue(advertiser.url))
         {
             text.GetComponent<UITinter>().updateColor(TintColor.Link);
-            text.text = advertiser.url;
+            text.text = advertiser.name+ " <sprite name=\"link\" tint=1> ";
             button.interactable = true;
         }
         else{
