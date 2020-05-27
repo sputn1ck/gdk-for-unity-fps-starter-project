@@ -195,7 +195,8 @@ public static class Utility
         QRCodeGenerator qrGenerator = new QRCodeGenerator();
         QRCodeData qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.M);
         UnityQRCode qrCode = new UnityQRCode(qrCodeData);
-        Texture2D tex = qrCode.GetGraphic(1);
+        Texture2D tex = qrCode.GetGraphic(8);
+        /*
         Color[] pixels = tex.GetPixels();
         for (int i = 0; i < pixels.Length; i++)
         {
@@ -211,6 +212,7 @@ public static class Utility
         tex.SetPixels(pixels);
         tex.filterMode = FilterMode.Point;
         tex.Apply();
+        */
         Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100);
         return sprite;
     }
