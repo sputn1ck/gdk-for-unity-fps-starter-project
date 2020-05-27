@@ -390,9 +390,16 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return res;
     }
 
-    public Task<Ranking> GetSpecificPlayerRanking(string pubkey)
+    public async Task<Ranking> GetSpecificPlayerRanking(string pubkey)
     {
-        throw new NotImplementedException();
+        string rndname = "random" + UnityEngine.Random.Range(100, 1000);
+        RankBadge globalBadge = (RankBadge)UnityEngine.Random.Range(0,Enum.GetNames(typeof(RankBadge)).Length);
+        LeagueRanking globalRanking = new LeagueRanking { Badge = globalBadge };
+
+        Ranking ranking = new Ranking { Name = rndname, GlobalRanking = globalRanking };
+
+        return ranking;
+
     }
 
     public async Task<string> GetDonationInvoice(long gameDonation, long devsDonation)

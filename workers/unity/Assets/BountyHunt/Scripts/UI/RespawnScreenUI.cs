@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
+using Bbhrpc;
 
 public class RespawnScreenUI : ScreenUI
 {
@@ -33,6 +34,7 @@ public class RespawnScreenUI : ScreenUI
 
         ClientEvents.instance.onPlayerDie.AddListener(StartCooldown);
         ClientEvents.instance.onPlayerDie.AddListener(RefreshAds);
+        ClientEvents.instance.onPlayerKilled.AddListener(SetKiller);
         respawnButton.onClick.AddListener(Respawn);
 
     }
@@ -137,5 +139,13 @@ public class RespawnScreenUI : ScreenUI
             }
             i++;
         }
+    }
+
+    void SetKiller(PlayerKilledArgs args)
+    {
+        Badge badge = BadgeManager.GetBadge(args.killerRanking.GlobalRanking.Badge);
+        killerBadge.sprite = badge.sprite;
+        killerBadge.color = badge.color;
+        killerNameText.text = args.killerRanking.Name;
     }
 }

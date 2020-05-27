@@ -1,3 +1,4 @@
+using Bbhrpc;
 using Bountyhunt;
 using Improbable.Gdk.Core;
 using System;
@@ -112,5 +113,5 @@ public struct LeaderboardUpdateArgs
 
 public struct PlayerKilledArgs
 {
-    public string killerName;
+    public Ranking killerRanking;
 }

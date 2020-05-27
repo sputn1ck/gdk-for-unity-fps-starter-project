@@ -5,6 +5,7 @@ using UnityEngine;
 using Bountyhunt;
 using Improbable.Gdk.Core;
 using System.Linq;
+using Bbhrpc;
 
 public class ClientGameStats : MonoBehaviour
 {
@@ -73,22 +74,21 @@ public class ClientGameStats : MonoBehaviour
         sendScoreBoardEvent(obj);
     }
 
-    private void OnKillEvent(KillInfo obj)
+    private async void OnKillEvent(KillInfo obj)
     {
 
-
-
-        string killer = GetPlayerByID(obj.Killer).Name;
-        string victim = GetPlayerByID(obj.Victim).Name;
-        KillEventArgs args = new KillEventArgs { killer = killer, victim =  victim };
+        PlayerItem killer = GetPlayerByID(obj.Killer);
+        PlayerItem victim = GetPlayerByID(obj.Victim);
+        KillEventArgs args = new KillEventArgs { killer = killer.Name, victim =  victim.Name };
         ClientEvents.instance.onAnyKill.Invoke(args);
 
         if(obj.Victim.Id == ClientGameObjectManager.Instance.AuthorativePlayerEntityId.Id)
         {
-            ClientEvents.instance.onPlayerKilled.Invoke(new PlayerKilledArgs {killerName = killer});
+            Ranking KillerRanking = await PlayerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(killer.Pubkey);
+            ClientEvents.instance.onPlayerKilled.Invoke(new PlayerKilledArgs {killerRanking = KillerRanking});
         }
 
-        Debug.Log(killer + " killed " + victim);
+        Debug.Log(killer.Name + " killed " + victim.Name);
     }
 
     private void sendScoreBoardEvent(Dictionary<EntityId, PlayerItem> obj)
