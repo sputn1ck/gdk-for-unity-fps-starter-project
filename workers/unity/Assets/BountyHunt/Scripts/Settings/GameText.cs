@@ -39,5 +39,6 @@ public static class GameText
     /// text to see, when clicked on a link (to open it later)
     public const string AdOpenInfo = "opens after game";
 
-
+    /// text in the Quit Game Popup
+    public const string QuitGamePopup = "Do you really want to quit the game?";
 }
