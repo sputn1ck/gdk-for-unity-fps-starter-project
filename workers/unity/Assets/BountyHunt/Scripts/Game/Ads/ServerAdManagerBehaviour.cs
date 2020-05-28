@@ -10,9 +10,10 @@ public class ServerAdManagerBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateAdvertisers();
+        //UpdateAdvertisers();
     }
 
+    /*
     public void UpdateAdvertisers()
     {
 
@@ -26,7 +27,6 @@ public class ServerAdManagerBehaviour : MonoBehaviour
         });
     }
 
-
     public bool test;
     [SerializeField] public List<AdvertiserSource> testSources;
 
@@ -39,4 +39,5 @@ public class ServerAdManagerBehaviour : MonoBehaviour
             UpdateAdvertisers();
         }
     }
+    */
 }

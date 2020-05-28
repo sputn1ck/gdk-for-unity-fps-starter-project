@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
+using Bbhrpc;
 
 public class RespawnScreenUI : ScreenUI
 {
@@ -14,8 +15,18 @@ public class RespawnScreenUI : ScreenUI
     public Button respawnButton;
     public TextMeshProUGUI respawnTimerText;
     public int respawnCooldown = 5;
+    public int forceRespawnCooldownAddition = 10;
+    public Image killerBadge;
+    public TextMeshProUGUI killerNameText;
+    public List<RespawnScreenAdUI> adObjects;
+    public int adsCount;
+
+
+    public bool alreadyRespawned;
+
     private bool isOn;
 
+    
     bool waiting;
 
     private void Awake()
@@ -23,13 +34,33 @@ public class RespawnScreenUI : ScreenUI
         base.Awake();
 
         ClientEvents.instance.onPlayerDie.AddListener(StartCooldown);
+        ClientEvents.instance.onPlayerDie.AddListener(RefreshAds);
+        ClientEvents.instance.onPlayerKilled.AddListener(SetKiller);
         respawnButton.onClick.AddListener(Respawn);
-
+        
     }
 
-    // Start is called before the first frame update
-    private void OnEnable()
+    protected override void OnShow()
     {
+        int gunID = FpsDriver.instance.GetGunId();
+        switch (gunID)
+        {
+            case 0:
+            default:
+                RifleToggle.isOn = false;
+                RifleToggle.isOn = true;
+                break;
+            case 1:
+                SniperToggle.isOn = false;
+                SniperToggle.isOn = true;
+
+                break;
+            case 2:
+                ShotGunToggle.isOn = false;
+                ShotGunToggle.isOn = true;
+                break;
+        }
+
         RifleToggle.onValueChanged.AddListener(SelectRifle);
         SniperToggle.onValueChanged.AddListener(SelectSniper);
         ShotGunToggle.onValueChanged.AddListener(SelectShotgun);
@@ -41,7 +72,7 @@ public class RespawnScreenUI : ScreenUI
     }
 
 
-    private void OnDisable()
+    protected override void OnHide()
     {
         RifleToggle.onValueChanged.RemoveAllListeners();
         SniperToggle.onValueChanged.RemoveAllListeners();
@@ -62,10 +93,14 @@ public class RespawnScreenUI : ScreenUI
             await Task.Delay(1000);
         }
 
+        alreadyRespawned = false;
         respawnTimerText.gameObject.SetActive(false);
         waiting = false;
         respawnButton.gameObject.SetActive(true);
 
+        await Task.Delay(forceRespawnCooldownAddition *1000);
+
+        if (!alreadyRespawned) Respawn();
     }
 
     public void SelectRifle(bool doIt)
@@ -96,5 +131,31 @@ public class RespawnScreenUI : ScreenUI
         if (!FpsDriver.instance || waiting) return;
         waiting = true;
         FpsDriver.instance.Respawn();
+        alreadyRespawned = true;
+    }
+
+    public void RefreshAds()
+    {
+        Advertiser[] advs = ClientAdManagerBehaviour.instance.GetRandomAdvertisers(adsCount);
+        int i = 0;
+        foreach(RespawnScreenAdUI Ad in adObjects)
+        {
+            if (i < advs.Length)
+            {
+                Ad.Set(advs[i]);
+            }
+            else {
+                Ad.Set(null);
+            }
+            i++;
+        }
+    }
+
+    void SetKiller(PlayerKilledArgs args)
+    {
+        Badge badge = BadgeManager.GetBadge(args.killerRanking.GlobalRanking.Badge);
+        killerBadge.sprite = badge.sprite;
+        killerBadge.color = badge.color;
+        killerNameText.text = args.killerRanking.Name;
     }
 }

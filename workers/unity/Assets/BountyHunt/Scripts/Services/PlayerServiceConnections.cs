@@ -29,6 +29,8 @@ public class PlayerServiceConnections : MonoBehaviour
     public IDonnerDaemonClient DonnerDaemonClient;
 
 
+
+
     [HideInInspector] public bool ServicesReady = false;
     void Awake()
     {
@@ -177,6 +179,15 @@ public class PlayerServiceConnections : MonoBehaviour
         lnd?.ShutDown();
         BackendPlayerClient?.Shutdown();
         Debug.Log("client quit cleanly");
+        UrlMemory.OpenAllUrls();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            UrlMemory.OpenAllUrls();
+        }
     }
 
 
@@ -238,6 +249,36 @@ public class PlayerServiceConnections : MonoBehaviour
         ClientEvents.instance.onAllTimeKillsUpdate.Invoke(totalKills);
         ClientEvents.instance.onAllTimeDeathsUpdate.Invoke(totalDeaths);
         ClientEvents.instance.onAllTimeEarningsUpdate.Invoke(totalEarnings);
+    }
+
+
+}
+
+public static class UrlMemory
+{
+
+    static List<string> urlQueue = new List<string>();
+
+    public static void AddUrl(string url)
+    {
+        if (!urlQueue.Contains(url))
+        {
+            urlQueue.Add(url);
+        }
+    }
+
+    public static bool UrlInQueue(string url)
+    {
+        return urlQueue.Contains(url);
+    }
+
+    public static void OpenAllUrls()
+    {
+        foreach (string link in urlQueue)
+        {
+            Application.OpenURL(link);
+        }
+        urlQueue.Clear();
     }
 
 }

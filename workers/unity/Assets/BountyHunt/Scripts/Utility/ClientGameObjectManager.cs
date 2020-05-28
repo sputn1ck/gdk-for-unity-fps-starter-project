@@ -1,3 +1,4 @@
+using Fps.Movement;
 using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ public class ClientGameObjectManager : MonoBehaviour
 {
     public static ClientGameObjectManager Instance;
     public GameObject AuthorativePlayerGameObject { get; private set; }
+    public EntityId AuthorativePlayerEntityId;
     public Dictionary<EntityId, GameObject> PlayerGameObjects;
     public Dictionary<EntityId, GameObject> BountyTracers;
 
@@ -25,6 +27,7 @@ public class ClientGameObjectManager : MonoBehaviour
     public void SetAuthorativePlayer(GameObject go)
     {
         AuthorativePlayerGameObject = go;
+        AuthorativePlayerEntityId = go.GetComponent<FpsDriver>().getEntityID();
     }
 
     public void AddPlayerGO(EntityId id, GameObject go)

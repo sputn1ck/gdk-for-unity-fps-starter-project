@@ -1,3 +1,4 @@
+using Bbhrpc;
 using Bountyhunt;
 using Improbable.Gdk.Core;
 using System;
@@ -36,6 +37,8 @@ public class AllTimeScoreUpdateEvent : UnityEvent<AllTimeScoreUpdateArgs> { }
 public class LeaderboardUpdateEvent : UnityEvent<LeaderboardUpdateArgs> { }
 
 public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
+
+public class PlayerKilledEvent : UnityEvent<PlayerKilledArgs> { }
 
 
 [Serializable]
@@ -106,4 +109,9 @@ public struct LeaderboardUpdateArgs
 {
     public Bbhrpc.Ranking[] highscores;
     public string PlayerPubKey;
+}
+
+public struct PlayerKilledArgs
+{
+    public Ranking killerRanking;
 }

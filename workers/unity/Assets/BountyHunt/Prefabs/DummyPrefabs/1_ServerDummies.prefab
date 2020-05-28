@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 212973259964900785}
   - component: {fileID: 851089427456680485}
   - component: {fileID: 1505973134812988758}
-  - component: {fileID: 4259521829153023365}
   m_Layer: 0
   m_Name: 1_ServerDummies
   m_TagString: Untagged
@@ -59,9 +58,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711b27c51ec22ba49905b6bb887664b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bbhDuration: 30
+  ssDuration: 120
   lobbyDuration: 10
+  bbDuration: 120
+  subsidy: 10000
+  bountyDropOnDeath: 1
+  bountyConversion: 0.1
+  bountyConversionTimeSeconds: 10
   PlayerSkins: []
+  invokeKick: 0
+  nameKick: 
+  pubkeyKick: 
+  sender: 
+  message: 
+  announce: 0
+  messageTrigger: 0
+  testAdvertisers:
+  - Name: Nyan
+    Investment: 1000
+    SquareTextureLinks:
+    - https://en.wikipedia.org/wiki/Nyan_Cat#/media/File:Nyan_cat_250px_frame.PNG
+    - https://cdn.kapwing.com/final_5cacd20e01f93c0014190e5a_347921.mp4
+    Url: https://www.youtube.com/watch?v=QH2-TGUlwu4
+  - Name: Grumpy
+    Investment: 200
+    SquareTextureLinks:
+    - https://pbs.twimg.com/profile_images/1080545769034108928/CEzHCTpI_400x400.jpg
+    Url: https://www.instagram.com/realgrumpycat/?hl=en
+  - Name: Catface
+    Investment: 200
+    SquareTextureLinks:
+    - https://static.tvtropes.org/pmwiki/pub/images/cat_face.jpg
+    Url: http://weebls-stuff.com/toons/category/toons/cat-face/
+  - Name: smudge
+    Investment: 300
+    SquareTextureLinks:
+    - https://i.pinimg.com/originals/f8/27/ed/f827ed9a704146f65b96226f430abf3c.png
+    Url: https://i.pinimg.com/originals/f8/27/ed/f827ed9a704146f65b96226f430abf3c.png
+  - Name: polite cat
+    Investment: 400
+    SquareTextureLinks:
+    - https://i1.sndcdn.com/avatars-000492537201-4u9jnl-t500x500.jpg
+    Url: https://pawsplanet.me/meet-ollie-the-polite-cat-with-the-amazing-expression/
 --- !u!114 &1505973134812988758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,9 +119,13 @@ MonoBehaviour:
   earningsRange: {x: 10, y: 10000}
   killsRange: {x: 3, y: 200}
   deathsRange: {x: 3, y: 200}
+  gameDonationSqrtRange: {x: 0, y: 0}
+  devsDonationSqrtRange: {x: 0, y: 0}
   playerEarnings: 5000
   playerKills: 201
   playerDeaths: 2
+  playerDonationsGame: 0
+  playerDonationsDevs: 0
   GoldThreshold: 0.1
   SilverThreshold: 0.3
   BronzeThreshold: 0.6
@@ -97,15 +139,3 @@ MonoBehaviour:
   returnPayment: 0
   expiryInSeconds: 0
   triggerPaymentTest: 0
---- !u!114 &4259521829153023365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302241656598969916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ccd12d5946c9747b52e6a79c8a5741, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

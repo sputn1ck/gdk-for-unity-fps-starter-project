@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
     public static MainMenuUI instance;
     public PreviewSpot previewSpot;
     public Button playButton;
+    public Button quitButton;
     public GameObject connectingInfoObject;
     public TextMeshProUGUI versionText;
     public GameObject uiCam;
@@ -21,6 +22,7 @@ public class MainMenuUI : MonoBehaviour
     {
         instance = this;
         playButton.onClick.AddListener(OnPlayButtonPress);
+        quitButton.onClick.AddListener(OnQuitButtonPress);
     }
 
     private void OnEnable()
@@ -84,9 +86,26 @@ public class MainMenuUI : MonoBehaviour
         versionText.text = version;
     }
 
+    public void OnQuitButtonPress()
+    {
+        YesNoPopUpArgs args = new YesNoPopUpArgs("Quit", GameText.QuitGamePopup, Quit);
+        PopUpManagerUI.instance.OpenYesNoPopUp(args);
+        return;
+    }
+
+    void Quit(bool doIt)
+    {
+        if (!doIt) return;
+        Debug.Log("Quitting!");
+        Application.Quit();
+    }
+
+
     public void BlendImage(bool show)
     {
         uiCam.GetComponent<PostProcessVolume>().enabled = !show;
         blendImage.SetActive(show);
     }
+
+
 }
