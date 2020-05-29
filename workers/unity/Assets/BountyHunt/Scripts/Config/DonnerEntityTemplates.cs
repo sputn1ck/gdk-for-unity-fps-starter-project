@@ -37,12 +37,12 @@ public class DonnerEntityTemplates
         return template;
     }
 
-    public static EntityTemplate Player(string workerId, byte[] args)
+    public static EntityTemplate Player(EntityId entityId, string clientWorkerId, byte[] serializedArguments)
     {
-        var client = EntityTemplate.GetWorkerAccessAttribute(workerId);
+        var client = EntityTemplate.GetWorkerAccessAttribute(clientWorkerId);
         // checks login
         // todo reaadd
-        var loginData = UnityEngine.JsonUtility.FromJson<LoginData>(Encoding.ASCII.GetString(args));
+        var loginData = UnityEngine.JsonUtility.FromJson<LoginData>(Encoding.ASCII.GetString(serializedArguments));
         var playerName = loginData.PlayerName;
         var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
 
@@ -81,9 +81,10 @@ public class DonnerEntityTemplates
         };
 
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
+        var serverCheckoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(500));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
         var bountyTracerQuery = InterestQuery.Query(Constraint.Component(TracerComponent.ComponentId));
-        var interestTemplate = InterestTemplate.Create().AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
+        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverCheckoutQuery).AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
         var interestComponent = interestTemplate.ToSnapshot();
 
         // NEW STUFF
@@ -151,7 +152,7 @@ public class DonnerEntityTemplates
         template.AddComponent(privateChat, client);
         */
 
-        PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, workerId, WorkerUtils.UnityGameLogic);
+        PlayerLifecycleHelper.AddPlayerLifecycleComponents(template, clientWorkerId, WorkerUtils.UnityGameLogic);
 
         template.SetReadAccess(WorkerUtils.UnityClient, WorkerUtils.UnityGameLogic, WorkerUtils.MobileClient);
         template.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

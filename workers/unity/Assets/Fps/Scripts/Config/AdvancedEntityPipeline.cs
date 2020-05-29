@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Fps.Movement;
 using Fps.SchemaExtensions;
@@ -46,22 +46,6 @@ namespace Fps.Config
             cachedNonAuthPlayer = Resources.Load<GameObject>(nonAuthPlayer);
         }
 
-        public void OnEntityCreated(SpatialOSEntity entity, EntityGameObjectLinker linker)
-        {
-            if (!entity.TryGetComponent<Metadata.Component>(out var metadata))
-            {
-                return;
-            }
-
-            if (metadata.EntityType == PlayerEntityType)
-            {
-                CreatePlayerGameObject(entity, linker);
-                return;
-            }
-
-            fallback.OnEntityCreated(entity, linker);
-        }
-
         private void CreatePlayerGameObject(SpatialOSEntity entity, EntityGameObjectLinker linker)
         {
             if (!entity.TryGetComponent<OwningWorker.Component>(out var owningWorker))
@@ -96,6 +80,29 @@ namespace Fps.Config
 
             gameObjectsCreated.Remove(entityId);
             Object.Destroy(go);
+        }
+
+        public void PopulateEntityTypeExpectations(EntityTypeExpectations entityTypeExpectations)
+        {
+            entityTypeExpectations.RegisterEntityType(PlayerEntityType, new[]
+            {
+                typeof(OwningWorker.Component), typeof(ServerMovement.Component)
+            });
+
+            fallback.PopulateEntityTypeExpectations(entityTypeExpectations);
+        }
+
+        public void OnEntityCreated(string entityType, SpatialOSEntity entity, EntityGameObjectLinker linker)
+        {
+            switch (entityType)
+            {
+                case PlayerEntityType:
+                    CreatePlayerGameObject(entity, linker);
+                    break;
+                default:
+                    fallback.OnEntityCreated(entityType, entity, linker);
+                    break;
+            }
         }
     }
 }

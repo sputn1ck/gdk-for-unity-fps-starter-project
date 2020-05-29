@@ -144,7 +144,8 @@ public class CompassUI : MonoBehaviour
 
     void UpdateTrackObject(TrackObject trackObject)
     {
-
+        if (trackObject == null)
+            return;
         Vector3 objDir3 = trackObject.gameObject.transform.position - cam.transform.position;
         Vector2 objDir2 = new Vector2(objDir3.x, objDir3.z);
 

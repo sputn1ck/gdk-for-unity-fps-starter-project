@@ -30,21 +30,20 @@ namespace Fps.Health
             componentUpdateSystem = World.GetExistingSystem<ComponentUpdateSystem>();
             commandSystem = World.GetExistingSystem<CommandSystem>();
 
+            
             initGroup = GetEntityQuery(
                 ComponentType.ReadOnly<HealthRegenComponent.Component>(),
                 ComponentType.Exclude<HealthRegenData>(),
-                ComponentType.ReadOnly<HealthComponent.ComponentAuthority>()
+                ComponentType.ReadOnly<HealthComponent.HasAuthority>()
             );
-            initGroup.SetFilter(HealthComponent.ComponentAuthority.Authoritative);
 
             regenGroup = GetEntityQuery(
                 ComponentType.ReadWrite<HealthRegenComponent.Component>(),
                 ComponentType.ReadWrite<HealthRegenData>(),
                 ComponentType.ReadOnly<HealthComponent.Component>(),
                 ComponentType.ReadOnly<SpatialEntityId>(),
-                ComponentType.ReadOnly<HealthComponent.ComponentAuthority>()
+                ComponentType.ReadOnly<HealthComponent.HasAuthority>()
             );
-            regenGroup.SetFilter(HealthComponent.ComponentAuthority.Authoritative);
         }
 
         protected override void OnUpdate()
@@ -142,7 +141,7 @@ namespace Fps.Health
                     // If damaged recently, tick down the timer.
                     if (regenComponent.DamagedRecently)
                     {
-                        regenData.DamagedRecentlyTimer -= Time.deltaTime;
+                        regenData.DamagedRecentlyTimer -= UnityEngine.Time.deltaTime;
 
                         if (regenData.DamagedRecentlyTimer <= 0)
                         {
@@ -153,7 +152,7 @@ namespace Fps.Health
                         else
                         {
                             // Send a spatial update once every CooldownSyncInterval.
-                            regenData.NextSpatialSyncTimer -= Time.deltaTime;
+                            regenData.NextSpatialSyncTimer -= UnityEngine.Time.deltaTime;
                             if (regenData.NextSpatialSyncTimer <= 0)
                             {
                                 regenData.NextSpatialSyncTimer += regenComponent.CooldownSyncInterval;
@@ -167,7 +166,7 @@ namespace Fps.Health
                     // If not damaged recently, and not already fully healed, regen.
                     if (healthComponent.Health < healthComponent.MaxHealth && !regenComponent.DamagedRecently)
                     {
-                        regenData.NextRegenTimer -= Time.deltaTime;
+                        regenData.NextRegenTimer -= UnityEngine.Time.deltaTime;
                         if (regenData.NextRegenTimer <= 0)
                         {
                             regenData.NextRegenTimer += regenComponent.RegenInterval;
