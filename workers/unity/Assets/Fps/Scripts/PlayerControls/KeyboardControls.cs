@@ -20,21 +20,21 @@ namespace Fps.PlayerControls
 
         public float YawDelta => Input.GetAxis("Mouse X")*sensitivity;
         public float PitchDelta => Input.GetAxis("Mouse Y")*sensitivity;
-        public bool IsAiming => Input.GetButton("Aim");
-        public bool AreSprinting => Input.GetButton("Sprint") && Forward && !Backward;
-        public bool JumpPressed => Input.GetButtonDown("Jump");
-        public bool ShootPressed => Input.GetButtonDown("Shoot");
-        public bool ShootHeld => Input.GetButton("Shoot");
-        public bool MenuPressed => Input.GetButtonDown("Menu");
-        public bool RespawnPressed => Input.GetButtonDown("Respawn");
-        public bool ConnectPressed => Input.GetButtonDown("Respawn");
-        public bool ChatPressed => Input.GetButtonDown("Chat");
+        public bool IsAiming => InputKeyMapping.MappedKeyHeld("Aim_Key");// Input.GetButton("Aim"); 
+        public bool AreSprinting => InputKeyMapping.MappedKeyHeld("Sprint_Key");//Input.GetButton("Sprint") && Forward && !Backward;
+        public bool JumpPressed => InputKeyMapping.MappedKeyDown("Jump_Key");//Input.GetButtonDown("Jump");
+        public bool ShootPressed => InputKeyMapping.MappedKeyDown("Shoot_Key");//Input.GetButtonDown("Shoot");
+        public bool ShootHeld => InputKeyMapping.MappedKeyHeld("Shoot_Key");//Input.GetButton("Shoot");
+        public bool MenuPressed => InputKeyMapping.MappedKeyDown("Menu_Key");//Input.GetButtonDown("Menu");
+        public bool RespawnPressed => InputKeyMapping.MappedKeyDown("Respawn_Key");//Input.GetButtonDown("Respawn");
+        public bool ConnectPressed => InputKeyMapping.MappedKeyDown("Respawn_Key");//Input.GetButtonDown("Respawn");
+        public bool ChatPressed => InputKeyMapping.MappedKeyDown("Chat_Key");//Input.GetButtonDown("Chat");
 
 
-        private static bool Forward => Input.GetButton("Forward");
-        private static bool Backward => Input.GetButton("Backward");
-        private static bool Left => Input.GetButton("Left");
-        private static bool Right => Input.GetButton("Right");
+        private static bool Forward => InputKeyMapping.MappedKeyHeld("ForWard_Key");//Input.GetButton("Forward");
+        private static bool Backward => InputKeyMapping.MappedKeyHeld("Backward_Key");//Input.GetButton("Backward");
+        private static bool Left => InputKeyMapping.MappedKeyHeld("Left_Key");//Input.GetButton("Left");
+        private static bool Right => InputKeyMapping.MappedKeyHeld("Right_Key");//Input.GetButton("Right");
 
         private readonly Vector3[] cachedDirectionVectors = new Vector3[16];
 

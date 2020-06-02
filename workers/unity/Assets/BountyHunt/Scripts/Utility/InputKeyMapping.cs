@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputKeyMapping : MonoBehaviour
 {
-    Dictionary<string, KeyCode> Keys;
+    static Dictionary<string, KeyCode> Keys;
 
     void Awake()
     {
@@ -12,7 +12,7 @@ public class InputKeyMapping : MonoBehaviour
         LoadAllKeys();
     }
 
-    void LoadAllKeys()
+    static void LoadAllKeys()
     {
         LoadKey("Aim_Key", "mouse 1");
         LoadKey("Sprint_Key", "left shift");
@@ -25,9 +25,10 @@ public class InputKeyMapping : MonoBehaviour
         LoadKey("Backward_Key", "s");
         LoadKey("Left_Key", "a");
         LoadKey("Right_Key", "d");
+
     }
 
-    public void ResetAllKeys()
+    public static void ResetAllKeys()
     {
         foreach(var key in Keys)
         {
@@ -36,13 +37,13 @@ public class InputKeyMapping : MonoBehaviour
         LoadAllKeys();
     }
 
-    void LoadKey(string key, string defaultValue)
+    static void LoadKey(string key, string defaultValue)
     {
         Keys[key] = (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(key, defaultValue));
 
     }
 
-    public void SetKey(string key, KeyCode keyCode)
+    public static void SetKey(string key, KeyCode keyCode)
     {
         Keys[key] = keyCode;
 
@@ -50,8 +51,25 @@ public class InputKeyMapping : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public KeyCode getKey(string key)
+    public static KeyCode GetKeyCode(string key)
     {
         return Keys[key];
+    }
+
+    public static bool MappedKeyDown(string key)
+    {
+        return Input.GetKeyDown(Keys[key]);
+    }
+
+    public static bool MappedKeyHeld(string key)
+    {
+        return Input.GetKey(Keys[key]);
+
+    }
+
+    public static bool MappedKeyUp(string key)
+    {
+        return Input.GetKeyUp(Keys[key]);
+
     }
 }
