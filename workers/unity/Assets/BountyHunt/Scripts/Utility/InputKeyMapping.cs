@@ -14,18 +14,17 @@ public class InputKeyMapping : MonoBehaviour
 
     static void LoadAllKeys()
     {
-        LoadKey("Aim_Key", "mouse 1");
-        LoadKey("Sprint_Key", "left shift");
-        LoadKey("Jump_Key", "space");
-        LoadKey("Shoot_Key", "mouse 0");
-        LoadKey("Menu_Key", "escape");
-        LoadKey("Respawn_Key", "space");
-        LoadKey("Chat_Key", "t");
-        LoadKey("Forward_Key", "w");
-        LoadKey("Backward_Key", "s");
-        LoadKey("Left_Key", "a");
-        LoadKey("Right_Key", "d");
-
+        LoadKey("Aim_Key", KeyCode.Mouse1);
+        LoadKey("Sprint_Key", KeyCode.LeftShift);
+        LoadKey("Jump_Key", KeyCode.Space);
+        LoadKey("Shoot_Key", KeyCode.Mouse0);
+        LoadKey("Menu_Key", KeyCode.Escape);
+        LoadKey("Respawn_Key", KeyCode.Space);
+        LoadKey("Chat_Key", KeyCode.T);
+        LoadKey("Forward_Key", KeyCode.W);
+        LoadKey("Backward_Key", KeyCode.S);
+        LoadKey("Left_Key", KeyCode.A);
+        LoadKey("Right_Key", KeyCode.D);
     }
 
     public static void ResetAllKeys()
@@ -37,17 +36,16 @@ public class InputKeyMapping : MonoBehaviour
         LoadAllKeys();
     }
 
-    static void LoadKey(string key, string defaultValue)
+    static void LoadKey(string key, KeyCode defaultCode)
     {
-        Keys[key] = (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(key, defaultValue));
-
+        Keys[key] = (KeyCode)(PlayerPrefs.GetInt(key, (int)defaultCode));
     }
 
     public static void SetKey(string key, KeyCode keyCode)
     {
         Keys[key] = keyCode;
 
-        PlayerPrefs.SetString(key, keyCode.ToString());
+        PlayerPrefs.SetInt(key, (int)keyCode);
         PlayerPrefs.Save();
     }
 
