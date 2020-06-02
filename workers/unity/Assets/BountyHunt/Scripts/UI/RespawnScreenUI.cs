@@ -81,7 +81,14 @@ public class RespawnScreenUI : ScreenUI
     }
 
 
-    async public void StartCooldown()
+    public void StartCooldown()
+    {
+        Invoke("Respawn", forceRespawnCooldownAddition);
+        StartCoroutine(DeathCooldown());
+
+    }
+
+    public IEnumerator DeathCooldown()
     {
         waiting = true;
         respawnButton.gameObject.SetActive(false);
@@ -90,17 +97,11 @@ public class RespawnScreenUI : ScreenUI
         for (int i = respawnCooldown; i > 0; i--)
         {
             respawnTimerText.text = i + " sec";
-            await Task.Delay(1000);
+            yield return new WaitForSeconds(1);
         }
-
-        alreadyRespawned = false;
-        respawnTimerText.gameObject.SetActive(false);
         waiting = false;
+        respawnTimerText.gameObject.SetActive(false);
         respawnButton.gameObject.SetActive(true);
-
-        await Task.Delay(forceRespawnCooldownAddition *1000);
-
-        if (!alreadyRespawned) Respawn();
     }
 
     public void SelectRifle(bool doIt)
@@ -129,10 +130,11 @@ public class RespawnScreenUI : ScreenUI
     public void Respawn()
     {
         if (!FpsDriver.instance || waiting) return;
-        waiting = true;
+        CancelInvoke();
         FpsDriver.instance.Respawn();
-        alreadyRespawned = true;
     }
+
+
 
     public void RefreshAds()
     {

@@ -87,35 +87,33 @@ public class BountyPlayerServer : MonoBehaviour
         SendResponse res = new SendResponse() { PaymentError = "something went wrong" };
         ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "trying to pay out " + res.PaymentError, Chat.MessageType.DEBUG_LOG, false);
         bool payed = false;
-        // Try paying player 
-        try
-        {
-            res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(HunterComponentWriter.Data.Pubkey, HunterComponentWriter.Data.Pubkey, amount);
-            payed = true;
-        } catch (Exception e)
-        {
-            res.PaymentError = "PLATFORM_KEYSEND:" + e.Message;
-            payed = false;
-        }
+        string exceptionMessage = "";
         // Pay to platform
         try
         {
             if (!payed)
             {
                 res = await ServerServiceConnections.instance.lnd.KeysendBufferDeposit(ServerServiceConnections.instance.PlatformPubkey, HunterComponentWriter.Data.Pubkey, amount);
-                payed = true;
+                if (res.PaymentError == "")
+                    payed = true;
+
             }
              
         } catch (Exception e)
         {
-            res.PaymentError += ";PLATFORM_KEYSEND:" + e.Message;
+            exceptionMessage += ";PLATFORM_KEYSEND:" + e.Message;
         }
-        if (res.PaymentError != "")
-        {
-            ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "error while paying out: " + res.PaymentError, Chat.MessageType.DEBUG_LOG,false);
-        } else
+        if (payed)
         {
             HunterComponentWriter.SendUpdate(new HunterComponent.Update { Earnings = HunterComponentWriter.Data.Earnings - amount });
+        }
+        if (res.PaymentError != "" && !payed)
+        {
+            //ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", , Chat.MessageType.DEBUG_LOG,false);
+            Debug.Log("error while paying out: " + res.PaymentError);
+        } else if(exceptionMessage != "" && !payed) {
+            //ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "error while paying out: " + exceptionMessage, Chat.MessageType.DEBUG_LOG, false);
+            Debug.Log("error while paying out: " + exceptionMessage);
         }
     }
 
