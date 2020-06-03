@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class InputKeyMapping : MonoBehaviour
 {
+    public SkillDictionary skillDictionary;
     static Dictionary<string, KeyCode> Keys;
+
+    static InputKeyMapping instance;
 
     void Awake()
     {
+        instance = this;
         Keys = new Dictionary<string, KeyCode>();
         LoadAllKeys();
     }
@@ -25,6 +29,11 @@ public class InputKeyMapping : MonoBehaviour
         LoadKey("Backward_Key", KeyCode.S);
         LoadKey("Left_Key", KeyCode.A);
         LoadKey("Right_Key", KeyCode.D);
+
+        foreach(PlayerSkill skill in instance.skillDictionary.skills)
+        {
+            LoadKey(skill.SkillName + "_Key", skill.defaultkey);
+        }
     }
 
     public static void ResetAllKeys()

@@ -31,7 +31,7 @@ namespace Fps.PlayerControls
         public bool ChatPressed => InputKeyMapping.MappedKeyDown("Chat_Key");//Input.GetButtonDown("Chat");
 
 
-        private static bool Forward => InputKeyMapping.MappedKeyHeld("ForWard_Key");//Input.GetButton("Forward");
+        private static bool Forward => InputKeyMapping.MappedKeyHeld("Forward_Key");//Input.GetButton("Forward");
         private static bool Backward => InputKeyMapping.MappedKeyHeld("Backward_Key");//Input.GetButton("Backward");
         private static bool Left => InputKeyMapping.MappedKeyHeld("Left_Key");//Input.GetButton("Left");
         private static bool Right => InputKeyMapping.MappedKeyHeld("Right_Key");//Input.GetButton("Right");

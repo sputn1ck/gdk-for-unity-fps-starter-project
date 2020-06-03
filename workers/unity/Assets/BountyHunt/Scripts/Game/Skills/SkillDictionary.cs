@@ -7,9 +7,9 @@ using UnityEngine;
 public class SkillDictionary : ScriptableObject
 {
 
-    public static SkillDictionary Instance { private get; set; }
+    public static SkillDictionary Instance;
 
-    [SerializeField] private PlayerSkill[] skills;
+    [SerializeField] public PlayerSkill[] skills;
     // Start is called before the first frame update
 
     public static PlayerSkill Get(int index)

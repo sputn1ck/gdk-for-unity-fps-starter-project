@@ -10,6 +10,8 @@ public class BBHUIManager : MonoBehaviour
     public StartScreenUI startScreen;
     public InGameScreenManagerUI inGame;
     public MainMenuUI mainMenu;
+    public GameObject uiCam;
+    public GameObject blendImage;
     public static BBHUIManager instance;
 
 

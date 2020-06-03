@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3231388491131628992}
   - component: {fileID: 8932650709854373229}
   - component: {fileID: 6882851908204537564}
+  - component: {fileID: 8111325867581222443}
   m_Layer: 0
   m_Name: ClientWorkerLnd
   m_TagString: Untagged
@@ -108,53 +109,33 @@ MonoBehaviour:
   onMapLoaded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onGameJoined:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onNewAuctionStarted:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onPlayerDie:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onServicesSetup:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onBountyUpdate:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: BountyUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   onSessionEarningsUpdate:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: SessionEarningsUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   onBalanceUpdate:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: BalanceUpdateEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   onChatMessageRecieve:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: ChatMessageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   onOpponentHit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &8932650709854373229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +163,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bountyPickupMaterialSettings: {fileID: 11400000, guid: b51c515cb2c889b45a49a4b2ff47a40a,
     type: 2}
+--- !u!114 &8111325867581222443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54bbd385543e59849ba83f0de9890163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillDictionary: {fileID: 11400000, guid: c362e1c6e94a0c546876566b1096f186, type: 2}
 --- !u!1 &6983945382177000905
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,11 +226,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2466744334126222728}
     m_Modifications:
-    - target: {fileID: 7920313071033556918, guid: 95d0ee86225dd7e4c92aeca5c2ff01b2,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
     - target: {fileID: 499792493541940304, guid: 95d0ee86225dd7e4c92aeca5c2ff01b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -291,6 +280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920313071033556918, guid: 95d0ee86225dd7e4c92aeca5c2ff01b2,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95d0ee86225dd7e4c92aeca5c2ff01b2, type: 3}

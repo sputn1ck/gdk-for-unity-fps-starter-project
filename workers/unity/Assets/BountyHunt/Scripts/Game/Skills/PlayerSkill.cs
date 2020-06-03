@@ -10,9 +10,11 @@ using UnityEngine.Events;
 
 public abstract class PlayerSkill : ScriptableObject
 {
+    public string SkillName;
     public float Cooldown;
     public Sprite icon;
-    public string key;
+    public KeyCode defaultkey;
+    [HideInInspector]public KeyCode key => InputKeyMapping.GetKeyCode(SkillName+"_Key");
 
     public FloatEvent onCooldownStart = new FloatEvent();
     public UnityEvent onCastFailed = new UnityEvent();

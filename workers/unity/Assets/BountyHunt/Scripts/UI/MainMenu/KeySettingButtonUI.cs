@@ -18,12 +18,17 @@ public class KeySettingButtonUI : MonoBehaviour
 
     private void Awake()
     {
-        labelText.text = label;
         button.onClick.AddListener(OnButtonClick);
     }
 
     private void OnEnable()
     {
+        if (string.IsNullOrEmpty(key)) return;
+        RefreshTexts();
+    }
+    public void RefreshTexts()
+    {
+        labelText.text = label;
         keyText.text = InputKeyMapping.GetKeyCode(key).ToString();
     }
 
@@ -32,7 +37,7 @@ public class KeySettingButtonUI : MonoBehaviour
         listeningCounter = detectKeyCountDown;
         string header = string.Format(GameText.AssignButtonPopupHeader, label);
         PopUpArgs popUpArgs = new PopUpArgs(header, GameText.AssignButtonPopup,StopListening);
-
+        popUp = PopUpManagerUI.instance.OpenPopUp(popUpArgs);
     }
 
     public void StopListening()
