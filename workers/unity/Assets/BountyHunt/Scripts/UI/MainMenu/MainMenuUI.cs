@@ -16,7 +16,8 @@ public class MainMenuUI : MonoBehaviour
     public TextMeshProUGUI versionText;
     public GameObject uiCam;
     public GameObject blendImage;
-        
+    private bool isConnecting;
+   
 
     private void Awake()
     {
@@ -42,6 +43,10 @@ public class MainMenuUI : MonoBehaviour
 
     public async void OnPlayButtonPress()
     {
+        if (isConnecting)
+            return;
+
+        isConnecting = true;
         connectingInfoObject.gameObject.SetActive(true);
         string playername;
         try
@@ -55,8 +60,10 @@ public class MainMenuUI : MonoBehaviour
             PopUpArgs args = new PopUpArgs("Error", e.Message);
             PopUpManagerUI.instance.OpenPopUp(args);
             connectingInfoObject.SetActive(false);
+            isConnecting = false;
             return;
         }
+        isConnecting = false;
         OnConnectionSuccesss(playername);
 
     }
