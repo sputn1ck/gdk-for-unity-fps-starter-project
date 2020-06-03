@@ -188,7 +188,13 @@ public class ChatPanelUI : MonoBehaviour
         chatInput.Select();
         chatInput.ActivateInputField();
         chatInput.placeholder.GetComponent<TextMeshProUGUI>().text = "";
+        StartCoroutine(fix());
+    }
 
+    IEnumerator fix()
+    {
+        yield return new WaitForEndOfFrame();
+        chatInput.textComponent.ForceMeshUpdate();
     }
 
     static bool showLogType(MessageType type)
