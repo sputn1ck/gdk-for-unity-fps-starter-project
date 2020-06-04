@@ -78,4 +78,9 @@ public class SkillIconUI : MonoBehaviour
         CoverImage.fillAmount = 1;
     }
 
+    private void OnEnable()
+    {
+        setSkill(skill);
+    }
+
 }

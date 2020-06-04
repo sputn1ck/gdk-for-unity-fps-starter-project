@@ -10,6 +10,7 @@ public class InputSettingsMenuUI : MonoBehaviour
     public Transform skillInputSettingsContainer;
     public KeySettingButtonUI keyButtonPrefab;
     KeySettingButtonUI[] keyButtons;
+    public List<KeyCode> keyBlacklist;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,11 @@ public class InputSettingsMenuUI : MonoBehaviour
             btn.RefreshTexts();
         }
         keyButtons = GetComponentsInChildren<KeySettingButtonUI>();
+
+        foreach(var btn in keyButtons)
+        {
+            btn.keyBlacklist = keyBlacklist;
+        }
     }
 
 

@@ -12,6 +12,7 @@ public class KeySettingButtonUI : MonoBehaviour
     public TextMeshProUGUI labelText;
     public TextMeshProUGUI keyText;
 
+    [HideInInspector]public List<KeyCode> keyBlacklist;
     float listeningCounter = 0f;
     const float detectKeyCountDown = 5f;
     PopUpUI popUp;
@@ -52,6 +53,8 @@ public class KeySettingButtonUI : MonoBehaviour
 
         foreach (KeyCode keycode in System.Enum.GetValues(typeof(KeyCode)))
         {
+            if (keyBlacklist.Contains(keycode)) continue;
+
             if (Input.GetKeyDown(keycode))
             {
                 InputKeyMapping.SetKey(key, keycode);
