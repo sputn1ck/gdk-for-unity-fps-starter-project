@@ -43,11 +43,11 @@ namespace Bbhrpc {
             "ZRgBIAEoCRITCgt1c2VyX3B1YmtleRgCIAEoCSI8CgtCb3VudHlFdmVudBIM",
             "CgR1c2VyGAEgASgJEg4KBmFtb3VudBgCIAEoAxIPCgdtZXNzYWdlGAMgASgJ",
             "Ij4KCUNoYXRFdmVudBIPCgdtZXNzYWdlGAEgASgJEg4KBnNlbmRlchgCIAEo",
-            "CRIQCghhbm5vdW5jZRgDIAEoCCJcChNHZXRSb3VuZEluZm9SZXF1ZXN0EhcK",
+            "CRIQCghhbm5vdW5jZRgDIAEoCCJGChNHZXRSb3VuZEluZm9SZXF1ZXN0EhcK",
             "D2Jhbm5lcnNfaW5fZ2FtZRgBIAEoBRIWCg5wbGF5ZXJfaW5fZ2FtZRgCIAEo",
-            "BRIUCgxnYW1lX21vZGVfaWQYAyABKAkigAEKFEdldFJvdW5kSW5mb1Jlc3Bv",
-            "bnNlEg8KB3N1YnNpZHkYASABKAMSKgoIc2V0dGluZ3MYAiABKAsyGC5iYmhy",
-            "cGMuR2FtZU1vZGVTZXR0aW5ncxIrCgthZHZlcnRpc2VycxgDIAMoCzIWLmJi",
+            "BSKWAQoUR2V0Um91bmRJbmZvUmVzcG9uc2USDwoHc3Vic2lkeRgBIAEoAxIU",
+            "CgxnYW1lX21vZGVfaWQYAiABKAkSKgoIc2V0dGluZ3MYAyABKAsyGC5iYmhy",
+            "cGMuR2FtZU1vZGVTZXR0aW5ncxIrCgthZHZlcnRpc2VycxgEIAMoCzIWLmJi",
             "aHJwYy5BZHZlcnRpc2VySW5mbyK4AQoQR2FtZU1vZGVTZXR0aW5ncxIXCg9z",
             "ZWNvbmRfZHVyYXRpb24YASABKAMSKwoNYmFzZV9zZXR0aW5ncxgCIAEoCzIU",
             "LmJiaHJwYy5CYXNlU2V0dGluZ3MSLwoPYm91bnR5X3NldHRpbmdzGAMgASgL",
@@ -92,8 +92,8 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.KickEvent), global::Bbhrpc.KickEvent.Parser, new[]{ "UserName", "UserPubkey" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BountyEvent), global::Bbhrpc.BountyEvent.Parser, new[]{ "User", "Amount", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ChatEvent), global::Bbhrpc.ChatEvent.Parser, new[]{ "Message", "Sender", "Announce" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoRequest), global::Bbhrpc.GetRoundInfoRequest.Parser, new[]{ "BannersInGame", "PlayerInGame", "GameModeId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoResponse), global::Bbhrpc.GetRoundInfoResponse.Parser, new[]{ "Subsidy", "Settings", "Advertisers" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoRequest), global::Bbhrpc.GetRoundInfoRequest.Parser, new[]{ "BannersInGame", "PlayerInGame" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoResponse), global::Bbhrpc.GetRoundInfoResponse.Parser, new[]{ "Subsidy", "GameModeId", "Settings", "Advertisers" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GameModeSettings), global::Bbhrpc.GameModeSettings.Parser, new[]{ "SecondDuration", "BaseSettings", "BountySettings", "SpawnSettings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BaseSettings), global::Bbhrpc.BaseSettings.Parser, new[]{ "TeleportPlayerOnStart", "ClearBountyOnEnd", "ClearStatsOnEnd", "ClearPickupsOnEnd" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BountySettings), global::Bbhrpc.BountySettings.Parser, new[]{ "BountyTickConversion", "BountyTickTimeSeconds", "BountyDropPercentageDeath" }, null, null, null),
@@ -1954,7 +1954,6 @@ namespace Bbhrpc {
     public GetRoundInfoRequest(GetRoundInfoRequest other) : this() {
       bannersInGame_ = other.bannersInGame_;
       playerInGame_ = other.playerInGame_;
-      gameModeId_ = other.gameModeId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1985,17 +1984,6 @@ namespace Bbhrpc {
       }
     }
 
-    /// <summary>Field number for the "game_mode_id" field.</summary>
-    public const int GameModeIdFieldNumber = 3;
-    private string gameModeId_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string GameModeId {
-      get { return gameModeId_; }
-      set {
-        gameModeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GetRoundInfoRequest);
@@ -2011,7 +1999,6 @@ namespace Bbhrpc {
       }
       if (BannersInGame != other.BannersInGame) return false;
       if (PlayerInGame != other.PlayerInGame) return false;
-      if (GameModeId != other.GameModeId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2020,7 +2007,6 @@ namespace Bbhrpc {
       int hash = 1;
       if (BannersInGame != 0) hash ^= BannersInGame.GetHashCode();
       if (PlayerInGame != 0) hash ^= PlayerInGame.GetHashCode();
-      if (GameModeId.Length != 0) hash ^= GameModeId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2042,10 +2028,6 @@ namespace Bbhrpc {
         output.WriteRawTag(16);
         output.WriteInt32(PlayerInGame);
       }
-      if (GameModeId.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(GameModeId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2059,9 +2041,6 @@ namespace Bbhrpc {
       }
       if (PlayerInGame != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerInGame);
-      }
-      if (GameModeId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameModeId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2080,9 +2059,6 @@ namespace Bbhrpc {
       if (other.PlayerInGame != 0) {
         PlayerInGame = other.PlayerInGame;
       }
-      if (other.GameModeId.Length != 0) {
-        GameModeId = other.GameModeId;
-      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2100,10 +2076,6 @@ namespace Bbhrpc {
           }
           case 16: {
             PlayerInGame = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            GameModeId = input.ReadString();
             break;
           }
         }
@@ -2138,6 +2110,7 @@ namespace Bbhrpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetRoundInfoResponse(GetRoundInfoResponse other) : this() {
       subsidy_ = other.subsidy_;
+      gameModeId_ = other.gameModeId_;
       settings_ = other.settings_ != null ? other.settings_.Clone() : null;
       advertisers_ = other.advertisers_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -2159,8 +2132,19 @@ namespace Bbhrpc {
       }
     }
 
+    /// <summary>Field number for the "game_mode_id" field.</summary>
+    public const int GameModeIdFieldNumber = 2;
+    private string gameModeId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GameModeId {
+      get { return gameModeId_; }
+      set {
+        gameModeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "settings" field.</summary>
-    public const int SettingsFieldNumber = 2;
+    public const int SettingsFieldNumber = 3;
     private global::Bbhrpc.GameModeSettings settings_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Bbhrpc.GameModeSettings Settings {
@@ -2171,9 +2155,9 @@ namespace Bbhrpc {
     }
 
     /// <summary>Field number for the "advertisers" field.</summary>
-    public const int AdvertisersFieldNumber = 3;
+    public const int AdvertisersFieldNumber = 4;
     private static readonly pb::FieldCodec<global::Bbhrpc.AdvertiserInfo> _repeated_advertisers_codec
-        = pb::FieldCodec.ForMessage(26, global::Bbhrpc.AdvertiserInfo.Parser);
+        = pb::FieldCodec.ForMessage(34, global::Bbhrpc.AdvertiserInfo.Parser);
     private readonly pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo> advertisers_ = new pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo> Advertisers {
@@ -2194,6 +2178,7 @@ namespace Bbhrpc {
         return true;
       }
       if (Subsidy != other.Subsidy) return false;
+      if (GameModeId != other.GameModeId) return false;
       if (!object.Equals(Settings, other.Settings)) return false;
       if(!advertisers_.Equals(other.advertisers_)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -2203,6 +2188,7 @@ namespace Bbhrpc {
     public override int GetHashCode() {
       int hash = 1;
       if (Subsidy != 0L) hash ^= Subsidy.GetHashCode();
+      if (GameModeId.Length != 0) hash ^= GameModeId.GetHashCode();
       if (settings_ != null) hash ^= Settings.GetHashCode();
       hash ^= advertisers_.GetHashCode();
       if (_unknownFields != null) {
@@ -2222,8 +2208,12 @@ namespace Bbhrpc {
         output.WriteRawTag(8);
         output.WriteInt64(Subsidy);
       }
-      if (settings_ != null) {
+      if (GameModeId.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(GameModeId);
+      }
+      if (settings_ != null) {
+        output.WriteRawTag(26);
         output.WriteMessage(Settings);
       }
       advertisers_.WriteTo(output, _repeated_advertisers_codec);
@@ -2237,6 +2227,9 @@ namespace Bbhrpc {
       int size = 0;
       if (Subsidy != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Subsidy);
+      }
+      if (GameModeId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameModeId);
       }
       if (settings_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
@@ -2255,6 +2248,9 @@ namespace Bbhrpc {
       }
       if (other.Subsidy != 0L) {
         Subsidy = other.Subsidy;
+      }
+      if (other.GameModeId.Length != 0) {
+        GameModeId = other.GameModeId;
       }
       if (other.settings_ != null) {
         if (settings_ == null) {
@@ -2279,13 +2275,17 @@ namespace Bbhrpc {
             break;
           }
           case 18: {
+            GameModeId = input.ReadString();
+            break;
+          }
+          case 26: {
             if (settings_ == null) {
               Settings = new global::Bbhrpc.GameModeSettings();
             }
             input.ReadMessage(Settings);
             break;
           }
-          case 26: {
+          case 34: {
             advertisers_.AddEntriesFrom(input, _repeated_advertisers_codec);
             break;
           }
