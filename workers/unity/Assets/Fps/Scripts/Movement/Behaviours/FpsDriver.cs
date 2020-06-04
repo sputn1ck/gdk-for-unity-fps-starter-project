@@ -119,12 +119,6 @@ namespace Fps.Movement
 
             if (health.Data.Health == 0)
             {
-                if (controller.RespawnPressed)
-                {
-                    ((RespawnScreenUI)BBHUIManager.instance.inGame.RespawnScreen).Respawn();
-                    //Respawn();
-                }
-
                 return;
             }
             for (int i = 0; i < SkillDictionary.Count; i++)
@@ -203,7 +197,7 @@ namespace Fps.Movement
 
         private IEnumerator RequestRespawn()
         {
-            while (true)
+            while (isRequestingRespawn)
             {
                 commandSender?.SendRequestRespawnCommand(entityId, new Empty());
                 yield return new WaitForSeconds(2);
