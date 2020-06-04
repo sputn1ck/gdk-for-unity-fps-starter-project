@@ -80,6 +80,7 @@ public class SkillIconUI : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!skill) return;
         setSkill(skill);
     }
 

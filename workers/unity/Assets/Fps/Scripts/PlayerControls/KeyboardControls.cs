@@ -5,6 +5,8 @@ namespace Fps.PlayerControls
     public class KeyboardControls : MonoBehaviour, IControlProvider
     {
         public float sensitivity;
+        public float mouseMultiplierX;
+        public float mouseMultiplierY;
 
         public Vector3 Movement
         {
@@ -18,8 +20,8 @@ namespace Fps.PlayerControls
             }
         }
 
-        public float YawDelta => Input.GetAxis("Mouse X")*sensitivity;
-        public float PitchDelta => Input.GetAxis("Mouse Y")*sensitivity;
+        public float YawDelta => Input.GetAxis("Mouse X")*sensitivity * mouseMultiplierX;
+        public float PitchDelta => Input.GetAxis("Mouse Y")*sensitivity * mouseMultiplierY;
         public bool IsAiming => InputKeyMapping.MappedKeyHeld("Aim_Key");// Input.GetButton("Aim"); 
         public bool AreSprinting => InputKeyMapping.MappedKeyHeld("Sprint_Key");//Input.GetButton("Sprint") && Forward && !Backward;
         public bool JumpPressed => InputKeyMapping.MappedKeyDown("Jump_Key");//Input.GetButtonDown("Jump");
@@ -43,6 +45,8 @@ namespace Fps.PlayerControls
         private void Awake()
         {
             sensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1);
+            mouseMultiplierX = PlayerPrefs.GetFloat("MouseMultiplierX", 1);
+            mouseMultiplierY = PlayerPrefs.GetFloat("MouseMultiplierY", 1);
             instance = this;
             CreateDirectionCache();
         }
