@@ -45,6 +45,7 @@ public class BBHHud : MonoBehaviour
         healthReader.OnHealthModifiedEvent += OnHealthModified;
         healthReader.OnRespawnEvent += OnRespawn;
         gunStateReader.OnIsAimingUpdate += AimingUpdated;
+        SetHealthEffect(1);
     }
 
     private void OnRespawn(Empty obj)
