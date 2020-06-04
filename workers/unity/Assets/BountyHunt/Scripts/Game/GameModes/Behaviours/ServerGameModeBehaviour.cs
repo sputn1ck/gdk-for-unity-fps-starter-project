@@ -87,7 +87,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     private async Task GetNextGameMode()
     {
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = GameStatsWriter.Data.PlayerMap.Count+1 });
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
         if (roundInfo.Advertisers != null)
         {
             SendAdvertisers(roundInfo.Advertisers);
@@ -99,7 +99,6 @@ public class ServerGameModeBehaviour : MonoBehaviour
     }
     private async Task SafeGameMode()
     {
-        
         try
         {
             await gameModeRoutine();
