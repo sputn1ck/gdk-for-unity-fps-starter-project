@@ -26,9 +26,11 @@ type TimeInfo {
 
 type GameModeInfo {
     string game_mode_id = 1;
+    string game_mode_name = 2;
 }
 
 type CoundDownInfo {
     string next_round_id = 1;
     int32 countdown = 2;
+    string next_round_name = 3;
 }

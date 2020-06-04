@@ -21,35 +21,37 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
     [Require] AdvertisingComponentWriter advertisingConmponentWriter;
     public GameMode currentGameMode;
+    public GameMode nextGameMode;
     public GetRoundInfoResponse currentRoundInfo;
+    public GetRoundInfoResponse nextRoundInfo;
     private void OnEnable()
     {
         instance = this;
 
         //StartCoroutine(gameModeEnumerator());
-        gameModeRoutine();
+        SafeGameMode();
     }
 
     private void StartGameMode()
     {
 
-        var roundInfo = currentRoundInfo;
-        var gameMode = currentGameMode;
-        currentGameMode.ServerOnGameModeStart(this, roundInfo.Settings, roundInfo.Subsidy);
+        currentRoundInfo = nextRoundInfo;
+        currentGameMode = nextGameMode;
+        currentGameMode.ServerOnGameModeStart(this, currentRoundInfo.Settings, currentRoundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
         {
-            GameModeInfo = new GameModeInfo(roundInfo.GameModeId),
+            GameModeInfo = new GameModeInfo(currentRoundInfo.GameModeId,nextRoundInfo.GameModeName),
             TimeInfo = new TimeInfo()
             {
                 StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GameModeSettings.SecondDuration * 10000000,
+                Duration = currentRoundInfo.Settings.SecondDuration * 10000000,
             }
         };
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
         });
-        ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
+        ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
     }
     public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
@@ -78,25 +80,41 @@ public class ServerGameModeBehaviour : MonoBehaviour
         ServerGameChat.instance.SendGlobalMessage("server", currentGameMode.Name + " has ended", MessageType.INFO_LOG);
         var RoundInfo = new RoundInfo()
         {
-            GameModeInfo = new GameModeInfo(currentGameMode.GameModeId)
+            GameModeInfo = new GameModeInfo(currentGameMode.GameModeId,currentRoundInfo.GameModeName)
         };
         GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
     }
 
     private async Task GetNextGameMode()
     {
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = GameStatsWriter.Data.PlayerMap.Count+1 });
         if (roundInfo.Advertisers != null)
         {
             SendAdvertisers(roundInfo.Advertisers);
         }
         var gameMode = GameModeDictionary.Get(roundInfo.GameModeId);
-        currentRoundInfo = roundInfo;
-        currentGameMode = gameMode;
+        nextRoundInfo = roundInfo;
+        nextGameMode = gameMode;
 
     }
-
-    private async void gameModeRoutine()
+    private async Task SafeGameMode()
+    {
+        
+        try
+        {
+            await gameModeRoutine();
+        } catch(Exception e)
+        {
+            Debug.LogError(e.Message);
+            if (ServerServiceConnections.ct.IsCancellationRequested)
+            {
+                return;
+            }
+            await Task.Delay(1000);
+            SafeGameMode();
+        }
+    }
+    private async Task gameModeRoutine()
     {
         await GetNextGameMode();
         StartGameMode();
@@ -108,7 +126,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
             {
                 EndGameMode();
                 await GetNextGameMode();
-                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(currentRoundInfo.GameModeId, 5));
+                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextRoundInfo.GameModeId, 5,nextRoundInfo.GameModeName));
                 await Task.Delay(5000);
                 StartGameMode();
 

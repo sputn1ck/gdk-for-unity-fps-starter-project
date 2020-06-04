@@ -34,21 +34,21 @@ public class ClientGameModeBehaviour : MonoBehaviour
         
         var nextGameMode = GameModeDictionary.Get(obj.NextRoundId);
         var currentGameMode = GameModeDictionary.Get(GameModeManagerReader.Data.CurrentRound.GameModeInfo.GameModeId);
-        StartCoroutine(CountdownEnumerator(nextGameMode, obj.Countdown, currentGameMode));
+        StartCoroutine(CountdownEnumerator(nextGameMode, obj.Countdown, currentGameMode, obj.NextRoundName));
     }
 
-    IEnumerator CountdownEnumerator(GameMode nextGameMode, int duration, GameMode currentGameMode)
+    IEnumerator CountdownEnumerator(GameMode nextGameMode, int duration, GameMode currentGameMode, string gamemodename)
     {
         currentGameMode.ClientOnGameModeEnd(this);
         var currentSecond = duration;
         while(currentSecond > 0)
         {
-            ClientEvents.instance.onAnnouncement.Invoke(nextGameMode.Name + " starting in " + currentSecond, ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+            ClientEvents.instance.onAnnouncement.Invoke(gamemodename + " starting in " + currentSecond, ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
             yield return new WaitForSeconds(1f);
             currentSecond -= 1;
         }
         yield return new WaitForSeconds(0.1f);
-        ClientEvents.instance.onAnnouncement.Invoke(nextGameMode.Name + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+        ClientEvents.instance.onAnnouncement.Invoke(gamemodename + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
         nextGameMode.ClientOnGameModeStart(this);
     }
 
