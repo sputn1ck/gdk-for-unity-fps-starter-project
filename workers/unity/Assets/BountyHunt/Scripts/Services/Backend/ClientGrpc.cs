@@ -834,6 +834,10 @@ namespace Bbhrpc {
 
     static readonly grpc::Marshaller<global::Bbhrpc.KickUserRequest> __Marshaller_bbhrpc_KickUserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.KickUserRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.KickUserResponse> __Marshaller_bbhrpc_KickUserResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.KickUserResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.SendChatRequest> __Marshaller_bbhrpc_SendChatRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SendChatRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.SendChatResponse> __Marshaller_bbhrpc_SendChatResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SendChatResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.IncreaseBountyRequest> __Marshaller_bbhrpc_IncreaseBountyRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.IncreaseBountyRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.IncreaseBountyResponse> __Marshaller_bbhrpc_IncreaseBountyResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.IncreaseBountyResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse> __Method_KickUser = new grpc::Method<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse>(
         grpc::MethodType.Unary,
@@ -841,6 +845,20 @@ namespace Bbhrpc {
         "KickUser",
         __Marshaller_bbhrpc_KickUserRequest,
         __Marshaller_bbhrpc_KickUserResponse);
+
+    static readonly grpc::Method<global::Bbhrpc.SendChatRequest, global::Bbhrpc.SendChatResponse> __Method_SendChat = new grpc::Method<global::Bbhrpc.SendChatRequest, global::Bbhrpc.SendChatResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SendChat",
+        __Marshaller_bbhrpc_SendChatRequest,
+        __Marshaller_bbhrpc_SendChatResponse);
+
+    static readonly grpc::Method<global::Bbhrpc.IncreaseBountyRequest, global::Bbhrpc.IncreaseBountyResponse> __Method_IncreaseBounty = new grpc::Method<global::Bbhrpc.IncreaseBountyRequest, global::Bbhrpc.IncreaseBountyResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "IncreaseBounty",
+        __Marshaller_bbhrpc_IncreaseBountyRequest,
+        __Marshaller_bbhrpc_IncreaseBountyResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -853,6 +871,16 @@ namespace Bbhrpc {
     public abstract partial class AdminServiceBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.KickUserResponse> KickUser(global::Bbhrpc.KickUserRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.SendChatResponse> SendChat(global::Bbhrpc.SendChatRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.IncreaseBountyResponse> IncreaseBounty(global::Bbhrpc.IncreaseBountyRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -898,6 +926,38 @@ namespace Bbhrpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_KickUser, null, options, request);
       }
+      public virtual global::Bbhrpc.SendChatResponse SendChat(global::Bbhrpc.SendChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SendChat(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.SendChatResponse SendChat(global::Bbhrpc.SendChatRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SendChat, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.SendChatResponse> SendChatAsync(global::Bbhrpc.SendChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SendChatAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.SendChatResponse> SendChatAsync(global::Bbhrpc.SendChatRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SendChat, null, options, request);
+      }
+      public virtual global::Bbhrpc.IncreaseBountyResponse IncreaseBounty(global::Bbhrpc.IncreaseBountyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return IncreaseBounty(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.IncreaseBountyResponse IncreaseBounty(global::Bbhrpc.IncreaseBountyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_IncreaseBounty, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.IncreaseBountyResponse> IncreaseBountyAsync(global::Bbhrpc.IncreaseBountyRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return IncreaseBountyAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.IncreaseBountyResponse> IncreaseBountyAsync(global::Bbhrpc.IncreaseBountyRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_IncreaseBounty, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override AdminServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -910,7 +970,9 @@ namespace Bbhrpc {
     public static grpc::ServerServiceDefinition BindService(AdminServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_KickUser, serviceImpl.KickUser).Build();
+          .AddMethod(__Method_KickUser, serviceImpl.KickUser)
+          .AddMethod(__Method_SendChat, serviceImpl.SendChat)
+          .AddMethod(__Method_IncreaseBounty, serviceImpl.IncreaseBounty).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -920,6 +982,8 @@ namespace Bbhrpc {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, AdminServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_KickUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.KickUserRequest, global::Bbhrpc.KickUserResponse>(serviceImpl.KickUser));
+      serviceBinder.AddMethod(__Method_SendChat, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.SendChatRequest, global::Bbhrpc.SendChatResponse>(serviceImpl.SendChat));
+      serviceBinder.AddMethod(__Method_IncreaseBounty, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.IncreaseBountyRequest, global::Bbhrpc.IncreaseBountyResponse>(serviceImpl.IncreaseBounty));
     }
 
   }

@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,7 +12,7 @@ public class GameModeDictionary : ScriptableObject
     [SerializeField] private GameMode[] gameModes;
     // Start is called before the first frame update
 
-    public static GameMode Get(int index)
+    public static GameMode Get(string id)
     {
         if (Instance == null)
         {
@@ -19,14 +20,12 @@ public class GameModeDictionary : ScriptableObject
             return null;
         }
 
-        if (index < 0 || index >= Count)
+        GameMode gm = Instance.gameModes.FirstOrDefault(g => g.GameModeId == id);
+        if (gm == null)
         {
-            //Debug.LogErrorFormat("The index {0} is outside of the dictionary's range (size {1}).", index, Count);
-            return null;
+            gm = new LobbyGameMode();
         }
-
-        return Instance.gameModes[index];
+        return gm;
     }
 
-    public static int Count => Instance.gameModes.Length;
 }

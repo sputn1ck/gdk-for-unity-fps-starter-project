@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3914475562c91fe4db45424efe19c38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportDistanceSqrd: 50
+  teleportDistanceSqrd: 25
   groundedRadius: 0.2
   groundLayerMask:
     serializedVersion: 2
@@ -373,8 +373,6 @@ MonoBehaviour:
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114748765334934590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8882a78e7c8b4134d9c24eed88fc7167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 0
+  sensitivity: 1
+  mouseMultiplierX: 1
+  mouseMultiplierY: 1
 --- !u!114 &7344274461009030805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,10 +540,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4323650176391204}
     m_Modifications:
-    - target: {fileID: 896626365763983101, guid: 2a8d33357edd45e48a205097b34fc6e0,
+    - target: {fileID: 882533396211205869, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
-      propertyPath: m_Name
-      value: FirstPersonCamera
+      propertyPath: field of view
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 893921381858113093, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
@@ -600,10 +600,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 882533396211205869, guid: 2a8d33357edd45e48a205097b34fc6e0,
+    - target: {fileID: 896626365763983101, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
-      propertyPath: field of view
-      value: 65
+      propertyPath: m_Name
+      value: FirstPersonCamera
       objectReference: {fileID: 0}
     - target: {fileID: 1000210505865880527, guid: 2a8d33357edd45e48a205097b34fc6e0,
         type: 3}
@@ -632,11 +632,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4620716434285874}
     m_Modifications:
-    - target: {fileID: 1620896566736479575, guid: 99c1c836e4262284d9b458f03442a4f6,
-        type: 3}
-      propertyPath: m_Name
-      value: FirstPersonModel
-      objectReference: {fileID: 0}
     - target: {fileID: 1371366245061083600, guid: 99c1c836e4262284d9b458f03442a4f6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -691,6 +686,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620896566736479575, guid: 99c1c836e4262284d9b458f03442a4f6,
+        type: 3}
+      propertyPath: m_Name
+      value: FirstPersonModel
       objectReference: {fileID: 0}
     - target: {fileID: 6108130638274169511, guid: 99c1c836e4262284d9b458f03442a4f6,
         type: 3}

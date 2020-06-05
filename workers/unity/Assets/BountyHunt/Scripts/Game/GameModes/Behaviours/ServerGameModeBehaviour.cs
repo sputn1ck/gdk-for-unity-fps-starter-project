@@ -8,6 +8,7 @@ using Grpc.Core;
 using Improbable.Gdk.Subscriptions;
 using Unity.Entities;
 using System.Threading.Tasks;
+using Bbhrpc;
 
 public class ServerGameModeBehaviour : MonoBehaviour
 {
@@ -19,52 +20,39 @@ public class ServerGameModeBehaviour : MonoBehaviour
 
 
     [Require] AdvertisingComponentWriter advertisingConmponentWriter;
-    private int gameModeRotationCounter;
     public GameMode currentGameMode;
-    private int nextGameModeId;
-
+    public GameMode nextGameMode;
+    public GetRoundInfoResponse currentRoundInfo;
+    public GetRoundInfoResponse nextRoundInfo;
     private void OnEnable()
     {
         instance = this;
-        gameModeRotationCounter = 0;
 
         //StartCoroutine(gameModeEnumerator());
-        gameModeRoutine();
+        SafeGameMode();
     }
 
-    private async Task StartGameMode()
+    private void StartGameMode()
     {
-        if(GameStatsWriter.Data.PlayerMap.Count < 2)
-        {
-            ServerGameChat.instance.SendGlobalMessage("SERVER", "NOT ENOUGH PLAYERS TO SPAWN SATOSHIS, 2 PLAYERS REQUIRED", MessageType.ERROR_LOG);
-        }
 
-        gameModeRotationCounter = getNextGameModeInt();
-        var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
-        currentGameMode = gameMode;
-
-
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { GameModeId = currentGameMode.GameModeId,PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
-        if (roundInfo.Advertisers != null) {
-            SendAdvertisers(roundInfo.Advertisers);
-        }
-        currentGameMode.ServerOnGameModeStart(this, roundInfo.Settings, roundInfo.Subsidy);
+        currentRoundInfo = nextRoundInfo;
+        currentGameMode = nextGameMode;
+        currentGameMode.ServerOnGameModeStart(this, currentRoundInfo.Settings, currentRoundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
         {
-            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
+            GameModeInfo = new GameModeInfo(currentRoundInfo.GameModeId,nextRoundInfo.GameModeName),
             TimeInfo = new TimeInfo()
             {
                 StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = gameMode.GameModeSettings.SecondDuration * 10000000,
+                Duration = currentRoundInfo.Settings.SecondDuration * 10000000,
             }
         };
         GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
         {
             CurrentRound = RoundInfo
         });
-        ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has started", MessageType.INFO_LOG);
+        ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);
         GameModeManagerWriter.SendNewRoundEvent(RoundInfo);
-        SetNextGameMode();
     }
     public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
     {
@@ -89,23 +77,46 @@ public class ServerGameModeBehaviour : MonoBehaviour
     private void EndGameMode()
     {
         currentGameMode.ServerOnGameModeEnd(this);
-        var gameMode = GameModeDictionary.Get(gameModeRotationCounter);
-        ServerGameChat.instance.SendGlobalMessage("server", gameMode.Name + " has ended", MessageType.INFO_LOG);
+        ServerGameChat.instance.SendGlobalMessage("server", currentGameMode.Name + " has ended", MessageType.INFO_LOG);
         var RoundInfo = new RoundInfo()
         {
-            GameModeInfo = new GameModeInfo(gameModeRotationCounter),
+            GameModeInfo = new GameModeInfo(currentGameMode.GameModeId,currentRoundInfo.GameModeName)
         };
         GameModeManagerWriter.SendEndRoundEvent(RoundInfo);
     }
-    private void SetNextGameMode()
+
+    private async Task GetNextGameMode()
     {
-        nextGameModeId = getNextGameModeInt();
+        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = GameStatsWriter.Data.PlayerMap.Count });
+        if (roundInfo.Advertisers != null)
+        {
+            SendAdvertisers(roundInfo.Advertisers);
+        }
+        var gameMode = GameModeDictionary.Get(roundInfo.GameModeId);
+        nextRoundInfo = roundInfo;
+        nextGameMode = gameMode;
+
     }
-
-
-    private async void gameModeRoutine()
+    private async Task SafeGameMode()
     {
-        await StartGameMode();
+        try
+        {
+            await gameModeRoutine();
+        } catch(Exception e)
+        {
+            Debug.LogError(e.Message);
+            if (ServerServiceConnections.ct.IsCancellationRequested)
+            {
+                return;
+            }
+            await Task.Delay(1000);
+            SafeGameMode();
+        }
+    }
+    private async Task gameModeRoutine()
+    {
+        await GetNextGameMode();
+        StartGameMode();
         while(!ServerServiceConnections.ct.IsCancellationRequested)
         {
             var endTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime +
@@ -113,18 +124,15 @@ public class ServerGameModeBehaviour : MonoBehaviour
             if (DateTime.UtcNow.ToFileTime() > endTime)
             {
                 EndGameMode();
-                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextGameModeId, 5));
+                await GetNextGameMode();
+                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextRoundInfo.GameModeId, 5,nextRoundInfo.GameModeName));
                 await Task.Delay(5000);
-                await StartGameMode();
+                StartGameMode();
 
             }
             await Task.Delay(10);
         }
     }
 
-    private int getNextGameModeInt()
-    {
-        return gameModeRotationCounter >= GameModeDictionary.Count - 1 ? 0 : gameModeRotationCounter + 1;
-    }
 
 }

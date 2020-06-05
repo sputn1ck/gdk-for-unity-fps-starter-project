@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 {
-
+    public int currentGamemodeCounter;
+    public List<string> gamemodeRotation;
     public int ssDuration = 30;
     public int lobbyDuration = 10;
     public int bbDuration = 30;
@@ -101,6 +102,16 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
     private GetRoundInfoResponse getRes(GetRoundInfoRequest req)
     {
+        var gamemodeId = "lobby";
+        if (gamemodeRotation.Count > 0)
+        {
+            if (currentGamemodeCounter >= gamemodeRotation.Count)
+            {
+                currentGamemodeCounter = 0;
+            }
+            gamemodeId = gamemodeRotation[currentGamemodeCounter];
+            currentGamemodeCounter++;
+        }
         var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
 
         foreach (var adv in testAdvertisers)
@@ -125,10 +136,11 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
         var roundinfo = new GetRoundInfoResponse()
         {
+            GameModeId = gamemodeId,
             Subsidy = subsidy,
             Settings = new GameModeSettings
             {
-                SecondDuration = GetGameModeDuration(req.GameModeId),
+                SecondDuration = GetGameModeDuration(gamemodeId),
                 BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
                 BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
                 SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 10, MinSpawnsPerSpawn = 20, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },

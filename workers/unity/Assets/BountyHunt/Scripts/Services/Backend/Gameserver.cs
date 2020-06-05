@@ -43,42 +43,42 @@ namespace Bbhrpc {
             "ZRgBIAEoCRITCgt1c2VyX3B1YmtleRgCIAEoCSI8CgtCb3VudHlFdmVudBIM",
             "CgR1c2VyGAEgASgJEg4KBmFtb3VudBgCIAEoAxIPCgdtZXNzYWdlGAMgASgJ",
             "Ij4KCUNoYXRFdmVudBIPCgdtZXNzYWdlGAEgASgJEg4KBnNlbmRlchgCIAEo",
-            "CRIQCghhbm5vdW5jZRgDIAEoCCJcChNHZXRSb3VuZEluZm9SZXF1ZXN0EhcK",
+            "CRIQCghhbm5vdW5jZRgDIAEoCCJGChNHZXRSb3VuZEluZm9SZXF1ZXN0EhcK",
             "D2Jhbm5lcnNfaW5fZ2FtZRgBIAEoBRIWCg5wbGF5ZXJfaW5fZ2FtZRgCIAEo",
-            "BRIUCgxnYW1lX21vZGVfaWQYAyABKAkigAEKFEdldFJvdW5kSW5mb1Jlc3Bv",
-            "bnNlEg8KB3N1YnNpZHkYASABKAMSKgoIc2V0dGluZ3MYAiABKAsyGC5iYmhy",
-            "cGMuR2FtZU1vZGVTZXR0aW5ncxIrCgthZHZlcnRpc2VycxgDIAMoCzIWLmJi",
-            "aHJwYy5BZHZlcnRpc2VySW5mbyK4AQoQR2FtZU1vZGVTZXR0aW5ncxIXCg9z",
-            "ZWNvbmRfZHVyYXRpb24YASABKAMSKwoNYmFzZV9zZXR0aW5ncxgCIAEoCzIU",
-            "LmJiaHJwYy5CYXNlU2V0dGluZ3MSLwoPYm91bnR5X3NldHRpbmdzGAMgASgL",
-            "MhYuYmJocnBjLkJvdW50eVNldHRpbmdzEi0KDnNwYXduX3NldHRpbmdzGAQg",
-            "ASgLMhUuYmJocnBjLlNwYXduU2V0dGluZ3MihwEKDEJhc2VTZXR0aW5ncxIg",
-            "Chh0ZWxlcG9ydF9wbGF5ZXJfb25fc3RhcnQYASABKAgSGwoTY2xlYXJfYm91",
-            "bnR5X29uX2VuZBgCIAEoCBIaChJjbGVhcl9zdGF0c19vbl9lbmQYAyABKAgS",
-            "HAoUY2xlYXJfcGlja3Vwc19vbl9lbmQYBCABKAgieAoOQm91bnR5U2V0dGlu",
-            "Z3MSHgoWYm91bnR5X3RpY2tfY29udmVyc2lvbhgBIAEoARIgChhib3VudHlf",
-            "dGlja190aW1lX3NlY29uZHMYAiABKAISJAocYm91bnR5X2Ryb3BfcGVyY2Vu",
-            "dGFnZV9kZWF0aBgDIAEoASKaAQoNU3Bhd25TZXR0aW5ncxIbChN0aW1lX2Jl",
-            "dHdlZW5fc3Bhd25zGAEgASgCEhwKFG1pbl9zcGF3bnNfcGVyX3NwYXduGAIg",
-            "ASgFEhwKFG1heF9zcGF3bnNfcGVyX3NwYXduGAMgASgFEjAKDGRpc3RyaWJ1",
-            "dGlvbhgEIAEoDjIaLmJiaHJwYy5Cb3VudHlEaXN0cmlidXRpb24icAoOQWR2",
-            "ZXJ0aXNlckluZm8SDAoEbmFtZRgBIAEoCRISCgpzcG9uc29yaW5nGAIgASgD",
-            "EhoKEnNxdWFyZV9iYW5uZXJfdXJscxgDIAMoCRITCgtkaXNjcmlwdGlvbhgJ",
-            "IAEoCRILCgN1cmwYCiABKAkiIAoOR2V0VXNlclJlcXVlc3QSDgoGcHVia2V5",
-            "GAEgASgJIi0KD0dldFVzZXJSZXNwb25zZRIaCgR1c2VyGAEgASgLMgwuYmJo",
-            "cnBjLlVzZXIiJAoEVXNlchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEo",
-            "CSIkChJHZXRVc2VyU2tpblJlcXVlc3QSDgoGcHVia2V5GAEgASgJIiwKE0dl",
-            "dFVzZXJTa2luUmVzcG9uc2USFQoNZXF1aXBwZWRfc2tpbhgBIAEoCSohChJC",
-            "b3VudHlEaXN0cmlidXRpb24SCwoHVU5JRk9STRAAMvwCChFHYW1lU2VydmVy",
-            "U2VydmljZRJICgtFdmVudFN0cmVhbRIaLmJiaHJwYy5FdmVudFN0cmVhbVJl",
-            "cXVlc3QaGy5iYmhycGMuRXZlbnRTdHJlYW1SZXNwb25zZSgBEk4KDUJhY2tl",
-            "bmRTdHJlYW0SHC5iYmhycGMuQmFja2VuZFN0cmVhbVJlcXVlc3QaHS5iYmhy",
-            "cGMuQmFja2VuZFN0cmVhbVJlc3BvbnNlMAESOgoHR2V0VXNlchIWLmJiaHJw",
-            "Yy5HZXRVc2VyUmVxdWVzdBoXLmJiaHJwYy5HZXRVc2VyUmVzcG9uc2USRgoL",
-            "R2V0VXNlclNraW4SGi5iYmhycGMuR2V0VXNlclNraW5SZXF1ZXN0GhsuYmJo",
-            "cnBjLkdldFVzZXJTa2luUmVzcG9uc2USSQoMR2V0Um91bmRJbmZvEhsuYmJo",
-            "cnBjLkdldFJvdW5kSW5mb1JlcXVlc3QaHC5iYmhycGMuR2V0Um91bmRJbmZv",
-            "UmVzcG9uc2ViBnByb3RvMw=="));
+            "BSKuAQoUR2V0Um91bmRJbmZvUmVzcG9uc2USDwoHc3Vic2lkeRgBIAEoAxIU",
+            "CgxnYW1lX21vZGVfaWQYAiABKAkSFgoOZ2FtZV9tb2RlX25hbWUYAyABKAkS",
+            "KgoIc2V0dGluZ3MYBCABKAsyGC5iYmhycGMuR2FtZU1vZGVTZXR0aW5ncxIr",
+            "CgthZHZlcnRpc2VycxgFIAMoCzIWLmJiaHJwYy5BZHZlcnRpc2VySW5mbyK4",
+            "AQoQR2FtZU1vZGVTZXR0aW5ncxIXCg9zZWNvbmRfZHVyYXRpb24YASABKAMS",
+            "KwoNYmFzZV9zZXR0aW5ncxgCIAEoCzIULmJiaHJwYy5CYXNlU2V0dGluZ3MS",
+            "LwoPYm91bnR5X3NldHRpbmdzGAMgASgLMhYuYmJocnBjLkJvdW50eVNldHRp",
+            "bmdzEi0KDnNwYXduX3NldHRpbmdzGAQgASgLMhUuYmJocnBjLlNwYXduU2V0",
+            "dGluZ3MihwEKDEJhc2VTZXR0aW5ncxIgChh0ZWxlcG9ydF9wbGF5ZXJfb25f",
+            "c3RhcnQYASABKAgSGwoTY2xlYXJfYm91bnR5X29uX2VuZBgCIAEoCBIaChJj",
+            "bGVhcl9zdGF0c19vbl9lbmQYAyABKAgSHAoUY2xlYXJfcGlja3Vwc19vbl9l",
+            "bmQYBCABKAgieAoOQm91bnR5U2V0dGluZ3MSHgoWYm91bnR5X3RpY2tfY29u",
+            "dmVyc2lvbhgBIAEoARIgChhib3VudHlfdGlja190aW1lX3NlY29uZHMYAiAB",
+            "KAISJAocYm91bnR5X2Ryb3BfcGVyY2VudGFnZV9kZWF0aBgDIAEoASKaAQoN",
+            "U3Bhd25TZXR0aW5ncxIbChN0aW1lX2JldHdlZW5fc3Bhd25zGAEgASgCEhwK",
+            "FG1pbl9zcGF3bnNfcGVyX3NwYXduGAIgASgFEhwKFG1heF9zcGF3bnNfcGVy",
+            "X3NwYXduGAMgASgFEjAKDGRpc3RyaWJ1dGlvbhgEIAEoDjIaLmJiaHJwYy5C",
+            "b3VudHlEaXN0cmlidXRpb24icAoOQWR2ZXJ0aXNlckluZm8SDAoEbmFtZRgB",
+            "IAEoCRISCgpzcG9uc29yaW5nGAIgASgDEhoKEnNxdWFyZV9iYW5uZXJfdXJs",
+            "cxgDIAMoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRILCgN1cmwYCiABKAkiIAoO",
+            "R2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJIi0KD0dldFVzZXJSZXNw",
+            "b25zZRIaCgR1c2VyGAEgASgLMgwuYmJocnBjLlVzZXIiJAoEVXNlchIMCgRu",
+            "YW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSIkChJHZXRVc2VyU2tpblJlcXVl",
+            "c3QSDgoGcHVia2V5GAEgASgJIiwKE0dldFVzZXJTa2luUmVzcG9uc2USFQoN",
+            "ZXF1aXBwZWRfc2tpbhgBIAEoCSohChJCb3VudHlEaXN0cmlidXRpb24SCwoH",
+            "VU5JRk9STRAAMvwCChFHYW1lU2VydmVyU2VydmljZRJICgtFdmVudFN0cmVh",
+            "bRIaLmJiaHJwYy5FdmVudFN0cmVhbVJlcXVlc3QaGy5iYmhycGMuRXZlbnRT",
+            "dHJlYW1SZXNwb25zZSgBEk4KDUJhY2tlbmRTdHJlYW0SHC5iYmhycGMuQmFj",
+            "a2VuZFN0cmVhbVJlcXVlc3QaHS5iYmhycGMuQmFja2VuZFN0cmVhbVJlc3Bv",
+            "bnNlMAESOgoHR2V0VXNlchIWLmJiaHJwYy5HZXRVc2VyUmVxdWVzdBoXLmJi",
+            "aHJwYy5HZXRVc2VyUmVzcG9uc2USRgoLR2V0VXNlclNraW4SGi5iYmhycGMu",
+            "R2V0VXNlclNraW5SZXF1ZXN0GhsuYmJocnBjLkdldFVzZXJTa2luUmVzcG9u",
+            "c2USSQoMR2V0Um91bmRJbmZvEhsuYmJocnBjLkdldFJvdW5kSW5mb1JlcXVl",
+            "c3QaHC5iYmhycGMuR2V0Um91bmRJbmZvUmVzcG9uc2ViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.BountyDistribution), }, new pbr::GeneratedClrTypeInfo[] {
@@ -92,8 +92,8 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.KickEvent), global::Bbhrpc.KickEvent.Parser, new[]{ "UserName", "UserPubkey" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BountyEvent), global::Bbhrpc.BountyEvent.Parser, new[]{ "User", "Amount", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.ChatEvent), global::Bbhrpc.ChatEvent.Parser, new[]{ "Message", "Sender", "Announce" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoRequest), global::Bbhrpc.GetRoundInfoRequest.Parser, new[]{ "BannersInGame", "PlayerInGame", "GameModeId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoResponse), global::Bbhrpc.GetRoundInfoResponse.Parser, new[]{ "Subsidy", "Settings", "Advertisers" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoRequest), global::Bbhrpc.GetRoundInfoRequest.Parser, new[]{ "BannersInGame", "PlayerInGame" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetRoundInfoResponse), global::Bbhrpc.GetRoundInfoResponse.Parser, new[]{ "Subsidy", "GameModeId", "GameModeName", "Settings", "Advertisers" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GameModeSettings), global::Bbhrpc.GameModeSettings.Parser, new[]{ "SecondDuration", "BaseSettings", "BountySettings", "SpawnSettings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BaseSettings), global::Bbhrpc.BaseSettings.Parser, new[]{ "TeleportPlayerOnStart", "ClearBountyOnEnd", "ClearStatsOnEnd", "ClearPickupsOnEnd" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BountySettings), global::Bbhrpc.BountySettings.Parser, new[]{ "BountyTickConversion", "BountyTickTimeSeconds", "BountyDropPercentageDeath" }, null, null, null),
@@ -1954,7 +1954,6 @@ namespace Bbhrpc {
     public GetRoundInfoRequest(GetRoundInfoRequest other) : this() {
       bannersInGame_ = other.bannersInGame_;
       playerInGame_ = other.playerInGame_;
-      gameModeId_ = other.gameModeId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1985,17 +1984,6 @@ namespace Bbhrpc {
       }
     }
 
-    /// <summary>Field number for the "game_mode_id" field.</summary>
-    public const int GameModeIdFieldNumber = 3;
-    private string gameModeId_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string GameModeId {
-      get { return gameModeId_; }
-      set {
-        gameModeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GetRoundInfoRequest);
@@ -2011,7 +1999,6 @@ namespace Bbhrpc {
       }
       if (BannersInGame != other.BannersInGame) return false;
       if (PlayerInGame != other.PlayerInGame) return false;
-      if (GameModeId != other.GameModeId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2020,7 +2007,6 @@ namespace Bbhrpc {
       int hash = 1;
       if (BannersInGame != 0) hash ^= BannersInGame.GetHashCode();
       if (PlayerInGame != 0) hash ^= PlayerInGame.GetHashCode();
-      if (GameModeId.Length != 0) hash ^= GameModeId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2042,10 +2028,6 @@ namespace Bbhrpc {
         output.WriteRawTag(16);
         output.WriteInt32(PlayerInGame);
       }
-      if (GameModeId.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(GameModeId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2059,9 +2041,6 @@ namespace Bbhrpc {
       }
       if (PlayerInGame != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerInGame);
-      }
-      if (GameModeId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameModeId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2080,9 +2059,6 @@ namespace Bbhrpc {
       if (other.PlayerInGame != 0) {
         PlayerInGame = other.PlayerInGame;
       }
-      if (other.GameModeId.Length != 0) {
-        GameModeId = other.GameModeId;
-      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2100,10 +2076,6 @@ namespace Bbhrpc {
           }
           case 16: {
             PlayerInGame = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            GameModeId = input.ReadString();
             break;
           }
         }
@@ -2138,6 +2110,8 @@ namespace Bbhrpc {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetRoundInfoResponse(GetRoundInfoResponse other) : this() {
       subsidy_ = other.subsidy_;
+      gameModeId_ = other.gameModeId_;
+      gameModeName_ = other.gameModeName_;
       settings_ = other.settings_ != null ? other.settings_.Clone() : null;
       advertisers_ = other.advertisers_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -2159,8 +2133,30 @@ namespace Bbhrpc {
       }
     }
 
+    /// <summary>Field number for the "game_mode_id" field.</summary>
+    public const int GameModeIdFieldNumber = 2;
+    private string gameModeId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GameModeId {
+      get { return gameModeId_; }
+      set {
+        gameModeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "game_mode_name" field.</summary>
+    public const int GameModeNameFieldNumber = 3;
+    private string gameModeName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GameModeName {
+      get { return gameModeName_; }
+      set {
+        gameModeName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "settings" field.</summary>
-    public const int SettingsFieldNumber = 2;
+    public const int SettingsFieldNumber = 4;
     private global::Bbhrpc.GameModeSettings settings_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Bbhrpc.GameModeSettings Settings {
@@ -2171,9 +2167,9 @@ namespace Bbhrpc {
     }
 
     /// <summary>Field number for the "advertisers" field.</summary>
-    public const int AdvertisersFieldNumber = 3;
+    public const int AdvertisersFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Bbhrpc.AdvertiserInfo> _repeated_advertisers_codec
-        = pb::FieldCodec.ForMessage(26, global::Bbhrpc.AdvertiserInfo.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Bbhrpc.AdvertiserInfo.Parser);
     private readonly pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo> advertisers_ = new pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Bbhrpc.AdvertiserInfo> Advertisers {
@@ -2194,6 +2190,8 @@ namespace Bbhrpc {
         return true;
       }
       if (Subsidy != other.Subsidy) return false;
+      if (GameModeId != other.GameModeId) return false;
+      if (GameModeName != other.GameModeName) return false;
       if (!object.Equals(Settings, other.Settings)) return false;
       if(!advertisers_.Equals(other.advertisers_)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -2203,6 +2201,8 @@ namespace Bbhrpc {
     public override int GetHashCode() {
       int hash = 1;
       if (Subsidy != 0L) hash ^= Subsidy.GetHashCode();
+      if (GameModeId.Length != 0) hash ^= GameModeId.GetHashCode();
+      if (GameModeName.Length != 0) hash ^= GameModeName.GetHashCode();
       if (settings_ != null) hash ^= Settings.GetHashCode();
       hash ^= advertisers_.GetHashCode();
       if (_unknownFields != null) {
@@ -2222,8 +2222,16 @@ namespace Bbhrpc {
         output.WriteRawTag(8);
         output.WriteInt64(Subsidy);
       }
-      if (settings_ != null) {
+      if (GameModeId.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(GameModeId);
+      }
+      if (GameModeName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(GameModeName);
+      }
+      if (settings_ != null) {
+        output.WriteRawTag(34);
         output.WriteMessage(Settings);
       }
       advertisers_.WriteTo(output, _repeated_advertisers_codec);
@@ -2237,6 +2245,12 @@ namespace Bbhrpc {
       int size = 0;
       if (Subsidy != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Subsidy);
+      }
+      if (GameModeId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameModeId);
+      }
+      if (GameModeName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GameModeName);
       }
       if (settings_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
@@ -2255,6 +2269,12 @@ namespace Bbhrpc {
       }
       if (other.Subsidy != 0L) {
         Subsidy = other.Subsidy;
+      }
+      if (other.GameModeId.Length != 0) {
+        GameModeId = other.GameModeId;
+      }
+      if (other.GameModeName.Length != 0) {
+        GameModeName = other.GameModeName;
       }
       if (other.settings_ != null) {
         if (settings_ == null) {
@@ -2279,13 +2299,21 @@ namespace Bbhrpc {
             break;
           }
           case 18: {
+            GameModeId = input.ReadString();
+            break;
+          }
+          case 26: {
+            GameModeName = input.ReadString();
+            break;
+          }
+          case 34: {
             if (settings_ == null) {
               Settings = new global::Bbhrpc.GameModeSettings();
             }
             input.ReadMessage(Settings);
             break;
           }
-          case 26: {
+          case 42: {
             advertisers_.AddEntriesFrom(input, _repeated_advertisers_codec);
             break;
           }
