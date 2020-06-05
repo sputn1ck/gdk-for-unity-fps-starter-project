@@ -70,12 +70,18 @@ public class SkillIconUI : MonoBehaviour
     public void setSkill(PlayerSkill skill)
     {
         this.skill = skill;
-        KeyText.text = skill.key.ToUpper();
+        KeyText.text = skill.key.ToString().ToUpper();
         Icon.sprite = skill.icon;
 
         skill.onCooldownStart.AddListener(StartCooldown);
         CoverImage.fillClockwise = clockwise;
         CoverImage.fillAmount = 1;
+    }
+
+    private void OnEnable()
+    {
+        if (!skill) return;
+        setSkill(skill);
     }
 
 }

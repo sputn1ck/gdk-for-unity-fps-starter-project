@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32b0ca707018eb4e85abd983ce8bd2b, type: 3}
   m_Name: Teleport
   m_EditorClassIdentifier: 
+  SkillName: Climb
   Cooldown: 5
   icon: {fileID: 1310265638354205581, guid: e5a177ee578b30445a3633ffbe816b68, type: 3}
-  key: f
+  defaultkey: 102
   onCastFailed:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   Distance: 2

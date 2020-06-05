@@ -14,10 +14,7 @@ public class MainMenuUI : MonoBehaviour
     public Button quitButton;
     public GameObject connectingInfoObject;
     public TextMeshProUGUI versionText;
-    public GameObject uiCam;
-    public GameObject blendImage;
     private bool isConnecting;
-   
 
     private void Awake()
     {
@@ -110,8 +107,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void BlendImage(bool show)
     {
-        uiCam.GetComponent<PostProcessVolume>().enabled = !show;
-        blendImage.SetActive(show);
+        BBHUIManager.instance.uiCam.GetComponent<PostProcessVolume>().enabled = !show;
+        BBHUIManager.instance.blendImage.SetActive(show);
     }
 
 

@@ -55,6 +55,11 @@ public class SettingsTabWindowUI : TabMenuWindowUI
 
         mouseSpeedSlider.onValueChanged.AddListener(OnSenstitvitySliderChange);
         
+        
+    }
+
+    private void OnEnable()
+    {
         SetSensitivitySlider(PlayerPrefs.GetFloat("MouseSensitivity", 1));
     }
 

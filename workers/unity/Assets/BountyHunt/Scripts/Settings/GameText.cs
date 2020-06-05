@@ -41,4 +41,11 @@ public static class GameText
 
     /// text in the Quit Game Popup
     public const string QuitGamePopup = "Do you really want to quit the game?";
+
+    /// assign Button Header
+    /// {0} = key label
+    public const string AssignButtonPopupHeader = "assign {0} key";
+
+    /// assign Button Text
+    public const string AssignButtonPopup = "press any key!";
 }
