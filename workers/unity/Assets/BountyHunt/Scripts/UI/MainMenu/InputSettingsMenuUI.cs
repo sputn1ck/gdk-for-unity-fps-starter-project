@@ -28,7 +28,7 @@ public class InputSettingsMenuUI : MonoBehaviour
         mouseSensitivitySlider.onValueChanged.AddListener(UpdateMouseSensitivity);
         resetButton.onClick.AddListener(OnResetClick);
         invertMouseXToggle.onValueChanged.AddListener(InvertX);
-        invertMouseXToggle.onValueChanged.AddListener(InvertY);
+        invertMouseYToggle.onValueChanged.AddListener(InvertY);
         foreach (PlayerSkill skill in SkillDictionary.Instance.skills)
         {
             var btn = Instantiate(keyButtonPrefab,skillInputSettingsContainer);
