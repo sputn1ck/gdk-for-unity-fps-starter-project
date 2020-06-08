@@ -42,7 +42,7 @@ public class RespawnScreenUI : ScreenUI
 
     protected override void OnShow()
     {
-        int gunID = FpsDriver.instance.GetGunId();
+        int gunID = PlayerPrefs.GetInt("SelectedGunID", 0);
         switch (gunID)
         {
             case 0:
@@ -108,7 +108,7 @@ public class RespawnScreenUI : ScreenUI
     {
         if (doIt)
         {
-            FpsDriver.instance.ChangeGunId(0);
+            SelectGun(0);
         }
     }
 
@@ -116,16 +116,24 @@ public class RespawnScreenUI : ScreenUI
     {
         if (doIt)
         {
-            FpsDriver.instance.ChangeGunId(1);
+            SelectGun(1);
         }
     }
     public void SelectShotgun(bool doIt)
     {
         if (doIt)
         {
-            FpsDriver.instance.ChangeGunId(2);
+            SelectGun(2);
         }
     }
+
+    public void SelectGun(int id)
+    {
+        PlayerPrefs.SetInt("SelectedGunID", id);
+        PlayerPrefs.Save();
+        FpsDriver.instance.ChangeGunId(id);
+    }
+
 
     public void Respawn()
     {

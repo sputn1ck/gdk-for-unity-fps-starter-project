@@ -69,7 +69,7 @@ public class MainMenuUI : MonoBehaviour
     {
         Debug.Log("joining game");
         BBHUIManager.instance.ShowGameView();
-        LndConnector.Instance.SpawnPlayer(playername, 0);
+        LndConnector.Instance.SpawnPlayer(playername, PlayerPrefs.GetInt("SelectedGunID", 0));
     }
 
     async void RefreshVersion()

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PreviewSpot : MonoBehaviour
 {
     public GameObject character;
+    [SerializeField] private List<GameObject> weapons;
+
     List<Renderer> bodyRenderers;
     public static PreviewSpot Instance;
 
@@ -33,5 +35,19 @@ public class PreviewSpot : MonoBehaviour
                 renderer.material = skin.material;
             }
         }
+    }
+    public void SetWeapon(int id)
+    {
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            if (i == id) weapons[i].SetActive(true);
+            else weapons[i].SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        int id = PlayerPrefs.GetInt("SelectedGunID", 0);
+        SetWeapon(id);
     }
 }

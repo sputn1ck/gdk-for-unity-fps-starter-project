@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Bbhrpc;
 using System.Threading;
 using Lnrpc;
+using Fps.Guns;
+using Fps.Movement;
 
 public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 {
@@ -32,12 +34,15 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
     public TextMeshProUGUI BalanceText;
 
+    public List<Toggle> WeaponButtonToggles;
+
     SkinsLibrary playerSkinsLibrary;
 
     Skin selectedSkin;
     List<SkinGroupButtonUI> skinGroupButtons;
     SkinGroupButtonUI selectedSkinGroupButton;
     Skin equippedSkin;
+
 
     private bool isInit;
     private void Start()
@@ -46,6 +51,18 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         //ClientEvents.instance.onServicesSetup.AddListener(Init);
         GetComponent<SlideSubMenuUI>().onActivate.AddListener(OnActivate);
         GetComponent<SlideSubMenuUI>().onDeactivate.AddListener(OnDeactivate);
+
+        for (int i = 0;i<WeaponButtonToggles.Count;i++)
+        {
+            int id = i;
+            WeaponButtonToggles[i].onValueChanged.AddListener((bool value) =>
+            {
+                if (value) SetGun(id);
+            });
+        }
+        int gunId = PlayerPrefs.GetInt("SelectedGunID", PlayerGunSettings.DefaultGunIndex);
+        WeaponButtonToggles[gunId].SetIsOnWithoutNotify(true);
+        WeaponButtonToggles[gunId].onValueChanged.Invoke(true);
     }
     async Task Init()
     {
@@ -87,6 +104,9 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
             await Init();
             isInit = true;
         }
+
+        StartCoroutine( refreshGunToggles());
+
         await RefreshTask();
     }
     async Task RefreshTask()
@@ -363,6 +383,25 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
     {
         selectedSkin = skin;
         UpdateDetailsPanel();
+    }
+
+    public void SetGun(int id)
+    {
+        PreviewSpot.Instance.SetWeapon(id);
+        PlayerPrefs.SetInt("SelectedGunID", id);
+        PlayerPrefs.Save();
+    }
+
+    IEnumerator refreshGunToggles()
+    {
+        int gunId = PlayerPrefs.GetInt("SelectedGunID", PlayerGunSettings.DefaultGunIndex);
+        yield return new WaitForEndOfFrame();
+        WeaponButtonToggles[gunId].isOn = true;
+    }
+
+    private void OnEnable()
+    {
+        if(PlayerServiceConnections.instance.ServicesReady)Refresh();
     }
 
 }
