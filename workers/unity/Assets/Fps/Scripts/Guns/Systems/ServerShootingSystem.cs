@@ -50,8 +50,8 @@ namespace Fps.Guns
                 }
 
                 var gunComponent = gunDataForEntity[shooterEntity];
-                var damage = GunDictionary.Get(gunComponent.GunId).ShotDamage;
-
+                var damage = GunDictionary.Get(gunComponent.GunId).ShotDamage * shotInfo.DmgMultiplier;
+                
                 var modifyHealthRequest = new HealthComponent.ModifyHealth.Request(
                     shotInfo.EntityId,
                     new HealthModifier

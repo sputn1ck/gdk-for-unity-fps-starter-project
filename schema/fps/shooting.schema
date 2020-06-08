@@ -7,6 +7,7 @@ type ShotInfo {
   EntityId entity_id = 2;
   fps.Vector3Int hit_location = 3;
   fps.Vector3Int hit_origin = 4;
+  float dmg_multiplier = 5;
 }
 
 component ShootingComponent {

@@ -35,8 +35,6 @@ public class InGameScreenManagerUI : MonoBehaviour
 
     private void Start()
     {
-        ClientEvents.instance.onPlayerSpawn.AddListener(OnPlayerSpawn);
-        ClientEvents.instance.onPlayerDie.AddListener(OnPlayerDie);
 
     }
 
@@ -57,26 +55,13 @@ public class InGameScreenManagerUI : MonoBehaviour
         Reticle.showReticle(true);
     }
 
-    void OnPlayerSpawn(GameObject player)
-    {
-        ClientShooting.instance.OnPlayerHit.AddListener(ShowHitmarker);
-    }
 
-    void OnPlayerDie()
-    {
-        ClientShooting.instance.OnPlayerHit.RemoveListener(ShowHitmarker);
-    }
 
     public void OnDisable()
     {
         isPlayerAiming = false;
     }
 
-    public void ShowHitmarker()
-    {
-        //TODO
-        //HitMarkerAnimator.SetTrigger("show");
-    }
 
     public void ToggleEscapeScreen()
     {

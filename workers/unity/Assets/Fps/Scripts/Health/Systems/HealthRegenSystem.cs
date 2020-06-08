@@ -143,13 +143,11 @@ namespace Fps.Health
                     if (regenComponent.DamagedRecently)
                     {
                         regenData.DamagedRecentlyTimer -= Time.DeltaTime;
-                        Debug.Log("Damaged Recently: Ticking down" + regenData.DamagedRecentlyTimer);
                         if (regenData.DamagedRecentlyTimer <= 0)
                         {
                             regenData.DamagedRecentlyTimer = 0;
                             regenComponent.DamagedRecently = false;
                             regenComponent.RegenCooldownTimer = 0;
-                            Debug.Log("Damaged Recently: finished  ");
                         }
                         else
                         {
