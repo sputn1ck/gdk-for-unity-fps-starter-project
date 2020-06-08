@@ -26,7 +26,10 @@ namespace Fps.Guns
             {
                 return;
             }
-
+            if (ServerGameModeBehaviour.instance.currentGameMode.GameModeId == "lobby")
+            {
+                return;
+            }
             var gunDataForEntity = GetComponentDataFromEntity<GunComponent.Component>();
 
             for (var i = 0; i < events.Count; ++i)
@@ -51,7 +54,7 @@ namespace Fps.Guns
 
                 var gunComponent = gunDataForEntity[shooterEntity];
                 var damage = GunDictionary.Get(gunComponent.GunId).ShotDamage * shotInfo.DmgMultiplier;
-                
+
                 var modifyHealthRequest = new HealthComponent.ModifyHealth.Request(
                     shotInfo.EntityId,
                     new HealthModifier
