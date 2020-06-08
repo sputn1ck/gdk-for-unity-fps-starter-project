@@ -110,7 +110,6 @@ namespace Fps.Health
                 regenComponent.DamagedRecently = true;
                 regenComponent.RegenCooldownTimer = regenComponent.RegenPauseTime;
                 regenData.DamagedRecentlyTimer = regenComponent.RegenPauseTime;
-                Debug.Log("Setting Damaged recently timer to " + regenComponent.RegenPauseTime);
                 regenData.NextSpatialSyncTimer = regenComponent.CooldownSyncInterval;
 
                 healthRegenComponentDataForEntity[entity] = regenComponent;

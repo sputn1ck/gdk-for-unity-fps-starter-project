@@ -89,7 +89,11 @@ public class BountyKillSystem : ComponentSystem
         var backend = ServerServiceConnections.instance.BackendGameServerClient;
         if (backend != null)
         {
-            backend.AddKill(killer, victim);
+            if(ServerGameModeBehaviour.instance.currentGameMode.GameModeId != "lobby")
+            {
+                backend.AddKill(killer, victim);
+            }
+            
         }
     }
 
