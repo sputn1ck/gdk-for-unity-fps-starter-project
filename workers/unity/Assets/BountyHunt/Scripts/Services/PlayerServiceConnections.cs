@@ -28,6 +28,8 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public IDonnerDaemonClient DonnerDaemonClient;
 
+    public IAdvertiserStore AdvertiserStore;
+
 
 
 
@@ -40,6 +42,7 @@ public class PlayerServiceConnections : MonoBehaviour
             dummyGO.AddComponent<DummyLnd>();
             dummyGO.AddComponent<DummyBackendClientClient>();
             dummyGO.AddComponent<DummyDaemonClient>();
+            dummyGO.AddComponent<DummyAdvertiserStore>();
             DummyServices = Instantiate(dummyGO, this.transform);
         }
         if(instance == null)
@@ -108,6 +111,15 @@ public class PlayerServiceConnections : MonoBehaviour
         {
             throw new Exception("Checking game version failed: " + e.Message, e);
         }
+        // Download Advertisers
+        stringFunc("Downloading Sponsors");
+        try
+        {
+            await SetupAdvertisers();
+        } catch (Exception e)
+        {
+            throw new Exception("Downloading Sponsors failed: " + e.Message, e);
+        }
         ServicesReady = true;
         ClientEvents.instance.onServicesSetup.Invoke();
 
@@ -123,6 +135,7 @@ public class PlayerServiceConnections : MonoBehaviour
             {
                 BackendPlayerClient = DummyServices.AddComponent<DummyBackendClientClient>();
             }
+            
         }
         else
         {
@@ -131,9 +144,9 @@ public class PlayerServiceConnections : MonoBehaviour
             sig = lnd.SignMessage(message);
             // Player Client
             BackendPlayerClient = new BackendPlayerClient();
-            BackendPlayerClient = new BackendPlayerClient();
         }
         await BackendPlayerClient.Setup(BackendHost, BackendPort, lnd.GetPubkey(), sig.Signature);
+        
     }
 
     private async Task SetupDonnerDaemon()
@@ -171,6 +184,22 @@ public class PlayerServiceConnections : MonoBehaviour
         await lnd.Setup(confName, false, UseApdata, "", lndConnectString);
     }
 
+    private async Task SetupAdvertisers()
+    {
+        if (UseDummy)
+        {
+            AdvertiserStore = DummyServices.GetComponent<DummyAdvertiserStore>();
+            if (AdvertiserStore == null)
+            {
+                AdvertiserStore = DummyServices.AddComponent<DummyAdvertiserStore>();
+            }
+        } else
+        {
+            // Todo add inmem advertiser store
+        }
+        var advertisers = await BackendPlayerClient.ListAdvertisers();
+        await AdvertiserStore.Initialize(advertisers);
+    }
 
 
     public void OnApplicationQuit()
