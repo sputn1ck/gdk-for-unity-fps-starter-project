@@ -8,10 +8,14 @@ public class ReticleUI : MonoBehaviour
     public Animator hitmarkerAnimator;
     [SerializeField] private Image reticle;
     private Vector3 baseSize;
+    private TintColor baseTint;
+    private UITinter uiTinter;
     private void Start()
     {
         ClientEvents.instance.onOpponentHit.AddListener(onOpponentHit);
         baseSize = reticle.transform.localScale;
+        uiTinter = GetComponent<UITinter>();
+        baseTint = uiTinter.tint;
     }
 
     public void showReticle(bool show)
@@ -23,11 +27,11 @@ public class ReticleUI : MonoBehaviour
     {
         if (headshot)
         {
-            reticle.color = Color.red;
+            uiTinter.updateColor(TintColor.Error);
             reticle.transform.localScale = baseSize * 1.5f;
         }else
         {
-            reticle.color = Color.white;
+            uiTinter.updateColor(baseTint);
             reticle.transform.localScale = baseSize;
         }
         hitmarkerAnimator.SetTrigger("play");
