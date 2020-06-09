@@ -18,7 +18,9 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
     public Material defaultSquareAdMaterial;
 
-    private List<Advertiser> advertisers;
+    //private List<Advertiser> advertisers;
+    private Dictionary<string,Advertiser> advertisers;
+    private List<string> advertiserHashesRanking;
 
     [HideInInspector] public long totalSponsoredSats;
 
@@ -30,7 +32,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(this);
 
-        advertisers = new List <Advertiser>();
+        advertisers = new Dictionary<string, Advertiser>();
     }
 
     private void OnEnable()
@@ -50,7 +52,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     {
         SortInvestments();
         InitializeAllAds();
-        ClientEvents.instance.onUpdateAdvertisers.Invoke(advertisers);
+        ClientEvents.instance.onUpdateAdvertisers.Invoke(advertiserHashesRanking.Select( h => advertisers[h]).ToList());
     }
     void InitializeAllAds()
     {
@@ -62,9 +64,9 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
-        foreach (Advertiser adv in advertisers)
+        foreach (var adv in advertisers)
         {
-            int count = Mathf.Max(1, (int)(banners.Length * adv.investment / totalSponsoredSats));
+            int count = Mathf.Max(1, (int)(banners.Length * adv.Value.investment / totalSponsoredSats));
 
             for (int j = 0; j < count; j++)
             {
@@ -73,7 +75,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
                     Debug.LogWarning("no BannersLeft!");
                     break;
                 }
-                bannersLeft[0].SetAdvertiser(adv);
+                bannersLeft[0].SetAdvertiser(adv.Value);
                 bannersLeft.RemoveAt(0);
             }
         }
@@ -91,26 +93,26 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     void SortInvestments()
     {
         totalSponsoredSats = 0;
-        foreach (Advertiser adv in advertisers)
+        foreach (var adv in advertisers)
         {
-            totalSponsoredSats += adv.investment;
+            totalSponsoredSats += adv.Value.investment;
         }
-
-        advertisers = advertisers.OrderByDescending(o => o.investment).ToList<Advertiser>();
+        
+        advertiserHashesRanking = advertisers.OrderByDescending(o => o.Value.investment).Select(a => a.Value.hash).ToList();
     }
 
     public Advertiser GetRandomAdvertiser()
     {
         var winningTicket = Random.Range(0, totalSponsoredSats);
         long ticket = 0;
-        foreach (var adv in advertisers)
+        foreach (var adv in advertisers.Values)
         {
             ticket += adv.investment;
             if (ticket > winningTicket)
                 return adv;
 
         }
-        return advertisers[0];
+        return advertisers.First().Value;
     }
 
     public Advertiser[] GetRandomAdvertisers(int count)
@@ -118,7 +120,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         Advertiser[] answer = new Advertiser[Mathf.Min(count, this.advertisers.Count)];
 
         long totSats = totalSponsoredSats;
-        List<Advertiser> tempAdvertisers = new List<Advertiser>(this.advertisers);
+        List<Advertiser> tempAdvertisers = new List<Advertiser>(this.advertisers.Values);
 
         for(int i = 0; i<answer.Length; i++)
         {
@@ -247,7 +249,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         advertiser.url = source.Url;
         advertiser.squareMedia = await getTexturesFromURLList(source.SquareTextureLinks);
         advertiser.Initialize();
-        advertisers.Add(advertiser);
+        advertisers[advertiser.hash] = advertiser;
     }
 
     public VideoPlayer GetNewVideoPlayer()
@@ -279,6 +281,7 @@ public class Advertiser
     public string name;
     public string description;
     public string url;
+    public string hash;
     public (List<Texture2D>, List<string>) squareMedia;
 
     Dictionary<AdMaterialType, List<MaterialInfo>> materials;
