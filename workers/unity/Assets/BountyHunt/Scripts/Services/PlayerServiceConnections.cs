@@ -42,7 +42,6 @@ public class PlayerServiceConnections : MonoBehaviour
             dummyGO.AddComponent<DummyLnd>();
             dummyGO.AddComponent<DummyBackendClientClient>();
             dummyGO.AddComponent<DummyDaemonClient>();
-            dummyGO.AddComponent<DummyAdvertiserStore>();
             DummyServices = Instantiate(dummyGO, this.transform);
         }
         if(instance == null)

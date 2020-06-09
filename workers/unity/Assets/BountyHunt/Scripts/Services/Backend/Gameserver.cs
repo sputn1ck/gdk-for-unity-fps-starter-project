@@ -62,23 +62,24 @@ namespace Bbhrpc {
             "U3Bhd25TZXR0aW5ncxIbChN0aW1lX2JldHdlZW5fc3Bhd25zGAEgASgCEhwK",
             "FG1pbl9zcGF3bnNfcGVyX3NwYXduGAIgASgFEhwKFG1heF9zcGF3bnNfcGVy",
             "X3NwYXduGAMgASgFEjAKDGRpc3RyaWJ1dGlvbhgEIAEoDjIaLmJiaHJwYy5C",
-            "b3VudHlEaXN0cmlidXRpb24icAoOQWR2ZXJ0aXNlckluZm8SDAoEbmFtZRgB",
+            "b3VudHlEaXN0cmlidXRpb24ifwoOQWR2ZXJ0aXNlckluZm8SDAoEbmFtZRgB",
             "IAEoCRISCgpzcG9uc29yaW5nGAIgASgDEhoKEnNxdWFyZV9iYW5uZXJfdXJs",
-            "cxgDIAMoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRILCgN1cmwYCiABKAkiIAoO",
-            "R2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJIi0KD0dldFVzZXJSZXNw",
-            "b25zZRIaCgR1c2VyGAEgASgLMgwuYmJocnBjLlVzZXIiJAoEVXNlchIMCgRu",
-            "YW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSIkChJHZXRVc2VyU2tpblJlcXVl",
-            "c3QSDgoGcHVia2V5GAEgASgJIiwKE0dldFVzZXJTa2luUmVzcG9uc2USFQoN",
-            "ZXF1aXBwZWRfc2tpbhgBIAEoCSohChJCb3VudHlEaXN0cmlidXRpb24SCwoH",
-            "VU5JRk9STRAAMvwCChFHYW1lU2VydmVyU2VydmljZRJICgtFdmVudFN0cmVh",
-            "bRIaLmJiaHJwYy5FdmVudFN0cmVhbVJlcXVlc3QaGy5iYmhycGMuRXZlbnRT",
-            "dHJlYW1SZXNwb25zZSgBEk4KDUJhY2tlbmRTdHJlYW0SHC5iYmhycGMuQmFj",
-            "a2VuZFN0cmVhbVJlcXVlc3QaHS5iYmhycGMuQmFja2VuZFN0cmVhbVJlc3Bv",
-            "bnNlMAESOgoHR2V0VXNlchIWLmJiaHJwYy5HZXRVc2VyUmVxdWVzdBoXLmJi",
-            "aHJwYy5HZXRVc2VyUmVzcG9uc2USRgoLR2V0VXNlclNraW4SGi5iYmhycGMu",
-            "R2V0VXNlclNraW5SZXF1ZXN0GhsuYmJocnBjLkdldFVzZXJTa2luUmVzcG9u",
-            "c2USSQoMR2V0Um91bmRJbmZvEhsuYmJocnBjLkdldFJvdW5kSW5mb1JlcXVl",
-            "c3QaHC5iYmhycGMuR2V0Um91bmRJbmZvUmVzcG9uc2ViBnByb3RvMw=="));
+            "cxgDIAMoCRINCgVwaGFzaBgEIAEoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRIL",
+            "CgN1cmwYCiABKAkiIAoOR2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJ",
+            "Ii0KD0dldFVzZXJSZXNwb25zZRIaCgR1c2VyGAEgASgLMgwuYmJocnBjLlVz",
+            "ZXIiJAoEVXNlchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSIkChJH",
+            "ZXRVc2VyU2tpblJlcXVlc3QSDgoGcHVia2V5GAEgASgJIiwKE0dldFVzZXJT",
+            "a2luUmVzcG9uc2USFQoNZXF1aXBwZWRfc2tpbhgBIAEoCSohChJCb3VudHlE",
+            "aXN0cmlidXRpb24SCwoHVU5JRk9STRAAMvwCChFHYW1lU2VydmVyU2Vydmlj",
+            "ZRJICgtFdmVudFN0cmVhbRIaLmJiaHJwYy5FdmVudFN0cmVhbVJlcXVlc3Qa",
+            "Gy5iYmhycGMuRXZlbnRTdHJlYW1SZXNwb25zZSgBEk4KDUJhY2tlbmRTdHJl",
+            "YW0SHC5iYmhycGMuQmFja2VuZFN0cmVhbVJlcXVlc3QaHS5iYmhycGMuQmFj",
+            "a2VuZFN0cmVhbVJlc3BvbnNlMAESOgoHR2V0VXNlchIWLmJiaHJwYy5HZXRV",
+            "c2VyUmVxdWVzdBoXLmJiaHJwYy5HZXRVc2VyUmVzcG9uc2USRgoLR2V0VXNl",
+            "clNraW4SGi5iYmhycGMuR2V0VXNlclNraW5SZXF1ZXN0GhsuYmJocnBjLkdl",
+            "dFVzZXJTa2luUmVzcG9uc2USSQoMR2V0Um91bmRJbmZvEhsuYmJocnBjLkdl",
+            "dFJvdW5kSW5mb1JlcXVlc3QaHC5iYmhycGMuR2V0Um91bmRJbmZvUmVzcG9u",
+            "c2ViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.BountyDistribution), }, new pbr::GeneratedClrTypeInfo[] {
@@ -98,7 +99,7 @@ namespace Bbhrpc {
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BaseSettings), global::Bbhrpc.BaseSettings.Parser, new[]{ "TeleportPlayerOnStart", "ClearBountyOnEnd", "ClearStatsOnEnd", "ClearPickupsOnEnd" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.BountySettings), global::Bbhrpc.BountySettings.Parser, new[]{ "BountyTickConversion", "BountyTickTimeSeconds", "BountyDropPercentageDeath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.SpawnSettings), global::Bbhrpc.SpawnSettings.Parser, new[]{ "TimeBetweenSpawns", "MinSpawnsPerSpawn", "MaxSpawnsPerSpawn", "Distribution" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.AdvertiserInfo), global::Bbhrpc.AdvertiserInfo.Parser, new[]{ "Name", "Sponsoring", "SquareBannerUrls", "Discription", "Url" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.AdvertiserInfo), global::Bbhrpc.AdvertiserInfo.Parser, new[]{ "Name", "Sponsoring", "SquareBannerUrls", "Phash", "Discription", "Url" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetUserRequest), global::Bbhrpc.GetUserRequest.Parser, new[]{ "Pubkey" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetUserResponse), global::Bbhrpc.GetUserResponse.Parser, new[]{ "User" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.User), global::Bbhrpc.User.Parser, new[]{ "Name", "Pubkey" }, null, null, null),
@@ -3193,6 +3194,7 @@ namespace Bbhrpc {
       name_ = other.name_;
       sponsoring_ = other.sponsoring_;
       squareBannerUrls_ = other.squareBannerUrls_.Clone();
+      phash_ = other.phash_;
       discription_ = other.discription_;
       url_ = other.url_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -3235,6 +3237,17 @@ namespace Bbhrpc {
       get { return squareBannerUrls_; }
     }
 
+    /// <summary>Field number for the "phash" field.</summary>
+    public const int PhashFieldNumber = 4;
+    private string phash_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Phash {
+      get { return phash_; }
+      set {
+        phash_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "discription" field.</summary>
     public const int DiscriptionFieldNumber = 9;
     private string discription_ = "";
@@ -3273,6 +3286,7 @@ namespace Bbhrpc {
       if (Name != other.Name) return false;
       if (Sponsoring != other.Sponsoring) return false;
       if(!squareBannerUrls_.Equals(other.squareBannerUrls_)) return false;
+      if (Phash != other.Phash) return false;
       if (Discription != other.Discription) return false;
       if (Url != other.Url) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -3284,6 +3298,7 @@ namespace Bbhrpc {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Sponsoring != 0L) hash ^= Sponsoring.GetHashCode();
       hash ^= squareBannerUrls_.GetHashCode();
+      if (Phash.Length != 0) hash ^= Phash.GetHashCode();
       if (Discription.Length != 0) hash ^= Discription.GetHashCode();
       if (Url.Length != 0) hash ^= Url.GetHashCode();
       if (_unknownFields != null) {
@@ -3308,6 +3323,10 @@ namespace Bbhrpc {
         output.WriteInt64(Sponsoring);
       }
       squareBannerUrls_.WriteTo(output, _repeated_squareBannerUrls_codec);
+      if (Phash.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Phash);
+      }
       if (Discription.Length != 0) {
         output.WriteRawTag(74);
         output.WriteString(Discription);
@@ -3331,6 +3350,9 @@ namespace Bbhrpc {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Sponsoring);
       }
       size += squareBannerUrls_.CalculateSize(_repeated_squareBannerUrls_codec);
+      if (Phash.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Phash);
+      }
       if (Discription.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Discription);
       }
@@ -3355,6 +3377,9 @@ namespace Bbhrpc {
         Sponsoring = other.Sponsoring;
       }
       squareBannerUrls_.Add(other.squareBannerUrls_);
+      if (other.Phash.Length != 0) {
+        Phash = other.Phash;
+      }
       if (other.Discription.Length != 0) {
         Discription = other.Discription;
       }
@@ -3382,6 +3407,10 @@ namespace Bbhrpc {
           }
           case 26: {
             squareBannerUrls_.AddEntriesFrom(input, _repeated_squareBannerUrls_codec);
+            break;
+          }
+          case 34: {
+            Phash = input.ReadString();
             break;
           }
           case 74: {
