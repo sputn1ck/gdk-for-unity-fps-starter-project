@@ -439,4 +439,21 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             }
         };
     }
+
+    public Task<ListAdvertiserResponse> ListAdvertisers()
+    {
+        var res = new ListAdvertiserResponse();
+        var advertiser = new Bbhrpc.Advertiser()
+        {
+            Name = "gude",
+            Balance = 100,
+            Phash = "1",
+            Url = "https://google.de",
+
+
+         };
+        res.Advertisers.Add(advertiser);
+        advertiser.PicUrls.Add("https://pics.donnerlab.com/pics/get/3bfde9ba-8574-4c1b-a092-202adc147702.pn");
+        return Task.FromResult(res);
+    }
 }

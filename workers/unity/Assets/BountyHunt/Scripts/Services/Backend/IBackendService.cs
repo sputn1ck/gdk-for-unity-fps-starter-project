@@ -37,6 +37,7 @@ public interface IBackendPlayerClient
 
     Task<GetInfoResponse> GetInfo();
 
+    Task<ListAdvertiserResponse> ListAdvertisers();
 }
 
 public interface IBackendServerClient

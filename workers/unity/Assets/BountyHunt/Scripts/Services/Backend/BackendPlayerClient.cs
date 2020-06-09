@@ -14,19 +14,23 @@ public class BackendPlayerClient : IBackendPlayerClient
     public GameClientService.GameClientServiceClient client;
     public PublicService.PublicServiceClient publicClient;
     public SkinService.SkinServiceClient skinClient;
-
+    public AdvertiserService.AdvertiserServiceClient adClient;
     private Channel rpcChannel;
 
     private string pubkey;
     private string signature;
 
     private CancellationTokenSource CancellationTokenSource;
+
+    
+
     public async Task Setup(string target,int port, string pubkey, string signature)
     {
         rpcChannel = new Grpc.Core.Channel(target, port, Grpc.Core.ChannelCredentials.Insecure);
         client = new GameClientService.GameClientServiceClient(rpcChannel);
         publicClient = new PublicService.PublicServiceClient(rpcChannel);
         skinClient = new SkinService.SkinServiceClient(rpcChannel);
+        adClient = new AdvertiserService.AdvertiserServiceClient(rpcChannel);
         this.CancellationTokenSource = new CancellationTokenSource();
         this.pubkey = pubkey;
         this.signature = signature;
@@ -206,6 +210,12 @@ public class BackendPlayerClient : IBackendPlayerClient
     public async Task<GetInfoResponse> GetInfo()
     {
         var res = await publicClient.GetInfoAsync(new GetInfoRequest());
+        return res;
+    }
+
+    public async Task<ListAdvertiserResponse> ListAdvertisers()
+    {
+        var res = await adClient.ListAdvertisersAsync(new ListAdvertisersRequest());
         return res;
     }
 }
