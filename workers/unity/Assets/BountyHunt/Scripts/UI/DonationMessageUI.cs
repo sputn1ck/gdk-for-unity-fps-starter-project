@@ -10,7 +10,7 @@ public class DonationMessageUI : MonoBehaviour
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI satsText;
     public float secondsPerAd = 5;
-    List<Advertiser> advertisers;
+    List<AdvertiserInvestment> advertiserInvestments;
     int nextID;
 
 
@@ -18,36 +18,36 @@ public class DonationMessageUI : MonoBehaviour
     {
         get
         {
-            if (advertisers == null) { return 0; }
-            return advertisers.Count;
+            if (advertiserInvestments == null) { return 0; }
+            return advertiserInvestments.Count;
         }
     }
 
     void Start()
     {
         nextID = 0;
-        ClientEvents.instance.onUpdateAdvertisers.AddListener(UpdateAdvertiserMessages);
+        ClientEvents.instance.onUpdateBillboardAdvertisers.AddListener(UpdateAdvertiserMessages);
         InvokeRepeating("Next", 0, secondsPerAd);
     }
 
-    private void UpdateAdvertiserMessages(List<Advertiser> advertisers)
+    private void UpdateAdvertiserMessages(List<AdvertiserInvestment> adInvs)
     {
-        this.advertisers = advertisers;
+        this.advertiserInvestments = adInvs;
         nextID = 0;
     }
 
     void Next()
     {
-        if (advertisers == null || advertisers.Count == 0) {
+        if (advertiserInvestments == null || advertiserInvestments.Count == 0) {
             nextID = 0;
             messageText.text = "";
             satsText.text = "";
             return;
         }
 
-        if (nextID >= advertisers.Count) nextID = 0;
-        messageText.text = advertisers[nextID].name + "    " + advertisers[nextID].url;
-        satsText.text = Utility.SatsToShortString(advertisers[nextID].investment, UITinter.tintDict[TintColor.Sats]);
+        if (nextID >= advertiserInvestments.Count) nextID = 0;
+        messageText.text = advertiserInvestments[nextID].advertiser.name + "    " + advertiserInvestments[nextID].advertiser.url;
+        satsText.text = Utility.SatsToShortString(advertiserInvestments[nextID].investment, UITinter.tintDict[TintColor.Sats]);
         
         nextID++;
     }

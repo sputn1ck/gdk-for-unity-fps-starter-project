@@ -28,7 +28,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
     public IDonnerDaemonClient DonnerDaemonClient;
 
-    public IAdvertiserStore AdvertiserStore;
+    public AdvertiserStore AdvertiserStore;
 
 
 
@@ -186,17 +186,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
     private async Task SetupAdvertisers()
     {
-        if (UseDummy)
-        {
-            AdvertiserStore = DummyServices.GetComponent<DummyAdvertiserStore>();
-            if (AdvertiserStore == null)
-            {
-                AdvertiserStore = DummyServices.AddComponent<DummyAdvertiserStore>();
-            }
-        } else
-        {
-            // Todo add inmem advertiser store
-        }
+        AdvertiserStore = new AdvertiserStore();
         var advertisers = await BackendPlayerClient.ListAdvertisers();
         await AdvertiserStore.Initialize(advertisers);
     }

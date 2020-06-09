@@ -61,6 +61,8 @@ public class ServerGameModeBehaviour : MonoBehaviour
         {
             var advertiserSource = new AdvertiserSource
             {
+                //TODO Replace Hash with real hash instead of name
+                Hash = advertiserInfo.Name,
                 Investment = advertiserInfo.Sponsoring,
                 Name = advertiserInfo.Name,
                 SquareTextureLinks = new List<string>(),

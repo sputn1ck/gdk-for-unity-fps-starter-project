@@ -19,9 +19,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     public Material defaultSquareAdMaterial;
 
     //private List<Advertiser> advertisers;
-    private Dictionary<string,Advertiser> advertisers;
-    private List<string> advertiserHashesRanking;
-
+    private List<AdvertiserInvestment> advertiserInvestments;
     [HideInInspector] public long totalSponsoredSats;
 
     List<VideoPlayer> usedVideoPlayers = new List<VideoPlayer>();
@@ -32,7 +30,7 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(this);
 
-        advertisers = new Dictionary<string, Advertiser>();
+        advertiserInvestments = new List<AdvertiserInvestment>();
     }
 
     private void OnEnable()
@@ -51,22 +49,22 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     void Initialize()
     {
         SortInvestments();
-        InitializeAllAds();
-        ClientEvents.instance.onUpdateAdvertisers.Invoke(advertiserHashesRanking.Select( h => advertisers[h]).ToList());
+        InitializeAllBillboards();
+        ClientEvents.instance.onUpdateBillboardAdvertisers.Invoke(advertiserInvestments);
     }
-    void InitializeAllAds()
+    void InitializeAllBillboards()
     {
         //Todo maybe don't search all ads every time?
         AdBillboard[] banners = FindObjectsOfType<AdBillboard>();
         Debug.Log("Total ad billboards Count: " + banners.Length);
-        Debug.Log("Total advertisers Count: " + advertisers.Count);
+        Debug.Log("Total advertisers Count: " + advertiserInvestments.Count);
 
         banners = banners.OrderBy(x => Random.value).ToArray<AdBillboard>();
         List<AdBillboard> bannersLeft = banners.ToList();
 
-        foreach (var adv in advertisers)
+        foreach (AdvertiserInvestment adv in advertiserInvestments)
         {
-            int count = Mathf.Max(1, (int)(banners.Length * adv.Value.investment / totalSponsoredSats));
+            int count = Mathf.Max(1, (int)(banners.Length * adv.investment / totalSponsoredSats));
 
             for (int j = 0; j < count; j++)
             {
@@ -75,16 +73,16 @@ public class ClientAdManagerBehaviour : MonoBehaviour
                     Debug.LogWarning("no BannersLeft!");
                     break;
                 }
-                bannersLeft[0].SetAdvertiser(adv.Value);
+                bannersLeft[0].SetAdvertiser(adv);
                 bannersLeft.RemoveAt(0);
             }
         }
-        if(advertisers.Count >= 1)
+        if(advertiserInvestments.Count >= 1)
         {
 
             foreach (AdBillboard ab in bannersLeft)
             {
-                ab.SetAdvertiser(GetRandomAdvertiser());
+                ab.SetAdvertiser(GetRandomAdvertiserInvestment());
             }
         }
 
@@ -93,34 +91,34 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     void SortInvestments()
     {
         totalSponsoredSats = 0;
-        foreach (var adv in advertisers)
+        foreach (var adv in advertiserInvestments)
         {
-            totalSponsoredSats += adv.Value.investment;
+            totalSponsoredSats += adv.investment;
         }
         
-        advertiserHashesRanking = advertisers.OrderByDescending(o => o.Value.investment).Select(a => a.Value.hash).ToList();
+        advertiserInvestments= advertiserInvestments.OrderByDescending(o => o.investment).ToList();
     }
 
-    public Advertiser GetRandomAdvertiser()
+    public AdvertiserInvestment GetRandomAdvertiserInvestment()
     {
         var winningTicket = Random.Range(0, totalSponsoredSats);
         long ticket = 0;
-        foreach (var adv in advertisers.Values)
+        foreach (var adv in advertiserInvestments)
         {
             ticket += adv.investment;
             if (ticket > winningTicket)
                 return adv;
 
         }
-        return advertisers.First().Value;
+        return advertiserInvestments.First();
     }
 
-    public Advertiser[] GetRandomAdvertisers(int count)
+    public AdvertiserInvestment[] GetRandomAdvertisers(int count)
     {
-        Advertiser[] answer = new Advertiser[Mathf.Min(count, this.advertisers.Count)];
+        AdvertiserInvestment[] answer = new AdvertiserInvestment[Mathf.Min(count, this.advertiserInvestments.Count)];
 
         long totSats = totalSponsoredSats;
-        List<Advertiser> tempAdvertisers = new List<Advertiser>(this.advertisers.Values);
+        List<AdvertiserInvestment> tempAdvertisers = new List<AdvertiserInvestment>(this.advertiserInvestments);
 
         for(int i = 0; i<answer.Length; i++)
         {
@@ -148,13 +146,14 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         
         List<Task> tasks = new List<Task>();
 
-        advertisers.Clear();
+        advertiserInvestments.Clear();
         foreach (VideoPlayer player in usedVideoPlayers)
         {
             freeVideoPlayers.Add(player);
             player.enabled = false;
         }
         usedVideoPlayers.Clear();
+
         foreach (AdvertiserSource source in advertiserSources)
         {
             tasks.Add(loadAdvertiser(source));
@@ -165,91 +164,11 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         Initialize();
     }
 
-    private static async Task<(List<Texture2D>,List<string>)> getTexturesFromURLList(List<string> urls)
-    {
-
-        List<Texture2D> textures = new List<Texture2D>();
-        List<string> videoUrls= new List<string>();
-        if (urls == null)
-        {
-            Debug.LogWarning("url list is null");
-            return (textures,videoUrls);
-        }
-        foreach (string url in urls)
-        {
-            string extension = Path.GetExtension(url);
-            switch (extension)
-            {
-                case ".png":
-                case ".jpg":
-                case ".jpeg":
-                case ".bmp":
-                case ".exr":
-                case ".hdr":
-                case ".iff":
-                case ".pict":
-                case ".psd":
-                case ".tga":
-                case ".tiff":
-                case ".gif":
-                
-
-                    Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(instance, url);
-
-                    if (tex == null)
-                    {
-                        continue;
-                    }
-
-                    Color backgroundColor = Color.white; 
-                    var pixels = tex.GetPixels();
-
-                    for (int i = 0; i < pixels.Length; i++)
-                    {
-                        float a = pixels[i].a;
-                        pixels[i] = Color.Lerp(backgroundColor,pixels[i],a);
-                        pixels[i].a = a;
-                    }
-                    tex.SetPixels(pixels);
-                    tex.Apply();
-                    textures.Add(tex);
-
-                    break;
-
-                case ".dv":
-                case ".m4v":
-                case ".mov":
-                case ".mp4":
-                case ".mpg":
-                case ".mpeg":
-                case ".ogv":
-                case ".vp8":
-                case ".webm":
-
-                    videoUrls.Add(url);
-
-                    break;
-
-                default:
-                    Debug.LogError("File Type not " + extension + "supportet!");
-                    break;
-            }
-
-            
-        }
-
-        return (textures,videoUrls);
-    }
+    
 
     private async Task loadAdvertiser(AdvertiserSource source)
     {
-        Advertiser advertiser = new Advertiser();
-        advertiser.name = source.Name;
-        advertiser.investment = source.Investment;
-        advertiser.url = source.Url;
-        advertiser.squareMedia = await getTexturesFromURLList(source.SquareTextureLinks);
-        advertiser.Initialize();
-        advertisers[advertiser.hash] = advertiser;
+        
     }
 
     public VideoPlayer GetNewVideoPlayer()
@@ -271,94 +190,5 @@ public class ClientAdManagerBehaviour : MonoBehaviour
         return vp;
     }
 
-}
-
-
-[System.Serializable]
-public class Advertiser
-{
-    public long investment;
-    public string name;
-    public string description;
-    public string url;
-    public string hash;
-    public (List<Texture2D>, List<string>) squareMedia;
-
-    Dictionary<AdMaterialType, List<MaterialInfo>> materials;
-
-    public void Initialize()
-    {
-        materials = new Dictionary<AdMaterialType, List<MaterialInfo>>();
-        InitializeMatrials(squareMedia, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
-        //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
-        //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
-        //InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
-
-    }
-    public void InitializeMatrials((List<Texture2D>textures,List<string>videolinks) media, AdMaterialType type, Material defaultMaterial, string TextureToReplace)
-    {
-        materials[type] = new List<MaterialInfo>();
-        foreach (var texture in media.textures)
-        {
-            var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
-            material.SetTexture(TextureToReplace, texture);
-            materials[type].Add(new MaterialInfo(material,texture));
-        }
-
-        foreach(string link in media.videolinks)
-        {
-            var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
-            VideoPlayer vp = ClientAdManagerBehaviour.instance.GetNewVideoPlayer();
-            vp.url = link;
-            vp.renderMode = VideoRenderMode.RenderTexture;
-            RenderTexture rt = new RenderTexture(512, 512, 0);
-            vp.targetTexture = rt;
-            material.SetTexture(TextureToReplace, rt);
-            materials[type].Add(new MaterialInfo(material,rt));
-
-        }
-    }
-
-    public Material GetRandomMaterial(AdMaterialType type)
-    {
-        return GetRandomMaterialInfo(type).Material;
-    }
-    public Texture GetRandomTexture(AdMaterialType type)
-    {
-        return GetRandomMaterialInfo(type).Texture;
-    }
-    public MaterialInfo GetRandomMaterialInfo(AdMaterialType type)
-    {
-        List<MaterialInfo> mats = GetMaterials(type);
-        if (mats.Count == 0)
-        {
-            Debug.LogError(name + " has no Material of type " + type);
-            return new MaterialInfo();
-        }
-
-        var rnd = Random.Range(0, mats.Count);
-        if (rnd > mats.Count - 1)
-            return mats[0];
-        return mats[rnd];
-    }
-
-    public List<MaterialInfo> GetMaterials (AdMaterialType type)
-    {
-        return materials[type];
-    }
-
-    public enum AdMaterialType { SQUARE, HORIZONTAL, VERTICAL}
-}
-
-public struct MaterialInfo
-{
-    public Material Material;
-    public Texture Texture;
-
-    public MaterialInfo(Material mat,Texture tex)
-    {
-        Material = mat;
-        Texture = tex;
-    }
 }
 
