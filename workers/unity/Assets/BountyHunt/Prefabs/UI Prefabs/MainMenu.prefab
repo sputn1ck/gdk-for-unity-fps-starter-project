@@ -2966,8 +2966,8 @@ GameObject:
   - component: {fileID: 3062643124093617093}
   - component: {fileID: 6346628626605416417}
   - component: {fileID: 362027595094949859}
-  - component: {fileID: 4240379080665006563}
   - component: {fileID: 309101895755213572}
+  - component: {fileID: 6396359950725778791}
   m_Layer: 5
   m_Name: Sponsors
   m_TagString: Untagged
@@ -3035,71 +3035,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   canvasGroup: {fileID: 0}
---- !u!114 &4240379080665006563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876497971117499392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ee37934aa40684787be73ce56451bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  slidingTime: 0.25
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.10395525
-      outSlope: 0.10395525
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.27378207
-      value: 0.2179921
-      inSlope: 1.2258761
-      outSlope: 1.2258761
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.50913227
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.83611435
-      value: 1.0534623
-      inSlope: 0.0011000675
-      outSlope: 0.0011000675
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.14545518
-      outWeight: 0.84501684
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.470142
-      outSlope: 0.470142
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  firstButtonID: 0
-  TabsLayoutGroup: {fileID: 0}
-  buttonSubMenuPairs:
-  - button: {fileID: 0}
-    subMenu: {fileID: 0}
-  - button: {fileID: 0}
-    subMenu: {fileID: 0}
-  - button: {fileID: 0}
-    subMenu: {fileID: 0}
 --- !u!114 &309101895755213572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,6 +3048,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tint: 2
+--- !u!114 &6396359950725778791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876497971117499392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f66f99454975f4bbc8ef89dbc50a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sponsorTilesContainer: {fileID: 0}
+  sponsorTileUIPrefab: {fileID: 0}
+  tiles: []
 --- !u!1 &1886519072396820030
 GameObject:
   m_ObjectHideFlags: 0
@@ -6363,7 +6313,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5074638032878305980}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.57494056
+  m_Size: 0.5753394
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -18,21 +18,8 @@ public class AdvertiserStore
             await GetAdvertiser(adv);
         }
     }
-    async Task<Advertiser> GetAdvertiser(Bbhrpc.Advertiser advertiser)
-    {
-        if (this.advertisers.ContainsKey(advertiser.Phash))
-        {
-            return advertisers[advertiser.Phash];
-        }
 
-        Advertiser adv = new Advertiser();
-        await adv.Load(advertiser);
-
-        advertisers[advertiser.Phash] = adv;
-        return adv;
-    }
-
-    async Task<Advertiser> GetAdvertiser(AdvertiserInvestmentInfo aii)
+    public async Task<Advertiser> GetAdvertiser(AdvertiserInvestmentInfo aii)
     {
         if (this.advertisers.ContainsKey(aii.Hash))
         {
@@ -45,6 +32,39 @@ public class AdvertiserStore
         advertisers[aii.Hash] = adv;
         return adv;
     }
+
+    public async Task<List<AdvertiserInvestment>> GetAdvertiserInvestments(ListAdvertiserResponse aiis)
+    {
+        List<AdvertiserInvestment> advis = new List<AdvertiserInvestment>();
+        List<Task> tasks = new List<Task>();
+        foreach (var aii in aiis.Advertisers)
+        {
+            tasks.Add(AddNewAdvertiserInvestmentToList(advis, aii));
+        }
+        await Task.WhenAll(tasks);
+
+        return advis;
+    }
+
+    public async Task<List<AdvertiserInvestment>> GetAdvertiserInvestments(List<AdvertiserSource> aiis)
+    {
+        List<AdvertiserInvestment> advis = new List<AdvertiserInvestment>();
+        List<Task> tasks = new List<Task>();
+        foreach (var aii in aiis)
+        {
+            tasks.Add(AddNewAdvertiserInvestmentToList(advis, aii));
+        }
+        await Task.WhenAll(tasks);
+
+        return advis;
+    }
+
+    public async Task AddNewAdvertiserInvestmentToList(List<AdvertiserInvestment> list, AdvertiserInvestmentInfo aii)
+    {
+        Advertiser adv = await GetAdvertiser(aii);
+        list.Add(new AdvertiserInvestment(adv, aii.Investment));
+    }
+
 }
 
 public class AdvertiserInvestmentInfo

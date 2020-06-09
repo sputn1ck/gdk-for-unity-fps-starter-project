@@ -21,7 +21,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         animator = GetComponent<Animator>();
     }
 
-    void Set(Advertiser advertiser)
+    public void Set(AdvertiserInvestment advertiser)
     {
         advertiser = advertiser;
     }

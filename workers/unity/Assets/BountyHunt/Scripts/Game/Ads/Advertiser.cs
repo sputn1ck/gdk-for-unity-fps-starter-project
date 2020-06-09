@@ -185,6 +185,8 @@ public class AdvertiserInvestment
     public Advertiser advertiser;
     public long investment;
 
+    
+
     public AdvertiserInvestment(Advertiser advertiser, long investment)
     {
         this.advertiser = advertiser;
