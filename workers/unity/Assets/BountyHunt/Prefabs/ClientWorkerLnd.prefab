@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8932650709854373229}
   - component: {fileID: 6882851908204537564}
   - component: {fileID: 8111325867581222443}
+  - component: {fileID: 9221059237978615307}
   m_Layer: 0
   m_Name: ClientWorkerLnd
   m_TagString: Untagged
@@ -176,6 +177,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillDictionary: {fileID: 11400000, guid: c362e1c6e94a0c546876566b1096f186, type: 2}
+--- !u!114 &9221059237978615307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466744334126222726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2072883666b98cc439aa2630c3c35047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSquareBillboardMaterial: {fileID: 2100000, guid: 761c5a320aa878a4ab19dae2289ae5a2,
+    type: 2}
 --- !u!1 &6983945382177000905
 GameObject:
   m_ObjectHideFlags: 0

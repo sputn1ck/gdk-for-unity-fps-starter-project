@@ -61,6 +61,7 @@ public class ServerGameModeBehaviour : MonoBehaviour
         {
             var advertiserSource = new AdvertiserSource
             {
+                Hash = advertiserInfo.Phash,
                 Investment = advertiserInfo.Sponsoring,
                 Name = advertiserInfo.Name,
                 SquareTextureLinks = new List<string>(),

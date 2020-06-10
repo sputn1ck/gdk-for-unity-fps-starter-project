@@ -146,7 +146,7 @@ public class RespawnScreenUI : ScreenUI
 
     public void RefreshAds()
     {
-        Advertiser[] advs = ClientAdManagerBehaviour.instance.GetRandomAdvertisers(adsCount);
+        AdvertiserInvestment[] advs = ClientAdManagerBehaviour.instance.GetRandomAdvertisers(adsCount);
         int i = 0;
         foreach(RespawnScreenAdUI Ad in adObjects)
         {

@@ -36,7 +36,7 @@ public class AllTimeScoreUpdateEvent : UnityEvent<AllTimeScoreUpdateArgs> { }
 
 public class LeaderboardUpdateEvent : UnityEvent<LeaderboardUpdateArgs> { }
 
-public class UpdateAdvertisersEvent : UnityEvent<List<Advertiser>> { }
+public class UpdateAdvertisersEvent : UnityEvent<List<AdvertiserInvestment>> { }
 
 public class PlayerKilledEvent : UnityEvent<PlayerKilledArgs> { }
 

@@ -6,13 +6,13 @@ public class AdBillboard : MonoBehaviour
 {
     public MeshRenderer AdRenderer;
     public Advertiser.AdMaterialType AdType;
-    private Advertiser advertiser;
+    private AdvertiserInvestment advertiserInvestment;
 
 
-    public void SetAdvertiser(Advertiser advertiser)
+    public void SetAdvertiser(AdvertiserInvestment adInv)
     {
-        this.advertiser = advertiser;
-        Material mat = this.advertiser.GetRandomMaterial(AdType);
+        this.advertiserInvestment = adInv;
+        Material mat = this.advertiserInvestment.advertiser.GetRandomMaterial(AdType);
         if (mat == null) return;
 
         AdRenderer.material = mat;

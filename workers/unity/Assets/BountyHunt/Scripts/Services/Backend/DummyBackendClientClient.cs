@@ -48,6 +48,8 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public int expiryInSeconds;
     public bool triggerPaymentTest;
 
+    [Header("Sponsors")]
+    [SerializeField]public List<AdvertiserInvestmentInfo> AdvertiserInvestmentInfos;
 
     private void Awake()
     {
@@ -438,5 +440,29 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
                 ShopPool = UnityEngine.Random.Range(100, int.MaxValue),
             }
         };
+    }
+
+    public Task<ListAdvertiserResponse> ListAdvertisers()
+    {
+
+        var res = new ListAdvertiserResponse();
+
+        foreach (AdvertiserInvestmentInfo aii in AdvertiserInvestmentInfos)
+        {
+            var advertiser = new Bbhrpc.Advertiser()
+            {
+                Name = aii.Name,
+                Balance = aii.Investment,
+                Phash = aii.Hash,
+                Url = aii.Url
+            };
+            foreach(string url in aii.SquareImageUrls)
+            {
+                advertiser.PicUrls.Add(url);
+            }
+            res.Advertisers.Add(advertiser);
+        }
+
+        return Task.FromResult(res);
     }
 }

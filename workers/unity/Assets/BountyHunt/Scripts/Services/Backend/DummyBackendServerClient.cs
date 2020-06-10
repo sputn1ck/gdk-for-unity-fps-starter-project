@@ -116,7 +116,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
 
         foreach (var adv in testAdvertisers)
         {
-            AdvertiserInfo advInfo = new AdvertiserInfo { Discription = "", Name = adv.Name, Url = adv.Url, Sponsoring = adv.Investment};
+            AdvertiserInfo advInfo = new AdvertiserInfo { Discription = "", Name = adv.Name, Url = adv.Url, Sponsoring = adv.Investment, Phash = adv.Hash};
             foreach(string s in adv.SquareTextureLinks)
             {
                 advInfo.SquareBannerUrls.Add(s);

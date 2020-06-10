@@ -10,16 +10,16 @@ public class RespawnScreenAdUI : MonoBehaviour
     public RawImage image;
     public Button button;
     public TextMeshProUGUI text;
-    Advertiser advertiser;
+    AdvertiserInvestment advertiserInvestment;
 
     private void Awake()
     {
         button.onClick.AddListener(OnClick);
     }
 
-    public void Set(Advertiser advertiser)
+    public void Set(AdvertiserInvestment adInv)
     {
-        if (advertiser == null)
+        if (adInv == null)
         {
             gameObject.SetActive(false);
             return;
@@ -29,11 +29,11 @@ public class RespawnScreenAdUI : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        this.advertiser = advertiser;
-        if (!UrlMemory.UrlInQueue(advertiser.url))
+        this.advertiserInvestment = adInv;
+        if (!UrlMemory.UrlInQueue(adInv.advertiser.url))
         {
             text.GetComponent<UITinter>().updateColor(TintColor.Link);
-            text.text = advertiser.name+ " <sprite name=\"link\" tint=1> ";
+            text.text = adInv.advertiser.name+ " <sprite name=\"link\" tint=1> ";
             button.interactable = true;
         }
         else{
@@ -41,7 +41,7 @@ public class RespawnScreenAdUI : MonoBehaviour
             text.text = GameText.AdOpenInfo;
             button.interactable = false;
         }
-        image.texture = advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
+        image.texture = adInv.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
 
     }
 
@@ -49,7 +49,7 @@ public class RespawnScreenAdUI : MonoBehaviour
     {
         text.GetComponent<UITinter>().updateColor(TintColor.Primary);
         text.text = GameText.AdOpenInfo;
-        UrlMemory.AddUrl(advertiser.url);
+        UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
         button.interactable = false;
     }
 
