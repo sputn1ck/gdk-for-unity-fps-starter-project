@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public RawImage image;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI satsText;
     public Button openLinkButton;
@@ -29,11 +30,11 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void Set(AdvertiserInvestment advertiserInvestment)
     {
-        this.advertiserInvestment = this.advertiserInvestment;
+        this.advertiserInvestment = advertiserInvestment;
         nameText.text = advertiserInvestment.advertiser.name;
         satsText.text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
         ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
-
+        image.texture = advertiserInvestment.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -49,6 +50,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void OnLinkButtonClick()
     {
+        UrlMemory.DoNotOpenAllLinksNextTime = true;
         Application.OpenURL(advertiserInvestment.advertiser.url);
     }
 
@@ -66,7 +68,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnApplicationFocus(bool focus)
     {
-        if (focus)
+        if (focus && advertiserInvestment!=null)
         {
             ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
         }

@@ -197,17 +197,7 @@ public class PlayerServiceConnections : MonoBehaviour
         lnd?.ShutDown();
         BackendPlayerClient?.Shutdown();
         Debug.Log("client quit cleanly");
-        UrlMemory.TryOpenAllUrls();
     }
-
-    private void OnApplicationFocus(bool focus)
-    {
-        if (!focus)
-        {
-            UrlMemory.TryOpenAllUrls();
-        }
-    }
-
 
     public string GetPubkey()
     {
@@ -269,42 +259,6 @@ public class PlayerServiceConnections : MonoBehaviour
         ClientEvents.instance.onAllTimeEarningsUpdate.Invoke(totalEarnings);
     }
 
-
-}
-
-public static class UrlMemory
-{
-    public static bool DoNotOpenAllLinksNextTime;
-
-    static List<string> urlQueue = new List<string>();
-
-    public static void AddUrl(string url)
-    {
-        if (!urlQueue.Contains(url))
-        {
-            urlQueue.Add(url);
-        }
-    }
-
-    public static bool UrlInQueue(string url)
-    {
-        return urlQueue.Contains(url);
-    }
-
-    public static void TryOpenAllUrls()
-    {
-        if (DoNotOpenAllLinksNextTime)
-        {
-            DoNotOpenAllLinksNextTime = false;
-            return;
-        }
-
-        foreach (string link in urlQueue)
-        {
-            Application.OpenURL(link);
-        }
-        urlQueue.Clear();
-    }
 
 }
 

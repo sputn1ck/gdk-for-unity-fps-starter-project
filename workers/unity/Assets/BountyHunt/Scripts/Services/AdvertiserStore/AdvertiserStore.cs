@@ -59,7 +59,7 @@ public class AdvertiserStore
         return advis;
     }
 
-    public async Task AddNewAdvertiserInvestmentToList(List<AdvertiserInvestment> list, AdvertiserInvestmentInfo aii)
+    async Task AddNewAdvertiserInvestmentToList(List<AdvertiserInvestment> list, AdvertiserInvestmentInfo aii)
     {
         Advertiser adv = await GetAdvertiser(aii);
         list.Add(new AdvertiserInvestment(adv, aii.Investment));
@@ -67,6 +67,7 @@ public class AdvertiserStore
 
 }
 
+[System.Serializable]
 public class AdvertiserInvestmentInfo
 {
     public string Name;

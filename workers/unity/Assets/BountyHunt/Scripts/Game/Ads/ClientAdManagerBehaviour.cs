@@ -16,14 +16,10 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
     public static ClientAdManagerBehaviour instance;
 
-    public Material defaultSquareAdMaterial;
-
+    
     //private List<Advertiser> advertisers;
     private List<AdvertiserInvestment> advertiserInvestments;
     [HideInInspector] public long totalSponsoredSats;
-
-    List<VideoPlayer> usedVideoPlayers = new List<VideoPlayer>();
-    List<VideoPlayer> freeVideoPlayers = new List<VideoPlayer>();
 
     private void Awake()
     {
@@ -43,8 +39,6 @@ public class ClientAdManagerBehaviour : MonoBehaviour
     {
         //ClientEvents.instance.onMapLoaded.AddListener(Initialize);
     }
-
-    
 
     void Initialize()
     {
@@ -143,51 +137,9 @@ public class ClientAdManagerBehaviour : MonoBehaviour
 
     public async void UpdateAdvertisers(List<AdvertiserSource> advertiserSources)
     {
+        advertiserInvestments = await PlayerServiceConnections.instance.AdvertiserStore.GetAdvertiserInvestments(advertiserSources);
         
-        List<Task> tasks = new List<Task>();
-
-        advertiserInvestments.Clear();
-        foreach (VideoPlayer player in usedVideoPlayers)
-        {
-            freeVideoPlayers.Add(player);
-            player.enabled = false;
-        }
-        usedVideoPlayers.Clear();
-
-        foreach (AdvertiserSource source in advertiserSources)
-        {
-            tasks.Add(loadAdvertiser(source));
-        }
-        await Task.WhenAll(tasks);
-
-
         Initialize();
-    }
-
-    
-
-    private async Task loadAdvertiser(AdvertiserSource source)
-    {
-        
-    }
-
-    public VideoPlayer GetNewVideoPlayer()
-    {
-        if (freeVideoPlayers.Count>0)
-        {
-            VideoPlayer p = freeVideoPlayers[0];
-
-            usedVideoPlayers.Add(p);
-            freeVideoPlayers.Remove(p);
-            p.enabled = true;
-            return p;
-        }
-        VideoPlayer vp = gameObject.AddComponent<VideoPlayer>();
-        vp.source = VideoSource.Url;
-        vp.isLooping = true;
-        vp.renderMode = VideoRenderMode.RenderTexture;
-        vp.audioOutputMode = VideoAudioOutputMode.None;
-        return vp;
     }
 
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8884591860163670217}
   - component: {fileID: 5732215415702532855}
   - component: {fileID: 1449321898093342440}
-  - component: {fileID: 9218794868624561133}
   m_Layer: 0
   m_Name: 0_PlayerDummies
   m_TagString: Untagged
@@ -89,6 +88,26 @@ MonoBehaviour:
   returnPayment: 0
   expiryInSeconds: 300
   triggerPaymentTest: 0
+  AdvertiserInvestmentInfos:
+  - Name: Nyan
+    Hash: nyanhash
+    Url: https://www.youtube.com/watch?v=QH2-TGUlwu4
+    SquareImageUrls:
+    - https://cdn.kapwing.com/final_5cacd20e01f93c0014190e5a_347921.mp4
+    Investment: 1000
+  - Name: Grumpy
+    Hash: grumpyhash
+    Url: https://www.instagram.com/realgrumpycat/?hl=en
+    SquareImageUrls:
+    - https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_2560%2Cc_limit/Culture-Grumpy-Cat-487386121-2.jpg
+    Investment: 500
+  - Name: Catface
+    Hash: catfacehash
+    Url: http://weebls-stuff.com/toons/category/toons/cat-face/
+    SquareImageUrls:
+    - https://images-na.ssl-images-amazon.com/images/I/51VBNePGmML._AC_SY450_.jpg
+    - https://static.tvtropes.org/pmwiki/pub/images/cat_face.jpg
+    Investment: 300
 --- !u!114 &1449321898093342440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,16 +124,3 @@ MonoBehaviour:
   channelMissingBalance: 2000
   daemonBalance: 30000
   randomBalance: 0
---- !u!114 &9218794868624561133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289981644747327406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85e299932a3daa74cbe9e3230c033266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  advertiserTexture: {fileID: 2800000, guid: 6f004c12e3069b84ca3a059449ade4b5, type: 3}

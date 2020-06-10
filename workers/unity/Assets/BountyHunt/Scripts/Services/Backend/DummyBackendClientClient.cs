@@ -48,6 +48,8 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
     public int expiryInSeconds;
     public bool triggerPaymentTest;
 
+    [Header("Sponsors")]
+    [SerializeField]public List<AdvertiserInvestmentInfo> AdvertiserInvestmentInfos;
 
     private void Awake()
     {
@@ -442,18 +444,25 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
 
     public Task<ListAdvertiserResponse> ListAdvertisers()
     {
+
         var res = new ListAdvertiserResponse();
-        var advertiser = new Bbhrpc.Advertiser()
+
+        foreach (AdvertiserInvestmentInfo aii in AdvertiserInvestmentInfos)
         {
-            Name = "gude",
-            Balance = 100,
-            Phash = "1",
-            Url = "https://google.de",
+            var advertiser = new Bbhrpc.Advertiser()
+            {
+                Name = aii.Name,
+                Balance = aii.Investment,
+                Phash = aii.Hash,
+                Url = aii.Url
+            };
+            foreach(string url in aii.SquareImageUrls)
+            {
+                advertiser.PicUrls.Add(url);
+            }
+            res.Advertisers.Add(advertiser);
+        }
 
-
-         };
-        res.Advertisers.Add(advertiser);
-        advertiser.PicUrls.Add("https://pics.donnerlab.com/pics/get/3bfde9ba-8574-4c1b-a092-202adc147702.pn");
         return Task.FromResult(res);
     }
 }

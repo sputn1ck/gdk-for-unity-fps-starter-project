@@ -22,91 +22,16 @@ public class Advertiser
         name = source.Name;
         url = source.Url;
         hash = source.Hash;
-        squareMedia = await getTexturesFromURLList(source.SquareImageUrls);
+        squareMedia = await AdUtility.getTexturesFromURLList(source.SquareImageUrls);
         Initialize();
     }
 
 
-    private static async Task<(List<Texture2D>, List<string>)> getTexturesFromURLList(List<string> urls)
-    {
-
-        List<Texture2D> textures = new List<Texture2D>();
-        List<string> videoUrls = new List<string>();
-        if (urls == null)
-        {
-            Debug.LogWarning("url list is null");
-            return (textures, videoUrls);
-        }
-        foreach (string url in urls)
-        {
-            string extension = Path.GetExtension(url);
-            switch (extension)
-            {
-                case ".png":
-                case ".jpg":
-                case ".jpeg":
-                case ".bmp":
-                case ".exr":
-                case ".hdr":
-                case ".iff":
-                case ".pict":
-                case ".psd":
-                case ".tga":
-                case ".tiff":
-                case ".gif":
-
-
-                    Texture2D tex = await AwaitRequestTexture.SendAsyncWebRequest(PlayerServiceConnections.instance, url);
-
-                    if (tex == null)
-                    {
-                        continue;
-                    }
-
-                    Color backgroundColor = Color.white;
-                    var pixels = tex.GetPixels();
-
-                    for (int i = 0; i < pixels.Length; i++)
-                    {
-                        float a = pixels[i].a;
-                        pixels[i] = Color.Lerp(backgroundColor, pixels[i], a);
-                        pixels[i].a = a;
-                    }
-                    tex.SetPixels(pixels);
-                    tex.Apply();
-                    textures.Add(tex);
-
-                    break;
-
-                case ".dv":
-                case ".m4v":
-                case ".mov":
-                case ".mp4":
-                case ".mpg":
-                case ".mpeg":
-                case ".ogv":
-                case ".vp8":
-                case ".webm":
-
-                    videoUrls.Add(url);
-
-                    break;
-
-                default:
-                    Debug.LogError("File Type not " + extension + "supportet!");
-                    break;
-            }
-
-
-        }
-
-        return (textures, videoUrls);
-    }
-
+    
     public void Initialize()
     {
         materials = new Dictionary<AdMaterialType, List<MaterialInfo>>();
-        InitializeMatrials(squareMedia, AdMaterialType.SQUARE, ClientAdManagerBehaviour.instance.defaultSquareAdMaterial, "_EmissionMap");
+        InitializeMatrials(squareMedia, AdMaterialType.SQUARE, AdUtility.instance.defaultSquareBillboardMaterial, "_EmissionMap");
         //InitializeMatrials(pickupAdTextures, AdMaterialType.PICKUP, AdManager.instance.defaultPickupAdMaterial, "_MainTex");
         //InitializeMatrials(horizontalAdTextures, AdMaterialType.HORIZONTAL, AdManager.instance.defaultHorizontalAdMaterial, "_EmissionMap");
         //InitializeMatrials(verticalAdTextures, AdMaterialType.VERTICAL, AdManager.instance.defaultVerticalAdMaterial, "_EmissionMap");
@@ -125,7 +50,7 @@ public class Advertiser
         foreach (string link in media.videolinks)
         {
             var material = ClientAdManagerBehaviour.Instantiate(defaultMaterial);
-            VideoPlayer vp = ClientAdManagerBehaviour.instance.GetNewVideoPlayer();
+            VideoPlayer vp = AdUtility.instance.GetNewVideoPlayer();
             vp.url = link;
             vp.renderMode = VideoRenderMode.RenderTexture;
             RenderTexture rt = new RenderTexture(512, 512, 0);
@@ -184,8 +109,6 @@ public class AdvertiserInvestment
 {
     public Advertiser advertiser;
     public long investment;
-
-    
 
     public AdvertiserInvestment(Advertiser advertiser, long investment)
     {
