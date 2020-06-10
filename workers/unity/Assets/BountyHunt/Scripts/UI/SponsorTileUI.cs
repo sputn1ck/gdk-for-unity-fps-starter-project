@@ -14,16 +14,26 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public TextMeshProUGUI savedForLaterText;
 
     Animator animator;
-    Advertiser advertiser;
+    AdvertiserInvestment advertiserInvestment;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
-
-    public void Set(AdvertiserInvestment advertiser)
+    private void Start()
     {
-        advertiser = advertiser;
+        savedForLaterText.text = GameText.AdOpenInfo;
+        openLinkButton.onClick.AddListener(OnLinkButtonClick);
+        openLaterButton.onClick.AddListener(OnLaterButtonClick);
+    }
+
+    public void Set(AdvertiserInvestment advertiserInvestment)
+    {
+        this.advertiserInvestment = this.advertiserInvestment;
+        nameText.text = advertiserInvestment.advertiser.name;
+        satsText.text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
+        ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -36,4 +46,30 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         animator.SetBool("showInfo", false);
 
     }
+
+    void OnLinkButtonClick()
+    {
+        Application.OpenURL(advertiserInvestment.advertiser.url);
+    }
+
+    void OnLaterButtonClick()
+    {
+        UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
+        ShowLaterButton(false);
+    }
+
+    void ShowLaterButton(bool show)
+    {
+        openLaterButton.gameObject.SetActive(show);
+        savedForLaterText.gameObject.SetActive(!show);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
+        }
+    }
+
 }

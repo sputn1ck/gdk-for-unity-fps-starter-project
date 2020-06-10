@@ -197,14 +197,14 @@ public class PlayerServiceConnections : MonoBehaviour
         lnd?.ShutDown();
         BackendPlayerClient?.Shutdown();
         Debug.Log("client quit cleanly");
-        UrlMemory.OpenAllUrls();
+        UrlMemory.TryOpenAllUrls();
     }
 
     private void OnApplicationFocus(bool focus)
     {
         if (!focus)
         {
-            UrlMemory.OpenAllUrls();
+            UrlMemory.TryOpenAllUrls();
         }
     }
 
@@ -274,6 +274,7 @@ public class PlayerServiceConnections : MonoBehaviour
 
 public static class UrlMemory
 {
+    public static bool DoNotOpenAllLinksNextTime;
 
     static List<string> urlQueue = new List<string>();
 
@@ -290,8 +291,14 @@ public static class UrlMemory
         return urlQueue.Contains(url);
     }
 
-    public static void OpenAllUrls()
+    public static void TryOpenAllUrls()
     {
+        if (DoNotOpenAllLinksNextTime)
+        {
+            DoNotOpenAllLinksNextTime = false;
+            return;
+        }
+
         foreach (string link in urlQueue)
         {
             Application.OpenURL(link);
