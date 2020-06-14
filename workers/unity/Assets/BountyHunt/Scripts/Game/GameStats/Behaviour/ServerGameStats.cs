@@ -77,8 +77,9 @@ public class ServerGameStats : MonoBehaviour
             if (user.Value.Pubkey == e.UserPubkey)
             {
                 HunterCommandSender.SendKickPlayerCommand(user.Key, new KickPlayerRequest(user.Value.Name), OnKickCallback);
+
+                RemovePlayer(user.Key);
             }
-            RemovePlayer(user.Key);
         }
         
     }
