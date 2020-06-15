@@ -10,11 +10,17 @@ public class ReticleUI : MonoBehaviour
     private Vector3 baseSize;
     private TintColor baseTint;
     private UITinter uiTinter;
+    private GameObject reticleGO;
+
+    private void Awake()
+    {
+        reticleGO = gameObject.transform.GetChild(1).gameObject;
+    }
     private void Start()
     {
         ClientEvents.instance.onOpponentHit.AddListener(onOpponentHit);
         baseSize = reticle.transform.localScale;
-        uiTinter = GetComponent<UITinter>();
+        uiTinter = reticleGO.GetComponent<UITinter>();
         baseTint = uiTinter.tint;
     }
 
