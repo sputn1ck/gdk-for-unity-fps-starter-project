@@ -8,6 +8,8 @@ public class ClientEvents : MonoBehaviour
 {
     public static ClientEvents instance;
 
+    [HideInInspector] public BoolEvent onOpponentHit = new BoolEvent();
+
     [HideInInspector] public UnityEvent onMapLoaded = new UnityEvent();
     [HideInInspector] public UnityEvent onGameJoined = new UnityEvent();
     [HideInInspector] public UnityEvent onNewAuctionStarted = new UnityEvent();
@@ -25,7 +27,6 @@ public class ClientEvents : MonoBehaviour
     [HideInInspector] public ChatMessageEvent onChatMessageRecieve = new ChatMessageEvent();
     [HideInInspector] public StringColorEvent onAnnouncement = new StringColorEvent();
     [HideInInspector] public StringLongEvent onAuctionMessageUpdate = new StringLongEvent();
-    [HideInInspector] public UnityEvent onOpponentHit = new UnityEvent();
 
     [HideInInspector] public PaymentSuccessEvent onPaymentSucces = new PaymentSuccessEvent();
     [HideInInspector] public PaymentFailureEvent onPaymentFailure = new PaymentFailureEvent();

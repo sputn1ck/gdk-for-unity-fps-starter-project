@@ -51,10 +51,11 @@ public class AudioManager : MonoBehaviour
         ao.Play(clip);
     }
 
-    public void spawn2DSound(AudioClip clip)
+    public void spawn2DSound(AudioClip clip, float pitch = 1f)
     {
         AudioObject ao = Instantiate(audioObject2DPrefab);
-        ao.Play(clip);
+      
+        ao.Play(clip, pitch);
     }
     /// <summary>
     /// values from 0 to  100

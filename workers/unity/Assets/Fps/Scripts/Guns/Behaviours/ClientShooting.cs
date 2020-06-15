@@ -24,7 +24,7 @@ namespace Fps.Guns
 
         //BBH
         public static ClientShooting instance;
-        public UnityEvent OnPlayerHit;
+        public BoolEvent OnPlayerHit = new BoolEvent();
 
         private void Awake()
         {
@@ -40,6 +40,8 @@ namespace Fps.Guns
         private void Start()
         {
             shotTrigger = new Trigger(gunTriggerAllowance);
+
+            OnPlayerHit.AddListener(ClientEvents.instance.onOpponentHit.Invoke);
         }
 
         public void InitiateCooldown(float cooldown)
@@ -85,7 +87,7 @@ namespace Fps.Guns
             var hitLocation = ray.origin + ray.direction * range;
             var hitSomething = false;
             var entityId = new EntityId(0);
-
+            bool headShot = false;
             if (Physics.Raycast(ray, out var hit, range, shootingLayerMask))
             {
                 hitSomething = true;
@@ -96,8 +98,15 @@ namespace Fps.Guns
                     entityId = spatialEntity.EntityId;
                     if (spatialEntity.CompareTag("Player"))
                     {
-                        OnPlayerHit.Invoke();
+                        var localhit = hitLocation - hit.collider.gameObject.transform.root.position;
+                        headShot = localhit.y > 1.5;
+                        OnPlayerHit.Invoke(headShot);
+
+                        Debug.Log("Hit Location: " + localhit +"; "+ headShot);
                     }
+                    
+
+                    
                 }
             }
 
@@ -107,8 +116,8 @@ namespace Fps.Guns
                 HitSomething = hitSomething,
                 HitLocation = (hitLocation - workerOrigin).ToVector3Int(),
                 HitOrigin = (ray.origin - workerOrigin).ToVector3Int(),
+                DmgMultiplier = headShot ? 1.0f : 1.5f,
             };
-
             shooting.SendShotsEvent(shotInfo);
         }
     }

@@ -7,10 +7,21 @@ public class ReticleUI : MonoBehaviour
 {
     public Animator hitmarkerAnimator;
     [SerializeField] private Image reticle;
+    private Vector3 baseSize;
+    private TintColor baseTint;
+    private UITinter uiTinter;
+    private GameObject reticleGO;
 
+    private void Awake()
+    {
+        reticleGO = gameObject.transform.GetChild(1).gameObject;
+    }
     private void Start()
     {
         ClientEvents.instance.onOpponentHit.AddListener(onOpponentHit);
+        baseSize = reticle.transform.localScale;
+        uiTinter = reticleGO.GetComponent<UITinter>();
+        baseTint = uiTinter.tint;
     }
 
     public void showReticle(bool show)
@@ -18,8 +29,17 @@ public class ReticleUI : MonoBehaviour
         reticle.gameObject.SetActive(show);
     }
 
-    void onOpponentHit()
+    void onOpponentHit(bool headshot)
     {
+        if (headshot)
+        {
+            uiTinter.updateColor(TintColor.Error);
+            reticle.transform.localScale = baseSize * 1.5f;
+        }else
+        {
+            uiTinter.updateColor(baseTint);
+            reticle.transform.localScale = baseSize;
+        }
         hitmarkerAnimator.SetTrigger("play");
     }
 
