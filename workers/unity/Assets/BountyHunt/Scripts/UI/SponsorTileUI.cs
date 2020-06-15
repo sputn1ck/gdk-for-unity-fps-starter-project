@@ -33,7 +33,15 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         this.advertiserInvestment = advertiserInvestment;
         nameText.text = advertiserInvestment.advertiser.name;
         satsText.text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
-        ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
+        if (advertiserInvestment.advertiser.url != "")
+        {
+            ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
+        } else
+        {
+            openLaterButton.gameObject.SetActive(false);
+            savedForLaterText.gameObject.SetActive(false);
+            openLinkButton.gameObject.SetActive(false);
+        }
         image.texture = advertiserInvestment.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
     }
 
