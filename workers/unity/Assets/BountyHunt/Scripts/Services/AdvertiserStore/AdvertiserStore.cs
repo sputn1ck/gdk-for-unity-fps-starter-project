@@ -13,10 +13,16 @@ public class AdvertiserStore
 
     public async Task Initialize(ListAdvertiserResponse advertisers)
     {
-        foreach(var adv in advertisers.Advertisers)
+        //float starttime = Time.time;
+        List<Task> tasks = new List<Task>();
+
+        foreach (var adv in advertisers.Advertisers)
         {
-            await GetAdvertiser(adv);
+            tasks.Add(GetAdvertiser(adv));
+            //await GetAdvertiser(adv);
         }
+        await Task.WhenAll(tasks);
+        //Debug.Log("loading sponsors took " + (Time.time - starttime) + " seconds");
     }
 
     public async Task<Advertiser> GetAdvertiser(AdvertiserInvestmentInfo aii)
