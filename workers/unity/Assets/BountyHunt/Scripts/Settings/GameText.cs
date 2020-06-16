@@ -47,5 +47,5 @@ public static class GameText
     public const string AssignButtonPopupHeader = "assign {0} key";
 
     /// assign Button Text
-    public const string AssignButtonPopup = "press any key!";
+    public const string AssignButtonPopup = "press any key!\n(or \"escape\" to abort)";
 }

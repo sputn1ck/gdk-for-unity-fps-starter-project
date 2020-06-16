@@ -164,11 +164,11 @@ public struct PopUpArgs
         this.closeAction = closeAction;
     }
 
-    public PopUpArgs(string headline, string text, UnityAction closeAction = null)
+    public PopUpArgs(string headline, string text, bool showX = true, UnityAction closeAction = null)
     {
         this.headline = headline;
         this.text = text;
-        this.showX = true;
+        this.showX = showX;
         this.actions = new List<PopUpButtonArgs>();
         this.verticalButtonLayout = false;
         this.closeAction = closeAction;
