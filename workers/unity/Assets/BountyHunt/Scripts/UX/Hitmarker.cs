@@ -14,7 +14,7 @@ public class Hitmarker : MonoBehaviour
 
     private void OnHit(bool headshot)
     {
-        AudioManager.instance.spawn2DSound(hitmarkerSound, headshot ? 1.0f : 1.5f);
+        AudioManager.instance.spawn2DSound(hitmarkerSound, !headshot ? 1.0f : 1.5f);
 
     }
 }
