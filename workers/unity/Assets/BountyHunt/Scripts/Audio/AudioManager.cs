@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixer mixer;
 
+    public AudioClip DamageTakenSound;
+
 
     Dictionary<VolumeType, VolumeKeys> keys;
 

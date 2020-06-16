@@ -69,6 +69,11 @@ public class BBHHud : MonoBehaviour
             inGameScreenManager.SetRespawnScreen(true);
         }
 
+        if (healthModifiedInfo.HealthAfter < healthModifiedInfo.HealthBefore)
+        {
+            AudioManager.instance.spawn2DSound(AudioManager.instance.DamageTakenSound);
+        }
+
         var currentHealth = healthReader.Data.Health / healthReader.Data.MaxHealth;
         SetHealthEffect(currentHealth);
         SetHealthBar(currentHealth);
