@@ -33,8 +33,15 @@ public class RespawnScreenAdUI : MonoBehaviour
         if (!UrlMemory.UrlInQueue(adInv.advertiser.url))
         {
             text.GetComponent<UITinter>().updateColor(TintColor.Link);
-            text.text = adInv.advertiser.name+ " <sprite name=\"link\" tint=1> ";
-            button.interactable = true;
+            if (advertiserInvestment.advertiser.url != "")
+            {
+                text.text = adInv.advertiser.name + " <sprite name=\"link\" tint=1> ";
+                button.interactable = true;
+            } else
+            {
+                text.text = adInv.advertiser.name;
+                button.interactable = false;
+            }
         }
         else{
             text.GetComponent<UITinter>().updateColor(TintColor.Primary);
@@ -47,6 +54,8 @@ public class RespawnScreenAdUI : MonoBehaviour
 
     void OnClick()
     {
+        if (advertiserInvestment.advertiser.url == "")
+            return;
         text.GetComponent<UITinter>().updateColor(TintColor.Primary);
         text.text = GameText.AdOpenInfo;
         UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
