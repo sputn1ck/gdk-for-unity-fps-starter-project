@@ -10,19 +10,29 @@ using Bountyhunt;
 public class AdvertiserStore
 {
     Dictionary<string,Advertiser> advertisers = new Dictionary<string,Advertiser>();
+    const int advertisersPerChunk = 10;
+
 
     public async Task Initialize(ListAdvertiserResponse advertisers)
     {
-        //float starttime = Time.time;
-        List<Task> tasks = new List<Task>();
+        int iterations = (int)Mathf.Ceil(advertisers.Advertisers.Count / advertisersPerChunk);
 
-        foreach (var adv in advertisers.Advertisers)
+        for (int i = 0; i < iterations; i++)
         {
-            tasks.Add(GetAdvertiser(adv));
-            //await GetAdvertiser(adv);
+            List<Task> tasks = new List<Task>();
+            for (int j = 0; j < advertisersPerChunk; j++)
+            {
+                int id = i + j;
+                if(id >= advertisers.Advertisers.Count)
+                {
+                    break;
+                }
+                tasks.Add(GetAdvertiser(advertisers.Advertisers[id]));
+
+            }
+            await Task.WhenAll(tasks);
         }
-        await Task.WhenAll(tasks);
-        //Debug.Log("loading sponsors took " + (Time.time - starttime) + " seconds");
+
     }
 
     public async Task<Advertiser> GetAdvertiser(AdvertiserInvestmentInfo aii)
