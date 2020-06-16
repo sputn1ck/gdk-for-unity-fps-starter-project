@@ -7372,6 +7372,7 @@ GameObject:
   - component: {fileID: 1857547302201236041}
   - component: {fileID: 5002056}
   - component: {fileID: 5002057}
+  - component: {fileID: 4381148070238115574}
   m_Layer: 14
   m_Name: Camera
   m_TagString: Untagged
@@ -7515,6 +7516,14 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: Fps.UI.LowHealthVignette, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!81 &4381148070238115574
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857547302201236036}
+  m_Enabled: 1
 --- !u!1 &1997193443818006361
 GameObject:
   m_ObjectHideFlags: 0
@@ -13560,12 +13569,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb231ed0cc39caf4e897380b9666c858, type: 3}
---- !u!1 &2166845876652422395 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1032942030598811718, guid: fb231ed0cc39caf4e897380b9666c858,
-    type: 3}
-  m_PrefabInstance: {fileID: 1173066301376726205}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8528272578440931002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7358058447203967495, guid: fb231ed0cc39caf4e897380b9666c858,
@@ -13575,6 +13578,12 @@ Transform:
 --- !u!4 &8635436113392319844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7462652536711723481, guid: fb231ed0cc39caf4e897380b9666c858,
+    type: 3}
+  m_PrefabInstance: {fileID: 1173066301376726205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2166845876652422395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1032942030598811718, guid: fb231ed0cc39caf4e897380b9666c858,
     type: 3}
   m_PrefabInstance: {fileID: 1173066301376726205}
   m_PrefabAsset: {fileID: 0}
