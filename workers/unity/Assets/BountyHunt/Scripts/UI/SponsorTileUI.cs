@@ -89,7 +89,27 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     void OnBuyButtonClick()
     {
-        Debug.Log("buy playersats!");
+        List<InputPopUpButtonArgs> actions = new List<InputPopUpButtonArgs>();
+        actions.Add(new InputPopUpButtonArgs("pay with ingame wallet", IncreasePlayersatsInternal));
+        actions.Add(new InputPopUpButtonArgs("pay with external wallet", IncreasePlayersatsExternal));
+
+        InputFieldPopUpArgs args = new InputFieldPopUpArgs(GameText.IncreaseSponsorPlayerSatsPopupHeader, GameText.IncreaseSponsorPlayerSatsPopupText, actions, true, "", Utility.tintedSatsSymbol, "100", TextAlignmentOptions.MidlineRight, TMP_InputField.ContentType.IntegerNumber);
+        PopUpManagerUI.instance.OperInputFieldPopUp(args);
+
+    }
+
+    void IncreasePlayersatsInternal(string input)
+    {
+        int sats = int.Parse(input);
+        Utility.Log("paying internal sats: " + sats, Color.cyan);
+        //PaymentUIHelper.
+    }
+    void IncreasePlayersatsExternal(string input)
+    {
+        int sats = int.Parse(input);
+        Utility.Log("paying external sats: " + sats, Color.cyan);
+
+        //PaymentUIHelper.
     }
 
     void ShowLaterButton(bool show)

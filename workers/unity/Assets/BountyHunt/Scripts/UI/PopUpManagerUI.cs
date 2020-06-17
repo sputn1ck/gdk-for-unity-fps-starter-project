@@ -44,6 +44,13 @@ public class PopUpManagerUI : MonoBehaviour
         return popup;
     }
 
+    public PopUpUI OperInputFieldPopUp(InputFieldPopUpArgs args)
+    {
+        PopUpUI popup = Instantiate(popUpPrefab, container);
+        popup.Set(args.headline, args.showX, args.text, args.actions, args.verticalButtonLayout, args.preInputFieldText, args.postInputFieldText, args.contentType,args.alignment,args.defaultInputFieldText,args.placeholderText, args.closeAction);
+        return popup;
+    }
+
     //TEST
 
     [Space(10)]
@@ -239,4 +246,42 @@ public struct ImagePopUpArgs
         this.imageSizeMultiplier = imageSizeMultiplier;
         this.closeAction = closeAction;
     }
+
+}
+
+public struct InputFieldPopUpArgs
+{
+    public string headline;
+    public string text;
+    public bool verticalButtonLayout;
+    public bool showX;
+    public List<InputPopUpButtonArgs> actions;
+    public UnityAction closeAction;
+    public string preInputFieldText;
+    public string postInputFieldText;
+    public string defaultInputFieldText;
+    public string placeholderText;
+    public TMP_InputField.ContentType contentType;
+    public TextAlignmentOptions alignment;
+
+    /// <param name="actions">the button labels and their corresponding actions with a string as argument (from inputfield)</param>
+    /// <param name="verticalButtonlayout">should the buttons be layouted vertical instead of horizontal?</param>
+    /// <param name="preInputFieldText">text before the input field</param>
+    /// <param name="postInputFieldText">text after the input field</param>
+    public InputFieldPopUpArgs(string headline, string text, List<InputPopUpButtonArgs> actions, bool verticalButtonlayout, string preInputFieldText, string postInputFieldText, string defaultInputFieldText, TextAlignmentOptions alignment, TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Alphanumeric, bool showX = true, UnityAction closeAction = null, string placeholderText = "")
+    {
+        this.headline = headline;
+        this.text = text;
+        this.showX = showX;
+        this.actions = actions;
+        this.verticalButtonLayout = verticalButtonlayout;
+        this.closeAction = closeAction;
+        this.preInputFieldText = preInputFieldText;
+        this.postInputFieldText = postInputFieldText;
+        this.defaultInputFieldText = defaultInputFieldText;
+        this.placeholderText = placeholderText;
+        this.alignment = alignment;
+        this.contentType = contentType;
+    }
+
 }
