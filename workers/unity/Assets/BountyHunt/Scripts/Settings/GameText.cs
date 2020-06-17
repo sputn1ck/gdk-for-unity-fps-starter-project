@@ -49,4 +49,9 @@ public static class GameText
 
     /// assign Button Text
     public const string AssignButtonPopup = "press any key!\n(or \"escape\" to abort)";
+
+    /// Button descriptions of Tiles in MainMenu > Sponsors
+    public const string BuyPlayerSatsButtonDescription = "buy playerSats";
+    public const string OpenLinkButtonDescription = "open link";
+    public const string BookmarkLinkButtonDescription = "bookmark link";
 }

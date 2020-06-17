@@ -11,8 +11,9 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI satsText;
     public Button openLinkButton;
-    public Button openLaterButton;
-    public TextMeshProUGUI savedForLaterText;
+    public Button bookmarkLinkButton;
+    public Button buyButton;
+    public TextMeshProUGUI buttonInfoText;
 
     Animator animator;
     AdvertiserInvestment advertiserInvestment;
@@ -23,9 +24,28 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     private void Start()
     {
-        savedForLaterText.text = GameText.AdOpenInfo;
+        buttonInfoText.text = "";
         openLinkButton.onClick.AddListener(OnLinkButtonClick);
-        openLaterButton.onClick.AddListener(OnLaterButtonClick);
+        bookmarkLinkButton.onClick.AddListener(OnLaterButtonClick);
+        buyButton.onClick.AddListener(OnBuyButtonClick);
+
+        openLinkButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.OpenLinkButtonDescription;
+        bookmarkLinkButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.BookmarkLinkButtonDescription;
+        buyButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.BuyPlayerSatsButtonDescription;
+
+    }
+
+    public void setButtonInfoText(string text)
+    {
+        buttonInfoText.text = text;
+    }
+
+    public void removeButtonInfoText(string text)
+    {
+        if(buttonInfoText.text == text)
+        {
+            buttonInfoText.text = "";
+        }
     }
 
     public void Set(AdvertiserInvestment advertiserInvestment)
@@ -38,8 +58,8 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             ShowLaterButton(!UrlMemory.UrlInQueue(advertiserInvestment.advertiser.url));
         } else
         {
-            openLaterButton.gameObject.SetActive(false);
-            savedForLaterText.gameObject.SetActive(false);
+            bookmarkLinkButton.gameObject.SetActive(false);
+            buttonInfoText.gameObject.SetActive(false);
             openLinkButton.gameObject.SetActive(false);
         }
         image.texture = advertiserInvestment.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
@@ -67,11 +87,14 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
         ShowLaterButton(false);
     }
+    void OnBuyButtonClick()
+    {
+        Debug.Log("buy playersats!");
+    }
 
     void ShowLaterButton(bool show)
     {
-        openLaterButton.gameObject.SetActive(show);
-        savedForLaterText.gameObject.SetActive(!show);
+        bookmarkLinkButton.interactable = show;
     }
 
     private void OnApplicationFocus(bool focus)
