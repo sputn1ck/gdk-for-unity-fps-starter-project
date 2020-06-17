@@ -116,7 +116,7 @@ namespace Fps.Guns
                 HitSomething = hitSomething,
                 HitLocation = (hitLocation - workerOrigin).ToVector3Int(),
                 HitOrigin = (ray.origin - workerOrigin).ToVector3Int(),
-                DmgMultiplier = headShot ? 1.0f : 1.5f,
+                DmgMultiplier = !headShot ? 1.0f : 1.5f,
             };
             shooting.SendShotsEvent(shotInfo);
         }
