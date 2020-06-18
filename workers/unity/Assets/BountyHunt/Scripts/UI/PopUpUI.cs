@@ -24,9 +24,6 @@ public class PopUpUI : MonoBehaviour
     [HideInInspector] public List<Button> buttons;
 
 
-
-    static List<PopUpUI> allPopUps = new List<PopUpUI>();
-
     public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, UnityAction closeAction = null)
     {
         this.closeAction = closeAction;
@@ -149,7 +146,6 @@ public class PopUpUI : MonoBehaviour
     {
         
         closeAction?.Invoke();
-        allPopUps.Remove(this);
         Destroy(gameObject);
     }
     public void Close(bool runCloseAction)
@@ -158,13 +154,6 @@ public class PopUpUI : MonoBehaviour
             closeAction?.Invoke();
         allPopUps.Remove(this);
         Destroy(gameObject);
-    }
-    public static void CloseAll()
-    {
-        for (int i = allPopUps.Count - 1; i >= 0; i--)
-        {
-            allPopUps[i].Close();
-        }
     }
 
 }

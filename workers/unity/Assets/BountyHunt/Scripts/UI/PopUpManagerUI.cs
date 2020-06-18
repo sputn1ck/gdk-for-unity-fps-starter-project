@@ -74,7 +74,6 @@ public class PopUpManagerUI : MonoBehaviour
     public bool testImagePopup;
     public bool closeWithID;
     public bool closeAllWithID;
-    public bool closeAll;
 
     private void Update()
     {
@@ -115,12 +114,6 @@ public class PopUpManagerUI : MonoBehaviour
             testYesNoPopup = false;
             ImagePopUpArgs args = new ImagePopUpArgs("header", text, sprite, text2,actions,verticalButtons,tintImage,imageSizeMultiplier,showX);
             OpenImagePopUp(args);
-        }
-
-        if (closeAll)
-        {
-            closeAll = false;
-            PopUpUI.CloseAll();
         }
 
     }
