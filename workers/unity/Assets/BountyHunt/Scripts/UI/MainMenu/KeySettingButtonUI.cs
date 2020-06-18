@@ -37,7 +37,7 @@ public class KeySettingButtonUI : MonoBehaviour
     {
         listeningCounter = detectKeyCountDown;
         string header = string.Format(GameText.AssignButtonPopupHeader, label);
-        PopUpArgs popUpArgs = new PopUpArgs(header, GameText.AssignButtonPopup,StopListening);
+        PopUpArgs popUpArgs = new PopUpArgs(header, GameText.AssignButtonPopup,false);
         popUp = PopUpManagerUI.instance.OpenPopUp(popUpArgs);
     }
 
@@ -50,6 +50,14 @@ public class KeySettingButtonUI : MonoBehaviour
     {
         if (listeningCounter==0) return;
         listeningCounter -= Mathf.Max(listeningCounter - Time.deltaTime);
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StopListening();
+            popUp.Close();
+            return;
+        }
 
         foreach (KeyCode keycode in System.Enum.GetValues(typeof(KeyCode)))
         {
