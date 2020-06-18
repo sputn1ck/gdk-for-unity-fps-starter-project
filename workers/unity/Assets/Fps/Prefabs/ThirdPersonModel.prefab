@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 6904808606989008612}
   - component: {fileID: 2812026842374944459}
   - component: {fileID: 6378904765885929504}
+  - component: {fileID: 1232828214261619493}
   m_Layer: 0
   m_Name: ThirdPersonModel
   m_TagString: Untagged
@@ -286,6 +287,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20540fbd38e763c4792a26bd91fb4092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchColor: 0
+  newBaseColor: {r: 0, g: 0, b: 0, a: 0}
+  newMainColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1232828214261619493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032942030598811718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0085501d2a1f04ca82000d27106ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 4775119137531665948}
+  rightFoot: {fileID: 2136246500096455487}
+  footStepVolume: 0.3
+  stepSounds:
+  - {fileID: 8300000, guid: c9a9da910687ddb4c829c071ae2c5523, type: 3}
+  - {fileID: 8300000, guid: 3d4a9c0344141ab47a9c3d422c408ff1, type: 3}
+  - {fileID: 8300000, guid: b5a1e0d31edd23543b165b0c3dee6dd0, type: 3}
+  - {fileID: 8300000, guid: 667cb7dafe894b245b57d766e4e96ab5, type: 3}
+  - {fileID: 8300000, guid: 0ef5611656a539141bf2a2e17edca720, type: 3}
+  - {fileID: 8300000, guid: 6a93952483b8ff442925936d73544973, type: 3}
 --- !u!1 &1062868207029259021
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +601,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -841,6 +868,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1013,6 +1041,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1876,6 +1905,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2456,6 +2486,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

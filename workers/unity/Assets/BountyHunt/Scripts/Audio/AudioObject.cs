@@ -15,9 +15,10 @@ public class AudioObject : MonoBehaviour
         source.loop = false;
         source.playOnAwake = false;
     }
-    public void Play(AudioClip clip, float pitch = 1f)
+    public void Play(AudioClip clip, float volume, float pitch)
     {
         source.clip = clip;
+        source.volume = volume;
         source.pitch = pitch;
         StartCoroutine(PlayAndDestroyEnumerator());
     }

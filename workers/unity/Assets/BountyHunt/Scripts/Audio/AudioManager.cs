@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioMixer mixer;
 
+    public AudioClip DamageTakenSound;
+
 
     Dictionary<VolumeType, VolumeKeys> keys;
 
@@ -33,29 +35,28 @@ public class AudioManager : MonoBehaviour
         ClientEvents.instance.onGameJoined.AddListener(OnGameJoined);
     }
 
-    public void spawnSound(AudioClip clip, Vector3 position)
+    public void spawnSound(AudioClip clip, Vector3 position, float volume=1, float pitch =1)
     {
         AudioObject ao = Instantiate(audioObjectPrefab,position, Quaternion.identity);
-        ao.Play(clip);
+        ao.Play(clip,volume,pitch);
     }
 
-    public void spawnSound(AudioClip clip, Transform parent)
+    public void spawnSound(AudioClip clip, Transform parent, float volume = 1, float pitch = 1)
     {
         AudioObject ao = Instantiate(audioObjectPrefab, parent);
-        ao.Play(clip);
+        ao.Play(clip,volume,pitch);
     }
 
-    public void spawnSound(AudioClip clip, Transform parent, Vector3 position)
+    public void spawnSound(AudioClip clip, Transform parent, Vector3 position, float volume = 1, float pitch = 1)
     {
         AudioObject ao = Instantiate(audioObjectPrefab, position, Quaternion.identity, parent);
-        ao.Play(clip);
+        ao.Play(clip,volume,pitch);
     }
 
-    public void spawn2DSound(AudioClip clip, float pitch = 1f)
+    public void spawn2DSound(AudioClip clip, float volume = 1, float pitch = 1)
     {
         AudioObject ao = Instantiate(audioObject2DPrefab);
-      
-        ao.Play(clip, pitch);
+        ao.Play(clip,volume,pitch);
     }
     /// <summary>
     /// values from 0 to  100

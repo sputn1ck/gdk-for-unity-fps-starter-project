@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 7451537192968994047}
   - component: {fileID: 778567619887799016}
   - component: {fileID: 6108130638274169511}
+  - component: {fileID: 8890439196813246283}
   m_Layer: 0
   m_Name: FirstPersonModel
   m_TagString: Untagged
@@ -439,6 +440,28 @@ MonoBehaviour:
   applyRecoil: 0
   userFirstPersonGrip: 1
   gunSocket: {fileID: 0}
+--- !u!114 &8890439196813246283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620896566736479575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0085501d2a1f04ca82000d27106ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 5664395006408825677}
+  rightFoot: {fileID: 5002788954637434370}
+  footStepVolume: 0.3
+  stepSounds:
+  - {fileID: 8300000, guid: c9a9da910687ddb4c829c071ae2c5523, type: 3}
+  - {fileID: 8300000, guid: 3d4a9c0344141ab47a9c3d422c408ff1, type: 3}
+  - {fileID: 8300000, guid: b5a1e0d31edd23543b165b0c3dee6dd0, type: 3}
+  - {fileID: 8300000, guid: 667cb7dafe894b245b57d766e4e96ab5, type: 3}
+  - {fileID: 8300000, guid: 0ef5611656a539141bf2a2e17edca720, type: 3}
+  - {fileID: 8300000, guid: 6a93952483b8ff442925936d73544973, type: 3}
 --- !u!1 &1649537373163702277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1100,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1088,6 +1112,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1250,6 +1275,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1261,6 +1287,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
