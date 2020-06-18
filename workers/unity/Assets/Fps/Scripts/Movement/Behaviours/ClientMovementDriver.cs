@@ -18,7 +18,7 @@ namespace Fps.Movement
         [SerializeField] [HideInInspector] private float transformUpdateDelta;
         [SerializeField] [HideInInspector] private float rotationUpdateDelta;
 
-
+   
         [SerializeField] private MovementSettings movementSettings = new MovementSettings
         {
             MovementSpeed = new MovementSpeedSettings
@@ -52,6 +52,7 @@ namespace Fps.Movement
         private bool jumpedThisFrame;
         private bool didJump;
         private bool lastMovementStationary;
+        private bool canDoubleJump;
 
         private float cumulativeRotationTimeDelta;
         private float currentPitch;
@@ -233,17 +234,30 @@ namespace Fps.Movement
                 jumpedThisFrame = false;
             }
 
+            
+
             if (startJump && IsGrounded && !isJumping)
             {
                 verticalVelocity = movementSettings.StartingJumpSpeed;
                 didJump = true;
                 jumpedThisFrame = true;
             }
+            if (startJump && canDoubleJump && !jumpedThisFrame)
+            {
+                canDoubleJump = false;
+                verticalVelocity = movementSettings.StartingJumpSpeed;
+                didJump = true;
+                jumpedThisFrame = true;
+                toMove = movement * speed;
+            }
 
             // Record the (horizontal) direction when last on the ground (for jumping or falling off platforms)
             if (IsGrounded)
             {
                 lastDirection = toMove;
+
+                canDoubleJump = true;
+
             }
 
             toMove += Vector3.up * verticalVelocity;
