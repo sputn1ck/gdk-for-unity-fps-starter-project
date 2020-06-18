@@ -32,12 +32,20 @@ namespace Daemon {
             "YXRoGAQgASgJEhUKDW1hY2Fyb29uX3BhdGgYBSABKAkiEwoRR2V0QmFsYW5j",
             "ZVJlcXVlc3QiZQoSR2V0QmFsYW5jZVJlc3BvbnNlEhYKDmJ1ZmZlcl9iYWxh",
             "bmNlGAEgASgDEhYKDmRhZW1vbl9iYWxhbmNlGAIgASgDEh8KF2NoYW5uZWxf",
-            "bWlzc2luZ19iYWxhbmNlGAMgASgDMtgBCg1EYWVtb25TZXJ2aWNlEjQKBUxu",
-            "Y2xpEhQuZGFlbW9uLkxuY2xpUmVxdWVzdBoVLmRhZW1vbi5MbmNsaVJlc3Bv",
-            "bnNlEkwKDUdldENvbm5lY3Rpb24SHC5kYWVtb24uR2V0Q29ubmVjdGlvblJl",
-            "cXVlc3QaHS5kYWVtb24uR2V0Q29ubmVjdGlvblJlc3BvbnNlEkMKCkdldEJh",
-            "bGFuY2USGS5kYWVtb24uR2V0QmFsYW5jZVJlcXVlc3QaGi5kYWVtb24uR2V0",
-            "QmFsYW5jZVJlc3BvbnNlYgZwcm90bzM="));
+            "bWlzc2luZ19iYWxhbmNlGAMgASgDIhYKFExudXJsV2l0aGRyYXdSZXF1ZXN0",
+            "IpUBChVMbnVybFdpdGhkcmF3UmVzcG9uc2USKQoLYmVjaF9zdHJpbmcYASAB",
+            "KAsyEi5kYWVtb24uQmVjaFN0cmluZ0gAEiIKB3dhaXRpbmcYAiABKAsyDy5k",
+            "YWVtb24uV2FpdGluZ0gAEiQKCGZpbmlzaGVkGAMgASgLMhAuZGFlbW9uLkZp",
+            "bmlzaGVkSABCBwoFZXZlbnQiIQoKQmVjaFN0cmluZxITCgtiZWNoX3N0cmlu",
+            "ZxgBIAEoCSIJCgdXYWl0aW5nIioKCEZpbmlzaGVkEg4KBnN0YXR1cxgBIAEo",
+            "CRIOCgZyZWFzb24YAiABKAkyqAIKDURhZW1vblNlcnZpY2USNAoFTG5jbGkS",
+            "FC5kYWVtb24uTG5jbGlSZXF1ZXN0GhUuZGFlbW9uLkxuY2xpUmVzcG9uc2US",
+            "TAoNR2V0Q29ubmVjdGlvbhIcLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVxdWVz",
+            "dBodLmRhZW1vbi5HZXRDb25uZWN0aW9uUmVzcG9uc2USQwoKR2V0QmFsYW5j",
+            "ZRIZLmRhZW1vbi5HZXRCYWxhbmNlUmVxdWVzdBoaLmRhZW1vbi5HZXRCYWxh",
+            "bmNlUmVzcG9uc2USTgoNTG51cmxXaXRoZHJhdxIcLmRhZW1vbi5MbnVybFdp",
+            "dGhkcmF3UmVxdWVzdBodLmRhZW1vbi5MbnVybFdpdGhkcmF3UmVzcG9uc2Uw",
+            "AWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -46,7 +54,12 @@ namespace Daemon {
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.GetConnectionRequest), global::Daemon.GetConnectionRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.GetConnectionResponse), global::Daemon.GetConnectionResponse.Parser, new[]{ "NodeAlive", "GrpcAddress", "P2PAddress", "CertPath", "MacaroonPath" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.GetBalanceRequest), global::Daemon.GetBalanceRequest.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.GetBalanceResponse), global::Daemon.GetBalanceResponse.Parser, new[]{ "BufferBalance", "DaemonBalance", "ChannelMissingBalance" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.GetBalanceResponse), global::Daemon.GetBalanceResponse.Parser, new[]{ "BufferBalance", "DaemonBalance", "ChannelMissingBalance" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.LnurlWithdrawRequest), global::Daemon.LnurlWithdrawRequest.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.LnurlWithdrawResponse), global::Daemon.LnurlWithdrawResponse.Parser, new[]{ "BechString", "Waiting", "Finished" }, new[]{ "Event" }, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.BechString), global::Daemon.BechString.Parser, new[]{ "BechString_" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.Waiting), global::Daemon.Waiting.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Daemon.Finished), global::Daemon.Finished.Parser, new[]{ "Status", "Reason" }, null, null, null)
           }));
     }
     #endregion
@@ -931,6 +944,737 @@ namespace Daemon {
           }
           case 24: {
             ChannelMissingBalance = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class LnurlWithdrawRequest : pb::IMessage<LnurlWithdrawRequest> {
+    private static readonly pb::MessageParser<LnurlWithdrawRequest> _parser = new pb::MessageParser<LnurlWithdrawRequest>(() => new LnurlWithdrawRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<LnurlWithdrawRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawRequest(LnurlWithdrawRequest other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawRequest Clone() {
+      return new LnurlWithdrawRequest(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as LnurlWithdrawRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(LnurlWithdrawRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(LnurlWithdrawRequest other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class LnurlWithdrawResponse : pb::IMessage<LnurlWithdrawResponse> {
+    private static readonly pb::MessageParser<LnurlWithdrawResponse> _parser = new pb::MessageParser<LnurlWithdrawResponse>(() => new LnurlWithdrawResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<LnurlWithdrawResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawResponse(LnurlWithdrawResponse other) : this() {
+      switch (other.EventCase) {
+        case EventOneofCase.BechString:
+          BechString = other.BechString.Clone();
+          break;
+        case EventOneofCase.Waiting:
+          Waiting = other.Waiting.Clone();
+          break;
+        case EventOneofCase.Finished:
+          Finished = other.Finished.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LnurlWithdrawResponse Clone() {
+      return new LnurlWithdrawResponse(this);
+    }
+
+    /// <summary>Field number for the "bech_string" field.</summary>
+    public const int BechStringFieldNumber = 1;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Daemon.BechString BechString {
+      get { return eventCase_ == EventOneofCase.BechString ? (global::Daemon.BechString) event_ : null; }
+      set {
+        event_ = value;
+        eventCase_ = value == null ? EventOneofCase.None : EventOneofCase.BechString;
+      }
+    }
+
+    /// <summary>Field number for the "waiting" field.</summary>
+    public const int WaitingFieldNumber = 2;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Daemon.Waiting Waiting {
+      get { return eventCase_ == EventOneofCase.Waiting ? (global::Daemon.Waiting) event_ : null; }
+      set {
+        event_ = value;
+        eventCase_ = value == null ? EventOneofCase.None : EventOneofCase.Waiting;
+      }
+    }
+
+    /// <summary>Field number for the "finished" field.</summary>
+    public const int FinishedFieldNumber = 3;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Daemon.Finished Finished {
+      get { return eventCase_ == EventOneofCase.Finished ? (global::Daemon.Finished) event_ : null; }
+      set {
+        event_ = value;
+        eventCase_ = value == null ? EventOneofCase.None : EventOneofCase.Finished;
+      }
+    }
+
+    private object event_;
+    /// <summary>Enum of possible cases for the "event" oneof.</summary>
+    public enum EventOneofCase {
+      None = 0,
+      BechString = 1,
+      Waiting = 2,
+      Finished = 3,
+    }
+    private EventOneofCase eventCase_ = EventOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public EventOneofCase EventCase {
+      get { return eventCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearEvent() {
+      eventCase_ = EventOneofCase.None;
+      event_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as LnurlWithdrawResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(LnurlWithdrawResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(BechString, other.BechString)) return false;
+      if (!object.Equals(Waiting, other.Waiting)) return false;
+      if (!object.Equals(Finished, other.Finished)) return false;
+      if (EventCase != other.EventCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (eventCase_ == EventOneofCase.BechString) hash ^= BechString.GetHashCode();
+      if (eventCase_ == EventOneofCase.Waiting) hash ^= Waiting.GetHashCode();
+      if (eventCase_ == EventOneofCase.Finished) hash ^= Finished.GetHashCode();
+      hash ^= (int) eventCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (eventCase_ == EventOneofCase.BechString) {
+        output.WriteRawTag(10);
+        output.WriteMessage(BechString);
+      }
+      if (eventCase_ == EventOneofCase.Waiting) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Waiting);
+      }
+      if (eventCase_ == EventOneofCase.Finished) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Finished);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (eventCase_ == EventOneofCase.BechString) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BechString);
+      }
+      if (eventCase_ == EventOneofCase.Waiting) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Waiting);
+      }
+      if (eventCase_ == EventOneofCase.Finished) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Finished);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(LnurlWithdrawResponse other) {
+      if (other == null) {
+        return;
+      }
+      switch (other.EventCase) {
+        case EventOneofCase.BechString:
+          if (BechString == null) {
+            BechString = new global::Daemon.BechString();
+          }
+          BechString.MergeFrom(other.BechString);
+          break;
+        case EventOneofCase.Waiting:
+          if (Waiting == null) {
+            Waiting = new global::Daemon.Waiting();
+          }
+          Waiting.MergeFrom(other.Waiting);
+          break;
+        case EventOneofCase.Finished:
+          if (Finished == null) {
+            Finished = new global::Daemon.Finished();
+          }
+          Finished.MergeFrom(other.Finished);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            global::Daemon.BechString subBuilder = new global::Daemon.BechString();
+            if (eventCase_ == EventOneofCase.BechString) {
+              subBuilder.MergeFrom(BechString);
+            }
+            input.ReadMessage(subBuilder);
+            BechString = subBuilder;
+            break;
+          }
+          case 18: {
+            global::Daemon.Waiting subBuilder = new global::Daemon.Waiting();
+            if (eventCase_ == EventOneofCase.Waiting) {
+              subBuilder.MergeFrom(Waiting);
+            }
+            input.ReadMessage(subBuilder);
+            Waiting = subBuilder;
+            break;
+          }
+          case 26: {
+            global::Daemon.Finished subBuilder = new global::Daemon.Finished();
+            if (eventCase_ == EventOneofCase.Finished) {
+              subBuilder.MergeFrom(Finished);
+            }
+            input.ReadMessage(subBuilder);
+            Finished = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BechString : pb::IMessage<BechString> {
+    private static readonly pb::MessageParser<BechString> _parser = new pb::MessageParser<BechString>(() => new BechString());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BechString> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BechString() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BechString(BechString other) : this() {
+      bechString_ = other.bechString_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BechString Clone() {
+      return new BechString(this);
+    }
+
+    /// <summary>Field number for the "bech_string" field.</summary>
+    public const int BechString_FieldNumber = 1;
+    private string bechString_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string BechString_ {
+      get { return bechString_; }
+      set {
+        bechString_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BechString);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BechString other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (BechString_ != other.BechString_) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (BechString_.Length != 0) hash ^= BechString_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BechString_.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(BechString_);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (BechString_.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BechString_);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BechString other) {
+      if (other == null) {
+        return;
+      }
+      if (other.BechString_.Length != 0) {
+        BechString_ = other.BechString_;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            BechString_ = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Waiting : pb::IMessage<Waiting> {
+    private static readonly pb::MessageParser<Waiting> _parser = new pb::MessageParser<Waiting>(() => new Waiting());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Waiting> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Waiting() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Waiting(Waiting other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Waiting Clone() {
+      return new Waiting(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Waiting);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Waiting other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Waiting other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Finished : pb::IMessage<Finished> {
+    private static readonly pb::MessageParser<Finished> _parser = new pb::MessageParser<Finished>(() => new Finished());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Finished> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Daemon.DaemonReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Finished() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Finished(Finished other) : this() {
+      status_ = other.status_;
+      reason_ = other.reason_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Finished Clone() {
+      return new Finished(this);
+    }
+
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 1;
+    private string status_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Status {
+      get { return status_; }
+      set {
+        status_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "reason" field.</summary>
+    public const int ReasonFieldNumber = 2;
+    private string reason_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Reason {
+      get { return reason_; }
+      set {
+        reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Finished);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Finished other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Status != other.Status) return false;
+      if (Reason != other.Reason) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Status.Length != 0) hash ^= Status.GetHashCode();
+      if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Status.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Status);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Reason);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Status.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
+      }
+      if (Reason.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Finished other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Status.Length != 0) {
+        Status = other.Status;
+      }
+      if (other.Reason.Length != 0) {
+        Reason = other.Reason;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Status = input.ReadString();
+            break;
+          }
+          case 18: {
+            Reason = input.ReadString();
             break;
           }
         }

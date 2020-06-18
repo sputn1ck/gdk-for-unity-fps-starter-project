@@ -88,10 +88,17 @@ public class PopUpUI : MonoBehaviour
         }
     }
 
-
     public void Close()
     {
+        
         closeAction?.Invoke();
+        allPopUps.Remove(this);
+        Destroy(gameObject);
+    }
+    public void Close(bool runCloseAction)
+    {
+        if(runCloseAction)
+            closeAction?.Invoke();
         allPopUps.Remove(this);
         Destroy(gameObject);
     }

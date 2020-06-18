@@ -18,6 +18,8 @@ namespace Daemon {
     static readonly grpc::Marshaller<global::Daemon.GetConnectionResponse> __Marshaller_daemon_GetConnectionResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.GetConnectionResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Daemon.GetBalanceRequest> __Marshaller_daemon_GetBalanceRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.GetBalanceRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Daemon.GetBalanceResponse> __Marshaller_daemon_GetBalanceResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.GetBalanceResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Daemon.LnurlWithdrawRequest> __Marshaller_daemon_LnurlWithdrawRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.LnurlWithdrawRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Daemon.LnurlWithdrawResponse> __Marshaller_daemon_LnurlWithdrawResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Daemon.LnurlWithdrawResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Daemon.LncliRequest, global::Daemon.LncliResponse> __Method_Lncli = new grpc::Method<global::Daemon.LncliRequest, global::Daemon.LncliResponse>(
         grpc::MethodType.Unary,
@@ -40,6 +42,13 @@ namespace Daemon {
         __Marshaller_daemon_GetBalanceRequest,
         __Marshaller_daemon_GetBalanceResponse);
 
+    static readonly grpc::Method<global::Daemon.LnurlWithdrawRequest, global::Daemon.LnurlWithdrawResponse> __Method_LnurlWithdraw = new grpc::Method<global::Daemon.LnurlWithdrawRequest, global::Daemon.LnurlWithdrawResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "LnurlWithdraw",
+        __Marshaller_daemon_LnurlWithdrawRequest,
+        __Marshaller_daemon_LnurlWithdrawResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -61,6 +70,11 @@ namespace Daemon {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Daemon.GetBalanceResponse> GetBalance(global::Daemon.GetBalanceRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task LnurlWithdraw(global::Daemon.LnurlWithdrawRequest request, grpc::IServerStreamWriter<global::Daemon.LnurlWithdrawResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -138,6 +152,14 @@ namespace Daemon {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetBalance, null, options, request);
       }
+      public virtual grpc::AsyncServerStreamingCall<global::Daemon.LnurlWithdrawResponse> LnurlWithdraw(global::Daemon.LnurlWithdrawRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return LnurlWithdraw(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Daemon.LnurlWithdrawResponse> LnurlWithdraw(global::Daemon.LnurlWithdrawRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_LnurlWithdraw, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override DaemonServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -152,7 +174,8 @@ namespace Daemon {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Lncli, serviceImpl.Lncli)
           .AddMethod(__Method_GetConnection, serviceImpl.GetConnection)
-          .AddMethod(__Method_GetBalance, serviceImpl.GetBalance).Build();
+          .AddMethod(__Method_GetBalance, serviceImpl.GetBalance)
+          .AddMethod(__Method_LnurlWithdraw, serviceImpl.LnurlWithdraw).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -164,6 +187,7 @@ namespace Daemon {
       serviceBinder.AddMethod(__Method_Lncli, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.LncliRequest, global::Daemon.LncliResponse>(serviceImpl.Lncli));
       serviceBinder.AddMethod(__Method_GetConnection, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.GetConnectionRequest, global::Daemon.GetConnectionResponse>(serviceImpl.GetConnection));
       serviceBinder.AddMethod(__Method_GetBalance, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Daemon.GetBalanceRequest, global::Daemon.GetBalanceResponse>(serviceImpl.GetBalance));
+      serviceBinder.AddMethod(__Method_LnurlWithdraw, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Daemon.LnurlWithdrawRequest, global::Daemon.LnurlWithdrawResponse>(serviceImpl.LnurlWithdraw));
     }
 
   }

@@ -7,6 +7,7 @@ using System;
 using Lnrpc;
 using Daemon;
 using System.Threading;
+using Grpc.Core;
 
 public class WalletMenuUI : MonoBehaviour, IRefreshableUI
 {
@@ -26,6 +27,9 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
     public TextMeshProUGUI missingValueText;
     public Button LicenceMissingInfoButton;
 
+    public Button WithdrawInfoButton;
+    public Button WithdrawButton;
+    private PopUpUI withdrawPopUp;
     long balance;
 
     private void Start()
@@ -38,6 +42,8 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
         DonateButton.onClick.AddListener(OnDonateButtonPress);
         LicenceMissingInfoButton.onClick.AddListener(OnLicenceMissingInfoButtonPress);
 
+        WithdrawInfoButton.onClick.AddListener(OnWithdrawInfoButtonPress);
+        WithdrawButton.onClick.AddListener(OnWithdrawButtonPress);
     }
 
     private void OnEnable()
@@ -54,7 +60,65 @@ public class WalletMenuUI : MonoBehaviour, IRefreshableUI
         PopUpArgs args = new PopUpArgs("pay invoice", GameText.PayInvoiceInfo);
         PopUpManagerUI.instance.OpenPopUp(args);
     }
+    void OnWithdrawInfoButtonPress()
+    {
+        //TODO change text
+        PopUpArgs args = new PopUpArgs("Withdraw Info", GameText.WithdrawInfo);
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
+    async void OnWithdrawButtonPress()
+    {
+        try
+        {
+            var closeToken = new CancellationTokenSource();
+            await PlayerServiceConnections.instance.DonnerDaemonClient.Withdraw(closeToken, OnBechstringReceived, OnWaiting, OnFinished);
+            RefreshBalance();
+        } catch(RpcException e)
+        {
+            
+            if(e.StatusCode == StatusCode.Cancelled)
+            {
+                return;
+            }
+            if (withdrawPopUp != null)
+                withdrawPopUp.Close();
+            Debug.Log(e.StatusCode);
+            PopUpArgs errArgs = new PopUpArgs("error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+    }
+    async void OnBechstringReceived(CancellationTokenSource closeToken, string bechstring)
+    {
+        BBHUIManager.instance.mainMenu.BlendImage(true);
+        Sprite qrCode = Utility.GetInvertedQRCode(bechstring);
+        ImagePopUpArgs args = new ImagePopUpArgs("WithdrawAttempt", "withdraw", qrCode, "", new List<PopUpButtonArgs> { }, true, true, closeAction: () => {
+            BBHUIManager.instance.mainMenu.BlendImage(false);
+            closeToken.Cancel();
+        });
+        withdrawPopUp  = PopUpManagerUI.instance.OpenImagePopUp(args);
+    }
+    async void OnWaiting()
+    {
+        BBHUIManager.instance.mainMenu.BlendImage(false);
+        withdrawPopUp.Close(false);
+        PopUpArgs args = new PopUpArgs("Wating", "Payment attempt received, waiting...", true);
+        withdrawPopUp = PopUpManagerUI.instance.OpenPopUp(args);
+    }
+    async void OnFinished(Finished finished)
+    {
+        withdrawPopUp.Close(false);
+        PopUpArgs args;
+        if (finished.Status == "OK")
+        {
 
+            args = new PopUpArgs("Success", "Withdraw Succeeded ", true);
+        } else
+        {
+            args = new PopUpArgs("Failed", "Status: "+finished.Status+" Reason: "+finished.Reason, true);
+        }
+        PopUpManagerUI.instance.OpenPopUp(args);
+    }
     async void OnPayButtonPress()
     {
         //TODO show error instead if invoice is invalid or not existent
