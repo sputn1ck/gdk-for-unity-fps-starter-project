@@ -32,7 +32,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
     }
     void OnEnable()
     {
-        ClientGameObjectManager.Instance.SetAuthorativePlayer(this.gameObject);
+        ClientGameObjectManager.Instance.SetAuthorativePlayer(this.gameObject, this.entityId);
 
         HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
         HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
@@ -52,7 +52,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
 
     void OnDisable()
     {
-        ClientGameObjectManager.Instance.SetAuthorativePlayer(null);
+        ClientGameObjectManager.Instance.DisableAuthorativePlayer();
     }
 
     

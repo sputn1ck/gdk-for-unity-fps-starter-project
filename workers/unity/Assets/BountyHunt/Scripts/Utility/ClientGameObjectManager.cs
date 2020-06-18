@@ -24,10 +24,16 @@ public class ClientGameObjectManager : MonoBehaviour
         BountyTracers = new Dictionary<EntityId, GameObject>();
     }
 
-    public void SetAuthorativePlayer(GameObject go)
+    public void SetAuthorativePlayer(GameObject go, EntityId id)
     {
         AuthorativePlayerGameObject = go;
-        AuthorativePlayerEntityId = go.GetComponent<FpsDriver>().getEntityID();
+        AuthorativePlayerEntityId = id;
+    }
+
+    public void DisableAuthorativePlayer()
+    {
+        AuthorativePlayerGameObject = null;
+        AuthorativePlayerEntityId = new EntityId();
     }
 
     public void AddPlayerGO(EntityId id, GameObject go)

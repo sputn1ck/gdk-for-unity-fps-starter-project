@@ -289,7 +289,7 @@ MonoBehaviour:
   rotationUpdateDelta: 0.06666667
   movementSettings:
     MovementSpeed:
-      WalkSpeed: 2.5
+      WalkSpeed: 3.5
       RunSpeed: 4.5
       SprintSpeed: 8.5
     SprintCooldown: 0.2
@@ -297,7 +297,7 @@ MonoBehaviour:
     StartingJumpSpeed: 8
     TerminalVelocity: 40
     GroundedFallSpeed: 3.5
-    AirControlModifier: 0.25
+    AirControlModifier: 0.4
     InAirDamping: 0.5
   rotationConstraints:
     XAxisRotation: 0
@@ -370,9 +370,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1025
   gunTriggerAllowance: 0.2
-  OnPlayerHit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &114748765334934590
 MonoBehaviour:
   m_ObjectHideFlags: 0

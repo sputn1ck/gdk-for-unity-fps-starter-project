@@ -249,6 +249,7 @@ namespace Fps.Movement
                 didJump = true;
                 jumpedThisFrame = true;
                 toMove = movement * speed;
+                lastDirection = toMove;
             }
 
             // Record the (horizontal) direction when last on the ground (for jumping or falling off platforms)
