@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixer mixer;
 
     public AudioClip DamageTakenSound;
-
+    public AudioClip JumpSound;
 
     Dictionary<VolumeType, VolumeKeys> keys;
 

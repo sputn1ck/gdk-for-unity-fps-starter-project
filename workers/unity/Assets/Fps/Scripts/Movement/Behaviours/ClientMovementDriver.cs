@@ -241,6 +241,7 @@ namespace Fps.Movement
                 verticalVelocity = movementSettings.StartingJumpSpeed;
                 didJump = true;
                 jumpedThisFrame = true;
+                AudioManager.instance.spawn2DSound(AudioManager.instance.JumpSound,0.5f);
             }
             if (startJump && canDoubleJump && !jumpedThisFrame)
             {
@@ -250,6 +251,7 @@ namespace Fps.Movement
                 jumpedThisFrame = true;
                 toMove = movement * speed;
                 lastDirection = toMove;
+                AudioManager.instance.spawn2DSound(AudioManager.instance.JumpSound,0.5f,1.5f);
             }
 
             // Record the (horizontal) direction when last on the ground (for jumping or falling off platforms)
