@@ -218,4 +218,9 @@ public class BackendPlayerClient : IBackendPlayerClient
         var res = await adClient.ListAdvertisersAsync(new ListAdvertisersRequest());
         return res;
     }
+
+    public Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long sats)
+    {
+        throw new NotImplementedException();
+    }
 }

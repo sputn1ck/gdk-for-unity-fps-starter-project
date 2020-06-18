@@ -28,6 +28,7 @@ public interface IBackendPlayerClient
     Task<string[]> GetAllSkinIds();
     Task<string> GetSkinInvoice(string skinId);
     Task<string> GetDonationInvoice(long gameDonation,long devsDonation);
+    Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long sats);
 
     // Ranking Stuff
     Task<Ranking> GetPlayerRanking();
@@ -38,6 +39,7 @@ public interface IBackendPlayerClient
     Task<GetInfoResponse> GetInfo();
 
     Task<ListAdvertiserResponse> ListAdvertisers();
+
 }
 
 public interface IBackendServerClient

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
+using Lnrpc;
+using System.Threading.Tasks;
 
 public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -98,18 +101,74 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     }
 
-    void IncreasePlayersatsInternal(string input)
+    async void IncreasePlayersatsInternal(string input)
     {
-        int sats = int.Parse(input);
-        Utility.Log("paying internal sats: " + sats, Color.cyan);
-        //PaymentUIHelper.
-    }
-    void IncreasePlayersatsExternal(string input)
-    {
-        int sats = int.Parse(input);
-        Utility.Log("paying external sats: " + sats, Color.cyan);
 
-        //PaymentUIHelper.
+        (string invoice, PayReq payreq) payInfo;
+
+        try
+        {
+            payInfo = await GetAddPlayerSatsPayReq(input);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+        PaymentUIHelper.IngamePayment(payInfo.invoice,payInfo.payreq);
+        
+
+    }
+    async void IncreasePlayersatsExternal(string input)
+    {
+        (string invoice, PayReq payreq) payInfo;
+
+        try
+        {
+            payInfo = await GetAddPlayerSatsPayReq(input);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
+
+        PaymentUIHelper.ExternalPayment(payInfo.invoice, payInfo.payreq);
+
+    }
+
+    async Task<(string invoice,PayReq payReq)> GetAddPlayerSatsPayReq(string input)
+    {
+        int sats = int.Parse(input);
+
+        string invoice;
+        try
+        {
+            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetAddSponsorPlayerSatsInvoice(advertiserInvestment.advertiser.hash, sats);
+        }
+        catch (Exception e)
+        {
+            throw (e);
+        }
+
+        PayReq payreq;
+        try
+        {
+            payreq = await PlayerServiceConnections.instance.lnd.DecodePayreq(invoice);
+
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return (invoice,payreq);
     }
 
     void ShowLaterButton(bool show)
