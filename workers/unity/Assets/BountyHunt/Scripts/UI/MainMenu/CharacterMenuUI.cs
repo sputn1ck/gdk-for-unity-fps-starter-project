@@ -92,7 +92,7 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         
         skinGroupButtons = skinGroupButtonsContainer.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
         equippedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
-        selectedSkin = playerSkinsLibrary.GetSkin(PlayerPrefs.GetString("EquippedSkinID", playerSkinsLibrary.defaultSkinID));
+        selectedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
 
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
