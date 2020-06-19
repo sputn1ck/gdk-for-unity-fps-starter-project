@@ -92,16 +92,25 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     void OnBuyButtonClick()
     {
-        List<InputPopUpButtonArgs> actions = new List<InputPopUpButtonArgs>();
-        actions.Add(new InputPopUpButtonArgs("pay with ingame wallet", IncreasePlayersatsInternal));
-        actions.Add(new InputPopUpButtonArgs("pay with external wallet", IncreasePlayersatsExternal));
+        
+        float playerSatsprice = 2;
 
-        InputFieldPopUpArgs args = new InputFieldPopUpArgs(GameText.IncreaseSponsorPlayerSatsPopupHeader, GameText.IncreaseSponsorPlayerSatsPopupText, actions, true, "", Utility.tintedSatsSymbol, "100", TextAlignmentOptions.MidlineRight, TMP_InputField.ContentType.IntegerNumber);
-        PopUpManagerUI.instance.OpenInputFieldPopUp(args);
+        List<IPopupElement> elements = new List<IPopupElement>();
+        elements.Add(new TextPopupElement { text = GameText.IncreaseSponsorPlayerSatsPopupText });
+        elements.Add(new PlayerSatsSettingsPopupElement {
+            defaultSats = 1000,
+            ingamePayAction = IncreasePlayersatsInternal,
+            walletPayAction = IncreasePlayersatsExternal,
+            playersatsPrice = playerSatsprice,
+            priceLabelText = "price",
+
+        });
+
+        PopUpManagerUI.instance.OpenModularPopUp(GameText.IncreaseSponsorPlayerSatsPopupHeader, elements);
 
     }
 
-    async void IncreasePlayersatsInternal(string input)
+    async void IncreasePlayersatsInternal(long input)
     {
 
         (string invoice, PayReq payreq) payInfo;
@@ -123,7 +132,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
 
     }
-    async void IncreasePlayersatsExternal(string input)
+    async void IncreasePlayersatsExternal(long input)
     {
         (string invoice, PayReq payreq) payInfo;
 
@@ -141,13 +150,11 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
 
         PaymentUIHelper.ExternalPayment(payInfo.invoice, payInfo.payreq);
-
+        
     }
 
-    async Task<(string invoice,PayReq payReq)> GetAddPlayerSatsPayReq(string input)
+    async Task<(string invoice,PayReq payReq)> GetAddPlayerSatsPayReq(long sats)
     {
-        int sats = int.Parse(input);
-
         string invoice;
         try
         {

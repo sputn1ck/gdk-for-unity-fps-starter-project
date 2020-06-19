@@ -213,18 +213,26 @@ public class PlayerSatsSettingsPopupElement : IPopupElement
     public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         ppss = obj.GetComponent<PopUpPlayerSatsSettingsUI>();
-        ppss.inputField.onValueChanged.AddListener(UpdatePrice);
+
         ppss.inputField.text = defaultSats.ToString();
+        UpdatePrice(defaultSats.ToString());
+        ppss.inputField.onValueChanged.AddListener(UpdatePrice);
+
         ppss.PriceLabelText.text = priceLabelText;
+
         ppss.IngamePayButton.onClick.AddListener(OnIngameButtonPress);
         ppss.WalletPayButton.onClick.AddListener(OnWalletButtonPress);
+        ppss.IngamePayButton.onClick.AddListener(popup.Close);
+        ppss.WalletPayButton.onClick.AddListener(popup.Close);
+
+        ppss.inputField.StartCoroutine(ForceRefresh(ppss.inputField));
     }
 
     void UpdatePrice(string playerSats)
     {
         long sats = long.Parse(playerSats);
         price = (long)(sats * playersatsPrice);
-        ppss.PriceText.text = price + Utility.tintedSatsSymbol;
+        ppss.PriceText.text = price.ToString();
     }
 
     void OnIngameButtonPress()
@@ -235,5 +243,11 @@ public class PlayerSatsSettingsPopupElement : IPopupElement
     void OnWalletButtonPress()
     {
         walletPayAction.Invoke(price);
+    }
+
+    IEnumerator ForceRefresh(TMP_InputField input)
+    {
+        yield return new WaitForEndOfFrame();
+        input.textComponent.ForceMeshUpdate();
     }
 }
