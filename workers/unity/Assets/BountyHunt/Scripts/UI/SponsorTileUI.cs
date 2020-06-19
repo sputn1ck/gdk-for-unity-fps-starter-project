@@ -97,7 +97,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         actions.Add(new InputPopUpButtonArgs("pay with external wallet", IncreasePlayersatsExternal));
 
         InputFieldPopUpArgs args = new InputFieldPopUpArgs(GameText.IncreaseSponsorPlayerSatsPopupHeader, GameText.IncreaseSponsorPlayerSatsPopupText, actions, true, "", Utility.tintedSatsSymbol, "100", TextAlignmentOptions.MidlineRight, TMP_InputField.ContentType.IntegerNumber);
-        PopUpManagerUI.instance.OperInputFieldPopUp(args);
+        PopUpManagerUI.instance.OpenInputFieldPopUp(args);
 
     }
 

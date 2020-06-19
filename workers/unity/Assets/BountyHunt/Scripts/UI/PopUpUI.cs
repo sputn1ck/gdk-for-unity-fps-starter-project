@@ -27,7 +27,6 @@ public class PopUpUI : MonoBehaviour
     public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, UnityAction closeAction = null)
     {
         this.closeAction = closeAction;
-        allPopUps.Add(this);
         image.gameObject.SetActive(false);
         inputfieldContainer.SetActive(false);
 

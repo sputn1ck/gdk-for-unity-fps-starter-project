@@ -8,6 +8,8 @@ using TMPro;
 public class PopUpManagerUI : MonoBehaviour
 {
     public PopUpUI popUpPrefab;
+    public ModularPopUpUI modularPopUpPrefab;
+
     public Transform container;
 
 
@@ -44,102 +46,44 @@ public class PopUpManagerUI : MonoBehaviour
         return popup;
     }
 
-    public PopUpUI OperInputFieldPopUp(InputFieldPopUpArgs args)
+    public PopUpUI OpenInputFieldPopUp(InputFieldPopUpArgs args)
     {
         PopUpUI popup = Instantiate(popUpPrefab, container);
         popup.Set(args.headline, args.showX, args.text, args.actions, args.verticalButtonLayout, args.preInputFieldText, args.postInputFieldText, args.contentType,args.alignment,args.defaultInputFieldText,args.placeholderText, args.closeAction);
         return popup;
     }
 
-    //TEST
+   public ModularPopUpUI OpenModularPopUp(string headline,List<IPopupElement> elements,bool showX = true, UnityAction closeAction = null)
+    {
+        ModularPopUpUI popup = Instantiate(modularPopUpPrefab, container);
+        popup.SetUp(headline,showX,elements,closeAction);
+        return popup;
+    }
 
-    [Space(10)]
-    public string header;
-    public string text;
-    public string text2;
-    public Sprite sprite;
-    public bool showX;
-    public bool verticalButtons;
-    public bool btn1;
-    public bool btn2;
-    public bool btn3;
-    public string ID;
-    public bool tintImage;
-    public float imageSizeMultiplier;
-
-    [Space(10)] [Range(0, 1)]
-    public int variant;
-    public bool testPopUp;
-    public bool testYesNoPopup;
-    public bool testImagePopup;
-    public bool closeWithID;
-    public bool closeAllWithID;
+    public bool test;
 
     private void Update()
     {
-        if (testPopUp)
+        if (!test) return;
+
+        test = false;
+
+        List<IPopupElement> elements = new List<IPopupElement>();
+        elements.Add(new ButtonPopupElement
         {
-            testPopUp = false;
-            List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
-            if (btn1) actions.Add(new PopUpButtonArgs("btn1",test1));
-            if (btn2) actions.Add(new PopUpButtonArgs("button2",test2));
-            if (btn3) actions.Add(new PopUpButtonArgs("Auslöser3",test3));
-
-            PopUpArgs args;
-            switch (variant)
-            {
-                case 0: default: args = new PopUpArgs("header",text,actions,verticalButtons,showX);break;
-                case 1: args = new PopUpArgs(header,text); break;
-            }
-
-            OpenPopUp(args);
-
-        }
-
-        if (testYesNoPopup)
+            args = new PopUpButtonArgs("I bims 1 Button",() => Utility.Log("I-bims-Button pressed",Color.green))
+        }) ;
+        elements.Add(new TextPopupElement
         {
-            testYesNoPopup = false;
-            YesNoPopUpArgs args = new YesNoPopUpArgs("header", text, testYN, showX);
-            OpenYesNoPopUp(args);
-        }
-
-        if (testImagePopup)
+            text = "I bims ein Text"
+        });
+        elements.Add(new ImagePopupElement
         {
-            testImagePopup = false;
-            List<PopUpButtonArgs> actions = new List<PopUpButtonArgs>();
-            if (btn1) actions.Add(new PopUpButtonArgs("btn1", test1));
-            if (btn2) actions.Add(new PopUpButtonArgs("button2", test2));
-            if (btn3) actions.Add(new PopUpButtonArgs("Auslöser3", test3));
+            scale = 0.2f
+        }) ;
 
-            testYesNoPopup = false;
-            ImagePopUpArgs args = new ImagePopUpArgs("header", text, sprite, text2,actions,verticalButtons,tintImage,imageSizeMultiplier,showX);
-            OpenImagePopUp(args);
-        }
-
+        OpenModularPopUp("PopUp yeah!", elements);
     }
-
-    void test1()
-    {
-        Utility.Log("testing answer 1", Color.yellow);
-    }
-    void test2()
-    {
-        Utility.Log("testing answer 2", Color.cyan);
-    }
-    void test3()
-    {
-        Utility.Log("testing answer 3", Color.blue);
-    }
-
-    void testYN(bool yes)
-    {
-        if(yes)
-        Utility.Log("YES!", Color.green);
-        else
-        Utility.Log("NO!", Color.red);
-
-    }
-
 
 }
 
@@ -276,5 +220,5 @@ public struct InputFieldPopUpArgs
         this.alignment = alignment;
         this.contentType = contentType;
     }
-
 }
+

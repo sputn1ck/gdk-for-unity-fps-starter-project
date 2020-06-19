@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
 
-public class ModularPopupUI : MonoBehaviour
+public class ModularPopUpUI : MonoBehaviour
 {
     public TextMeshProUGUI headlineText;
     public Button xButton;
@@ -14,7 +14,7 @@ public class ModularPopupUI : MonoBehaviour
 
     UnityAction closeAction;
 
-    void SetUp(string headline, bool showX, List<IPopupElement> elements, UnityAction closeAction = null)
+    public void SetUp(string headline, bool showX, List<IPopupElement> elements, UnityAction closeAction = null)
     {
         headlineText.text = headline;
         if (showX) xButton.onClick.AddListener(Close);
@@ -44,20 +44,20 @@ public class ModularPopupUI : MonoBehaviour
  
 public interface IPopupElement
 {
-    public string GetKey();
-    public void SetUp(GameObject obj, ModularPopupUI popup);
+    string GetKey();
+    void SetUp(GameObject obj, ModularPopUpUI popup);
 }
 
 public class TextPopupElement : IPopupElement
 {
-    public string text = "" ;
+    public string text;
 
     public string GetKey()
     {
         return "text";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         obj.GetComponent<TextMeshProUGUI>().text = text;
     }
@@ -72,7 +72,7 @@ public class ButtonPopupElement : IPopupElement
         return "button";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         
         Button b = obj.GetComponent<Button>();
@@ -91,7 +91,7 @@ public class horizontalButtonListPopupElement : IPopupElement
         return "horizontalButtonList";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         PopUpButtonListUI buttonList = obj.GetComponent<PopUpButtonListUI>();
 
@@ -115,7 +115,7 @@ public class VerticalButtonListPopupElement : IPopupElement
         return "verticalButtonList";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         PopUpButtonListUI buttonList = obj.GetComponent<PopUpButtonListUI>();
 
@@ -142,7 +142,7 @@ public class ImagePopupElement : IPopupElement
         return "image";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         Image image = obj.GetComponent<Image>();
         UITinter tinter = image.GetComponent<UITinter>();
@@ -172,7 +172,7 @@ public class InputfieldPopupElement : IPopupElement
         return "inputField";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         PopUpInputFieldUI pif = obj.GetComponent<PopUpInputFieldUI>();
         
@@ -210,7 +210,7 @@ public class PlayerSatsSettingsPopupElement : IPopupElement
         return "playerSatsSettings";
     }
 
-    public void SetUp(GameObject obj, ModularPopupUI popup)
+    public void SetUp(GameObject obj, ModularPopUpUI popup)
     {
         ppss = obj.GetComponent<PopUpPlayerSatsSettingsUI>();
         ppss.inputField.onValueChanged.AddListener(UpdatePrice);
