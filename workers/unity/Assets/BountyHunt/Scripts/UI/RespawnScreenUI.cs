@@ -42,7 +42,7 @@ public class RespawnScreenUI : ScreenUI
 
     protected override void OnShow()
     {
-        int gunID = PlayerPrefs.GetInt("SelectedGunID", 0);
+        int gunID = PlayerPrefs.GetInt("SelectedGunID");
         switch (gunID)
         {
             case 0:

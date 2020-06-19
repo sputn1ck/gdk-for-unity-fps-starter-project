@@ -1,6 +1,7 @@
 using Daemon;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -53,5 +54,23 @@ public class DummyDaemonClient : MonoBehaviour, IDonnerDaemonClient
     public Task<string> Lncli(string command)
     {
         return Task.FromResult("yooooo lncli or what;" + command);
+    }
+
+    public async Task Withdraw(CancellationTokenSource ct, OnBechstring onBechstring, OnWaiting onWaiting, OnFinished onFinished)
+    {
+        await Task.Delay(1000);
+        // get string
+        onBechstring(ct, "qrcodestring");
+        // wait for invoice
+        await Task.Delay(5000);
+        if (ct.IsCancellationRequested)
+            return;
+        // await blablabla
+        onWaiting();
+        await Task.Delay(5000);
+        if (ct.IsCancellationRequested)
+            return;
+        // On Finished
+        onFinished(new Finished());
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SponsorsMenuUI : MonoBehaviour
+public class SponsorsMenuUI : MonoBehaviour, IRefreshableUI
 {
     public Transform sponsorTilesContainer;
     public SponsorTileUI sponsorTileUIPrefab;
@@ -64,6 +64,11 @@ public class SponsorsMenuUI : MonoBehaviour
 
     }
 
-
-
+    public void Refresh()
+    {
+        if (PlayerServiceConnections.instance.ServicesReady)
+        {
+            RefreshTiles();
+        }
+    }
 }

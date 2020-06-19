@@ -15,6 +15,7 @@ public static class GameText
     /// Main Menu > Wallet > Donation > (i)
     public const string DonationInfo = "with the slider, you can adjust, how much of the donation goes into the game pot and how much the game developers will recieve";
 
+    public const string WithdrawInfo = "You can easily withdraw money using mobile Wallets such as Phoenix Wallet, Breez Wallet, Wallet of Satoshi, Blue Wallet. Simply scan the qr code and follow the instructions";
     /// text above the Image in the Buy Skin Popup
     /// {0} = skin name
     /// {1} = price with sats symbol

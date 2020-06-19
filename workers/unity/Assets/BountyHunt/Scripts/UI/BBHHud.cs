@@ -14,6 +14,8 @@ public class BBHHud : MonoBehaviour
     [SerializeField] private float hitIntensity = 1f;
     [SerializeField] private float hitEffectDuration = 1f;
     [SerializeField] private float hitEffectFocus = 16f;
+    [SerializeField] private float hitMinPitch = 1f;
+    [SerializeField] private float hitMaxPitch = 1.5f;
 
     [Require] private HealthComponentReader healthReader;
     [Require] private GunStateComponentReader gunStateReader;
@@ -71,7 +73,7 @@ public class BBHHud : MonoBehaviour
 
         if (healthModifiedInfo.HealthAfter < healthModifiedInfo.HealthBefore)
         {
-            AudioManager.instance.spawn2DSound(AudioManager.instance.DamageTakenSound);
+            AudioManager.instance.spawn2DSound(AudioManager.instance.DamageTakenSound, 1, UnityEngine.Random.Range(hitMinPitch, hitMaxPitch));
         }
 
         var currentHealth = healthReader.Data.Health / healthReader.Data.MaxHealth;

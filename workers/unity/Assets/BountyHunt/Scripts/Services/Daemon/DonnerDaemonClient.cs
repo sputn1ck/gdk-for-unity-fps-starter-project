@@ -5,6 +5,7 @@ using Daemon;
 using Grpc.Core;
 using System.Threading.Tasks;
 using System;
+using System.Threading;
 
 
 // TODO try catch blocks every rpc call
@@ -12,7 +13,7 @@ public class DonnerDaemonClient : IDonnerDaemonClient
 {
     public Channel rpcChannel;
     public DaemonService.DaemonServiceClient client;
-
+    
     public static DonnerDaemonClient instance;
     public string command;
     public bool commandTrigger;
@@ -52,5 +53,37 @@ public class DonnerDaemonClient : IDonnerDaemonClient
     {
         Task t = Task.Run(async () => await rpcChannel.ShutdownAsync());
         t.Wait(5000);
+    }
+
+    public async Task Withdraw(CancellationTokenSource ct, OnBechstring onBechstring, OnWaiting onWaiting, OnFinished onFinished)
+    {
+        var stream = client.LnurlWithdraw(new LnurlWithdrawRequest());
+        if (await stream.ResponseStream.MoveNext(ct.Token))
+        {
+            var current = stream.ResponseStream.Current;
+            if (current.BechString == null)
+            {
+                throw new Exception("something went wrong");
+            }
+            onBechstring(ct, current.BechString.BechString_);
+        }
+        if (await stream.ResponseStream.MoveNext(ct.Token))
+        {
+            var current = stream.ResponseStream.Current;
+            if (current.Waiting == null)
+            {
+                throw new Exception("something went wrong");
+            }
+            onWaiting();
+        }
+        if (await stream.ResponseStream.MoveNext(ct.Token))
+        {
+            var current = stream.ResponseStream.Current;
+            if (current.Finished == null)
+            {
+                throw new Exception("something went wrong");
+            }
+            onFinished(current.Finished);
+        }
     }
 }
