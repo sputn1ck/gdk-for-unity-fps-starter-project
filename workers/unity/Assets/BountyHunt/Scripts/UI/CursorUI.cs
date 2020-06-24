@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CursorUI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CursorUI : MonoBehaviour
     public Sprite onClickSprite;
     public Camera cam;
     Image image;
+    [SerializeField]TextMeshProUGUI toolTipText;
 
     public static CursorUI Instance;
 
@@ -32,5 +34,15 @@ public class CursorUI : MonoBehaviour
     {
         transform.position = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
         image.sprite = Input.GetMouseButton(0) ? onClickSprite : defaultSprite;
+    }
+
+    public void SetToolTipText(string text)
+    {
+        toolTipText.text = text;
+    }
+
+    public void RemoveToolTipText()
+    {
+        toolTipText.text = "";
     }
 }

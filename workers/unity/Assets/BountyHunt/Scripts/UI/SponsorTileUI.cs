@@ -90,10 +90,23 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
         ShowLaterButton(false);
     }
-    void OnBuyButtonClick()
+    async void OnBuyButtonClick()
     {
-        
-        float playerSatsprice = 2;
+
+        float playerSatsprice;
+
+        try
+        {
+            playerSatsprice = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerSatsPrice();
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
+            PopUpManagerUI.instance.OpenPopUp(errArgs);
+            return;
+        }
 
         List<IPopupElement> elements = new List<IPopupElement>();
         elements.Add(new TextPopupElement { text = GameText.IncreaseSponsorPlayerSatsPopupText });

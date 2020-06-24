@@ -466,13 +466,18 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return Task.FromResult(res);
     }
 
-    public async Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long sats)
+    public async Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long psats)
     {
         AdvertiserInvestmentInfo ai = new AdvertiserInvestmentInfo { Hash = pHash };
         Advertiser advertiser = await PlayerServiceConnections.instance.AdvertiserStore.GetAdvertiser(ai);
 
-        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(sats, advertiser.name + " " + sats, expiryInSeconds);
+        string invoice = await PlayerServiceConnections.instance.lnd.GetInvoice(psats*2, advertiser.name + " " + psats, expiryInSeconds);
 
         return invoice;
+    }
+
+    public async Task<float> GetPlayerSatsPrice()
+    {
+        return 2;
     }
 }

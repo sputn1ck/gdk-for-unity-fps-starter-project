@@ -202,6 +202,7 @@ public class PlayerSatsSettingsPopupElement : IPopupElement
     public UnityAction<long> ingamePayAction;
     public UnityAction<long> walletPayAction;
 
+    long playersats;
     long price;
     PopUpPlayerSatsSettingsUI ppss;
 
@@ -230,19 +231,19 @@ public class PlayerSatsSettingsPopupElement : IPopupElement
 
     void UpdatePrice(string playerSats)
     {
-        long sats = long.Parse(playerSats);
-        price = (long)(sats * playersatsPrice);
+        playersats = long.Parse(playerSats);
+        price = (long)(playersats * playersatsPrice);
         ppss.PriceText.text = price.ToString();
     }
 
     void OnIngameButtonPress()
     {
-        ingamePayAction.Invoke(price);
+        ingamePayAction.Invoke(playersats);
     }
 
     void OnWalletButtonPress()
     {
-        walletPayAction.Invoke(price);
+        walletPayAction.Invoke(playersats);
     }
 
     IEnumerator ForceRefresh(TMP_InputField input)

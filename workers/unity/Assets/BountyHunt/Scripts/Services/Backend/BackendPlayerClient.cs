@@ -219,7 +219,12 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res;
     }
 
-    public Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long sats)
+    public Task<string> GetAddSponsorPlayerSatsInvoice(string pHash, long psats)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<float> GetPlayerSatsPrice()
     {
         throw new NotImplementedException();
     }
