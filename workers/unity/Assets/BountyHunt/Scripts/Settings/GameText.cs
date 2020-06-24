@@ -58,4 +58,13 @@ public static class GameText
     // headline and description of the popup, that appears, when you click on the pay button in a sponsors Tile
     public const string IncreaseSponsorPlayerSatsPopupHeader = "Buy Player Sats";
     public const string IncreaseSponsorPlayerSatsPopupText = "How much Player Satoshi do you want to buy?";
+
+
+    //-----TOOLTIPS----- Don't rename these Consts !!!
+    public const string BuyPlayersatsTooltip = "buy player sats";
+    public const string OpenLinkTooltip = "Open URL";
+    public const string BookmarkLinkTooltip = "Bookmark URL";
+    public const string IngameWalletTooltip = "pay with ingame wallet";
+    public const string ExternalWalletTooltip = "pay with external wallet";
+
 }

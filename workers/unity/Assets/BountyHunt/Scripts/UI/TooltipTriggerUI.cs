@@ -6,8 +6,25 @@ using UnityEngine.EventSystems;
 
 public class TooltipTriggerUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    
     public string tooltipText;
+    [Tooltip ("overrides text if field exists")]
+    public string gameTextStringName;
+
+    private void Awake()
+    {
+        
+        if (gameTextStringName == "") return;
+        try
+        {
+            var field = typeof(GameText).GetField(gameTextStringName);
+            tooltipText = (string)field.GetValue(null);
+        }
+        catch
+        {
+            Debug.LogError("couldnt find field " + gameTextStringName);
+        }
+        
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
