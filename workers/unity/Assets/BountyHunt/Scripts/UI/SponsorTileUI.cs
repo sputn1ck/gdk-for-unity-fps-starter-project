@@ -16,7 +16,6 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Button openLinkButton;
     public Button bookmarkLinkButton;
     public Button buyButton;
-    public TextMeshProUGUI buttonInfoText;
 
     Animator animator;
     AdvertiserInvestment advertiserInvestment;
@@ -27,28 +26,10 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     private void Start()
     {
-        buttonInfoText.text = "";
         openLinkButton.onClick.AddListener(OnLinkButtonClick);
         bookmarkLinkButton.onClick.AddListener(OnLaterButtonClick);
         buyButton.onClick.AddListener(OnBuyButtonClick);
 
-        openLinkButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.OpenLinkButtonDescription;
-        bookmarkLinkButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.BookmarkLinkButtonDescription;
-        buyButton.GetComponent<HoverDescriptionUI>().descriptionString = GameText.BuyPlayerSatsButtonDescription;
-
-    }
-
-    public void setButtonInfoText(string text)
-    {
-        buttonInfoText.text = text;
-    }
-
-    public void removeButtonInfoText(string text)
-    {
-        if(buttonInfoText.text == text)
-        {
-            buttonInfoText.text = "";
-        }
     }
 
     public void Set(AdvertiserInvestment advertiserInvestment)
@@ -62,7 +43,6 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         } else
         {
             bookmarkLinkButton.gameObject.SetActive(false);
-            buttonInfoText.gameObject.SetActive(false);
             openLinkButton.gameObject.SetActive(false);
         }
         image.texture = advertiserInvestment.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
