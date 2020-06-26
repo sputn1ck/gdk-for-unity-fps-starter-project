@@ -55,6 +55,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -102,6 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5203486659098258300}
   - component: {fileID: 1847345810980891344}
+  - component: {fileID: 65966934780015002}
   m_Layer: 0
   m_Name: AdBilllboardSquare
   m_TagString: IgnoreMeshCollapse
@@ -139,6 +141,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AdRenderer: {fileID: 8994659748404830455}
   AdType: 0
+--- !u!65 &65966934780015002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420834330849553293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0222092, y: 2.031945, z: 0.10763034}
+  m_Center: {x: -0.004867792, y: 0.00000011920929, z: -0.0066505224}
 --- !u!1 &8395453558236265118
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +209,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -227,8 +243,8 @@ MeshCollider:
   m_GameObject: {fileID: 8395453558236265118}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_Enabled: 0
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
