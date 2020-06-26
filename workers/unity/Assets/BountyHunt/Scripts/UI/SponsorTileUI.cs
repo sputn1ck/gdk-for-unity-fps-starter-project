@@ -77,7 +77,8 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         try
         {
-            playerSatsprice = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerSatsPrice();
+            var res = await PlayerServiceConnections.instance.BackendPlayerClient.GetInfo();
+            playerSatsprice = res.SponsorFeeInfo.PlayerSatoshiCost;
 
         }
         catch (Exception e)
@@ -151,7 +152,7 @@ public class SponsorTileUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         string invoice;
         try
         {
-            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetAddSponsorPlayerSatsInvoice(advertiserInvestment.advertiser.hash, sats);
+            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerSatsInvoice(advertiserInvestment.advertiser.hash, sats);
         }
         catch (Exception e)
         {
