@@ -219,9 +219,11 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res;
     }
 
-    public Task<string> GetPlayerSatsInvoice(string pHash, long psats)
+    public async Task<string> GetPlayerSatsInvoice(string pHash, long psats)
     {
-        throw new NotImplementedException();
+        var req = new DepositAdvertiserRequest { Amount = psats, Phash = pHash };
+        var res = await adClient.DepositAdvertiserAsync(req, GetPubkeyCalloptions());
+        return res.Invoice;
     }
 
 }
