@@ -143,15 +143,12 @@ public class PopUpUI : MonoBehaviour
 
     public void Close()
     {
-        
-        closeAction?.Invoke();
-        Destroy(gameObject);
+        Close(true);
     }
     public void Close(bool runCloseAction)
     {
         if(runCloseAction)
             closeAction?.Invoke();
-        allPopUps.Remove(this);
         Destroy(gameObject);
     }
 
