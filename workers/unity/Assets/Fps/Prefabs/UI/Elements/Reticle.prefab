@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2414116443925429758}
   - component: {fileID: 3510714524051366460}
   - component: {fileID: 2172707888434755015}
+  - component: {fileID: 4578778983220472799}
   m_Layer: 5
   m_Name: Reticle
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitmarkerAnimator: {fileID: 3510714524051366460}
   reticle: {fileID: 5423789106527303533}
+--- !u!114 &4578778983220472799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491039826350760906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01995cd01a039e43abeb455cf569faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 0.2
+  maxDistance: 50
 --- !u!1 &4388184501256473129
 GameObject:
   m_ObjectHideFlags: 0

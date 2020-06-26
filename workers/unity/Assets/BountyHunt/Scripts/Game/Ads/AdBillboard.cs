@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class AdBillboard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class AdBillboard : MonoBehaviour, ILookAtHandler
 {
     public MeshRenderer AdRenderer;
     public Advertiser.AdMaterialType AdType;
@@ -20,14 +20,14 @@ public class AdBillboard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         AdRenderer.material = mat;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnLookAtEnter()
     {
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
         string text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
         ContextMenuUI.Instance.Set(this, advertiserInvestment.advertiser.name, text, actions);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnLookAtExit()
     {
         ContextMenuUI.Instance.Hide(this);
     }
