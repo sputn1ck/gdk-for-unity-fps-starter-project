@@ -14,17 +14,21 @@ public class PopUpUI : MonoBehaviour
     public Transform verticalButtonsContainer;
     public Button buttonPrefab;
     public Button xButton;
+    public GameObject inputfieldContainer;
+    public TextMeshProUGUI preInputText;
+    public TMP_InputField inputField;
+    public TextMeshProUGUI postInputText;
 
-    public UnityAction closeAction;
+
+    [HideInInspector] public UnityAction closeAction;
     [HideInInspector] public List<Button> buttons;
 
-    static List<PopUpUI> allPopUps = new List<PopUpUI>();
 
     public void Set(string headline, bool showX, string text, List<PopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, UnityAction closeAction = null)
     {
         this.closeAction = closeAction;
-        allPopUps.Add(this);
         image.gameObject.SetActive(false);
+        inputfieldContainer.SetActive(false);
 
         this.headline.text = headline;
 
@@ -88,26 +92,64 @@ public class PopUpUI : MonoBehaviour
         }
     }
 
+    public void Set(string headline, bool showX, string text, List<InputPopUpButtonArgs> buttonActions, bool verticalLayoutedButtons, string preInputFieldText, string postInputFieldText, TMP_InputField.ContentType contentType, TextAlignmentOptions alignment, string defaultInputText, string placeholderText , UnityAction closeAction = null)
+    {
+        Set(headline, showX, text, new List<PopUpButtonArgs>(), verticalLayoutedButtons, closeAction) ;
+
+        inputfieldContainer.SetActive(true);
+        inputField.contentType = contentType;
+        inputField.text = defaultInputText;
+        (inputField.placeholder as TextMeshProUGUI).text = placeholderText;
+
+        inputField.textComponent.alignment = alignment;
+        (inputField.placeholder as TextMeshProUGUI).alignment = alignment;
+
+        if (preInputFieldText != "") preInputText.text = preInputFieldText;
+        else preInputText.gameObject.SetActive(false);
+
+        if (postInputFieldText != "") postInputText.text = postInputFieldText;
+        else postInputText.gameObject.SetActive(false);
+
+        Transform btnContainer;
+        if (buttonActions.Count == 0)
+        {
+            horizontalButtonsContainer.gameObject.SetActive(false);
+            verticalButtonsContainer.gameObject.SetActive(false);
+            return;
+        }
+        else if (verticalLayoutedButtons)
+        {
+            verticalButtonsContainer.gameObject.SetActive(true);
+            horizontalButtonsContainer.gameObject.SetActive(false);
+            btnContainer = verticalButtonsContainer;
+        }
+        else
+        {
+            horizontalButtonsContainer.gameObject.SetActive(true);
+            verticalButtonsContainer.gameObject.SetActive(false);
+            btnContainer = horizontalButtonsContainer;
+        }
+
+        foreach (InputPopUpButtonArgs puba in buttonActions)
+        {
+            Button b = Instantiate(buttonPrefab, btnContainer);
+            b.GetComponentInChildren<TextMeshProUGUI>().text = puba.label;
+            b.onClick.AddListener(() => puba.action(inputField.text));
+            if (puba.closePopupOnClick) b.onClick.AddListener(Close);
+            this.buttons.Add(b);
+        }
+    }
+
+
     public void Close()
     {
-        
-        closeAction?.Invoke();
-        allPopUps.Remove(this);
-        Destroy(gameObject);
+        Close(true);
     }
     public void Close(bool runCloseAction)
     {
         if(runCloseAction)
             closeAction?.Invoke();
-        allPopUps.Remove(this);
         Destroy(gameObject);
-    }
-    public static void CloseAll()
-    {
-        for (int i = allPopUps.Count - 1; i >= 0; i--)
-        {
-            allPopUps[i].Close();
-        }
     }
 
 }
@@ -118,6 +160,19 @@ public class PopUpButtonArgs
     public UnityAction action;
     public bool closePopupOnClick;
     public PopUpButtonArgs(string label, UnityAction action, bool closePopupOnClick = true)
+    {
+        this.label = label;
+        this.action = action;
+        this.closePopupOnClick = closePopupOnClick;
+    }
+}
+
+public class InputPopUpButtonArgs
+{
+    public string label;
+    public UnityAction<string> action;
+    public bool closePopupOnClick;
+    public InputPopUpButtonArgs(string label, UnityAction<string> action, bool closePopupOnClick = true)
     {
         this.label = label;
         this.action = action;

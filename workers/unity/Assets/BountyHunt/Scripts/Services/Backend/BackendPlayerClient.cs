@@ -218,4 +218,12 @@ public class BackendPlayerClient : IBackendPlayerClient
         var res = await adClient.ListAdvertisersAsync(new ListAdvertisersRequest());
         return res;
     }
+
+    public async Task<string> GetPlayerSatsInvoice(string pHash, long psats)
+    {
+        var req = new DepositAdvertiserRequest { Amount = psats, Phash = pHash };
+        var res = await adClient.DepositAdvertiserAsync(req);
+        return res.Invoice;
+    }
+
 }
