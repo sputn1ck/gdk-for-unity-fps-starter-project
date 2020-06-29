@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using UnityEngine;
+
 public static class GameText
 {
     /// Main Menu > Wallet > Pay Invoice > (i)
@@ -55,7 +58,7 @@ public static class GameText
     public const string IncreaseSponsorPlayerSatsPopupText = "How much Player Satoshi do you want to buy?";
 
     //label of the bookmark link action in the billboard contextmenu
-    public const string AdContextMenuBookmarkActionLabel = "bookmark link <sprite name=\"bookmark\">";
+    public const string AdContextMenuBookmarkActionLabel = "bookmark link <sprite name=\"bookmark\" tint=1>";
 
 
     //-----TOOLTIPS----- Don't rename these Consts !!!
@@ -65,4 +68,39 @@ public static class GameText
     public const string IngameWalletTooltip = "pay with ingame wallet";
     public const string ExternalWalletTooltip = "pay with external wallet";
 
+    public static string GetKeyName(KeyCode keyCode)
+    {
+        switch (keyCode)
+        {
+            default: return keyCode.ToString();
+            case KeyCode.Alpha0: return "0";
+            case KeyCode.Alpha1: return "1";
+            case KeyCode.Alpha2: return "2";
+            case KeyCode.Alpha3: return "3";
+            case KeyCode.Alpha4: return "4";
+            case KeyCode.Alpha5: return "5";
+            case KeyCode.Alpha6: return "6";
+            case KeyCode.Alpha7: return "7";
+            case KeyCode.Alpha8: return "8";
+            case KeyCode.Alpha9: return "9";
+            case KeyCode.Keypad0: return "K0";
+            case KeyCode.Keypad1: return "K1";
+            case KeyCode.Keypad2: return "K2";
+            case KeyCode.Keypad3: return "K3";
+            case KeyCode.Keypad4: return "K4";
+            case KeyCode.Keypad5: return "K5";
+            case KeyCode.Keypad6: return "K6";
+            case KeyCode.Keypad7: return "K7";
+            case KeyCode.Keypad8: return "K8";
+            case KeyCode.Keypad9: return "K9";
+            case KeyCode.Mouse0: return "LMB";
+            case KeyCode.Mouse1: return "RMB";
+            case KeyCode.UpArrow: return "Up";
+            case KeyCode.DownArrow: return "Down";
+            case KeyCode.LeftArrow: return "Left";
+            case KeyCode.RightArrow: return "Right";
+            case KeyCode.Escape: return "esc";
+            case KeyCode.Caret: return "^";
+        }
+    }
 }

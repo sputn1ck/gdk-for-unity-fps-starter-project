@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class LookAtRaycaster : MonoBehaviour
 {
-    public float minDistance = 0.2f;
-    public float maxDistance = 50f;
+    public float minDistance = 0.3f;
+    public float maxDistance = 100f;
 
     Transform target;
     private void Update()

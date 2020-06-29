@@ -50,7 +50,7 @@ public class ContextMenuUI : MonoBehaviour
                 actionUIs[i].gameObject.SetActive(true);
                 actionUIs[i].labelText.text = actions[i].label;
                 actionUIs[i].key = string.Format("ContextAction{0}_Key", i + 1);
-                actionUIs[i].keyText.text = InputKeyMapping.GetKeyCode(actionUIs[i].key).ToString();
+                actionUIs[i].keyText.text = GameText.GetKeyName(InputKeyMapping.GetKeyCode(actionUIs[i].key));
                 actionUIs[i].action = actions[i].action;
             }
             else
