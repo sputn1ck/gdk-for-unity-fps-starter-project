@@ -45,7 +45,7 @@ public class RespawnScreenAdUI : MonoBehaviour
         }
         else{
             text.GetComponent<UITinter>().updateColor(TintColor.Primary);
-            text.text = GameText.AdOpenInfo;
+            text.text = GameText.linkBookmarkedInfo;
             button.interactable = false;
         }
         image.texture = adInv.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
@@ -57,7 +57,7 @@ public class RespawnScreenAdUI : MonoBehaviour
         if (advertiserInvestment.advertiser.url == "")
             return;
         text.GetComponent<UITinter>().updateColor(TintColor.Primary);
-        text.text = GameText.AdOpenInfo;
+        text.text = GameText.linkBookmarkedInfo;
         UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
         button.interactable = false;
     }

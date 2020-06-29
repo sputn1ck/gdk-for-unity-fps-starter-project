@@ -38,7 +38,7 @@ public static class GameText
     public const string PaymentExpiredPopup = "payment has expired!";
 
     /// text to see, when clicked on a link (to open it later)
-    public const string AdOpenInfo = "Link Remembered";
+    public const string linkBookmarkedInfo = "Link Bookmarked";
 
     /// text in the Quit Game Popup
     public const string QuitGamePopup = "Do you really want to quit the game?";
@@ -50,14 +50,12 @@ public static class GameText
     /// assign Button Text
     public const string AssignButtonPopup = "press any key!\n(or \"escape\" to abort)";
 
-    // Button descriptions of Tiles in MainMenu > Sponsors
-    public const string BuyPlayerSatsButtonDescription = "buy playerSats";
-    public const string OpenLinkButtonDescription = "open link";
-    public const string BookmarkLinkButtonDescription = "bookmark link";
-
     // headline and description of the popup, that appears, when you click on the pay button in a sponsors Tile
     public const string IncreaseSponsorPlayerSatsPopupHeader = "Buy Player Sats";
     public const string IncreaseSponsorPlayerSatsPopupText = "How much Player Satoshi do you want to buy?";
+
+    //label of the bookmark link action in the billboard contextmenu
+    public const string AdContextMenuBookmarkActionLabel = "bookmark link <sprite name=\"bookmark\">";
 
 
     //-----TOOLTIPS----- Don't rename these Consts !!!

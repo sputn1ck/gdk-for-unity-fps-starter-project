@@ -19,7 +19,7 @@ public class LookAtRaycaster : MonoBehaviour
             newTarget = hit.transform;
         }
         else newTarget = null;
-        Debug.Log("new target = " + newTarget);
+
         if(newTarget != target)
         {
             if(target != null)

@@ -23,6 +23,8 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
     public void OnLookAtEnter()
     {
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
+        (UnityAction, string) bookmarkAction = (BookmarkUrl, GameText.AdContextMenuBookmarkActionLabel);
+        actions.Add(bookmarkAction);
         string text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
         ContextMenuUI.Instance.Set(this, advertiserInvestment.advertiser.name, text, actions);
     }
@@ -30,5 +32,11 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
     public void OnLookAtExit()
     {
         ContextMenuUI.Instance.Hide(this);
+    }
+
+    void BookmarkUrl()
+    {
+        UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
+        ClientEvents.instance.onAnnouncement.Invoke(GameText.linkBookmarkedInfo, Color.white);
     }
 }
