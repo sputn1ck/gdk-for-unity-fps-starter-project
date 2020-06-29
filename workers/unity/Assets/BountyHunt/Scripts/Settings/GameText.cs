@@ -53,15 +53,19 @@ public static class GameText
     /// assign Button Text
     public const string AssignButtonPopup = "press any key!\n(or \"escape\" to abort)";
 
-    // headline and description of the popup, that appears, when you click on the pay button in a sponsors Tile
+    /// headline and description of the popup, that appears, when you click on the pay button in a sponsors Tile
     public const string IncreaseSponsorPlayerSatsPopupHeader = "Buy Player Sats";
     public const string IncreaseSponsorPlayerSatsPopupText = "How much Player Satoshi do you want to buy?";
 
-    //label of the bookmark link action in the billboard contextmenu
+    /// label of the bookmark link action in the billboard contextmenu
     public const string AdContextMenuBookmarkActionLabel = "bookmark link <sprite name=\"bookmark\" tint=1>";
 
+    /// content of the players Context menu discription
+    /// {0} player bounty
+    public const string PlayerContextMenuText = "Bounty - {0}";
 
-    //-----TOOLTIPS----- Don't rename these Consts !!!
+
+    //-----TOOLTIPS----- Don't rename these Constants !!!
     public const string BuyPlayersatsTooltip = "buy player sats";
     public const string OpenLinkTooltip = "Open URL";
     public const string BookmarkLinkTooltip = "Bookmark URL";
@@ -95,12 +99,19 @@ public static class GameText
             case KeyCode.Keypad9: return "K9";
             case KeyCode.Mouse0: return "LMB";
             case KeyCode.Mouse1: return "RMB";
+            case KeyCode.Mouse2: return "MB2";
+            case KeyCode.Mouse3: return "MB3";
+            case KeyCode.Mouse4: return "MB4";
+            case KeyCode.Mouse5: return "MB5";
+            case KeyCode.Mouse6: return "MB6";
             case KeyCode.UpArrow: return "Up";
             case KeyCode.DownArrow: return "Down";
             case KeyCode.LeftArrow: return "Left";
             case KeyCode.RightArrow: return "Right";
             case KeyCode.Escape: return "esc";
             case KeyCode.Caret: return "^";
+            case KeyCode.LeftShift: return "L-shift";
+            case KeyCode.RightShift: return "R-shift";
         }
     }
 }
