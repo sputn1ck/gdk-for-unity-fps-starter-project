@@ -64,6 +64,18 @@ public static class GameText
     /// {0} player bounty
     public const string PlayerContextMenuText = "Bounty - {0}";
 
+    /// label of the Bounty Increase action in the player contextmenu
+    public const string IncreasePlayerBountyContextMenuActionLabel = "Increase Bounty";
+
+    /// description of the Bounty Increase submenu in the player contextmenu
+    public const string IncreasePlayerBountyContextMenuText = "Increase Bounty by:";
+
+    /// announcement text, if balance doesnt cover a payment
+    public const string BalanceToLowAnnouncement = "Balance to low";
+
+    /// announcement text, if a payment was successfull
+    public const string PaymentSuccesfullAnnouncement = "Payment Sucessfull";
+
 
     //-----TOOLTIPS----- Don't rename these Constants !!!
     public const string BuyPlayersatsTooltip = "buy player sats";

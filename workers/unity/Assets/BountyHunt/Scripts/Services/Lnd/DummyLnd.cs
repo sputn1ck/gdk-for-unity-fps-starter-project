@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class DummyLnd : MonoBehaviour, IClientLnd
 {
+    public long walletbalance = 2000;
     public bool ThrowPaymentError;
     string pubkey;
 
@@ -122,9 +123,9 @@ public class DummyLnd : MonoBehaviour, IClientLnd
     {
     }
 
-    public Task<long> GetWalletBalace()
+    public async Task<long> GetWalletBalace()
     {
-        throw new NotImplementedException();
+        return walletbalance;
     }
 
     public Task CloseChannel(string fundingTx, uint index)
@@ -149,19 +150,20 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         return null;
     }
 
-    public Task<SendResponse> KeysendBountyIncrease(string targetPubkey, long amount, string message = "")
-    {
-        return null;
-    }
 
     public Task<SendResponse> KeysendBufferDeposit(string platformPubkey, string targetPubkey, long amount)
     {
         return null;
     }
 
-    public Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "")
+    public async Task<SendResponse> KeysendBountyIncrease(string platformPubkey, string targetPubkey, long amount, string message = "")
     {
-        throw new NotImplementedException();
+        SendResponse res = new SendResponse
+        {
+            PaymentError = ""
+        };
+        //return null;
+        return res;
     }
 }
 

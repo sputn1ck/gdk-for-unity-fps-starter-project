@@ -217,4 +217,10 @@ public static class Utility
         return sprite;
     }
 
+    static System.Random rnd = new System.Random();
+
+    public static string GetUniqueString()
+    {
+        return rnd.Next().ToString();
+    }
 }

@@ -12,9 +12,11 @@ public class ContextMenuUI : MonoBehaviour
     public Image image;
     public List<ContextMenuActionUI> actionUIs;
 
-    Object referenceObject;
+    string reference;
 
     public static ContextMenuUI Instance;
+
+    float hideTime;
 
     private void Awake()
     {
@@ -22,36 +24,41 @@ public class ContextMenuUI : MonoBehaviour
         Instance = this;   
     }
 
-    public void Set(Object reference, string headline, string text, List<(UnityAction action, string label)> actions, Sprite sprite = null, int imageSize = 200)
+    public void Set(ContextMenuArgs args)
     {
-        gameObject.SetActive(true);
-        referenceObject = reference;
-        this.headline.text = headline;
+        if (gameObject.activeSelf) return;
 
-        if (text != "") {
+        hideTime = Time.time + args.lifeTime;
+
+        gameObject.SetActive(true);
+        reference = args.ReferenceString;
+        this.headline.text = args.Headline;
+
+        if (args.Text != "") {
             this.text.gameObject.SetActive(true);
-            this.text.text = text;
+            this.text.text = args.Text;
         }
         else this.text.gameObject.SetActive(false);
 
-        if (sprite != null)
+        if (args.ImageSprite != null)
         {
             this.image.gameObject.SetActive(true);
-            this.image.sprite = sprite;
-            this.image.GetComponent<LayoutElement>().preferredHeight = imageSize;
+            this.image.sprite = args.ImageSprite;
+            this.image.GetComponent<LayoutElement>().preferredHeight = args.ImageSize;
+            this.image.color = args.ImageColor;
         }
         else this.image.gameObject.SetActive(false);
 
 
         for (int i = 0; i < actionUIs.Count; i++)
         {
-            if(i < actions.Count)
+            if(i < args.Actions.Count)
             {
                 actionUIs[i].gameObject.SetActive(true);
-                actionUIs[i].labelText.text = actions[i].label;
+                actionUIs[i].labelText.text = args.Actions[i].label;
                 actionUIs[i].key = string.Format("ContextAction{0}_Key", i + 1);
                 actionUIs[i].keyText.text = GameText.GetKeyName(InputKeyMapping.GetKeyCode(actionUIs[i].key));
-                actionUIs[i].action = actions[i].action;
+                actionUIs[i].action = args.Actions[i].action;
             }
             else
             {
@@ -61,9 +68,14 @@ public class ContextMenuUI : MonoBehaviour
 
     }
 
-    public void Hide(Object reference)
+    public void Hide(string reference)
     {
-        if (referenceObject!= reference) return;
+        if (this.reference!= reference) return;
+        gameObject.SetActive(false);
+    }
+
+    private void Hide()
+    {
         gameObject.SetActive(false);
     }
 
@@ -79,6 +91,20 @@ public class ContextMenuUI : MonoBehaviour
                 }
             }
         }
+
+        if (Time.time >= hideTime) Hide();
     }
 
+}
+
+public class ContextMenuArgs
+{
+    public string ReferenceString;
+    public string Headline = "";
+    public string Text =  "";
+    public Sprite ImageSprite = null;
+    public List<(UnityAction action,string label)> Actions  = new List<(UnityAction action, string label)>();
+    public Color ImageColor = Color.white;
+    public float ImageSize = 200;
+    public float lifeTime = 10;
 }
