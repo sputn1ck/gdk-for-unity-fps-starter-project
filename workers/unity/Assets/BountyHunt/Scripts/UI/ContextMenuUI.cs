@@ -18,15 +18,23 @@ public class ContextMenuUI : MonoBehaviour
 
     float hideTime;
 
+    UnityAction OpenAction;
+    UnityAction CloseAction;
+
     private void Awake()
     {
         gameObject.SetActive(false);
         Instance = this;   
     }
 
-    public void Set(ContextMenuArgs args)
+    /// <summary>
+    /// sets up the context menu, aborts if there is a contextmenu already
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns>true if not aborted</returns>
+    public bool Set(ContextMenuArgs args)
     {
-        if (gameObject.activeSelf) return;
+        if (gameObject.activeSelf) return false;
 
         hideTime = Time.time + args.lifeTime;
 
@@ -66,18 +74,38 @@ public class ContextMenuUI : MonoBehaviour
             }
         }
 
+        OpenAction = args.OpenAction;
+        CloseAction = args.CloseAction;
+
+        if (OpenAction != null)
+        {
+            OpenAction.Invoke();
+        }
+        return true;
     }
 
     public void Hide(string reference)
     {
         if (this.reference!= reference) return;
-        gameObject.SetActive(false);
+        Hide();
+
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
+        if (CloseAction != null)
+        {
+            CloseAction.Invoke();
+        }
     }
+
+    public void UpdateText(string text, string reference)
+    {
+        if (this.reference != reference) return;
+        this.text.text = text;
+    }
+
 
     private void Update()
     {
@@ -107,4 +135,6 @@ public class ContextMenuArgs
     public Color ImageColor = Color.white;
     public float ImageSize = 200;
     public float lifeTime = 10;
+    public UnityAction OpenAction = null;
+    public UnityAction CloseAction = null;
 }

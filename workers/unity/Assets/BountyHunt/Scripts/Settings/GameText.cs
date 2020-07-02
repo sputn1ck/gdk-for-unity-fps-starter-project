@@ -61,8 +61,9 @@ public static class GameText
     public const string AdContextMenuBookmarkActionLabel = "bookmark link <sprite name=\"bookmark\" tint=1>";
 
     /// content of the players Context menu discription
-    /// {0} player bounty
-    public const string PlayerContextMenuText = "Bounty - {0}";
+    /// {0} player hitpoints
+    /// {1} player bounty
+    public const string PlayerContextMenuText = "Health - {0}\nBounty - {1}";
 
     /// label of the Bounty Increase action in the player contextmenu
     public const string IncreasePlayerBountyContextMenuActionLabel = "Increase Bounty";

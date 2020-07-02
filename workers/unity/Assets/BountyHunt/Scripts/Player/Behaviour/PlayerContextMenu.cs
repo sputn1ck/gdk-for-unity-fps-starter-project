@@ -1,4 +1,6 @@
+using Bbhrpc;
 using Bountyhunt;
+using Fps;
 using Improbable.Gdk.Subscriptions;
 using System;
 using System.Collections;
@@ -10,6 +12,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 {
 
     [Require] HunterComponentReader hunterComponentReader;
+    [Require] HealthComponentReader healthComopnentReader;
 
     string mainID;
     string subMenuID;
@@ -39,18 +42,34 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
             Debug.Log(e.Message);
         }
 
+        Ranking ranking;
+        try
+        {
+            ranking = await ServerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(hunterComponentReader.Data.Pubkey);
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
+            return;
+        }
 
-        string text = string.Format(GameText.PlayerContextMenuText, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
+        Badge badge = BadgeManager.GetBadge(ranking.GlobalRanking.Badge);
+
+        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health ,Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
         ContextMenuArgs args = new ContextMenuArgs
         {
             ReferenceString = mainID,
             Headline = hunterComponentReader.Data.Name,
             Text = text,
-            Actions =  actions
+            Actions = actions,
+            ImageSprite = badge.sprite,
+            ImageColor = badge.color,
+            OpenAction = Subscribe,
+            CloseAction = Unsubscribe
         };
         ContextMenuUI.Instance.Set(args);
     }
-
 
     public void OnLookAtExit()
     {
@@ -130,5 +149,29 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         }
         ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccesfullAnnouncement, true);
 
+    }
+
+    void Subscribe()
+    {
+        hunterComponentReader.OnBountyUpdate += UpdateBounty;
+        healthComopnentReader.OnHealthUpdate += UpdateHealth;
+    }
+    void Unsubscribe()
+    {
+        hunterComponentReader.OnBountyUpdate -= UpdateBounty;
+        healthComopnentReader.OnHealthUpdate -= UpdateHealth;
+    }
+    void UpdateHealth(float health)
+    {
+        UpdateText();
+    }
+    void UpdateBounty(long bounty)
+    {
+        UpdateText();
+    }
+    void UpdateText()
+    {
+        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
+        ContextMenuUI.Instance.UpdateText(text, mainID);
     }
 }
