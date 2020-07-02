@@ -11,8 +11,14 @@ public class CursorUI : MonoBehaviour
     public Camera cam;
     Image image;
     [SerializeField]TextMeshProUGUI toolTipText;
+    public float toolTipDelay = 1;
 
     public static CursorUI Instance;
+
+
+    bool waitingToShowTooltip;
+    float toolTipShowTime;
+    string toolTipString;
 
     private void Awake()
     {
@@ -34,15 +40,24 @@ public class CursorUI : MonoBehaviour
     {
         transform.position = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
         image.sprite = Input.GetMouseButton(0) ? onClickSprite : defaultSprite;
+
+        if (waitingToShowTooltip && Time.time >= toolTipShowTime)
+        {
+            waitingToShowTooltip = false;
+            toolTipText.text = toolTipString;
+        }
     }
 
     public void SetToolTipText(string text)
     {
-        toolTipText.text = text;
+        waitingToShowTooltip = true;
+        toolTipShowTime = Time.time + toolTipDelay;
+        toolTipString = text;
     }
 
     public void RemoveToolTipText()
     {
+        waitingToShowTooltip = false;
         toolTipText.text = "";
     }
 }
