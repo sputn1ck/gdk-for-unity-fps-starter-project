@@ -14,16 +14,32 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     string mainID;
     string subMenuID;
 
+    long walletBalance;
+
     private void Awake()
     {
         mainID = Utility.GetUniqueString();
         subMenuID = Utility.GetUniqueString();
     }
-    public void OnLookAtEnter()
+    public async void OnLookAtEnter()
     {
+
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
-        (UnityAction, string) bountyIncreaseMenuAction = (OpenPlayerBountyIncreaseMenu, GameText.IncreasePlayerBountyContextMenuActionLabel);
-        actions.Add(bountyIncreaseMenuAction);
+        try
+        {
+            walletBalance = await PlayerServiceConnections.instance.lnd.GetWalletBalace();
+            if (walletBalance >= 100)
+            {
+                (UnityAction, string) bountyIncreaseMenuAction = (OpenPlayerBountyIncreaseMenu, GameText.IncreasePlayerBountyContextMenuActionLabel);
+                actions.Add(bountyIncreaseMenuAction);
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
+
         string text = string.Format(GameText.PlayerContextMenuText, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
         ContextMenuArgs args = new ContextMenuArgs
         {
@@ -46,12 +62,12 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         ContextMenuUI.Instance.Hide(mainID);
 
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
-        
-        actions.Add(IncreasePlayerbountyActionString(100));
-        actions.Add(IncreasePlayerbountyActionString(500));
-        actions.Add(IncreasePlayerbountyActionString(1000));
-        actions.Add(IncreasePlayerbountyActionString(5000));
-        actions.Add(IncreasePlayerbountyActionString(10000));
+
+        AddBountyIncreaseActionToList(ref actions, 100);
+        AddBountyIncreaseActionToList(ref actions, 500);
+        AddBountyIncreaseActionToList(ref actions, 1000);
+        AddBountyIncreaseActionToList(ref actions, 5000);
+        AddBountyIncreaseActionToList(ref actions, 10000);
         string text = GameText.IncreasePlayerBountyContextMenuText;
         ContextMenuArgs args = new ContextMenuArgs
         {
@@ -63,6 +79,10 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         ContextMenuUI.Instance.Set(args);
     }
 
+    void AddBountyIncreaseActionToList(ref List<(UnityAction, string)> list,long value)
+    {
+        if(walletBalance >= value) list.Add(IncreasePlayerbountyActionString(value));
+    }
 
     (UnityAction, string) IncreasePlayerbountyActionString(long sats)
     {
@@ -81,12 +101,14 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         }
         catch(Exception e)
         {
+            Debug.Log(e.Message);
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
 
         if (balance < sats)
         {
+            Debug.Log("balance to low");
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "failure", GameText.BalanceToLowAnnouncement, true);
             return;
         }
@@ -102,6 +124,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         }
         catch (Exception e)
         {
+            Debug.Log(e.Message);
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
