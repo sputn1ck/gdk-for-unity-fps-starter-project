@@ -84,6 +84,14 @@ public static class GameText
     public const string BookmarkLinkTooltip = "Bookmark URL";
     public const string IngameWalletTooltip = "pay with ingame wallet";
     public const string ExternalWalletTooltip = "pay with external wallet";
+    public const string RefreshTooltip = "refresh";
+    public const string RifleTooltip = "rifle";
+    public const string ShotgunTooltip = "shotgun";
+    public const string SniperTooltip = "sniper";
+    public const string NextPageTooltip = "next page";
+    public const string PreviousPageTooltip = "previous page";
+    public const string FirstPageTooltip = "first page";
+    public const string MyPageTooltip = "locate yourself";
 
     public static string GetKeyName(KeyCode keyCode)
     {
