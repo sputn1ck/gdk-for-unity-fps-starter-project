@@ -109,18 +109,26 @@ public class ContextMenuUI : MonoBehaviour
 
     private void Update()
     {
+        if (Time.time >= hideTime)
+        {
+            Hide();
+            return;
+        }
+
+        if (UnityEngine.EventSystems.EventSystem.current.IsEditingInpputfield()|| ChatPanelUI.instance.chatting) return;
+
         foreach (ContextMenuActionUI ui in actionUIs)
         {
             if (ui.gameObject.activeSelf)
             {
                 if (InputKeyMapping.MappedKeyDown(ui.key))
                 {
+
                     ui.action.Invoke();
                 }
             }
         }
 
-        if (Time.time >= hideTime) Hide();
     }
 
 }
