@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-
-public class RespawnScreenAdUI : MonoBehaviour
+public class RespawnScreenAdUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public RawImage image;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI satsText;
     public Button button;
-    public TextMeshProUGUI text;
+    public Animator animator;
     AdvertiserInvestment advertiserInvestment;
 
     private void Awake()
@@ -19,6 +21,7 @@ public class RespawnScreenAdUI : MonoBehaviour
 
     public void Set(AdvertiserInvestment adInv)
     {
+
         if (adInv == null)
         {
             gameObject.SetActive(false);
@@ -30,23 +33,24 @@ public class RespawnScreenAdUI : MonoBehaviour
         }
 
         this.advertiserInvestment = adInv;
-        if (!UrlMemory.UrlInQueue(adInv.advertiser.url))
+
+        nameText.text = advertiserInvestment.advertiser.name;
+        satsText.text = Utility.SatsToShortString(advertiserInvestment.investment,true,UITinter.tintDict[TintColor.Sats]);
+
+        if (advertiserInvestment.advertiser.url != "")
         {
-            text.GetComponent<UITinter>().updateColor(TintColor.Link);
-            if (advertiserInvestment.advertiser.url != "")
+            button.gameObject.SetActive(true);
+            if (!UrlMemory.UrlInQueue(adInv.advertiser.url))
             {
-                text.text = adInv.advertiser.name + " <sprite name=\"link\" tint=1> ";
                 button.interactable = true;
-            } else
+            }
+            else
             {
-                text.text = adInv.advertiser.name;
                 button.interactable = false;
             }
         }
         else{
-            text.GetComponent<UITinter>().updateColor(TintColor.Primary);
-            text.text = GameText.linkBookmarkedInfo;
-            button.interactable = false;
+            button.gameObject.SetActive(false);
         }
         image.texture = adInv.advertiser.GetRandomTexture(Advertiser.AdMaterialType.SQUARE);
 
@@ -56,10 +60,19 @@ public class RespawnScreenAdUI : MonoBehaviour
     {
         if (advertiserInvestment.advertiser.url == "")
             return;
-        text.GetComponent<UITinter>().updateColor(TintColor.Primary);
-        text.text = GameText.linkBookmarkedInfo;
-        UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
         button.interactable = false;
+        UrlMemory.AddUrl(advertiserInvestment.advertiser.url);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        animator.SetBool("showInfo", true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        animator.SetBool("showInfo", false);
+
     }
 
 }
