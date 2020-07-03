@@ -30,7 +30,7 @@ public class KeySettingButtonUI : MonoBehaviour
     public void RefreshTexts()
     {
         labelText.text = label;
-        keyText.text = InputKeyMapping.GetKeyCode(key).ToString();
+        keyText.text = GameText.GetKeyName(InputKeyMapping.GetKeyCode(key));
     }
 
     void OnButtonClick()
@@ -66,7 +66,7 @@ public class KeySettingButtonUI : MonoBehaviour
             if (Input.GetKeyDown(keycode))
             {
                 InputKeyMapping.SetKey(key, keycode);
-                keyText.text = keycode.ToString();
+                keyText.text = GameText.GetKeyName(keycode);
                 StopListening();
                 popUp.Close();
                 return;

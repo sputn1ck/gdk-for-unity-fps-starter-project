@@ -29,8 +29,13 @@ public class InputKeyMapping : MonoBehaviour
         LoadKey("Backward_Key", KeyCode.S);
         LoadKey("Left_Key", KeyCode.A);
         LoadKey("Right_Key", KeyCode.D);
+        LoadKey("ContextAction1_Key", KeyCode.Alpha1);
+        LoadKey("ContextAction2_Key", KeyCode.Alpha2);
+        LoadKey("ContextAction3_Key", KeyCode.Alpha3);
+        LoadKey("ContextAction4_Key", KeyCode.Alpha4);
+        LoadKey("ContextAction5_Key", KeyCode.Alpha5);
 
-        foreach(PlayerSkill skill in instance.skillDictionary.skills)
+        foreach (PlayerSkill skill in instance.skillDictionary.skills)
         {
             LoadKey(skill.SkillName + "_Key", skill.defaultkey);
         }
