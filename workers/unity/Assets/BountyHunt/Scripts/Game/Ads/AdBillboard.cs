@@ -28,6 +28,10 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
 
     public void OnLookAtEnter()
     {
+        if (advertiserInvestment == null)
+        {
+            return;
+        }
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
         (UnityAction, string) bookmarkAction = (BookmarkUrl, GameText.AdContextMenuBookmarkActionLabel);
         actions.Add(bookmarkAction);

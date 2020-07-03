@@ -15,14 +15,14 @@ public class AdvertiserStore
 
     public async Task Initialize(ListAdvertiserResponse advertisers)
     {
-        int iterations = (int)Mathf.Ceil(advertisers.Advertisers.Count / advertisersPerChunk);
+        int iterations = (int)Mathf.Ceil(advertisers.Advertisers.Count / (float)advertisersPerChunk);
 
         for (int i = 0; i < iterations; i++)
         {
             List<Task> tasks = new List<Task>();
             for (int j = 0; j < advertisersPerChunk; j++)
             {
-                int id = i + j;
+                int id = i*advertisersPerChunk + j;
                 if(id >= advertisers.Advertisers.Count)
                 {
                     break;

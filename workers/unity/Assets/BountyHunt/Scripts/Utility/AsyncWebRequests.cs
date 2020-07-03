@@ -21,7 +21,7 @@ public class AwaitRequestText
         while (result == null && tries < maxTries)
         {
             tries++;
-            await Task.Delay(TimeSpan.FromSeconds(0.1));
+            await Task.Delay(TimeSpan.FromSeconds(1));
         }
         if (tries >= maxTries)
         {
@@ -91,7 +91,7 @@ public class AwaitRequestTexture
         while (result == null && tries < maxTries)
         {
             tries++;
-            await Task.Delay(TimeSpan.FromSeconds(0.1));
+            await Task.Delay(TimeSpan.FromSeconds(0.1f));
         }
         if (tries >= maxTries)
         {
@@ -132,7 +132,7 @@ public class AwaitRequestTexture
         }
 
     }
-    public static async Task<Texture2D> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 20)
+    public static async Task<Texture2D> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 100)
     {
         AwaitRequestTexture ar = new AwaitRequestTexture(mb, url, maxTries);
         RequestTextureResult rr = await ar.GetResult();
