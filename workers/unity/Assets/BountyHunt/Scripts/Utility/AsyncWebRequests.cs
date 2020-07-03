@@ -8,7 +8,7 @@ public class AwaitRequestText
 {
     RequestTextResult result;
     private int maxTries;
-    public AwaitRequestText(MonoBehaviour mb, string url, int maxTries = 50)
+    public AwaitRequestText(MonoBehaviour mb, string url, int maxTries = 200)
     {
         this.maxTries = maxTries;
         mb.StartCoroutine(GetRequest(url));
@@ -21,7 +21,7 @@ public class AwaitRequestText
         while (result == null && tries < maxTries)
         {
             tries++;
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromSeconds(0.1f));
         }
         if (tries >= maxTries)
         {
@@ -62,7 +62,7 @@ public class AwaitRequestText
         }
 
     }
-    public static async Task<string> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 20)
+    public static async Task<string> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 200)
     {
         AwaitRequestText ar = new AwaitRequestText(mb, url, maxTries);
         RequestTextResult rr = await ar.GetResult();
@@ -78,7 +78,7 @@ public class AwaitRequestTexture
 {
     RequestTextureResult result;
     private int maxTries;
-    public AwaitRequestTexture(MonoBehaviour mb, string url, int maxTries = 50)
+    public AwaitRequestTexture(MonoBehaviour mb, string url, int maxTries)
     {
         mb.StartCoroutine(GetRequest(url));
         this.maxTries = maxTries;
@@ -132,7 +132,7 @@ public class AwaitRequestTexture
         }
 
     }
-    public static async Task<Texture2D> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 100)
+    public static async Task<Texture2D> SendAsyncWebRequest(MonoBehaviour mb, string url, int maxTries = 1000)
     {
         AwaitRequestTexture ar = new AwaitRequestTexture(mb, url, maxTries);
         RequestTextureResult rr = await ar.GetResult();
@@ -144,7 +144,12 @@ public class AwaitRequestTexture
     }
 }
 
-public class RequestTextResult
+public interface IWebParser
+{
+    Type GetType();
+    object GetResult();
+}
+    public class RequestTextResult
 {
     public string response;
     public string error;
