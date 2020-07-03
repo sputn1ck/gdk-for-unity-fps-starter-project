@@ -11,6 +11,8 @@ public class LookAtRaycaster : MonoBehaviour
     Transform target;
     private void Update()
     {
+        if (!Camera.main) return;
+
         Transform newTarget;
         Ray ray = new Ray(Camera.main.transform.position + Camera.main.transform.forward * minDistance, Camera.main.transform.forward);
         RaycastHit hit;
