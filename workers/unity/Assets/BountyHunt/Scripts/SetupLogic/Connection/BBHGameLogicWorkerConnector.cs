@@ -11,7 +11,7 @@ using Fps.WorkerConnectors;
 using Fps.Config;
 using Improbable.Worker.CInterop;
 
-public class BBHGameLogicWorkerConnector : WorkerConnectorBase
+public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
 {
     public bool DisableRenderers = true;
 

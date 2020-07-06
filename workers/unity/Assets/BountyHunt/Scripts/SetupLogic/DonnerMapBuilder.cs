@@ -436,7 +436,7 @@ public class DonnerMapBuilder
             levelInstance.transform.position = parentTransform.position;
             levelInstance.transform.rotation = parentTransform.rotation;
 
-            var mapBuilder = new MapBuilder(mapTemplate, levelInstance);
+            var mapBuilder = new DonnerMapBuilder(mapTemplate, levelInstance);
 
             yield return mapBuilder.CleanAndBuild(mapSize);
 

@@ -97,6 +97,7 @@ public class GraphicSettingsMenuUI : MonoBehaviour
     void SetFramerate(int framerate)
     {
         Screen.SetResolution(targetResolution.width,targetResolution.height,Screen.fullScreenMode, framerate);
+        Application.targetFrameRate = framerate;
         frameRateButton.GetComponentInChildren<TextMeshProUGUI>().text = framerate + " Hz";
         frameRateButton.GetComponentInChildren<TextSizer>().Refresh();
         targetResolution.refreshRate = framerate;
