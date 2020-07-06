@@ -77,8 +77,11 @@ public static class GameText
     /// announcement text, if a payment was successfull
     public const string PaymentSuccesfullAnnouncement = "Payment Sucessfull";
 
-    /// description of the Bounty Increase submenu in the player contextmenu
+    /// label of the equip button in the gun contextMenu
     public const string EquipGunContextMenuAction = "equip";
+
+    /// hint when gun is already equipped in the gun contextMenu
+    public const string IsEquippedContextMenuText = "equipped";
 
 
     //-----TOOLTIPS----- Don't rename these Constants !!!

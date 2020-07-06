@@ -23,9 +23,12 @@ public class GunSelectContextMenu : MonoBehaviour, ILookAtHandler
     public  void OnLookAtEnter()
     {
         List<(UnityAction action, string label)> list = new List<(UnityAction action, string label)>();
+        string text = GameText.IsEquippedContextMenuText;
+
 
         if (FpsDriver.instance.GetGunId() != gunID)
         {
+            text = "";
             (UnityAction action, string label) action = (SelectGun, GameText.EquipGunContextMenuAction);
             list.Add(action);
         }
@@ -34,7 +37,8 @@ public class GunSelectContextMenu : MonoBehaviour, ILookAtHandler
         {
             ReferenceString = uniqueId,
             Headline = gunName,
-            Actions = list
+            Actions = list,
+            Text = text
         };
         
         ContextMenuUI.Instance.Set(args);
