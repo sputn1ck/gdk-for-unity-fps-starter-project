@@ -80,6 +80,8 @@ public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
 
     protected override IEnumerator LoadWorld()
     {
+        yield return null;
+        /*
         yield return base.LoadWorld();
 
         if (DisableRenderers)
@@ -89,6 +91,6 @@ public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
                 childRenderer.enabled = false;
             }
         }
-
+        */
     }
 }

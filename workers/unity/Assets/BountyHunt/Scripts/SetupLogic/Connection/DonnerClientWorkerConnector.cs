@@ -30,7 +30,7 @@ public abstract class DonnerWorkerConnectorBase : WorkerConnector
 
         protected override void HandleWorkerConnectionEstablished()
         {
-            StartCoroutine(LoadWorld());
+            //StartCoroutine(LoadWorld());
         }
 
         public override void Dispose()

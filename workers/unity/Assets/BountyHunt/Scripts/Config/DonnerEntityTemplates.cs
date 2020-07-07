@@ -173,16 +173,6 @@ public class DonnerEntityTemplates
         }
         return template;
     }
-    /*
-    public static EntityTemplate SpectatorTemplate(string workerId, byte[] args)
-    {
-
-        var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
-        var pos = new Position.Snapshot { Coords = Coordinates.FromUnityVector(spawnPosition) };
-        var sessionQuery = InterestQuery.Query(Constraint.Component<Session.Component>());
-        var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
-        var nodeInfoQuery = InterestQuery.Query(Constraint.Component(Donner.GamePotManager.ComponentId));
-    }*/
 
     public static EntityTemplate BountyPickup(Vector3 position, long satValue)
     {
@@ -203,28 +193,40 @@ public class DonnerEntityTemplates
         return entityTemplate;
     }
 
-    /*
-     * OLD GAMEMANAGER
-     * TODO: READD
-    public static EntityTemplate NodeInfo(Vector3 position)
+    public static EntityTemplate RoomManager(Vector3 position, Room room)
     {
-        var nodeinfocomponent = new Donner.LightningNode.Snapshot();
-        var gamepotcomponent = new Donner.GamePotManager.Snapshot();
-        var chatComponent = new Chat.Chat.Snapshot();
-        var entityTemplate = new EntityTemplate();
-        entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
-        entityTemplate.AddComponent(new Metadata.Snapshot("NodeInfo"), WorkerUtils.UnityGameLogic);
+        var roomManagerComponent = new RoomManager.Snapshot();
+        roomManagerComponent.RoomInfo = room;
+        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(new Metadata.Snapshot("RoomManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
-        entityTemplate.AddComponent(nodeinfocomponent, WorkerUtils.UnityGameLogic);
-        entityTemplate.AddComponent(gamepotcomponent, WorkerUtils.UnityGameLogic);
-        entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(roomManagerComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
 
         return entityTemplate;
-    }*/
+    }
 
+    public static EntityTemplate WorldManager(Vector3 position)
+    {
+        var roomManagerComponent = new WorldManager.Snapshot();
+        roomManagerComponent.ActiveRooms = new Dictionary<string, Room>();
+
+        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(new Metadata.Snapshot("WorldManager"), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
+
+        entityTemplate.AddComponent(roomManagerComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
+        entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
+
+        return entityTemplate;
+    }
     public static EntityTemplate GameManager(Vector3 position)
     {
         var boutySpawnerComponent = new BountySpawner.Snapshot();
@@ -233,7 +235,6 @@ public class DonnerEntityTemplates
 
         gameStatsComponent.LastRoundScores = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.ChatComponent.Snapshot();
-        var roundInfoComponent = new Bountyhunt.GameModeManager.Snapshot();
         var paymentComponent = new PaymentManagerComponent.Snapshot();
 
         var advertisingComponent = new AdvertisingComponent.Snapshot();
@@ -246,7 +247,6 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(gameStatsComponent, WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
 
-        entityTemplate.AddComponent(roundInfoComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(paymentComponent, WorkerUtils.UnityGameLogic);
 

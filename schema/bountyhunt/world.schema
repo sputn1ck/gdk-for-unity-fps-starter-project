@@ -1,0 +1,61 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+import "bountyhunt/gamemode.schema";
+
+component WorldManager {
+    id = 480001;
+
+    map<string, Room> active_rooms = 1;
+    
+    command Room create_room(CreateRoomRequest);
+
+    command bountyhunt.Empty end_room(EndRoomRequest);
+
+    command bountyhunt.Empty update_room(UpdateRoomRequest);
+}
+
+component RoomManager {
+    id = 480002;
+
+    Room room_info = 1;
+
+    command bountyhunt.Empty start_room(StartRoomRequest);
+
+    command bountyhunt.Empty join_room(JoinRoomRequest);
+    
+}
+
+
+type Room {
+    string room_id = 1;
+    list<int64> active_players = 2;
+    list<int64> queued_players = 3;
+    string map_id = 4;
+    string gamemode_id = 5;
+    bountyhunt.TimeInfo time_info = 6;
+    int64 entity_id = 7;
+}
+
+type JoinRoomRequest {
+    string room_id = 1;
+}
+
+type CreateRoomRequest {
+    string map_id = 1;
+    string gamemode_id = 2;
+    bountyhunt.TimeInfo time_info = 3;
+    bool instant_start = 4;
+}
+
+type EndRoomRequest {
+
+}
+
+type StartRoomRequest {
+
+}
+
+type UpdateRoomRequest {
+    Room room = 1;
+}

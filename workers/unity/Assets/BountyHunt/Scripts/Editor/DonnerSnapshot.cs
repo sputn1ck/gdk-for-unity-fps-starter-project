@@ -28,6 +28,7 @@ public class DonnerSnapshot : MonoBehaviour
         var snapshot = new Snapshot();
         snapshot.AddEntity(DonnerEntityTemplates.Spawner(Coordinates.Zero));
         AddGameManager(snapshot);
+        AddWorldManager(snapshot);
         //AddBountyPacks(snapshot);
         return snapshot;
     }
@@ -55,5 +56,11 @@ public class DonnerSnapshot : MonoBehaviour
         var nodeInfo = DonnerEntityTemplates.GameManager(new Vector3(0, 0, 0));
 
         snapshot.AddEntity(nodeInfo);
+    }
+    private static void AddWorldManager(Snapshot snapshot)
+    {
+        var worldManager = DonnerEntityTemplates.WorldManager(new Vector3(0, 0, 0));
+
+        snapshot.AddEntity(worldManager);
     }
 }
