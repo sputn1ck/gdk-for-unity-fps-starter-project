@@ -93,6 +93,7 @@ public class ContextMenuUI : MonoBehaviour
 
     private void Hide()
     {
+        reference = "";
         gameObject.SetActive(false);
         if (CloseAction != null)
         {
@@ -106,6 +107,13 @@ public class ContextMenuUI : MonoBehaviour
         this.text.text = text;
     }
 
+
+    public void UpdateAll(ContextMenuArgs args)
+    {
+        if (this.reference != args.ReferenceString) return;
+        Hide();
+        Set(args);
+    }
 
     private void Update()
     {

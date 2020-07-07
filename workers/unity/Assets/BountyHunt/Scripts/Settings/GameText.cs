@@ -81,7 +81,16 @@ public static class GameText
     public const string EquipGunContextMenuAction = "equip";
 
     /// hint when gun is already equipped in the gun contextMenu
-    public const string IsEquippedContextMenuText = "equipped";
+    public const string GunEquippedContextMenuText = "equipped";
+
+    /// label of the equip button in the skin contextMenu
+    public const string EquipSkinContextMenuAction = "equip";
+
+    /// hint when skin is already equipped in the skin contextMenu
+    public const string SkinEquippedContextMenuText = "equipped";
+
+    /// label of the buy button in the skin contextMenu
+    public const string BuySkinContextMenuAction = "buy";
 
 
     //-----TOOLTIPS----- Don't rename these Constants !!!
