@@ -35,6 +35,7 @@ type Room {
     string gamemode_id = 5;
     bountyhunt.TimeInfo time_info = 6;
     int64 entity_id = 7;
+    bountyhunt.Vector3Float origin = 8;
 }
 
 type JoinRoomRequest {

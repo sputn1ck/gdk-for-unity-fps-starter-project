@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMapStorage
+public interface IMap 
 {
-    Map GetMap(string mapId);
+    void Initialize(bool isServer, Vector3 spawnPosition);
 }

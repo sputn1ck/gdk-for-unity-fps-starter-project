@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105003b0342e7124aa6dc337a4c922c2, type: 3}
+  m_Name: CantinaMap
+  m_EditorClassIdentifier: 
+  MapId: cantina
+  Settings:
+    DimensionX: 150
+    DimensionZ: 150
+    SupportedGameModes:
+    - lobby
+    RecommendedPlayers: 1
+  MapPrefab: {fileID: 815937395767000090, guid: 3e0ecbebd54935b4ebf870274c43222f,
+    type: 3}

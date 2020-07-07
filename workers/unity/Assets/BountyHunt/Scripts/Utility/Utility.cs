@@ -7,6 +7,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Bountyhunt;
 
 public static class Utility
 {
@@ -222,5 +223,14 @@ public static class Utility
     public static string GetUniqueString()
     {
         return rnd.Next().ToString();
+    }
+
+    public static Vector3 Vector3FloatToVector3(Vector3Float vector)
+    {
+        return new Vector3(vector.X, vector.Y, vector.Z);
+    }
+    public static Vector3Float Vector3ToVector3Float(Vector3 vector)
+    {
+        return new Vector3Float(vector.x, vector.y, vector.z);
     }
 }
