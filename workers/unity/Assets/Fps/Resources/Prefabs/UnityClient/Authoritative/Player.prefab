@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 6664102670667166243}
   - component: {fileID: -3606728209907532769}
   - component: {fileID: 8003412066021046749}
+  - component: {fileID: -5160661776179147233}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -414,6 +415,8 @@ MonoBehaviour:
   hitIntensity: 1
   hitEffectDuration: 1
   hitEffectFocus: 16
+  hitMinPitch: 1
+  hitMaxPitch: 1.5
 --- !u!114 &114781168066614706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +533,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RendererParent: {fileID: 5610480118836389758}
+--- !u!114 &-5160661776179147233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627949407420470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066145d7715fbcc41a6266788cbdc28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!81 &735483941144274747
 AudioListener:
   m_ObjectHideFlags: 0

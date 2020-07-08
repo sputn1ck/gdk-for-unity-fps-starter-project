@@ -11,6 +11,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 {
     [Require] WorldManagerWriter WorldManagerWriter;
     [Require] WorldManagerCommandReceiver WorldManagerCommandReceiver;
+    [Require] RoomManagerCommandSender RoomManagerCommandSender;
 
     [Require] WorldCommandSender WorldCommandSender;
 
@@ -35,7 +36,18 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     private void OnJoinRoom(WorldManager.JoinRoom.ReceivedRequest obj)
     {
-        throw new System.NotImplementedException();
+        Debug.LogFormat("Join room {0}, {1}", obj.Payload.RoomId, obj.Payload.PlayerId);
+        var map = WorldManagerWriter.Data.ActiveRooms;
+        
+        if (!map.TryGetValue(obj.Payload.RoomId, out var room))
+        {
+            WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room does not exist");
+            return;
+        }
+       
+        // TODO queue management
+        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(obj.Payload.PlayerId));
+        WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());
     }
 
     private void OnStartRoom(WorldManager.StartRoom.ReceivedRequest obj)
@@ -45,7 +57,18 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     private void OnUpdateRoom(WorldManager.UpdateRoom.ReceivedRequest obj)
     {
-        throw new System.NotImplementedException();
+        var map = WorldManagerWriter.Data.ActiveRooms;
+
+        if (!map.TryGetValue(obj.Payload.Room.RoomId, out var room))
+        {
+            WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room does not exist");
+            return;
+        }
+        map[obj.Payload.Room.RoomId] = obj.Payload.Room;
+        WorldManagerWriter.SendUpdate(new WorldManager.Update
+        {
+            ActiveRooms = map
+        });
     }
 
     private void Update()
@@ -79,7 +102,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-        var room = new Room(id, new List<long>(), new List<long>(), req.MapInfo,req.GamemodeId, req.TimeInfo,0, Utility.Vector3ToVector3Float(roomCenter));
+        var room = new Room(id, new List<EntityId>(), new List<EntityId>(), req.MapInfo,req.GamemodeId, req.TimeInfo,new EntityId(), Utility.Vector3ToVector3Float(roomCenter));
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 
@@ -92,7 +115,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
                 return;
             }
             Debug.LogFormat("{0} created; res {1}", room.RoomId, res);
-            room.EntityId = res.EntityId.Value.Id;
+            room.EntityId = res.EntityId.Value;
             var map = WorldManagerWriter.Data.ActiveRooms;
             map.Add(room.RoomId, room);
             WorldManagerWriter.SendUpdate(new WorldManager.Update()

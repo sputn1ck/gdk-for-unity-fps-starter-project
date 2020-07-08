@@ -103,6 +103,7 @@ public class DonnerEntityTemplates
             Skills = new List<int>() { 0 },
         };
         var chatComponent = new PrivateChat.Snapshot();
+        var roomCompenent = new RoomPlayer.Snapshot();
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
@@ -142,6 +143,7 @@ public class DonnerEntityTemplates
         template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(skillComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(chatComponent, client);
+        template.AddComponent(roomCompenent, WorkerUtils.UnityGameLogic);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);

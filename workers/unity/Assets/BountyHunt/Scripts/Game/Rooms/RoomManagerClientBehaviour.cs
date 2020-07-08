@@ -8,7 +8,7 @@ using Improbable.Gdk.Core.Commands;
 
 public class RoomManagerClientBehaviour : MonoBehaviour
 {
-    [Require] RoomManagerReader RoomManagerWriter;
+    [Require] RoomManagerReader RoomManagerReader;
 
 
     LinkedEntityComponent LinkedEntityComponent;
@@ -22,9 +22,11 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 
     private void Initialize()
     {
-        var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId);
+        var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.MapInfo.MapId);
 
-        mapInfo.Initialize(this, false, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
-        
+        mapInfo.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.MapInfo.MapData);
+
+        // Ready to join
     }
+
 }

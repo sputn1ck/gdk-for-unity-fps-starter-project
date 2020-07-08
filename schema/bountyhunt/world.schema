@@ -19,6 +19,8 @@ component WorldManager {
     
     command bountyhunt.Empty join_room(JoinRoomRequest);
 
+    event Room new_room;
+
 }
 
 component RoomManager {
@@ -27,30 +29,35 @@ component RoomManager {
     Room room_info = 1;
     map<EntityId, bountyhunt.PlayerItem> player_map = 2;
 
+    command bountyhunt.Empty add_player(AddPlayerRequest);
+    command bountyhunt.Empty remove_player(RemovePlayerRequest);
 }
 
 component RoomPlayer {
     id = 430003;
-    string room_id = 1;
-    int64 room_entityid = 2;
 
-    command bountyhunt.Empty update_interest(UpdateInterestRequest);
+    string room_id = 1;
+    EntityId room_entityid = 2;
+
+    command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
+    
 }
 
 
 type Room {
     string room_id = 1;
-    list<int64> active_players = 2;
-    list<int64> queued_players = 3;
+    list<EntityId> active_players = 2;
+    list<EntityId> queued_players = 3;
     MapInfo map_info = 4;
     string gamemode_id = 5;
     bountyhunt.TimeInfo time_info = 6;
-    int64 entity_id = 7;
+    EntityId entity_id = 7;
     bountyhunt.Vector3Float origin = 8;
 }
 
 type JoinRoomRequest {
     string room_id = 1;
+    EntityId player_id = 2;
 }
 
 type CreateRoomRequest {
@@ -76,8 +83,15 @@ type MapInfo {
     string map_data = 2;
 }
 
-type UpdateInterestRequest {
+type UpdatePlayerRoomRequest {
     string room_id = 1;
-    int64 room_entityid = 2;
+    EntityId room_entityid = 2;
 }
 
+type AddPlayerRequest {
+    EntityId player_id = 1;
+}
+
+type RemovePlayerRequest {
+    EntityId player_id = 2;
+}
