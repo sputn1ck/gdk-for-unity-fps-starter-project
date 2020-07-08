@@ -198,6 +198,7 @@ public class DonnerEntityTemplates
     {
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
+        roomManagerComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(new Metadata.Snapshot("RoomManager"), WorkerUtils.UnityGameLogic);

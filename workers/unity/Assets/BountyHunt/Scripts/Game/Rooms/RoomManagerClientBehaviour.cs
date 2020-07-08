@@ -25,5 +25,6 @@ public class RoomManagerClientBehaviour : MonoBehaviour
         var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId);
 
         mapInfo.Initialize(this, false, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
+        
     }
 }

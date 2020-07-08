@@ -30,7 +30,7 @@ public abstract class DonnerWorkerConnectorBase : WorkerConnector
 
         protected override void HandleWorkerConnectionEstablished()
         {
-            //StartCoroutine(LoadWorld());
+            StartCoroutine(LoadWorld());
         }
 
         public override void Dispose()
@@ -47,6 +47,8 @@ public abstract class DonnerWorkerConnectorBase : WorkerConnector
         // Get the world size from the config, and use it to generate the correct-sized level
         protected virtual IEnumerator LoadWorld()
         {
+        yield return null;
+        /*
             // Defer a frame to allow worker flags to propagate.
             yield return null;
 
@@ -62,7 +64,7 @@ public abstract class DonnerWorkerConnectorBase : WorkerConnector
                 transform,
                 Worker.WorkerType,
                 this);
-        ClientEvents.instance.onMapLoaded.Invoke();
+        ClientEvents.instance.onMapLoaded.Invoke();*/
         }
 
         protected int GetWorldSize()
