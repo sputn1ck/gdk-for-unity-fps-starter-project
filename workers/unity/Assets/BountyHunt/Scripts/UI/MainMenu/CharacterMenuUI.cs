@@ -36,12 +36,11 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
     public List<Toggle> WeaponButtonToggles;
 
-    SkinsLibrary playerSkinsLibrary;
+    //SkinsLibrary playerSkinsLibrary;
 
-    Skin selectedSkin;
+    SkinItem selectedSkinItem;
     List<SkinGroupButtonUI> skinGroupButtons;
     SkinGroupButtonUI selectedSkinGroupButton;
-    Skin equippedSkin;
 
 
     private bool isInit;
@@ -85,14 +84,13 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         }
         BalanceText.text = Utility.SatsToShortString(balance, true);
 
-        playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
-        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, inventory.OwnedSkins.ToArray());
+        await SkinShop.Refresh();
 
         skinColorButtons = ColorButtonsContainer.GetComponentsInChildren<SkinColorButtonUI>(true).ToList();
         
         skinGroupButtons = skinGroupButtonsContainer.GetComponentsInChildren<SkinGroupButtonUI>(true).ToList();
-        equippedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
-        selectedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
+
+        selectedSkinItem = SkinShop.EquippedSkin;
 
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
@@ -111,31 +109,11 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
     }
     async Task RefreshTask()
     {
-        ShopSkin[] shopSkins;
-        SkinInventory inventory;
-        long balance;
-        try
-        {
-            shopSkins = await PlayerServiceConnections.instance.BackendPlayerClient.GetAllSkins();
-            inventory = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInventory();
-            var b = (await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance());
-            balance = b.DaemonBalance;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            PopUpArgs errArgs = new PopUpArgs("Error", e.Message);
-            PopUpManagerUI.instance.OpenPopUp(errArgs);
-            return;
-        }
+        await SkinShop.Refresh();
 
-        BalanceText.text = Utility.SatsToShortString(balance,true);
+        BalanceText.text = Utility.SatsToShortString(SkinShop.PlayerBalance,true);
 
-        playerSkinsLibrary = Instantiate(SkinsLibrary.MasterInstance);
-        playerSkinsLibrary.InitializeForCharacterMenu(shopSkins, inventory.OwnedSkins.ToArray());
-
-        equippedSkin = playerSkinsLibrary.GetSkin(inventory.EquippedSkin);
-        selectedSkin = playerSkinsLibrary.GetSkin(selectedSkin.ID);
+        //selectedSkinItem = playerSkinsLibrary.GetSkin(selectedSkinItem.ID);
 
         UpdateSkinGroupButtons();
         UpdateDetailsPanel();
@@ -153,63 +131,60 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
     {
         if (PlayerServiceConnections.instance.ServicesReady)
         {
-            PreviewSpot.Instance.SetSkin(equippedSkin);
+            PreviewSpot.Instance.SetSkin(SkinShop.EquippedSkin.skin);
         }
     }
 
     void UpdateSkinGroupButtons()
     {
-        List<SkinGroup> groups = playerSkinsLibrary.groups;
-        SkinGroup equippedGroup = playerSkinsLibrary.GetGroup(PlayerPrefs.GetString("EquippedSkinID", playerSkinsLibrary.defaultSkinID));
-        SkinGroup selectedGroup = playerSkinsLibrary.GetGroup(selectedSkin.ID);
+        var groups = SkinShop.ItemGroupDict;
+        SkinGroup equippedGroup = SkinShop.EquippedSkin.skin.group;
+        SkinGroup selectedGroup = selectedSkinItem.skin.group;
+        
         int counter = 0;
-        foreach (SkinGroupButtonUI sgb in skinGroupButtons)
+        foreach(var group in groups)
         {
-            if (groups.Count > counter)
+            SkinGroupButtonUI sgb;
+            if (counter < skinGroupButtons.Count)
             {
-                sgb.gameObject.SetActive(true);
-                sgb.set(groups[counter], SelectSkinGroup);
-
-                if (groups[counter] == equippedGroup) sgb.SetEquippedState(true);
-                else sgb.SetEquippedState(false);
-
-                if (groups[counter] == selectedGroup) sgb.SetSelection(true);
-                else sgb.SetSelection(false);
-
+                sgb = skinGroupButtons[counter];
             }
             else
             {
-                sgb.gameObject.SetActive(false);
+                sgb = Instantiate(skinGroupButtonPrefab, skinGroupButtonsContainer);
+                skinGroupButtons.Add(sgb);
             }
-            counter++;
-        }
-        for (int i = counter; i < groups.Count; i++)
-        {
-            SkinGroupButtonUI sgb = Instantiate(skinGroupButtonPrefab, skinGroupButtonsContainer);
             sgb.gameObject.SetActive(true);
-            sgb.set(groups[i], SelectSkinGroup);
+            sgb.set(group.Key, SelectSkinGroup);
 
-            if (groups[i] == equippedGroup) sgb.SetEquippedState(true);
+            if (group.Key == equippedGroup) sgb.SetEquippedState(true);
             else sgb.SetEquippedState(false);
 
-            if (groups[i] == selectedGroup) sgb.SetSelection(true);
+            if (group.Key == selectedGroup) sgb.SetSelection(true);
             else sgb.SetSelection(false);
+
+            counter++;
+        }
+
+        for (int i = counter; i < skinGroupButtons.Count; i++)
+        {
+            skinGroupButtons[i].gameObject.SetActive(false);
         }
     }
 
     public void UpdateDetailsPanel()
     {
-        Skin skin = selectedSkin;
-        detailsHeaderText.text = skin.group.groupName;
-        detailsPreviewImage.sprite = skin.group.sprite;
+        SkinItem item = selectedSkinItem;
+        detailsHeaderText.text = item.skin.group.groupName;
+        detailsPreviewImage.sprite = item.skin.group.sprite;
         BuyAndEquipButton.interactable = true;
 
         BuyAndEquipButton.gameObject.SetActive(true);
 
-        if (skin.owned)
+        if (item.owned)
         {
             
-            if (skin == equippedSkin)
+            if (item == SkinShop.EquippedSkin)
             {
                 buyStateText.text = "equipped";
                 BuyAndEquipButton.gameObject.SetActive(false);
@@ -224,26 +199,26 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         }
         else
         {
-            buyStateText.text = Utility.SatsToShortString(skin.price, UITinter.tintDict[TintColor.Sats]);
+            buyStateText.text = Utility.SatsToShortString(item.price, UITinter.tintDict[TintColor.Sats]);
             BuyAndEquipButtonText.text = "buy";
             BuyAndEquipButton.onClick.RemoveAllListeners();
             BuyAndEquipButton.onClick.AddListener(Buy);
         }
-        UpdateSkinGroupColors(skin.group);
-        PreviewSpot.Instance.SetSkin(skin);
+        UpdateSkinGroupColors(SkinShop.ItemGroupDict[item.skin.group]);
+        PreviewSpot.Instance.SetSkin(item.skin);
     }
 
-    public void UpdateSkinGroupColors(SkinGroup group)
+    public void UpdateSkinGroupColors(List<SkinItem> items)
     {
         
-        for (int i = 0; i<group.skins.Count || i < skinColorButtons.Count;i++)
+        for (int i = 0; i<items.Count || i < skinColorButtons.Count;i++)
         {
-            if (i >= group.skins.Count)
+            if (i >= items.Count)
             {
                 skinColorButtons[i].gameObject.SetActive(false);
                 continue;
             }
-            Skin skn = group.skins[i];
+            SkinItem item = items[i];
 
 
             SkinColorButtonUI scb;
@@ -257,14 +232,14 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
                 scb = skinColorButtons[i];
             }
             skinColorButtons[i].gameObject.SetActive(true);
-            scb.image.color = skn.identificationColor;
-            scb.skin = skn;
-            scb.lockedImage.gameObject.SetActive(!skn.owned);
+            scb.image.color = item.skin.identificationColor;
+            scb.item = item;
+            scb.lockedImage.gameObject.SetActive(!item.owned);
 
-            if (equippedSkin == skn) scb.frame.SetActive(true);
+            if (SkinShop.EquippedSkin == item) scb.frame.SetActive(true);
             else scb.frame.SetActive(false);
 
-            if (selectedSkin == skn) scb.underLine.SetActive(true);
+            if (selectedSkinItem == item) scb.underLine.SetActive(true);
             else scb.underLine.SetActive(false);
 
             scb.onClick.RemoveAllListeners();
@@ -275,12 +250,12 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
     private async void Buy()
     {
-        Skin skn = selectedSkin;
-        SkinGroup grp = selectedSkin.group;
+        SkinItem item = selectedSkinItem;
+        SkinGroup grp = selectedSkinItem.skin.group;
         string res;
         try
         {
-            res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skn.ID);
+            res = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(item.skin.ID);
 
         }
         catch(Exception e)
@@ -324,7 +299,7 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
         long balance = balanceResponse.DaemonBalance;
 
-        string text1 = String.Format(GameText.BuySkinPopup, grp.groupName, Utility.SatsToShortString(skn.price, UITinter.tintDict[TintColor.Sats]));
+        string text1 = String.Format(GameText.BuySkinPopup, grp.groupName, Utility.SatsToShortString(item.price, UITinter.tintDict[TintColor.Sats]));
         Sprite sprite = grp.sprite;
         string text2 = "";
         if (balance < payreq.NumSatoshis) text2 = GameText.BuySkinPopupWarning;
@@ -335,7 +310,7 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         ImagePopUpArgs args = new ImagePopUpArgs("buy skin", text1, sprite, text2, actions, false, false, 0.5f);
         PopUpUI popup = PopUpManagerUI.instance.OpenImagePopUp(args);
 
-        popup.image.color = skn.identificationColor;
+        popup.image.color = item.skin.identificationColor;
         if (balance < payreq.NumSatoshis) popup.buttons[0].interactable = false;
 
     }
@@ -354,7 +329,7 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         // Todo check for errors
         try
         {
-            await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(selectedSkin.ID);
+            await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(selectedSkinItem.skin.ID);
         }
         catch(Exception e)
         {
@@ -369,7 +344,7 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
 
     public void SelectSkinGroup(SkinGroup group)
     {
-        selectedSkin = group.skins[0];
+        selectedSkinItem = SkinShop.ItemGroupDict[group][0];
 
         if (selectedSkinGroupButton != null) selectedSkinGroupButton.SetSelection(false);
         selectedSkinGroupButton = skinGroupButtons.Find(o => o.group == group);
@@ -379,9 +354,9 @@ public class CharacterMenuUI : MonoBehaviour, IRefreshableUI
         UpdateSkinGroupButtons();
     }
 
-    public void selectSkin(Skin skin)
+    public void selectSkin(SkinItem skinItem)
     {
-        selectedSkin = skin;
+        selectedSkinItem = skinItem;
         UpdateDetailsPanel();
     }
 

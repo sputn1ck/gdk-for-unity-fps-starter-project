@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SkinDictionaryPublisher : MonoBehaviour, ISettingsPublisher
 {
-    [SerializeField] private SkinsLibrary SkinLibrary;
+    [SerializeField] private SkinsLibrary MasterSkinsLibrary;
 
     public void Publish()
     {
-        SkinsLibrary.MasterInstance = SkinLibrary;
-        SkinLibrary.Initialize();
+        SkinsLibrary.Instance = Object.Instantiate(MasterSkinsLibrary) ;
+        SkinsLibrary.Instance.Initialize();
     }
 }

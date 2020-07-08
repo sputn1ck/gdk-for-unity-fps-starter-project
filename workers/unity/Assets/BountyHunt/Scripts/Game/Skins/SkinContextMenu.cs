@@ -7,24 +7,37 @@ using UnityEngine.Events;
 
 public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
 {
-    public string uniqueID;
-
-    public static Skin EquippedSkin;
-
-    Skin skin;
-    public Renderer renderer;
+    public List<Renderer> bodyRenderers;
+    string uniqueID;
+    SkinItem item;
 
     private void Awake()
     {
         uniqueID = Utility.GetUniqueString();
     }
 
-    void Set (Skin skin)
+    public void Set (SkinItem item)
     {
-        this.skin = skin;
-        renderer.material = skin.material;
+        gameObject.SetActive(true);
+        this.item = item;
+        SetSkin(item.skin);
     }
 
+    public void SetSkin(Skin skin)
+    {
+        if (skin.material != null)
+        {
+            foreach (var renderer in bodyRenderers)
+            {
+                renderer.material = skin.material;
+            }
+        }
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 
     public async void OnLookAtEnter()
     {
@@ -62,9 +75,9 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
     {
         List<(UnityAction action, string label)> actions = new List<(UnityAction action, string label)>();
         string text = "";
-        if (skin.owned)
+        if (item.owned)
         {
-            if (EquippedSkin == skin)
+            if (SkinShop.EquippedSkin == item)
             {
                 text = GameText.SkinEquippedContextMenuText;
             }
@@ -75,7 +88,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         }
         else
         {
-            text = Utility.SatsToShortString(skin.price,true,UITinter.tintDict[TintColor.Sats]);
+            text = Utility.SatsToShortString(item.price,true,UITinter.tintDict[TintColor.Sats]);
 
             long balance;
             try
@@ -87,7 +100,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
                 throw (e);
             }
 
-            if (balance >= skin.price)
+            if (balance >= item.price)
             {
                 actions.Add((buy, GameText.BuySkinContextMenuAction));
             }
@@ -97,7 +110,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         var args = new ContextMenuArgs
         {
             ReferenceString = uniqueID,
-            Headline = skin.group.groupName,
+            Headline = item.skin.group.groupName,
             Text = text,
             Actions = actions
         };
@@ -116,7 +129,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         
         try
         {
-            await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(skin.ID);
+            await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(item.skin.ID);
         }
         catch (Exception e)
         {
@@ -124,7 +137,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        EquippedSkin = skin;
+        SkinShop.Refresh();
         RefreshContextMenu();
     }
 
@@ -142,7 +155,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             return;
         }
 
-        if (balance < skin.price)
+        if (balance < item.price)
         {
             Debug.Log("balance to low");
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "failure", GameText.BalanceToLowAnnouncement, true);
@@ -153,7 +166,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         try
         {
             
-            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(skin.ID);
+            invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetSkinInvoice(item.skin.ID);
 
         }
         catch (Exception e)

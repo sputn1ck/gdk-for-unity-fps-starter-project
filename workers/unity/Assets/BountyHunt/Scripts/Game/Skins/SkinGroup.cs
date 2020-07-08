@@ -7,5 +7,10 @@ public class SkinGroup : ScriptableObject
 {
     public string groupName;
     public Sprite sprite;
-    public List<Skin> skins;
+    [SerializeField] private List<Skin> skins;
+
+    public List<Skin> GetAllSkins()
+    {
+        return skins;
+    } 
 }
