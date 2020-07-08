@@ -8,7 +8,7 @@ public abstract class Map : ScriptableObject, IMap
     public string MapId;
     public MapSettings Settings;
 
-    public abstract void Initialize(bool isServer, Vector3 spawnPosition);
+    public abstract void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData);
 }
 
 [System.Serializable]

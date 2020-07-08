@@ -31,7 +31,7 @@ type Room {
     string room_id = 1;
     list<int64> active_players = 2;
     list<int64> queued_players = 3;
-    string map_id = 4;
+    MapInfo map_info = 4;
     string gamemode_id = 5;
     bountyhunt.TimeInfo time_info = 6;
     int64 entity_id = 7;
@@ -43,7 +43,7 @@ type JoinRoomRequest {
 }
 
 type CreateRoomRequest {
-    string map_id = 1;
+    MapInfo map_info = 1;
     string gamemode_id = 2;
     bountyhunt.TimeInfo time_info = 3;
     bool instant_start = 4;
@@ -59,4 +59,9 @@ type StartRoomRequest {
 
 type UpdateRoomRequest {
     Room room = 1;
+}
+
+type MapInfo {
+    string map_id = 1;
+    string map_data = 2;
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class PrefabMap : Map
 {
     public GameObject MapPrefab;
-    public override void Initialize(bool isServer, Vector3 spawnPosition)
+    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData)
     {
         var mapGO = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
         if (isServer)

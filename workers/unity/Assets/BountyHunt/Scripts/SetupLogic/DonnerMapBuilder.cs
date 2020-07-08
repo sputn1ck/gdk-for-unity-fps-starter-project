@@ -442,8 +442,24 @@ public class DonnerMapBuilder
 
             worker.LevelInstance = levelInstance;
         }
+    public static IEnumerator GenerateMap(
+            MapTemplate mapTemplate,
+            int mapSize,
+            Transform parentTransform,
+            string workerType, string seed, GeneratedMap instance)
+    {
+        var levelInstance = new GameObject($"FPS-Level_{mapSize}({workerType})");
+        levelInstance.transform.position = parentTransform.position;
+        levelInstance.transform.rotation = parentTransform.rotation;
 
-        private class SceneScope : IDisposable
+        var mapBuilder = new DonnerMapBuilder(mapTemplate, levelInstance);
+
+        yield return mapBuilder.CleanAndBuild(mapSize, seed);
+        instance.mapGO = levelInstance;
+
+    }
+
+    private class SceneScope : IDisposable
         {
             private readonly Scene activeScene;
 

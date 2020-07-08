@@ -29,8 +29,8 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void Initialize()
     {
-        var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapId);
+        var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId);
        
-        mapInfo.Initialize(true, this.transform.position);
+        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
     }
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMap 
 {
-    void Initialize(bool isServer, Vector3 spawnPosition);
+    void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData);
 }

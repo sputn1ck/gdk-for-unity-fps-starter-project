@@ -17,7 +17,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
 
 
-    public bool startNewRoomTrigger;
+    public bool startGenerated;
     private void OnEnable()
     {
         WorldManagerCommandReceiver.OnEndRoomRequestReceived += OnEndRoom;
@@ -27,17 +27,18 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         // TODO: really check for cantina
         if(WorldManagerWriter.Data.ActiveRooms.Count < 1)
         {
-            CreateRoom(new CreateRoomRequest("cantina", "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue),true));
+            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue),true));
 
             
         }
     }
     private void Update()
     {
-        if (startNewRoomTrigger)
+        
+        if (startGenerated)
         {
-            startNewRoomTrigger = false;
-            CreateRoom(new CreateRoomRequest("cantina", "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), true));
+            startGenerated = false;
+            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), true));
         }
     }
     private void OnCreateRoom(WorldManager.CreateRoom.ReceivedRequest obj)
@@ -53,12 +54,12 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     private void CreateRoom(CreateRoomRequest req)
     {
         // TODO: Get MapInfo
-        var mapInfo = MapDictStorage.Instance.GetMap(req.MapId);
+        var mapInfo = MapDictStorage.Instance.GetMap(req.MapInfo.MapId);
         
         // TODO: Get Free Slot depending on map size
         var roomCenter = GetNextSlot(mapInfo.Settings);
         // TODO: create room
-        var room = new Room("room" + UnityEngine.Random.Range(0, int.MaxValue), new List<long>(), new List<long>(), req.MapId,req.GamemodeId, req.TimeInfo,0, Utility.Vector3ToVector3Float(roomCenter));
+        var room = new Room("room" + UnityEngine.Random.Range(0, int.MaxValue), new List<long>(), new List<long>(), req.MapInfo,req.GamemodeId, req.TimeInfo,0, Utility.Vector3ToVector3Float(roomCenter));
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 
@@ -89,7 +90,12 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     private Vector3 GetNextSlot(MapSettings mapSettings)
     {
+        
         var activeRooms = WorldManagerWriter.Data.ActiveRooms.ToList();
+        if(activeRooms.Count < 1)
+        {
+            return new Vector3(0, 0, 0);
+        }
         activeRooms.Sort((KeyValuePair<string, Room> p1, KeyValuePair<string, Room> p2) =>
         {
             return p1.Value.Origin.X.CompareTo(p2.Value.Origin.X);
@@ -97,7 +103,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         float lastPos = 0f;
         for (int i = 0; i < activeRooms.Count; i++)
         {
-            var thisMap = MapDictStorage.Instance.GetMap(activeRooms[i].Value.MapId);
+            var thisMap = MapDictStorage.Instance.GetMap(activeRooms[i].Value.MapInfo.MapId);
             var thisRoom = activeRooms[i].Value;
 
             lastPos = thisRoom.Origin.Z + thisMap.Settings.DimensionZ / 2;
@@ -105,7 +111,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             if (i + 1 >= activeRooms.Count)
             break;
             
-            var nextMap = MapDictStorage.Instance.GetMap(activeRooms[i + 1].Value.MapId);
+            var nextMap = MapDictStorage.Instance.GetMap(activeRooms[i + 1].Value.MapInfo.MapId);
             var nextRoom = activeRooms[i + 1].Value;
 
             var spaceBetweenMaps = (nextRoom.Origin.Z - nextMap.Settings.DimensionZ / 2) - (thisRoom.Origin.Z + thisMap.Settings.DimensionZ / 2);
