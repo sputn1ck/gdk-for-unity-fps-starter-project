@@ -56,7 +56,7 @@ public class DonnerMapBuilder
             this.parentGameObject = parentGameObject;
         }
 
-    public IEnumerator CleanAndBuild(int worldLayers = 4, string seed = "f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16")
+    public IEnumerator CleanAndBuild(int worldLayers = 4, string seed = "SpatialOS GDK for Unity")
         {
             if (mapTemplate == null)
             {
