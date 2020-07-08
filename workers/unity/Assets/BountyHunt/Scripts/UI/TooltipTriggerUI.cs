@@ -9,6 +9,7 @@ public class TooltipTriggerUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public string tooltipText;
     [Tooltip ("overrides text if field exists")]
     public string gameTextStringName;
+    private bool isShowing;
 
     private void Awake()
     {
@@ -28,10 +29,22 @@ public class TooltipTriggerUI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        isShowing = true;
         CursorUI.Instance.SetToolTipText(tooltipText);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+
+        isShowing = false;
         CursorUI.Instance.RemoveToolTipText();
+    }
+
+    public void OnDestroy()
+    {
+        if (isShowing)
+        {
+            CursorUI.Instance.RemoveToolTipText();
+        }
+
     }
 }
