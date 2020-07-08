@@ -83,8 +83,9 @@ public class DonnerEntityTemplates
         var checkoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(150));
         var serverCheckoutQuery = InterestQuery.Query(Constraint.RelativeCylinder(500));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
+        var worldManager = InterestQuery.Query(Constraint.Component(Bountyhunt.WorldManager.ComponentId));
         var bountyTracerQuery = InterestQuery.Query(Constraint.Component(TracerComponent.ComponentId));
-        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverCheckoutQuery).AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery);
+        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverCheckoutQuery).AddQueries<ClientMovement.Component>( checkoutQuery, gameManagerQuery, bountyTracerQuery, worldManager);
         var interestComponent = interestTemplate.ToSnapshot();
 
         // NEW STUFF

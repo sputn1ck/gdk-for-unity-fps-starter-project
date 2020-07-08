@@ -6,10 +6,9 @@ using Improbable.Gdk.Subscriptions;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
 
-
-public class RoomManagerServerBehaviour : MonoBehaviour
+public class RoomManagerClientBehaviour : MonoBehaviour
 {
-    [Require] RoomManagerWriter RoomManagerWriter;
+    [Require] RoomManagerReader RoomManagerWriter;
 
 
     LinkedEntityComponent LinkedEntityComponent;
@@ -24,7 +23,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private void Initialize()
     {
         var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId);
-       
-        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
+
+        mapInfo.Initialize(this, false, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
     }
 }

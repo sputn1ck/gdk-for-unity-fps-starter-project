@@ -2,6 +2,7 @@ package bountyhunt;
 
 import "bountyhunt/common.schema";
 import "bountyhunt/gamemode.schema";
+import "bountyhunt/manager.schema";
 
 component WorldManager {
     id = 480001;
@@ -13,17 +14,27 @@ component WorldManager {
     command bountyhunt.Empty end_room(EndRoomRequest);
 
     command bountyhunt.Empty update_room(UpdateRoomRequest);
+    
+    command bountyhunt.Empty start_room(StartRoomRequest);
+    
+    command bountyhunt.Empty join_room(JoinRoomRequest);
+
 }
 
 component RoomManager {
     id = 480002;
 
     Room room_info = 1;
+    map<EntityId, bountyhunt.PlayerItem> player_map = 2;
 
-    command bountyhunt.Empty start_room(StartRoomRequest);
+}
 
-    command bountyhunt.Empty join_room(JoinRoomRequest);
-    
+component RoomPlayer {
+    id = 430003;
+    string room_id = 1;
+    int64 room_entityid = 2;
+
+    command bountyhunt.Empty update_interest(UpdateInterestRequest);
 }
 
 
@@ -46,7 +57,6 @@ type CreateRoomRequest {
     MapInfo map_info = 1;
     string gamemode_id = 2;
     bountyhunt.TimeInfo time_info = 3;
-    bool instant_start = 4;
 }
 
 type EndRoomRequest {
@@ -65,3 +75,9 @@ type MapInfo {
     string map_id = 1;
     string map_data = 2;
 }
+
+type UpdateInterestRequest {
+    string room_id = 1;
+    int64 room_entityid = 2;
+}
+

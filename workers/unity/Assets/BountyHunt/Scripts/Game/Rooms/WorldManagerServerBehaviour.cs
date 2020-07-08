@@ -14,7 +14,6 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     [Require] WorldCommandSender WorldCommandSender;
 
-    [Require] RoomManagerCommandSender RoomManagerCommandSender;
 
 
     public bool startGenerated;
@@ -22,23 +21,40 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     {
         WorldManagerCommandReceiver.OnEndRoomRequestReceived += OnEndRoom;
         WorldManagerCommandReceiver.OnCreateRoomRequestReceived += OnCreateRoom;
-
+        WorldManagerCommandReceiver.OnUpdateRoomRequestReceived += OnUpdateRoom;
+        WorldManagerCommandReceiver.OnStartRoomRequestReceived += OnStartRoom;
+        WorldManagerCommandReceiver.OnJoinRoomRequestReceived += OnJoinRoom;
         // TODO: check for existing rooms and instantiate them if neccesarry
         // TODO: really check for cantina
         if(WorldManagerWriter.Data.ActiveRooms.Count < 1)
         {
-            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue),true));
-
-            
+            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue)),"cantina-1"); 
         }
     }
+
+
+    private void OnJoinRoom(WorldManager.JoinRoom.ReceivedRequest obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void OnStartRoom(WorldManager.StartRoom.ReceivedRequest obj)
+    {
+  
+    }
+
+    private void OnUpdateRoom(WorldManager.UpdateRoom.ReceivedRequest obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void Update()
     {
         
         if (startGenerated)
         {
             startGenerated = false;
-            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), true));
+            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue)));
         }
     }
     private void OnCreateRoom(WorldManager.CreateRoom.ReceivedRequest obj)
@@ -51,7 +67,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         
     }
 
-    private void CreateRoom(CreateRoomRequest req)
+    private void CreateRoom(CreateRoomRequest req, string id = "")
     {
         // TODO: Get MapInfo
         var mapInfo = MapDictStorage.Instance.GetMap(req.MapInfo.MapId);
@@ -59,7 +75,11 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         // TODO: Get Free Slot depending on map size
         var roomCenter = GetNextSlot(mapInfo.Settings);
         // TODO: create room
-        var room = new Room("room" + UnityEngine.Random.Range(0, int.MaxValue), new List<long>(), new List<long>(), req.MapInfo,req.GamemodeId, req.TimeInfo,0, Utility.Vector3ToVector3Float(roomCenter));
+        if (id == "")
+        {
+            id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
+        }
+        var room = new Room(id, new List<long>(), new List<long>(), req.MapInfo,req.GamemodeId, req.TimeInfo,0, Utility.Vector3ToVector3Float(roomCenter));
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 
@@ -79,10 +99,6 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             {
                 ActiveRooms = map
             });
-            if (req.InstantStart)
-            {
-                RoomManagerCommandSender.SendStartRoomCommand(new EntityId(room.EntityId), new StartRoomRequest());
-            }
             
         };
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(roomManager), callback);

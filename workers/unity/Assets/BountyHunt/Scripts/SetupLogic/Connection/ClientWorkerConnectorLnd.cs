@@ -95,6 +95,7 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
 
     }
 
+    // TODO change that to load the base room
     protected override IEnumerator LoadWorld()
     {
         yield return base.LoadWorld();
