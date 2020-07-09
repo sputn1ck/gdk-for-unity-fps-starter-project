@@ -10,11 +10,11 @@ public class GeneratedMap : Map
     public int layers;
     public MapTemplate mapTemplate;
     public GameObject mapGO;
-    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData)
+    public override GameObject Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData)
     {
         var workerType = isServer ? "server" : "client";
         caller.StartCoroutine(LoadWorld(caller.transform, layers, workerType, isServer, mapData));
-        
+        return mapGO;
 
     }
     protected virtual IEnumerator LoadWorld(Transform transform, int worldSize, string workertype, bool isServer, string seed)

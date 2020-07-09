@@ -17,6 +17,8 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] RoomPlayerWriter RoomPlayerWriter;
     [Require] InterestWriter InterestWriter;
+    [Require] HunterComponentCommandSender HunterComponentCommandSender;
+    [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
     
     private void OnEnable()
@@ -44,7 +46,18 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
             RoomEntityid = obj.Payload.RoomEntityid,
             RoomId = obj.Payload.RoomId
         });
-
+        HunterComponentCommandSender.SendTeleportPlayerCommand(EntityId, new TeleportRequest()
+        {
+            Heal = true,
+            X = room.Origin.X,
+            Y = room.Origin.Y+2,
+            Z = room.Origin.Z
+        }, (cb) => {
+            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            {
+                Debug.LogError(cb.Message);
+            }
+        });
     }
 
     public void RequestJoinLobby()

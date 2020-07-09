@@ -26,10 +26,12 @@ namespace Fps.Guns
             {
                 return;
             }
+            /*
             if (ServerGameModeBehaviour.instance.currentGameMode.GameModeId == "lobby")
             {
                 return;
             }
+            */
             var gunDataForEntity = GetComponentDataFromEntity<GunComponent.Component>();
 
             for (var i = 0; i < events.Count; ++i)

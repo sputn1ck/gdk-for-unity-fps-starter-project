@@ -98,7 +98,7 @@ public class ServerGameModeSystem : ComponentSystem
             commandSystem.SendCommand(new HunterComponent.TeleportPlayer.Request()
             {
                 TargetEntityId = entityId.EntityId,
-                Payload = new TeleportRequest(randomPos.x, randomPos.y, randomPos.z)
+                Payload = new TeleportRequest(randomPos.x, randomPos.y, randomPos.z, false)
             });
             commandSystem.SendCommand(new HealthComponent.ModifyHealth.Request()
             {

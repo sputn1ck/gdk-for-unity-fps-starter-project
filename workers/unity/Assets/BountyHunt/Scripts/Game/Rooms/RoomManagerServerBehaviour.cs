@@ -13,7 +13,10 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandReceiver RoomManagerCommandReceiver;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandSender RoomPlayerCommandSender;
+    [Require] EntityId EntityId;
     LinkedEntityComponent LinkedEntityComponent;
+
+    private GameObject mapGo;
     private void OnEnable()
     {
 
@@ -22,6 +25,17 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
         RoomManagerCommandReceiver.OnAddPlayerRequestReceived += AddPlayer;
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
+        RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
+
+        var map = RoomManagerWriter.Data.PlayerMap;
+        var room = RoomManagerWriter.Data.RoomInfo;
+        SendUpdates(map, room);
+    }
+
+    private void ReadyToJoin(RoomManager.ReadyToJoin.ReceivedRequest obj)
+    {
+        //TODO get spawnpoint
+        
     }
 
     private void RemovePlayer(RoomManager.RemovePlayer.ReceivedRequest obj)
@@ -33,7 +47,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         }
         var room = RoomManagerWriter.Data.RoomInfo;
         room.ActivePlayers.Remove(obj.Payload.PlayerId);
-
+        
         SendUpdates(map, room);
     }
 
@@ -49,10 +63,12 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void SendUpdates(Dictionary<EntityId, PlayerItem> map, Room room)
     {
+        room.EntityId = EntityId;
         RoomManagerWriter.SendUpdate(new RoomManager.Update()
         {
+            RoomInfo = room,
             PlayerMap = map
-        });
+        }) ;
         WorldManagerCommandSender.SendUpdateRoomCommand(new EntityId(3), new UpdateRoomRequest()
         {
             Room = room
@@ -61,7 +77,8 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private void Initialize()
     {
         var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId);
-       
-        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
+
+        mapGo = mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
+
     }
 }

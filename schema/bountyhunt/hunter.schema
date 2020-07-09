@@ -57,6 +57,7 @@ type TeleportRequest {
     float x = 1;
     float y = 2;
     float z = 3;
+    bool heal = 4;
 }
 
 type UpdatePositionRequest {

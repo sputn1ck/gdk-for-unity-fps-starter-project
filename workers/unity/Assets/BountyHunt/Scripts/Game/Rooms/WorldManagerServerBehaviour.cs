@@ -90,6 +90,12 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         
     }
 
+
+    [ContextMenu("Do Something")]
+    public void CreateRandomRoom()
+    {
+        CreateRoom(new CreateRoomRequest(new MapInfo("generated_20", UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue)));
+    }
     private void CreateRoom(CreateRoomRequest req, string id = "")
     {
         // TODO: Get MapInfo

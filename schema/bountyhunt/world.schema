@@ -31,6 +31,7 @@ component RoomManager {
 
     command bountyhunt.Empty add_player(AddPlayerRequest);
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
+    command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
 }
 
 component RoomPlayer {
@@ -40,7 +41,6 @@ component RoomPlayer {
     EntityId room_entityid = 2;
 
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
-    
 }
 
 
@@ -95,3 +95,8 @@ type AddPlayerRequest {
 type RemovePlayerRequest {
     EntityId player_id = 2;
 }
+
+type ReadyToJoinRequest {
+    EntityId player_id = 1;
+}
+

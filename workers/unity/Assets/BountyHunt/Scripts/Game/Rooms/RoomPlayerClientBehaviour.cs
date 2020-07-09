@@ -13,14 +13,18 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
 {
 
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
+    [Require] public EntityId EntityId;
 
     LinkedEntityComponent linkedEntityComponent;
 
     private string menuReference = "";
+
+    public static RoomPlayerClientBehaviour Instance;
     // Start is called before the first frame update
     void OnEnable()
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
+        Instance = this;
     }
 
     private void Update()
