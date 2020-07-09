@@ -195,7 +195,7 @@ namespace Fps.Movement
             var rotation = Quaternion.Euler(newPitch, newYaw, 0);
 
             //Check for sprint cooldown
-            if (!movement.HasSprintedRecently)
+            if (!movement.HasSprintedRecently && !viewChanger.thirdPerson)
             {
                 HandleShooting(shootPressed, shootHeld);
             }
