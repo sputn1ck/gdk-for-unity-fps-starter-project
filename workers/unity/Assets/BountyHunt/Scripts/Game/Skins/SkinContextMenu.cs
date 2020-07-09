@@ -1,3 +1,4 @@
+using Fps.Movement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -141,6 +142,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             return;
         }
         RefreshContextMenu();
+        FpsDriver.instance.GetComponent<SkinChangeBehaviour>().UpdateSkin(SkinShop.EquippedSkin.skin.ID);
     }
 
     async void buy()

@@ -34,6 +34,7 @@ public class InputKeyMapping : MonoBehaviour
         LoadKey("ContextAction3_Key", KeyCode.Alpha3);
         LoadKey("ContextAction4_Key", KeyCode.Alpha4);
         LoadKey("ContextAction5_Key", KeyCode.Alpha5);
+        LoadKey("ThirdPerson_Key", KeyCode.LeftAlt);
 
         foreach (PlayerSkill skill in instance.skillDictionary.skills)
         {

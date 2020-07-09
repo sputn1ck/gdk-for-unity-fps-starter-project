@@ -35,11 +35,14 @@ namespace Fps.Movement
         private FpsAnimator fpsAnimator;
         private GunManager currentGun;
         private ClientPlayerSkillBehaviour skillBehaviour;
+        private ViewChanger viewChanger;
 
         public bool editingInputfield;
 
         [SerializeField] private Transform pitchTransform;
         public new Camera camera;
+        public GameObject ThirdPersonCameraSocket;
+
 
         [SerializeField] private CameraSettings cameraSettings = new CameraSettings
         {
@@ -66,6 +69,7 @@ namespace Fps.Movement
             currentGun = GetComponent<GunManager>();
             controller = GetComponent<IControlProvider>();
             skillBehaviour = GetComponent<ClientPlayerSkillBehaviour>();
+            viewChanger = GetComponent<ViewChanger>();
 
             var uiManager = GameObject.FindGameObjectWithTag("OnScreenUI")?.GetComponent<BBHUIManager>();
             if (uiManager == null)
@@ -157,6 +161,16 @@ namespace Fps.Movement
             {
                 yawSpeed = currentGun.CurrentGunSettings.AimYawSpeed;
                 pitchSpeed = currentGun.CurrentGunSettings.AimPitchSpeed;
+            }
+
+            //setCamera
+            if (InputKeyMapping.MappedKeyDown("ThirdPerson_Key"))
+            {
+                viewChanger.SetThirdPersonView(true);
+            }
+            else if (InputKeyMapping.MappedKeyUp("ThirdPerson_Key"))
+            {
+                viewChanger.SetThirdPersonView(false);
             }
 
             //Mediator

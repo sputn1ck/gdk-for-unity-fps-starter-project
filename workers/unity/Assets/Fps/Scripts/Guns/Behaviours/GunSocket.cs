@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Fps.Guns
@@ -6,12 +6,14 @@ namespace Fps.Guns
     public class GunSocket : MonoBehaviour, IRequiresGun
     {
         [SerializeField] private Transform gunSocket;
+        [SerializeField] private Transform thirdPersonGunSocket;
         [SerializeField] private bool gunCollidersEnabled;
         [SerializeField] private ShadowCastingMode shadowMode;
 
         public GunHandle Gun { get; private set; }
 
         private GameObject instantiatedGun;
+        private GameObject thirdPersonGunModel;
 
         public void InformOfGun(GunSettings settings)
         {
@@ -25,6 +27,11 @@ namespace Fps.Guns
             instantiatedGun.transform.SetParent(gunSocket);
             instantiatedGun.transform.localPosition = Vector3.zero;
             instantiatedGun.transform.localEulerAngles = Vector3.zero;
+
+            if (thirdPersonGunModel) Destroy(thirdPersonGunModel);
+            thirdPersonGunModel = Instantiate(settings.GunModel, thirdPersonGunSocket);
+            thirdPersonGunModel.transform.localPosition = Vector3.zero;
+            thirdPersonGunModel.transform.localRotation = Quaternion.identity;
 
             Gun = instantiatedGun.GetComponent<GunHandle>();
 

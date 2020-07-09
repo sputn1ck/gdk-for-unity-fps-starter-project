@@ -148,6 +148,10 @@ public static class GameText
             case KeyCode.Caret: return "^";
             case KeyCode.LeftShift: return "L-shift";
             case KeyCode.RightShift: return "R-shift";
+            case KeyCode.LeftControl: return "L-ctrl";
+            case KeyCode.RightControl: return "R-ctrl";
+            case KeyCode.LeftAlt: return "L-alt";
+            case KeyCode.RightAlt: return "R-alt";
         }
     }
 }
