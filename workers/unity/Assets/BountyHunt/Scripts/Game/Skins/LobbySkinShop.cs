@@ -5,8 +5,12 @@ using UnityEngine;
 public class LobbySkinShop : MonoBehaviour
 {
     public List<SkinContextMenu> skinDolls;
+    private void Awake()
+    {
+        ClientEvents.instance.onGameJoined.AddListener(LoadSkins);
+    }
 
-    private async void OnEnable()
+    private async void LoadSkins()
     {
         if (!PlayerServiceConnections.instance.ServicesReady) return;
 
@@ -22,4 +26,6 @@ public class LobbySkinShop : MonoBehaviour
             skinDolls[counter].Hide();
         }
     }
+
+
 }

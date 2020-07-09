@@ -29,24 +29,20 @@ public class SkinShop
             Debug.LogError(e.Message);
             return;
         }
-
-        
         ItemGroupDict = new Dictionary<SkinGroup, List<SkinItem>>();
 
         PlayerBalance = balance;
-        AvailableItems = new Dictionary<string, SkinItem>();
+
+        if (AvailableItems == null) AvailableItems = new Dictionary<string, SkinItem>();
+
+        Dictionary<string, SkinItem> oldItems = new Dictionary<string, SkinItem>(AvailableItems);
+        AvailableItems.Clear();
+        clearGroups();
 
         foreach(ShopSkin shopSkin in shopSkins)
         {
-            Skin skin = SkinsLibrary.Instance.GetSkin(shopSkin.Id);
-            SkinItem item = new SkinItem
-            {
-                skin = skin,
-                price = shopSkin.Price,
-                owned = false
-            };
-            AvailableItems[shopSkin.Id]=item;
-            AddItemToGroups(item);
+            
+            AddOrReuseItem(oldItems, shopSkin.Id, false, shopSkin.Price);
         }
 
         foreach(string skinID in inventory.OwnedSkins)
@@ -57,18 +53,29 @@ public class SkinShop
             }
             else
             {
-                Skin skin = SkinsLibrary.Instance.GetSkin(skinID);
-                SkinItem item = new SkinItem
-                {
-                    skin = skin,
-                    price = 0,
-                    owned = true
-                };
-                AvailableItems[skinID] = item;
-                AddItemToGroups(item);
+                AddOrReuseItem(oldItems, skinID, true);
             }
         }
         EquippedSkin = AvailableItems[inventory.EquippedSkin];
+        CleanGroups();
+        
+    }
+
+    static void AddOrReuseItem(Dictionary<string, SkinItem>oldItems, string skinID, bool owned, long price = 0)
+    {
+        SkinItem item;
+        if (oldItems.ContainsKey(skinID))
+        {
+            item = oldItems[skinID];
+        }
+        else item = new SkinItem();
+
+        item.skin = SkinsLibrary.Instance.GetSkin(skinID);
+        if (price != 0) item.price = price;
+        item.owned= owned;
+        AvailableItems[skinID] = item;
+        oldItems.Remove(skinID);
+        AddItemToGroups(item);
     }
 
     static void AddItemToGroups(SkinItem item)
@@ -79,12 +86,37 @@ public class SkinShop
         }
         ItemGroupDict[item.skin.group].Add(item);
     }
+
+    static void CleanGroups()
+    {
+        List<SkinGroup> groupsToRemove = new List<SkinGroup>();
+
+        foreach (var g in ItemGroupDict)
+        {
+            if (g.Value.Count == 0)
+            {
+                groupsToRemove.Add(g.Key);
+            }
+        }
+
+        foreach(SkinGroup g in groupsToRemove)
+        {
+            ItemGroupDict.Remove(g);
+        }
+    }
+    static void clearGroups()
+    {
+        foreach (var g in ItemGroupDict)
+        {
+            g.Value.Clear();
+        }
+    }
 }
 
 public class SkinItem
 {
     public Skin skin;
-    public long price;
+    public long price=0;
     public bool owned;
 }
 

@@ -160,7 +160,7 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
             shopSkins.Add(new ShopSkin
             {
                 Id = id,
-                Price = UnityEngine.Random.Range(1, 100000)
+                Price = UnityEngine.Random.Range(1, 1000)
             });
         }
     }

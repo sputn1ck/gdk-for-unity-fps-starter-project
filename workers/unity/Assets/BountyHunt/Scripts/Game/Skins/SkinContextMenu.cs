@@ -112,7 +112,9 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             ReferenceString = uniqueID,
             Headline = item.skin.group.groupName,
             Text = text,
-            Actions = actions
+            Actions = actions,
+            ImageSprite = item.skin.group.sprite,
+            ImageColor =  item.skin.identificationColor
         };
 
         return args;
@@ -130,6 +132,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         try
         {
             await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(item.skin.ID);
+            await SkinShop.Refresh();
         }
         catch (Exception e)
         {
@@ -137,7 +140,6 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        SkinShop.Refresh();
         RefreshContextMenu();
     }
 
@@ -188,6 +190,18 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         }
 
         ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccesfullAnnouncement, true);
+
+        try
+        {
+            await SkinShop.Refresh();
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
+            return;
+        }
+
         RefreshContextMenu();
 
     }
