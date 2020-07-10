@@ -30,7 +30,9 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
         try
         {
-            walletBalance = await PlayerServiceConnections.instance.lnd.GetWalletBalace();
+
+            var balanceReq = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+            walletBalance = balanceReq.DaemonBalance;
             if (walletBalance >= 100)
             {
                 (UnityAction, string) bountyIncreaseMenuAction = (OpenPlayerBountyIncreaseMenu, GameText.IncreasePlayerBountyContextMenuActionLabel);
@@ -45,7 +47,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         Ranking ranking;
         try
         {
-            ranking = await ServerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(hunterComponentReader.Data.Pubkey);
+            ranking = await PlayerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(hunterComponentReader.Data.Pubkey);
         }
         catch(Exception e)
         {
@@ -87,6 +89,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         AddBountyIncreaseActionToList(ref actions, 1000);
         AddBountyIncreaseActionToList(ref actions, 5000);
         AddBountyIncreaseActionToList(ref actions, 10000);
+        actions.Add((() => { ContextMenuUI.Instance.Hide(subMenuID); }, "close"));
         string text = GameText.IncreasePlayerBountyContextMenuText;
         ContextMenuArgs args = new ContextMenuArgs
         {
@@ -113,29 +116,11 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     async void IncreasePlayerBounty(long sats)
     {
         ContextMenuUI.Instance.Hide(subMenuID);
-        long balance;
+        
         try
         {
-            balance = await PlayerServiceConnections.instance.lnd.GetWalletBalace();
-        }
-        catch(Exception e)
-        {
-            Debug.Log(e.Message);
-            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
-            return;
-        }
-
-        if (balance < sats)
-        {
-            Debug.Log("balance to low");
-            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "failure", GameText.BalanceToLowAnnouncement, true);
-            return;
-        }
-
-        try
-        {
-            string serverpubkey = PlayerServiceConnections.instance.BackendPubkey;
-            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(serverpubkey, hunterComponentReader.Data.Pubkey, sats);
+            var invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetBountyInvoice(hunterComponentReader.Data.Pubkey, sats);
+            var res = await PlayerServiceConnections.instance.lnd.PayInvoice(invoice);
             if (res.PaymentError != "")
             {
                 throw new Exception(res.PaymentError);
@@ -147,7 +132,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccesfullAnnouncement, true);
+        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSucessful, true);
 
     }
 

@@ -226,4 +226,13 @@ public class BackendPlayerClient : IBackendPlayerClient
         return res.Invoice;
     }
 
+    public async Task<string> GetBountyInvoice(string pubkey, long amount)
+    {
+        var res = await publicClient.AddBountyAsync(new AddBountyRequest()
+        {
+            Amount = amount,
+            Pubkey = pubkey,
+        });
+        return res.Invoice;
+    }
 }

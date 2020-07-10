@@ -35,7 +35,7 @@ public static class GameText
     public const string WaitingForPaymentPopup = "waiting for payment...";
 
     /// text in the payment Success Popup
-    public const string PaymentSuccessPopup = "payment successfull";
+    public const string PaymentSuccessPopup = "payment successful";
 
     /// text in the payment Expired Popup
     public const string PaymentExpiredPopup = "payment has expired!";
@@ -75,7 +75,7 @@ public static class GameText
     public const string BalanceToLowAnnouncement = "Balance to low";
 
     /// announcement text, if a payment was successfull
-    public const string PaymentSuccesfullAnnouncement = "Payment Sucessfull";
+    public const string PaymentSucessful = "Payment Sucessful";
 
     /// label of the equip button in the gun contextMenu
     public const string EquipGunContextMenuAction = "equip";

@@ -39,6 +39,8 @@ public interface IBackendPlayerClient
 
     Task<ListAdvertiserResponse> ListAdvertisers();
 
+    Task<string> GetBountyInvoice(string pubkey, long amount);
+
 }
 
 public interface IBackendServerClient
