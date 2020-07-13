@@ -288,7 +288,7 @@ namespace Fps.Movement
             fpsAnimator.SetAiming(gunState.Data.IsAiming);
             fpsAnimator.SetGrounded(movement.IsGrounded);
             fpsAnimator.SetMovement(transform.position, Time.deltaTime);
-            fpsAnimator.SetPitch(pitchTransform.transform.localEulerAngles.x);
+            fpsAnimator.SetPitch(-pitchTransform.transform.localEulerAngles.x);
 
             if (isJumping)
             {
