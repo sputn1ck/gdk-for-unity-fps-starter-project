@@ -144,7 +144,7 @@ namespace Fps.Movement
             var pitchDelta = controller.PitchDelta;
 
             // Modifiers
-            var isAiming = controller.IsAiming;
+            var isAiming = controller.IsAiming && !viewChanger.thirdPerson;
             var isSprinting = controller.AreSprinting;
 
             var isJumpPressed = controller.JumpPressed;
