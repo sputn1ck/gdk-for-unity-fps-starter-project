@@ -2,7 +2,7 @@ using Fps.WorldTiles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "BBH/Maps/GeneratedMap", order = 1)]
 public class GeneratedMap : Map
@@ -10,16 +10,19 @@ public class GeneratedMap : Map
     public int layers;
     public MapTemplate mapTemplate;
     public GameObject mapGO;
-    public override GameObject Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData)
+
+    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
     {
         var workerType = isServer ? "server" : "client";
-        caller.StartCoroutine(LoadWorld(caller.transform, layers, workerType, isServer, mapData));
-        return mapGO;
-
+        caller.StartCoroutine(LoadWorld(caller.transform, layers, workerType, isServer, mapData, onFinished));
     }
-    protected virtual IEnumerator LoadWorld(Transform transform, int worldSize, string workertype, bool isServer, string seed)
+
+    public override void Remove()
     {
-       
+        Destroy(mapGO);
+    }
+    protected virtual IEnumerator LoadWorld(Transform transform, int worldSize, string workertype, bool isServer, string seed, UnityAction onFinished)
+    {
         yield return DonnerMapBuilder.GenerateMap(
             mapTemplate,
             worldSize,
@@ -33,5 +36,6 @@ public class GeneratedMap : Map
             }
         }
         yield return null;
+        onFinished?.Invoke();
     }
 }

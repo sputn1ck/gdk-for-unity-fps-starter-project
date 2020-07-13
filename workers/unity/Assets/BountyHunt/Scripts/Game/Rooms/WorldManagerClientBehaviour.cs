@@ -11,8 +11,8 @@ public class WorldManagerClientBehaviour : MonoBehaviour
 {
     [Require] public WorldManagerReader WorldManagerReader;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
+    [Require] EntityId EntityId;
 
-    LinkedEntityComponent linkedEntityComponent;
 
     public static WorldManagerClientBehaviour Instance;
 
@@ -22,8 +22,7 @@ public class WorldManagerClientBehaviour : MonoBehaviour
     }
     private void OnEnable()
     {
-        linkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        //WorldManagerReader.OnUpdate += WorldManagerWriter_OnUpdate;
+
     }
 
     private void WorldManagerWriter_OnUpdate(WorldManager.Update obj)
@@ -33,7 +32,7 @@ public class WorldManagerClientBehaviour : MonoBehaviour
 
     public void RequestJoinLobby()
     {
-        WorldManagerCommandSender.SendJoinRoomCommand(linkedEntityComponent.EntityId, new JoinRoomRequest
+        WorldManagerCommandSender.SendJoinRoomCommand(EntityId, new JoinRoomRequest
         {
             RoomId = "cantina-1"
         }, (cb) => {

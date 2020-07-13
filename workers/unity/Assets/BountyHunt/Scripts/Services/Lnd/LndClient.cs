@@ -565,7 +565,15 @@ public class LndClient : IClientLnd
         }
     }
 
-
+    public async Task<VerifyMessageResponse> VerifyMessage(string message, string signature)
+    {
+        var res = await lightningClient.VerifyMessageAsync(new VerifyMessageRequest()
+        {
+            Msg = Google.Protobuf.ByteString.CopyFromUtf8(message),
+            Signature = signature
+        });
+        return res;
+    }
 }
 
 /* concurrent channel test

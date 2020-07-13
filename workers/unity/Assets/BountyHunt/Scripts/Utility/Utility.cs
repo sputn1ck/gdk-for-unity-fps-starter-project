@@ -14,6 +14,8 @@ public static class Utility
     public const ulong BountyInt = 989810498;
     public const ulong MemoInt = 9898104109;
 
+    public const string AuthMessage = "BBH_DONT_SIGN";
+
 
     //static Colors for variation
     public static Color32 failureColor = new Color32(255, 120, 105, 255);

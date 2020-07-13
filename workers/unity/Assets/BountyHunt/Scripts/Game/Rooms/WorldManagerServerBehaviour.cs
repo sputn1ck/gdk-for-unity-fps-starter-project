@@ -16,7 +16,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     [Require] WorldCommandSender WorldCommandSender;
 
 
-
+    
     public bool startGenerated;
     private void OnEnable()
     {
@@ -25,6 +25,8 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         WorldManagerCommandReceiver.OnUpdateRoomRequestReceived += OnUpdateRoom;
         WorldManagerCommandReceiver.OnStartRoomRequestReceived += OnStartRoom;
         WorldManagerCommandReceiver.OnJoinRoomRequestReceived += OnJoinRoom;
+        WorldManagerCommandReceiver.OnAddActivePlayerRequestReceived += AddActivePlayer;
+        WorldManagerCommandReceiver.OnRemoveActivePlayerRequestReceived += RemoveActivePlayer;
         // TODO: check for existing rooms and instantiate them if neccesarry
         // TODO: really check for cantina
         if(WorldManagerWriter.Data.ActiveRooms.Count < 1)
@@ -33,6 +35,34 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         }
     }
 
+    private void RemoveActivePlayer(WorldManager.RemoveActivePlayer.ReceivedRequest obj)
+    {
+        var map = WorldManagerWriter.Data.ActivePlayers;
+        if (map.ContainsKey(obj.Payload.PlayerPk)) {
+            map.Remove(obj.Payload.PlayerPk);
+            WorldManagerWriter.SendUpdate(new WorldManager.Update()
+            {
+                ActivePlayers = map
+            });
+        }
+    }
+
+    private async void AddActivePlayer(WorldManager.AddActivePlayer.ReceivedRequest obj)
+    {
+        var res = await ServerServiceConnections.instance.lnd.VerifyMessage(Utility.AuthMessage, obj.Payload.Signature);
+        var map = WorldManagerWriter.Data.ActivePlayers;
+        if (!map.ContainsKey(obj.Payload.PlayerPk))
+        {
+            var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
+            var user = await bbhbackend.GetUser(res.Pubkey);
+            map.Add(obj.Payload.PlayerPk, new Bountyhunt.PlayerInfo(obj.Payload.PlayerId, user.Name));
+            WorldManagerWriter.SendUpdate(new WorldManager.Update()
+            {
+                ActivePlayers = map
+            });
+        }
+        WorldManagerCommandReceiver.SendAddActivePlayerResponse(obj.RequestId, new Bountyhunt.Empty());
+    }
 
     private void OnJoinRoom(WorldManager.JoinRoom.ReceivedRequest obj)
     {
@@ -46,7 +76,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         }
        
         // TODO queue management
-        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(obj.Payload.PlayerId));
+        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(obj.Payload.PlayerPk, obj.Payload.PlayerId));
         WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());
     }
 
@@ -108,7 +138,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-        var room = new Room(id, new List<EntityId>(), new List<EntityId>(), req.MapInfo,req.GamemodeId, req.TimeInfo,new EntityId(), Utility.Vector3ToVector3Float(roomCenter));
+        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.GamemodeId, req.TimeInfo,new EntityId(), Utility.Vector3ToVector3Float(roomCenter));
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 

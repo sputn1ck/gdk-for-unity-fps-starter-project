@@ -165,5 +165,14 @@ public class DummyLnd : MonoBehaviour, IClientLnd
         //return null;
         return res;
     }
+
+    public Task<VerifyMessageResponse> VerifyMessage(string message, string signature)
+    {
+        return Task.FromResult(new VerifyMessageResponse()
+        {
+            Pubkey = "Pubkey" + UnityEngine.Random.Range((int)0, int.MaxValue),
+            Valid = true
+        });
+    }
 }
 

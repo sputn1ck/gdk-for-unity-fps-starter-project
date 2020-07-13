@@ -20,6 +20,7 @@ public class ServerDisconnectSystem : ComponentSystem
 
     private ComponentUpdateSystem componentUpdateSystem;
     private EntityQuery query;
+    private EntityQuery newQuery;
 
 
 
@@ -37,6 +38,14 @@ public class ServerDisconnectSystem : ComponentSystem
                 ComponentType.ReadOnly<SpatialEntityId>(),
                 ComponentType.ReadOnly<Position.Component>()
             );
+        newQuery = GetEntityQuery(
+                ComponentType.ReadOnly<HeartbeatData>(),
+                ComponentType.ReadOnly<RoomPlayer.Component>(),
+                ComponentType.ReadOnly<HunterComponent.Component>(),
+                ComponentType.ReadOnly<SpatialEntityId>(),
+                ComponentType.ReadOnly<Position.Component>()
+            );
+
     }
 
 
@@ -73,13 +82,26 @@ public class ServerDisconnectSystem : ComponentSystem
 
                 componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
             }
-            /*
-            if(component.Bounty > 0)
+        });
+        Entities.With(query).ForEach((ref HunterComponent.Component donnerinfo, ref RoomPlayer.Component roomplayer, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
+        {
+            if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
             {
-                Debug.Log($"Got disconnected: {onDisconnected.ReasonForDisconnect}");
-                var gameState = componentUpdateSystem.GetComponent<GamePotManager.Snapshot>(new EntityId(2));
-                componentUpdateSystem.SendUpdate(new GamePotManager.Update { UnusedBounty = gameState.UnusedBounty - component.Bounty }, new EntityId(2));
-            }*/
+                commandSystem.SendCommand<WorldManager.RemoveActivePlayer.Request>(new WorldManager.RemoveActivePlayer.Request {
+                    TargetEntityId = new EntityId(3),
+                    Payload = new RemoveActivePlayerRequest
+                    {
+                        PlayerPk = donnerinfo.Pubkey
+                    }
+                });
+                commandSystem.SendCommand<RoomManager.RemovePlayer.Request>(new RoomManager.RemovePlayer.Request
+                {
+                    TargetEntityId = roomplayer.RoomEntityid,
+                    Payload = new RemovePlayerRequest(donnerinfo.Pubkey)
+                });
+
+            }
         });
     }
+    
 }

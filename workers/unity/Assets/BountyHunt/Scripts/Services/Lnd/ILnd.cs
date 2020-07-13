@@ -23,6 +23,7 @@ public interface IClientLnd :IDisposable
 
     SignMessageResponse SignMessage(string message);
 
+    Task<VerifyMessageResponse> VerifyMessage(string message, string signature);
     void AddCallback(InvoiceSettledEventHandler e);
 
     void RemoveCallback(InvoiceSettledEventHandler e);

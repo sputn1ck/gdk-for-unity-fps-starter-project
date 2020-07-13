@@ -10,30 +10,65 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 {
     [Require] RoomManagerReader RoomManagerReader;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
+    [Require] EntityId EntityId;
 
-    LinkedEntityComponent LinkedEntityComponent;
 
-    private GameObject mapGo;
+    public Dictionary<string, PlayerStats> playerStats;
+    private Map map;
     private void OnEnable()
     {
-
-        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         Initialize();
+        RoomManagerReader.OnMapUpdateEvent += OnStatsUpdate;
+    }
+
+    private void OnStatsUpdate(PlayerStatsUpdate obj)
+    {
+        if (obj.ReplaceMap)
+        {
+            playerStats = obj.PlayerStats;
+        } else
+        {
+            foreach(var kv in obj.PlayerStats)
+            {
+                playerStats[kv.Key] = kv.Value;
+            }
+        }
     }
 
     private void OnDisable()
     {
-        Destroy(mapGo);
+        map.Remove();
     }
 
     private void Initialize()
     {
-        var mapInfo = MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.MapInfo.MapId);
+        map = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.MapInfo.MapId));
 
-        mapGo = mapInfo.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.MapInfo.MapData);
 
-        // Ready to join
-        RoomManagerCommandSender.SendReadyToJoinCommand(LinkedEntityComponent.EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId));
+        // start initializing map
+        BBHUIManager.instance.mainMenu.BlendImage(true);
+        map.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.MapInfo.MapData, () => {
+            // initializing finished
+            RoomManagerCommandSender.SendRequestStatsCommand(EntityId, new Bountyhunt.Empty(),(cb) => {
+                if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+                {
+                    BBHUIManager.instance.mainMenu.BlendImage(false);
+                    Debug.LogError(cb.Message);
+                    return;
+                }
+                playerStats = cb.ResponsePayload.Value.PlayerStats;
+                RoomManagerCommandSender.SendReadyToJoinCommand(EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId), (cb2) => {
+                    if (cb2.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+                    {
+                        BBHUIManager.instance.mainMenu.BlendImage(false);
+                        Debug.LogError(cb2.Message);
+                        return;
+                    }
+                    BBHUIManager.instance.mainMenu.BlendImage(false);
+                });
+            });
+        });
+        
     }
 
 }

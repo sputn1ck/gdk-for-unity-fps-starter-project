@@ -200,7 +200,6 @@ public class DonnerEntityTemplates
     {
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
-        roomManagerComponent.PlayerMap = new Dictionary<EntityId, PlayerItem>();
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(new Metadata.Snapshot("RoomManager"), WorkerUtils.UnityGameLogic);
@@ -216,15 +215,16 @@ public class DonnerEntityTemplates
 
     public static EntityTemplate WorldManager(Vector3 position)
     {
-        var roomManagerComponent = new WorldManager.Snapshot();
-        roomManagerComponent.ActiveRooms = new Dictionary<string, Room>();
+        var worldManagerComponent = new WorldManager.Snapshot();
+        worldManagerComponent.ActiveRooms = new Dictionary<string, Room>();
+        worldManagerComponent.ActivePlayers = new Dictionary<string, Bountyhunt.PlayerInfo>();
 
         var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(new Metadata.Snapshot("WorldManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
 
-        entityTemplate.AddComponent(roomManagerComponent, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(worldManagerComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

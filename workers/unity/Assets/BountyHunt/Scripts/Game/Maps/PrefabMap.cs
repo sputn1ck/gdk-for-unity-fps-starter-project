@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "BBH/Maps/PrefabMap", order = 1)]
 public class PrefabMap : Map
 {
     public GameObject MapPrefab;
-    public override GameObject Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData)
+
+    private GameObject MapGo;
+    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
     {
-        var mapGO = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
+        MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
         if (isServer)
         {
-            foreach (var childRenderer in mapGO.GetComponentsInChildren<Renderer>())
+            foreach (var childRenderer in MapGo.GetComponentsInChildren<Renderer>())
             {
                 childRenderer.enabled = false;
             }
         }
-        return mapGO;
+        onFinished?.Invoke();
+    }
+
+    public override void Remove()
+    {
+        Destroy(MapGo);
     }
 }

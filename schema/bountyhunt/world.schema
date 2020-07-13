@@ -8,7 +8,7 @@ component WorldManager {
     id = 480001;
 
     map<string, Room> active_rooms = 1;
-    
+    map<string, PlayerInfo> active_players = 2;
     command Room create_room(CreateRoomRequest);
 
     command bountyhunt.Empty end_room(EndRoomRequest);
@@ -18,17 +18,21 @@ component WorldManager {
     command bountyhunt.Empty start_room(StartRoomRequest);
     
     command bountyhunt.Empty join_room(JoinRoomRequest);
+    command bountyhunt.Empty add_active_player(AddActivePlayerRequest);
+    command bountyhunt.Empty remove_active_player(RemoveActivePlayerRequest);
 
     event Room new_room;
 
 }
 
+
 component RoomManager {
     id = 480002;
 
     Room room_info = 1;
-    map<EntityId, bountyhunt.PlayerItem> player_map = 2;
 
+    event PlayerStatsUpdate map_update;
+    command PlayerStatsUpdate request_stats(bountyhunt.Empty);
     command bountyhunt.Empty add_player(AddPlayerRequest);
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
     command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
@@ -43,11 +47,22 @@ component RoomPlayer {
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
 }
 
+type PlayerInfo {
+    EntityId entity_id = 1; 
+    string name = 2;
+}
 
+type PlayerStats {
+    int32 kills = 1;
+    int32 deaths = 2;
+    int64 bounty = 3;
+    int64 session_earnings = 4;
+    bool active = 5;
+}
 type Room {
     string room_id = 1;
-    list<EntityId> active_players = 2;
-    list<EntityId> queued_players = 3;
+    list<string> active_players = 2;
+    list<string> queued_players = 3;
     MapInfo map_info = 4;
     string gamemode_id = 5;
     bountyhunt.TimeInfo time_info = 6;
@@ -55,9 +70,15 @@ type Room {
     bountyhunt.Vector3Float origin = 8;
 }
 
+type PlayerStatsUpdate {
+    map<string,PlayerStats> player_stats = 1;
+    bool replace_map = 2;
+}
+
 type JoinRoomRequest {
     string room_id = 1;
-    EntityId player_id = 2;
+    string player_pk = 2;
+    EntityId player_id = 3;
 }
 
 type CreateRoomRequest {
@@ -84,19 +105,28 @@ type MapInfo {
 }
 
 type UpdatePlayerRoomRequest {
-    string room_id = 1;
-    EntityId room_entityid = 2;
+    Room room = 1;
 }
 
 type AddPlayerRequest {
-    EntityId player_id = 1;
+    string player_pk = 1;
+    EntityId player_id = 2;
 }
 
 type RemovePlayerRequest {
-    EntityId player_id = 2;
+    string player_pk = 1;
 }
 
 type ReadyToJoinRequest {
     EntityId player_id = 1;
 }
 
+type AddActivePlayerRequest {
+    string signature = 1;
+    string player_pk = 2;
+    EntityId player_id = 3;
+}
+
+type RemoveActivePlayerRequest {
+    string player_pk = 1;
+}

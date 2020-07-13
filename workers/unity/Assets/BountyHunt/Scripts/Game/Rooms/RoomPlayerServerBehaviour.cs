@@ -16,6 +16,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomPlayerCommandReceiver RoomPlayerCommandReceiver;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] RoomPlayerWriter RoomPlayerWriter;
+    [Require] HunterComponentReader HunterComponentReader;
     [Require] InterestWriter InterestWriter;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId EntityId;
@@ -25,39 +26,47 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
         RoomPlayerCommandReceiver.OnUpdatePlayerRoomRequestReceived += OnUpdatePlayerRoom;
-        RequestJoinLobby();
+        JoinWorld();
+
+
+
+        
+    }
+
+    private void JoinWorld()
+    {
+        var hunter = HunterComponentReader.Data;
+        var sig = PlayerServiceConnections.instance.lnd.SignMessage(Utility.AuthMessage);
+        WorldManagerCommandSender.SendAddActivePlayerCommand(new EntityId(3), new AddActivePlayerRequest(sig.Signature, hunter.Pubkey, EntityId),(cb) => {
+            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            {
+                Debug.LogError(cb.Message);
+                return;
+            }
+            RequestJoinLobby();
+        });
     }
 
     private void OnUpdatePlayerRoom(RoomPlayer.UpdatePlayerRoom.ReceivedRequest obj)
     {
-        var room = WorldManagerClientBehaviour.Instance.WorldManagerReader.Data.ActiveRooms[obj.Payload.RoomId];
+        var room = obj.Payload.Room;
         var newInterestTemplate = GetInterestTemplate(room);
         InterestWriter.SendUpdate(new Interest.Update()
         {
             ComponentInterest = newInterestTemplate.AsComponentInterest()
         });
 
+        var hunter = HunterComponentReader.Data;
         if (RoomPlayerWriter.Data.RoomId != null && RoomPlayerWriter.Data.RoomId != "")
         {
-            RoomManagerCommandSender.SendRemovePlayerCommand(RoomPlayerWriter.Data.RoomEntityid, new RemovePlayerRequest(linkedEntityComponent.EntityId));
+            RoomManagerCommandSender.SendRemovePlayerCommand(RoomPlayerWriter.Data.RoomEntityid, new RemovePlayerRequest(hunter.Pubkey));
         }
         RoomPlayerWriter.SendUpdate(new RoomPlayer.Update()
         {
-            RoomEntityid = obj.Payload.RoomEntityid,
-            RoomId = obj.Payload.RoomId
+            RoomEntityid = room.EntityId,
+            RoomId = room.RoomId
         });
-        HunterComponentCommandSender.SendTeleportPlayerCommand(EntityId, new TeleportRequest()
-        {
-            Heal = true,
-            X = room.Origin.X,
-            Y = room.Origin.Y+2,
-            Z = room.Origin.Z
-        }, (cb) => {
-            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
-            {
-                Debug.LogError(cb.Message);
-            }
-        });
+        
     }
 
     public void RequestJoinLobby()
@@ -77,14 +86,14 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     private InterestTemplate GetInterestTemplate(Room roomInfo)
     {
         var map = MapDictStorage.Instance.GetMap(roomInfo.MapInfo.MapId);
-        var boxConstraint = Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin)));
-        var relativeConstraint = Constraint.RelativeCylinder(150);
-        var checkoutQuery = InterestQuery.Query(Constraint.Any(Constraint.All(boxConstraint, relativeConstraint), Constraint.RelativeCylinder(2)));
-        var serverQuery = InterestQuery.Query(Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin))));
+        var roomConstraint = Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin)));
+        var relativeConstraint = Constraint.RelativeCylinder(100);
+        var checkoutQuery = InterestQuery.Query(Constraint.Any(Constraint.All(roomConstraint, relativeConstraint), Constraint.RelativeCylinder(1)));
+        var serverQuery = InterestQuery.Query(Constraint.Any(Constraint.RelativeCylinder(1),Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin)))));
         var worldManager = InterestQuery.Query(Constraint.Component(Bountyhunt.WorldManager.ComponentId));
-        var roomManager = InterestQuery.Query(Constraint.EntityId(roomInfo.EntityId));
+        var roomManager = InterestQuery.Query(Constraint.All(Constraint.Component(Bountyhunt.RoomManager.ComponentId), roomConstraint));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
-        var bountyTracerQuery = InterestQuery.Query(Constraint.All(Constraint.Component(TracerComponent.ComponentId), boxConstraint));
+        var bountyTracerQuery = InterestQuery.Query(Constraint.All(Constraint.Component(TracerComponent.ComponentId), roomConstraint));
         var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverQuery).AddQueries<ClientMovement.Component>(checkoutQuery, bountyTracerQuery, worldManager,roomManager, gameManagerQuery);
         return interestTemplate;
     }

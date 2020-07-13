@@ -21,10 +21,15 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
 
     public static RoomPlayerClientBehaviour Instance;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        Instance = this;
+    }
     void OnEnable()
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        Instance = this;
+        
     }
 
     private void Update()
@@ -80,7 +85,9 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
                 Debug.LogError(cb.Message);
+                return;
             }
+            BBHUIManager.instance.mainMenu.BlendImage(true);
 
         });
     }

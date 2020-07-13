@@ -147,6 +147,7 @@ public class BountyPlayerServer : MonoBehaviour
             Coords = Coordinates.FromUnityVector(pos)
         };
         spatialPosition.SendUpdate(spatialPositionUpdate);
+        HunterCommandReceiver.SendTeleportPlayerResponse(obj.RequestId, new Bountyhunt.Empty());
     }
 
     private async void OnRequestPayout(HunterComponent.RequestPayout.ReceivedRequest obj)
