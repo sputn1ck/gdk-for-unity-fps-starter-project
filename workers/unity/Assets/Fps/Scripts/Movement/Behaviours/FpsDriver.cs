@@ -173,6 +173,13 @@ namespace Fps.Movement
                 viewChanger.SetThirdPersonView(false);
             }
 
+            if (viewChanger.thirdPerson)
+            {
+                viewChanger.UpdateThirdPersonView(yawDelta,pitchDelta);
+                yawDelta = 0;
+                pitchDelta = 0;
+            }
+
             //Mediator
             var movementSpeed = isAiming
                 ? MovementSpeed.Walk
