@@ -10,7 +10,7 @@ using Bountyhunt;
 public class AdvertiserStore
 {
     Dictionary<string,Advertiser> advertisers = new Dictionary<string,Advertiser>();
-    const int advertisersPerChunk = 10;
+    const int advertisersPerChunk = 50;
 
 
     public async Task Initialize(ListAdvertiserResponse advertisers)
