@@ -46,8 +46,19 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         menuReference = "RoomMenuRef";
         var rooms = WorldManagerClientBehaviour.Instance.WorldManagerReader.Data.ActiveRooms;
         var actions = new List<(UnityAction, string)>();
-        foreach( var room in rooms)
+        var cantinalabel = string.Format("Join Cantina");
+        UnityAction cantinaAction = () =>
         {
+            RequestJoinCantina();
+            ContextMenuUI.Instance.Hide(menuReference);
+        };
+        actions.Add((cantinaAction, cantinalabel));
+        foreach ( var room in rooms)
+        {
+            if (room.Value.RoomId.Contains("cantina"))
+            {
+                break;
+            }
             var label = string.Format("P:{0}, GM:{1}, MAP:{2}", room.Value.ActivePlayers.Count, room.Value.GamemodeId,room.Value.MapInfo.MapId);
             UnityAction action = () =>
             {
@@ -74,7 +85,32 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         }
 
     }
+    public void RequestJoinCantina()
+    {
+        WorldManagerCommandSender.SendGetCantinaCommand(new EntityId(3), new GetCantinaRequest() {
+            PlayerId = EntityId
+        },(cb) => {
+            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            {
+                Debug.LogError(cb.Message);
+                return;
+            }
+            if (cb.ResponsePayload.Value.NewlyCreated)
+            {
+                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.RoomId));
+            } else
+            {
+                RequestJoinRoom(cb.ResponsePayload.Value.Room.RoomId);
+            }
+            
+        });
+    }
+    public IEnumerator WaitForJoin(string roomid)
+    {
+        yield return new WaitForSeconds(2f);
+        RequestJoinRoom(roomid);
 
+    }
     public void RequestJoinRoom(string roomid)
     {
         WorldManagerCommandSender.SendJoinRoomCommand(new EntityId(3), new JoinRoomRequest

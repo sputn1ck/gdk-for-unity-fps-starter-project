@@ -44,7 +44,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
                 Debug.LogError(cb.Message);
                 return;
             }
-            RequestJoinLobby();
+            RequestJoinCantina();
         });
     }
 
@@ -69,17 +69,47 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         
     }
 
-    public void RequestJoinLobby()
+    public void RequestJoinCantina()
     {
-        WorldManagerCommandSender.SendJoinRoomCommand(new EntityId(3), new JoinRoomRequest
+        WorldManagerCommandSender.SendGetCantinaCommand(new EntityId(3), new GetCantinaRequest()
         {
-            RoomId = "cantina-1",
-            PlayerId = linkedEntityComponent.EntityId
+            PlayerId = EntityId
         }, (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
                 Debug.LogError(cb.Message);
+                return;
             }
+            if (cb.ResponsePayload.Value.NewlyCreated)
+            {
+                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.RoomId));
+            }
+            else
+            {
+                RequestJoinRoom(cb.ResponsePayload.Value.Room.RoomId);
+            }
+
+        });
+    }
+    public IEnumerator WaitForJoin(string roomid)
+    {
+        yield return new WaitForSeconds(2f);
+        RequestJoinRoom(roomid);
+
+    }
+    public void RequestJoinRoom(string roomid)
+    {
+        WorldManagerCommandSender.SendJoinRoomCommand(new EntityId(3), new JoinRoomRequest
+        {
+            RoomId = roomid,
+            PlayerId = linkedEntityComponent.EntityId,
+        }, (cb) => {
+            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            {
+                Debug.LogError(cb.Message);
+                return;
+            }
+
         });
     }
 

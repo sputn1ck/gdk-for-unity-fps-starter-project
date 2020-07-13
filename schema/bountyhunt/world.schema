@@ -18,6 +18,7 @@ component WorldManager {
     command bountyhunt.Empty start_room(StartRoomRequest);
     
     command bountyhunt.Empty join_room(JoinRoomRequest);
+    command GetCantinaResponse get_cantina(GetCantinaRequest);
     command bountyhunt.Empty add_active_player(AddActivePlayerRequest);
     command bountyhunt.Empty remove_active_player(RemoveActivePlayerRequest);
 
@@ -69,6 +70,7 @@ type Room {
     bountyhunt.TimeInfo time_info = 6;
     EntityId entity_id = 7;
     bountyhunt.Vector3Float origin = 8;
+    int32 max_players = 9;
 }
 
 type PlayerStatsUpdate {
@@ -80,11 +82,20 @@ type JoinRoomRequest {
     string room_id = 1;
     EntityId player_id = 2;
 }
+type GetCantinaRequest {
+    EntityId player_id = 1;
+}
+
+type GetCantinaResponse {
+    Room room = 1;
+    bool newly_created = 2;
+}
 
 type CreateRoomRequest {
     MapInfo map_info = 1;
     string gamemode_id = 2;
     bountyhunt.TimeInfo time_info = 3;
+    int32 max_players = 4;
 }
 
 type EndRoomRequest {

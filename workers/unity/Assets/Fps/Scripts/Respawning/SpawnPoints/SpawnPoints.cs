@@ -42,7 +42,8 @@ namespace Fps.Respawning
 
             return spawnPointListStatic[Random.Range(0, spawnPointListStatic.Length)];
         }
-        public void SetSpawnPoints()
+        public void SetSpawnPoints
+          ()
         {
             var spawnPoints = FindSpawnPoints();
             var worldOffset = transform.root.position;
