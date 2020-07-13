@@ -144,7 +144,7 @@ namespace Fps.Movement
             var pitchDelta = controller.PitchDelta;
 
             // Modifiers
-            var isAiming = controller.IsAiming && !viewChanger.thirdPerson;
+            var isAiming = controller.IsAiming && !thirdPersonViewActivated;
             var isSprinting = controller.AreSprinting;
 
             var isJumpPressed = controller.JumpPressed;
@@ -202,7 +202,7 @@ namespace Fps.Movement
             var rotation = Quaternion.Euler(newPitch, newYaw, 0);
 
             //Check for sprint cooldown
-            if (!movement.HasSprintedRecently && !viewChanger.thirdPerson)
+            if (!movement.HasSprintedRecently && !thirdPersonViewActivated)
             {
                 HandleShooting(shootPressed, shootHeld);
             }
@@ -316,5 +316,8 @@ namespace Fps.Movement
         {
             return entityId;
         }
+
+        public bool thirdPersonViewActivated => viewChanger.thirdPerson;
+        public bool isAiming => gunState!=null?gunState.Data.IsAiming:false;
     }
 }

@@ -28,7 +28,7 @@ namespace Fps.Guns
             instantiatedGun.transform.localPosition = Vector3.zero;
             instantiatedGun.transform.localEulerAngles = Vector3.zero;
 
-            if (thirdPersonGunModel) Destroy(thirdPersonGunModel);
+            if (thirdPersonGunModel != null) Destroy(thirdPersonGunModel);
             thirdPersonGunModel = Instantiate(settings.GunModel, thirdPersonGunSocket);
             thirdPersonGunModel.transform.localPosition = Vector3.zero;
             thirdPersonGunModel.transform.localRotation = Quaternion.identity;

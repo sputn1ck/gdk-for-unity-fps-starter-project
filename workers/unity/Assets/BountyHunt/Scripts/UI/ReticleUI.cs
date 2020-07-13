@@ -26,6 +26,12 @@ public class ReticleUI : MonoBehaviour
 
     public void showReticle(bool show)
     {
+        if(Fps.Movement.FpsDriver.instance != null)
+        {
+            if (Fps.Movement.FpsDriver.instance.thirdPersonViewActivated) show = false;
+            if (Fps.Movement.FpsDriver.instance.isAiming) show = false;
+        }
+        
         reticle.gameObject.SetActive(show);
     }
 

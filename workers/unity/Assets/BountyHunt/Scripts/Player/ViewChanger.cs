@@ -1,9 +1,12 @@
+using Fps;
+using Improbable.Gdk.Subscriptions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ViewChanger : MonoBehaviour
 {
+
     public GameObject FirstPersonModel;
     public GameObject ThirdPersonModel;
 
@@ -28,13 +31,21 @@ public class ViewChanger : MonoBehaviour
 
     public void SetThirdPersonView(bool thirdPerson)
     {
-        if (!this.thirdPerson && thirdPerson) ResetThirdPersonView();
-
+        if (thirdPerson == this.thirdPerson) return;
         this.thirdPerson = thirdPerson;
 
+        if (thirdPerson) {
 
-        ThirdPersonModel.SetActive(this.thirdPerson);
-        FirstPersonModel.SetActive(!this.thirdPerson);
+            ResetThirdPersonView();
+            BBHUIManager.instance.inGame.Reticle.showReticle(false);
+        }
+        else
+        {
+            BBHUIManager.instance.inGame.Reticle.showReticle(true);
+        }
+
+        ThirdPersonModel.SetActive(thirdPerson);
+        FirstPersonModel.SetActive(!thirdPerson);
     }
 
     void ResetThirdPersonView()
