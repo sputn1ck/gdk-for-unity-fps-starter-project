@@ -40,7 +40,7 @@ namespace Fps.Respawning
             health.SendUpdate(healthUpdate);
 
             // Move to a spawn point (position and rotation)
-            var (spawnPosition, spawnYaw, spawnPitch) = Respawning.SpawnPoints.GetRandomSpawnPoint();
+            var (spawnPosition, spawnYaw, spawnPitch) = Respawning.SpawnPoints.GetRandomSpawnPointStatic();
             var newLatest = new ServerResponse
             {
                 Position = spawnPosition.ToVector3Int(),

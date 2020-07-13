@@ -72,7 +72,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
 
     public SignMessageResponse SignMessage(string message)
     {
-        return new SignMessageResponse { Signature = "signature" };
+        return new SignMessageResponse { Signature = pubkey };
     }
 
     public void AddCallback(InvoiceSettledEventHandler e)
@@ -170,7 +170,7 @@ public class DummyLnd : MonoBehaviour, IClientLnd
     {
         return Task.FromResult(new VerifyMessageResponse()
         {
-            Pubkey = "Pubkey" + UnityEngine.Random.Range((int)0, int.MaxValue),
+            Pubkey = signature,
             Valid = true
         });
     }

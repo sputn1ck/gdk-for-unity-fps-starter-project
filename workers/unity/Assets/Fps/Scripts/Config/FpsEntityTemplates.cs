@@ -32,7 +32,7 @@ namespace Fps.Config
         {
             var client = EntityTemplate.GetWorkerAccessAttribute(workerId);
 
-            var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
+            var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPointStatic();
 
             var serverResponse = new ServerResponse
             {

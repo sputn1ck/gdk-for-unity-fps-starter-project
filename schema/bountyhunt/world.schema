@@ -43,13 +43,14 @@ component RoomPlayer {
 
     string room_id = 1;
     EntityId room_entityid = 2;
-
+    string pubkey = 3;
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
 }
 
 type PlayerInfo {
     EntityId entity_id = 1; 
     string name = 2;
+    EntityId active_room = 3;
 }
 
 type PlayerStats {
@@ -77,8 +78,7 @@ type PlayerStatsUpdate {
 
 type JoinRoomRequest {
     string room_id = 1;
-    string player_pk = 2;
-    EntityId player_id = 3;
+    EntityId player_id = 2;
 }
 
 type CreateRoomRequest {

@@ -9,6 +9,8 @@ public abstract class Map : ScriptableObject
     public MapSettings Settings;
 
     public abstract void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null);
+
+    public abstract Vector3 GetSpawnPoint();
     public abstract void Remove();
 }
 

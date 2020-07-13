@@ -18,25 +18,36 @@ namespace Fps.Respawning
             }
         }
 
+        private static SpawnPoint[] spawnPointListStatic;
         private static SpawnPoint[] spawnPointList;
         [SerializeField] private bool snapsToGround = true;
 
-        public static SpawnPoint GetRandomSpawnPoint()
+        public static SpawnPoint GetRandomSpawnPointStatic()
         {
-            if (spawnPointList == null || spawnPointList.Length == 0)
+            if (spawnPointListStatic == null || spawnPointListStatic.Length == 0)
             {
                 Debug.LogWarning("No spawn points found - using origin.");
                 return new SpawnPoint();
             }
 
-            return spawnPointList[Random.Range(0, spawnPointList.Length)];
+            return spawnPointListStatic[Random.Range(0, spawnPointListStatic.Length)];
         }
+        public  SpawnPoint GetRandomSpawnPoint()
+        {
+            if (spawnPointListStatic == null || spawnPointListStatic.Length == 0)
+            {
+                Debug.LogWarning("No spawn points found - using origin.");
+                return new SpawnPoint();
+            }
 
+            return spawnPointListStatic[Random.Range(0, spawnPointListStatic.Length)];
+        }
         public void SetSpawnPoints()
         {
             var spawnPoints = FindSpawnPoints();
             var worldOffset = transform.root.position;
 
+            spawnPointListStatic = new SpawnPoint[spawnPoints.Length];
             spawnPointList = new SpawnPoint[spawnPoints.Length];
             for (var n = 0; n < spawnPoints.Length; n++)
             {
@@ -47,6 +58,12 @@ namespace Fps.Respawning
                     spawnPointPosition = SnapToGround(spawnPointPosition);
                 }
 
+                spawnPointListStatic[n] = new SpawnPoint
+                {
+                    SpawnPosition = spawnPointPosition - worldOffset,
+                    SpawnYaw = spawnPointTransform.eulerAngles.y,
+                    SpawnPitch = 0
+                };
                 spawnPointList[n] = new SpawnPoint
                 {
                     SpawnPosition = spawnPointPosition - worldOffset,

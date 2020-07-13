@@ -17,12 +17,14 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     private Map map;
     private void OnEnable()
     {
+        Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.RoomId);
         Initialize();
         RoomManagerReader.OnMapUpdateEvent += OnStatsUpdate;
     }
 
     private void OnStatsUpdate(PlayerStatsUpdate obj)
     {
+        // TODO send scoreboard update
         if (obj.ReplaceMap)
         {
             playerStats = obj.PlayerStats;
@@ -56,6 +58,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
                     Debug.LogError(cb.Message);
                     return;
                 }
+                // TODO update scoreboard
                 playerStats = cb.ResponsePayload.Value.PlayerStats;
                 RoomManagerCommandSender.SendReadyToJoinCommand(EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId), (cb2) => {
                     if (cb2.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)

@@ -1,3 +1,4 @@
+using Fps.Respawning;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PrefabMap : Map
     public GameObject MapPrefab;
 
     private GameObject MapGo;
+    private SpawnPoints spawnPoints;
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
     {
         MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
@@ -20,10 +22,21 @@ public class PrefabMap : Map
             }
         }
         onFinished?.Invoke();
+        spawnPoints = MapGo.GetComponentInChildren<SpawnPoints>();
     }
 
     public override void Remove()
     {
         Destroy(MapGo);
+    }
+
+    public override Vector3 GetSpawnPoint()
+    {
+        if(spawnPoints == null)
+        {
+            
+            return new Vector3(0,2,0);
+        }
+        return spawnPoints.GetRandomSpawnPoint().SpawnPosition;
     }
 }

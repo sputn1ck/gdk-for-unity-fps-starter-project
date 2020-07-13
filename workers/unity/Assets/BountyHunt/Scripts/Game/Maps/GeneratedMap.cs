@@ -1,3 +1,4 @@
+using Fps.Respawning;
 using Fps.WorldTiles;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ public class GeneratedMap : Map
     public int layers;
     public MapTemplate mapTemplate;
     public GameObject mapGO;
+    private SpawnPoints spawnPoints;
 
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
     {
@@ -35,7 +37,16 @@ public class GeneratedMap : Map
                 childRenderer.enabled = false;
             }
         }
+        spawnPoints = mapGO.GetComponentInChildren<SpawnPoints>();
         yield return null;
         onFinished?.Invoke();
+    }
+    public override Vector3 GetSpawnPoint()
+    {
+        if (spawnPoints == null)
+        {
+            return new Vector3(0, 2, 0);
+        }
+        return spawnPoints.GetRandomSpawnPoint().SpawnPosition;
     }
 }

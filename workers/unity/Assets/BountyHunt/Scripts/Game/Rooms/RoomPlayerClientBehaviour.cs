@@ -80,7 +80,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         WorldManagerCommandSender.SendJoinRoomCommand(new EntityId(3), new JoinRoomRequest
         {
             RoomId = roomid,
-            PlayerId = linkedEntityComponent.EntityId
+            PlayerId = linkedEntityComponent.EntityId,
         }, (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {

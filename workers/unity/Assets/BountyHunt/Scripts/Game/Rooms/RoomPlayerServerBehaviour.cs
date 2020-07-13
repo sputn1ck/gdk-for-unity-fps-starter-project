@@ -16,16 +16,18 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomPlayerCommandReceiver RoomPlayerCommandReceiver;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] RoomPlayerWriter RoomPlayerWriter;
-    [Require] HunterComponentReader HunterComponentReader;
     [Require] InterestWriter InterestWriter;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
+
+    private string pubkey;
     
     private void OnEnable()
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
         RoomPlayerCommandReceiver.OnUpdatePlayerRoomRequestReceived += OnUpdatePlayerRoom;
+        pubkey = RoomPlayerWriter.Data.Pubkey;
         JoinWorld();
 
 
@@ -35,9 +37,8 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
 
     private void JoinWorld()
     {
-        var hunter = HunterComponentReader.Data;
         var sig = PlayerServiceConnections.instance.lnd.SignMessage(Utility.AuthMessage);
-        WorldManagerCommandSender.SendAddActivePlayerCommand(new EntityId(3), new AddActivePlayerRequest(sig.Signature, hunter.Pubkey, EntityId),(cb) => {
+        WorldManagerCommandSender.SendAddActivePlayerCommand(new EntityId(3), new AddActivePlayerRequest(sig.Signature, pubkey, EntityId),(cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
                 Debug.LogError(cb.Message);
@@ -56,10 +57,9 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
             ComponentInterest = newInterestTemplate.AsComponentInterest()
         });
 
-        var hunter = HunterComponentReader.Data;
         if (RoomPlayerWriter.Data.RoomId != null && RoomPlayerWriter.Data.RoomId != "")
         {
-            RoomManagerCommandSender.SendRemovePlayerCommand(RoomPlayerWriter.Data.RoomEntityid, new RemovePlayerRequest(hunter.Pubkey));
+            RoomManagerCommandSender.SendRemovePlayerCommand(RoomPlayerWriter.Data.RoomEntityid, new RemovePlayerRequest(pubkey));
         }
         RoomPlayerWriter.SendUpdate(new RoomPlayer.Update()
         {

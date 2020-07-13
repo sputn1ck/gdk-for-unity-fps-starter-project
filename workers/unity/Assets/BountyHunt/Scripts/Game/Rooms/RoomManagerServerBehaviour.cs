@@ -24,7 +24,6 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private void OnEnable()
     {
 
-        playerStats = new Dictionary<string, PlayerStats>();
 
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         Initialize();
@@ -33,11 +32,21 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
         RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
         RoomManagerCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
+        InitializePlayerStats();
+    }
+    private  void InitializePlayerStats()
+    {
+
+        playerStats = new Dictionary<string, PlayerStats>();
         var room = RoomManagerWriter.Data.RoomInfo;
         room.EntityId = EntityId;
+        foreach(var player in room.ActivePlayers)
+        {
+            playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false));
+        }
         SendUpdates(room);
-    }
 
+    }
     private void RequestStats(RoomManager.RequestStats.ReceivedRequest obj)
     {
         RoomManagerCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, true));
@@ -47,12 +56,14 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     {
         var room = RoomManagerWriter.Data.RoomInfo;
         //TODO get spawnpoint
+        var spawnPoint = mapInfo.GetSpawnPoint();
+
         HunterComponentCommandSender.SendTeleportPlayerCommand(obj.Payload.PlayerId, new TeleportRequest()
         {
             Heal = true,
-            X = room.Origin.X,
-            Y = room.Origin.Y + 2,
-            Z = room.Origin.Z
+            X = room.Origin.X +spawnPoint.x,
+            Y = room.Origin.Y + spawnPoint.y,
+            Z = room.Origin.Z + spawnPoint.z
         }, (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
@@ -95,7 +106,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         UpdateDictionary(map);
         RoomPlayerCommandSender.SendUpdatePlayerRoomCommand(obj.Payload.PlayerId, new UpdatePlayerRoomRequest(room));
     }
-
+   
     private void SendUpdates(Room room)
     {
         RoomManagerWriter.SendUpdate(new RoomManager.Update()

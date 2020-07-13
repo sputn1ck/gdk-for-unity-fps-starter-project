@@ -38,12 +38,14 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     private void RemoveActivePlayer(WorldManager.RemoveActivePlayer.ReceivedRequest obj)
     {
         var map = WorldManagerWriter.Data.ActivePlayers;
-        if (map.ContainsKey(obj.Payload.PlayerPk)) {
+        if (map.TryGetValue(obj.Payload.PlayerPk, out var player)) {
+
             map.Remove(obj.Payload.PlayerPk);
             WorldManagerWriter.SendUpdate(new WorldManager.Update()
             {
                 ActivePlayers = map
             });
+            RoomManagerCommandSender.SendRemovePlayerCommand(player.ActiveRoom, new RemovePlayerRequest(obj.Payload.PlayerPk));
         }
     }
 
@@ -51,16 +53,20 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     {
         var res = await ServerServiceConnections.instance.lnd.VerifyMessage(Utility.AuthMessage, obj.Payload.Signature);
         var map = WorldManagerWriter.Data.ActivePlayers;
-        if (!map.ContainsKey(obj.Payload.PlayerPk))
+        var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
+        var user = await bbhbackend.GetUser(res.Pubkey);
+        if (!map.ContainsKey(res.Pubkey))
         {
-            var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
-            var user = await bbhbackend.GetUser(res.Pubkey);
-            map.Add(obj.Payload.PlayerPk, new Bountyhunt.PlayerInfo(obj.Payload.PlayerId, user.Name));
-            WorldManagerWriter.SendUpdate(new WorldManager.Update()
-            {
-                ActivePlayers = map
-            });
+            
+            map.Add(obj.Payload.PlayerPk, new Bountyhunt.PlayerInfo(obj.Payload.PlayerId, user.Name,new EntityId(0)));
+        } else
+        {
+            map[obj.Payload.PlayerPk] = new Bountyhunt.PlayerInfo(obj.Payload.PlayerId, user.Name, new EntityId(0));
         }
+        WorldManagerWriter.SendUpdate(new WorldManager.Update()
+        {
+            ActivePlayers = map
+        });
         WorldManagerCommandReceiver.SendAddActivePlayerResponse(obj.RequestId, new Bountyhunt.Empty());
     }
 
@@ -74,10 +80,38 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room does not exist");
             return;
         }
-       
+        var playerPk = GetPlayerPKByEntity(obj.Payload.PlayerId);
         // TODO queue management
-        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(obj.Payload.PlayerPk, obj.Payload.PlayerId));
+        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(playerPk, obj.Payload.PlayerId));
         WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());
+
+        UpdateActivePlayerRoom(playerPk, room.EntityId);
+    }
+    private void UpdateActivePlayerRoom(string key, EntityId roomId)
+    {
+        var map = WorldManagerWriter.Data.ActivePlayers;
+        if (map.ContainsKey(key))
+        {
+            var player = map[key];
+            player.ActiveRoom = roomId;
+            map[key] = player;
+        }
+        WorldManagerWriter.SendUpdate(new WorldManager.Update()
+        {
+            ActivePlayers = map
+        });
+    }
+    private string GetPlayerPKByEntity(EntityId id)
+    {
+        var map = WorldManagerWriter.Data.ActivePlayers;
+        foreach (var kv in map)
+        {
+            if(kv.Value.EntityId == id)
+            {
+                return kv.Key;
+            }
+        }
+        return "";
     }
 
     private void OnStartRoom(WorldManager.StartRoom.ReceivedRequest obj)

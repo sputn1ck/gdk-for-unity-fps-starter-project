@@ -83,7 +83,7 @@ public class ServerDisconnectSystem : ComponentSystem
                 componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
             }
         });
-        Entities.With(query).ForEach((ref HunterComponent.Component donnerinfo, ref RoomPlayer.Component roomplayer, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
+        Entities.With(query).ForEach((ref RoomPlayer.Component roomplayer, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
         {
             if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
             {
@@ -91,13 +91,8 @@ public class ServerDisconnectSystem : ComponentSystem
                     TargetEntityId = new EntityId(3),
                     Payload = new RemoveActivePlayerRequest
                     {
-                        PlayerPk = donnerinfo.Pubkey
+                        PlayerPk = roomplayer.Pubkey
                     }
-                });
-                commandSystem.SendCommand<RoomManager.RemovePlayer.Request>(new RoomManager.RemovePlayer.Request
-                {
-                    TargetEntityId = roomplayer.RoomEntityid,
-                    Payload = new RemovePlayerRequest(donnerinfo.Pubkey)
                 });
 
             }

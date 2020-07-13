@@ -44,7 +44,7 @@ public class DonnerEntityTemplates
         // todo reaadd
         var loginData = UnityEngine.JsonUtility.FromJson<LoginData>(Encoding.ASCII.GetString(serializedArguments));
         var playerName = loginData.PlayerName;
-        var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
+        var (spawnPosition, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPointStatic();
 
         var serverResponse = new ServerResponse
         {
@@ -103,7 +103,10 @@ public class DonnerEntityTemplates
             Skills = new List<int>() { 0 },
         };
         var chatComponent = new PrivateChat.Snapshot();
-        var roomCompenent = new RoomPlayer.Snapshot();
+        var roomCompenent = new RoomPlayer.Snapshot()
+        {
+            Pubkey = loginData.Pubkey
+        };
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
