@@ -1,4 +1,6 @@
+using Bountyhunt;
 using Fps.Movement;
+using Improbable.Gdk.Subscriptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +10,8 @@ using UnityEngine.Events;
 
 public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
 {
+    [Require] HunterComponentCommandSender hunterCommandSender;
+
     public List<Renderer> bodyRenderers;
     string uniqueID;
     SkinItem item;
@@ -129,7 +133,7 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
 
     async void Equip()
     {
-        
+
         try
         {
             await PlayerServiceConnections.instance.BackendPlayerClient.EquipSkin(item.skin.ID);
@@ -142,9 +146,9 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
             return;
         }
         RefreshContextMenu();
-        FpsDriver.instance.GetComponent<SkinChangeBehaviour>().UpdateSkin(SkinShop.EquippedSkin.skin.ID);
+        //FpsDriver.instance.GetComponent<SkinChangeBehaviour>().UpdateSkin(SkinShop.EquippedSkin.skin.ID);
+        FpsDriver.instance.GetComponent<BountyPlayerAuthorative>().RefreshAppearance();
     }
-
     async void buy()
     {
         long balance;

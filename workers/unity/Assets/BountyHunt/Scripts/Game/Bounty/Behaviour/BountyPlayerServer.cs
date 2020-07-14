@@ -42,6 +42,7 @@ public class BountyPlayerServer : MonoBehaviour
         HunterCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
         HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
         HunterCommandReceiver.OnKickPlayerRequestReceived += OnKickPlayer;
+        HunterCommandReceiver.OnRefreshAppearanceRequestReceived += OnRefreshAppearance;
         Invoke("SetName", 1f);
 
         //StartCoroutine(BountyTick());
@@ -205,6 +206,7 @@ public class BountyPlayerServer : MonoBehaviour
         var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
         var user = await bbhbackend.GetUser(HunterComponentWriter.Data.Pubkey);
         var skin = await bbhbackend.GetUserSkin(HunterComponentWriter.Data.Pubkey);
+        Utility.Log("returning Skin: " + skin, Color.magenta);
         HunterComponentWriter.SendUpdate(new HunterComponent.Update { Name = user.Name, EquippedSkin = skin });
         GameStatsCommandSender.SendSetNameCommand(new EntityId(2), new SetNameRequest(HunterComponentWriter.Data.Name, LinkedEntityComponent.EntityId, HunterComponentWriter.Data.Pubkey));
 
@@ -242,5 +244,10 @@ public class BountyPlayerServer : MonoBehaviour
     public void KickPlayer()
     {
         wcs.SendDeleteEntityCommand(new Improbable.Gdk.Core.Commands.WorldCommands.DeleteEntity.Request { EntityId = this.LinkedEntityComponent.EntityId });
+    }
+
+    public void OnRefreshAppearance(HunterComponent.RefreshAppearance.ReceivedRequest obj)
+    {
+        if (obj.EntityId == this.entityId)SetName();
     }
 }

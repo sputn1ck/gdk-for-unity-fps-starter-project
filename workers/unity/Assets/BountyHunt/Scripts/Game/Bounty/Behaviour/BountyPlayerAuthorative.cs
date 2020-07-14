@@ -107,7 +107,11 @@ public class BountyPlayerAuthorative : MonoBehaviour
         });
     }
 
-
+    public void RefreshAppearance()
+    {
+        HunterComponent.RefreshAppearance.Request req = new HunterComponent.RefreshAppearance.Request(entityId, new Bountyhunt.Empty());
+        HunterComponentCommandSender.SendRefreshAppearanceCommand(req);
+    }
 
 
     private void OnApplicationQuit()

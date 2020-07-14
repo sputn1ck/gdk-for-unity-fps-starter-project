@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44d57a18e578b1478044ee33827d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walletbalance: 2000
   ThrowPaymentError: 0
 --- !u!114 &851089427456680485
 MonoBehaviour:
@@ -68,7 +69,11 @@ MonoBehaviour:
   bountyDropOnDeath: 1
   bountyConversion: 0.1
   bountyConversionTimeSeconds: 10
-  PlayerSkins: []
+  PlayerSkins:
+  - robot_2
+  - robot_3
+  - robot_4
+  - robot_5
   invokeKick: 0
   nameKick: 
   pubkeyKick: 
