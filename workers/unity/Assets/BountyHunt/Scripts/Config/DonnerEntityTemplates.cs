@@ -303,4 +303,29 @@ public class DonnerEntityTemplates
 
         return entityTemplate;
     }
+
+    public static EntityTemplate MovingPlatform(Vector3 position, Vector3 scale, UnityEngine.Quaternion rotation, EntityId roomId)
+    {
+        var transform = new TransformSync.Snapshot()
+        {
+            Transform = new Bountyhunt.TransformData(Utility.Vector3ToVector3Float(scale), Utility.QuatToBhQuat(rotation))
+        };
+        var roombound = new RoomBoundObject.Snapshot()
+        {
+            RoomEntityId = roomId
+        };
+        var animator = new AnimatorSync.Snapshot();
+        var entityTemplate = new EntityTemplate();
+        entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Metadata.Snapshot("MovingPlatform"), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(transform, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(roombound, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(animator, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
+        entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
+
+        return entityTemplate;
+    }
 }

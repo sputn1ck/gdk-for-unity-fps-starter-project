@@ -15,12 +15,13 @@ public class PrefabMap : Map
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null )
     {
         MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
+        foreach (var convertToEntity in MapGo.GetComponentsInChildren<IConvertToEntity>())
+        {
+            convertToEntity.Convert(worldCommandSender, this);
+        }
         if (isServer)
         {
-            foreach (var convertToEntity in MapGo.GetComponentsInChildren<IConvertToEntity>())
-            {
-                convertToEntity.Convert(worldCommandSender, this);
-            }
+            
             foreach (var childRenderer in MapGo.GetComponentsInChildren<Renderer>())
             {
                 childRenderer.enabled = false;
