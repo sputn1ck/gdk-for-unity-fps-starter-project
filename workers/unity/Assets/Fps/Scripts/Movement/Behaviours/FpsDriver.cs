@@ -175,7 +175,8 @@ namespace Fps.Movement
 
             if (viewChanger.thirdPerson)
             {
-                viewChanger.UpdateThirdPersonView(yawDelta,pitchDelta);
+                float zoomDelta = Input.mouseScrollDelta.y;
+                viewChanger.UpdateThirdPersonView(yawDelta,pitchDelta,zoomDelta);
                 yawDelta = 0;
                 pitchDelta = 0;
             }
