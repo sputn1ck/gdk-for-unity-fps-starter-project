@@ -555,6 +555,30 @@ MonoBehaviour:
   FirstPersonModel: {fileID: 1574605872312582}
   ThirdPersonModel: {fileID: 7810519271807415266}
   thirdPersonCameraSocket: {fileID: 2077297572423103181}
+  zoomShiftYCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0016415
+      value: 0.7016238
+      inSlope: 2.5412514
+      outSlope: 2.5412514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.034157753
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!81 &735483941144274747
 AudioListener:
   m_ObjectHideFlags: 0

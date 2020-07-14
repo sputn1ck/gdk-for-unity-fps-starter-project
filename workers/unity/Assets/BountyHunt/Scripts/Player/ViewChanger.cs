@@ -20,7 +20,7 @@ public class ViewChanger : MonoBehaviour
     const float minZoom = -5f;
     const float maxZoom = -0.6f;
     const float zoomSpeed= 0.05f;
-    const float zoomInYShift = 0.7f;
+    public AnimationCurve zoomShiftYCurve;
 
     public bool thirdPerson { get; private set; }
 
@@ -77,7 +77,7 @@ public class ViewChanger : MonoBehaviour
         currentZoom = Mathf.Clamp01(currentZoom + zoomChange);
         float z = Mathf.Lerp(minZoom, maxZoom, currentZoom);
         thirdPersonCameraTransform.localPosition = new Vector3(0, 0, z);
-        float yShift = currentZoom * zoomInYShift;
+        float yShift = zoomShiftYCurve.Evaluate(currentZoom);
         thirdPersonCameraTransform.position = thirdPersonCameraTransform.position + new Vector3(0, yShift, 0);
     }
 }
