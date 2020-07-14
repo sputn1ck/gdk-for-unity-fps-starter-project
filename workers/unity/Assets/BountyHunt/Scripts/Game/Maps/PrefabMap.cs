@@ -1,5 +1,6 @@
 using Fps.Respawning;
 using Improbable.Gdk.Core;
+using Improbable.Gdk.Subscriptions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,10 @@ public class PrefabMap : Map
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null )
     {
         MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
+        var origin = caller.GetComponent<LinkedEntityComponent>().Worker.Origin;
         foreach (var convertToEntity in MapGo.GetComponentsInChildren<IConvertToEntity>())
         {
-            convertToEntity.Convert(worldCommandSender, this);
+            convertToEntity.Convert(worldCommandSender, this, origin);
         }
         if (isServer)
         {

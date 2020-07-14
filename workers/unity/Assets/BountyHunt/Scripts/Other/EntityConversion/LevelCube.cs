@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class LevelCube : MonoBehaviour, IConvertToEntity
 {
-    public void Convert(WorldCommandSender worldCommandSender,Map map)
+    public void Convert(WorldCommandSender worldCommandSender, Map map, Vector3 Workerorigin)
     {
-        if(worldCommandSender == null)
+        if (worldCommandSender == null)
         {
             Destroy(gameObject);
             return;
         }
-        var cube = DonnerEntityTemplates.LevelCube(transform.position, transform.localScale, transform.rotation,map.EntityId);
+        var cube = DonnerEntityTemplates.LevelCube(transform.position-Workerorigin, transform.localScale, transform.rotation,map.EntityId);
 
         worldCommandSender.SendCreateEntityCommand(new Improbable.Gdk.Core.Commands.WorldCommands.CreateEntity.Request(cube), callback: (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)

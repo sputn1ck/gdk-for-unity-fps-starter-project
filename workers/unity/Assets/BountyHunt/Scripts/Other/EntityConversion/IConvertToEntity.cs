@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IConvertToEntity
 {
-    void Convert(WorldCommandSender worldCommandSender, Map map);
+    void Convert(WorldCommandSender worldCommandSender, Map map, Vector3 workerOrigin);
 }

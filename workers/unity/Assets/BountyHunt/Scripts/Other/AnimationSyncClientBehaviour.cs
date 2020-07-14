@@ -13,7 +13,7 @@ public class AnimationSyncClientBehaviour : MonoBehaviour
     [Require] EntityId EntityId;
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()

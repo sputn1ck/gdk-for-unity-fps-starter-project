@@ -13,7 +13,7 @@ public class AnimationSyncServerBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
     private void OnEnable()
     {

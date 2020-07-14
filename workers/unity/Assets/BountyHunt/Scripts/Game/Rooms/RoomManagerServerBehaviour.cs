@@ -16,7 +16,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     [Require] WorldCommandSender WorldCommandSender;
     [Require] EntityId EntityId;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
-    LinkedEntityComponent LinkedEntityComponent;
+    public LinkedEntityComponent LinkedEntityComponent;
 
     private Map mapInfo;
 
