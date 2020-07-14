@@ -1,0 +1,20 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+component TransformSync {
+    id = 490001;
+
+    TransformData transform = 1;
+}
+
+component RoomBoundObject {
+    id = 490002;
+    
+    EntityId room_entity_id = 1;
+}
+
+type TransformData {
+    bountyhunt.Vector3Float scale = 1;
+    bountyhunt.Quaternion rotation = 2;
+}

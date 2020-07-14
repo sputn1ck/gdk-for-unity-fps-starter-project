@@ -66,7 +66,6 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
             RoomEntityid = room.EntityId,
             RoomId = room.RoomId
         });
-        
     }
 
     public void RequestJoinCantina()

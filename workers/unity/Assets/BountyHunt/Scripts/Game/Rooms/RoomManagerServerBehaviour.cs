@@ -13,6 +13,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandReceiver RoomManagerCommandReceiver;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandSender RoomPlayerCommandSender;
+    [Require] WorldCommandSender WorldCommandSender;
     [Require] EntityId EntityId;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     LinkedEntityComponent LinkedEntityComponent;
@@ -32,8 +33,15 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
         RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
         RoomManagerCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
+        RoomManagerCommandReceiver.OnAddRoomboundObjectRequestReceived += AddRoomBoundObject;
         InitializePlayerStats();
     }
+
+    private void AddRoomBoundObject(RoomManager.AddRoomboundObject.ReceivedRequest obj)
+    {
+        mapInfo.LevelObjects.Add(obj.Payload.EntityId);
+    }
+
     private  void InitializePlayerStats()
     {
 
@@ -49,7 +57,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     }
     private void RequestStats(RoomManager.RequestStats.ReceivedRequest obj)
     {
-        RoomManagerCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, true));
+        RoomManagerCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
 
     private void ReadyToJoin(RoomManager.ReadyToJoin.ReceivedRequest obj)
@@ -132,13 +140,27 @@ public class RoomManagerServerBehaviour : MonoBehaviour
             }
             
         }
-        RoomManagerWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap, false));
+        RoomManagerWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap ,new List<string>() , false));
     }
 
 
     private void Initialize()
     {
         mapInfo = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId));
-        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData);
+        mapInfo.EntityId = EntityId;
+        mapInfo.LevelObjects = new List<EntityId>();
+        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData, null, WorldCommandSender);
+    }
+
+    private void OnDisable()
+    {
+        var levelObjects = mapInfo.LevelObjects;
+        foreach(var levelObject in levelObjects)
+        {
+            Debug.Log("deleting entityid: "+ levelObject.Id.ToString());
+            WorldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(levelObject));
+        }
+        mapInfo.Remove();
+        Destroy(mapInfo);
     }
 }

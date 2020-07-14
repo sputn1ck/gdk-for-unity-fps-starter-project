@@ -57,7 +57,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         {
             if (room.Value.RoomId.Contains("cantina"))
             {
-                break;
+                continue;
             }
             var label = string.Format("P:{0}, GM:{1}, MAP:{2}", room.Value.ActivePlayers.Count, room.Value.GamemodeId,room.Value.MapInfo.MapId);
             UnityAction action = () =>

@@ -29,7 +29,7 @@ public static class Utility
     {
         t.localPosition = Vector3.zero;
         t.localScale = Vector3.one;
-        t.localRotation = Quaternion.identity;
+        t.localRotation = UnityEngine.Quaternion.identity;
     }
 
     public static long Abs(long input)
@@ -234,5 +234,15 @@ public static class Utility
     public static Vector3Float Vector3ToVector3Float(Vector3 vector)
     {
         return new Vector3Float(vector.x, vector.y, vector.z);
+    }
+
+    public static Bountyhunt.Quaternion QuatToBhQuat(UnityEngine.Quaternion q)
+    {
+        return new Bountyhunt.Quaternion(q.w, q.x, q.y, q.z);
+    }
+
+    public static UnityEngine.Quaternion BhQuatToQuat(Bountyhunt.Quaternion q)
+    {
+        return new UnityEngine.Quaternion(q.X, q.Y, q.Z, q.W);
     }
 }

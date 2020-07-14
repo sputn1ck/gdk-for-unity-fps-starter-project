@@ -1,4 +1,5 @@
 using Fps.Respawning;
+using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,15 @@ public class PrefabMap : Map
 
     private GameObject MapGo;
     private SpawnPoints spawnPoints;
-    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
+    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null )
     {
         MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
         if (isServer)
         {
+            foreach (var convertToEntity in MapGo.GetComponentsInChildren<IConvertToEntity>())
+            {
+                convertToEntity.Convert(worldCommandSender, this);
+            }
             foreach (var childRenderer in MapGo.GetComponentsInChildren<Renderer>())
             {
                 childRenderer.enabled = false;

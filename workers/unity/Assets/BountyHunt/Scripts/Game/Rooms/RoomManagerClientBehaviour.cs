@@ -35,6 +35,13 @@ public class RoomManagerClientBehaviour : MonoBehaviour
                 playerStats[kv.Key] = kv.Value;
             }
         }
+        if(obj.RemovePlayers != null)
+        {
+            foreach (var keys in obj.RemovePlayers)
+            {
+                playerStats.Remove(keys);
+            }
+        }
     }
 
     private void OnDisable()

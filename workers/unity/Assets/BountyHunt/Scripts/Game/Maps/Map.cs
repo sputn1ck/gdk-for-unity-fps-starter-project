@@ -1,3 +1,4 @@
+using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,10 @@ using UnityEngine.Events;
 public abstract class Map : ScriptableObject
 {
     public string MapId;
+    public EntityId EntityId;
     public MapSettings Settings;
-
-    public abstract void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null);
+    public List<EntityId> LevelObjects;
+    public abstract void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null);
 
     public abstract Vector3 GetSpawnPoint();
     public abstract void Remove();

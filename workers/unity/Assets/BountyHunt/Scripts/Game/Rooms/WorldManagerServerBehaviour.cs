@@ -18,7 +18,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     
     public bool startGenerated;
-    public static int cantinaPlayers = 0;
+    public static int cantinaPlayers = 20;
     private void OnEnable()
     {
         WorldManagerCommandReceiver.OnEndRoomRequestReceived += OnEndRoom;
@@ -60,9 +60,8 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         var map = WorldManagerWriter.Data.ActivePlayers;
         var bbhbackend = ServerServiceConnections.instance.BackendGameServerClient;
         var user = await bbhbackend.GetUser(res.Pubkey);
-        if (!map.ContainsKey(res.Pubkey))
+        if (!map.ContainsKey(obj.Payload.PlayerPk))
         {
-            
             map.Add(obj.Payload.PlayerPk, new Bountyhunt.PlayerInfo(obj.Payload.PlayerId, user.Name,new EntityId(0)));
         } else
         {

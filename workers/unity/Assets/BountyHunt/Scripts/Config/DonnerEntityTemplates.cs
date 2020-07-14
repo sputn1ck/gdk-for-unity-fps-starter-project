@@ -4,7 +4,6 @@ using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.PlayerLifecycle;
 
-
 using Improbable.Gdk.TransformSynchronization;
 using Fps;
 using Fps.Config;
@@ -24,7 +23,6 @@ public class DonnerEntityTemplates
     {
         var position = new Position.Snapshot(spawnerCoordinates);
         var metadata = new Metadata.Snapshot("PlayerCreator");
-
         var template = new EntityTemplate();
         template.AddComponent(position, WorkerUtils.UnityGameLogic);
         template.AddComponent(metadata, WorkerUtils.UnityGameLogic);
@@ -203,8 +201,9 @@ public class DonnerEntityTemplates
     {
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
-        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
-
+        var entityTemplate = new EntityTemplate();
+        entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        
         entityTemplate.AddComponent(new Metadata.Snapshot("RoomManager"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
 
@@ -269,11 +268,35 @@ public class DonnerEntityTemplates
     {
         var tracerComponent = new TracerComponent.Snapshot() { AttachedHunter = attachedHunter };
 
-        var entityTemplate = new EntityTemplate(); entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        var entityTemplate = new EntityTemplate();
+        entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Metadata.Snapshot("BountyTracer"), WorkerUtils.UnityGameLogic);
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(tracerComponent, WorkerUtils.UnityGameLogic);
+
+        entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
+        entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);
+
+        return entityTemplate;
+    }
+
+    public static EntityTemplate LevelCube(Vector3 position, Vector3 scale, UnityEngine.Quaternion rotation, EntityId roomId)
+    {
+        var transform = new TransformSync.Snapshot()
+        {
+            Transform = new Bountyhunt.TransformData(Utility.Vector3ToVector3Float(scale), Utility.QuatToBhQuat(rotation))
+        };
+        var roombound = new RoomBoundObject.Snapshot()
+        {
+            RoomEntityId = roomId
+        };
+        var entityTemplate = new EntityTemplate();
+        entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Metadata.Snapshot("LevelCube"), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(transform, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(roombound, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

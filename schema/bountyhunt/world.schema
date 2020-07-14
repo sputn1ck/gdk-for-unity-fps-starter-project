@@ -37,6 +37,7 @@ component RoomManager {
     command bountyhunt.Empty add_player(AddPlayerRequest);
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
     command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
+    command bountyhunt.Empty add_roombound_object(AddRoomBountyObjectRequest);
 }
 
 component RoomPlayer {
@@ -75,7 +76,8 @@ type Room {
 
 type PlayerStatsUpdate {
     map<string,PlayerStats> player_stats = 1;
-    bool replace_map = 2;
+    list<string> remove_players = 2;
+    bool replace_map = 3;
 }
 
 type JoinRoomRequest {
@@ -140,4 +142,8 @@ type AddActivePlayerRequest {
 
 type RemoveActivePlayerRequest {
     string player_pk = 1;
+}
+
+type AddRoomBountyObjectRequest{
+    EntityId entity_id = 1;
 }

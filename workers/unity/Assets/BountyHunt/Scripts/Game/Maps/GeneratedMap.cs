@@ -1,5 +1,6 @@
 using Fps.Respawning;
 using Fps.WorldTiles;
+using Improbable.Gdk.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class GeneratedMap : Map
     public GameObject mapGO;
     private SpawnPoints spawnPoints;
 
-    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null)
+    public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null)
     {
         var workerType = isServer ? "server" : "client";
         caller.StartCoroutine(LoadWorld(caller.transform, layers, workerType, isServer, mapData, onFinished));
