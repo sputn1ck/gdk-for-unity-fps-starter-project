@@ -8,7 +8,7 @@ public class ClientEvents : MonoBehaviour
 {
     public static ClientEvents instance;
 
-    [HideInInspector] public BoolEvent onOpponentHit = new BoolEvent();
+    [HideInInspector] public BoolEvent onTargetHit = new BoolEvent();
 
     [HideInInspector] public UnityEvent onMapLoaded = new UnityEvent();
     [HideInInspector] public UnityEvent onGameJoined = new UnityEvent();

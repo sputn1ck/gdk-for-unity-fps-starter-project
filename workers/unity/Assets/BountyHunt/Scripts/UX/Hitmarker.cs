@@ -9,7 +9,7 @@ public class Hitmarker : MonoBehaviour
     public AudioClip hitmarkerSound;
     void Start()
     {
-        ClientEvents.instance.onOpponentHit.AddListener(OnHit);
+        ClientEvents.instance.onTargetHit.AddListener(OnHit);
     }
 
     private void OnHit(bool headshot)

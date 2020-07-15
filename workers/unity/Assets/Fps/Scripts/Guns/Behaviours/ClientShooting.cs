@@ -41,7 +41,7 @@ namespace Fps.Guns
         {
             shotTrigger = new Trigger(gunTriggerAllowance);
 
-            OnPlayerHit.AddListener(ClientEvents.instance.onOpponentHit.Invoke);
+            OnPlayerHit.AddListener(ClientEvents.instance.onTargetHit.Invoke);
         }
 
         public void InitiateCooldown(float cooldown)
@@ -102,12 +102,20 @@ namespace Fps.Guns
                         headShot = localhit.y > 1.5;
                         OnPlayerHit.Invoke(headShot);
 
-                        Debug.Log("Hit Location: " + localhit +"; "+ headShot);
+                        Debug.Log("Hit Location: " + localhit + "; " + headShot);
                     }
-                    
-
-                    
                 }
+                else
+                {
+                    var shootable = hit.transform.GetComponent<IShootable>();
+                    if (shootable != null)
+                    {
+                        var res = shootable.OnHit();
+                        Utility.Log("hit target", res.headshot ? Color.green : Color.red);
+                        ClientEvents.instance.onTargetHit.Invoke(res.headshot);
+                    }
+                }
+                
             }
 
             var shotInfo = new ShotInfo()
