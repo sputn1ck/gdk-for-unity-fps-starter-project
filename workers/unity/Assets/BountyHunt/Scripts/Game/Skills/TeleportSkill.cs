@@ -13,6 +13,7 @@ public class TeleportSkill : PlayerSkill
     public float Distance;
     public override CastResponse ServerCastSkill(ServerPlayerSkillBehaviour player)
     {
+        Vector3 enterPosition = player.transform.position;
         JsonUtility.FromJson("", typeof(TeleportPayload));
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
@@ -27,10 +28,21 @@ public class TeleportSkill : PlayerSkill
         }
         pos = SpawnPoints.SnapToGround(pos);
         Debug.Log("teleport invoice paid!!" + pos);
-
+        Vector3 exitPosition = player.transform.position;
 
         //var (pos, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
-
+        Bountyhunt.EffectInfo info = new Bountyhunt.EffectInfo
+        {
+            Key = "TeleportEnter",
+            Position = enterPosition.ToBbhVector(),
+            RotationEuler = player.transform.rotation.eulerAngles.ToBbhVector(),
+            Parent = Bountyhunt.EffectParent.ROOM,
+            PositionIsLocal = false
+        };
+        player.effectSpawnerComponentCommandSender.SendSpawnEffectCommand(player.entityId, info);
+        info.Key = "TeleportExit";
+        info.Position = exitPosition.ToBbhVector();
+        player.effectSpawnerComponentCommandSender.SendSpawnEffectCommand(player.entityId, info);
 
         // Move to a spawn point (position and rotation)
         var newLatest = new ServerResponse
