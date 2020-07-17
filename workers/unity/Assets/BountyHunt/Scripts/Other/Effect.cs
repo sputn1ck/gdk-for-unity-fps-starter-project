@@ -10,6 +10,8 @@ public class Effect : MonoBehaviour
 
     public float LifetTime = 10;
 
+    public AudioClip soundEffect;
+
     private void Start()
     {
         if (selfDestroy) StartCoroutine(DestroyEnumerator());

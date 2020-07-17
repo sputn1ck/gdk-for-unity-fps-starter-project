@@ -11,7 +11,7 @@ public class EffectSpawnBehaviour : MonoBehaviour
     public List<Effect> effects;
     Dictionary<string,Effect> effectsDict;
 
-    public LinkedEntityComponent LinkedEntityComponent;
+    [HideInInspector]public LinkedEntityComponent LinkedEntityComponent;
 
 
     private void Awake()
@@ -58,6 +58,11 @@ public class EffectSpawnBehaviour : MonoBehaviour
         {
             effect.transform.position = info.Position.convert() + LinkedEntityComponent.Worker.Origin;
             effect.transform.rotation = Quaternion.Euler(info.RotationEuler.convert());
+        }
+
+        if(effect.soundEffect != null)
+        {
+            AudioManager.instance.spawnSound(effect.soundEffect, effect.transform);
         }
 
     }
