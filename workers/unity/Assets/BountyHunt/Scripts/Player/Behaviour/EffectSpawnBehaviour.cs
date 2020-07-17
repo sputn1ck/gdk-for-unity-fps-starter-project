@@ -11,6 +11,9 @@ public class EffectSpawnBehaviour : MonoBehaviour
     public List<Effect> effects;
     Dictionary<string,Effect> effectsDict;
 
+    public LinkedEntityComponent LinkedEntityComponent;
+
+
     private void Awake()
     {
         effectsDict = new Dictionary<string, Effect>();
@@ -23,6 +26,7 @@ public class EffectSpawnBehaviour : MonoBehaviour
     private void OnEnable()
     {
         effectSpawnerComponentCommandReceiver.OnSpawnEffectRequestReceived += OnSpawnEffect;
+        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
     }
 
     void OnSpawnEffect(EffectSpawnerComponent.SpawnEffect.ReceivedRequest obj)
@@ -47,12 +51,12 @@ public class EffectSpawnBehaviour : MonoBehaviour
         var effect = Instantiate(effectsDict[info.Key],parent);
         if (info.PositionIsLocal)
         {
-            effect.transform.localPosition = info.Position.convert();
+            effect.transform.localPosition = info.Position.convert() + LinkedEntityComponent.Worker.Origin;
             effect.transform.localRotation = Quaternion.Euler(info.RotationEuler.convert());
         }
         else
         {
-            effect.transform.position = info.Position.convert();
+            effect.transform.position = info.Position.convert() + LinkedEntityComponent.Worker.Origin;
             effect.transform.rotation = Quaternion.Euler(info.RotationEuler.convert());
         }
 
