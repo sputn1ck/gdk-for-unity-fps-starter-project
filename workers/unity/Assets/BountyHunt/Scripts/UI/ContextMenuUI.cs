@@ -59,8 +59,7 @@ public class ContextMenuUI : MonoBehaviour
     }
     void ReplaceCurrent(ContextMenuArgs args)
     {
-        if (currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) currentLookAtMenu = null;
-
+        
         if (currentMenu.CloseAction != null)
         {
             currentMenu.CloseAction.Invoke();
@@ -193,7 +192,8 @@ public class ContextMenuUI : MonoBehaviour
 
     }
 
-    [ContextMenuItem("Test queueElement", "TestQueue")]
+    [ContextMenuItem("Test replaceElement", "TestQueue")]
+    [ContextMenuItem("Test queueElement", "TestReplace")]
     public string testString;
 
     public void TestQueue()
@@ -203,6 +203,17 @@ public class ContextMenuUI : MonoBehaviour
             Headline = testString,
             Text = "random " + Random.Range(1000, 9999),
             Type = ContextMenuType.QUEUE
+        };
+        Instance.Set(args);
+    }
+
+    public void TestReplace()
+    {
+        ContextMenuArgs args = new ContextMenuArgs
+        {
+            Headline = testString,
+            Text = "random " + Random.Range(1000, 9999),
+            Type = ContextMenuType.REPLACE
         };
         Instance.Set(args);
     }
