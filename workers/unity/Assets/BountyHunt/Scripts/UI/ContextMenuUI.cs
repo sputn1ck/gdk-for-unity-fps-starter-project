@@ -17,9 +17,6 @@ public class ContextMenuUI : MonoBehaviour
 
     float hideTime;
 
-    UnityAction OpenAction;
-    UnityAction CloseAction;
-
     private List<ContextMenuArgs> queue = new List<ContextMenuArgs>();
     private ContextMenuArgs currentLookAtMenu;
     private ContextMenuArgs currentMenu;
@@ -62,8 +59,14 @@ public class ContextMenuUI : MonoBehaviour
     }
     void ReplaceCurrent(ContextMenuArgs args)
     {
-        SetCurrent(args);
+        if (currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) currentLookAtMenu = null;
 
+        if (currentMenu.CloseAction != null)
+        {
+            currentMenu.CloseAction.Invoke();
+        }
+
+        SetCurrent(args);
     }
     public void SetLookAtMenu(ContextMenuArgs args)
     {
@@ -121,25 +124,23 @@ public class ContextMenuUI : MonoBehaviour
             }
         }
 
-        OpenAction = args.OpenAction;
-        CloseAction = args.CloseAction;
 
-        if (OpenAction != null)
+        if (currentMenu.OpenAction != null)
         {
-            OpenAction.Invoke();
+            currentMenu.OpenAction.Invoke();
         }
     }
 
-    public void CloseCurrent()
+    public void CloseCurrentAndShowNext()
     {
         currentMenu = null;
         gameObject.SetActive(false);
 
         if (currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) currentLookAtMenu = null;
 
-        if (CloseAction != null)
+        if (currentMenu.CloseAction != null)
         {
-            CloseAction.Invoke();
+            currentMenu.CloseAction.Invoke();
         }
 
         if(queue.Count > 0)
@@ -167,7 +168,7 @@ public class ContextMenuUI : MonoBehaviour
     {
         if (Time.time >= hideTime)
         {
-            CloseCurrent();
+            CloseCurrentAndShowNext();
             return;
         }
 
@@ -187,7 +188,7 @@ public class ContextMenuUI : MonoBehaviour
 
         if (InputKeyMapping.MappedKeyDown("ContextCloseAction_Key"))
         {
-            CloseCurrent();
+            CloseCurrentAndShowNext();
         }
 
     }

@@ -112,7 +112,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 
     async void IncreasePlayerBounty(long sats)
     {
-        ContextMenuUI.Instance.CloseCurrent();
+        ContextMenuUI.Instance.CloseCurrentAndShowNext();
         
         try
         {
