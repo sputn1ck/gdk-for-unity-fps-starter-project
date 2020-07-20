@@ -15,6 +15,11 @@ component BountySpawner {
     command bountyhunt.Empty start_spawning(StartSpawningRequest);
 }
 
+component BountyComponent {
+    id = 420004;
+    int64 bounty = 1;
+}
+
 type SpawnBountyPickupRequest {
     int64 bounty_value = 1;
     bountyhunt.Vector3Float position = 2;

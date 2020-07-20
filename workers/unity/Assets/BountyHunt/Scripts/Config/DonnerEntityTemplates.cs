@@ -201,6 +201,8 @@ public class DonnerEntityTemplates
     {
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
+        var roomStatsComponent = new RoomStats.Snapshot();
+
         var entityTemplate = new EntityTemplate();
         entityTemplate.AddComponent(new Position.Snapshot(Coordinates.FromUnityVector(position)), WorkerUtils.UnityGameLogic);
         
@@ -208,6 +210,7 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(new Persistence.Snapshot(), WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(roomManagerComponent, WorkerUtils.UnityGameLogic);
+        entityTemplate.AddComponent(roomStatsComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.SetReadAccess(WorkerUtils.UnityGameLogic, WorkerUtils.UnityClient);
         entityTemplate.SetComponentWriteAccess(EntityAcl.ComponentId, WorkerUtils.UnityGameLogic);

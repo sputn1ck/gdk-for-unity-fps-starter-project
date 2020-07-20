@@ -11,6 +11,8 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 {
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] RoomManagerCommandReceiver RoomManagerCommandReceiver;
+    [Require] RoomStatsWriter RoomStatsWriter;
+    [Require] RoomStatsCommandReceiver RoomStatsCommandReceiver;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandSender RoomPlayerCommandSender;
     [Require] WorldCommandSender WorldCommandSender;
@@ -32,7 +34,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomManagerCommandReceiver.OnAddPlayerRequestReceived += AddPlayer;
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
         RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
-        RoomManagerCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
+        RoomStatsCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
         RoomManagerCommandReceiver.OnAddRoomboundObjectRequestReceived += AddRoomBoundObject;
         InitializePlayerStats();
     }
@@ -55,9 +57,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         SendUpdates(room);
 
     }
-    private void RequestStats(RoomManager.RequestStats.ReceivedRequest obj)
+    private void RequestStats(RoomStats.RequestStats.ReceivedRequest obj)
     {
-        RoomManagerCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
+        RoomStatsCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
 
     private void ReadyToJoin(RoomManager.ReadyToJoin.ReceivedRequest obj)
@@ -140,7 +142,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
             }
             
         }
-        RoomManagerWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap ,new List<string>() , false));
+        RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap ,new List<string>() , false));
     }
 
 

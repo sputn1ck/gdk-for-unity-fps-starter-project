@@ -32,12 +32,37 @@ component RoomManager {
 
     Room room_info = 1;
 
-    event PlayerStatsUpdate map_update;
-    command PlayerStatsUpdate request_stats(bountyhunt.Empty);
     command bountyhunt.Empty add_player(AddPlayerRequest);
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
     command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
     command bountyhunt.Empty add_roombound_object(AddRoomBountyObjectRequest);
+}
+
+component RoomStats {
+    id = 480004;
+
+    
+    event PlayerStatsUpdate map_update;
+    command PlayerStatsUpdate request_stats(bountyhunt.Empty);
+
+    command bountyhunt.Empty add_kill(AddKillRequest);
+    command bountyhunt.Empty add_earnings(AddEarningsRequest);
+    command bountyhunt.Empty set_bounty(SetBountyRequest);
+}
+
+type AddKillRequest {
+    string killer_id = 1;
+    string victim_id = 2;
+}
+
+type AddEarningsRequest {
+    string player_id = 1;
+    int64 earnings = 2;
+}
+
+type SetBountyRequest {
+    string player_id = 1;
+    int64 bounty = 2;
 }
 
 component RoomPlayer {

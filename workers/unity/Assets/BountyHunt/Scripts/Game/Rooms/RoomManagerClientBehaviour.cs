@@ -9,7 +9,9 @@ using Improbable.Gdk.Core.Commands;
 public class RoomManagerClientBehaviour : MonoBehaviour
 {
     [Require] RoomManagerReader RoomManagerReader;
+    [Require] RoomStatsReader RoomStatsReader;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
+    [Require] RoomStatsCommandSender RoomStatsCommandSender;
     [Require] EntityId EntityId;
 
 
@@ -19,7 +21,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     {
         Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.RoomId);
         Initialize();
-        RoomManagerReader.OnMapUpdateEvent += OnStatsUpdate;
+        RoomStatsReader.OnMapUpdateEvent += OnStatsUpdate;
     }
 
     private void OnStatsUpdate(PlayerStatsUpdate obj)
@@ -58,7 +60,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
         BBHUIManager.instance.mainMenu.BlendImage(true);
         map.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.MapInfo.MapData, () => {
             // initializing finished
-            RoomManagerCommandSender.SendRequestStatsCommand(EntityId, new Bountyhunt.Empty(),(cb) => {
+            RoomStatsCommandSender.SendRequestStatsCommand(EntityId, new Bountyhunt.Empty(),(cb) => {
                 if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
                 {
                     BBHUIManager.instance.mainMenu.BlendImage(false);
