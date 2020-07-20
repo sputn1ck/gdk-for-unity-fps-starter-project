@@ -11,8 +11,7 @@ public class ContextMenuUI : MonoBehaviour
     public TextMeshProUGUI text;
     public Image image;
     public List<ContextMenuActionUI> actionUIs;
-
-    string reference;
+    public float LookAtHideDelay = 1f;
 
     public static ContextMenuUI Instance;
 
@@ -21,25 +20,73 @@ public class ContextMenuUI : MonoBehaviour
     UnityAction OpenAction;
     UnityAction CloseAction;
 
+    private List<ContextMenuArgs> queue = new List<ContextMenuArgs>();
+    private ContextMenuArgs currentLookAtMenu;
+    private ContextMenuArgs currentMenu;
+
+    
     private void Awake()
     {
         gameObject.SetActive(false);
         Instance = this;   
     }
 
-    /// <summary>
-    /// sets up the context menu, aborts if there is a contextmenu already
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns>true if not aborted</returns>
-    public bool Set(ContextMenuArgs args)
+    public void Set(ContextMenuArgs args)
     {
-        if (gameObject.activeSelf) return false;
+        switch (args.Type)
+        {
+            case ContextMenuType.QUEUE:
+            default:
+                AddToQueue(args);
+                break;
+            case ContextMenuType.REPLACE:
+                ReplaceCurrent(args);
+                break;
+            case ContextMenuType.LOOKAT:
+                SetLookAtMenu(args);
+                break;
+        }
+
+    }
+
+    void AddToQueue(ContextMenuArgs args)
+    {
+        if(currentMenu!= null && currentMenu.Type != ContextMenuType.LOOKAT)
+        {
+            queue.Add(args);
+        }
+        else
+        {
+            SetCurrent(args);
+        }
+    }
+    void ReplaceCurrent(ContextMenuArgs args)
+    {
+        SetCurrent(args);
+
+    }
+    public void SetLookAtMenu(ContextMenuArgs args)
+    {
+        currentLookAtMenu = args;
+
+        if(currentMenu == null || currentMenu.Type == ContextMenuType.LOOKAT)
+        {
+            SetCurrent(args);
+        }
+    }
+
+    public void UnsetLookAtMenu()
+    {
+        currentLookAtMenu = null;
+        hideTime = Time.time + LookAtHideDelay;
+    }
+    private void SetCurrent(ContextMenuArgs args)
+    {
+        currentMenu = args;
 
         hideTime = Time.time + args.lifeTime;
 
         gameObject.SetActive(true);
-        reference = args.ReferenceString;
         this.headline.text = args.Headline;
 
         if (args.Text != "") {
@@ -81,30 +128,31 @@ public class ContextMenuUI : MonoBehaviour
         {
             OpenAction.Invoke();
         }
-        return true;
     }
 
-    public void Hide(string reference)
+    public void CloseCurrent()
     {
-        if (this.reference!= reference) return;
-        Hide();
-
-    }
-
-    private void Hide()
-    {
-        reference = "";
+        currentMenu = null;
         gameObject.SetActive(false);
+
+        if (currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) currentLookAtMenu = null;
+
         if (CloseAction != null)
         {
             CloseAction.Invoke();
         }
-    }
 
-    public void UpdateText(string text, string reference)
-    {
-        if (this.reference != reference) return;
-        this.text.text = text;
+        if(queue.Count > 0)
+        {
+            SetCurrent(queue[0]);
+            queue.RemoveAt(0);
+        }
+
+        else if (currentLookAtMenu != null)
+        {
+            SetCurrent(currentLookAtMenu);
+        }
+
     }
 
 
@@ -119,7 +167,7 @@ public class ContextMenuUI : MonoBehaviour
     {
         if (Time.time >= hideTime)
         {
-            Hide();
+            CloseCurrent();
             return;
         }
 
@@ -137,13 +185,30 @@ public class ContextMenuUI : MonoBehaviour
             }
         }
 
+        if (InputKeyMapping.MappedKeyDown("ContextCloseAction_Key"))
+        {
+            CloseCurrent();
+        }
+
     }
 
+    [ContextMenuItem("Test queueElement", "TestQueue")]
+    public string testString;
+
+    public void TestQueue()
+    {
+        ContextMenuArgs args = new ContextMenuArgs
+        {
+            Headline = testString,
+            Text = "random " + Random.Range(1000, 9999),
+            Type = ContextMenuType.QUEUE
+        };
+        Instance.Set(args);
+    }
 }
 
 public class ContextMenuArgs
 {
-    public string ReferenceString;
     public string Headline = "";
     public string Text =  "";
     public Sprite ImageSprite = null;
@@ -153,4 +218,10 @@ public class ContextMenuArgs
     public float lifeTime = 10;
     public UnityAction OpenAction = null;
     public UnityAction CloseAction = null;
+    public ContextMenuType Type;
+}
+
+public enum ContextMenuType
+{
+    QUEUE,REPLACE,LOOKAT
 }

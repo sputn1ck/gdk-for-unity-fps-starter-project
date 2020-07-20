@@ -61,27 +61,25 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health ,Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = mainID,
             Headline = hunterComponentReader.Data.Name,
             Text = text,
             Actions = actions,
             ImageSprite = badge.sprite,
             ImageColor = badge.color,
             OpenAction = Subscribe,
-            CloseAction = Unsubscribe
+            CloseAction = Unsubscribe,
+            Type = ContextMenuType.LOOKAT
         };
         ContextMenuUI.Instance.Set(args);
     }
 
     public void OnLookAtExit()
     {
-        ContextMenuUI.Instance.Hide(mainID);
+        ContextMenuUI.Instance.UnsetLookAtMenu();
     }
 
     void OpenPlayerBountyIncreaseMenu()
     {
-        ContextMenuUI.Instance.Hide(mainID);
-
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
 
         AddBountyIncreaseActionToList(ref actions, 100);
@@ -89,14 +87,13 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         AddBountyIncreaseActionToList(ref actions, 1000);
         AddBountyIncreaseActionToList(ref actions, 5000);
         AddBountyIncreaseActionToList(ref actions, 10000);
-        actions.Add((() => { ContextMenuUI.Instance.Hide(subMenuID); }, "close"));
         string text = GameText.IncreasePlayerBountyContextMenuText;
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = subMenuID,
             Headline = hunterComponentReader.Data.Name,
             Text = text,
-            Actions = actions
+            Actions = actions,
+            Type = ContextMenuType.REPLACE
         };
         ContextMenuUI.Instance.Set(args);
     }
@@ -115,7 +112,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 
     async void IncreasePlayerBounty(long sats)
     {
-        ContextMenuUI.Instance.Hide(subMenuID);
+        ContextMenuUI.Instance.CloseCurrent();
         
         try
         {
@@ -156,7 +153,8 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     }
     void UpdateText()
     {
-        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
-        ContextMenuUI.Instance.UpdateText(text, mainID);
+        OnLookAtEnter();
+        //string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
+        //ContextMenuUI.Instance.UpdateText(text, mainID);
     }
 }
