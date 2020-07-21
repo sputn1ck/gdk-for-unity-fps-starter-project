@@ -11,7 +11,7 @@ public class ContextMenuUI : MonoBehaviour
     public TextMeshProUGUI text;
     public Image image;
     public List<ContextMenuActionUI> actionUIs;
-    public float LookAtHideDelay = 1f;
+    public ContextMenuActionUI closeActionUI;
 
     public static ContextMenuUI Instance;
 
@@ -21,11 +21,20 @@ public class ContextMenuUI : MonoBehaviour
     private ContextMenuArgs currentLookAtMenu;
     private ContextMenuArgs currentMenu;
 
-    
+    const float defaultLifeTime = 10;
+    const float defaultLookAtHideDelay = 0;
+
+
     private void Awake()
     {
         gameObject.SetActive(false);
         Instance = this;   
+    }
+
+    private void OnEnable()
+    {
+        closeActionUI.keyText.text = GameText.GetKeyName(InputKeyMapping.GetKeyCode("ContextCloseAction_Key"));
+        closeActionUI.labelText.text = GameText.ContextMenuCloseActionLabel;
     }
 
     public void Set(ContextMenuArgs args)
@@ -74,19 +83,28 @@ public class ContextMenuUI : MonoBehaviour
         if(currentMenu == null || currentMenu.Type == ContextMenuType.LOOKAT)
         {
             SetCurrent(args);
+            hideTime = float.PositiveInfinity;
         }
+
     }
 
     public void UnsetLookAtMenu()
     {
+        if(currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) hideTime = Time.time + currentMenu.LifeTime;
         currentLookAtMenu = null;
-        hideTime = Time.time + LookAtHideDelay;
     }
     private void SetCurrent(ContextMenuArgs args)
     {
+        if(args.LifeTime == -1)
+        {
+            args.LifeTime = args.Type == ContextMenuType.LOOKAT ? defaultLookAtHideDelay : defaultLifeTime;
+        }
+
+        closeActionUI.gameObject.SetActive(args.Type != ContextMenuType.LOOKAT);
+
         currentMenu = args;
 
-        hideTime = Time.time + args.lifeTime;
+        hideTime = Time.time + args.LifeTime;
 
         gameObject.SetActive(true);
         this.headline.text = args.Headline;
@@ -132,7 +150,6 @@ public class ContextMenuUI : MonoBehaviour
 
     public void CloseCurrentAndShowNext()
     {
-        currentMenu = null;
         gameObject.SetActive(false);
 
         if (currentMenu != null && currentMenu.Type == ContextMenuType.LOOKAT) currentLookAtMenu = null;
@@ -141,6 +158,7 @@ public class ContextMenuUI : MonoBehaviour
         {
             currentMenu.CloseAction.Invoke();
         }
+        currentMenu = null;
 
         if(queue.Count > 0)
         {
@@ -151,6 +169,7 @@ public class ContextMenuUI : MonoBehaviour
         else if (currentLookAtMenu != null)
         {
             SetCurrent(currentLookAtMenu);
+            hideTime = float.PositiveInfinity;
         }
 
     }
@@ -185,38 +204,13 @@ public class ContextMenuUI : MonoBehaviour
             }
         }
 
-        if (InputKeyMapping.MappedKeyDown("ContextCloseAction_Key"))
+        if (InputKeyMapping.MappedKeyDown("ContextCloseAction_Key")&&currentMenu.Type != ContextMenuType.LOOKAT)
         {
             CloseCurrentAndShowNext();
         }
 
     }
 
-    [ContextMenuItem("Test replaceElement", "TestQueue")]
-    [ContextMenuItem("Test queueElement", "TestReplace")]
-    public string testString;
-
-    public void TestQueue()
-    {
-        ContextMenuArgs args = new ContextMenuArgs
-        {
-            Headline = testString,
-            Text = "random " + Random.Range(1000, 9999),
-            Type = ContextMenuType.QUEUE
-        };
-        Instance.Set(args);
-    }
-
-    public void TestReplace()
-    {
-        ContextMenuArgs args = new ContextMenuArgs
-        {
-            Headline = testString,
-            Text = "random " + Random.Range(1000, 9999),
-            Type = ContextMenuType.REPLACE
-        };
-        Instance.Set(args);
-    }
 }
 
 public class ContextMenuArgs
@@ -227,7 +221,10 @@ public class ContextMenuArgs
     public List<(UnityAction action,string label)> Actions  = new List<(UnityAction action, string label)>();
     public Color ImageColor = Color.white;
     public float ImageSize = 200;
-    public float lifeTime = 10;
+    /// <summary>
+    /// if type is LOOKAT, this is the delay, it needs to hide after looking away(-1 means default value)
+    /// </summary>
+    public float LifeTime = -1;
     public UnityAction OpenAction = null;
     public UnityAction CloseAction = null;
     public ContextMenuType Type;

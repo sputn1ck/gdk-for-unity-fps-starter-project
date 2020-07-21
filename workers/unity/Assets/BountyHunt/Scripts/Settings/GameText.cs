@@ -77,8 +77,11 @@ public static class GameText
     /// announcement text, if a payment was successfull
     public const string PaymentSucessful = "Payment Sucessful";
 
+    /// label of the close action in the context Menu
+    public const string ContextMenuCloseActionLabel = "close";
     /// label of the equip button in the gun contextMenu
     public const string EquipGunContextMenuAction = "equip";
+
 
     /// hint when gun is already equipped in the gun contextMenu
     public const string GunEquippedContextMenuText = "equipped";
