@@ -20,7 +20,7 @@ public class Effect : MonoBehaviour
     IEnumerator DestroyEnumerator()
     {
         yield return new WaitForSeconds(LifetTime);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
 }

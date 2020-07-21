@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbySkinShop : MonoBehaviour
+public class LobbySkinShop : MapClientOnlyBehaviour,  IClientInitializer
 {
     public List<SkinContextMenu> skinDolls;
-    private void Awake()
-    {
-        ClientEvents.instance.onGameJoined.AddListener(LoadSkins);
-    }
+
 
     private async void LoadSkins()
     {
@@ -27,5 +24,10 @@ public class LobbySkinShop : MonoBehaviour
         }
     }
 
+    public void Initialize()
+    {
+        Debug.Log("initialize called");
+        LoadSkins();
+    }
 
 }

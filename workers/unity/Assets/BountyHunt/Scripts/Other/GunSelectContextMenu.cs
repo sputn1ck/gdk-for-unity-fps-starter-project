@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GunSelectContextMenu : MonoBehaviour, ILookAtHandler
+public class GunSelectContextMenu : MapClientOnlyBehaviour, ILookAtHandler
 {
     
     public string gunName;
@@ -58,4 +58,5 @@ public class GunSelectContextMenu : MonoBehaviour, ILookAtHandler
         ContextMenuUI.Instance.Hide(uniqueId);
         OnLookAtEnter();
     }
+
 }

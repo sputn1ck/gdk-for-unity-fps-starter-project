@@ -15,6 +15,7 @@ public class PrefabMap : Map
     private SpawnPoints spawnPoints;
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null )
     {
+       
         MapGo = Instantiate(MapPrefab, spawnPosition, Quaternion.identity);
         var origin = caller.GetComponent<LinkedEntityComponent>().Worker.Origin;
         foreach (var convertToEntity in MapGo.GetComponentsInChildren<IConvertToEntity>())
@@ -28,9 +29,23 @@ public class PrefabMap : Map
             {
                 childRenderer.enabled = false;
             }
+            foreach(var serverRemover in MapGo.GetComponentsInChildren<IServerRemover>())
+            {
+                Destroy(serverRemover.GetMonoBehaviour());
+            }
+        } else
+        {
+            foreach (var clientScript in MapGo.GetComponentsInChildren<IClientInitializer>())
+            {
+                clientScript.Initialize();
+            }
+        }
+        spawnPoints = MapGo.GetComponentInChildren<SpawnPoints>();
+        if (spawnPoints != null)
+        {
+            spawnPoints.SetSpawnPoints();
         }
         onFinished?.Invoke();
-        spawnPoints = MapGo.GetComponentInChildren<SpawnPoints>();
     }
 
     public override void Remove()

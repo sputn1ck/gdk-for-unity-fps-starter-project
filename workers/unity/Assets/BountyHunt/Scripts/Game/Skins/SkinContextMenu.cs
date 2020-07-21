@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
+public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
 {
-    [Require] HunterComponentCommandSender hunterCommandSender;
 
     public List<Renderer> bodyRenderers;
     string uniqueID;
@@ -211,4 +210,6 @@ public class SkinContextMenu : MonoBehaviour ,ILookAtHandler
         RefreshContextMenu();
 
     }
+
+
 }

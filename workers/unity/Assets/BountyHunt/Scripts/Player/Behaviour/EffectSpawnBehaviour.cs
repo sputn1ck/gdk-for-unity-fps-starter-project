@@ -52,12 +52,12 @@ public class EffectSpawnBehaviour : MonoBehaviour
         if (info.PositionIsLocal)
         {
             effect.transform.localPosition = info.Position.convert() + LinkedEntityComponent.Worker.Origin;
-            effect.transform.localRotation = Quaternion.Euler(info.RotationEuler.convert());
+            effect.transform.localRotation = UnityEngine.Quaternion.Euler(info.RotationEuler.convert());
         }
         else
         {
             effect.transform.position = info.Position.convert() + LinkedEntityComponent.Worker.Origin;
-            effect.transform.rotation = Quaternion.Euler(info.RotationEuler.convert());
+            effect.transform.rotation = UnityEngine.Quaternion.Euler(info.RotationEuler.convert());
         }
 
         if(effect.soundEffect != null)

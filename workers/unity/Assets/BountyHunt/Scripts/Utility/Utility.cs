@@ -37,9 +37,9 @@ public static class Utility
         return new Vector3(v3.X, v3.Y, v3.Z);
     }
 
-    public static Vector3Int convert(this Bountyhunt.Vector3Int v3)
+    public static Vector3 convert(this Bountyhunt.Vector3Int v3)
     {
-        return new Vector3Int(v3.X, v3.Y, v3.Z);
+        return new Vector3(v3.X, v3.Y, v3.Z);
     }
 
     public static Bountyhunt.Vector3Float ToBbhVector(this Vector3 v3)
@@ -47,7 +47,7 @@ public static class Utility
         return new Bountyhunt.Vector3Float {X = v3.x, Y = v3.y, Z = v3.z};
     }
 
-    public static Bountyhunt.Vector3Int ToBbhVector(this Vector3Int v3)
+    public static Bountyhunt.Vector3Int ToBbhVector(this UnityEngine.Vector3Int v3)
     {
         return new Bountyhunt.Vector3Int { X = v3.x, Y = v3.y, Z = v3.z };
     }

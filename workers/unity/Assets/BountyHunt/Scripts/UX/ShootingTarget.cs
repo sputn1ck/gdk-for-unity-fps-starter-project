@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingTarget : MonoBehaviour, IShootable
+public class ShootingTarget : MapClientOnlyBehaviour, IShootable
 {
     public bool criticalHit;
 
