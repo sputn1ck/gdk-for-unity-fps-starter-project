@@ -14,16 +14,8 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     [Require] HunterComponentReader hunterComponentReader;
     [Require] HealthComponentReader healthComopnentReader;
 
-    string mainID;
-    string subMenuID;
-
     long walletBalance;
 
-    private void Awake()
-    {
-        mainID = Utility.GetUniqueString();
-        subMenuID = Utility.GetUniqueString();
-    }
     public async void OnLookAtEnter()
     {
 
@@ -129,7 +121,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSucessful, true);
+        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccessful, true);
 
     }
 

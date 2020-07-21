@@ -9,13 +9,6 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
     public MeshRenderer AdRenderer;
     public Advertiser.AdMaterialType AdType;
     private AdvertiserInvestment advertiserInvestment;
-    string billboardID;
-
-    private void Awake()
-    {
-        var rnd = new System.Random();
-        billboardID = Utility.GetUniqueString();
-    }
 
     public void SetAdvertiser(AdvertiserInvestment adInv)
     {

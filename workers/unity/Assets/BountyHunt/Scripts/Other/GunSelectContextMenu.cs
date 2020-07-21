@@ -11,15 +11,6 @@ public class GunSelectContextMenu : MapClientOnlyBehaviour, ILookAtHandler
     public string gunName;
     public int gunID;
 
-    string uniqueId;
-
-    
-
-    private void Awake()
-    {
-        uniqueId = Utility.GetUniqueString();
-    }
-
     public  void OnLookAtEnter()
     {
         List<(UnityAction action, string label)> list = new List<(UnityAction action, string label)>();
@@ -35,10 +26,10 @@ public class GunSelectContextMenu : MapClientOnlyBehaviour, ILookAtHandler
 
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = uniqueId,
             Headline = gunName,
             Actions = list,
-            Text = text
+            Text = text,
+            Type = ContextMenuType.LOOKAT
         };
         
         ContextMenuUI.Instance.Set(args);
@@ -46,7 +37,7 @@ public class GunSelectContextMenu : MapClientOnlyBehaviour, ILookAtHandler
 
     public void OnLookAtExit()
     {
-        ContextMenuUI.Instance.Hide(uniqueId);
+        ContextMenuUI.Instance.UnsetLookAtMenu(); 
     }
 
     public void SelectGun()
@@ -55,7 +46,6 @@ public class GunSelectContextMenu : MapClientOnlyBehaviour, ILookAtHandler
         PlayerPrefs.Save();
         FpsDriver.instance.ChangeGunId(gunID);
 
-        ContextMenuUI.Instance.Hide(uniqueId);
         OnLookAtEnter();
     }
 

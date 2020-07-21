@@ -75,7 +75,7 @@ public static class GameText
     public const string BalanceToLowAnnouncement = "Balance to low";
 
     /// announcement text, if a payment was successfull
-    public const string PaymentSucessful = "Payment Sucessful";
+    public const string PaymentSuccessful = "Payment Sucessful";
 
     /// label of the close action in the context Menu
     public const string ContextMenuCloseActionLabel = "close";

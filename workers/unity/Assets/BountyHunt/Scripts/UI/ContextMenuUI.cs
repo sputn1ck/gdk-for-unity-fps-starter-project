@@ -175,13 +175,6 @@ public class ContextMenuUI : MonoBehaviour
     }
 
 
-    public void UpdateAll(ContextMenuArgs args)
-    {
-        if (this.reference != args.ReferenceString) return;
-        Hide();
-        Set(args);
-    }
-
     private void Update()
     {
         if (Time.time >= hideTime)
