@@ -17,8 +17,6 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
 
     LinkedEntityComponent linkedEntityComponent;
 
-    private string menuReference = "";
-
     public static RoomPlayerClientBehaviour Instance;
     // Start is called before the first frame update
 
@@ -36,21 +34,18 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            if (menuReference == "")
-                OpenJoinRoomContextMenu();
+            OpenJoinRoomContextMenu();
         }
     }
 
     public void OpenJoinRoomContextMenu()
     {
-        menuReference = "RoomMenuRef";
         var rooms = WorldManagerClientBehaviour.Instance.WorldManagerReader.Data.ActiveRooms;
         var actions = new List<(UnityAction, string)>();
         var cantinalabel = string.Format("Join Cantina");
         UnityAction cantinaAction = () =>
         {
             RequestJoinCantina();
-            ContextMenuUI.Instance.Hide(menuReference);
         };
         actions.Add((cantinaAction, cantinalabel));
         foreach ( var room in rooms)
@@ -63,27 +58,17 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
             UnityAction action = () =>
             {
                 RequestJoinRoom(room.Key);
-                ContextMenuUI.Instance.Hide(menuReference);
+                ContextMenuUI.Instance.CloseCurrentAndShowNext();
             };
             actions.Add((action, label));
         }
-        actions.Add((new UnityAction(() =>
-        {
-            ContextMenuUI.Instance.Hide(menuReference);
-        }), "close menu"));
         ContextMenuArgs args = new ContextMenuArgs()
         {
             Headline = "Select Room",
             Actions = actions,
-            lifeTime = 10f,
-            ReferenceString = menuReference,
-            CloseAction = new UnityAction(() => { menuReference = ""; }),
+            Type = ContextMenuType.REPLACE
         };
-        if (!ContextMenuUI.Instance.Set(args))
-        {
-            menuReference = "";
-        }
-
+        ContextMenuUI.Instance.Set(args);
     }
     public void RequestJoinCantina()
     {

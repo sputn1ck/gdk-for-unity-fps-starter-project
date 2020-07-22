@@ -12,13 +12,7 @@ public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
 {
 
     public List<Renderer> bodyRenderers;
-    string uniqueID;
     SkinItem item;
-
-    private void Awake()
-    {
-        uniqueID = Utility.GetUniqueString();
-    }
 
     public void Set (SkinItem item)
     {
@@ -72,7 +66,7 @@ public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        ContextMenuUI.Instance.UpdateAll(args);
+        ContextMenuUI.Instance.SetLookAtMenu(args);
     }
 
     async Task<ContextMenuArgs> CreateContextMenuArgs()
@@ -113,12 +107,12 @@ public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
 
         var args = new ContextMenuArgs
         {
-            ReferenceString = uniqueID,
             Headline = item.skin.group.groupName,
             Text = text,
             Actions = actions,
             ImageSprite = item.skin.group.sprite,
-            ImageColor =  item.skin.identificationColor
+            ImageColor =  item.skin.identificationColor,
+            Type = ContextMenuType.LOOKAT
         };
 
         return args;
@@ -127,7 +121,7 @@ public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
 
     public void OnLookAtExit()
     {
-        ContextMenuUI.Instance.Hide(uniqueID);
+        ContextMenuUI.Instance.UnsetLookAtMenu();
     }
 
     async void Equip()
@@ -194,7 +188,7 @@ public class SkinContextMenu : MapClientOnlyBehaviour ,ILookAtHandler
             return;
         }
 
-        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccesfullAnnouncement, true);
+        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccessful, true);
 
         try
         {

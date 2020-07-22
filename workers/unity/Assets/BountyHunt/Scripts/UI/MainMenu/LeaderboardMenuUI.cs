@@ -203,7 +203,7 @@ public class LeaderboardMenuUI : MonoBehaviour
         try
         {
             var ranking = await PlayerServiceConnections.instance.BackendPlayerClient.GetPlayerRanking();
-            int rank = 0;
+            int rank = 1;
             switch (selectedLeaderboard.rankType)
             {
                 case RankType.None:
@@ -223,7 +223,7 @@ public class LeaderboardMenuUI : MonoBehaviour
                 default:
                     throw new Exception("internal error");
             }
-            SetPage(rank/pageSize);
+            SetPage((rank-1)/pageSize); // -1 because rankings start at 1 instead of 0 !
         }
         catch (Exception e)
         {

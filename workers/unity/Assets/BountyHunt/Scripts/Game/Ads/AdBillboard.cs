@@ -9,13 +9,6 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
     public MeshRenderer AdRenderer;
     public Advertiser.AdMaterialType AdType;
     private AdvertiserInvestment advertiserInvestment;
-    string billboardID;
-
-    private void Awake()
-    {
-        var rnd = new System.Random();
-        billboardID = Utility.GetUniqueString();
-    }
 
     public void SetAdvertiser(AdvertiserInvestment adInv)
     {
@@ -38,17 +31,17 @@ public class AdBillboard : MonoBehaviour, ILookAtHandler
         string text = Utility.SatsToShortString(advertiserInvestment.investment, true, UITinter.tintDict[TintColor.Sats]);
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = billboardID,
             Headline = advertiserInvestment.advertiser.name,
             Text = text,
-            Actions = actions
+            Actions = actions,
+            Type = ContextMenuType.LOOKAT
         };
         ContextMenuUI.Instance.Set(args);
     }
 
     public void OnLookAtExit()
     {
-        ContextMenuUI.Instance.Hide(billboardID);
+        ContextMenuUI.Instance.UnsetLookAtMenu();
     }
 
     void BookmarkUrl()

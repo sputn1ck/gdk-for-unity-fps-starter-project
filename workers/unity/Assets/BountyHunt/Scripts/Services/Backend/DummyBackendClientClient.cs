@@ -476,4 +476,8 @@ public class DummyBackendClientClient : MonoBehaviour, IBackendPlayerClient
         return invoice;
     }
 
+    public Task<string> GetBountyInvoice(string pubkey, long amount)
+    {
+        return Task.FromResult("bountyinvoice");
+    }
 }
