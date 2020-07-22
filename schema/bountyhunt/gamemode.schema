@@ -13,6 +13,16 @@ component GameModeManager {
     event CoundDownInfo start_countdown;
 }
 
+component RoomGameModeManager {
+    id = 460002;
+
+    RoundInfo current_round = 1;
+
+    event RoundInfo new_round;
+    event RoundInfo end_round;
+    event CoundDownInfo start_countdown;
+
+}
 
 type RoundInfo {
     GameModeInfo game_mode_info = 1;

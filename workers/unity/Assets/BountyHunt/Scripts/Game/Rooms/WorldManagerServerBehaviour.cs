@@ -36,7 +36,11 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         // TODO: really check for cantina
         if(WorldManagerWriter.Data.ActiveRooms.Count < 1)
         {
-            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), cantinaPlayers),"cantina-"+cantinaPlayers );
+            var cantinaRotation = new List<ModeRotationItem>()
+           {
+               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue))
+           };
+            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), cantinaRotation,int.MaxValue, cantinaPlayers),"cantina-"+cantinaPlayers );
             cantinaPlayers++;
         }
     }
@@ -105,7 +109,11 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         var newlyCreated = false;
         if (newCantina.RoomId == "none")
         {
-            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), cantinaPlayers), "cantina-" + cantinaPlayers);
+            var cantinaRotation = new List<ModeRotationItem>()
+           {
+               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue))
+           };
+            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, int.MaxValue, cantinaPlayers), "cantina-" + cantinaPlayers);
             cantinaPlayers++;
             newlyCreated = true;
         }
@@ -189,8 +197,13 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         
         if (startGenerated)
         {
+            var rotation = new List<ModeRotationItem>()
+           {
+               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 60)),
+               new ModeRotationItem("satsstacker", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 600))
+           };
             startGenerated = false;
-            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), 20));
+            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,1, 20));
         }
 
         if(startPrefabMap)
@@ -224,7 +237,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.GamemodeId, req.TimeInfo,new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.MaxPlayers);
+        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.ModeRotation,req.Repetitions,0,new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.MaxPlayers);
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 
