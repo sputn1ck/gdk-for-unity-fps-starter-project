@@ -18,6 +18,9 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     
     public bool startGenerated;
+    public string mapID;
+    public bool startPrefabMap;
+
     public static int cantinaPlayers = 20;
     private void OnEnable()
     {
@@ -188,6 +191,14 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             startGenerated = false;
             CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), "lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue), 20));
+        }
+
+        if(startPrefabMap)
+        {
+            startPrefabMap = false;
+            var mapInfo = new MapInfo(mapID,Utility.GetUniqueString());
+            var req = new CreateRoomRequest(mapInfo,"satsstacker", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue),10);
+            CreateRoom(req);
         }
     }
     private void OnCreateRoom(WorldManager.CreateRoom.ReceivedRequest obj)
