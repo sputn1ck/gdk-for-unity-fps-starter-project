@@ -97,6 +97,11 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             return;
         }
         var playerPk = GetPlayerPKByEntity(obj.Payload.PlayerId);
+        if (room.ActivePlayers.Contains(playerPk))
+        {
+            WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "already connected to room");
+            return;
+        }
         // TODO queue management
         RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(playerPk, obj.Payload.PlayerId));
         WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());

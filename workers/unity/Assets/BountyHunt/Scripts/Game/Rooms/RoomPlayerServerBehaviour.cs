@@ -50,6 +50,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
 
     private void OnUpdatePlayerRoom(RoomPlayer.UpdatePlayerRoom.ReceivedRequest obj)
     {
+        Debug.Log("OnUpdatePlayerRoom called " + obj.CallerWorkerId);
         var room = obj.Payload.Room;
         var newInterestTemplate = GetInterestTemplate(room);
         InterestWriter.SendUpdate(new Interest.Update()

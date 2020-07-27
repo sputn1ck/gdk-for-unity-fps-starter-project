@@ -20,8 +20,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.RoomId);
-        Initialize();
-        RoomStatsReader.OnMapUpdateEvent += OnStatsUpdate;
+        ClientGameObjectManager.Instance.AddRoomGo(EntityId, this.gameObject);
     }
 
     private void OnStatsUpdate(PlayerStatsUpdate obj)
@@ -48,11 +47,16 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        map.Remove();
+
+        ClientGameObjectManager.Instance.RemoveRoomGo(EntityId);
+        Deinitialize();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
+        Debug.Log("Iniailized called on " + transform.name);
+
+        RoomStatsReader.OnMapUpdateEvent += OnStatsUpdate;
         map = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.MapInfo.MapId));
 
 
@@ -81,6 +85,17 @@ public class RoomManagerClientBehaviour : MonoBehaviour
             });
         });
         
+    }
+    public void Deinitialize()
+    {
+        Debug.Log("Deinitialize called on " + transform.name);
+        RoomStatsReader.RemoveAllCallbacks();
+        if (map == null)
+        {
+            return;
+        }
+        map.Remove();
+        map = null;
     }
 
 }

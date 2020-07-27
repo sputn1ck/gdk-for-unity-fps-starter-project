@@ -11,13 +11,15 @@ using Improbable.Gdk.QueryBasedInterest;
 
 public class RoomPlayerClientBehaviour : MonoBehaviour 
 {
-
+    [Require] RoomPlayerReader RoomPlayerReader;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] public EntityId EntityId;
 
     LinkedEntityComponent linkedEntityComponent;
 
     public static RoomPlayerClientBehaviour Instance;
+
+    private EntityId currentRoom = new EntityId(0);
     // Start is called before the first frame update
 
     void Awake()
@@ -27,7 +29,31 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     void OnEnable()
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        
+        RoomPlayerReader.OnRoomEntityidUpdate += OnNewRoom;
+    }
+
+    private void OnNewRoom(EntityId obj)
+    {
+        Debug.Log("new room " + obj.Id);
+        if(currentRoom.Id != 0)
+        {
+            var oldRoomGo = ClientGameObjectManager.Instance.GetRoomGO(currentRoom);
+            oldRoomGo?.GetComponent<RoomManagerClientBehaviour>().Deinitialize();
+        }
+        StartCoroutine(WaitForMap(obj));
+    }
+
+    IEnumerator WaitForMap(EntityId obj)
+    {
+        Debug.Log("Waiting for map " + obj.Id);
+        GameObject newRoomGo = null;
+        while(newRoomGo == null)
+        {
+            newRoomGo = ClientGameObjectManager.Instance.GetRoomGO(obj);
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("Room loaded " + obj.Id);
+        newRoomGo.GetComponent<RoomManagerClientBehaviour>().Initialize();
     }
 
     private void Update()
@@ -46,6 +72,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         UnityAction cantinaAction = () =>
         {
             RequestJoinCantina();
+            ContextMenuUI.Instance.CloseCurrentAndShowNext();
         };
         actions.Add((cantinaAction, cantinalabel));
         foreach ( var room in rooms)

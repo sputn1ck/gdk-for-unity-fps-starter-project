@@ -11,7 +11,7 @@ public class ClientGameObjectManager : MonoBehaviour
     public EntityId AuthorativePlayerEntityId;
     public Dictionary<EntityId, GameObject> PlayerGameObjects;
     public Dictionary<EntityId, GameObject> BountyTracers;
-
+    public Dictionary<EntityId, GameObject> Rooms;
     private void Awake()
     {
         if (Instance != this)
@@ -22,6 +22,7 @@ public class ClientGameObjectManager : MonoBehaviour
 
         PlayerGameObjects = new Dictionary<EntityId, GameObject>();
         BountyTracers = new Dictionary<EntityId, GameObject>();
+        Rooms = new Dictionary<EntityId, GameObject>();
     }
 
     public void SetAuthorativePlayer(GameObject go, EntityId id)
@@ -54,6 +55,33 @@ public class ClientGameObjectManager : MonoBehaviour
 
             PlayerGameObjects.Remove(id);
         }
+    }
+
+    public void AddRoomGo(EntityId id, GameObject go)
+    {
+        if (Rooms.ContainsKey(id))
+        {
+            Rooms[id] = go;
+        } else
+        {
+            Rooms.Add(id, go);
+        }
+    }
+
+    public void RemoveRoomGo(EntityId id)
+    {
+        if (Rooms.ContainsKey(id))
+        {
+            Rooms.Remove(id);
+        }
+    }
+    public GameObject GetRoomGO(EntityId id)
+    {
+        if (Rooms.ContainsKey(id))
+        {
+            return Rooms[id];
+        }
+        return null;
     }
 
     public GameObject GetPlayerGameObject(EntityId id)
