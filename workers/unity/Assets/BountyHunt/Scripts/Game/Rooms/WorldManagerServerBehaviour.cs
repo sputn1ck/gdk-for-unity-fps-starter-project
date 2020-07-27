@@ -116,9 +116,9 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var cantinaRotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue))
+               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 300))
            };
-            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, int.MaxValue, cantinaPlayers), "cantina-" + cantinaPlayers);
+            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, 100, cantinaPlayers), "cantina-" + cantinaPlayers);
             cantinaPlayers++;
             newlyCreated = true;
         }
@@ -204,11 +204,11 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var rotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 60)),
-               new ModeRotationItem("satsstacker", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 600))
+               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 3)),
+               new ModeRotationItem("satsstacker", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 5))
            };
             startGenerated = false;
-            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,1, 20));
+            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,10, 20));
         }
 
         if(startPrefabMap)

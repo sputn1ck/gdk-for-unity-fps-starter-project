@@ -23,6 +23,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private Map mapInfo;
 
     private Dictionary<string, PlayerStats> playerStats;
+    private ServerRoomGameModeBehaviour ServerRoomGameModeBehaviour;
 
     private void OnEnable()
     {
@@ -37,6 +38,14 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomStatsCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
         RoomManagerCommandReceiver.OnAddRoomboundObjectRequestReceived += AddRoomBoundObject;
         InitializePlayerStats();
+        // start gamemode rotation
+        ServerRoomGameModeBehaviour = GetComponent<ServerRoomGameModeBehaviour>();
+        ServerRoomGameModeBehaviour.StartRotation();
+    }
+
+    private void CloseRoom()
+    {
+        WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest());
     }
 
     private void AddRoomBoundObject(RoomManager.AddRoomboundObject.ReceivedRequest obj)

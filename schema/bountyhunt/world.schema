@@ -26,6 +26,12 @@ component WorldManager {
 
 }
 
+component WorldStatsManager {
+    id = 480005;
+
+    command bountyhunt.Empty post_stats(PostStatsRequest);
+}
+
 
 component RoomManager {
     id = 480002;
@@ -44,7 +50,7 @@ component RoomStats {
     
     event PlayerStatsUpdate map_update;
     command PlayerStatsUpdate request_stats(bountyhunt.Empty);
-
+    command bountyhunt.Empty start_rotation(bountyhunt.Empty);
     command bountyhunt.Empty add_kill(AddKillRequest);
     command bountyhunt.Empty add_earnings(AddEarningsRequest);
     command bountyhunt.Empty set_bounty(SetBountyRequest);
@@ -106,6 +112,10 @@ type PlayerStatsUpdate {
     bool replace_map = 3;
 }
 
+type PostStatsRequest {
+    map<string, PlayerStats> player_stats = 1;
+}
+
 type JoinRoomRequest {
     string room_id = 1;
     EntityId player_id = 2;
@@ -132,7 +142,6 @@ type ModeRotationItem {
 }
 
 type EndRoomRequest {
-
 }
 
 type StartRoomRequest {
