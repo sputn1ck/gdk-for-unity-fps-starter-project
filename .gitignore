@@ -38,6 +38,8 @@ sysinfo.txt
 # Once a directory is ignored by git, nothing underneath it can ever be un-ignored.
 workers/unity/Assets/Generated/Source.meta
 workers/unity/Assets/Generated/Source/**/*.*
+workers/unity/Assets/Generated/Editor.meta
+workers/unity/Assets/Generated/Editor/**/*.*
 
 workers/unity/Assets/Plugins/Improbable/
 workers/unity/Assets/Plugins/Improbable.meta
@@ -59,6 +61,8 @@ _ReSharper.Caches
 
 workers/unity/[Ll]ibrary/*
 workers/unity/[Ll]ibrary/**
+workers/unity/[Ll]ibraryBK/*
+workers/unity/[Ll]ibraryBK/**
 !workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/System.Runtime.CompilerServices.Unsafe.dll
 !workers/unity/Library/PackageCache/com.unity.collections@0.1.1-preview/System.Runtime.CompilerServices.Unsafe.dll.meta
 

@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0598980a22146e5bb63df7b024cf2b0, type: 3}
+  m_Name: ServerPrefabMapping
+  m_EditorClassIdentifier: 
+  EntityRepresentationResolvers:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
+  - id: 7
+  references:
+    version: 1
+    00000000:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: BountyPickup
+        prefab: {fileID: 1466186237968154, guid: f0d50943f40f2044598a48ab4c6304a6,
+          type: 3}
+        requiredComponents: 
+    00000001:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: BountyTracer
+        prefab: {fileID: 728067070911559588, guid: acdef7c78d4218543bd0f214653911d5,
+          type: 3}
+        requiredComponents: 
+    00000002:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: GameManager
+        prefab: {fileID: 1138815752769483736, guid: 6264a06c7de152e4a927ef34ecdf5a69,
+          type: 3}
+        requiredComponents: 
+    00000003:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: RoomManager
+        prefab: {fileID: 1138815752769483736, guid: 95fe8a53fac9d19449b7d4dbda0db856,
+          type: 3}
+        requiredComponents: 
+    00000004:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: WorldManager
+        prefab: {fileID: 1138815752769483736, guid: fbb38bc779329294890a25e59dfdf5d4,
+          type: 3}
+        requiredComponents: 
+    00000005:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: LevelCube
+        prefab: {fileID: 8693591221802097473, guid: 35eafca445ad6ee408383162514c37c6,
+          type: 3}
+        requiredComponents: 
+    00000006:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: MovingPlatform
+        prefab: {fileID: 3508442096486458015, guid: 6e62fbc0cc77b3e449705753591f317c,
+          type: 3}
+        requiredComponents: 
+    00000007:
+      type: {class: SimpleEntityResolver, ns: Improbable.Gdk.Core.Representation.Types,
+        asm: Improbable.Gdk.Core}
+      data:
+        entityType: Player
+        prefab: {fileID: 1777598867489458, guid: 2fde7fec7be0d62439e66cd3fa72e0c4,
+          type: 3}
+        requiredComponents: 

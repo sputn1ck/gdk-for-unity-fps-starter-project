@@ -26,7 +26,13 @@ namespace Fps.WorkerConnectors
         public async void Connect(string deployment = "")
         {
             this.deployment = deployment.Trim();
-            await AttemptConnect();
+            try
+            {
+                await AttemptConnect();
+            } catch (Exception e)
+            {
+                HandleWorkerConnectionFailure(e.Message);
+            }
         }
 
         public void SpawnPlayer(string playerName, Action<PlayerCreator.CreatePlayer.ReceivedResponse> onPlayerResponse)
@@ -91,11 +97,11 @@ namespace Fps.WorkerConnectors
             PlayerLifecycleHelper.AddClientSystems(world, autoRequestPlayerCreation: false);
             PlayerLifecycleConfig.MaxPlayerCreationRetries = 0;
 
-            entityPipeline = new AdvancedEntityPipeline(Worker, GetAuthPlayerPrefabPath(), GetNonAuthPlayerPrefabPath());
+            entityPipeline = new AdvancedEntityPipeline(Worker);
             entityPipeline.OnRemovedAuthoritativePlayer += RemovingAuthoritativePlayer;
 
             // Set the Worker gameObject to the ClientWorker so it can access PlayerCreater reader/writers
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(world, entityPipeline, gameObject);
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(world, entityPipeline,null, gameObject);
 
             base.HandleWorkerConnectionEstablished();
         }
@@ -106,7 +112,7 @@ namespace Fps.WorkerConnectors
             OnLostPlayerEntity?.Invoke();
         }
 
-        protected override void HandleWorkerConnectionFailure(string errorMessage)
+        protected void HandleWorkerConnectionFailure(string errorMessage)
         {
             Debug.LogError($"Connection failed: {errorMessage}");
             Destroy(gameObject);

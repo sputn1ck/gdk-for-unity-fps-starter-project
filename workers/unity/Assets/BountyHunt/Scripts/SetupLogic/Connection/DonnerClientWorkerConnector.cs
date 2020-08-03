@@ -10,18 +10,12 @@ using Fps.WorldTiles;
 
 public abstract class DonnerWorkerConnectorBase : WorkerConnector
     {
-        public int TargetFrameRate = 60;
 
         [SerializeField] protected MapTemplate mapTemplate;
 
         [NonSerialized] public GameObject LevelInstance;
 
         protected abstract IConnectionHandlerBuilder GetConnectionHandlerBuilder();
-
-        protected virtual void Start()
-        {
-            Application.targetFrameRate = TargetFrameRate;
-        }
 
         protected async Task AttemptConnect()
         {

@@ -24,6 +24,8 @@ MonoBehaviour:
       SnapshotPath: snapshots/cloud.snapshot
       LaunchJson: bbh_small.json
       Region: 1
+      Cluster: 
+      DeploymentLocationType: 0
       Tags:
       - dev_login
       - nightly
@@ -35,6 +37,8 @@ MonoBehaviour:
       SnapshotPath: snapshots/cloud.snapshot
       LaunchJson: bbh_small.json
       Region: 1
+      Cluster: 
+      DeploymentLocationType: 0
       Tags:
       - dev_login
     SimulatedPlayerDeploymentConfigs:
@@ -42,6 +46,8 @@ MonoBehaviour:
       SnapshotPath: 
       LaunchJson: cloud_launch_small_sim_players.json
       Region: 1
+      Cluster: 
+      DeploymentLocationType: 0
       Tags: []
       TargetDeploymentName: live_newsim
       FlagPrefix: fps

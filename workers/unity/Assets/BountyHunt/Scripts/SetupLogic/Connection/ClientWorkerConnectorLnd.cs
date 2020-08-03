@@ -1,6 +1,7 @@
 using Fps;
 using Fps.Config;
 using Improbable.Gdk.Core;
+using Improbable.Gdk.Core.Representation;
 using Improbable.Gdk.GameObjectCreation;
 using Improbable.Gdk.PlayerLifecycle;
 using Improbable.Worker.CInterop;
@@ -13,6 +14,8 @@ using UnityEngine;
 
 public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
 {
+    [SerializeField] private EntityRepresentationMapping entityRepresentationMapping;
+
     protected string deployment;
     protected string loginToken;
     protected string playerIdentityToken;
@@ -35,7 +38,13 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
         this.loginToken = loginToken;
         this.playerIdentityToken = playerIdentityToken;
         this.useLocal = useLocal;
-        await AttemptConnect();
+        try
+        {
+            await AttemptConnect();
+        } catch(Exception e)
+        {
+            HandleWorkerConnectionFailure(e.Message);
+        }
     }
 
     public void SpawnPlayer(string playerName, int gunId, Action<PlayerCreator.CreatePlayer.ReceivedResponse> onPlayerResponse)
@@ -51,15 +60,6 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
         StartCoroutine(PrepareDestroy());
     }
 
-    protected virtual string GetAuthPlayerPrefabPath()
-    {
-        return "Prefabs/UnityClient/Authoritative/Player";
-    }
-
-    protected virtual string GetNonAuthPlayerPrefabPath()
-    {
-        return "Prefabs/UnityClient/NonAuthoritative/Player";
-    }
 
     protected override void HandleWorkerConnectionEstablished()
     {
@@ -68,11 +68,11 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
         PlayerLifecycleHelper.AddClientSystems(world, autoRequestPlayerCreation: false);
         PlayerLifecycleConfig.MaxPlayerCreationRetries = 0;
 
-        entityPipeline = new AdvancedEntityPipeline(Worker, GetAuthPlayerPrefabPath(), GetNonAuthPlayerPrefabPath());
+        entityPipeline = new AdvancedEntityPipeline(Worker);
         entityPipeline.OnRemovedAuthoritativePlayer += RemovingAuthoritativePlayer;
 
         // Set the Worker gameObject to the ClientWorker so it can access PlayerCreater reader/writers
-        GameObjectCreationHelper.EnableStandardGameObjectCreation(world, entityPipeline, gameObject);
+        GameObjectCreationHelper.EnableStandardGameObjectCreation(world, entityPipeline,entityRepresentationMapping, gameObject);
 
 
         base.HandleWorkerConnectionEstablished();
@@ -85,7 +85,7 @@ public class ClientWorkerConnectorLnd : DonnerWorkerConnectorBase
         
     }
 
-    protected override void HandleWorkerConnectionFailure(string errorMessage)
+    protected void HandleWorkerConnectionFailure(string errorMessage)
     {
 
         BBHUIManager.instance.ShowMainMenu();

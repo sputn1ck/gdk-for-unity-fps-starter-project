@@ -50,7 +50,7 @@ namespace Fps.WorkerConnectors
             var world = Worker.World;
 
             PlayerLifecycleHelper.AddServerSystems(world);
-            GameObjectCreationHelper.EnableStandardGameObjectCreation(world);
+            GameObjectCreationHelper.EnableStandardGameObjectCreation(world,null);
 
             // Shooting
             world.GetOrCreateSystem<ServerShootingSystem>();

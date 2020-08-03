@@ -10,14 +10,18 @@ using Fps.Guns;
 using Fps.WorkerConnectors;
 using Fps.Config;
 using Improbable.Worker.CInterop;
+using Improbable.Gdk.Core.Representation;
 
 public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
 {
+
+    [SerializeField] private EntityRepresentationMapping entityRepresentationMapping;
+
     public bool DisableRenderers = true;
 
-    protected override async void Start()
+    public async void Start()
     {
-        base.Start();
+        Application.targetFrameRate = 30;
         await AttemptConnect();
     }
 
@@ -50,7 +54,7 @@ public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
         var world = Worker.World;
 
         PlayerLifecycleHelper.AddServerSystems(world);
-        GameObjectCreationHelper.EnableStandardGameObjectCreation(world);
+        GameObjectCreationHelper.EnableStandardGameObjectCreation(world, entityRepresentationMapping);
 
         // Shooting
         world.GetOrCreateSystem<ServerShootingSystem>();
