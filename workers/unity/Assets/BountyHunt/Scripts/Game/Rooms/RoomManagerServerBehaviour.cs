@@ -68,7 +68,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private void CloseRoom()
     {
         Debug.Log("Closing Room");
-        WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest());
+        WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest(this.EntityId, RoomManagerWriter.Data.RoomInfo.RoomId));
         RoomManagerWriter.SendUpdate(new RoomManager.Update()
         {
             RoomState = RoomState.ENDED
@@ -192,6 +192,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
+        
         var levelObjects = mapInfo.LevelObjects;
         foreach(var levelObject in levelObjects)
         {
@@ -200,5 +201,6 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         }
         mapInfo.Remove();
         Destroy(mapInfo);
+        Debug.Log("room destroyed");
     }
 }

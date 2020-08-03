@@ -14,6 +14,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
 
     [Require] WorldCommandSender WorldCommandSender;
+    [Require] RoomPlayerCommandSender RoomPlayerCommandSender;
 
 
     
@@ -227,7 +228,25 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     private void OnEndRoom(WorldManager.EndRoom.ReceivedRequest obj)
     {
-        
+        Debug.Log("Deleting room");
+
+        WorldCommandSender.SendDeleteEntityCommand(new WorldCommands.DeleteEntity.Request(obj.Payload.EntityId));
+        var map = WorldManagerWriter.Data.ActiveRooms;
+        if (map.TryGetValue(obj.Payload.RoomId, out var room))
+        {
+            foreach(var playerString in room.ActivePlayers)
+            {
+                if(WorldManagerWriter.Data.ActivePlayers.TryGetValue(playerString, out var player))
+                {
+                    RoomPlayerCommandSender.SendSendToCantinaCommand(player.EntityId, new Bountyhunt.Empty());
+                }
+            }
+        }
+        map.Remove(obj.Payload.RoomId);
+        WorldManagerWriter.SendUpdate(new WorldManager.Update
+        {
+            ActiveRooms = map
+        });
     }
 
 

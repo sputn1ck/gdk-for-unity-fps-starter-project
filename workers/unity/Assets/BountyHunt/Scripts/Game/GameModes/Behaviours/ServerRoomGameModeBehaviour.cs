@@ -6,6 +6,7 @@ using Bountyhunt;
 using System.Threading.Tasks;
 using System;
 using UnityEngine.Events;
+using Improbable.Gdk.Core;
 
 public class ServerRoomGameModeBehaviour : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     //[Require] AdvertisingComponentWriter advertisingConmponentWriter;
     [Require] RoomGameModeManagerWriter RoomGameModeManagerWriter;
     [Require] RoomManagerWriter RoomManagerWriter;
+    [Require] WorldManagerCommandSender WorldManagerCommandSender;
 
     private GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
@@ -114,7 +116,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     // TODO connect with backend
     private void StartGameMode()
     {
-        Debug.Log("starting gamemode " + currentGameModeInfo.GamemodeId);
+        Debug.LogFormat("starting gamemode {0} ",currentGameModeInfo.GamemodeId, RoomManagerWriter.Data.RoomInfo.CurrentMode);
         /*
         currentGameMode.ServerOnGameModeStart(this, currentRoundInfo.Settings, currentRoundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
@@ -212,7 +214,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     {
         var roomInfo = RoomManagerWriter.Data.RoomInfo;
         var totalGameModes = roomInfo.ModeRotation.Count * roomInfo.Repetitions;
-        if(roomInfo.CurrentMode >= totalGameModes)
+        if(roomInfo.CurrentMode > totalGameModes)
         {
             return true;
         }
@@ -223,6 +225,17 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     {
         var room = RoomManagerWriter.Data.RoomInfo;
         room.CurrentMode++;
-        RoomManagerWriter.SendUpdate(new RoomManager.Update() { RoomInfo = room });
+        SendUpdates(room);
+    }
+    private void SendUpdates(Room room)
+    {
+        RoomManagerWriter.SendUpdate(new RoomManager.Update()
+        {
+            RoomInfo = room
+        });
+        WorldManagerCommandSender.SendUpdateRoomCommand(new EntityId(3), new UpdateRoomRequest()
+        {
+            Room = room
+        });
     }
 }

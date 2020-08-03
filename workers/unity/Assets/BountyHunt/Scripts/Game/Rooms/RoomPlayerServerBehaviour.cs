@@ -27,12 +27,18 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
         RoomPlayerCommandReceiver.OnUpdatePlayerRoomRequestReceived += OnUpdatePlayerRoom;
+        RoomPlayerCommandReceiver.OnSendToCantinaRequestReceived += SendToCantina;
         pubkey = RoomPlayerWriter.Data.Pubkey;
         JoinWorld();
 
 
 
         
+    }
+
+    private void SendToCantina(RoomPlayer.SendToCantina.ReceivedRequest obj)
+    {
+        RequestJoinCantina();
     }
 
     private void JoinWorld()

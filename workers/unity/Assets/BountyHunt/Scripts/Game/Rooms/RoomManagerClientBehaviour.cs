@@ -26,10 +26,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 
     private void RoomManagerReader_OnRoomStateUpdate(RoomState obj)
     {
-        if(obj == RoomState.ENDED)
-        {
-            RoomPlayerClientBehaviour.Instance.RequestJoinCantina();
-        }
+
     }
 
     private void OnStatsUpdate(PlayerStatsUpdate obj)
@@ -56,7 +53,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-
+        
         ClientGameObjectManager.Instance.RemoveRoomGo(EntityId);
         Deinitialize();
     }

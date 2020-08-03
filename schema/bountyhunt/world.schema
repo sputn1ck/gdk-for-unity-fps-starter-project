@@ -78,6 +78,7 @@ component RoomPlayer {
     EntityId room_entityid = 2;
     string pubkey = 3;
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
+    command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
 }
 
 type PlayerInfo {
@@ -148,6 +149,8 @@ type ModeRotationItem {
 }
 
 type EndRoomRequest {
+    EntityId entity_id = 1;
+    string room_id = 2;
 }
 
 type StartRoomRequest {
