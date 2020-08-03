@@ -52,6 +52,10 @@ public static class Utility
         return new Bountyhunt.Vector3Int { X = v3.x, Y = v3.y, Z = v3.z };
     }
 
+    public static long SecondsToNano(long seconds)
+    {
+        return seconds * 10000000;
+    }
     public static long Abs(long input)
     {
         if (input >= 0) return input;

@@ -204,6 +204,7 @@ public class DonnerEntityTemplates
     {
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
+        roomManagerComponent.RoomState = RoomState.CREATED;
         var roomStatsComponent = new RoomStats.Snapshot();
         var roomGameModeComponent = new RoomGameModeManager.Snapshot();
 

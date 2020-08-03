@@ -20,7 +20,16 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.RoomId);
+        RoomManagerReader.OnRoomStateUpdate += RoomManagerReader_OnRoomStateUpdate;
         ClientGameObjectManager.Instance.AddRoomGo(EntityId, this.gameObject);
+    }
+
+    private void RoomManagerReader_OnRoomStateUpdate(RoomState obj)
+    {
+        if(obj == RoomState.ENDED)
+        {
+            RoomPlayerClientBehaviour.Instance.RequestJoinCantina();
+        }
     }
 
     private void OnStatsUpdate(PlayerStatsUpdate obj)

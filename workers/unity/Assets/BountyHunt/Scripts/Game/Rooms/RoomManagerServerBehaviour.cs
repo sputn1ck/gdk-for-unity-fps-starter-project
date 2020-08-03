@@ -5,7 +5,8 @@ using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
-
+using UnityEngine.Events;
+using System;
 
 public class RoomManagerServerBehaviour : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private Dictionary<string, PlayerStats> playerStats;
     private ServerRoomGameModeBehaviour ServerRoomGameModeBehaviour;
 
+    private UnityAction RotationEnded;
     private void OnEnable()
     {
 
@@ -40,12 +42,37 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         InitializePlayerStats();
         // start gamemode rotation
         ServerRoomGameModeBehaviour = GetComponent<ServerRoomGameModeBehaviour>();
-        ServerRoomGameModeBehaviour.StartRotation();
+        ServerRoomGameModeBehaviour.AddFinishedAction(CloseRoom);
     }
 
+    private void Update()
+    {
+        if(RoomManagerWriter.Data.RoomState == RoomState.CREATED)
+        {
+            CheckIfStartGameMode();
+        }
+    }
+
+    private void CheckIfStartGameMode()
+    {
+        if(DateTime.UtcNow.ToFileTime() > RoomManagerWriter.Data.RoomInfo.StartTime )
+        {
+            RoomManagerWriter.SendUpdate(new RoomManager.Update()
+            {
+                RoomState = RoomState.STARTED
+            });
+            ServerRoomGameModeBehaviour.StartRotation();
+            Debug.Log("Starting Room");
+        }
+    }
     private void CloseRoom()
     {
+        Debug.Log("Closing Room");
         WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest());
+        RoomManagerWriter.SendUpdate(new RoomManager.Update()
+        {
+            RoomState = RoomState.ENDED
+        });
     }
 
     private void AddRoomBoundObject(RoomManager.AddRoomboundObject.ReceivedRequest obj)

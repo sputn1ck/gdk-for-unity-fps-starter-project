@@ -37,7 +37,7 @@ component RoomManager {
     id = 480002;
 
     Room room_info = 1;
-
+    RoomState room_state = 2;
     command bountyhunt.Empty add_player(AddPlayerRequest);
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
     command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
@@ -104,8 +104,13 @@ type Room {
     EntityId entity_id = 8;
     bountyhunt.Vector3Float origin = 9;
     int32 max_players = 10;
+    int64 start_time = 11;
 }
-
+enum RoomState {
+        CREATED = 0;
+        STARTED = 1;
+        ENDED = 2;
+}
 type PlayerStatsUpdate {
     map<string,PlayerStats> player_stats = 1;
     list<string> remove_players = 2;
@@ -134,11 +139,12 @@ type CreateRoomRequest {
     list<ModeRotationItem> mode_rotation = 2;
     int32 repetitions = 3;
     int32 max_players = 4;
+    int64 start_time = 5;
 }
 
 type ModeRotationItem {
     string gamemode_id = 1;
-    bountyhunt.TimeInfo time_info = 2;
+    int64 duration = 2;
 }
 
 type EndRoomRequest {

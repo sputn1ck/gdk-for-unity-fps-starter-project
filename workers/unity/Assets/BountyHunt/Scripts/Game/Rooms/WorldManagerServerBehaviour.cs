@@ -38,9 +38,9 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var cantinaRotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), long.MaxValue))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(300))
            };
-            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), cantinaRotation,int.MaxValue, cantinaPlayers),"cantina-"+cantinaPlayers );
+            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), cantinaRotation,int.MaxValue, cantinaPlayers,System.DateTime.UtcNow.ToFileTimeUtc()),"cantina-"+cantinaPlayers );
             cantinaPlayers++;
         }
     }
@@ -116,9 +116,9 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var cantinaRotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 300))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(300))
            };
-            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, 100, cantinaPlayers), "cantina-" + cantinaPlayers);
+            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, 100, cantinaPlayers, System.DateTime.UtcNow.ToFileTimeUtc()), "cantina-" + cantinaPlayers);
             cantinaPlayers++;
             newlyCreated = true;
         }
@@ -204,11 +204,12 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var rotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 3)),
-               new ModeRotationItem("satsstacker", new TimeInfo(System.DateTime.UtcNow.ToFileTimeUtc(), 5))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(3)),
+               new ModeRotationItem("satsstacker",Utility.SecondsToNano(5))
            };
             startGenerated = false;
-            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,10, 20));
+            var startTime = System.DateTime.UtcNow.AddSeconds(10).ToFileTimeUtc();
+            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,2, 20, startTime));
         }
 
         if(startPrefabMap)
@@ -242,7 +243,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.ModeRotation,req.Repetitions,0,new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.MaxPlayers);
+        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.ModeRotation,req.Repetitions,0,new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.MaxPlayers, req.StartTime);
 
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 

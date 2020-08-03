@@ -5,6 +5,7 @@ using UnityEngine;
 using Bountyhunt;
 using System.Threading.Tasks;
 using System;
+using UnityEngine.Events;
 
 public class ServerRoomGameModeBehaviour : MonoBehaviour
 {
@@ -15,13 +16,38 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
+    private TimeInfo currentTimeInfo;
+    private UnityAction RotationFinished;
+    private bool sendCallback;
+    private bool rotationStarted = false;
     private void OnEnable()
     {
-
+        if(RoomManagerWriter.Data.RoomState == RoomState.STARTED)
+        {
+            StartRotation();
+        }
     }
     public void StartRotation()
     {
-        SafeGameMode();
+        if (!rotationStarted)
+        { 
+            rotationStarted = true;
+            SafeGameMode();
+        }
+    }
+
+    public void AddFinishedAction(UnityAction onRotationFinished)
+    {
+
+        RotationFinished = onRotationFinished;
+    }
+    public void Update()
+    {
+        if (sendCallback)
+        {
+            sendCallback = false;
+            RotationFinished?.Invoke();
+        }
     }
     private async Task SafeGameMode()
     {
@@ -42,6 +68,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     }
     private async Task gameModeRoutine()
     {
+        Debug.Log("gamemode routine starting");
         /*await GetNextGameMode();
         StartGameMode();
         while (!ServerServiceConnections.ct.IsCancellationRequested)
@@ -66,7 +93,13 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
                 // ends game mode
                 EndGameMode();
                 // sets next game mode;
-              
+                UpdateModeCounter();
+                //check if rotation is finished
+                if (roationHasFinished())
+                {
+                    sendCallback = true;
+                    return;
+                }
                 await GetNextGameMode();
                 RoomGameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(currentGameModeInfo.GamemodeId, 5, currentMode.Name));
                 await Task.Delay(5000);
@@ -76,6 +109,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             await Task.Delay(10);
         }
     }
+
 
     // TODO connect with backend
     private void StartGameMode()
@@ -97,12 +131,17 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             CurrentRound = RoundInfo
         });
         ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);*/
-        RoomGameModeManagerWriter.SendNewRoundEvent(new RoundInfo(new GameModeInfo(currentGameModeInfo.GamemodeId, currentMode.name), currentGameModeInfo.TimeInfo));
+        var roundInfo = new RoundInfo(new GameModeInfo(currentGameModeInfo.GamemodeId, currentMode.name), new TimeInfo(DateTime.UtcNow.ToFileTime(), currentGameModeInfo.Duration));
+        RoomGameModeManagerWriter.SendUpdate(new RoomGameModeManager.Update()
+        {
+            CurrentRound = roundInfo
+        });
+        RoomGameModeManagerWriter.SendNewRoundEvent(roundInfo);
     }
     private async Task GetNextGameMode()
     {
-        UpdateModeCounter();
-        /*
+
+        /* Get Advertisers
         var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = RoomManagerWriter.Data.RoomInfo.ActivePlayers.Count });
         if (roundInfo.Advertisers != null)
         {
@@ -112,13 +151,15 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         var gameMode = GameModeDictionary.Get(gameModeInfo.GamemodeId);
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
+       
     }
 
     private void EndGameMode()
     {
         Debug.Log("ending gamemode "+ currentGameModeInfo.GamemodeId);
         var gameModeInfo = GetCurrentRound();
-        RoomGameModeManagerWriter.SendEndRoundEvent(new RoundInfo(new GameModeInfo("", gameModeInfo.GamemodeId), gameModeInfo.TimeInfo));
+        var timeInfo = RoomGameModeManagerWriter.Data.CurrentRound.TimeInfo;
+        RoomGameModeManagerWriter.SendEndRoundEvent(new RoundInfo(new GameModeInfo("", gameModeInfo.GamemodeId), timeInfo));
         //currentMode.ServerOnGameModeEnd(null);
     }
     public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
@@ -145,10 +186,12 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private bool gameModeHasEnded( long currentTime)
     {
+
+        var gameModeInfo = RoomGameModeManagerWriter.Data.CurrentRound;
         
-        var gameModeInfo = GetCurrentRound();
         var endTime = gameModeInfo.TimeInfo.StartTime + gameModeInfo.TimeInfo.Duration;
 
+        
         return currentTime > endTime;
     }
 
@@ -165,6 +208,17 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         return roomInfo.ModeRotation[roomIndex];
     }
 
+    private bool roationHasFinished()
+    {
+        var roomInfo = RoomManagerWriter.Data.RoomInfo;
+        var totalGameModes = roomInfo.ModeRotation.Count * roomInfo.Repetitions;
+        if(roomInfo.CurrentMode >= totalGameModes)
+        {
+            return true;
+        }
+        Debug.LogFormat("Checkinf if room should end: totalGameModes: {0} currentMode: {1}, result: {2}",totalGameModes, roomInfo.CurrentMode, roomInfo.CurrentMode >= totalGameModes);
+        return false;
+    }
     private void UpdateModeCounter()
     {
         var room = RoomManagerWriter.Data.RoomInfo;
