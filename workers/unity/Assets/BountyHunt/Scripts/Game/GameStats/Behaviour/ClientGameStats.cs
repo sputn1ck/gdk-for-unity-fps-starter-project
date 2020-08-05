@@ -30,7 +30,7 @@ public class ClientGameStats : MonoBehaviour
 
     private void initEvents()
     {
-        GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
+        //GameStatsReader.OnPlayerMapUpdate += OnPlayerMapUpdate;
         GameStatsReader.OnGainedKillEventEvent += OnKillEvent;
         GameStatsReader.OnBountyInCubesUpdate += OnBountyInCubesUpdate;
         GameStatsReader.OnBountyOnPlayersUpdate += OnBountyInPlayersUpdate;
@@ -112,7 +112,7 @@ public class ClientGameStats : MonoBehaviour
         {
             playerID = Fps.Movement.FpsDriver.instance.getEntityID();
         }
-        ClientEvents.instance.onScoreboardUpdate.Invoke(itemList, playerID);
+        //ClientEvents.instance.onScoreboardUpdate.Invoke(itemList, playerID);
     }
 
     // Update is called once per frame

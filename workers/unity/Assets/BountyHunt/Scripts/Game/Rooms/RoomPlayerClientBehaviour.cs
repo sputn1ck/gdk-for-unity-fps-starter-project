@@ -52,6 +52,8 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
             newRoomGo = ClientGameObjectManager.Instance.GetRoomGO(obj);
             yield return new WaitForEndOfFrame();
         }
+        ClientGameObjectManager.Instance.ActiveRoom = newRoomGo;
+        ClientGameObjectManager.Instance.ActiveRoomEntityId = obj;
         Debug.Log("Room loaded " + obj.Id);
         newRoomGo.GetComponent<RoomManagerClientBehaviour>().Initialize();
     }

@@ -4,14 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ClientGameObjectManager : MonoBehaviour
 {
     public static ClientGameObjectManager Instance;
     public GameObject AuthorativePlayerGameObject { get; private set; }
     public EntityId AuthorativePlayerEntityId;
+
+    public EntityId ActiveRoomEntityId;
+    public GameObject ActiveRoom;
+
     public Dictionary<EntityId, GameObject> PlayerGameObjects;
     public Dictionary<EntityId, GameObject> BountyTracers;
     public Dictionary<EntityId, GameObject> Rooms;
+    public Dictionary<string, Bountyhunt.PlayerInfo> PlayerInfos;
     private void Awake()
     {
         if (Instance != this)
@@ -23,6 +29,7 @@ public class ClientGameObjectManager : MonoBehaviour
         PlayerGameObjects = new Dictionary<EntityId, GameObject>();
         BountyTracers = new Dictionary<EntityId, GameObject>();
         Rooms = new Dictionary<EntityId, GameObject>();
+        PlayerInfos = new Dictionary<string, Bountyhunt.PlayerInfo>();
     }
 
     public void SetAuthorativePlayer(GameObject go, EntityId id)

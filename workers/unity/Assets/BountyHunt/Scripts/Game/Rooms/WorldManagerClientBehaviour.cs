@@ -22,12 +22,16 @@ public class WorldManagerClientBehaviour : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        WorldManagerReader.OnUpdate += WorldManagerReader_OnUpdate;
     }
 
-    private void WorldManagerWriter_OnUpdate(WorldManager.Update obj)
+
+    private void WorldManagerReader_OnUpdate(WorldManager.Update obj)
     {
-        
+        if (obj.ActivePlayers.HasValue)
+        {
+            ClientGameObjectManager.Instance.PlayerInfos = obj.ActivePlayers.Value;
+        }
     }
 
     public void RequestJoinLobby()
