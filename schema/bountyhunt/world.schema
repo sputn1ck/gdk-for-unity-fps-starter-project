@@ -50,7 +50,7 @@ component RoomStats {
     
     event PlayerStatsUpdate map_update;
     command PlayerStatsUpdate request_stats(bountyhunt.Empty);
-    command bountyhunt.Empty start_rotation(bountyhunt.Empty);
+    
     command bountyhunt.Empty add_kill(AddKillRequest);
     command bountyhunt.Empty add_earnings(AddEarningsRequest);
     command bountyhunt.Empty set_bounty(SetBountyRequest);

@@ -29,8 +29,36 @@ public class BountyKillSystem : ComponentSystem
         var events = componentUpdateSystem.GetEventsReceived<GameStats.GainedKillEvent.Event>();
         if (events.Count == 0)
             return;
-        HandleKills(events);
+        //HandleKills(events);
         //SendBountyBoardUpdate();
+        HandleRoomKills(events);
+    }
+
+    private void HandleRoomKills(MessagesSpan<ComponentEventReceived<GameStats.GainedKillEvent.Event>> events)
+    {
+        var roomPlayers = GetComponentDataFromEntity<RoomPlayer.Component>();
+        for(int i =0; i < events.Count; i++)
+        {
+
+            ref readonly var request = ref events[i];
+            var killerId = request.Event.Payload.Killer;
+            var victimId = request.Event.Payload.Victim;
+
+            if (!workerSystem.TryGetEntity(killerId, out var killer))
+            {
+                continue;
+            }
+            if (!workerSystem.TryGetEntity(victimId, out var victim))
+            {
+                continue;
+            }
+
+            var roomPlayerKiller = roomPlayers[killer];
+            var roomPlayerVictim = roomPlayers[victim];
+            commandSystem.SendCommand(new RoomStats.AddKill.Request(roomPlayerKiller.RoomEntityid, new AddKillRequest(roomPlayerKiller.Pubkey, roomPlayerVictim.Pubkey)));
+
+            //SendBackendUpdate(roomPlayerKiller.Pubkey, roomPlayerVictim.Pubkey);
+        }
     }
 
     private void HandleKills(MessagesSpan<ComponentEventReceived<GameStats.GainedKillEvent.Event>> events)
@@ -78,9 +106,9 @@ public class BountyKillSystem : ComponentSystem
                 commandSystem.SendCommand(new BountySpawner.SpawnBountyPickup.Request { TargetEntityId = new EntityId(2), Payload = new SpawnBountyPickupRequest { BountyValue = satsToDrop + added, Position = pos } });
             }
 
-            SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
+            //SendBackendUpdate(killerDonnerInfo.Pubkey, victimDonnerInfo.Pubkey);
             
-            PrometheusManager.TotalKills.Inc(1);
+            //PrometheusManager.TotalKills.Inc(1);
         }
     }
 

@@ -12,8 +12,6 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 {
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] RoomManagerCommandReceiver RoomManagerCommandReceiver;
-    [Require] RoomStatsWriter RoomStatsWriter;
-    [Require] RoomStatsCommandReceiver RoomStatsCommandReceiver;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandSender RoomPlayerCommandSender;
     [Require] WorldCommandSender WorldCommandSender;
@@ -23,21 +21,19 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private Map mapInfo;
 
-    private Dictionary<string, PlayerStats> playerStats;
     private ServerRoomGameModeBehaviour ServerRoomGameModeBehaviour;
-
+    private ServerGameStatsMap statsMap;
     private UnityAction RotationEnded;
     private void OnEnable()
     {
 
-
+        statsMap = GetComponent<ServerGameStatsMap>();
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         Initialize();
 
         RoomManagerCommandReceiver.OnAddPlayerRequestReceived += AddPlayer;
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
         RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
-        RoomStatsCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
         RoomManagerCommandReceiver.OnAddRoomboundObjectRequestReceived += AddRoomBoundObject;
         InitializePlayerStats();
         // start gamemode rotation
@@ -83,20 +79,13 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private  void InitializePlayerStats()
     {
 
-        playerStats = new Dictionary<string, PlayerStats>();
         var room = RoomManagerWriter.Data.RoomInfo;
         room.EntityId = EntityId;
-        foreach(var player in room.ActivePlayers)
-        {
-            playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false));
-        }
         SendUpdates(room);
+        statsMap.Initialize(room);
 
     }
-    private void RequestStats(RoomStats.RequestStats.ReceivedRequest obj)
-    {
-        RoomStatsCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
-    }
+    
 
     private void ReadyToJoin(RoomManager.ReadyToJoin.ReceivedRequest obj)
     {
@@ -122,34 +111,21 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void RemovePlayer(RoomManager.RemovePlayer.ReceivedRequest obj)
     {
-        var map = new Dictionary<string, PlayerStats>();
-        if (playerStats.TryGetValue(obj.Payload.PlayerPk, out var player))
-        {
-            player.Active = false;
-            map[obj.Payload.PlayerPk] = player;
-            var room = RoomManagerWriter.Data.RoomInfo;
-            room.ActivePlayers.Remove(obj.Payload.PlayerPk);
+        statsMap.RemovePlayer(obj.Payload.PlayerPk);
+        var room = RoomManagerWriter.Data.RoomInfo;
+        if(room.ActivePlayers.Remove(obj.Payload.PlayerPk))
             SendUpdates(room);
-            UpdateDictionary(map);
-        }
     }
 
     private void AddPlayer(RoomManager.AddPlayer.ReceivedRequest obj)
     {
-        var map = new Dictionary<string, PlayerStats>();
-        if (playerStats.TryGetValue(obj.Payload.PlayerPk, out var player))
-        {
-            player.Active = true;
-            map[obj.Payload.PlayerPk] = player;
-        } else
-        {
-            map.Add(obj.Payload.PlayerPk, new PlayerStats(0, 0, 0, 0, true));
-        }
+        statsMap.AddPlayer(obj.Payload.PlayerPk);
+        
         var room = RoomManagerWriter.Data.RoomInfo;
         room.EntityId = EntityId;
         room.ActivePlayers.Add(obj.Payload.PlayerPk);
+
         SendUpdates(room);
-        UpdateDictionary(map);
         RoomPlayerCommandSender.SendUpdatePlayerRoomCommand(obj.Payload.PlayerId, new UpdatePlayerRoomRequest(room));
     }
    
@@ -165,21 +141,6 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         });
     }
 
-    private void UpdateDictionary(Dictionary<string, PlayerStats> newMap)
-    {
-        foreach(var kv in newMap)
-        {
-            if (playerStats.ContainsKey(kv.Key))
-            {
-                playerStats[kv.Key] = kv.Value;
-            } else
-            {
-                playerStats.Add(kv.Key, kv.Value);
-            }
-            
-        }
-        RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap ,new List<string>() , false));
-    }
 
 
     private void Initialize()

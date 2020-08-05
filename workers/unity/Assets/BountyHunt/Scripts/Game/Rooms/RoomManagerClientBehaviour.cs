@@ -32,7 +32,6 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     private void OnDisable()
     {
         
-        ClientGameObjectManager.Instance.RemoveRoomGo(EntityId);
         Deinitialize();
     }
 
@@ -62,7 +61,9 @@ public class RoomManagerClientBehaviour : MonoBehaviour
 
     public void Deinitialize()
     {
+
         Debug.Log("Deinitialize called on " + transform.name);
+        ClientGameObjectManager.Instance.RemoveRoomGo(EntityId);
         RoomStatsReader.RemoveAllCallbacks();
         if (map == null)
         {
