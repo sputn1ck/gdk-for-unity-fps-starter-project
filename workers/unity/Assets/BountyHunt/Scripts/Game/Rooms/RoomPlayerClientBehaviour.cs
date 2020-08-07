@@ -18,8 +18,9 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     LinkedEntityComponent linkedEntityComponent;
 
     public static RoomPlayerClientBehaviour Instance;
+   public RoomInfo CurrentRoom;
 
-    private EntityId currentRoom = new EntityId(0);
+    private EntityId currentRoomId = new EntityId(0);
     // Start is called before the first frame update
 
     void Awake()
@@ -30,14 +31,20 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     {
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
         RoomPlayerReader.OnRoomEntityidUpdate += OnNewRoom;
+        RoomPlayerReader.OnActiveRoomUpdate += RoomPlayerReader_OnActiveRoomUpdate;
+    }
+
+    private void RoomPlayerReader_OnActiveRoomUpdate(RoomInfo obj)
+    {
+        CurrentRoom = obj;
     }
 
     private void OnNewRoom(EntityId obj)
     {
         Debug.Log("new room " + obj.Id);
-        if(currentRoom.Id != 0)
+        if(currentRoomId.Id != 0)
         {
-            var oldRoomGo = ClientGameObjectManager.Instance.GetRoomGO(currentRoom);
+            var oldRoomGo = ClientGameObjectManager.Instance.GetRoomGO(currentRoomId);
             oldRoomGo?.GetComponent<RoomManagerClientBehaviour>().Deinitialize();
         }
         StartCoroutine(WaitForMap(obj));
@@ -79,12 +86,12 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         actions.Add((cantinaAction, cantinalabel));
         foreach ( var room in rooms)
         {
-            if (room.Value.RoomId.Contains("cantina"))
+            if (room.Value.Info.RoomId.Contains("cantina"))
             {
                 continue;
             }
-            var mode = room.Value.ModeRotation[room.Value.CurrentMode % room.Value.ModeRotation.Count];
-            var label = string.Format("P:{0}, GM:{1}, MAP:{2}", room.Value.ActivePlayers.Count, mode.GamemodeId,room.Value.MapInfo.MapId);
+            var mode = room.Value.GameModeInfo.ModeRotation[room.Value.GameModeInfo.CurrentMode % room.Value.GameModeInfo.ModeRotation.Count];
+            var label = string.Format("P:{0}, GM:{1}, MAP:{2}", room.Value.PlayerInfo.ActivePlayers.Count, mode.GamemodeId,room.Value.Info.MapInfo.MapId);
             UnityAction action = () =>
             {
                 RequestJoinRoom(room.Key);
@@ -112,10 +119,10 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
             }
             if (cb.ResponsePayload.Value.NewlyCreated)
             {
-                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.RoomId));
+                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.Info.RoomId));
             } else
             {
-                RequestJoinRoom(cb.ResponsePayload.Value.Room.RoomId);
+                RequestJoinRoom(cb.ResponsePayload.Value.Room.Info.RoomId);
             }
             
         });

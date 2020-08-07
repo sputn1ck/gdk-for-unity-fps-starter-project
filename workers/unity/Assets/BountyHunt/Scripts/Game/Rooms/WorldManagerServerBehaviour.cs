@@ -92,28 +92,28 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room does not exist");
             return;
         }
-        if(room.EntityId.Id == 0)
+        if(room.Info.EntityId.Id == 0)
         {
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room not ready yet");
             return;
         }
         var playerPk = GetPlayerPKByEntity(obj.Payload.PlayerId);
-        if (room.ActivePlayers.Contains(playerPk))
+        if (room.PlayerInfo.ActivePlayers.Contains(playerPk))
         {
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "already connected to room");
             return;
         }
         // TODO queue management
-        RoomManagerCommandSender.SendAddPlayerCommand(room.EntityId, new AddPlayerRequest(playerPk, obj.Payload.PlayerId));
+        RoomManagerCommandSender.SendAddPlayerCommand(room.Info.EntityId, new AddPlayerRequest(playerPk, obj.Payload.PlayerId));
         WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());
 
-        UpdateActivePlayerRoom(playerPk, room.EntityId);
+        UpdateActivePlayerRoom(playerPk, room.Info.EntityId);
     }
     private void OnGetCantina(WorldManager.GetCantina.ReceivedRequest obj)
     {
         var newCantina = GetFreeCantina();
         var newlyCreated = false;
-        if (newCantina.RoomId == "none")
+        if (newCantina.Info.RoomId == "none")
         {
             var cantinaRotation = new List<ModeRotationItem>()
            {
@@ -137,12 +137,16 @@ public class WorldManagerServerBehaviour : MonoBehaviour
                 cantinalist.Add(room.Value);
             }
         }
-        var newCantina = new Room() {
-            RoomId = "none"
-        };
-        foreach(var cantina in cantinalist)
+        var newCantina = new Room()
         {
-            if(cantina.MaxPlayers > cantina.ActivePlayers.Count)
+            Info = new RoomInfo()
+            {
+                RoomId = "none"
+            }
+        };
+        foreach (var cantina in cantinalist)
+        {
+            if(cantina.PlayerInfo.MaxPlayers > cantina.PlayerInfo.ActivePlayers.Count)
             {
                 newCantina = cantina;
                 break;
@@ -186,12 +190,12 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     {
         var map = WorldManagerWriter.Data.ActiveRooms;
 
-        if (!map.TryGetValue(obj.Payload.Room.RoomId, out var room))
+        if (!map.TryGetValue(obj.Payload.Room.Info.RoomId, out var room))
         {
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "room does not exist");
             return;
         }
-        map[obj.Payload.Room.RoomId] = obj.Payload.Room;
+        map[obj.Payload.Room.Info.RoomId] = obj.Payload.Room;
         WorldManagerWriter.SendUpdate(new WorldManager.Update
         {
             ActiveRooms = map
@@ -234,7 +238,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         var map = WorldManagerWriter.Data.ActiveRooms;
         if (map.TryGetValue(obj.Payload.RoomId, out var room))
         {
-            foreach(var playerString in room.ActivePlayers)
+            foreach(var playerString in room.PlayerInfo.ActivePlayers)
             {
                 if(WorldManagerWriter.Data.ActivePlayers.TryGetValue(playerString, out var player))
                 {
@@ -262,8 +266,13 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-        var room = new Room(id, new List<string>(), new List<string>(), req.MapInfo,req.ModeRotation,req.Repetitions,0,new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.MaxPlayers, req.StartTime);
 
+        var room = new Room()
+        {
+            Info = new RoomInfo(id, req.MapInfo, new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.StartTime),
+            GameModeInfo = new RoomGameModeInfo(req.ModeRotation, req.Repetitions, 0),
+            PlayerInfo = new RoomPlayerInfo(new List<string>(), new List<string>(), req.MaxPlayers),
+        };
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 
         var list = WorldManagerWriter.Data.ActiveRooms;
@@ -274,10 +283,10 @@ public class WorldManagerServerBehaviour : MonoBehaviour
                 Debug.LogErrorFormat("{0} RoomCreation errpr",  res.Message);
                 return;
             }
-            Debug.LogFormat("{0} created; res {1}", room.RoomId, res);
-            room.EntityId = res.EntityId.Value;
+            Debug.LogFormat("{0} created; res {1}", room.Info.RoomId, res);
+            room.Info.EntityId = res.EntityId.Value;
             var map = WorldManagerWriter.Data.ActiveRooms;
-            map.Add(room.RoomId, room);
+            map.Add(room.Info.RoomId, room);
             WorldManagerWriter.SendUpdate(new WorldManager.Update()
             {
                 ActiveRooms = map
@@ -298,23 +307,23 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         }
         activeRooms.Sort((KeyValuePair<string, Room> p1, KeyValuePair<string, Room> p2) =>
         {
-            return p1.Value.Origin.X.CompareTo(p2.Value.Origin.X);
+            return p1.Value.Info.Origin.X.CompareTo(p2.Value.Info.Origin.X);
         });
         float lastPos = 0f;
         for (int i = 0; i < activeRooms.Count; i++)
         {
-            var thisMap = MapDictStorage.Instance.GetMap(activeRooms[i].Value.MapInfo.MapId);
+            var thisMap = MapDictStorage.Instance.GetMap(activeRooms[i].Value.Info.MapInfo.MapId);
             var thisRoom = activeRooms[i].Value;
 
-            lastPos = thisRoom.Origin.Z + thisMap.Settings.DimensionZ / 2;
+            lastPos = thisRoom.Info.Origin.Z + thisMap.Settings.DimensionZ / 2;
 
             if (i + 1 >= activeRooms.Count)
             break;
             
-            var nextMap = MapDictStorage.Instance.GetMap(activeRooms[i + 1].Value.MapInfo.MapId);
+            var nextMap = MapDictStorage.Instance.GetMap(activeRooms[i + 1].Value.Info.MapInfo.MapId);
             var nextRoom = activeRooms[i + 1].Value;
 
-            var spaceBetweenMaps = (nextRoom.Origin.Z - nextMap.Settings.DimensionZ / 2) - (thisRoom.Origin.Z + thisMap.Settings.DimensionZ / 2);
+            var spaceBetweenMaps = (nextRoom.Info.Origin.Z - nextMap.Settings.DimensionZ / 2) - (thisRoom.Info.Origin.Z + thisMap.Settings.DimensionZ / 2);
             if (spaceBetweenMaps >= mapSettings.DimensionZ)
             {
                 break;

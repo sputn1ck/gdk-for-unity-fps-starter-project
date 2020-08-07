@@ -18,7 +18,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     private Map map;
     private void OnEnable()
     {
-        Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.RoomId);
+        Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.Info.RoomId);
         RoomManagerReader.OnRoomStateUpdate += RoomManagerReader_OnRoomStateUpdate;
         ClientGameObjectManager.Instance.AddRoomGo(EntityId, this.gameObject);
     }
@@ -39,12 +39,12 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     {
         Debug.Log("Iniailized called on " + transform.name);
 
-        map = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.MapInfo.MapId));
+        map = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerReader.Data.RoomInfo.Info.MapInfo.MapId));
 
 
         // start initializing map
         BBHUIManager.instance.mainMenu.BlendImage(true);
-        map.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.MapInfo.MapData, () => {
+        map.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.Info.MapInfo.MapData, () => {
                 RoomManagerCommandSender.SendReadyToJoinCommand(EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId), (cb2) => {
                     if (cb2.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
                     {

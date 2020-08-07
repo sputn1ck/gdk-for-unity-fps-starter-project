@@ -103,9 +103,11 @@ public class DonnerEntityTemplates
         var chatComponent = new PrivateChat.Snapshot();
 
         var effectSpawnerComponent = new EffectSpawnerComponent.Snapshot();
+
         var roomCompenent = new RoomPlayer.Snapshot()
         {
-            Pubkey = loginData.Pubkey
+            Pubkey = loginData.Pubkey,
+            ActiveRoom = new RoomInfo(), 
         };
         /*
          * OLD STUFF

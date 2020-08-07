@@ -78,6 +78,7 @@ component RoomPlayer {
     string room_id = 1;
     EntityId room_entityid = 2;
     string pubkey = 3;
+    RoomInfo active_room = 4;
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
     command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
 }
@@ -96,17 +97,26 @@ type PlayerStats {
     bool active = 5;
 }
 type Room {
+    RoomInfo info = 1;
+    RoomGameModeInfo game_mode_info = 2;
+    RoomPlayerInfo player_info = 3;
+}
+type RoomInfo {
     string room_id = 1;
-    list<string> active_players = 2;
-    list<string> queued_players = 3;
-    MapInfo map_info = 4;
-    list<ModeRotationItem> mode_rotation = 5;
-    int32 repetitions = 6;
-    int32 current_mode = 7;
-    EntityId entity_id = 8;
-    bountyhunt.Vector3Float origin = 9;
-    int32 max_players = 10;
-    int64 start_time = 11;
+    MapInfo map_info = 2;
+    EntityId entity_id = 3;
+    bountyhunt.Vector3Float origin = 4;
+    int64 start_time = 5;
+}
+type RoomGameModeInfo {
+    list<ModeRotationItem> mode_rotation = 1;
+    int32 repetitions = 2;
+    int32 current_mode = 3;
+}
+type RoomPlayerInfo {
+    list<string> active_players = 1;
+    list<string> queued_players = 2;
+    int32 max_players = 3;
 }
 enum RoomState {
         CREATED = 0;

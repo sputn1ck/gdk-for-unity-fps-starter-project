@@ -18,7 +18,10 @@ public class TeleportSkill : PlayerSkill
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
         var pos = new Vector3(teleport.x, 75, teleport.y);
-        if (pos.x > 140 || pos.z > 140 || pos.z < -140 || pos.x < -140)
+        var room = player.GetComponent<RoomPlayerServerBehaviour>().CurrentRoom;
+        var boundaries = Utility.GetRoomBoundaries(room);
+        Debug.LogFormat("teleport boundaries: {0} {1} {2} {3}", boundaries.x1, boundaries.x2, boundaries.z1, boundaries.z2);
+        if (pos.x > boundaries.x2 || pos.z > boundaries.z2 || pos.z < boundaries.z1 || pos.x < boundaries.x1)
         {
             return new CastResponse()
             {

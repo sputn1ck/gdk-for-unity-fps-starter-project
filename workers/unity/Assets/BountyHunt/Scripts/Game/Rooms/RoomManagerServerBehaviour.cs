@@ -47,9 +47,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         var sP = mapInfo.GetSpawnPoint();
         var room = RoomManagerWriter.Data.RoomInfo;
         var newpos = Utility.Vector3ToVector3Float(sP.pos);
-        newpos.X += room.Origin.X;
-        newpos.Y += room.Origin.Y;
-        newpos.Z += room.Origin.Z;
+        newpos.X += room.Info.Origin.X;
+        newpos.Y += room.Info.Origin.Y;
+        newpos.Z += room.Info.Origin.Z;
         Debug.Log("respawning at " + newpos);
         RoomManagerCommandReceiver.SendGetSpawnPositionResponse(obj.RequestId, new SpawnPosition(newpos, sP.yaw, sP.pitch));
     }
@@ -64,7 +64,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void CheckIfStartGameMode()
     {
-        if(DateTime.UtcNow.ToFileTime() > RoomManagerWriter.Data.RoomInfo.StartTime )
+        if(DateTime.UtcNow.ToFileTime() > RoomManagerWriter.Data.RoomInfo.Info.StartTime )
         {
             RoomManagerWriter.SendUpdate(new RoomManager.Update()
             {
@@ -77,7 +77,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private void CloseRoom()
     {
         Debug.Log("Closing Room");
-        WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest(this.EntityId, RoomManagerWriter.Data.RoomInfo.RoomId));
+        WorldManagerCommandSender.SendEndRoomCommand(new EntityId(3), new EndRoomRequest(this.EntityId, RoomManagerWriter.Data.RoomInfo.Info.RoomId));
         RoomManagerWriter.SendUpdate(new RoomManager.Update()
         {
             RoomState = RoomState.ENDED
@@ -93,7 +93,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     {
 
         var room = RoomManagerWriter.Data.RoomInfo;
-        room.EntityId = EntityId;
+        room.Info.EntityId = EntityId;
         SendUpdates(room);
         statsMap.Initialize(room);
 
@@ -109,9 +109,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         HunterComponentCommandSender.SendTeleportPlayerCommand(obj.Payload.PlayerId, new TeleportRequest()
         {
             Heal = true,
-            X = room.Origin.X +spawnPoint.pos.x,
-            Y = room.Origin.Y + spawnPoint.pos.y,
-            Z = room.Origin.Z + spawnPoint.pos.z
+            X = room.Info.Origin.X +spawnPoint.pos.x,
+            Y = room.Info.Origin.Y + spawnPoint.pos.y,
+            Z = room.Info.Origin.Z + spawnPoint.pos.z
         }, (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
@@ -126,7 +126,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     {
         statsMap.RemovePlayer(obj.Payload.PlayerPk);
         var room = RoomManagerWriter.Data.RoomInfo;
-        if(room.ActivePlayers.Remove(obj.Payload.PlayerPk))
+        if(room.PlayerInfo.ActivePlayers.Remove(obj.Payload.PlayerPk))
             SendUpdates(room);
     }
 
@@ -135,8 +135,8 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         statsMap.AddPlayer(obj.Payload.PlayerPk);
         
         var room = RoomManagerWriter.Data.RoomInfo;
-        room.EntityId = EntityId;
-        room.ActivePlayers.Add(obj.Payload.PlayerPk);
+        room.Info.EntityId = EntityId;
+        room.PlayerInfo.ActivePlayers.Add(obj.Payload.PlayerPk);
 
         SendUpdates(room);
         RoomPlayerCommandSender.SendUpdatePlayerRoomCommand(obj.Payload.PlayerId, new UpdatePlayerRoomRequest(room));
@@ -158,10 +158,10 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void Initialize()
     {
-        mapInfo = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.MapInfo.MapId));
+        mapInfo = Instantiate(MapDictStorage.Instance.GetMap(RoomManagerWriter.Data.RoomInfo.Info.MapInfo.MapId));
         mapInfo.EntityId = EntityId;
         mapInfo.LevelObjects = new List<EntityId>();
-        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.MapInfo.MapData, null, WorldCommandSender);
+        mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.Info.MapInfo.MapData, null, WorldCommandSender);
     }
 
     private void OnDisable()

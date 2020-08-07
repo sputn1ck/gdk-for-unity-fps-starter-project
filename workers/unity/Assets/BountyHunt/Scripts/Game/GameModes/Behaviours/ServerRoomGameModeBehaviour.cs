@@ -116,7 +116,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     // TODO connect with backend
     private void StartGameMode()
     {
-        Debug.LogFormat("starting gamemode {0} ",currentGameModeInfo.GamemodeId, RoomManagerWriter.Data.RoomInfo.CurrentMode);
+        Debug.LogFormat("starting gamemode {0} ",currentGameModeInfo.GamemodeId, RoomManagerWriter.Data.RoomInfo.GameModeInfo.CurrentMode);
         /*
         currentGameMode.ServerOnGameModeStart(this, currentRoundInfo.Settings, currentRoundInfo.Subsidy);
         var RoundInfo = new RoundInfo()
@@ -200,7 +200,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private ModeRotationItem GetCurrentRound()
     {
         // Get Room Index
-        var roomInfo = RoomManagerWriter.Data.RoomInfo;
+        var roomInfo = RoomManagerWriter.Data.RoomInfo.GameModeInfo;
         int roomIndex;
 
         roomIndex = roomInfo.CurrentMode % roomInfo.ModeRotation.Count;
@@ -212,7 +212,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private bool roationHasFinished()
     {
-        var roomInfo = RoomManagerWriter.Data.RoomInfo;
+        var roomInfo = RoomManagerWriter.Data.RoomInfo.GameModeInfo;
         var totalGameModes = roomInfo.ModeRotation.Count * roomInfo.Repetitions;
         if(roomInfo.CurrentMode > totalGameModes)
         {
@@ -224,7 +224,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private void UpdateModeCounter()
     {
         var room = RoomManagerWriter.Data.RoomInfo;
-        room.CurrentMode++;
+        room.GameModeInfo.CurrentMode++;
         SendUpdates(room);
     }
     private void SendUpdates(Room room)

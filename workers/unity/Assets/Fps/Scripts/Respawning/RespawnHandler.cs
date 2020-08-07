@@ -95,7 +95,7 @@ namespace Fps.Respawning
         }
         private void OnRequestRespawn(HealthComponent.RequestRespawn.ReceivedRequest request)
         {
-            var roomId = GetComponent<RoomPlayerServerBehaviour>().RoomPlayerWriter.Data.RoomEntityid;
+            var roomId = GetComponent<RoomPlayerServerBehaviour>().CurrentRoom.EntityId;
             RoomManagerCommandSender.SendGetSpawnPositionCommand(roomId, new Bountyhunt.Empty(), OnSpawnPositionResponse);
             
         }

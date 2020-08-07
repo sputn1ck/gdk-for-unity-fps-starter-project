@@ -15,12 +15,13 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandReceiver RoomPlayerCommandReceiver;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
-    [Require] public RoomPlayerWriter RoomPlayerWriter;
+    [Require] RoomPlayerWriter RoomPlayerWriter;
     [Require] InterestWriter InterestWriter;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
 
+    public RoomInfo CurrentRoom;
     private string pubkey;
     
     private void OnEnable()
@@ -32,9 +33,10 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         JoinWorld();
 
 
-
         
     }
+
+    
 
     private void SendToCantina(RoomPlayer.SendToCantina.ReceivedRequest obj)
     {
@@ -68,10 +70,12 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         {
             RoomManagerCommandSender.SendRemovePlayerCommand(RoomPlayerWriter.Data.RoomEntityid, new RemovePlayerRequest(pubkey));
         }
+        CurrentRoom = room.Info;
         RoomPlayerWriter.SendUpdate(new RoomPlayer.Update()
         {
-            RoomEntityid = room.EntityId,
-            RoomId = room.RoomId
+            RoomEntityid = room.Info.EntityId,
+            RoomId = room.Info.RoomId,
+            ActiveRoom = room.Info
         });
     }
 
@@ -88,11 +92,11 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
             }
             if (cb.ResponsePayload.Value.NewlyCreated)
             {
-                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.RoomId));
+                StartCoroutine(WaitForJoin(cb.ResponsePayload.Value.Room.Info.RoomId));
             }
             else
             {
-                RequestJoinRoom(cb.ResponsePayload.Value.Room.RoomId);
+                RequestJoinRoom(cb.ResponsePayload.Value.Room.Info.RoomId);
             }
 
         });
@@ -121,11 +125,11 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
 
     private InterestTemplate GetInterestTemplate(Room roomInfo)
     {
-        var map = MapDictStorage.Instance.GetMap(roomInfo.MapInfo.MapId);
-        var roomConstraint = Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin)));
+        var map = MapDictStorage.Instance.GetMap(roomInfo.Info.MapInfo.MapId);
+        var roomConstraint = Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Info.Origin)));
         var relativeConstraint = Constraint.RelativeCylinder(100);
         var checkoutQuery = InterestQuery.Query(Constraint.Any(Constraint.All(roomConstraint, relativeConstraint), Constraint.RelativeCylinder(1)));
-        var serverQuery = InterestQuery.Query(Constraint.Any(Constraint.RelativeCylinder(1),Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Origin)))));
+        var serverQuery = InterestQuery.Query(Constraint.Any(Constraint.RelativeCylinder(1),Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Info.Origin)))));
         var worldManager = InterestQuery.Query(Constraint.Component(Bountyhunt.WorldManager.ComponentId));
         var roomManager = InterestQuery.Query(Constraint.All(Constraint.Component(Bountyhunt.RoomManager.ComponentId), roomConstraint));
         var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));

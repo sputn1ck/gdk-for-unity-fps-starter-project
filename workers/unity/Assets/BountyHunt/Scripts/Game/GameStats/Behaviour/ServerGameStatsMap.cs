@@ -21,7 +21,7 @@ public class ServerGameStatsMap : MonoBehaviour
     public void Initialize(Room room)
     {
         playerStats = new Dictionary<string, PlayerStats>();
-        foreach (var player in room.ActivePlayers)
+        foreach (var player in room.PlayerInfo.ActivePlayers)
         {
             playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false));
         }

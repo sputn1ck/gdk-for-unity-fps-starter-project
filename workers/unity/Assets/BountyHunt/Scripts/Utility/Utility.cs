@@ -93,6 +93,12 @@ public static class Utility
         return new Color32(r, g, b, a);
     }
 
+    public static (float x1, float x2, float z1, float z2) GetRoomBoundaries(RoomInfo room)
+    {
+
+        var map = MapDictStorage.Instance.GetMap(room.MapInfo.MapId);
+        return (room.Origin.X - map.Settings.DimensionX, room.Origin.X + map.Settings.DimensionX, room.Origin.Z - map.Settings.DimensionZ, room.Origin.Z - map.Settings.DimensionZ);
+    }
     public static string bytesToString(byte[] ba)
     {
         StringBuilder hex = new StringBuilder(ba.Length * 2);
