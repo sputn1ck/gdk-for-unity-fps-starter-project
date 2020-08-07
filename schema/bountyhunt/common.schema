@@ -22,3 +22,9 @@ type Quaternion {
     float y = 3;
     float z = 4;
 }
+
+type SpawnPosition {
+    Vector3Float position = 1;
+    float yaw = 2;
+    float pitch = 3;
+}

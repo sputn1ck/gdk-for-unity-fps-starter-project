@@ -83,7 +83,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
             {
                 continue;
             }
-            var mode = room.Value.ModeRotation[room.Value.CurrentMode];
+            var mode = room.Value.ModeRotation[room.Value.CurrentMode % room.Value.ModeRotation.Count];
             var label = string.Format("P:{0}, GM:{1}, MAP:{2}", room.Value.ActivePlayers.Count, mode.GamemodeId,room.Value.MapInfo.MapId);
             UnityAction action = () =>
             {

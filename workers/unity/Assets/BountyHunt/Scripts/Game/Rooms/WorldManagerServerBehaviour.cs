@@ -205,8 +205,8 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var rotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", Utility.SecondsToNano(3)),
-               new ModeRotationItem("satsstacker",Utility.SecondsToNano(5))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(120)),
+               new ModeRotationItem("satsstacker",Utility.SecondsToNano(240))
            };
             startGenerated = false;
             var startTime = System.DateTime.UtcNow.AddSeconds(10).ToFileTimeUtc();

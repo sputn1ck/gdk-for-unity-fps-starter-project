@@ -42,6 +42,7 @@ component RoomManager {
     command bountyhunt.Empty remove_player(RemovePlayerRequest);
     command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
     command bountyhunt.Empty add_roombound_object(AddRoomBountyObjectRequest);
+    command bountyhunt.SpawnPosition get_spawn_position(bountyhunt.Empty);
 }
 
 component RoomStats {

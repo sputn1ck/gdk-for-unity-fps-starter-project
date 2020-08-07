@@ -15,7 +15,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomPlayerCommandReceiver RoomPlayerCommandReceiver;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
-    [Require] RoomPlayerWriter RoomPlayerWriter;
+    [Require] public RoomPlayerWriter RoomPlayerWriter;
     [Require] InterestWriter InterestWriter;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId EntityId;

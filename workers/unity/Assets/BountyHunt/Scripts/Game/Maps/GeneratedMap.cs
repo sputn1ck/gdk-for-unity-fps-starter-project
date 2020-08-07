@@ -42,12 +42,13 @@ public class GeneratedMap : Map
         yield return null;
         onFinished?.Invoke();
     }
-    public override Vector3 GetSpawnPoint()
+    public override (Vector3 pos, float yaw, float pitch) GetSpawnPoint()
     {
         if (spawnPoints == null)
         {
-            return new Vector3(0, 2, 0);
+            return (new Vector3(0, 2, 0), 0, 0);
         }
-        return spawnPoints.GetRandomSpawnPoint().SpawnPosition;
+        var sp = spawnPoints.GetRandomSpawnPoint();
+        return (sp.SpawnPosition, sp.SpawnYaw, sp.SpawnYaw);
     }
 }

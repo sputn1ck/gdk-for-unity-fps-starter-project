@@ -5,6 +5,8 @@ using Improbable;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Subscriptions;
 using UnityEngine;
+using Bountyhunt;
+using Empty = Improbable.Gdk.Core.Empty;
 
 namespace Fps.Respawning
 {
@@ -16,7 +18,7 @@ namespace Fps.Respawning
         [Require] private PositionWriter spatialPosition;
         [Require] private GunStateComponentReader gunState;
         [Require] private GunComponentWriter gun;
-
+        [Require] private RoomManagerCommandSender RoomManagerCommandSender;
         private LinkedEntityComponent spatial;
 
         private void OnEnable()
@@ -30,7 +32,7 @@ namespace Fps.Respawning
             StopAllCoroutines();
         }
 
-        private void OnRequestRespawn(HealthComponent.RequestRespawn.ReceivedRequest request)
+        private void OnSpawnPositionResponse(RoomManager.GetSpawnPosition.ReceivedResponse res)
         {
             // Reset the player's health.
             var healthUpdate = new HealthComponent.Update
@@ -38,12 +40,12 @@ namespace Fps.Respawning
                 Health = health.Data.MaxHealth
             };
             health.SendUpdate(healthUpdate);
-
             // Move to a spawn point (position and rotation)
-            var (spawnPosition, spawnYaw, spawnPitch) = Respawning.SpawnPoints.GetRandomSpawnPointStatic();
+            var resData = res.ResponsePayload.Value;
+            var resVec = Utility.Vector3FloatToVector3(resData.Position);
             var newLatest = new ServerResponse
             {
-                Position = spawnPosition.ToVector3Int(),
+                Position = resVec.ToVector3Int(),
                 IncludesJump = false,
                 Timestamp = serverMovement.Data.Latest.Timestamp,
                 TimeDelta = 0
@@ -55,12 +57,12 @@ namespace Fps.Respawning
             };
             serverMovement.SendUpdate(serverMovementUpdate);
 
-            transform.position = spawnPosition + spatial.Worker.Origin;
+            transform.position = resVec + spatial.Worker.Origin;
 
             var forceRotationRequest = new RotationUpdate
             {
-                Yaw = spawnYaw.ToInt1k(),
-                Pitch = spawnPitch.ToInt1k(),
+                Yaw = resData.Yaw.ToInt1k(),
+                Pitch = resData.Pitch.ToInt1k(),
                 TimeDelta = 0
             };
             serverMovement.SendForcedRotationEvent(forceRotationRequest);
@@ -89,7 +91,13 @@ namespace Fps.Respawning
             }
 
             // Update spatial position in the next frame.
-            StartCoroutine(SetSpatialPosition(spawnPosition));
+            StartCoroutine(SetSpatialPosition(resVec));
+        }
+        private void OnRequestRespawn(HealthComponent.RequestRespawn.ReceivedRequest request)
+        {
+            var roomId = GetComponent<RoomPlayerServerBehaviour>().RoomPlayerWriter.Data.RoomEntityid;
+            RoomManagerCommandSender.SendGetSpawnPositionCommand(roomId, new Bountyhunt.Empty(), OnSpawnPositionResponse);
+            
         }
 
         private IEnumerator SetSpatialPosition(Vector3 position)

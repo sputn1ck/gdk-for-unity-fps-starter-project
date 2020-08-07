@@ -35,10 +35,23 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
         RoomManagerCommandReceiver.OnReadyToJoinRequestReceived += ReadyToJoin;
         RoomManagerCommandReceiver.OnAddRoomboundObjectRequestReceived += AddRoomBoundObject;
+        RoomManagerCommandReceiver.OnGetSpawnPositionRequestReceived += GetSpawnPosition;
         InitializePlayerStats();
         // start gamemode rotation
         ServerRoomGameModeBehaviour = GetComponent<ServerRoomGameModeBehaviour>();
         ServerRoomGameModeBehaviour.AddFinishedAction(CloseRoom);
+    }
+
+    private void GetSpawnPosition(RoomManager.GetSpawnPosition.ReceivedRequest obj)
+    {
+        var sP = mapInfo.GetSpawnPoint();
+        var room = RoomManagerWriter.Data.RoomInfo;
+        var newpos = Utility.Vector3ToVector3Float(sP.pos);
+        newpos.X += room.Origin.X;
+        newpos.Y += room.Origin.Y;
+        newpos.Z += room.Origin.Z;
+        Debug.Log("respawning at " + newpos);
+        RoomManagerCommandReceiver.SendGetSpawnPositionResponse(obj.RequestId, new SpawnPosition(newpos, sP.yaw, sP.pitch));
     }
 
     private void Update()
@@ -96,9 +109,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         HunterComponentCommandSender.SendTeleportPlayerCommand(obj.Payload.PlayerId, new TeleportRequest()
         {
             Heal = true,
-            X = room.Origin.X +spawnPoint.x,
-            Y = room.Origin.Y + spawnPoint.y,
-            Z = room.Origin.Z + spawnPoint.z
+            X = room.Origin.X +spawnPoint.pos.x,
+            Y = room.Origin.Y + spawnPoint.pos.y,
+            Z = room.Origin.Z + spawnPoint.pos.z
         }, (cb) => {
             if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {

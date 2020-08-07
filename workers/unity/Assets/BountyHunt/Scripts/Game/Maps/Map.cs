@@ -12,7 +12,7 @@ public abstract class Map : ScriptableObject
     public List<EntityId> LevelObjects;
     public abstract void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null);
 
-    public abstract Vector3 GetSpawnPoint();
+    public abstract (Vector3 pos, float yaw, float pitch) GetSpawnPoint();
     public abstract void Remove();
 }
 
