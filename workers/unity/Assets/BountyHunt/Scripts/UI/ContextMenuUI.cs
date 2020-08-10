@@ -69,7 +69,7 @@ public class ContextMenuUI : MonoBehaviour
     void ReplaceCurrent(ContextMenuArgs args)
     {
         
-        if (currentMenu.CloseAction != null)
+        if (currentMenu != null && currentMenu.CloseAction != null)
         {
             currentMenu.CloseAction.Invoke();
         }

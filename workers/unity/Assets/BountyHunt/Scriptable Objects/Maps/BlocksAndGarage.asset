@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105003b0342e7124aa6dc337a4c922c2, type: 3}
+  m_Name: BlocksAndGarage
+  m_EditorClassIdentifier: 
+  MapId: blocks
+  Settings:
+    DimensionX: 110
+    DimensionZ: 70
+    SupportedGameModes:
+    - satsstacking
+    - bountyboss
+    RecommendedPlayers: 2
+  MapPrefab: {fileID: 9149291729964918209, guid: 79b1b0fb527e4bf4c94bdd4347503c65,
+    type: 3}
