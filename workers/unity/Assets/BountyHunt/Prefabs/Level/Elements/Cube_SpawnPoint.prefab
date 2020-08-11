@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1112786501089713047}
   - component: {fileID: 4046074007682355691}
+  - component: {fileID: 6907463699981721172}
   m_Layer: 0
   m_Name: Cube_SpawnPoint
   m_TagString: Untagged
@@ -44,3 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weighting: 1
+--- !u!114 &6907463699981721172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008375981145438593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76092028756c6b1488f2cc7581d577f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.5, z: 0}
+  extent: {x: 2, y: 2, z: 2}
