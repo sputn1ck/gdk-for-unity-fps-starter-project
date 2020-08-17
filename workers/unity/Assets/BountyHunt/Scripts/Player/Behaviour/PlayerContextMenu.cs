@@ -16,9 +16,16 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 
     long walletBalance;
 
+    private bool isShowing;
+    public void OnEnable()
+    {
+        hunterComponentReader.OnBountyUpdate += UpdateBounty;
+        healthComopnentReader.OnHealthUpdate += UpdateHealth;
+    }
     public async void OnLookAtEnter()
     {
 
+        
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
         try
         {
@@ -63,11 +70,19 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
             Type = ContextMenuType.LOOKAT
         };
         ContextMenuUI.Instance.Set(args);
+        isShowing = true;
     }
 
     public void OnLookAtExit()
     {
+        isShowing = false;
         ContextMenuUI.Instance.UnsetLookAtMenu();
+    }
+
+    public void OnDisable()
+    {
+        if(isShowing)
+            ContextMenuUI.Instance.UnsetLookAtMenu();
     }
 
     void OpenPlayerBountyIncreaseMenu()
@@ -127,13 +142,9 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 
     void Subscribe()
     {
-        hunterComponentReader.OnBountyUpdate += UpdateBounty;
-        healthComopnentReader.OnHealthUpdate += UpdateHealth;
     }
     void Unsubscribe()
     {
-        hunterComponentReader.OnBountyUpdate -= UpdateBounty;
-        healthComopnentReader.OnHealthUpdate -= UpdateHealth;
     }
     void UpdateHealth(float health)
     {
