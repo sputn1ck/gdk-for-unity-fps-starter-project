@@ -41,13 +41,15 @@ public class BountyTickSystem : ComponentSystem
     }
 
 
+    //TODO für rooms überarbeiten
     protected override void OnUpdate()
     {
+        /*
         if (ServerGameModeBehaviour.instance == null)
             return;
         var endEvents = componentUpdateSystem.GetEventsReceived<GameModeManager.EndRound.Event>();
         var startEvents = componentUpdateSystem.GetEventsReceived<GameModeManager.NewRound.Event>();
-        var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
+        //var gameMode = ServerGameModeBehaviour.instance.currentGameMode;
      
 
         if(gameMode == null || gameMode.GameModeSettings == null)
@@ -72,6 +74,7 @@ public class BountyTickSystem : ComponentSystem
             return;
         timeSum = 0;
         AddTicks(gameMode.GameModeSettings.BountySettings.BountyTickConversion);
+        */
     }
 
     

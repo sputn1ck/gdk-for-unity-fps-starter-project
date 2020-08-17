@@ -13,19 +13,22 @@ using Bbhrpc;
 [CreateAssetMenu(fileName = "SatsStackerGameMode", menuName = "BBH/GameModes/SatsStacker", order = 2)]
 public class SatsStackerGameMode : GameMode
 {
-    private ServerGameModeBehaviour _serverGameModeBehaviour;
-    public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
+    private RoomManagerServerBehaviour _serverGameModeBehaviour;
+    public override void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
 
         // TODO get gamemode from backend
+        
         this.GameModeSettings = settings;
 
         _serverGameModeBehaviour = serverGameModeBehaviour;
+        /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
         serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
         {
             CarryoverSats = 0
         });
+        
         serverGameModeBehaviour.BountySpawnerCommandSender.SendStartSpawningCommand(new EntityId(2), new Bountyhunt.StartSpawningRequest()
         {
             TotalDuration = GameModeSettings.SecondDuration,
@@ -34,11 +37,12 @@ public class SatsStackerGameMode : GameMode
             MaxSpawns = GameModeSettings.SpawnSettings.MaxSpawnsPerSpawn,
             TotalBounty = totalSats,
             Distribution = (Distribution)GameModeSettings.SpawnSettings.Distribution
-        });
-        ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
+        });*/
+        //ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
+        
     }
 
-    public override void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
     {
 
         Debug.Log("end bbh");
@@ -48,13 +52,14 @@ public class SatsStackerGameMode : GameMode
 
     private void OnDonationPaid(RandomInvoice e)
     {
+        /*
         var pos = getRandomPosition();
         _serverGameModeBehaviour.BountySpawnerCommandSender.SendSpawnBountyPickupCommand(new EntityId(2), new SpawnBountyPickupRequest
         {
             BountyValue = e.amount,
             Position = new Vector3Float(pos.x,pos.y,pos.z)
         });
-        ServerGameChat.instance.SendGlobalMessage("DONATION", e.message, Chat.MessageType.INFO_LOG, e.amount >= 250);
+        ServerGameChat.instance.SendGlobalMessage("DONATION", e.message, Chat.MessageType.INFO_LOG, e.amount >= 250);*/
     }
 
     Vector3 getRandomPosition()

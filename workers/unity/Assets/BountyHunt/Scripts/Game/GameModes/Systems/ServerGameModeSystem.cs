@@ -54,8 +54,10 @@ public class ServerGameModeSystem : ComponentSystem
         EndGameModeStuff();
     }
 
+    // TODO ROOM gamemode stuff
     private void EndGameModeStuff()
     {
+        /*
         var events = componentUpdateSystem.GetEventsReceived<GameModeManager.EndRound.Event>();
         if (events.Count < 1)
             return;
@@ -68,6 +70,7 @@ public class ServerGameModeSystem : ComponentSystem
         {
             ClearStats();
         }
+        */
     }
 
     private void StartGameModeStuff()

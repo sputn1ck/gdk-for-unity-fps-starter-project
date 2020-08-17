@@ -94,11 +94,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
         
     }
-
-    public Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request)
-    {
-        return Task.FromResult(getRes(request));
-    }
+    /*
 
     private GetRoundInfoResponse getRes(GetRoundInfoRequest req)
     {
@@ -149,7 +145,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         };
         roundinfo.Advertisers.Add(advertisers);
         return roundinfo;
-    }
+    }*/
     public int GetGameModeDuration(string gameModeId)
     {
         switch (gameModeId) {

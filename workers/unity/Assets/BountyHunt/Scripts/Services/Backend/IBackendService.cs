@@ -53,7 +53,6 @@ public interface IBackendServerClient
     void AddEarnings(string user, long earnings);
     void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths);
     void AddPlayerDisconnect(string user);
-    Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request);
     Task<string> GetUserSkin(string pubkey);
     IEnumerator HandleBackendEvents(CancellationTokenSource ct);
 }

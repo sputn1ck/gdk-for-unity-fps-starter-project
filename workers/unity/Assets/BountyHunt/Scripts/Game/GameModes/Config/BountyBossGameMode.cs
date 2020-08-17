@@ -11,20 +11,20 @@ using UnityEngine;
 public class BountyBossGameMode : GameMode
 {
 
-    private ServerGameModeBehaviour _serverGameModeBehaviour;
-    public override void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
+    private RoomManagerServerBehaviour _serverGameModeBehaviour;
+    public override void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
 
-        this.GameModeSettings = settings;
 
         _serverGameModeBehaviour = serverGameModeBehaviour;
-
+        this.GameModeSettings = settings;
         // setting subsidy + resetting carryover sats
+        /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
         serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
         {
             CarryoverSats = 0
-        });
+        });*/
 
         // Get Random Player
         // TODO use server game mode objects
@@ -46,7 +46,7 @@ public class BountyBossGameMode : GameMode
     }
 
 
-    public override void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
     {
     }
 

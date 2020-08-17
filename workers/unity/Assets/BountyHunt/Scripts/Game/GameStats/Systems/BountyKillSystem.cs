@@ -85,8 +85,9 @@ public class BountyKillSystem : ComponentSystem
             {
                 Kills = killerDonnerInfo.Kills + 1
             };
-            int added = (int)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.GameModeSettings.BountySettings.BountyDropPercentageDeath) % 2;
-            var satsToDrop = (long)(victimDonnerInfo.Bounty * ServerGameModeBehaviour.instance.currentGameMode.GameModeSettings.BountySettings.BountyDropPercentageDeath);
+            // TODO room gamemode dropping
+            int added = (int)(victimDonnerInfo.Bounty * 1) % 2;
+            var satsToDrop = (long)(victimDonnerInfo.Bounty * 1);
             var victimModifiedInfo = new HunterComponent.Update()
             {
                 Bounty = victimDonnerInfo.Bounty - satsToDrop,
@@ -112,12 +113,13 @@ public class BountyKillSystem : ComponentSystem
         }
     }
 
-    private void SendBackendUpdate(string killer, string victim)
+    private void SendBackendUpdate(string killer, string victim, string gameModeId)
     {
         var backend = ServerServiceConnections.instance.BackendGameServerClient;
         if (backend != null)
         {
-            if(ServerGameModeBehaviour.instance.currentGameMode.GameModeId != "lobby")
+            
+            if(gameModeId != "lobby")
             {
                 backend.AddKill(killer, victim);
             }

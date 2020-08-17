@@ -316,6 +316,8 @@ namespace Bbhrpc {
     static readonly grpc::Marshaller<global::Bbhrpc.SubscribeInvioceStreamResponse> __Marshaller_bbhrpc_SubscribeInvioceStreamResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.SubscribeInvioceStreamResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetDonationInvoiceRequest> __Marshaller_bbhrpc_GetDonationInvoiceRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetDonationInvoiceRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetDonationInvoiceResponse> __Marshaller_bbhrpc_GetDonationInvoiceResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetDonationInvoiceResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetBountyLnurlRequest> __Marshaller_bbhrpc_GetBountyLnurlRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetBountyLnurlRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetBountyLnurlResponse> __Marshaller_bbhrpc_GetBountyLnurlResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetBountyLnurlResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse> __Method_GetRankingInfo = new grpc::Method<global::Bbhrpc.GetRankingInfoRequest, global::Bbhrpc.GetRankingInfoResponse>(
         grpc::MethodType.Unary,
@@ -380,6 +382,13 @@ namespace Bbhrpc {
         __Marshaller_bbhrpc_GetDonationInvoiceRequest,
         __Marshaller_bbhrpc_GetDonationInvoiceResponse);
 
+    static readonly grpc::Method<global::Bbhrpc.GetBountyLnurlRequest, global::Bbhrpc.GetBountyLnurlResponse> __Method_GetBountyLnurl = new grpc::Method<global::Bbhrpc.GetBountyLnurlRequest, global::Bbhrpc.GetBountyLnurlResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetBountyLnurl",
+        __Marshaller_bbhrpc_GetBountyLnurlRequest,
+        __Marshaller_bbhrpc_GetBountyLnurlResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -431,6 +440,11 @@ namespace Bbhrpc {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetDonationInvoiceResponse> GetDonationInvoice(global::Bbhrpc.GetDonationInvoiceRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetBountyLnurlResponse> GetBountyLnurl(global::Bbhrpc.GetBountyLnurlRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -596,6 +610,22 @@ namespace Bbhrpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetDonationInvoice, null, options, request);
       }
+      public virtual global::Bbhrpc.GetBountyLnurlResponse GetBountyLnurl(global::Bbhrpc.GetBountyLnurlRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetBountyLnurl(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.GetBountyLnurlResponse GetBountyLnurl(global::Bbhrpc.GetBountyLnurlRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetBountyLnurl, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetBountyLnurlResponse> GetBountyLnurlAsync(global::Bbhrpc.GetBountyLnurlRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetBountyLnurlAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetBountyLnurlResponse> GetBountyLnurlAsync(global::Bbhrpc.GetBountyLnurlRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetBountyLnurl, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override PublicServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -616,7 +646,8 @@ namespace Bbhrpc {
           .AddMethod(__Method_GetOnlineUser, serviceImpl.GetOnlineUser)
           .AddMethod(__Method_GetInfo, serviceImpl.GetInfo)
           .AddMethod(__Method_SubscribeInvoiceStream, serviceImpl.SubscribeInvoiceStream)
-          .AddMethod(__Method_GetDonationInvoice, serviceImpl.GetDonationInvoice).Build();
+          .AddMethod(__Method_GetDonationInvoice, serviceImpl.GetDonationInvoice)
+          .AddMethod(__Method_GetBountyLnurl, serviceImpl.GetBountyLnurl).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -634,6 +665,7 @@ namespace Bbhrpc {
       serviceBinder.AddMethod(__Method_GetInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetInfoRequest, global::Bbhrpc.GetInfoResponse>(serviceImpl.GetInfo));
       serviceBinder.AddMethod(__Method_SubscribeInvoiceStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Bbhrpc.SubscribeInvoiceStreamRequest, global::Bbhrpc.SubscribeInvioceStreamResponse>(serviceImpl.SubscribeInvoiceStream));
       serviceBinder.AddMethod(__Method_GetDonationInvoice, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetDonationInvoiceRequest, global::Bbhrpc.GetDonationInvoiceResponse>(serviceImpl.GetDonationInvoice));
+      serviceBinder.AddMethod(__Method_GetBountyLnurl, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetBountyLnurlRequest, global::Bbhrpc.GetBountyLnurlResponse>(serviceImpl.GetBountyLnurl));
     }
 
   }

@@ -7,18 +7,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LobbyGameMode", menuName = "BBH/GameModes/Lobby", order = 1)]
 public class LobbyGameMode : GameMode
 {
-    private ServerGameModeBehaviour _serverGameModeBehaviour;
+    private RoomManagerServerBehaviour _serverGameModeBehaviour;
 
-    public override async void ServerOnGameModeStart(ServerGameModeBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
+    public override async void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour,GameModeSettings settings, long subsidy)
     {
         Debug.Log("start lobby");
-        this.GameModeSettings = settings;
         _serverGameModeBehaviour = serverGameModeBehaviour;
+        this.GameModeSettings = settings;
         //ServerGameChat.instance.SendAuctionStartedChatMessage("new auction started, check escape menu to participate");
 
     }
 
-    public override async void ServerOnGameModeEnd(ServerGameModeBehaviour serverGameModeBehaviour)
+    public override async void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
     {
         Debug.Log("end lobby");
         await Task.Delay(2000);
@@ -27,10 +27,11 @@ public class LobbyGameMode : GameMode
 
     private void AddCarryOverSats(long sats)
     {
+        /*
         _serverGameModeBehaviour.GameStatsWriter.SendUpdate(new Bountyhunt.GameStats.Update
         {
             CarryoverSats = _serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats + sats
-        });
+        });*/
     }
 
 

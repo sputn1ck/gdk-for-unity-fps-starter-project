@@ -202,11 +202,6 @@ public class BackendGameserverClient : IBackendServerClient
         }
     }
 
-    public async Task<GetRoundInfoResponse> GetRoundInfo(GetRoundInfoRequest request)
-    {
-        return await _client.GetRoundInfoAsync(request,GetPubkeyCalloptions());
-    }
-    
 
     private CallOptions GetPubkeyCalloptions()
     {
