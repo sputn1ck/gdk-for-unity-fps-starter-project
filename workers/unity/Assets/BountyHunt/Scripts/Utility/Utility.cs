@@ -93,7 +93,7 @@ public static class Utility
         return new Color32(r, g, b, a);
     }
 
-    public static (float x1, float x2, float z1, float z2) GetRoomBoundaries(RoomInfo room)
+    public static (float x1, float x2, float z1, float z2) GetRoomBoundaries(RoomBaseInfo room)
     {
 
         var map = MapDictStorage.Instance.GetMap(room.MapInfo.MapId);

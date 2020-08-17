@@ -3,7 +3,7 @@ package bountyhunt;
 import "bountyhunt/common.schema";
 import "bountyhunt/gamemode.schema";
 import "bountyhunt/manager.schema";
-
+import "bountyhunt/ads.schema";
 component WorldManager {
     id = 480001;
 
@@ -78,7 +78,7 @@ component RoomPlayer {
     string room_id = 1;
     EntityId room_entityid = 2;
     string pubkey = 3;
-    RoomInfo active_room = 4;
+    RoomBaseInfo active_room = 4;
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
     command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
 }
@@ -97,11 +97,12 @@ type PlayerStats {
     bool active = 5;
 }
 type Room {
-    RoomInfo info = 1;
+    RoomBaseInfo info = 1;
     RoomGameModeInfo game_mode_info = 2;
     RoomPlayerInfo player_info = 3;
+    RoomFinanceInfo finance_info = 4;
 }
-type RoomInfo {
+type RoomBaseInfo {
     string room_id = 1;
     MapInfo map_info = 2;
     EntityId entity_id = 3;
@@ -118,6 +119,18 @@ type RoomPlayerInfo {
     list<string> queued_players = 2;
     int32 max_players = 3;
 }
+
+type RoomFinanceInfo {
+    int64 start_sats = 1;
+    int64 added_sats = 2;
+    int64 spawned_sats = 3;
+    option<FixedAdvertisers> fixed_advertisers = 4;
+}
+
+type FixedAdvertisers {
+    list<bountyhunt.AdvertiserSource> advertisers = 1;
+}
+
 enum RoomState {
         CREATED = 0;
         STARTED = 1;
@@ -152,6 +165,8 @@ type CreateRoomRequest {
     int32 repetitions = 3;
     int32 max_players = 4;
     int64 start_time = 5;
+    int64 start_sats = 6;
+    list<bountyhunt.AdvertiserSource> advertisers = 7;
 }
 
 type ModeRotationItem {

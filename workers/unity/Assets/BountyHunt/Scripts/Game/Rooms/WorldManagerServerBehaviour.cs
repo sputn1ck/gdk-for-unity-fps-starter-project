@@ -19,10 +19,8 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     
     public bool startGenerated;
-    public string mapID;
-    public bool startPrefabMap;
-
-    public static int cantinaPlayers = 20;
+    public static int cantinaCounter = 1;
+    
     private void OnEnable()
     {
         WorldManagerCommandReceiver.OnEndRoomRequestReceived += OnEndRoom;
@@ -41,8 +39,18 @@ public class WorldManagerServerBehaviour : MonoBehaviour
            {
                new ModeRotationItem("lobby", Utility.SecondsToNano(300))
            };
-            CreateRoom(new CreateRoomRequest(new MapInfo("cantina",""), cantinaRotation,int.MaxValue, cantinaPlayers,System.DateTime.UtcNow.ToFileTimeUtc()),"cantina-"+cantinaPlayers );
-            cantinaPlayers++;
+            var cantinaRequest = new CreateRoomRequest()
+            {
+                Advertisers = null,
+                MapInfo = new MapInfo("cantina", ""),
+                MaxPlayers = 20,
+                ModeRotation = cantinaRotation,
+                Repetitions = int.MaxValue,
+                StartTime = System.DateTime.UtcNow.ToFileTimeUtc(),
+                StartSats = 0, 
+            };
+            CreateRoom((cantinaRequest), "cantina-"+cantinaCounter);
+            cantinaCounter++;
         }
     }
 
@@ -119,8 +127,18 @@ public class WorldManagerServerBehaviour : MonoBehaviour
            {
                new ModeRotationItem("lobby", Utility.SecondsToNano(300))
            };
-            newCantina = CreateRoom(new CreateRoomRequest(new MapInfo("cantina", ""), cantinaRotation, 100, cantinaPlayers, System.DateTime.UtcNow.ToFileTimeUtc()), "cantina-" + cantinaPlayers);
-            cantinaPlayers++;
+            var cantinaRequest = new CreateRoomRequest()
+            {
+                Advertisers = null,
+                MapInfo = new MapInfo("cantina", ""),
+                MaxPlayers = 20,
+                ModeRotation = cantinaRotation,
+                Repetitions = int.MaxValue,
+                StartTime = System.DateTime.UtcNow.ToFileTimeUtc(),
+                StartSats = 0,
+            };
+            newCantina = CreateRoom(cantinaRequest, "cantina-"+cantinaCounter);
+            cantinaCounter++;
             newlyCreated = true;
         }
         WorldManagerCommandReceiver.SendGetCantinaResponse(obj.RequestId, new GetCantinaResponse(newCantina, newlyCreated));
@@ -139,7 +157,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         }
         var newCantina = new Room()
         {
-            Info = new RoomInfo()
+            Info = new RoomBaseInfo()
             {
                 RoomId = "none"
             }
@@ -214,7 +232,17 @@ public class WorldManagerServerBehaviour : MonoBehaviour
            };
             startGenerated = false;
             var startTime = System.DateTime.UtcNow.AddSeconds(10).ToFileTimeUtc();
-            CreateRoom(new CreateRoomRequest(new MapInfo("generated_20",UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()), rotation,2, 20, startTime));
+            var roomRequest = new CreateRoomRequest()
+            {
+                Advertisers = null,
+                MapInfo = new MapInfo("generated_20", UnityEngine.Random.Range(float.MinValue, float.MaxValue).ToString()),
+                MaxPlayers = 20,
+                ModeRotation = rotation,
+                Repetitions = 2,
+                StartTime = startTime,
+                StartSats = 0,
+            };
+            CreateRoom(roomRequest);
         }
 
         if(startPrefabMap)
@@ -256,22 +284,29 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
     private Room CreateRoom(CreateRoomRequest req, string id = "")
     {
-        // TODO: Get MapInfo
+        // Get MapInfo
         var mapInfo = MapDictStorage.Instance.GetMap(req.MapInfo.MapId);
         
-        // TODO: Get Free Slot depending on map size
+        // Get Free Slot depending on map size
         var roomCenter = GetNextSlot(mapInfo.Settings);
-        // TODO: create room
+        // create room
         if (id == "")
         {
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
-
+        RoomFinanceInfo financeInfo;
+        if (req.Advertisers == null) {
+            financeInfo = new RoomFinanceInfo(req.StartSats, 0, 0, null);
+        } else
+        {
+            financeInfo = new RoomFinanceInfo(req.StartSats, 0, 0, new FixedAdvertisers(req.Advertisers));
+        }
         var room = new Room()
         {
-            Info = new RoomInfo(id, req.MapInfo, new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.StartTime),
+            Info = new RoomBaseInfo(id, req.MapInfo, new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.StartTime),
             GameModeInfo = new RoomGameModeInfo(req.ModeRotation, req.Repetitions, 0),
             PlayerInfo = new RoomPlayerInfo(new List<string>(), new List<string>(), req.MaxPlayers),
+            FinanceInfo = financeInfo
         };
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);
 

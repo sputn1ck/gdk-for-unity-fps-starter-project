@@ -18,7 +18,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     LinkedEntityComponent linkedEntityComponent;
 
     public static RoomPlayerClientBehaviour Instance;
-   public RoomInfo CurrentRoom;
+   public RoomBaseInfo CurrentRoom;
 
     private EntityId currentRoomId = new EntityId(0);
     // Start is called before the first frame update
@@ -34,7 +34,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         RoomPlayerReader.OnActiveRoomUpdate += RoomPlayerReader_OnActiveRoomUpdate;
     }
 
-    private void RoomPlayerReader_OnActiveRoomUpdate(RoomInfo obj)
+    private void RoomPlayerReader_OnActiveRoomUpdate(RoomBaseInfo obj)
     {
         CurrentRoom = obj;
     }

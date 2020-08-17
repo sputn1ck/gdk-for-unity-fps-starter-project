@@ -107,7 +107,7 @@ public class DonnerEntityTemplates
         var roomCompenent = new RoomPlayer.Snapshot()
         {
             Pubkey = loginData.Pubkey,
-            ActiveRoom = new RoomInfo(), 
+            ActiveRoom = new RoomBaseInfo(), 
         };
         /*
          * OLD STUFF

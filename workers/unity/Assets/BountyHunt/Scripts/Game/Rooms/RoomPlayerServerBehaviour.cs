@@ -21,7 +21,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
 
-    public RoomInfo CurrentRoom;
+    public RoomBaseInfo CurrentRoom;
     private string pubkey;
     
     private void OnEnable()
