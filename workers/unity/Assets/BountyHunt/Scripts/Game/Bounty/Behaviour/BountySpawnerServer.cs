@@ -17,7 +17,6 @@ public class BountySpawnerServer : MonoBehaviour
     [Require] BountySpawnerCommandReceiver BountySpawnerCommandReceiver;
     [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] GameStatsWriter GameStatsWriter;
-    [Require] PaymentManagerComponentWriter PaymentManagerComponentWriter;
 
     public bool spawnPickupTrigger;
     public long spawnSats;
@@ -26,7 +25,6 @@ public class BountySpawnerServer : MonoBehaviour
     {
         BountySpawnerCommandReceiver.OnSpawnBountyPickupRequestReceived += OnSpawnBountyPickupRequestReceived;
         BountySpawnerCommandReceiver.OnStartSpawningRequestReceived += OnStartSpawning;
-        ServerEvents.instance.OnBountyInvoicePaid.AddListener(OnBountyInvoicePaid);
     }
 
 
@@ -39,16 +37,6 @@ public class BountySpawnerServer : MonoBehaviour
         }
     }
     
-    private void OnBountyInvoicePaid(BountyInvoice bounty)
-    {
-        var player = GameStatsWriter.Data.PlayerMap.FirstOrDefault(u => u.Value.Pubkey == bounty.pubkey);
-        if (player.Value.Name == null)
-        {
-            return;
-        }
-        HunterComponentCommandSender.SendAddBountyCommand(player.Key, new AddBountyRequest(bounty.amount, BountyReason.DONATION));
-        PaymentManagerComponentWriter.SendBountyIncreaseEvent(new BountyIncrease(bounty.message, player.Key.Id, bounty.amount));
-    }
     private void OnStartSpawning(BountySpawner.StartSpawning.ReceivedRequest obj)
     {
         if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)

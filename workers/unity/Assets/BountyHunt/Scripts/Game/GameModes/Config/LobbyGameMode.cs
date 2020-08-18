@@ -35,12 +35,12 @@ public class LobbyGameMode : GameMode
     }
 
 
-    public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
         
     }
 
-    public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
         
     }

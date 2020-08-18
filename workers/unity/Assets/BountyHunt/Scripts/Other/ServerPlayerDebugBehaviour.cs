@@ -64,6 +64,6 @@ public class ServerPlayerDebugBehaviour : MonoBehaviour
     public void AddBounty()
     {
 
-        hunter.SendUpdate(new HunterComponent.Update { Bounty = hunter.Data.Bounty + modifiyBounty });
+        //hunter.SendUpdate(new HunterComponent.Update { Bounty = hunter.Data.Bounty + modifiyBounty });
     }
 }

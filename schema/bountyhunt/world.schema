@@ -2,7 +2,6 @@ package bountyhunt;
 
 import "bountyhunt/common.schema";
 import "bountyhunt/gamemode.schema";
-import "bountyhunt/manager.schema";
 import "bountyhunt/ads.schema";
 component WorldManager {
     id = 480001;
@@ -54,6 +53,7 @@ component RoomStats {
     
     command bountyhunt.Empty add_kill(AddKillRequest);
     command bountyhunt.Empty add_earnings(AddEarningsRequest);
+    command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty set_bounty(SetBountyRequest);
 }
 
@@ -65,6 +65,10 @@ type AddKillRequest {
 type AddEarningsRequest {
     string player_id = 1;
     int64 earnings = 2;
+}
+type AddBountyRequest {
+    string player_id =1;
+    int64 bounty = 2;
 }
 
 type SetBountyRequest {

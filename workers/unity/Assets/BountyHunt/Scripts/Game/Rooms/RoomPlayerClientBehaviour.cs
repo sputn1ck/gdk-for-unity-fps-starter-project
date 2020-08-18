@@ -34,6 +34,7 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
         RoomPlayerReader.OnActiveRoomUpdate += RoomPlayerReader_OnActiveRoomUpdate;
     }
 
+
     private void RoomPlayerReader_OnActiveRoomUpdate(RoomBaseInfo obj)
     {
         CurrentRoom = obj;
@@ -42,11 +43,20 @@ public class RoomPlayerClientBehaviour : MonoBehaviour
     private void OnNewRoom(EntityId obj)
     {
         Debug.Log("new room " + obj.Id);
+        if(currentRoomId == obj)
+        {
+            Debug.Log("Weird behaviour the second");
+            return;
+        }
         if(currentRoomId.Id != 0)
         {
             var oldRoomGo = ClientGameObjectManager.Instance.GetRoomGO(currentRoomId);
-            oldRoomGo?.GetComponent<RoomManagerClientBehaviour>().Deinitialize();
+            if(oldRoomGo != null)
+            {
+                oldRoomGo.GetComponent<RoomManagerClientBehaviour>()?.Deinitialize();
+            }
         }
+        currentRoomId = obj;
         StartCoroutine(WaitForMap(obj));
     }
 

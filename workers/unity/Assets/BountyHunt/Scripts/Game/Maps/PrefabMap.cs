@@ -53,6 +53,8 @@ public class PrefabMap : Map
 
     public override void Remove()
     {
+
+        Debug.Log("prefab map remove");
         Destroy(MapGo);
     }
 

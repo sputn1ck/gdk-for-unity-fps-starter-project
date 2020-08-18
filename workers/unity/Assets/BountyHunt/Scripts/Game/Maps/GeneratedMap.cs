@@ -23,6 +23,7 @@ public class GeneratedMap : Map
 
     public override void Remove()
     {
+        Debug.Log("generated map remove");
         Destroy(mapGO);
     }
     protected virtual IEnumerator LoadWorld(Transform transform, int worldSize, string workertype, bool isServer, string seed, UnityAction onFinished)

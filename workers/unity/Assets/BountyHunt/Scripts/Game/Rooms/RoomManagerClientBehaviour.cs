@@ -65,8 +65,10 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     {
 
         Debug.Log("Deinitialize called on " + transform.name);
-        ClientGameObjectManager.Instance.RemoveRoomGo(EntityId);
-        RoomStatsReader.RemoveAllCallbacks();
+        if(RoomStatsReader != null)
+        {
+            RoomStatsReader.RemoveAllCallbacks();
+        }
         if (map == null)
         {
             return;

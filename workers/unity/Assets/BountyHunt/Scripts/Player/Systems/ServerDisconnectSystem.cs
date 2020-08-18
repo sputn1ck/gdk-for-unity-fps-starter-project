@@ -51,6 +51,8 @@ public class ServerDisconnectSystem : ComponentSystem
 
     protected override void OnUpdate()
     {
+        // todo drop bounty and payout 
+        /*
         Entities.With(query).ForEach((ref HunterComponent.Component donnerinfo, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
         {
             if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)
@@ -82,7 +84,7 @@ public class ServerDisconnectSystem : ComponentSystem
 
                 componentUpdateSystem.SendUpdate<HunterComponent.Update>(new HunterComponent.Update { Bounty = 0, Earnings = 0 }, entityId.EntityId);
             }
-        });
+        });*/
         Entities.With(query).ForEach((ref RoomPlayer.Component roomplayer, ref HeartbeatData heartbeat, ref SpatialEntityId entityId, ref Position.Component pos) =>
         {
             if (heartbeat.NumFailedHeartbeats > PlayerLifecycleConfig.MaxNumFailedPlayerHeartbeats - 1)

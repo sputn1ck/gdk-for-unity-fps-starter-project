@@ -12,6 +12,6 @@ public abstract class GameMode : ScriptableObject
     public abstract void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour,GameModeSettings settings,  long subsidy);
     public abstract void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour);
 
-    public abstract void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour);
-    public abstract void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour);
+    public abstract void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour);
+    public abstract void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour);
 }

@@ -132,6 +132,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void AddPlayer(RoomManager.AddPlayer.ReceivedRequest obj)
     {
+        Debug.Log("called addplayer on room adding player to room " + this.EntityId);
         statsMap.AddPlayer(obj.Payload.PlayerPk);
         
         var room = RoomManagerWriter.Data.RoomInfo;

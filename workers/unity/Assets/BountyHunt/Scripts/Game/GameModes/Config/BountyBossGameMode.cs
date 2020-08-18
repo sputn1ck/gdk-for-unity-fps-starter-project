@@ -39,8 +39,9 @@ public class BountyBossGameMode : GameMode
                 bountyPlayers.Add(bp);
             }
         }
+        //TODO reimplement bounty increasing
         var bountyKing = bountyPlayers[UnityEngine.Random.Range(0, bountyPlayers.Count)];
-        bountyKing.IncreaseBounty(subsidy);
+        //bountyKing.IncreaseBounty(subsidy);
         ServerGameChat.instance.SendGlobalMessage("SERVER", bountyKing.HunterComponentWriter.Data.Name + " IS THE NEW BOUNTY KING, HUNT HIM DOWN", Chat.MessageType.INFO_LOG);
         ServerGameChat.instance.SendPrivateMessage(bountyKing.entityId.Id, 2, "SERVER", "YOU ARE THE BOUNTY KING", Chat.MessageType.ERROR_LOG, true);
     }
@@ -50,11 +51,11 @@ public class BountyBossGameMode : GameMode
     {
     }
 
-    public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
     }
 
-    public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
     }
 }

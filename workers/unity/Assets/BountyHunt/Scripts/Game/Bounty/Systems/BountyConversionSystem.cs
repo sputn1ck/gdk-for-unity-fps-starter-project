@@ -50,7 +50,8 @@ public class BountyConversionSystem : ComponentSystem
         {
             return;
         }
-        Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
+        // todo bounty ticking on room
+       /* Entities.With(gameStatsGroup).ForEach((ref GameStats.Component gamestats) =>
         {
 
             Entities.With(conversionGroup).ForEach(
@@ -72,7 +73,7 @@ public class BountyConversionSystem : ComponentSystem
 
 
             
-        });
+        });*/
 
 
 

@@ -75,14 +75,7 @@ public class ServerGameModeSystem : ComponentSystem
 
     private void StartGameModeStuff()
     {
-        var events = componentUpdateSystem.GetEventsReceived<GameModeManager.NewRound.Event>();
-        if (events.Count < 1)
-            return;
-        if (GameModeDictionary.Get(events[0].Event.Payload.GameModeInfo.GameModeId).GameModeSettings.BaseSettings.TeleportPlayerOnStart)
-        {
-            TeleportPlayers();
-        }
-
+        
 
 
     }
@@ -116,14 +109,12 @@ public class ServerGameModeSystem : ComponentSystem
 
     void ClearStats()
     {
+        // TODO clear stats in room
         Entities.With(playerBountyGroup).ForEach((
             ref HunterComponent.Component hunter,
             ref SpatialEntityId entityId) =>
         {
             componentUpdateSystem.SendUpdate(new HunterComponent.Update() {
-                SessionEarnings = 0,
-                Kills = 0,
-                Deaths = 0,
             }, entityId.EntityId);
         });
     }

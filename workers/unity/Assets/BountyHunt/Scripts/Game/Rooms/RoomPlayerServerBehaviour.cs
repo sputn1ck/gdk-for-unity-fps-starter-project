@@ -17,7 +17,6 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] RoomPlayerWriter RoomPlayerWriter;
     [Require] InterestWriter InterestWriter;
-    [Require] HunterComponentCommandSender HunterComponentCommandSender;
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
 
@@ -58,8 +57,14 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
 
     private void OnUpdatePlayerRoom(RoomPlayer.UpdatePlayerRoom.ReceivedRequest obj)
     {
-        Debug.Log("OnUpdatePlayerRoom called " + obj.CallerWorkerId);
         var room = obj.Payload.Room;
+
+        if (room.Info.RoomId == CurrentRoom.RoomId)
+        {
+            Debug.Log("WEird behaviour");
+            return;
+        }
+        Debug.Log("OnUpdatePlayerRoom called " + obj.Payload.Room.Info.RoomId);
         var newInterestTemplate = GetInterestTemplate(room);
         InterestWriter.SendUpdate(new Interest.Update()
         {

@@ -15,7 +15,6 @@ public class BountyTickSystem : ComponentSystem
     private EntityManager entityManager;
 
     private EntityQuery tickGroup;
-    private EntityQuery gameStatsGroup;
 
     private float timeSum;
     private float tickTime;
@@ -32,9 +31,6 @@ public class BountyTickSystem : ComponentSystem
             ComponentType.ReadOnly<SpatialEntityId>(),
             ComponentType.ReadOnly<GunComponent.Component>()
         );
-        gameStatsGroup = GetEntityQuery(
-            ComponentType.ReadWrite<GameModeManager.Component>(),
-            ComponentType.ReadOnly<SpatialEntityId>());
 
         timeSum = 0;
         tickTime = 1;

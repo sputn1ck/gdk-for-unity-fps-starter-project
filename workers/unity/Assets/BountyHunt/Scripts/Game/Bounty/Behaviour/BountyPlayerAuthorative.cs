@@ -34,11 +34,6 @@ public class BountyPlayerAuthorative : MonoBehaviour
     {
         ClientGameObjectManager.Instance.SetAuthorativePlayer(this.gameObject, this.entityId);
 
-        HunterComponentReader.OnBountyUpdate += HunterComponentReader_OnBountyUpdate;
-        HunterComponentReader.OnEarningsUpdate += HunterComponentReader_OnEarningsUpdate;
-        HunterComponentReader.OnSessionEarningsUpdate += HunterComponentReader_OnSessionEarningsUpdate;
-        HunterComponentReader.OnKillsUpdate += HunterComponentReader_OnKillsUpdate;
-        HunterComponentReader.OnDeathsUpdate += HunterComponentReader_OnDeathsUpdate;
 
 
         lastBounty = 0;
@@ -100,7 +95,7 @@ public class BountyPlayerAuthorative : MonoBehaviour
         
         ClientEvents.instance.onBalanceUpdate.Invoke(new BalanceUpdateEventArgs()
         {
-            GameServerBalance = HunterComponentReader.Data.Earnings,
+            GameServerBalance = 0,
             BufferBalance = balance.BufferBalance,
             DaemonBalance = balance.DaemonBalance,
             ChannelCost = balance.ChannelMissingBalance

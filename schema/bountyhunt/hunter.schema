@@ -5,16 +5,8 @@ import "bountyhunt/common.schema";
 component HunterComponent {
     id = 430001;
     string name = 1;
-    int32 kills = 2;
-    int32 deaths = 3;
-    int64 bounty = 4;
-    int64 earnings = 5;
-    string pubkey = 6;
-    int64 session_earnings = 7;
-    string equipped_skin = 8;
-    command bountyhunt.Empty add_bounty(AddBountyRequest);
-    command bountyhunt.Empty increase_earnings(IncreaseEarningsRequest);
-    command RequestPayoutResponse request_payout(RequestPayoutRequest);
+    string pubkey = 2;
+    string equipped_skin = 3;
     command bountyhunt.Empty teleport_player(TeleportRequest);
     command bountyhunt.Empty kick_player(KickPlayerRequest);
     command bountyhunt.Empty refresh_appearance(bountyhunt.Empty);
@@ -26,32 +18,9 @@ component TracerComponent {
     command bountyhunt.Empty update_position(UpdatePositionRequest);
 }
 
-type AddBountyRequest {
-    int64 amount = 1;
-    BountyReason reason = 2;
-}
-
-type IncreaseEarningsRequest {
-    int64 amount = 1;
-}
-
-type RequestPayoutRequest {
-    string pay_req = 1;
-}
-
-type RequestPayoutResponse {
-    bool ok = 1;
-    string pre_image = 2;
-    string message = 3;
-    int64 amount = 4;
-}
 
 type  KickPlayerRequest {
     string player_name = 1;
-}
-
-type NextBountyTick {
-    double tick_percentage = 1;
 }
 
 type TeleportRequest {

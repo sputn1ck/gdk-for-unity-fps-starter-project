@@ -8,6 +8,7 @@ using Fps;
 using Bountyhunt;
 using System;
 
+// TODO get bounty / name from room player
 public class PlayerNameUpdater : MonoBehaviour
 {
     public Canvas nameCanvas;
@@ -17,8 +18,8 @@ public class PlayerNameUpdater : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateName(hunterComponentReader.Data.Bounty);
-        hunterComponentReader.OnBountyUpdate += UpdateName;
+        UpdateName(0);
+        //hunterComponentReader.OnBountyUpdate += UpdateName;
     }
 
     public void UpdateName(long bounty)

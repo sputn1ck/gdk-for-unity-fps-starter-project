@@ -37,10 +37,7 @@ public class BountyPlayerServer : MonoBehaviour
     {
 
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        HunterCommandReceiver.OnAddBountyRequestReceived += BountyComponentCommandReceiver_OnAddBountyRequestReceived;
-        HunterCommandReceiver.OnRequestPayoutRequestReceived += OnRequestPayout;
         HunterCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
-        HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
         HunterCommandReceiver.OnKickPlayerRequestReceived += OnKickPlayer;
         HunterCommandReceiver.OnRefreshAppearanceRequestReceived += OnRefreshAppearance;
         Invoke("SetName", 1f);
@@ -78,6 +75,7 @@ public class BountyPlayerServer : MonoBehaviour
     }
     private async void OnEarningsUpdate(long obj)
     {
+        /*
         var amount = HunterComponentWriter.Data.Earnings;
         if (amount < 1)
         {
@@ -115,7 +113,7 @@ public class BountyPlayerServer : MonoBehaviour
         } else if(exceptionMessage != "" && !payed) {
             //ServerGameChat.instance.SendPrivateMessage(this.entityId.Id, this.entityId.Id, "PAYMENTS_SERVER", "error while paying out: " + exceptionMessage, Chat.MessageType.DEBUG_LOG, false);
             Debug.Log("error while paying out: " + exceptionMessage);
-        }
+        }*/
     }
 
     private void OnTeleport(HunterComponent.TeleportPlayer.ReceivedRequest obj)
@@ -151,53 +149,6 @@ public class BountyPlayerServer : MonoBehaviour
         HunterCommandReceiver.SendTeleportPlayerResponse(obj.RequestId, new Bountyhunt.Empty());
     }
 
-    private async void OnRequestPayout(HunterComponent.RequestPayout.ReceivedRequest obj)
-    {
-        Lnrpc.PayReq invoice;
-        try
-        {
-            invoice = await ServerServiceConnections.instance.lnd.DecodePayreq(obj.Payload.PayReq);
-
-        }
-        catch (Exception e)
-        {
-            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice: " + e.Message);
-            return;
-        }
-        if(invoice == null)
-        {
-            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "cannot decode invoice:");
-            return;
-        }
-        if (invoice.NumSatoshis > HunterComponentWriter.Data.Earnings)
-        {
-            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, "not enough sats");
-            return;
-        }
-        Lnrpc.SendResponse payment;
-        try
-        {
-            payment = await ServerServiceConnections.instance.lnd.PayInvoice(obj.Payload.PayReq);
-        } catch (PaymentException pe)
-        {
-
-            HunterCommandReceiver.SendRequestPayoutFailure(obj.RequestId, pe.Message);
-            return;
-        } catch (Exception e)
-        {
-            return;
-        }
-        if (payment.PaymentError != "")
-        {
-            
-        }
-        var newEarnings = Mathf.Clamp(HunterComponentWriter.Data.Earnings - payment.PaymentRoute.TotalAmtMsat / 1000,0, int.MaxValue);
-        Debug.Log("new earnings");
-        HunterComponentWriter.SendUpdate(new HunterComponent.Update() { Earnings = (long)newEarnings });
-        HunterCommandReceiver.SendRequestPayoutResponse(obj.RequestId, new RequestPayoutResponse(true, payment.PaymentPreimage.ToBase64(), invoice.Description,payment.PaymentRoute.TotalAmtMsat / 1000));
-        PrometheusManager.TotalEarnings.Inc(invoice.NumSatoshis);
-
-    }
 
 
     //TODO hacky...
@@ -226,18 +177,8 @@ public class BountyPlayerServer : MonoBehaviour
         if(res.StatusCode == Improbable.Worker.CInterop.StatusCode.Success)
         {
             var data = HunterComponentWriter.Data;
-            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerHeartbeat(data.Pubkey, data.Bounty, data.Kills, data.Deaths);
+            ServerServiceConnections.instance.BackendGameServerClient.AddPlayerHeartbeat(data.Pubkey, 0, 0, 0);
         }
-    }
-    private void BountyComponentCommandReceiver_OnAddBountyRequestReceived(HunterComponent.AddBounty.ReceivedRequest obj)
-    {
-        if (obj.CallerAttributeSet[0] != WorkerUtils.UnityGameLogic)
-            return;
-        IncreaseBounty(obj.Payload.Amount);
-    }
-    public void IncreaseBounty(long amount)
-    {
-        HunterComponentWriter.SendUpdate(new HunterComponent.Update { Bounty = HunterComponentWriter.Data.Bounty + amount });
     }
 
     public void KickPlayer()

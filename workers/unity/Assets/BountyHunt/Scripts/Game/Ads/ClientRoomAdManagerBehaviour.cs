@@ -14,7 +14,7 @@ public class ClientRoomAdManagerBehaviour : MonoBehaviour
 
     private List<AdvertiserInvestment> advertiserInvestments;
     [HideInInspector] public long totalSponsoredSats;
-
+    private bool mapLoaded = false;
     private void Awake()
     {
         RoomManagerClientBehaviour = GetComponent<RoomManagerClientBehaviour>();
@@ -26,6 +26,7 @@ public class ClientRoomAdManagerBehaviour : MonoBehaviour
     }
     private void OnMapLoaded()
     {
+        mapLoaded = true;
         UpdateAdvertisers(RoomAdvertingManagerReader.Data.CurrentAdvertisers);
     }
     private void RoomAdvertingManagerReader_OnCurrentAdvertisersUpdate(List<AdvertiserSource> obj)
@@ -36,8 +37,17 @@ public class ClientRoomAdManagerBehaviour : MonoBehaviour
 
     async void UpdateAdvertisers(List<AdvertiserSource> advertiserSources)
     {
+        if (!mapLoaded)
+        {
+            
+            return;
+        }
         var map = RoomManagerClientBehaviour.map;
         var banners = map.GetBillboards();
+        if(banners == null || banners.Length < 1)
+        {
+            return;
+        }
         var bannersLeft = banners.ToList();
         advertiserInvestments = await PlayerServiceConnections.instance.AdvertiserStore.GetAdvertiserInvestments(advertiserSources);
         totalSponsoredSats = 0;

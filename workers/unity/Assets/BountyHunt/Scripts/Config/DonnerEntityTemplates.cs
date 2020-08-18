@@ -90,9 +90,6 @@ public class DonnerEntityTemplates
 
         var hunterComponent = new HunterComponent.Snapshot()
         {
-            Earnings = 0,
-            Bounty = 0,
-            SessionEarnings = 0,
             Name = playerName,
             Pubkey = loginData.Pubkey
         };
@@ -261,7 +258,6 @@ public class DonnerEntityTemplates
 
         gameStatsComponent.LastRoundScores = new Dictionary<EntityId, PlayerItem>();
         var chatComponent = new Chat.ChatComponent.Snapshot();
-        var paymentComponent = new PaymentManagerComponent.Snapshot();
 
         var advertisingComponent = new AdvertisingComponent.Snapshot();
         advertisingComponent.CurrentAdvertisers = new List<AdvertiserSource>();
@@ -274,7 +270,6 @@ public class DonnerEntityTemplates
         entityTemplate.AddComponent(chatComponent, WorkerUtils.UnityGameLogic);
 
 
-        entityTemplate.AddComponent(paymentComponent, WorkerUtils.UnityGameLogic);
 
         entityTemplate.AddComponent(advertisingComponent, WorkerUtils.UnityGameLogic);
 

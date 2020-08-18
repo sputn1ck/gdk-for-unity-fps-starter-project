@@ -12,6 +12,7 @@ public class ClientRoomGameModeBehaviour : MonoBehaviour
     private void OnEnable()
     {
         RoomGameModeManagerReader.OnNewRoundEvent += NewRound;
+        RoomGameModeManagerReader.OnStartCountdownEvent += OnStartCountdown;
         SendGameModeEvent(RoomGameModeManagerReader.Data.CurrentRound);
     }
 
@@ -19,7 +20,27 @@ public class ClientRoomGameModeBehaviour : MonoBehaviour
     {
         SendGameModeEvent(obj);
     }
+    private void OnStartCountdown(CoundDownInfo obj)
+    {
 
+        var nextGameMode = GameModeDictionary.Get(obj.NextRoundId);
+        var currentGameMode = GameModeDictionary.Get(RoomGameModeManagerReader.Data.CurrentRound.GameModeInfo.GameModeId);
+        StartCoroutine(CountdownEnumerator(nextGameMode, obj.Countdown, currentGameMode, obj.NextRoundName));
+    }
+    IEnumerator CountdownEnumerator(GameMode nextGameMode, int duration, GameMode currentGameMode, string gamemodename)
+    {
+        currentGameMode.ClientOnGameModeEnd(null);
+        var currentSecond = duration;
+        while (currentSecond > 0)
+        {
+            ClientEvents.instance.onAnnouncement.Invoke(gamemodename + " starting in " + currentSecond, ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+            yield return new WaitForSeconds(1f);
+            currentSecond -= 1;
+        }
+        yield return new WaitForSeconds(0.1f);
+        ClientEvents.instance.onAnnouncement.Invoke(gamemodename + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
+        nextGameMode.ClientOnGameModeStart(null);
+    }
     private void SendGameModeEvent(RoundInfo obj)
     {
         var gameMode = GameModeDictionary.Get(obj.GameModeInfo.GameModeId);
@@ -28,17 +49,6 @@ public class ClientRoomGameModeBehaviour : MonoBehaviour
             gameMode = gameMode,
             remainingTime = (float)getRoundSeconds(obj.TimeInfo)
         });
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     private double getRoundSeconds(TimeInfo timeInfo)
     {

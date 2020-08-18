@@ -68,14 +68,14 @@ public class SatsStackerGameMode : GameMode
         return pos;
     }
 
-    public override void ClientOnGameModeStart(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
 
     }
 
-    public override void ClientOnGameModeEnd(ClientGameModeBehaviour clientGameModeBehaviour)
+    public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
-        PlayerServiceConnections.instance.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
+       //PlayerServiceConnections.instance.UpdateBackendStats(BountyPlayerAuthorative.instance.HunterComponentReader.Data.Pubkey);
     }
 }
 

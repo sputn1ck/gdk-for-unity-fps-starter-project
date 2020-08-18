@@ -19,7 +19,6 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     private bool isShowing;
     public void OnEnable()
     {
-        hunterComponentReader.OnBountyUpdate += UpdateBounty;
         healthComopnentReader.OnHealthUpdate += UpdateHealth;
     }
     public async void OnLookAtEnter()
@@ -56,8 +55,8 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         }
 
         Badge badge = BadgeManager.GetBadge(ranking.GlobalRanking.Badge);
-
-        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health ,Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
+        // todo get sats from roomplayer
+        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health ,Utility.SatsToShortString(0, true, UITinter.tintDict[TintColor.Sats]));
         ContextMenuArgs args = new ContextMenuArgs
         {
             Headline = hunterComponentReader.Data.Name,

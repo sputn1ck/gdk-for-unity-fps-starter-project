@@ -84,11 +84,14 @@ namespace Fps
             {
                 return;
             }
-            
-            hunterComponentCommandSender.SendAddBountyCommand(playerSpatialOsComponent.EntityId, new AddBountyRequest {
+            // todo add bounty on room player/*
+            /*
+             *
+             * hunterComponentCommandSender.SendAddBountyCommand(playerSpatialOsComponent.EntityId, new AddBountyRequest {
                 Reason = BountyReason.PICKUP,
                 Amount = bountyPickupWriter.Data.BountyValue,
             });
+            */
             HealthComponentCommandSender.SendModifyHealthCommand(playerSpatialOsComponent.EntityId, new HealthModifier
             {
                 Amount = 15
