@@ -217,6 +217,12 @@ public class BackendGameserverClient : IBackendServerClient
         var res = await _client.GetUserSkinAsync(new GetUserSkinRequest { Pubkey = pubkey }, GetPubkeyCalloptions());
         return res.EquippedSkin;
     }
+
+    public async Task<GetAdvertisersResponse> GetAdvertisers(GetAdvertisersRequest request)
+    {
+        var res = await _client.GetAdvertisersAsync(request);
+        return res;
+    }
 }
 
 

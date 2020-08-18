@@ -14,6 +14,7 @@ public class GeneratedMap : Map
     public GameObject mapGO;
     private SpawnPoints spawnPoints;
 
+    private AdBillboard[] billBoards;
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null)
     {
         var workerType = isServer ? "server" : "client";
@@ -39,6 +40,7 @@ public class GeneratedMap : Map
             }
         }
         spawnPoints = mapGO.GetComponentInChildren<SpawnPoints>();
+        billBoards = mapGO.transform.GetComponentsInChildren<AdBillboard>();
         yield return null;
         onFinished?.Invoke();
     }
@@ -50,5 +52,10 @@ public class GeneratedMap : Map
         }
         var sp = spawnPoints.GetRandomSpawnPoint();
         return (sp.SpawnPosition, sp.SpawnYaw, sp.SpawnYaw);
+    }
+
+    public override AdBillboard[] GetBillboards()
+    {
+        return billBoards;
     }
 }

@@ -5,6 +5,7 @@ using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 using Improbable.Gdk.Core;
 using Improbable.Gdk.Core.Commands;
+using UnityEngine.Events;
 
 public class RoomManagerClientBehaviour : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class RoomManagerClientBehaviour : MonoBehaviour
     [Require] EntityId EntityId;
 
 
-    private Map map;
+    public Map map;
+    public UnityAction OnMapLoaded;
     private void OnEnable()
     {
         Debug.Log("enabling room " + RoomManagerReader.Data.RoomInfo.Info.RoomId);
@@ -53,7 +55,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
                         return;
                     }
                     BBHUIManager.instance.mainMenu.BlendImage(false);
-
+                    OnMapLoaded?.Invoke();
             });
         });
         

@@ -107,6 +107,7 @@ public static class Utility
         return hex.ToString();
     }
 
+
     /// <summary>
     /// returns the shortened string without curccency symbol
     /// </summary>

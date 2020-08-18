@@ -15,6 +15,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     [Require] RoomGameModeManagerWriter RoomGameModeManagerWriter;
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
+    [Require] RoomAdvertingManagerWriter RoomAdvertingManagerWriter;
 
     private GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
@@ -149,6 +150,16 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         {
             SendAdvertisers(roundInfo.Advertisers);
         }*/
+        if (!RoomManagerWriter.Data.RoomInfo.FinanceInfo.FixedAdvertisers.HasValue)
+        {
+            // TODO multiserver safe
+            var advertisers = await ServerServiceConnections.instance.BackendGameServerClient.GetAdvertisers(new Bbhrpc.GetAdvertisersRequest()
+            {
+                BannersInGame = 0,
+                PlayerInGame = RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers.Count,
+            });
+            SendAdvertisers(advertisers.Advertisers);
+        } 
         var gameModeInfo = GetCurrentRound();
         var gameMode = GameModeDictionary.Get(gameModeInfo.GamemodeId);
         currentMode = gameMode;
@@ -183,6 +194,10 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             }
             advertiserSources.Add(advertiserSource);
         }
+        RoomAdvertingManagerWriter.SendUpdate(new RoomAdvertingManager.Update()
+        {
+            CurrentAdvertisers = advertiserSources
+        });
         //advertisingConmponentWriter.SendUpdate(new AdvertisingComponent.Update() { CurrentAdvertisers = advertiserSources });
     }
 

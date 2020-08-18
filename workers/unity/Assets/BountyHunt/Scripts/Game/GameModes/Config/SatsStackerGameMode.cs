@@ -17,7 +17,6 @@ public class SatsStackerGameMode : GameMode
     public override void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
     {
 
-        // TODO get gamemode from backend
         
         this.GameModeSettings = settings;
 

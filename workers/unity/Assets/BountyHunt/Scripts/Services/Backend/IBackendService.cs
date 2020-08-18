@@ -54,6 +54,7 @@ public interface IBackendServerClient
     void AddPlayerHeartbeat(string user, long bounty, int kills, int deaths);
     void AddPlayerDisconnect(string user);
     Task<string> GetUserSkin(string pubkey);
+    Task<GetAdvertisersResponse> GetAdvertisers(GetAdvertisersRequest request);
     IEnumerator HandleBackendEvents(CancellationTokenSource ct);
 }
 

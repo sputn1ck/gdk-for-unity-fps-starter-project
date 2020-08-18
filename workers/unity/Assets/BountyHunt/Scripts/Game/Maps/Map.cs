@@ -14,6 +14,8 @@ public abstract class Map : ScriptableObject
 
     public abstract (Vector3 pos, float yaw, float pitch) GetSpawnPoint();
     public abstract void Remove();
+
+    public abstract AdBillboard[] GetBillboards();
 }
 
 [System.Serializable]

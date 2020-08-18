@@ -94,6 +94,34 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
         
     }
+
+    public Task<GetAdvertisersResponse> GetAdvertisers(GetAdvertisersRequest request)
+    {
+
+        var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
+
+        foreach (var adv in testAdvertisers)
+        {
+            AdvertiserInfo advInfo = new AdvertiserInfo { Discription = "", Name = adv.Name, Url = adv.Url, Sponsoring = adv.Investment, Phash = adv.Hash };
+            foreach (string s in adv.SquareTextureLinks)
+            {
+                advInfo.SquareBannerUrls.Add(s);
+            }
+            advertisers.Add(advInfo);
+
+        }
+        /*advertisers.Add(new AdvertiserInfo()
+        {
+            Discription = "",
+           Name = "Become a BBH sponsor",
+           Url = " https://bitcoinbountyhunt.com/sponsors",
+            Sponsoring = 1000,
+        });
+       advertisers[advertisers.Count - 1].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");*/
+        var res = new GetAdvertisersResponse();
+        res.Advertisers.Add(advertisers);
+        return Task.FromResult(res);
+    }
     /*
 
     private GetRoundInfoResponse getRes(GetRoundInfoRequest req)

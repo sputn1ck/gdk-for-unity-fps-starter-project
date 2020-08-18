@@ -5,6 +5,10 @@ component AdvertisingComponent {
     list<AdvertiserSource> current_advertisers = 1;
 }
 
+component RoomAdvertingManager {
+    id = 520002;
+    list<AdvertiserSource> current_advertisers = 1;
+}
 type AdvertiserSource{
     string name = 1;
     int64 investment = 2;

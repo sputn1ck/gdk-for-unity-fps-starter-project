@@ -295,7 +295,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             id = "room" + UnityEngine.Random.Range(0, int.MaxValue);
         }
         RoomFinanceInfo financeInfo;
-        if (req.Advertisers == null) {
+        if (req.Advertisers == null || req.Advertisers.Count < 1) {
             financeInfo = new RoomFinanceInfo(req.StartSats, 0, 0, null);
         } else
         {
