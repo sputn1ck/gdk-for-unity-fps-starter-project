@@ -8,18 +8,22 @@ using UnityEngine;
 public class BountyRoomSpawner : MonoBehaviour
 {
 
-    private WorldCommandSender WorldCommandSender;
+    [Require] private WorldCommandSender WorldCommandSender;
     private SatsCubeSpawnPoint[] satsCubeSpawnPoints;
      
     public bool SpawnTrigger;
     public long spawnAmount;
 
     private LinkedEntityComponent LinkedEntityComponent;
-    public void Setup(SatsCubeSpawnPoint[] satsCubeSpawnPoints, WorldCommandSender WorldCommandSender)
+
+    private void OnEnable()
+    {
+        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
+        Debug.Log(WorldCommandSender.IsValid);
+    }
+    public void Setup(SatsCubeSpawnPoint[] satsCubeSpawnPoints)
     {
         this.satsCubeSpawnPoints = satsCubeSpawnPoints;
-        this.WorldCommandSender = WorldCommandSender;
-        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
     }
 
     void Update()

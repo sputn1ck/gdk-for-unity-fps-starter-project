@@ -26,6 +26,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private bool sendCallback;
     private bool rotationStarted = false;
 
+    private bool inGameMode;
     private Map mapInfo;
     private void OnEnable()
     {
@@ -60,6 +61,10 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         {
             sendCallback = false;
             RotationFinished?.Invoke();
+        }
+        if (inGameMode)
+        {
+            currentMode.GameModeUpdate(Time.deltaTime);
         }
     }
     private async Task SafeGameMode()
@@ -151,20 +156,22 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             CurrentRound = roundInfo
         });
         RoomGameModeManagerWriter.SendNewRoundEvent(roundInfo);
+        inGameMode = true;
     }
     private async Task GetNextGameMode()
     {
-
+        long subsidySats = 0;
         if (!RoomManagerWriter.Data.RoomInfo.FinanceInfo.FixedAdvertisers.HasValue)
         {
             // TODO multiserver safe
             var advertisers = await ServerServiceConnections.instance.BackendGameServerClient.GetAdvertisers(RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers.Count,0);
             SendAdvertisers(advertisers.Advertisers);
+            subsidySats = advertisers.Subsidy;
         } 
         var gameModeInfo = GetCurrentRound();
         var gameMode = Instantiate(GameModeDictionary.Get(gameModeInfo.GamemodeId));
         var settings = await ServerServiceConnections.instance.BackendGameServerClient.GetGameModeSettings(gameMode.GameModeId);
-        gameMode.Initialize(settings, mapInfo);
+        gameMode.Initialize(settings, mapInfo, new GameModeFinancing() { totalSatAmount = subsidySats});
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
        
@@ -172,6 +179,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private void EndGameMode()
     {
+        inGameMode = false;
         Debug.Log("ending gamemode "+ currentGameModeInfo.GamemodeId);
         var gameModeInfo = GetCurrentRound();
         var timeInfo = RoomGameModeManagerWriter.Data.CurrentRound.TimeInfo;

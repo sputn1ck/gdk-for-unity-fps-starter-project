@@ -99,7 +99,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
     {
 
         var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
-
+        var totalSats = (long)0;
         foreach (var adv in testAdvertisers)
         {
             AdvertiserInfo advInfo = new AdvertiserInfo { Discription = "", Name = adv.Name, Url = adv.Url, Sponsoring = adv.Investment, Phash = adv.Hash };
@@ -108,7 +108,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
                 advInfo.SquareBannerUrls.Add(s);
             }
             advertisers.Add(advInfo);
-
+            totalSats += adv.Investment;
         }
         /*advertisers.Add(new AdvertiserInfo()
         {
@@ -119,6 +119,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         });
        advertisers[advertisers.Count - 1].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");*/
         var res = new GetAdvertisersResponse();
+        res.Subsidy = totalSats;
         res.Advertisers.Add(advertisers);
         return Task.FromResult(res);
     }
@@ -195,7 +196,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
             SecondDuration = GetGameModeDuration(gamemodeid),
             BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
             BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
-            SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 10, MinSpawnsPerSpawn = 20, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
+            SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 5, MinSpawnsPerSpawn = 2, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 10 },
         };
         return Task.FromResult(settings);
     }

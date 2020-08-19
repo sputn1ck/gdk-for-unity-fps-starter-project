@@ -43,5 +43,9 @@ public class LobbyGameMode : GameMode
     {
         
     }
+
+    public override void GameModeUpdate(float deltaTime)
+    {
+    }
 }
 

@@ -57,4 +57,9 @@ public class BountyBossGameMode : GameMode
     public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
     {
     }
+
+    public override void GameModeUpdate(float deltaTime)
+    {
+
+    }
 }
