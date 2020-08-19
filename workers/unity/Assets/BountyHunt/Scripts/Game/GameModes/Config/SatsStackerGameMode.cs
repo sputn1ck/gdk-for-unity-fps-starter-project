@@ -14,12 +14,15 @@ using Bbhrpc;
 public class SatsStackerGameMode : GameMode
 {
     private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
+    private BountyRoomSpawner BountyRoomSpawner;
     public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
 
         
         // TODO implement bounty spawning
         _serverGameModeBehaviour = serverGameModeBehaviour;
+        BountyRoomSpawner = _serverGameModeBehaviour.gameObject.AddComponent<BountyRoomSpawner>();
+        BountyRoomSpawner.Setup(MapInfo.GetBountySpawnPoints(), serverGameModeBehaviour.WorldCommandSender);
         /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
         serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
@@ -44,6 +47,7 @@ public class SatsStackerGameMode : GameMode
     {
 
         Debug.Log("end bbh");
+        Destroy(BountyRoomSpawner);
         ServerEvents.instance.OnRandomInvoicePaid.RemoveListener(OnDonationPaid);
     }
 

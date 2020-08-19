@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2406055923789036777}
   - component: {fileID: 7492153629294250504}
   - component: {fileID: 3823093703637248679}
+  - component: {fileID: -6142279352663740525}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -58,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004889b8225482a4785cc4ce9ea6ff53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LinkedEntityComponent: {fileID: 0}
 --- !u!114 &3823093703637248679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,3 +72,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52864ddf503386241b5d960db9166c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6142279352663740525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138815752769483736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d92a39143020348b87a37667db658e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsValid: 0

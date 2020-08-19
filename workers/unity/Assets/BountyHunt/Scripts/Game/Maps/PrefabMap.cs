@@ -13,7 +13,6 @@ public class PrefabMap : Map
 
     private GameObject MapGo;
     private SpawnPoints spawnPoints;
-    private AdBillboard[] billBoards;
 
     public override void Initialize(MonoBehaviour caller, bool isServer, Vector3 spawnPosition, string mapData, UnityAction onFinished = null, WorldCommandSender worldCommandSender = null )
     {
@@ -47,7 +46,9 @@ public class PrefabMap : Map
         {
             spawnPoints.SetSpawnPoints();
         }
-        billBoards = MapGo.transform.GetComponentsInChildren<AdBillboard>();
+        adBillboards = MapGo.transform.GetComponentsInChildren<AdBillboard>();
+        BountySpawnPoints = MapGo.transform.GetComponentsInChildren<SatsCubeSpawnPoint>();
+
         onFinished?.Invoke();
     }
 
@@ -69,8 +70,5 @@ public class PrefabMap : Map
         return (sp.SpawnPosition, sp.SpawnYaw, sp.SpawnYaw);
     }
 
-    public override AdBillboard[] GetBillboards()
-    {
-        return billBoards;
-    }
+    
 }

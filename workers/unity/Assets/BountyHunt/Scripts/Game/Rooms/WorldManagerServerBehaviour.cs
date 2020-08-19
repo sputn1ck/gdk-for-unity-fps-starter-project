@@ -34,21 +34,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         // TODO: really check for cantina
         if(WorldManagerWriter.Data.ActiveRooms.Count < 1)
         {
-            var cantinaRotation = new List<ModeRotationItem>()
-           {
-               new ModeRotationItem("lobby", Utility.SecondsToNano(300))
-           };
-            var cantinaRequest = new CreateRoomRequest()
-            {
-                Advertisers = null,
-                MapInfo = new MapInfo("cantina", ""),
-                MaxPlayers = 20,
-                ModeRotation = cantinaRotation,
-                Repetitions = int.MaxValue,
-                StartTime = System.DateTime.UtcNow.ToFileTimeUtc(),
-                StartSats = 0, 
-            };
-            CreateRoom((cantinaRequest), "cantina-"+cantinaCounter);
+            CreateCantina();
             cantinaCounter++;
         }
     }
@@ -116,28 +102,33 @@ public class WorldManagerServerBehaviour : MonoBehaviour
 
         UpdateActivePlayerRoom(playerPk, room.Info.EntityId);
     }
+    private Room CreateCantina()
+    {
+        var cantinaRotation = new List<ModeRotationItem>()
+           {
+               new ModeRotationItem("satsstacker", Utility.SecondsToNano(300))
+           };
+        var cantinaRequest = new CreateRoomRequest()
+        {
+            Advertisers = null,
+            MapInfo = new MapInfo("cantina", ""),
+            MaxPlayers = 20,
+            ModeRotation = cantinaRotation,
+            Repetitions = int.MaxValue,
+            StartTime = System.DateTime.UtcNow.ToFileTimeUtc(),
+            StartSats = 0,
+        };
+        var newCantina = CreateRoom(cantinaRequest, "cantina-" + cantinaCounter);
+        cantinaCounter++;
+        return newCantina;
+    }
     private void OnGetCantina(WorldManager.GetCantina.ReceivedRequest obj)
     {
         var newCantina = GetFreeCantina();
         var newlyCreated = false;
         if (newCantina.Info.RoomId == "none")
         {
-            var cantinaRotation = new List<ModeRotationItem>()
-           {
-               new ModeRotationItem("lobby", Utility.SecondsToNano(300))
-           };
-            var cantinaRequest = new CreateRoomRequest()
-            {
-                Advertisers = null,
-                MapInfo = new MapInfo("cantina", ""),
-                MaxPlayers = 20,
-                ModeRotation = cantinaRotation,
-                Repetitions = int.MaxValue,
-                StartTime = System.DateTime.UtcNow.ToFileTimeUtc(),
-                StartSats = 0,
-            };
-            newCantina = CreateRoom(cantinaRequest, "cantina-"+cantinaCounter);
-            cantinaCounter++;
+            newCantina = CreateCantina();
             newlyCreated = true;
         }
         WorldManagerCommandReceiver.SendGetCantinaResponse(obj.RequestId, new GetCantinaResponse(newCantina, newlyCreated));

@@ -9,10 +9,12 @@ public abstract class GameMode : ScriptableObject
     public string GameModeId;
     public Sprite Icon;
     public GameModeSettings GameModeSettings;
+    public Map MapInfo;
 
-    public void Initialize(GameModeSettings settings)
+    public void Initialize(GameModeSettings settings, Map mapInfo)
     {
         this.GameModeSettings = settings;
+        this.MapInfo = mapInfo;
     }
     public abstract void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour);
     public abstract void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour);

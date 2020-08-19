@@ -84,6 +84,8 @@ namespace Fps
             {
                 return;
             }
+            var playerRoomPlayer = player.GetComponent<RoomPlayerServerBehaviour>();
+            RoomStatsCommandSender.SendAddBountyCommand(playerRoomPlayer.RoomPlayerWriter.Data.RoomEntityid, new AddBountyRequest(playerRoomPlayer.RoomPlayerWriter.Data.Pubkey, bountyPickupWriter.Data.BountyValue, "PICKUP"));
             // todo add bounty on room player/*
             /*
              *

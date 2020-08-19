@@ -29,7 +29,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
         statsMap = GetComponent<ServerRoomGameStatsMap>();
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        Initialize();
+        
 
         RoomManagerCommandReceiver.OnAddPlayerRequestReceived += AddPlayer;
         RoomManagerCommandReceiver.OnRemovePlayerRequestReceived += RemovePlayer;
@@ -40,6 +40,8 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         // start gamemode rotation
         ServerRoomGameModeBehaviour = GetComponent<ServerRoomGameModeBehaviour>();
         ServerRoomGameModeBehaviour.AddFinishedAction(CloseRoom);
+
+        Initialize();
     }
 
     private void GetSpawnPosition(RoomManager.GetSpawnPosition.ReceivedRequest obj)
@@ -71,6 +73,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
                 RoomState = RoomState.STARTED
             });
             ServerRoomGameModeBehaviour.StartRotation();
+            
             Debug.Log("Starting Room");
         }
     }
@@ -163,7 +166,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         mapInfo.EntityId = EntityId;
         mapInfo.LevelObjects = new List<EntityId>();
         mapInfo.Initialize(this, true, this.transform.position, RoomManagerWriter.Data.RoomInfo.Info.MapInfo.MapData, null, WorldCommandSender);
+        ServerRoomGameModeBehaviour.Setup(mapInfo);
     }
+
 
     private void OnDisable()
     {

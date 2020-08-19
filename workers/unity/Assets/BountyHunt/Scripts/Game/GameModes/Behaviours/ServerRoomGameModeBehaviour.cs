@@ -15,19 +15,30 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomAdvertingManagerWriter RoomAdvertingManagerWriter;
+    [Require] public WorldCommandSender WorldCommandSender;
 
+
+    public LinkedEntityComponent LinkedEntityComponent;
     private GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
     private TimeInfo currentTimeInfo;
     private UnityAction RotationFinished;
     private bool sendCallback;
     private bool rotationStarted = false;
+
+    private Map mapInfo;
     private void OnEnable()
     {
+        LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         if(RoomManagerWriter.Data.RoomState == RoomState.STARTED)
         {
             StartRotation();
         }
+    }
+
+    public void Setup(Map mapInfo)
+    {
+        this.mapInfo = mapInfo;
     }
     public void StartRotation()
     {
@@ -153,7 +164,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         var gameModeInfo = GetCurrentRound();
         var gameMode = Instantiate(GameModeDictionary.Get(gameModeInfo.GamemodeId));
         var settings = await ServerServiceConnections.instance.BackendGameServerClient.GetGameModeSettings(gameMode.GameModeId);
-        gameMode.Initialize(settings);
+        gameMode.Initialize(settings, mapInfo);
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
        
