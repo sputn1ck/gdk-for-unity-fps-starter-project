@@ -4,9 +4,10 @@ import "bountyhunt/common.schema";
 import "bountyhunt/gamemode.schema";
 import "bountyhunt/ads.schema";
 
-component RoomStats {
+component RoomStatsManager {
     id = 480004;
 
+    RoomStats room_stats = 1;
     event PlayerStatsUpdate map_update;
 
     command PlayerStatsUpdate request_stats(bountyhunt.Empty);
@@ -14,12 +15,20 @@ component RoomStats {
     command bountyhunt.Empty add_earnings(AddEarningsRequest);
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty set_bounty(SetBountyRequest);
+    command bountyhunt.Empty bounty_tick(BountyTickRequest);
+    
 }
 
 type PlayerStatsUpdate {
     map<string,PlayerStats> player_stats = 1;
     list<string> remove_players = 2;
     bool replace_map = 3;
+}
+
+type RoomStats {
+    int64 bounty_in_cubes = 1;
+    int64 bounty_on_players = 2;
+    int64 remaining_pot = 3;
 }
 
 type AddKillRequest {
@@ -47,4 +56,5 @@ type PlayerStats {
     int64 bounty = 3;
     int64 session_earnings = 4;
     bool active = 5;
+    int64 score = 6;
 }

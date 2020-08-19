@@ -10,8 +10,7 @@ using Improbable.Gdk.Core;
 
 public class ServerRoomGameModeBehaviour : MonoBehaviour
 {
-    [Require] RoomStatsWriter roomStatsWriter;
-    //[Require] AdvertisingComponentWriter advertisingConmponentWriter;
+
     [Require] RoomGameModeManagerWriter RoomGameModeManagerWriter;
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
@@ -134,6 +133,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             CurrentRound = RoundInfo
         });
         ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);*/
+        currentMode.ServerOnGameModeStart(this);
         var roundInfo = new RoundInfo(new GameModeInfo(currentGameModeInfo.GamemodeId, currentMode.name), new TimeInfo(DateTime.UtcNow.ToFileTime(), currentGameModeInfo.Duration));
         RoomGameModeManagerWriter.SendUpdate(new RoomGameModeManager.Update()
         {
@@ -144,7 +144,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private async Task GetNextGameMode()
     {
 
-        /* Get Advertisers
+        /* Get Advertisers 
         var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = RoomManagerWriter.Data.RoomInfo.ActivePlayers.Count });
         if (roundInfo.Advertisers != null)
         {
@@ -153,15 +153,13 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         if (!RoomManagerWriter.Data.RoomInfo.FinanceInfo.FixedAdvertisers.HasValue)
         {
             // TODO multiserver safe
-            var advertisers = await ServerServiceConnections.instance.BackendGameServerClient.GetAdvertisers(new Bbhrpc.GetAdvertisersRequest()
-            {
-                BannersInGame = 0,
-                PlayerInGame = RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers.Count,
-            });
+            var advertisers = await ServerServiceConnections.instance.BackendGameServerClient.GetAdvertisers(RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers.Count,0);
             SendAdvertisers(advertisers.Advertisers);
         } 
         var gameModeInfo = GetCurrentRound();
-        var gameMode = GameModeDictionary.Get(gameModeInfo.GamemodeId);
+        var gameMode = Instantiate(GameModeDictionary.Get(gameModeInfo.GamemodeId));
+        var settings = await ServerServiceConnections.instance.BackendGameServerClient.GetGameModeSettings(gameMode.GameModeId);
+        gameMode.Initialize(settings);
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
        

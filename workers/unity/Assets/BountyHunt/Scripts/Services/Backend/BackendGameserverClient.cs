@@ -218,11 +218,31 @@ public class BackendGameserverClient : IBackendServerClient
         return res.EquippedSkin;
     }
 
-    public async Task<GetAdvertisersResponse> GetAdvertisers(GetAdvertisersRequest request)
+    public async Task<GetAdvertisersResponse> GetAdvertisers(int playersInGame, int bannersInGame)
     {
-        var res = await _client.GetAdvertisersAsync(request);
+        
+        var res = await _client.GetAdvertisersAsync(new GetAdvertisersRequest {
+            PlayerInGame = playersInGame,
+            BannersInGame = bannersInGame
+        });
         return res;
     }
+
+    public async Task<GameModeSettings> GetGameModeSettings(string gamemodeid)
+    {
+        var res = await _client.GetGameModeSettingsAsync(new GetGameModeSettingsRequest {
+            GamemodeId = gamemodeid
+        });
+        return res.Settings;
+    }
+
+    public async Task PostStats(List<PlayerStats> stats)
+    {
+        var req = new PostStatsRequest { };
+        req.PlayerStats.Add(stats);
+        var res = await _client.PostStatsAsync(req);
+    }
+
 }
 
 

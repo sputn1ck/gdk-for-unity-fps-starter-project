@@ -22,12 +22,12 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private Map mapInfo;
 
     private ServerRoomGameModeBehaviour ServerRoomGameModeBehaviour;
-    private ServerGameStatsMap statsMap;
+    private ServerRoomGameStatsMap statsMap;
     private UnityAction RotationEnded;
     private void OnEnable()
     {
 
-        statsMap = GetComponent<ServerGameStatsMap>();
+        statsMap = GetComponent<ServerRoomGameStatsMap>();
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         Initialize();
 

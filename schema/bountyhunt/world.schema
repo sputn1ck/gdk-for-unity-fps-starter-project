@@ -11,14 +11,10 @@ component WorldManager {
 
     map<string, bountyhunt.Room> active_rooms = 1;
     map<string, PlayerInfo> active_players = 2;
-    command Room create_room(CreateRoomRequest);
 
+    command bountyhunt.Empty create_room(CreateRoomRequest);
     command bountyhunt.Empty end_room(EndRoomRequest);
-
     command bountyhunt.Empty update_room(UpdateRoomRequest);
-    
-    command bountyhunt.Empty start_room(StartRoomRequest);
-    
     command bountyhunt.Empty join_room(JoinRoomRequest);
     command GetCantinaResponse get_cantina(GetCantinaRequest);
     command bountyhunt.Empty add_active_player(AddActivePlayerRequest);

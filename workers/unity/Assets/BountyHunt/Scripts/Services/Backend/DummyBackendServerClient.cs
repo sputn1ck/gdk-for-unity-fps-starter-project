@@ -95,7 +95,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         
     }
 
-    public Task<GetAdvertisersResponse> GetAdvertisers(GetAdvertisersRequest request)
+    public Task<GetAdvertisersResponse> GetAdvertisers(int playersInGame, int bannersInGame)
     {
 
         var advertisers = new Google.Protobuf.Collections.RepeatedField<AdvertiserInfo>();
@@ -158,19 +158,7 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         //});
         //advertisers[0].SquareBannerUrls.Add("https://pics.donnerlab.com/pics/get/1005662206048b51adfd181ba63bfb9c1f0647a3e641442907ff45114999e9f8/e804db7d-5cf0-4d63-8da6-aa2f13548e3f.png");
 
-        var roundinfo = new GetRoundInfoResponse()
-        {
-            GameModeId = gamemodeId,
-            Subsidy = subsidy,
-            Settings = new GameModeSettings
-            {
-                SecondDuration = GetGameModeDuration(gamemodeId),
-                BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
-                BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
-                SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 10, MinSpawnsPerSpawn = 20, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
-            },
-            
-        };
+        
         roundinfo.Advertisers.Add(advertisers);
         return roundinfo;
     }*/
@@ -200,4 +188,22 @@ public class DummyBackendServerClient : MonoBehaviour, IBackendServerClient
         return null;
     }
 
+    public Task<GameModeSettings> GetGameModeSettings(string gamemodeid)
+    {
+        var settings = new GameModeSettings
+        {
+            SecondDuration = GetGameModeDuration(gamemodeid),
+            BaseSettings = new BaseSettings { ClearBountyOnEnd = true, ClearPickupsOnEnd = true, ClearStatsOnEnd = true, TeleportPlayerOnStart = true },
+            BountySettings = new BountySettings { BountyDropPercentageDeath = bountyDropOnDeath, BountyTickConversion = bountyConversion, BountyTickTimeSeconds = bountyConversionTimeSeconds },
+            SpawnSettings = new SpawnSettings { MaxSpawnsPerSpawn = 10, MinSpawnsPerSpawn = 20, Distribution = BountyDistribution.Uniform, TimeBetweenSpawns = 100 },
+        };
+        return Task.FromResult(settings);
+    }
+
+    public Task PostStats(List<Bbhrpc.PlayerStats> stats)
+    {
+        return Task.Run(()=> {
+
+        });
+    }
 }

@@ -4,9 +4,8 @@ using UnityEngine;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 
-public class ServerGameStatsMap : MonoBehaviour
+public class ServerRoomGameStatsMap : MonoBehaviour
 {
-
     [Require] RoomStatsWriter RoomStatsWriter;
     [Require] RoomStatsCommandReceiver RoomStatsCommandReceiver;
 
@@ -16,8 +15,44 @@ public class ServerGameStatsMap : MonoBehaviour
     {
         RoomStatsCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
         RoomStatsCommandReceiver.OnAddKillRequestReceived += AddKill;
-        
+        RoomStatsCommandReceiver.OnAddBountyRequestReceived += AddBounty;
+        RoomStatsCommandReceiver.OnAddEarningsRequestReceived += AddEarnings;
+        RoomStatsCommandReceiver.OnSetBountyRequestReceived += SetBounty;
     }
+
+    private void SetBounty(RoomStats.SetBounty.ReceivedRequest obj)
+    {
+        var map = new Dictionary<string, PlayerStats>();
+        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        {
+            playerStat.Bounty = obj.Payload.Bounty;
+            map[obj.Payload.PlayerId] = playerStat;
+        }
+        UpdateDictionary(map);
+    }
+
+    private void AddEarnings(RoomStats.AddEarnings.ReceivedRequest obj)
+    {
+        var map = new Dictionary<string, PlayerStats>();
+        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        {
+            playerStat.SessionEarnings += obj.Payload.Earnings;
+            map[obj.Payload.PlayerId] = playerStat;
+        }
+        UpdateDictionary(map);
+    }
+
+    private void AddBounty(RoomStats.AddBounty.ReceivedRequest obj)
+    {
+        var map = new Dictionary<string, PlayerStats>();
+        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        {
+            playerStat.Bounty += obj.Payload.Bounty;
+            map[obj.Payload.PlayerId] = playerStat;
+        }
+        UpdateDictionary(map);
+    }
+
     public void Initialize(Room room)
     {
         playerStats = new Dictionary<string, PlayerStats>();

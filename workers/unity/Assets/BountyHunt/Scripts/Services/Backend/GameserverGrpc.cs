@@ -22,6 +22,8 @@ namespace Bbhrpc {
     static readonly grpc::Marshaller<global::Bbhrpc.GetUserSkinResponse> __Marshaller_bbhrpc_GetUserSkinResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetUserSkinResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetAdvertisersRequest> __Marshaller_bbhrpc_GetAdvertisersRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetAdvertisersRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.GetAdvertisersResponse> __Marshaller_bbhrpc_GetAdvertisersResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetAdvertisersResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetGameModeSettingsRequest> __Marshaller_bbhrpc_GetGameModeSettingsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetGameModeSettingsRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Bbhrpc.GetGameModeSettingsResponse> __Marshaller_bbhrpc_GetGameModeSettingsResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.GetGameModeSettingsResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.PostStatsRequest> __Marshaller_bbhrpc_PostStatsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.PostStatsRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.PostStatsResponse> __Marshaller_bbhrpc_PostStatsResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.PostStatsResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Bbhrpc.EndRoomRequest> __Marshaller_bbhrpc_EndRoomRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Bbhrpc.EndRoomRequest.Parser.ParseFrom);
@@ -61,6 +63,13 @@ namespace Bbhrpc {
         "GetAdvertisers",
         __Marshaller_bbhrpc_GetAdvertisersRequest,
         __Marshaller_bbhrpc_GetAdvertisersResponse);
+
+    static readonly grpc::Method<global::Bbhrpc.GetGameModeSettingsRequest, global::Bbhrpc.GetGameModeSettingsResponse> __Method_GetGameModeSettings = new grpc::Method<global::Bbhrpc.GetGameModeSettingsRequest, global::Bbhrpc.GetGameModeSettingsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetGameModeSettings",
+        __Marshaller_bbhrpc_GetGameModeSettingsRequest,
+        __Marshaller_bbhrpc_GetGameModeSettingsResponse);
 
     static readonly grpc::Method<global::Bbhrpc.PostStatsRequest, global::Bbhrpc.PostStatsResponse> __Method_PostStats = new grpc::Method<global::Bbhrpc.PostStatsRequest, global::Bbhrpc.PostStatsResponse>(
         grpc::MethodType.Unary,
@@ -107,6 +116,11 @@ namespace Bbhrpc {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetAdvertisersResponse> GetAdvertisers(global::Bbhrpc.GetAdvertisersRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Bbhrpc.GetGameModeSettingsResponse> GetGameModeSettings(global::Bbhrpc.GetGameModeSettingsRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -210,6 +224,22 @@ namespace Bbhrpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetAdvertisers, null, options, request);
       }
+      public virtual global::Bbhrpc.GetGameModeSettingsResponse GetGameModeSettings(global::Bbhrpc.GetGameModeSettingsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameModeSettings(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Bbhrpc.GetGameModeSettingsResponse GetGameModeSettings(global::Bbhrpc.GetGameModeSettingsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetGameModeSettings, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetGameModeSettingsResponse> GetGameModeSettingsAsync(global::Bbhrpc.GetGameModeSettingsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameModeSettingsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Bbhrpc.GetGameModeSettingsResponse> GetGameModeSettingsAsync(global::Bbhrpc.GetGameModeSettingsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetGameModeSettings, null, options, request);
+      }
       public virtual global::Bbhrpc.PostStatsResponse PostStats(global::Bbhrpc.PostStatsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PostStats(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -259,6 +289,7 @@ namespace Bbhrpc {
           .AddMethod(__Method_GetUser, serviceImpl.GetUser)
           .AddMethod(__Method_GetUserSkin, serviceImpl.GetUserSkin)
           .AddMethod(__Method_GetAdvertisers, serviceImpl.GetAdvertisers)
+          .AddMethod(__Method_GetGameModeSettings, serviceImpl.GetGameModeSettings)
           .AddMethod(__Method_PostStats, serviceImpl.PostStats)
           .AddMethod(__Method_EndRoom, serviceImpl.EndRoom).Build();
     }
@@ -274,6 +305,7 @@ namespace Bbhrpc {
       serviceBinder.AddMethod(__Method_GetUser, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetUserRequest, global::Bbhrpc.GetUserResponse>(serviceImpl.GetUser));
       serviceBinder.AddMethod(__Method_GetUserSkin, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetUserSkinRequest, global::Bbhrpc.GetUserSkinResponse>(serviceImpl.GetUserSkin));
       serviceBinder.AddMethod(__Method_GetAdvertisers, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetAdvertisersRequest, global::Bbhrpc.GetAdvertisersResponse>(serviceImpl.GetAdvertisers));
+      serviceBinder.AddMethod(__Method_GetGameModeSettings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.GetGameModeSettingsRequest, global::Bbhrpc.GetGameModeSettingsResponse>(serviceImpl.GetGameModeSettings));
       serviceBinder.AddMethod(__Method_PostStats, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.PostStatsRequest, global::Bbhrpc.PostStatsResponse>(serviceImpl.PostStats));
       serviceBinder.AddMethod(__Method_EndRoom, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Bbhrpc.EndRoomRequest, global::Bbhrpc.EndRoomResponse>(serviceImpl.EndRoom));
     }

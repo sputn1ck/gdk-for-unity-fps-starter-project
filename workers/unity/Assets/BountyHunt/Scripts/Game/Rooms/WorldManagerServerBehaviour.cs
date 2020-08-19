@@ -26,7 +26,6 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         WorldManagerCommandReceiver.OnEndRoomRequestReceived += OnEndRoom;
         WorldManagerCommandReceiver.OnCreateRoomRequestReceived += OnCreateRoom;
         WorldManagerCommandReceiver.OnUpdateRoomRequestReceived += OnUpdateRoom;
-        WorldManagerCommandReceiver.OnStartRoomRequestReceived += OnStartRoom;
         WorldManagerCommandReceiver.OnJoinRoomRequestReceived += OnJoinRoom;
         WorldManagerCommandReceiver.OnAddActivePlayerRequestReceived += AddActivePlayer;
         WorldManagerCommandReceiver.OnRemoveActivePlayerRequestReceived += RemoveActivePlayer;
@@ -199,10 +198,6 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         return "";
     }
 
-    private void OnStartRoom(WorldManager.StartRoom.ReceivedRequest obj)
-    {
-  
-    }
 
     private void OnUpdateRoom(WorldManager.UpdateRoom.ReceivedRequest obj)
     {
@@ -255,7 +250,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     }
     private void OnCreateRoom(WorldManager.CreateRoom.ReceivedRequest obj)
     {
-        
+        CreateRoom(obj.Payload);
     }
 
     private void OnEndRoom(WorldManager.EndRoom.ReceivedRequest obj)

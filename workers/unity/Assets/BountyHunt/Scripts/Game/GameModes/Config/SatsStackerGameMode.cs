@@ -13,12 +13,11 @@ using Bbhrpc;
 [CreateAssetMenu(fileName = "SatsStackerGameMode", menuName = "BBH/GameModes/SatsStacker", order = 2)]
 public class SatsStackerGameMode : GameMode
 {
-    private RoomManagerServerBehaviour _serverGameModeBehaviour;
-    public override void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
+    private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
+    public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
 
         
-        this.GameModeSettings = settings;
 
         _serverGameModeBehaviour = serverGameModeBehaviour;
         /*
@@ -41,7 +40,7 @@ public class SatsStackerGameMode : GameMode
         
     }
 
-    public override void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
 
         Debug.Log("end bbh");

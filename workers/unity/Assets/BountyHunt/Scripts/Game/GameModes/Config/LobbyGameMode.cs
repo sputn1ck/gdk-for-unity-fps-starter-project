@@ -7,18 +7,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LobbyGameMode", menuName = "BBH/GameModes/Lobby", order = 1)]
 public class LobbyGameMode : GameMode
 {
-    private RoomManagerServerBehaviour _serverGameModeBehaviour;
+    private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
 
-    public override async void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour,GameModeSettings settings, long subsidy)
+    public override async void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
         Debug.Log("start lobby");
         _serverGameModeBehaviour = serverGameModeBehaviour;
-        this.GameModeSettings = settings;
         //ServerGameChat.instance.SendAuctionStartedChatMessage("new auction started, check escape menu to participate");
 
     }
 
-    public override async void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
+    public override async void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
         Debug.Log("end lobby");
         await Task.Delay(2000);

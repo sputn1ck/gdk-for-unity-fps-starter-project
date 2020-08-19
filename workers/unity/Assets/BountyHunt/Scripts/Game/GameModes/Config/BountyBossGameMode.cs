@@ -11,13 +11,12 @@ using UnityEngine;
 public class BountyBossGameMode : GameMode
 {
 
-    private RoomManagerServerBehaviour _serverGameModeBehaviour;
-    public override void ServerOnGameModeStart(RoomManagerServerBehaviour serverGameModeBehaviour, GameModeSettings settings, long subsidy)
+    private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
+    public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
 
 
         _serverGameModeBehaviour = serverGameModeBehaviour;
-        this.GameModeSettings = settings;
         // setting subsidy + resetting carryover sats
         /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
@@ -47,7 +46,7 @@ public class BountyBossGameMode : GameMode
     }
 
 
-    public override void ServerOnGameModeEnd(RoomManagerServerBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
     }
 

@@ -24,80 +24,87 @@ namespace Bbhrpc {
     static GameserverReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxiYmgtYmFja2VuZC9nYW1lc2VydmVyLnByb3RvEgZiYmhycGMiSAoVR2V0",
-            "QWR2ZXJ0aXNlcnNSZXF1ZXN0EhcKD2Jhbm5lcnNfaW5fZ2FtZRgBIAEoBRIW",
-            "Cg5wbGF5ZXJfaW5fZ2FtZRgCIAEoBSJWChZHZXRBZHZlcnRpc2Vyc1Jlc3Bv",
-            "bnNlEg8KB3N1YnNpZHkYASABKAMSKwoLYWR2ZXJ0aXNlcnMYAiADKAsyFi5i",
-            "YmhycGMuQWR2ZXJ0aXNlckluZm8iPQoQUG9zdFN0YXRzUmVxdWVzdBIpCgxw",
-            "bGF5ZXJfc3RhdHMYASADKAsyEy5iYmhycGMuUGxheWVyU3RhdHMiEwoRUG9z",
-            "dFN0YXRzUmVzcG9uc2UiIQoORW5kUm9vbVJlcXVlc3QSDwoHcm9vbV9pZBgB",
-            "IAEoCSIRCg9FbmRSb29tUmVzcG9uc2UiZAoLUGxheWVyU3RhdHMSEQoJcGxh",
-            "eWVyX2lkGAEgASgJEhAKCGVhcm5pbmdzGAIgASgDEg0KBWtpbGxzGAMgASgF",
-            "Eg4KBmRlYXRocxgEIAEoBRIRCgl3b25fcm91bmQYBSABKAgimwEKEkV2ZW50",
-            "U3RyZWFtUmVxdWVzdBIhCgRraWxsGAEgASgLMhEuYmJocnBjLktpbGxFdmVu",
-            "dEgAEikKCGVhcm5pbmdzGAIgASgLMhUuYmJocnBjLkVhcm5pbmdzRXZlbnRI",
-            "ABIuCgtwbGF5ZXJfaW5mbxgDIAEoCzIXLmJiaHJwYy5QbGF5ZXJJbmZvRXZl",
-            "bnRIAEIHCgVldmVudCIVChNFdmVudFN0cmVhbVJlc3BvbnNlIjoKCUtpbGxF",
-            "dmVudBIOCgZraWxsZXIYASABKAkSDgoGdmljdGltGAIgASgJEg0KBWNhdXNl",
-            "GAMgASgJIioKDUVhcm5pbmdzRXZlbnQSDAoEdXNlchgBIAEoCRILCgNhbXQY",
-            "AiABKAMiyQEKD1BsYXllckluZm9FdmVudBIMCgR1c2VyGAEgASgJEjUKCmV2",
-            "ZW50X3R5cGUYAiABKA4yIS5iYmhycGMuUGxheWVySW5mb0V2ZW50LkV2ZW50",
-            "VHlwZRIWCg5jdXJyZW50X2JvdW50eRgDIAEoAxIVCg1jdXJyZW50X2tpbGxz",
-            "GAQgASgFEhYKDmN1cnJlbnRfZGVhdGhzGAUgASgFIioKCUV2ZW50VHlwZRIN",
-            "CglIRUFSVEJFQVQQABIOCgpESVNDT05ORUNUEAEiFgoUQmFja2VuZFN0cmVh",
-            "bVJlcXVlc3QitwEKFUJhY2tlbmRTdHJlYW1SZXNwb25zZRIhCgRraWNrGAEg",
-            "ASgLMhEuYmJocnBjLktpY2tFdmVudEgAEiUKBmJvdW50eRgCIAEoCzITLmJi",
-            "aHJwYy5Cb3VudHlFdmVudEgAEiEKBGNoYXQYAyABKAsyES5iYmhycGMuQ2hh",
-            "dEV2ZW50SAASKAoIbmV3X3Jvb20YBCABKAsyFC5iYmhycGMuTmV3Um9vbUV2",
-            "ZW50SABCBwoFZXZlbnQiMwoJS2lja0V2ZW50EhEKCXVzZXJfbmFtZRgBIAEo",
-            "CRITCgt1c2VyX3B1YmtleRgCIAEoCSI8CgtCb3VudHlFdmVudBIMCgR1c2Vy",
-            "GAEgASgJEg4KBmFtb3VudBgCIAEoAxIPCgdtZXNzYWdlGAMgASgJIj4KCUNo",
-            "YXRFdmVudBIPCgdtZXNzYWdlGAEgASgJEg4KBnNlbmRlchgCIAEoCRIQCghh",
-            "bm5vdW5jZRgDIAEoCCIyCgxOZXdSb29tRXZlbnQSIgoIbmV3X3Jvb20YASAB",
-            "KAsyEC5iYmhycGMuUm9vbUluZm8izwEKCFJvb21JbmZvEg8KB3Jvb21faWQY",
-            "ASABKAkSDgoGbWFwX2lkGAIgASgJEhAKCG1hcF9kYXRhGAMgASgJEicKDW1v",
-            "ZGVfcm90YXRpb24YBCADKAsyEC5iYmhycGMuR2FtZU1vZGUSEwoLcmVwZXRp",
-            "dGlvbnMYBSABKAUSEgoKc3RhcnRfdGltZRgGIAEoAxIRCgliYXNlX3NhdHMY",
-            "ByABKAMSKwoLYWR2ZXJ0aXNlcnMYCCADKAsyFi5iYmhycGMuQWR2ZXJ0aXNl",
-            "ckluZm8iSwoIR2FtZU1vZGUSEwoLZ2FtZW1vZGVfaWQYASABKAkSKgoIc2V0",
-            "dGluZ3MYAiABKAsyGC5iYmhycGMuR2FtZU1vZGVTZXR0aW5ncyK4AQoQR2Ft",
-            "ZU1vZGVTZXR0aW5ncxIXCg9zZWNvbmRfZHVyYXRpb24YASABKAMSKwoNYmFz",
-            "ZV9zZXR0aW5ncxgCIAEoCzIULmJiaHJwYy5CYXNlU2V0dGluZ3MSLwoPYm91",
-            "bnR5X3NldHRpbmdzGAMgASgLMhYuYmJocnBjLkJvdW50eVNldHRpbmdzEi0K",
-            "DnNwYXduX3NldHRpbmdzGAQgASgLMhUuYmJocnBjLlNwYXduU2V0dGluZ3Mi",
-            "hwEKDEJhc2VTZXR0aW5ncxIgChh0ZWxlcG9ydF9wbGF5ZXJfb25fc3RhcnQY",
-            "ASABKAgSGwoTY2xlYXJfYm91bnR5X29uX2VuZBgCIAEoCBIaChJjbGVhcl9z",
-            "dGF0c19vbl9lbmQYAyABKAgSHAoUY2xlYXJfcGlja3Vwc19vbl9lbmQYBCAB",
-            "KAgieAoOQm91bnR5U2V0dGluZ3MSHgoWYm91bnR5X3RpY2tfY29udmVyc2lv",
-            "bhgBIAEoARIgChhib3VudHlfdGlja190aW1lX3NlY29uZHMYAiABKAISJAoc",
-            "Ym91bnR5X2Ryb3BfcGVyY2VudGFnZV9kZWF0aBgDIAEoASKaAQoNU3Bhd25T",
-            "ZXR0aW5ncxIbChN0aW1lX2JldHdlZW5fc3Bhd25zGAEgASgCEhwKFG1pbl9z",
-            "cGF3bnNfcGVyX3NwYXduGAIgASgFEhwKFG1heF9zcGF3bnNfcGVyX3NwYXdu",
-            "GAMgASgFEjAKDGRpc3RyaWJ1dGlvbhgEIAEoDjIaLmJiaHJwYy5Cb3VudHlE",
-            "aXN0cmlidXRpb24ifwoOQWR2ZXJ0aXNlckluZm8SDAoEbmFtZRgBIAEoCRIS",
-            "CgpzcG9uc29yaW5nGAIgASgDEhoKEnNxdWFyZV9iYW5uZXJfdXJscxgDIAMo",
-            "CRINCgVwaGFzaBgEIAEoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRILCgN1cmwY",
-            "CiABKAkiIAoOR2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJIi0KD0dl",
-            "dFVzZXJSZXNwb25zZRIaCgR1c2VyGAEgASgLMgwuYmJocnBjLlVzZXIiJAoE",
-            "VXNlchIMCgRuYW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSIkChJHZXRVc2Vy",
-            "U2tpblJlcXVlc3QSDgoGcHVia2V5GAEgASgJIiwKE0dldFVzZXJTa2luUmVz",
-            "cG9uc2USFQoNZXF1aXBwZWRfc2tpbhgBIAEoCSozChJCb3VudHlEaXN0cmli",
-            "dXRpb24SCwoHVU5JRk9STRAAEhAKDE1BUF9XRUlHSFRFRBABMoAEChFHYW1l",
-            "U2VydmVyU2VydmljZRJICgtFdmVudFN0cmVhbRIaLmJiaHJwYy5FdmVudFN0",
-            "cmVhbVJlcXVlc3QaGy5iYmhycGMuRXZlbnRTdHJlYW1SZXNwb25zZSgBEk4K",
-            "DUJhY2tlbmRTdHJlYW0SHC5iYmhycGMuQmFja2VuZFN0cmVhbVJlcXVlc3Qa",
-            "HS5iYmhycGMuQmFja2VuZFN0cmVhbVJlc3BvbnNlMAESOgoHR2V0VXNlchIW",
-            "LmJiaHJwYy5HZXRVc2VyUmVxdWVzdBoXLmJiaHJwYy5HZXRVc2VyUmVzcG9u",
-            "c2USRgoLR2V0VXNlclNraW4SGi5iYmhycGMuR2V0VXNlclNraW5SZXF1ZXN0",
-            "GhsuYmJocnBjLkdldFVzZXJTa2luUmVzcG9uc2USTwoOR2V0QWR2ZXJ0aXNl",
-            "cnMSHS5iYmhycGMuR2V0QWR2ZXJ0aXNlcnNSZXF1ZXN0Gh4uYmJocnBjLkdl",
-            "dEFkdmVydGlzZXJzUmVzcG9uc2USQAoJUG9zdFN0YXRzEhguYmJocnBjLlBv",
-            "c3RTdGF0c1JlcXVlc3QaGS5iYmhycGMuUG9zdFN0YXRzUmVzcG9uc2USOgoH",
-            "RW5kUm9vbRIWLmJiaHJwYy5FbmRSb29tUmVxdWVzdBoXLmJiaHJwYy5FbmRS",
-            "b29tUmVzcG9uc2ViBnByb3RvMw=="));
+            "ChxiYmgtYmFja2VuZC9nYW1lc2VydmVyLnByb3RvEgZiYmhycGMiMQoaR2V0",
+            "R2FtZU1vZGVTZXR0aW5nc1JlcXVlc3QSEwoLZ2FtZW1vZGVfaWQYASABKAki",
+            "SQobR2V0R2FtZU1vZGVTZXR0aW5nc1Jlc3BvbnNlEioKCHNldHRpbmdzGAEg",
+            "ASgLMhguYmJocnBjLkdhbWVNb2RlU2V0dGluZ3MiSAoVR2V0QWR2ZXJ0aXNl",
+            "cnNSZXF1ZXN0EhcKD2Jhbm5lcnNfaW5fZ2FtZRgBIAEoBRIWCg5wbGF5ZXJf",
+            "aW5fZ2FtZRgCIAEoBSJWChZHZXRBZHZlcnRpc2Vyc1Jlc3BvbnNlEg8KB3N1",
+            "YnNpZHkYASABKAMSKwoLYWR2ZXJ0aXNlcnMYAiADKAsyFi5iYmhycGMuQWR2",
+            "ZXJ0aXNlckluZm8iPQoQUG9zdFN0YXRzUmVxdWVzdBIpCgxwbGF5ZXJfc3Rh",
+            "dHMYASADKAsyEy5iYmhycGMuUGxheWVyU3RhdHMiEwoRUG9zdFN0YXRzUmVz",
+            "cG9uc2UiIQoORW5kUm9vbVJlcXVlc3QSDwoHcm9vbV9pZBgBIAEoCSIRCg9F",
+            "bmRSb29tUmVzcG9uc2UiZAoLUGxheWVyU3RhdHMSEQoJcGxheWVyX2lkGAEg",
+            "ASgJEhAKCGVhcm5pbmdzGAIgASgDEg0KBWtpbGxzGAMgASgFEg4KBmRlYXRo",
+            "cxgEIAEoBRIRCgl3b25fcm91bmQYBSABKAgimwEKEkV2ZW50U3RyZWFtUmVx",
+            "dWVzdBIhCgRraWxsGAEgASgLMhEuYmJocnBjLktpbGxFdmVudEgAEikKCGVh",
+            "cm5pbmdzGAIgASgLMhUuYmJocnBjLkVhcm5pbmdzRXZlbnRIABIuCgtwbGF5",
+            "ZXJfaW5mbxgDIAEoCzIXLmJiaHJwYy5QbGF5ZXJJbmZvRXZlbnRIAEIHCgVl",
+            "dmVudCIVChNFdmVudFN0cmVhbVJlc3BvbnNlIjoKCUtpbGxFdmVudBIOCgZr",
+            "aWxsZXIYASABKAkSDgoGdmljdGltGAIgASgJEg0KBWNhdXNlGAMgASgJIioK",
+            "DUVhcm5pbmdzRXZlbnQSDAoEdXNlchgBIAEoCRILCgNhbXQYAiABKAMiyQEK",
+            "D1BsYXllckluZm9FdmVudBIMCgR1c2VyGAEgASgJEjUKCmV2ZW50X3R5cGUY",
+            "AiABKA4yIS5iYmhycGMuUGxheWVySW5mb0V2ZW50LkV2ZW50VHlwZRIWCg5j",
+            "dXJyZW50X2JvdW50eRgDIAEoAxIVCg1jdXJyZW50X2tpbGxzGAQgASgFEhYK",
+            "DmN1cnJlbnRfZGVhdGhzGAUgASgFIioKCUV2ZW50VHlwZRINCglIRUFSVEJF",
+            "QVQQABIOCgpESVNDT05ORUNUEAEiFgoUQmFja2VuZFN0cmVhbVJlcXVlc3Qi",
+            "twEKFUJhY2tlbmRTdHJlYW1SZXNwb25zZRIhCgRraWNrGAEgASgLMhEuYmJo",
+            "cnBjLktpY2tFdmVudEgAEiUKBmJvdW50eRgCIAEoCzITLmJiaHJwYy5Cb3Vu",
+            "dHlFdmVudEgAEiEKBGNoYXQYAyABKAsyES5iYmhycGMuQ2hhdEV2ZW50SAAS",
+            "KAoIbmV3X3Jvb20YBCABKAsyFC5iYmhycGMuTmV3Um9vbUV2ZW50SABCBwoF",
+            "ZXZlbnQiMwoJS2lja0V2ZW50EhEKCXVzZXJfbmFtZRgBIAEoCRITCgt1c2Vy",
+            "X3B1YmtleRgCIAEoCSI8CgtCb3VudHlFdmVudBIMCgR1c2VyGAEgASgJEg4K",
+            "BmFtb3VudBgCIAEoAxIPCgdtZXNzYWdlGAMgASgJIj4KCUNoYXRFdmVudBIP",
+            "CgdtZXNzYWdlGAEgASgJEg4KBnNlbmRlchgCIAEoCRIQCghhbm5vdW5jZRgD",
+            "IAEoCCIyCgxOZXdSb29tRXZlbnQSIgoIbmV3X3Jvb20YASABKAsyEC5iYmhy",
+            "cGMuUm9vbUluZm8izwEKCFJvb21JbmZvEg8KB3Jvb21faWQYASABKAkSDgoG",
+            "bWFwX2lkGAIgASgJEhAKCG1hcF9kYXRhGAMgASgJEicKDW1vZGVfcm90YXRp",
+            "b24YBCADKAsyEC5iYmhycGMuR2FtZU1vZGUSEwoLcmVwZXRpdGlvbnMYBSAB",
+            "KAUSEgoKc3RhcnRfdGltZRgGIAEoAxIRCgliYXNlX3NhdHMYByABKAMSKwoL",
+            "YWR2ZXJ0aXNlcnMYCCADKAsyFi5iYmhycGMuQWR2ZXJ0aXNlckluZm8iSwoI",
+            "R2FtZU1vZGUSEwoLZ2FtZW1vZGVfaWQYASABKAkSKgoIc2V0dGluZ3MYAiAB",
+            "KAsyGC5iYmhycGMuR2FtZU1vZGVTZXR0aW5ncyK4AQoQR2FtZU1vZGVTZXR0",
+            "aW5ncxIXCg9zZWNvbmRfZHVyYXRpb24YASABKAMSKwoNYmFzZV9zZXR0aW5n",
+            "cxgCIAEoCzIULmJiaHJwYy5CYXNlU2V0dGluZ3MSLwoPYm91bnR5X3NldHRp",
+            "bmdzGAMgASgLMhYuYmJocnBjLkJvdW50eVNldHRpbmdzEi0KDnNwYXduX3Nl",
+            "dHRpbmdzGAQgASgLMhUuYmJocnBjLlNwYXduU2V0dGluZ3MihwEKDEJhc2VT",
+            "ZXR0aW5ncxIgChh0ZWxlcG9ydF9wbGF5ZXJfb25fc3RhcnQYASABKAgSGwoT",
+            "Y2xlYXJfYm91bnR5X29uX2VuZBgCIAEoCBIaChJjbGVhcl9zdGF0c19vbl9l",
+            "bmQYAyABKAgSHAoUY2xlYXJfcGlja3Vwc19vbl9lbmQYBCABKAgieAoOQm91",
+            "bnR5U2V0dGluZ3MSHgoWYm91bnR5X3RpY2tfY29udmVyc2lvbhgBIAEoARIg",
+            "Chhib3VudHlfdGlja190aW1lX3NlY29uZHMYAiABKAISJAocYm91bnR5X2Ry",
+            "b3BfcGVyY2VudGFnZV9kZWF0aBgDIAEoASKaAQoNU3Bhd25TZXR0aW5ncxIb",
+            "ChN0aW1lX2JldHdlZW5fc3Bhd25zGAEgASgCEhwKFG1pbl9zcGF3bnNfcGVy",
+            "X3NwYXduGAIgASgFEhwKFG1heF9zcGF3bnNfcGVyX3NwYXduGAMgASgFEjAK",
+            "DGRpc3RyaWJ1dGlvbhgEIAEoDjIaLmJiaHJwYy5Cb3VudHlEaXN0cmlidXRp",
+            "b24ifwoOQWR2ZXJ0aXNlckluZm8SDAoEbmFtZRgBIAEoCRISCgpzcG9uc29y",
+            "aW5nGAIgASgDEhoKEnNxdWFyZV9iYW5uZXJfdXJscxgDIAMoCRINCgVwaGFz",
+            "aBgEIAEoCRITCgtkaXNjcmlwdGlvbhgJIAEoCRILCgN1cmwYCiABKAkiIAoO",
+            "R2V0VXNlclJlcXVlc3QSDgoGcHVia2V5GAEgASgJIi0KD0dldFVzZXJSZXNw",
+            "b25zZRIaCgR1c2VyGAEgASgLMgwuYmJocnBjLlVzZXIiJAoEVXNlchIMCgRu",
+            "YW1lGAEgASgJEg4KBnB1YmtleRgCIAEoCSIkChJHZXRVc2VyU2tpblJlcXVl",
+            "c3QSDgoGcHVia2V5GAEgASgJIiwKE0dldFVzZXJTa2luUmVzcG9uc2USFQoN",
+            "ZXF1aXBwZWRfc2tpbhgBIAEoCSozChJCb3VudHlEaXN0cmlidXRpb24SCwoH",
+            "VU5JRk9STRAAEhAKDE1BUF9XRUlHSFRFRBABMuAEChFHYW1lU2VydmVyU2Vy",
+            "dmljZRJICgtFdmVudFN0cmVhbRIaLmJiaHJwYy5FdmVudFN0cmVhbVJlcXVl",
+            "c3QaGy5iYmhycGMuRXZlbnRTdHJlYW1SZXNwb25zZSgBEk4KDUJhY2tlbmRT",
+            "dHJlYW0SHC5iYmhycGMuQmFja2VuZFN0cmVhbVJlcXVlc3QaHS5iYmhycGMu",
+            "QmFja2VuZFN0cmVhbVJlc3BvbnNlMAESOgoHR2V0VXNlchIWLmJiaHJwYy5H",
+            "ZXRVc2VyUmVxdWVzdBoXLmJiaHJwYy5HZXRVc2VyUmVzcG9uc2USRgoLR2V0",
+            "VXNlclNraW4SGi5iYmhycGMuR2V0VXNlclNraW5SZXF1ZXN0GhsuYmJocnBj",
+            "LkdldFVzZXJTa2luUmVzcG9uc2USTwoOR2V0QWR2ZXJ0aXNlcnMSHS5iYmhy",
+            "cGMuR2V0QWR2ZXJ0aXNlcnNSZXF1ZXN0Gh4uYmJocnBjLkdldEFkdmVydGlz",
+            "ZXJzUmVzcG9uc2USXgoTR2V0R2FtZU1vZGVTZXR0aW5ncxIiLmJiaHJwYy5H",
+            "ZXRHYW1lTW9kZVNldHRpbmdzUmVxdWVzdBojLmJiaHJwYy5HZXRHYW1lTW9k",
+            "ZVNldHRpbmdzUmVzcG9uc2USQAoJUG9zdFN0YXRzEhguYmJocnBjLlBvc3RT",
+            "dGF0c1JlcXVlc3QaGS5iYmhycGMuUG9zdFN0YXRzUmVzcG9uc2USOgoHRW5k",
+            "Um9vbRIWLmJiaHJwYy5FbmRSb29tUmVxdWVzdBoXLmJiaHJwYy5FbmRSb29t",
+            "UmVzcG9uc2ViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Bbhrpc.BountyDistribution), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetGameModeSettingsRequest), global::Bbhrpc.GetGameModeSettingsRequest.Parser, new[]{ "GamemodeId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetGameModeSettingsResponse), global::Bbhrpc.GetGameModeSettingsResponse.Parser, new[]{ "Settings" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetAdvertisersRequest), global::Bbhrpc.GetAdvertisersRequest.Parser, new[]{ "BannersInGame", "PlayerInGame" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.GetAdvertisersResponse), global::Bbhrpc.GetAdvertisersResponse.Parser, new[]{ "Subsidy", "Advertisers" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Bbhrpc.PostStatsRequest), global::Bbhrpc.PostStatsRequest.Parser, new[]{ "PlayerStats" }, null, null, null),
@@ -142,6 +149,270 @@ namespace Bbhrpc {
   #endregion
 
   #region Messages
+  public sealed partial class GetGameModeSettingsRequest : pb::IMessage<GetGameModeSettingsRequest> {
+    private static readonly pb::MessageParser<GetGameModeSettingsRequest> _parser = new pb::MessageParser<GetGameModeSettingsRequest>(() => new GetGameModeSettingsRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetGameModeSettingsRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsRequest(GetGameModeSettingsRequest other) : this() {
+      gamemodeId_ = other.gamemodeId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsRequest Clone() {
+      return new GetGameModeSettingsRequest(this);
+    }
+
+    /// <summary>Field number for the "gamemode_id" field.</summary>
+    public const int GamemodeIdFieldNumber = 1;
+    private string gamemodeId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GamemodeId {
+      get { return gamemodeId_; }
+      set {
+        gamemodeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetGameModeSettingsRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetGameModeSettingsRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GamemodeId != other.GamemodeId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GamemodeId.Length != 0) hash ^= GamemodeId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GamemodeId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GamemodeId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GamemodeId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GamemodeId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetGameModeSettingsRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GamemodeId.Length != 0) {
+        GamemodeId = other.GamemodeId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            GamemodeId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetGameModeSettingsResponse : pb::IMessage<GetGameModeSettingsResponse> {
+    private static readonly pb::MessageParser<GetGameModeSettingsResponse> _parser = new pb::MessageParser<GetGameModeSettingsResponse>(() => new GetGameModeSettingsResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetGameModeSettingsResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsResponse(GetGameModeSettingsResponse other) : this() {
+      settings_ = other.settings_ != null ? other.settings_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetGameModeSettingsResponse Clone() {
+      return new GetGameModeSettingsResponse(this);
+    }
+
+    /// <summary>Field number for the "settings" field.</summary>
+    public const int SettingsFieldNumber = 1;
+    private global::Bbhrpc.GameModeSettings settings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Bbhrpc.GameModeSettings Settings {
+      get { return settings_; }
+      set {
+        settings_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetGameModeSettingsResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetGameModeSettingsResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Settings, other.Settings)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (settings_ != null) hash ^= Settings.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (settings_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Settings);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (settings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetGameModeSettingsResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.settings_ != null) {
+        if (settings_ == null) {
+          Settings = new global::Bbhrpc.GameModeSettings();
+        }
+        Settings.MergeFrom(other.Settings);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (settings_ == null) {
+              Settings = new global::Bbhrpc.GameModeSettings();
+            }
+            input.ReadMessage(Settings);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class GetAdvertisersRequest : pb::IMessage<GetAdvertisersRequest> {
     private static readonly pb::MessageParser<GetAdvertisersRequest> _parser = new pb::MessageParser<GetAdvertisersRequest>(() => new GetAdvertisersRequest());
     private pb::UnknownFieldSet _unknownFields;
@@ -150,7 +421,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -307,7 +578,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -456,7 +727,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -577,7 +848,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -678,7 +949,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -807,7 +1078,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -908,7 +1179,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1149,7 +1420,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1392,7 +1663,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1493,7 +1764,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1678,7 +1949,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1835,7 +2106,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2088,7 +2359,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2189,7 +2460,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2471,7 +2742,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2628,7 +2899,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2813,7 +3084,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2998,7 +3269,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3133,7 +3404,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3442,7 +3713,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3605,7 +3876,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3836,7 +4107,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4049,7 +4320,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4234,7 +4505,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4447,7 +4718,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4708,7 +4979,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4837,7 +5108,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4972,7 +5243,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5129,7 +5400,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5258,7 +5529,7 @@ namespace Bbhrpc {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Bbhrpc.GameserverReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
