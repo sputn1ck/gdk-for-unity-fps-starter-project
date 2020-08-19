@@ -1,0 +1,22 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+import "bountyhunt/room.schema";
+
+
+component RoomPlayer {
+    id = 430003;
+
+    string room_id = 1;
+    EntityId room_entityid = 2;
+    string pubkey = 3;
+    RoomBaseInfo active_room = 4;
+    
+    command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
+    command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
+}
+
+
+type UpdatePlayerRoomRequest {
+    bountyhunt.Room room = 1;
+}

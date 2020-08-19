@@ -3,10 +3,13 @@ package bountyhunt;
 import "bountyhunt/common.schema";
 import "bountyhunt/gamemode.schema";
 import "bountyhunt/ads.schema";
+import "bountyhunt/room.schema";
+import "bountyhunt/stats.schema";
+
 component WorldManager {
     id = 480001;
 
-    map<string, Room> active_rooms = 1;
+    map<string, bountyhunt.Room> active_rooms = 1;
     map<string, PlayerInfo> active_players = 2;
     command Room create_room(CreateRoomRequest);
 
@@ -21,70 +24,8 @@ component WorldManager {
     command bountyhunt.Empty add_active_player(AddActivePlayerRequest);
     command bountyhunt.Empty remove_active_player(RemoveActivePlayerRequest);
 
-    event Room new_room;
+    event bountyhunt.Room new_room;
 
-}
-
-component WorldStatsManager {
-    id = 480005;
-
-    command bountyhunt.Empty post_stats(PostStatsRequest);
-}
-
-
-component RoomManager {
-    id = 480002;
-
-    Room room_info = 1;
-    RoomState room_state = 2;
-    command bountyhunt.Empty add_player(AddPlayerRequest);
-    command bountyhunt.Empty remove_player(RemovePlayerRequest);
-    command bountyhunt.Empty ready_to_join(ReadyToJoinRequest);
-    command bountyhunt.Empty add_roombound_object(AddRoomBountyObjectRequest);
-    command bountyhunt.SpawnPosition get_spawn_position(bountyhunt.Empty);
-}
-
-component RoomStats {
-    id = 480004;
-
-    
-    event PlayerStatsUpdate map_update;
-    command PlayerStatsUpdate request_stats(bountyhunt.Empty);
-    
-    command bountyhunt.Empty add_kill(AddKillRequest);
-    command bountyhunt.Empty add_earnings(AddEarningsRequest);
-    command bountyhunt.Empty add_bounty(AddBountyRequest);
-    command bountyhunt.Empty set_bounty(SetBountyRequest);
-}
-
-type AddKillRequest {
-    string killer_id = 1;
-    string victim_id = 2;
-}
-
-type AddEarningsRequest {
-    string player_id = 1;
-    int64 earnings = 2;
-}
-type AddBountyRequest {
-    string player_id =1;
-    int64 bounty = 2;
-}
-
-type SetBountyRequest {
-    string player_id = 1;
-    int64 bounty = 2;
-}
-
-component RoomPlayer {
-    id = 430003;
-
-    string room_id = 1;
-    EntityId room_entityid = 2;
-    string pubkey = 3;
-    RoomBaseInfo active_room = 4;
-    command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
-    command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
 }
 
 type PlayerInfo {
@@ -93,89 +34,28 @@ type PlayerInfo {
     EntityId active_room = 3;
 }
 
-type PlayerStats {
-    int32 kills = 1;
-    int32 deaths = 2;
-    int64 bounty = 3;
-    int64 session_earnings = 4;
-    bool active = 5;
-}
-type Room {
-    RoomBaseInfo info = 1;
-    RoomGameModeInfo game_mode_info = 2;
-    RoomPlayerInfo player_info = 3;
-    RoomFinanceInfo finance_info = 4;
-}
-type RoomBaseInfo {
-    string room_id = 1;
-    MapInfo map_info = 2;
-    EntityId entity_id = 3;
-    bountyhunt.Vector3Float origin = 4;
-    int64 start_time = 5;
-}
-type RoomGameModeInfo {
-    list<ModeRotationItem> mode_rotation = 1;
-    int32 repetitions = 2;
-    int32 current_mode = 3;
-}
-type RoomPlayerInfo {
-    list<string> active_players = 1;
-    list<string> queued_players = 2;
-    int32 max_players = 3;
-}
-
-type RoomFinanceInfo {
-    int64 start_sats = 1;
-    int64 added_sats = 2;
-    int64 spawned_sats = 3;
-    option<FixedAdvertisers> fixed_advertisers = 4;
-}
-
-type FixedAdvertisers {
-    list<bountyhunt.AdvertiserSource> advertisers = 1;
-}
-
-enum RoomState {
-        CREATED = 0;
-        STARTED = 1;
-        ENDED = 2;
-}
-type PlayerStatsUpdate {
-    map<string,PlayerStats> player_stats = 1;
-    list<string> remove_players = 2;
-    bool replace_map = 3;
-}
-
-type PostStatsRequest {
-    map<string, PlayerStats> player_stats = 1;
-}
-
 type JoinRoomRequest {
     string room_id = 1;
     EntityId player_id = 2;
 }
+
 type GetCantinaRequest {
     EntityId player_id = 1;
 }
 
 type GetCantinaResponse {
-    Room room = 1;
+    bountyhunt.Room room = 1;
     bool newly_created = 2;
 }
 
 type CreateRoomRequest {
-    MapInfo map_info = 1;
-    list<ModeRotationItem> mode_rotation = 2;
+    bountyhunt.MapInfo map_info = 1;
+    list<bountyhunt.ModeRotationItem> mode_rotation = 2;
     int32 repetitions = 3;
     int32 max_players = 4;
     int64 start_time = 5;
     int64 start_sats = 6;
     list<bountyhunt.AdvertiserSource> advertisers = 7;
-}
-
-type ModeRotationItem {
-    string gamemode_id = 1;
-    int64 duration = 2;
 }
 
 type EndRoomRequest {
@@ -184,34 +64,12 @@ type EndRoomRequest {
 }
 
 type StartRoomRequest {
-
 }
 
 type UpdateRoomRequest {
-    Room room = 1;
+    bountyhunt.Room room = 1;
 }
 
-type MapInfo {
-    string map_id = 1;
-    string map_data = 2;
-}
-
-type UpdatePlayerRoomRequest {
-    Room room = 1;
-}
-
-type AddPlayerRequest {
-    string player_pk = 1;
-    EntityId player_id = 2;
-}
-
-type RemovePlayerRequest {
-    string player_pk = 1;
-}
-
-type ReadyToJoinRequest {
-    EntityId player_id = 1;
-}
 
 type AddActivePlayerRequest {
     string signature = 1;
@@ -221,8 +79,4 @@ type AddActivePlayerRequest {
 
 type RemoveActivePlayerRequest {
     string player_pk = 1;
-}
-
-type AddRoomBountyObjectRequest{
-    EntityId entity_id = 1;
 }
