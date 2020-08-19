@@ -18,7 +18,7 @@ public class SatsStackerGameMode : GameMode
     {
 
         
-
+        // TODO implement bounty spawning
         _serverGameModeBehaviour = serverGameModeBehaviour;
         /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;

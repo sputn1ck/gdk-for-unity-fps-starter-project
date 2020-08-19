@@ -18,7 +18,6 @@ using Improbable.Gdk.QueryBasedInterest;
 
 public class DonnerEntityTemplates
 {
-
     public static EntityTemplate Spawner(Coordinates spawnerCoordinates)
     {
         var position = new Position.Snapshot(spawnerCoordinates);
@@ -204,7 +203,7 @@ public class DonnerEntityTemplates
         var roomManagerComponent = new RoomManager.Snapshot();
         roomManagerComponent.RoomInfo = room;
         roomManagerComponent.RoomState = RoomState.CREATED;
-        var roomStatsComponent = new RoomStats.Snapshot();
+        var roomStatsComponent = new RoomStatsManager.Snapshot();
         var roomGameModeComponent = new RoomGameModeManager.Snapshot();
         var roomAdComponent = new RoomAdvertingManager.Snapshot();
         if (room.FinanceInfo.FixedAdvertisers.HasValue)

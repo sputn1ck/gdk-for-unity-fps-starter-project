@@ -10,9 +10,9 @@ using UnityEngine.Events;
 public class RoomManagerClientBehaviour : MonoBehaviour
 {
     [Require] RoomManagerReader RoomManagerReader;
-    [Require] RoomStatsReader RoomStatsReader;
+    [Require] RoomStatsManagerReader RoomStatsReader;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
-    [Require] RoomStatsCommandSender RoomStatsCommandSender;
+    [Require] RoomStatsManagerCommandSender RoomStatsCommandSender;
     [Require] EntityId EntityId;
 
 

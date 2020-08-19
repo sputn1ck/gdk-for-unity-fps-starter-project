@@ -13,7 +13,7 @@ namespace Fps
     {
         [Require] private BountyPickupWriter bountyPickupWriter;
 
-        [Require] private HunterComponentCommandSender hunterComponentCommandSender;
+        [Require] private RoomStatsManagerCommandSender RoomStatsCommandSender;
         [Require] private HealthComponentCommandSender HealthComponentCommandSender;
 
         [Require] private WorldCommandSender commandSender;
@@ -92,6 +92,7 @@ namespace Fps
                 Amount = bountyPickupWriter.Data.BountyValue,
             });
             */
+            //RoomStatsCommandSender.SendAddBountyCommand()
             HealthComponentCommandSender.SendModifyHealthCommand(playerSpatialOsComponent.EntityId, new HealthModifier
             {
                 Amount = 15

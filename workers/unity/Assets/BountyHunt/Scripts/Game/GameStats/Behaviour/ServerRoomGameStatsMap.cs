@@ -6,8 +6,8 @@ using Improbable.Gdk.Subscriptions;
 
 public class ServerRoomGameStatsMap : MonoBehaviour
 {
-    [Require] RoomStatsWriter RoomStatsWriter;
-    [Require] RoomStatsCommandReceiver RoomStatsCommandReceiver;
+    [Require] RoomStatsManagerWriter RoomStatsWriter;
+    [Require] RoomStatsManagerCommandReceiver RoomStatsCommandReceiver;
 
     private Dictionary<string, PlayerStats> playerStats;
 
@@ -20,7 +20,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         RoomStatsCommandReceiver.OnSetBountyRequestReceived += SetBounty;
     }
 
-    private void SetBounty(RoomStats.SetBounty.ReceivedRequest obj)
+    private void SetBounty(RoomStatsManager.SetBounty.ReceivedRequest obj)
     {
         var map = new Dictionary<string, PlayerStats>();
         if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
@@ -31,7 +31,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         UpdateDictionary(map);
     }
 
-    private void AddEarnings(RoomStats.AddEarnings.ReceivedRequest obj)
+    private void AddEarnings(RoomStatsManager.AddEarnings.ReceivedRequest obj)
     {
         var map = new Dictionary<string, PlayerStats>();
         if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
@@ -42,7 +42,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         UpdateDictionary(map);
     }
 
-    private void AddBounty(RoomStats.AddBounty.ReceivedRequest obj)
+    private void AddBounty(RoomStatsManager.AddBounty.ReceivedRequest obj)
     {
         var map = new Dictionary<string, PlayerStats>();
         if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
@@ -58,12 +58,12 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         playerStats = new Dictionary<string, PlayerStats>();
         foreach (var player in room.PlayerInfo.ActivePlayers)
         {
-            playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false));
+            playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false,0));
         }
         RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
 
-    private void AddKill(RoomStats.AddKill.ReceivedRequest obj)
+    private void AddKill(RoomStatsManager.AddKill.ReceivedRequest obj)
     {
         var map = new Dictionary<string, PlayerStats>();
         if(playerStats.TryGetValue(obj.Payload.KillerId, out var killerStats))
@@ -79,7 +79,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         UpdateDictionary(map);
     }
 
-    private void RequestStats(RoomStats.RequestStats.ReceivedRequest obj)
+    private void RequestStats(RoomStatsManager.RequestStats.ReceivedRequest obj)
     {
         RoomStatsCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
@@ -95,7 +95,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         }
         else
         {
-            map.Add(pubkey, new PlayerStats(0, 0, 0, 0, true));
+            map.Add(pubkey, new PlayerStats(0, 0, 0, 0, true,0));
         }
         UpdateDictionary(map);
     }

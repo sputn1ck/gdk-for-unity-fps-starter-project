@@ -7,8 +7,8 @@ using Improbable.Gdk.Core;
 
 public class ClientRoomStatsBehaviour : MonoBehaviour
 {
-    [Require] RoomStatsReader RoomStatsReader;
-    [Require] RoomStatsCommandSender RoomStatsCommandSender;
+    [Require] RoomStatsManagerReader RoomStatsReader;
+    [Require] RoomStatsManagerCommandSender RoomStatsCommandSender;
 
     [Require] EntityId EntityId;
 

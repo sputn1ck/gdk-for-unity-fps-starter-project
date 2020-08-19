@@ -144,12 +144,6 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private async Task GetNextGameMode()
     {
 
-        /* Get Advertisers 
-        var roundInfo = await ServerServiceConnections.instance.BackendGameServerClient.GetRoundInfo(new Bbhrpc.GetRoundInfoRequest { PlayerInGame = RoomManagerWriter.Data.RoomInfo.ActivePlayers.Count });
-        if (roundInfo.Advertisers != null)
-        {
-            SendAdvertisers(roundInfo.Advertisers);
-        }*/
         if (!RoomManagerWriter.Data.RoomInfo.FinanceInfo.FixedAdvertisers.HasValue)
         {
             // TODO multiserver safe

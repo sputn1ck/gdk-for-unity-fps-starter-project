@@ -15,7 +15,7 @@ component RoomStatsManager {
     command bountyhunt.Empty add_earnings(AddEarningsRequest);
     command bountyhunt.Empty add_bounty(AddBountyRequest);
     command bountyhunt.Empty set_bounty(SetBountyRequest);
-    command bountyhunt.Empty bounty_tick(BountyTickRequest);
+    // command bountyhunt.Empty bounty_tick(BountyTickRequest);
     
 }
 
@@ -43,6 +43,7 @@ type AddEarningsRequest {
 type AddBountyRequest {
     string player_id =1;
     int64 bounty = 2;
+    string reason = 3;
 }
 
 type SetBountyRequest {
