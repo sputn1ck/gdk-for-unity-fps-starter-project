@@ -106,7 +106,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
     {
         var cantinaRotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("satsstacker", Utility.SecondsToNano(300))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(300))
            };
         var cantinaRequest = new CreateRoomRequest()
         {
@@ -213,7 +213,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var rotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", Utility.SecondsToNano(120)),
+               new ModeRotationItem("lobby", Utility.SecondsToNano(5)),
                new ModeRotationItem("satsstacker",Utility.SecondsToNano(240))
            };
             startGenerated = false;

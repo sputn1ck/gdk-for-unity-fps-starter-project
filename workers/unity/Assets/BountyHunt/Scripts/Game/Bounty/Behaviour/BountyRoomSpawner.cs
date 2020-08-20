@@ -45,7 +45,8 @@ public class BountyRoomSpawner : MonoBehaviour
     {
         if (satAmount < 1)
             return;
-        var pos =  position.position - LinkedEntityComponent.Worker.Origin;
+        var pos = position.position - LinkedEntityComponent.Worker.Origin;
+       
         var bountypickup = DonnerEntityTemplates.BountyPickup(pos, satAmount);
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountypickup));
     }

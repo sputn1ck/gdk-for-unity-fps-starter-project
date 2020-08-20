@@ -41,7 +41,10 @@ public class GeneratedMap : Map
         }
         spawnPoints = mapGO.GetComponentInChildren<SpawnPoints>();
         adBillboards = mapGO.transform.GetComponentsInChildren<AdBillboard>();
+        var startTime = System.DateTime.Now;
         BountySpawnPoints = mapGO.transform.GetComponentsInChildren<SatsCubeSpawnPoint>();
+        var totalTime = System.DateTime.Now - startTime;
+        Debug.LogFormat("Total sats cube spawn points: {0} ; seconds {1}",BountySpawnPoints.Length, totalTime.TotalSeconds);
         yield return null;
         onFinished?.Invoke();
     }
