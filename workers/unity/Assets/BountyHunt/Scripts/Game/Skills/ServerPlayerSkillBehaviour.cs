@@ -16,6 +16,9 @@ public class ServerPlayerSkillBehaviour : MonoBehaviour
     [Require] public ServerMovementWriter ServerMovementWriter;
 
     [Require] public PlayerSkillComponentCommandReceiver PlayerSkillComponentCommandReceiver;
+    [Require] public EffectSpawnerComponentCommandSender effectSpawnerComponentCommandSender;
+
+    [Require] public EntityId entityId;
 
     public LinkedEntityComponent LinkedEntityComponent;
     private Dictionary<int, bool> SkillCooldowns;

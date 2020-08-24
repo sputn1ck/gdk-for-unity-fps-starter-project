@@ -35,14 +35,14 @@ public class SkinGroupButtonUI : MonoBehaviour
         symbol.sprite = group.sprite;
 
 
-        List<Skin> owned = new List<Skin>(group.skins.Where(o => o.owned));
+        List<SkinItem> owned = new List<SkinItem>(SkinShop.ItemGroupDict[group].Where(o => o.owned));
         colorfieldsContainer.gameObject.SetActive(true);
         for (int i = 0; i<colorfields.Length;i++)
         {
             if (owned.Count > i)
             {
 
-                colorfields[i].color = owned[i].identificationColor;
+                colorfields[i].color = owned[i].skin.identificationColor;
             }
             else
             {

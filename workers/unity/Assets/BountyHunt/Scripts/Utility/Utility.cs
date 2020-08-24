@@ -32,6 +32,26 @@ public static class Utility
         t.localRotation = UnityEngine.Quaternion.identity;
     }
 
+    public static Vector3 convert(this Bountyhunt.Vector3Float v3)
+    {
+        return new Vector3(v3.X, v3.Y, v3.Z);
+    }
+
+    public static Vector3 convert(this Bountyhunt.Vector3Int v3)
+    {
+        return new Vector3(v3.X, v3.Y, v3.Z);
+    }
+
+    public static Bountyhunt.Vector3Float ToBbhVector(this Vector3 v3)
+    {
+        return new Bountyhunt.Vector3Float {X = v3.x, Y = v3.y, Z = v3.z};
+    }
+
+    public static Bountyhunt.Vector3Int ToBbhVector(this UnityEngine.Vector3Int v3)
+    {
+        return new Bountyhunt.Vector3Int { X = v3.x, Y = v3.y, Z = v3.z };
+    }
+
     public static long Abs(long input)
     {
         if (input >= 0) return input;
@@ -244,5 +264,11 @@ public static class Utility
     public static UnityEngine.Quaternion BhQuatToQuat(Bountyhunt.Quaternion q)
     {
         return new UnityEngine.Quaternion(q.X, q.Y, q.Z, q.W);
+    }
+
+    public static float MapValue(float x, float in_min, float in_max, float out_min, float out_max)
+    {
+        
+        return(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 }

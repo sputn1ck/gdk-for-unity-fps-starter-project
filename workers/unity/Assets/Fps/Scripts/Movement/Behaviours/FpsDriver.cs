@@ -35,11 +35,14 @@ namespace Fps.Movement
         private FpsAnimator fpsAnimator;
         private GunManager currentGun;
         private ClientPlayerSkillBehaviour skillBehaviour;
+        private ViewChanger viewChanger;
 
         public bool editingInputfield;
 
         [SerializeField] private Transform pitchTransform;
         public new Camera camera;
+        public GameObject ThirdPersonCameraSocket;
+
 
         [SerializeField] private CameraSettings cameraSettings = new CameraSettings
         {
@@ -66,6 +69,7 @@ namespace Fps.Movement
             currentGun = GetComponent<GunManager>();
             controller = GetComponent<IControlProvider>();
             skillBehaviour = GetComponent<ClientPlayerSkillBehaviour>();
+            viewChanger = GetComponent<ViewChanger>();
 
             var uiManager = GameObject.FindGameObjectWithTag("OnScreenUI")?.GetComponent<BBHUIManager>();
             if (uiManager == null)
@@ -140,7 +144,7 @@ namespace Fps.Movement
             var pitchDelta = controller.PitchDelta;
 
             // Modifiers
-            var isAiming = controller.IsAiming;
+            var isAiming = controller.IsAiming && !thirdPersonViewActivated;
             var isSprinting = controller.AreSprinting;
 
             var isJumpPressed = controller.JumpPressed;
@@ -157,6 +161,24 @@ namespace Fps.Movement
             {
                 yawSpeed = currentGun.CurrentGunSettings.AimYawSpeed;
                 pitchSpeed = currentGun.CurrentGunSettings.AimPitchSpeed;
+            }
+
+            //setCamera
+            if (InputKeyMapping.MappedKeyDown("ThirdPerson_Key"))
+            {
+                viewChanger.SetThirdPersonView(true);
+            }
+            else if (InputKeyMapping.MappedKeyUp("ThirdPerson_Key"))
+            {
+                viewChanger.SetThirdPersonView(false);
+            }
+
+            if (viewChanger.thirdPerson)
+            {
+                float zoomDelta = Input.mouseScrollDelta.y;
+                viewChanger.UpdateThirdPersonView(yawDelta,pitchDelta,zoomDelta);
+                yawDelta = 0;
+                pitchDelta = 0;
             }
 
             //Mediator
@@ -181,7 +203,7 @@ namespace Fps.Movement
             var rotation = Quaternion.Euler(newPitch, newYaw, 0);
 
             //Check for sprint cooldown
-            if (!movement.HasSprintedRecently)
+            if (!movement.HasSprintedRecently && !thirdPersonViewActivated)
             {
                 HandleShooting(shootPressed, shootHeld);
             }
@@ -267,7 +289,7 @@ namespace Fps.Movement
             fpsAnimator.SetAiming(gunState.Data.IsAiming);
             fpsAnimator.SetGrounded(movement.IsGrounded);
             fpsAnimator.SetMovement(transform.position, Time.deltaTime);
-            fpsAnimator.SetPitch(pitchTransform.transform.localEulerAngles.x);
+            fpsAnimator.SetPitch(-pitchTransform.transform.localEulerAngles.x);
 
             if (isJumping)
             {
@@ -295,5 +317,8 @@ namespace Fps.Movement
         {
             return entityId;
         }
+
+        public bool thirdPersonViewActivated => viewChanger.thirdPerson;
+        public bool isAiming => gunState!=null?gunState.Data.IsAiming:false;
     }
 }

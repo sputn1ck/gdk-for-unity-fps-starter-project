@@ -101,6 +101,8 @@ public class DonnerEntityTemplates
             Skills = new List<int>() { 0 },
         };
         var chatComponent = new PrivateChat.Snapshot();
+
+        var effectSpawnerComponent = new EffectSpawnerComponent.Snapshot();
         var roomCompenent = new RoomPlayer.Snapshot()
         {
             Pubkey = loginData.Pubkey
@@ -145,6 +147,7 @@ public class DonnerEntityTemplates
         template.AddComponent(skillComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(chatComponent, client);
         template.AddComponent(roomCompenent, WorkerUtils.UnityGameLogic);
+        template.AddComponent(effectSpawnerComponent, client);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);

@@ -11,18 +11,18 @@ public class SkinColorButtonUI : MonoBehaviour
     public GameObject frame;
     public GameObject underLine;
     public Image lockedImage;
-    [HideInInspector]public Skin skin;
+    [HideInInspector]public SkinItem item;
 
     private void Awake()
     {
         button.onClick.AddListener(OnClick);
     }
 
-    public class skinEvent : UnityEvent<Skin> { }
-    public skinEvent onClick = new skinEvent();
+    public class SkinItemEvent : UnityEvent<SkinItem> { }
+    public SkinItemEvent onClick = new SkinItemEvent();
 
     void OnClick()
     {
-        onClick.Invoke(skin);
+        onClick.Invoke(item);
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Fps.Guns
@@ -25,6 +25,8 @@ namespace Fps.Guns
             instantiatedGun.transform.SetParent(gunSocket);
             instantiatedGun.transform.localPosition = Vector3.zero;
             instantiatedGun.transform.localEulerAngles = Vector3.zero;
+
+            
 
             Gun = instantiatedGun.GetComponent<GunHandle>();
 

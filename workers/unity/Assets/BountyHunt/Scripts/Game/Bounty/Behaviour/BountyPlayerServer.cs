@@ -42,6 +42,7 @@ public class BountyPlayerServer : MonoBehaviour
         HunterCommandReceiver.OnTeleportPlayerRequestReceived += OnTeleport;
         HunterComponentWriter.OnEarningsUpdate += OnEarningsUpdate;
         HunterCommandReceiver.OnKickPlayerRequestReceived += OnKickPlayer;
+        HunterCommandReceiver.OnRefreshAppearanceRequestReceived += OnRefreshAppearance;
         Invoke("SetName", 1f);
 
         //StartCoroutine(BountyTick());
@@ -242,5 +243,10 @@ public class BountyPlayerServer : MonoBehaviour
     public void KickPlayer()
     {
         wcs.SendDeleteEntityCommand(new Improbable.Gdk.Core.Commands.WorldCommands.DeleteEntity.Request { EntityId = this.LinkedEntityComponent.EntityId });
+    }
+
+    public void OnRefreshAppearance(HunterComponent.RefreshAppearance.ReceivedRequest obj)
+    {
+        if (obj.EntityId == this.entityId)SetName();
     }
 }

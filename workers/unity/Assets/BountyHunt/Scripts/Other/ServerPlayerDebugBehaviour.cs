@@ -12,12 +12,16 @@ public class ServerPlayerDebugBehaviour : MonoBehaviour
     [Require] private HealthComponentCommandSender healthCommandSender;
     [Require] private HunterComponentWriter hunter;
     [Require] private EntityId entityId;
+    [Require] private GunComponentWriter GunComponentWriter;
 
     public bool modifyHealthTrigger;
     public float modifyHealthAmount;
 
     public bool modifyBountyTrigger;
     public long modifiyBounty;
+
+    public bool changeGunTrigger;
+    public int gunId;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +41,20 @@ public class ServerPlayerDebugBehaviour : MonoBehaviour
             modifyBountyTrigger = false;
             AddBounty();
         }
+        if(changeGunTrigger)
+        {
+            changeGunTrigger = false;
+            ChangeGun();
+        }
     }
 
+    public void ChangeGun()
+    {
+        GunComponentWriter.SendUpdate(new GunComponent.Update()
+        {
+            GunId = this.gunId
+        });
+    }
     public void ModifyHealth()
     {
         healthCommandSender.SendModifyHealthCommand(entityId, new HealthModifier(0, modifyHealthAmount, new Fps.Vector3Int(0, 0, 0), new Fps.Vector3Int(0, 0, 0), entityId));

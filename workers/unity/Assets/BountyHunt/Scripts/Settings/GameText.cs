@@ -35,7 +35,7 @@ public static class GameText
     public const string WaitingForPaymentPopup = "waiting for payment...";
 
     /// text in the payment Success Popup
-    public const string PaymentSuccessPopup = "payment successfull";
+    public const string PaymentSuccessPopup = "payment successful";
 
     /// text in the payment Expired Popup
     public const string PaymentExpiredPopup = "payment has expired!";
@@ -75,7 +75,25 @@ public static class GameText
     public const string BalanceToLowAnnouncement = "Balance to low";
 
     /// announcement text, if a payment was successfull
-    public const string PaymentSuccesfullAnnouncement = "Payment Sucessfull";
+    public const string PaymentSuccessful = "Payment Sucessful";
+
+    /// label of the close action in the context Menu
+    public const string ContextMenuCloseActionLabel = "close";
+    /// label of the equip button in the gun contextMenu
+    public const string EquipGunContextMenuAction = "equip";
+
+
+    /// hint when gun is already equipped in the gun contextMenu
+    public const string GunEquippedContextMenuText = "equipped";
+
+    /// label of the equip button in the skin contextMenu
+    public const string EquipSkinContextMenuAction = "equip";
+
+    /// hint when skin is already equipped in the skin contextMenu
+    public const string SkinEquippedContextMenuText = "equipped";
+
+    /// label of the buy button in the skin contextMenu
+    public const string BuySkinContextMenuAction = "buy";
 
 
     //-----TOOLTIPS----- Don't rename these Constants !!!
@@ -133,6 +151,10 @@ public static class GameText
             case KeyCode.Caret: return "^";
             case KeyCode.LeftShift: return "L-shift";
             case KeyCode.RightShift: return "R-shift";
+            case KeyCode.LeftControl: return "L-ctrl";
+            case KeyCode.RightControl: return "R-ctrl";
+            case KeyCode.LeftAlt: return "L-alt";
+            case KeyCode.RightAlt: return "R-alt";
         }
     }
 }

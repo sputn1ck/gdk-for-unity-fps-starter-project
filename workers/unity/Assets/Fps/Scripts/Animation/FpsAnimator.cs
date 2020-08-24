@@ -1,4 +1,4 @@
-﻿using Fps.Movement;
+using Fps.Movement;
 using UnityEngine;
 
 namespace Fps.Animation
@@ -102,6 +102,10 @@ namespace Fps.Animation
 
         public void SetPitch(float pitch)
         {
+            if (pitch < -180)
+            {
+                pitch += 360;
+            }
             if (pitch > 180)
             {
                 pitch -= 360;

@@ -13,6 +13,7 @@ public class TeleportSkill : PlayerSkill
     public float Distance;
     public override CastResponse ServerCastSkill(ServerPlayerSkillBehaviour player)
     {
+        Vector3 enterPosition = player.transform.position;
         JsonUtility.FromJson("", typeof(TeleportPayload));
         var forward2d = new Vector2(player.transform.forward.x, player.transform.forward.z).normalized * this.Distance;
         var teleport = new Vector2(player.transform.position.x + forward2d.x, player.transform.position.z + forward2d.y);
@@ -27,11 +28,15 @@ public class TeleportSkill : PlayerSkill
         }
         pos = SpawnPoints.SnapToGround(pos);
         Debug.Log("teleport invoice paid!!" + pos);
+        Vector3 exitPosition = pos;
 
+        enterPosition -= player.LinkedEntityComponent.Worker.Origin;
+        //exitPosition -= player.LinkedEntityComponent.Worker.Origin;
+
+        spawnEffects(player, enterPosition, exitPosition);
 
         //var (pos, spawnYaw, spawnPitch) = SpawnPoints.GetRandomSpawnPoint();
-
-
+        
         // Move to a spawn point (position and rotation)
         var newLatest = new ServerResponse
         {
@@ -73,5 +78,28 @@ public class TeleportSkill : PlayerSkill
     public struct TeleportPayload
     {
         public float distance { get; set; }
+    }
+
+    void spawnEffects(ServerPlayerSkillBehaviour player, Vector3 enterPos, Vector3 exitPos)
+    {
+        Bountyhunt.EffectInfo info = new Bountyhunt.EffectInfo
+        {
+            Key = "TeleportEnter",
+            Position = enterPos.ToBbhVector(),
+            RotationEuler = player.transform.rotation.eulerAngles.ToBbhVector(),
+            Parent = Bountyhunt.EffectParent.ROOM,
+            PositionIsLocal = false
+        };
+        player.effectSpawnerComponentCommandSender.SendSpawnEffectCommand(player.entityId, info);
+        info = new Bountyhunt.EffectInfo
+        {
+            Key = "TeleportExit",
+            Position = exitPos.ToBbhVector(),
+            RotationEuler = player.transform.rotation.eulerAngles.ToBbhVector(),
+            Parent = Bountyhunt.EffectParent.ROOM,
+            PositionIsLocal = false
+        };
+        player.effectSpawnerComponentCommandSender.SendSpawnEffectCommand(player.entityId, info);
+
     }
 }

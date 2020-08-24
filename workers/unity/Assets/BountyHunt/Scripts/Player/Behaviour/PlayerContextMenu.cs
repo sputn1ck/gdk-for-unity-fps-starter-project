@@ -14,23 +14,17 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     [Require] HunterComponentReader hunterComponentReader;
     [Require] HealthComponentReader healthComopnentReader;
 
-    string mainID;
-    string subMenuID;
-
     long walletBalance;
 
-    private void Awake()
-    {
-        mainID = Utility.GetUniqueString();
-        subMenuID = Utility.GetUniqueString();
-    }
     public async void OnLookAtEnter()
     {
 
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
         try
         {
-            walletBalance = await PlayerServiceConnections.instance.lnd.GetWalletBalace();
+
+            var balanceReq = await PlayerServiceConnections.instance.DonnerDaemonClient.GetWalletBalance();
+            walletBalance = balanceReq.DaemonBalance;
             if (walletBalance >= 100)
             {
                 (UnityAction, string) bountyIncreaseMenuAction = (OpenPlayerBountyIncreaseMenu, GameText.IncreasePlayerBountyContextMenuActionLabel);
@@ -45,7 +39,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         Ranking ranking;
         try
         {
-            ranking = await ServerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(hunterComponentReader.Data.Pubkey);
+            ranking = await PlayerServiceConnections.instance.BackendPlayerClient.GetSpecificPlayerRanking(hunterComponentReader.Data.Pubkey);
         }
         catch(Exception e)
         {
@@ -59,27 +53,25 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health ,Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = mainID,
             Headline = hunterComponentReader.Data.Name,
             Text = text,
             Actions = actions,
             ImageSprite = badge.sprite,
             ImageColor = badge.color,
             OpenAction = Subscribe,
-            CloseAction = Unsubscribe
+            CloseAction = Unsubscribe,
+            Type = ContextMenuType.LOOKAT
         };
         ContextMenuUI.Instance.Set(args);
     }
 
     public void OnLookAtExit()
     {
-        ContextMenuUI.Instance.Hide(mainID);
+        ContextMenuUI.Instance.UnsetLookAtMenu();
     }
 
     void OpenPlayerBountyIncreaseMenu()
     {
-        ContextMenuUI.Instance.Hide(mainID);
-
         List<(UnityAction, string)> actions = new List<(UnityAction, string)>();
 
         AddBountyIncreaseActionToList(ref actions, 100);
@@ -90,10 +82,10 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
         string text = GameText.IncreasePlayerBountyContextMenuText;
         ContextMenuArgs args = new ContextMenuArgs
         {
-            ReferenceString = subMenuID,
             Headline = hunterComponentReader.Data.Name,
             Text = text,
-            Actions = actions
+            Actions = actions,
+            Type = ContextMenuType.REPLACE
         };
         ContextMenuUI.Instance.Set(args);
     }
@@ -112,30 +104,12 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
 
     async void IncreasePlayerBounty(long sats)
     {
-        ContextMenuUI.Instance.Hide(subMenuID);
-        long balance;
+        ContextMenuUI.Instance.CloseCurrentAndShowNext();
+        
         try
         {
-            balance = await PlayerServiceConnections.instance.lnd.GetWalletBalace();
-        }
-        catch(Exception e)
-        {
-            Debug.Log(e.Message);
-            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
-            return;
-        }
-
-        if (balance < sats)
-        {
-            Debug.Log("balance to low");
-            ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "failure", GameText.BalanceToLowAnnouncement, true);
-            return;
-        }
-
-        try
-        {
-            string serverpubkey = PlayerServiceConnections.instance.BackendPubkey;
-            var res = await PlayerServiceConnections.instance.lnd.KeysendBountyIncrease(serverpubkey, hunterComponentReader.Data.Pubkey, sats);
+            var invoice = await PlayerServiceConnections.instance.BackendPlayerClient.GetBountyInvoice(hunterComponentReader.Data.Pubkey, sats);
+            var res = await PlayerServiceConnections.instance.lnd.PayInvoice(invoice);
             if (res.PaymentError != "")
             {
                 throw new Exception(res.PaymentError);
@@ -147,7 +121,7 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
             ChatPanelUI.instance.SpawnMessage(Chat.MessageType.DEBUG_LOG, "error", e.Message, true);
             return;
         }
-        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccesfullAnnouncement, true);
+        ChatPanelUI.instance.SpawnMessage(Chat.MessageType.INFO_LOG, "Info", GameText.PaymentSuccessful, true);
 
     }
 
@@ -171,7 +145,8 @@ public class PlayerContextMenu : MonoBehaviour, ILookAtHandler
     }
     void UpdateText()
     {
-        string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
-        ContextMenuUI.Instance.UpdateText(text, mainID);
+        OnLookAtEnter();
+        //string text = string.Format(GameText.PlayerContextMenuText, healthComopnentReader.Data.Health, Utility.SatsToShortString(hunterComponentReader.Data.Bounty, true, UITinter.tintDict[TintColor.Sats]));
+        //ContextMenuUI.Instance.UpdateText(text, mainID);
     }
 }

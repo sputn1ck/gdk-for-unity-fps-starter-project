@@ -7,12 +7,17 @@ using UnityEngine;
 public class SkinChangeBehaviour : MonoBehaviour
 {
     [Require] private HunterComponentReader hunterComponentReader;
-    [SerializeField] private Transform RendererParent;
+    [SerializeField] private List<Transform> RendererParents;
     private Renderer[] renderers;
 
     public void Awake()
     {
-        renderers = RendererParent.GetComponentsInChildren<SkinnedMeshRenderer>();
+        List<Renderer> r = new List<Renderer>();
+        foreach(Transform p in RendererParents)
+        {
+            r.AddRange(p.GetComponentsInChildren<SkinnedMeshRenderer>());
+        }
+        renderers = r.ToArray();
     }
     public void OnEnable()
     {
@@ -25,9 +30,9 @@ public class SkinChangeBehaviour : MonoBehaviour
         UpdateSkin(skinId);
     }
 
-    private void UpdateSkin(string skinId)
+    public void UpdateSkin(string skinId)
     {
-        var skin = SkinsLibrary.MasterInstance.GetSkin(skinId);
+        var skin = SkinsLibrary.Instance.GetSkin(skinId);
         if (skin.material != null)
         {
             foreach (var renderer in renderers)

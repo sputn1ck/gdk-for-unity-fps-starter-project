@@ -9,38 +9,49 @@ public class ReticleUI : MonoBehaviour
     [SerializeField] private Image reticle;
     private Vector3 baseSize;
     private TintColor baseTint;
-    private UITinter uiTinter;
-    private GameObject reticleGO;
-
+    private UITinter[] uiTinters;
     private void Awake()
     {
-        reticleGO = gameObject.transform.GetChild(1).gameObject;
+        uiTinters = GetComponentsInChildren<UITinter>();
     }
     private void Start()
     {
-        ClientEvents.instance.onOpponentHit.AddListener(onOpponentHit);
-        baseSize = reticle.transform.localScale;
-        uiTinter = reticleGO.GetComponent<UITinter>();
-        baseTint = uiTinter.tint;
+        ClientEvents.instance.onTargetHit.AddListener(onTargetHit);
+        baseTint = uiTinters[0].tint;
     }
 
     public void showReticle(bool show)
     {
+        if(Fps.Movement.FpsDriver.instance != null)
+        {
+            if (Fps.Movement.FpsDriver.instance.thirdPersonViewActivated) show = false;
+            if (Fps.Movement.FpsDriver.instance.isAiming) show = false;
+        }
+        
         reticle.gameObject.SetActive(show);
     }
 
-    void onOpponentHit(bool headshot)
+    void onTargetHit(bool headshot)
     {
-        if (headshot)
-        {
-            uiTinter.updateColor(TintColor.Error);
-            reticle.transform.localScale = baseSize * 1.5f;
-        }else
-        {
-            uiTinter.updateColor(baseTint);
-            reticle.transform.localScale = baseSize;
-        }
-        hitmarkerAnimator.SetTrigger("play");
+        string animationTrigger = headshot? "headshot":"show";
+        hitmarkerAnimator.SetTrigger(animationTrigger);
     }
+
+    public void DefaultTint()
+    {
+        Tint(baseTint);
+    }
+    public void HeadshotTint()
+    {
+        Tint(TintColor.Error);
+    }
+    void Tint(TintColor tint)
+    {
+        foreach(UITinter tinter in uiTinters)
+        {
+            tinter.updateColor(tint);
+        }
+    }
+
 
 }

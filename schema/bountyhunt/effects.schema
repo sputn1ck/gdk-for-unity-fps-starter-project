@@ -1,0 +1,23 @@
+package bountyhunt;
+
+import "bountyhunt/common.schema";
+
+
+component EffectSpawnerComponent {
+    id = 530001;
+    command bountyhunt.Empty spawn_effect(EffectInfo);
+}
+
+type EffectInfo {
+    string key = 1;
+    Vector3Float position = 2;
+    Vector3Float rotation_euler = 3;
+    bool position_is_local = 4;
+    EffectParent parent = 5;
+}
+
+enum EffectParent {
+    ENTITY = 0;
+    ROOM = 1;
+    WORLD = 2;
+}

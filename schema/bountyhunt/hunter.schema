@@ -17,6 +17,7 @@ component HunterComponent {
     command RequestPayoutResponse request_payout(RequestPayoutRequest);
     command bountyhunt.Empty teleport_player(TeleportRequest);
     command bountyhunt.Empty kick_player(KickPlayerRequest);
+    command bountyhunt.Empty refresh_appearance(bountyhunt.Empty);
 }
 
 component TracerComponent {
