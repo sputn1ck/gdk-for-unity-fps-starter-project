@@ -11,14 +11,14 @@ using Improbable.Gdk.QueryBasedInterest;
 
 public class RoomPlayerClientBehaviour : MonoBehaviour 
 {
-    [Require] RoomPlayerReader RoomPlayerReader;
+    [Require] public RoomPlayerReader RoomPlayerReader;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] public EntityId EntityId;
 
     LinkedEntityComponent linkedEntityComponent;
 
     public static RoomPlayerClientBehaviour Instance;
-   public RoomBaseInfo CurrentRoom;
+    public RoomBaseInfo CurrentRoom;
 
     private EntityId currentRoomId = new EntityId(0);
     // Start is called before the first frame update

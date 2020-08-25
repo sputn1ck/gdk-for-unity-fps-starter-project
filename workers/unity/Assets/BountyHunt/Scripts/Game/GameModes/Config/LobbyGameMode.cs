@@ -34,15 +34,6 @@ public class LobbyGameMode : GameMode
     }
 
 
-    public override void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour)
-    {
-        
-    }
-
-    public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
-    {
-        
-    }
 
     public override void GameModeUpdate(float deltaTime)
     {

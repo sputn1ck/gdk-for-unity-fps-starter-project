@@ -11,10 +11,8 @@ component RoomStatsManager {
     event PlayerStatsUpdate map_update;
 
     command PlayerStatsUpdate request_stats(bountyhunt.Empty);
-    command bountyhunt.Empty add_kill(AddKillRequest);
-    command bountyhunt.Empty add_earnings(AddEarningsRequest);
-    command bountyhunt.Empty add_bounty(AddBountyRequest);
-    command bountyhunt.Empty set_bounty(SetBountyRequest);
+
+    event KillEvent kill_event;
     // command bountyhunt.Empty bounty_tick(BountyTickRequest);
     
 }
@@ -31,25 +29,6 @@ type RoomStats {
     int64 remaining_pot = 3;
 }
 
-type AddKillRequest {
-    string killer_id = 1;
-    string victim_id = 2;
-}
-
-type AddEarningsRequest {
-    string player_id = 1;
-    int64 earnings = 2;
-}
-type AddBountyRequest {
-    string player_id =1;
-    int64 bounty = 2;
-    string reason = 3;
-}
-
-type SetBountyRequest {
-    string player_id = 1;
-    int64 bounty = 2;
-}
 
 type PlayerStats {
     int32 kills = 1;
@@ -58,4 +37,9 @@ type PlayerStats {
     int64 session_earnings = 4;
     bool active = 5;
     int64 score = 6;
+}
+
+type KillEvent {
+    string killer_id = 1;
+    string victim_id = 2;
 }

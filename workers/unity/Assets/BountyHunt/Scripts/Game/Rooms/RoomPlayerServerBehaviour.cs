@@ -16,6 +16,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomPlayerCommandReceiver RoomPlayerCommandReceiver;
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] public RoomPlayerWriter RoomPlayerWriter;
+    [Require] public HealthComponentReader PlayerHealth;
     [Require] InterestWriter InterestWriter;
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;

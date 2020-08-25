@@ -39,15 +39,14 @@ public class BountyRoomSpawner : MonoBehaviour
     {
 
         var spawnIndex = Random.Range(0, satsCubeSpawnPoints.Length);
-        SpawnCube(satsCubeSpawnPoints[spawnIndex].transform, spawnAmount);
+        SpawnCube(satsCubeSpawnPoints[spawnIndex].transform.position, spawnAmount);
     }
-    public void SpawnCube(Transform position, long satAmount)
+    public void SpawnCube(Vector3 position, long satAmount)
     {
         if (satAmount < 1)
             return;
-        var pos = position.position - LinkedEntityComponent.Worker.Origin;
        
-        var bountypickup = DonnerEntityTemplates.BountyPickup(pos, satAmount);
+        var bountypickup = DonnerEntityTemplates.BountyPickup(position, satAmount);
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountypickup));
     }
 }

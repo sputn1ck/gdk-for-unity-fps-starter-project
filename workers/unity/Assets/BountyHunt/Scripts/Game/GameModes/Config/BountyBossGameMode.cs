@@ -8,10 +8,11 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "BountyBossGameMode", menuName = "BBH/GameModes/BountyBoss", order = 3)]
-public class BountyBossGameMode : GameMode
+public class BountyBossGameMode : BountyGameMode
 {
 
     private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
+    private string bountyBossId;
     public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
     {
 
@@ -50,16 +51,17 @@ public class BountyBossGameMode : GameMode
     {
     }
 
-    public override void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour)
+    public override void PlayerKill(string killer, string victim, Vector3 position)
     {
+        throw new NotImplementedException();
     }
 
-    public override void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour)
+    public override void BountyTick(string player)
     {
+        throw new NotImplementedException();
     }
 
     public override void GameModeUpdate(float deltaTime)
     {
-
     }
 }

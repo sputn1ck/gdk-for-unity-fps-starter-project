@@ -13,7 +13,7 @@ namespace Fps
     {
         [Require] private BountyPickupWriter bountyPickupWriter;
 
-        [Require] private RoomStatsManagerCommandSender RoomStatsCommandSender;
+        [Require] private RoomGameModeManagerCommandSender RoomGameModeManagerCommandSender;
         [Require] private HealthComponentCommandSender HealthComponentCommandSender;
 
         [Require] private WorldCommandSender commandSender;
@@ -78,14 +78,19 @@ namespace Fps
                 return;
             }
             hasCollided = true;
-            var playerSpatialOsComponent = player.GetComponent<LinkedEntityComponent>();
+           var playerSpatialOsComponent = player.GetComponent<LinkedEntityComponent>();
 
             if (playerSpatialOsComponent == null)
             {
                 return;
             }
             var playerRoomPlayer = player.GetComponent<RoomPlayerServerBehaviour>();
-            RoomStatsCommandSender.SendAddBountyCommand(playerRoomPlayer.RoomPlayerWriter.Data.RoomEntityid, new AddBountyRequest(playerRoomPlayer.RoomPlayerWriter.Data.Pubkey, bountyPickupWriter.Data.BountyValue, "PICKUP"));
+            if (playerRoomPlayer == null || playerRoomPlayer.PlayerHealth.Data.Health < 0.1)
+            {
+                return;
+            }
+            
+            RoomGameModeManagerCommandSender.SendAddBountyCommand(playerRoomPlayer.RoomPlayerWriter.Data.RoomEntityid, new AddBountyRequest(playerRoomPlayer.RoomPlayerWriter.Data.Pubkey, bountyPickupWriter.Data.BountyValue, "PICKUP"));
             // todo add bounty on room player/*
             /*
              *

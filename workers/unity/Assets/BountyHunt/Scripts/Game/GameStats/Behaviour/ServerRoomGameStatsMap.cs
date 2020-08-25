@@ -14,41 +14,37 @@ public class ServerRoomGameStatsMap : MonoBehaviour
     private void OnEnable()
     {
         RoomStatsCommandReceiver.OnRequestStatsRequestReceived += RequestStats;
-        RoomStatsCommandReceiver.OnAddKillRequestReceived += AddKill;
-        RoomStatsCommandReceiver.OnAddBountyRequestReceived += AddBounty;
-        RoomStatsCommandReceiver.OnAddEarningsRequestReceived += AddEarnings;
-        RoomStatsCommandReceiver.OnSetBountyRequestReceived += SetBounty;
     }
 
-    private void SetBounty(RoomStatsManager.SetBounty.ReceivedRequest obj)
+    public void SetBounty(string playerId, long bounty)
     {
         var map = new Dictionary<string, PlayerStats>();
-        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        if (playerStats.TryGetValue(playerId, out var playerStat))
         {
-            playerStat.Bounty = obj.Payload.Bounty;
-            map[obj.Payload.PlayerId] = playerStat;
+            playerStat.Bounty = bounty;
+            map[playerId] = playerStat;
         }
         UpdateDictionary(map);
     }
 
-    private void AddEarnings(RoomStatsManager.AddEarnings.ReceivedRequest obj)
+    public void AddEarnings(string playerId, long earnings)
     {
         var map = new Dictionary<string, PlayerStats>();
-        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        if (playerStats.TryGetValue(playerId, out var playerStat))
         {
-            playerStat.SessionEarnings += obj.Payload.Earnings;
-            map[obj.Payload.PlayerId] = playerStat;
+            playerStat.SessionEarnings += earnings;
+            map[playerId] = playerStat;
         }
         UpdateDictionary(map);
     }
 
-    private void AddBounty(RoomStatsManager.AddBounty.ReceivedRequest obj)
+    public void AddBounty(string playerId, long bounty)
     {
         var map = new Dictionary<string, PlayerStats>();
-        if (playerStats.TryGetValue(obj.Payload.PlayerId, out var playerStat))
+        if (playerStats.TryGetValue(playerId, out var playerStat))
         {
-            playerStat.Bounty += obj.Payload.Bounty;
-            map[obj.Payload.PlayerId] = playerStat;
+            playerStat.Bounty += bounty;
+            map[playerId] = playerStat;
         }
         UpdateDictionary(map);
     }
@@ -63,18 +59,29 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
 
-    private void AddKill(RoomStatsManager.AddKill.ReceivedRequest obj)
+    public void Reset()
+    {
+        var newMap = new Dictionary<string, PlayerStats>();
+        foreach(var player in playerStats)
+        {
+            newMap.Add(player.Key, new PlayerStats(0, 0, 0, 0, player.Value.Active, 0));
+        }
+        playerStats = newMap;
+        RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(newMap, new List<string>(), true));
+    }
+
+    public void AddKill(string killerId, string victimId)
     {
         var map = new Dictionary<string, PlayerStats>();
-        if(playerStats.TryGetValue(obj.Payload.KillerId, out var killerStats))
+        if(playerStats.TryGetValue(killerId, out var killerStats))
         {
             killerStats.Kills++;
-            map[obj.Payload.KillerId] = killerStats;
+            map[killerId] = killerStats;
         }
-        if (playerStats.TryGetValue(obj.Payload.VictimId, out var victimStats))
+        if (playerStats.TryGetValue(victimId, out var victimStats))
         {
             victimStats.Deaths++;
-            map[obj.Payload.VictimId] = victimStats;
+            map[victimId] = victimStats;
         }
         UpdateDictionary(map);
     }
@@ -84,7 +91,14 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         RoomStatsCommandReceiver.SendRequestStatsResponse(obj.RequestId, new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
 
-    
+    public PlayerStats GetStats(string playerId)
+    {
+        if (playerStats.TryGetValue(playerId, out var playerStat))
+        {
+            return playerStat;
+        }
+        return new PlayerStats();
+    }
     public void AddPlayer(string pubkey)
     {
         var map = new Dictionary<string, PlayerStats>();

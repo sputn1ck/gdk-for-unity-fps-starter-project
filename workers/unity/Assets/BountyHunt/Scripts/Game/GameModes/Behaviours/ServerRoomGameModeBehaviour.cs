@@ -15,26 +15,56 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     [Require] RoomManagerWriter RoomManagerWriter;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomAdvertingManagerWriter RoomAdvertingManagerWriter;
+    [Require] RoomGameModeManagerCommandReceiver RoomGameModeManagerCommandReceiver;
     [Require] public WorldCommandSender WorldCommandSender;
+   
 
 
     public LinkedEntityComponent LinkedEntityComponent;
+    public ServerRoomGameStatsMap ServerRoomGameStatsMap;
     private GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
     private TimeInfo currentTimeInfo;
     private UnityAction RotationFinished;
     private bool sendCallback;
     private bool rotationStarted = false;
+    
 
     private bool inGameMode;
     private Map mapInfo;
     private void OnEnable()
     {
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        if(RoomManagerWriter.Data.RoomState == RoomState.STARTED)
+        ServerRoomGameStatsMap = GetComponent<ServerRoomGameStatsMap>();
+        RoomGameModeManagerCommandReceiver.OnAddBountyRequestReceived += RoomGameModeManagerCommandReceiver_OnAddBountyRequestReceived;
+        RoomGameModeManagerCommandReceiver.OnAddKillRequestReceived += RoomGameModeManagerCommandReceiver_OnAddKillRequestReceived;
+        RoomGameModeManagerCommandReceiver.OnBountyTickRequestReceived += RoomGameModeManagerCommandReceiver_OnBountyTickRequestReceived;
+        if (RoomManagerWriter.Data.RoomState == RoomState.STARTED)
         {
             StartRotation();
         }
+    }
+
+    private void RoomGameModeManagerCommandReceiver_OnBountyTickRequestReceived(RoomGameModeManager.BountyTick.ReceivedRequest obj)
+    {
+        if(currentMode.GetType() == typeof(BountyGameMode))
+        {
+            ((BountyGameMode)currentMode).BountyTick(obj.Payload.PlayerId);
+        }
+    }
+
+    private void RoomGameModeManagerCommandReceiver_OnAddKillRequestReceived(RoomGameModeManager.AddKill.ReceivedRequest obj)
+    {
+        ServerRoomGameStatsMap.AddKill(obj.Payload.KillerId, obj.Payload.VictimId);
+        if (currentMode.GetType().IsSubclassOf(typeof(BountyGameMode)))
+        {
+            ((BountyGameMode)currentMode).PlayerKill(obj.Payload.KillerId,obj.Payload.VictimId,obj.Payload.Coordinates.ToUnityVector());
+        }
+    }
+
+    private void RoomGameModeManagerCommandReceiver_OnAddBountyRequestReceived(RoomGameModeManager.AddBounty.ReceivedRequest obj)
+    {
+        ServerRoomGameStatsMap.AddBounty(obj.Payload.PlayerId, obj.Payload.Bounty);
     }
 
     public void Setup(Map mapInfo)

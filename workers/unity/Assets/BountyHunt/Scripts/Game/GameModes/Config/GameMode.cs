@@ -22,8 +22,14 @@ public abstract class GameMode : ScriptableObject
     public abstract void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour);
     public abstract void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour);
     public abstract void GameModeUpdate(float deltaTime);
-    public abstract void ClientOnGameModeStart(RoomManagerClientBehaviour clientGameModeBehaviour);
-    public abstract void ClientOnGameModeEnd(RoomManagerClientBehaviour clientGameModeBehaviour);
+
+}
+
+public abstract class BountyGameMode : GameMode
+{ 
+    public abstract void PlayerKill(string killer, string victim, Vector3 position);
+
+    public abstract void BountyTick(string player);
 }
 
 public struct GameModeFinancing

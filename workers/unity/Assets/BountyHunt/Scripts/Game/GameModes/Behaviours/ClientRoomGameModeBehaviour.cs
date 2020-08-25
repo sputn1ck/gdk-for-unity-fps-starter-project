@@ -29,7 +29,6 @@ public class ClientRoomGameModeBehaviour : MonoBehaviour
     }
     IEnumerator CountdownEnumerator(GameMode nextGameMode, int duration, GameMode currentGameMode, string gamemodename)
     {
-        currentGameMode.ClientOnGameModeEnd(null);
         var currentSecond = duration;
         while (currentSecond > 0)
         {
@@ -39,7 +38,7 @@ public class ClientRoomGameModeBehaviour : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         ClientEvents.instance.onAnnouncement.Invoke(gamemodename + " started", ChatPanelUI.instance.GetColorFormLogType(Chat.MessageType.DEBUG_LOG));
-        nextGameMode.ClientOnGameModeStart(null);
+
     }
     private void SendGameModeEvent(RoundInfo obj)
     {

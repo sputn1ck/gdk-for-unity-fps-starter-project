@@ -13,6 +13,8 @@ public class ClientRoomStatsBehaviour : MonoBehaviour
     [Require] EntityId EntityId;
 
     public Dictionary<string, PlayerStats> playerStats;
+
+    private PlayerStats lastPlayerStats;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -69,12 +71,46 @@ public class ClientRoomStatsBehaviour : MonoBehaviour
         var scoreboardUIItems = new List<ScoreboardUIItem>();
         foreach(var playerStat in playerStats)
         {
+            if(playerStat.Key == RoomPlayerClientBehaviour.Instance.RoomPlayerReader.Data.Pubkey)
+            {
+                SendPlayerRelatedEvents(playerStat.Value);
+            }
             if(ClientGameObjectManager.Instance.PlayerInfos.TryGetValue(playerStat.Key, out var playerInfo)){
 
                 scoreboardUIItems.Add(new ScoreboardUIItem(playerInfo.Name, new ScoreboardItem(playerInfo.EntityId, playerStat.Value.Bounty, playerStat.Value.Kills, playerStat.Value.Deaths, playerStat.Value.SessionEarnings)));
             }
         }
         ClientEvents.instance.onScoreboardUpdate.Invoke(scoreboardUIItems, ClientGameObjectManager.Instance.AuthorativePlayerEntityId);
+    }
+
+    private void SendPlayerRelatedEvents(PlayerStats playerStats)
+    {
+        if(playerStats.Bounty != lastPlayerStats.Bounty)
+        {
+            ClientEvents.instance.onBountyUpdate.Invoke(new BountyUpdateEventArgs()
+            {
+                NewAmount = playerStats.Bounty,
+                OldAmount = lastPlayerStats.Bounty,
+                Reason = BountyReason.PICKUP
+            });
+        }
+        if (playerStats.SessionEarnings != lastPlayerStats.SessionEarnings)
+        {
+            ClientEvents.instance.onSessionEarningsUpdate.Invoke(new SessionEarningsEventArgs()
+            {
+                NewAmount = playerStats.SessionEarnings,
+                OldAmount = lastPlayerStats.SessionEarnings
+            });
+        }
+        if (playerStats.Score != lastPlayerStats.Score)
+        {
+
+        }
+        if (playerStats.Kills != lastPlayerStats.Kills || playerStats.Deaths != lastPlayerStats.Kills)
+        {
+            ClientEvents.instance.onPlayerKillsAndDeathsUpdate.Invoke(new KillsAndDeathsUpdateEventArgs { kills = playerStats.Kills, deaths = playerStats.Deaths });
+        }
+        lastPlayerStats = playerStats;
     }
 
 }

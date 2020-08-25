@@ -10,7 +10,7 @@ public class ServerPlayerDebugBehaviour : MonoBehaviour
 {
 
     [Require] private HealthComponentCommandSender healthCommandSender;
-    [Require] private RoomStatsManagerCommandSender RoomStatsCommandSender;
+    [Require] private RoomGameModeManagerCommandSender RoomGameModeManagerCommandSender;
     [Require] private EntityId entityId;
     [Require] private GunComponentWriter GunComponentWriter;
 
@@ -67,6 +67,6 @@ public class ServerPlayerDebugBehaviour : MonoBehaviour
         //hunter.SendUpdate(new HunterComponent.Update { Bounty = hunter.Data.Bounty + modifiyBounty });
         var player = GetComponent<RoomPlayerServerBehaviour>().RoomPlayerWriter.Data;
 
-        RoomStatsCommandSender.SendAddBountyCommand(player.RoomEntityid, new AddBountyRequest(player.Pubkey, modifiyBounty, "DEBUG"));
+        RoomGameModeManagerCommandSender.SendAddBountyCommand(player.RoomEntityid, new AddBountyRequest(player.Pubkey, modifiyBounty, "DEBUG"));
     }
 }

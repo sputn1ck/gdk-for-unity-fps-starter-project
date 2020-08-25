@@ -5,7 +5,8 @@ using UnityEngine;
 public class SatsCubeSpawnPoint : MonoBehaviour
 {
     public float weighting = 1;
-
+    public bool bountybossSpawn;
+    public string bountybossName;
     private void OnDrawGizmos()
     {
         Color c = Color.Lerp(Color.red, Color.green, weighting / 2);

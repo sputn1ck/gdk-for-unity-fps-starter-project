@@ -36,6 +36,13 @@ namespace Tests
             Assert.AreEqual(expectedNew, res.newBounty);
             Assert.AreEqual(expectedDrop, res.dropBounty);
         }
+        [Test]
+        public void SubClassTest()
+        {
+            var satsStacker = new SatsStackerGameMode();
+            var isBountyMode = satsStacker.GetType().IsSubclassOf(typeof(BountyGameMode));
+            Assert.IsTrue(isBountyMode);
+        }
 
         
     }

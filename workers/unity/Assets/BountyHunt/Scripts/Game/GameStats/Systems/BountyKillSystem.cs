@@ -55,8 +55,10 @@ public class BountyKillSystem : ComponentSystem
 
             var roomPlayerKiller = roomPlayers[killer];
             var roomPlayerVictim = roomPlayers[victim];
+            var victimPos = GetComponentDataFromEntity<Position.Component>()[victim];
+            
             // todo modify bounty (maybe the room should do that)
-            commandSystem.SendCommand(new RoomStatsManager.AddKill.Request(roomPlayerKiller.RoomEntityid, new AddKillRequest(roomPlayerKiller.Pubkey, roomPlayerVictim.Pubkey)));
+            commandSystem.SendCommand(new RoomGameModeManager.AddKill.Request(roomPlayerKiller.RoomEntityid, new AddKillRequest(roomPlayerKiller.Pubkey, roomPlayerVictim.Pubkey, victimPos.Coords)));
 
             //SendBackendUpdate(roomPlayerKiller.Pubkey, roomPlayerVictim.Pubkey);
         }
