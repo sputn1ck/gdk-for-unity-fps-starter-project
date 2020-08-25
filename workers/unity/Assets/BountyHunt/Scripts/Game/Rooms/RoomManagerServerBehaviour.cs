@@ -123,10 +123,17 @@ public class RoomManagerServerBehaviour : MonoBehaviour
             }
         });
         RoomManagerCommandReceiver.SendReadyToJoinResponse(obj.RequestId, new Bountyhunt.Empty());
+        if(ServerRoomGameModeBehaviour.currentMode != null)
+        {
+            ServerRoomGameModeBehaviour.currentMode.OnPlayerJoin(obj.Payload.PlayerPubkey);
+        }
+
     }
 
     private void RemovePlayer(RoomManager.RemovePlayer.ReceivedRequest obj)
-    {
+    { 
+
+        ServerRoomGameModeBehaviour.currentMode.OnPlayerLeave(obj.Payload.PlayerPk);
         statsMap.RemovePlayer(obj.Payload.PlayerPk);
         var room = RoomManagerWriter.Data.RoomInfo;
         if(room.PlayerInfo.ActivePlayers.Remove(obj.Payload.PlayerPk))
@@ -140,8 +147,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         
         var room = RoomManagerWriter.Data.RoomInfo;
         room.Info.EntityId = EntityId;
-        room.PlayerInfo.ActivePlayers.Add(obj.Payload.PlayerPk);
-
+        room.PlayerInfo.ActivePlayers.Add(obj.Payload.PlayerPk, obj.Payload.PlayerId);
         SendUpdates(room);
         RoomPlayerCommandSender.SendUpdatePlayerRoomCommand(obj.Payload.PlayerId, new UpdatePlayerRoomRequest(room));
     }

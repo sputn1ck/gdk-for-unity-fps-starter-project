@@ -283,6 +283,11 @@ public static class Utility
         return(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 
+    public static long BountyTick(long bounty, double tickpercentage)
+    {
+        long sats = (long)System.Math.Round(bounty * tickpercentage);
+        return sats < 1 ? 1 : sats;
+    }
     public static (long newBounty, long dropBounty) GetBountyDropInfo(long playerBounty, double dropPercentage)
     {
         var dropAmount = (long)Mathf.Ceil((float)(playerBounty * dropPercentage));

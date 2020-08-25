@@ -21,6 +21,10 @@ public abstract class GameMode : ScriptableObject
     }
     public abstract void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour);
     public abstract void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour);
+
+    public abstract void OnPlayerJoin(string playerId);
+
+    public abstract void OnPlayerLeave(string playerId);
     public abstract void GameModeUpdate(float deltaTime);
 
 }

@@ -100,7 +100,7 @@ public class DonnerEntityTemplates
 
         var effectSpawnerComponent = new EffectSpawnerComponent.Snapshot();
 
-        var roomCompenent = new RoomPlayer.Snapshot()
+        var roomComponent = new RoomPlayer.Snapshot()
         {
             Pubkey = loginData.Pubkey,
             ActiveRoom = new RoomBaseInfo(), 
@@ -148,8 +148,9 @@ public class DonnerEntityTemplates
         template.AddComponent(hunterComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(skillComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(chatComponent, client);
-        template.AddComponent(roomCompenent, WorkerUtils.UnityGameLogic);
+        template.AddComponent(roomComponent, WorkerUtils.UnityGameLogic);
         template.AddComponent(effectSpawnerComponent, client);
+        template.AddComponent(tickComponent, WorkerUtils.UnityGameLogic);
         /*
          * OLD STUFF
         template.AddComponent(playerStateComponent, WorkerUtils.UnityGameLogic);

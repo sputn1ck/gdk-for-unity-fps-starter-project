@@ -64,4 +64,14 @@ public class BountyBossGameMode : BountyGameMode
     public override void GameModeUpdate(float deltaTime)
     {
     }
+
+    public override void OnPlayerJoin(string playerId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnPlayerLeave(string playerId)
+    {
+        throw new NotImplementedException();
+    }
 }

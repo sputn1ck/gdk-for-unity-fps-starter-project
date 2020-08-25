@@ -28,6 +28,8 @@ component BountyTickComponent {
     float current_tick_time = 2;
 
     float tick_interval = 3;
+
+    command bountyhunt.Empty set_tick_interval(TickIntervalRequest);
 }
 type SpawnBountyPickupRequest {
     int64 bounty_value = 1;
@@ -57,6 +59,10 @@ enum Distribution {
     UNIFORM = 0;
 }
 
+type TickIntervalRequest {
+    bool set_active = 1;
+    float tick_interval = 2;
+}
 
 
 

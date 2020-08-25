@@ -12,17 +12,18 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 {
 
     [Require] RoomGameModeManagerWriter RoomGameModeManagerWriter;
-    [Require] RoomManagerWriter RoomManagerWriter;
+    [Require] public RoomManagerWriter RoomManagerWriter;
     [Require] WorldManagerCommandSender WorldManagerCommandSender;
     [Require] RoomAdvertingManagerWriter RoomAdvertingManagerWriter;
     [Require] RoomGameModeManagerCommandReceiver RoomGameModeManagerCommandReceiver;
     [Require] public WorldCommandSender WorldCommandSender;
-   
+    [Require] public BountyTickComponentCommandSender BountyTickComponentCommandSender;
+
 
 
     public LinkedEntityComponent LinkedEntityComponent;
     public ServerRoomGameStatsMap ServerRoomGameStatsMap;
-    private GameMode currentMode;
+    public GameMode currentMode;
     private ModeRotationItem currentGameModeInfo;
     private TimeInfo currentTimeInfo;
     private UnityAction RotationFinished;
@@ -47,7 +48,8 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private void RoomGameModeManagerCommandReceiver_OnBountyTickRequestReceived(RoomGameModeManager.BountyTick.ReceivedRequest obj)
     {
-        if(currentMode.GetType() == typeof(BountyGameMode))
+
+        if (currentMode.GetType().IsSubclassOf(typeof(BountyGameMode)))
         {
             ((BountyGameMode)currentMode).BountyTick(obj.Payload.PlayerId);
         }
@@ -55,6 +57,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private void RoomGameModeManagerCommandReceiver_OnAddKillRequestReceived(RoomGameModeManager.AddKill.ReceivedRequest obj)
     {
+
         ServerRoomGameStatsMap.AddKill(obj.Payload.KillerId, obj.Payload.VictimId);
         if (currentMode.GetType().IsSubclassOf(typeof(BountyGameMode)))
         {
@@ -64,6 +67,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private void RoomGameModeManagerCommandReceiver_OnAddBountyRequestReceived(RoomGameModeManager.AddBounty.ReceivedRequest obj)
     {
+
         ServerRoomGameStatsMap.AddBounty(obj.Payload.PlayerId, obj.Payload.Bounty);
     }
 
@@ -117,23 +121,6 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private async Task gameModeRoutine()
     {
         Debug.Log("gamemode routine starting");
-        /*await GetNextGameMode();
-        StartGameMode();
-        while (!ServerServiceConnections.ct.IsCancellationRequested)
-        {
-            var endTime = GameModeManagerWriter.Data.CurrentRound.TimeInfo.StartTime +
-                GameModeManagerWriter.Data.CurrentRound.TimeInfo.Duration;
-            if (DateTime.UtcNow.ToFileTime() > endTime)
-            {
-                EndGameMode();
-                await GetNextGameMode();
-                GameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(nextRoundInfo.GameModeId, 5, nextRoundInfo.GameModeName));
-                await Task.Delay(5000);
-                StartGameMode();
-
-            }
-            await Task.Delay(10);
-        }*/
         while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
             if (gameModeHasEnded(DateTime.UtcNow.ToFileTime()))
@@ -204,7 +191,6 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         gameMode.Initialize(settings, mapInfo, new GameModeFinancing() { totalSatAmount = subsidySats});
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
-       
     }
 
     private void EndGameMode()
@@ -214,7 +200,9 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         var gameModeInfo = GetCurrentRound();
         var timeInfo = RoomGameModeManagerWriter.Data.CurrentRound.TimeInfo;
         RoomGameModeManagerWriter.SendEndRoundEvent(new RoundInfo(new GameModeInfo("", gameModeInfo.GamemodeId), timeInfo));
-        //currentMode.ServerOnGameModeEnd(null);
+
+        if(currentMode != null)
+            currentMode.ServerOnGameModeEnd(null);
     }
     public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
     {
@@ -268,6 +256,10 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private bool roationHasFinished()
     {
+        if(currentMode == null)
+        {
+            return false;
+        }
         var roomInfo = RoomManagerWriter.Data.RoomInfo.GameModeInfo;
         var totalGameModes = roomInfo.ModeRotation.Count * roomInfo.Repetitions;
         if(roomInfo.CurrentMode > totalGameModes)

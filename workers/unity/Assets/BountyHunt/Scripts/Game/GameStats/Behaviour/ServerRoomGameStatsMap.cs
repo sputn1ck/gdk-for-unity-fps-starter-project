@@ -27,6 +27,16 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         UpdateDictionary(map);
     }
 
+    public void AddScore(string playerId, long score)
+    {
+        var map = new Dictionary<string, PlayerStats>();
+        if (playerStats.TryGetValue(playerId, out var playerStat))
+        {
+            playerStat.Score += score;
+            map[playerId] = playerStat;
+        }
+        UpdateDictionary(map);
+    }
     public void AddEarnings(string playerId, long earnings)
     {
         var map = new Dictionary<string, PlayerStats>();
@@ -54,7 +64,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         playerStats = new Dictionary<string, PlayerStats>();
         foreach (var player in room.PlayerInfo.ActivePlayers)
         {
-            playerStats.Add(player, new PlayerStats(0, 0, 0, 0, false,0));
+            playerStats.Add(player.Key, new PlayerStats(0, 0, 0, 0, false,0));
         }
         RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }

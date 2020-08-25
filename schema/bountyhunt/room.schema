@@ -29,6 +29,7 @@ type RemovePlayerRequest {
 
 type ReadyToJoinRequest {
     EntityId player_id = 1;
+    string player_pubkey = 2;
 }
 
 type AddRoomBountyObjectRequest{
@@ -63,8 +64,8 @@ type RoomGameModeInfo {
 }
 
 type RoomPlayerInfo {
-    list<string> active_players = 1;
-    list<string> queued_players = 2;
+    map<string, EntityId> active_players = 1;
+    map<string, EntityId> queued_players = 2;
     int32 max_players = 3;
 }
 

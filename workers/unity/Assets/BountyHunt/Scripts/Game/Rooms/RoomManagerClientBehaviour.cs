@@ -47,7 +47,7 @@ public class RoomManagerClientBehaviour : MonoBehaviour
         // start initializing map
         BBHUIManager.instance.mainMenu.BlendImage(true);
         map.Initialize(this, false, this.transform.position, RoomManagerReader.Data.RoomInfo.Info.MapInfo.MapData, () => {
-                RoomManagerCommandSender.SendReadyToJoinCommand(EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId), (cb2) => {
+                RoomManagerCommandSender.SendReadyToJoinCommand(EntityId, new ReadyToJoinRequest(RoomPlayerClientBehaviour.Instance.EntityId, RoomPlayerClientBehaviour.Instance.RoomPlayerReader.Data.Pubkey), (cb2) => {
                     if (cb2.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
                     {
                         BBHUIManager.instance.mainMenu.BlendImage(false);

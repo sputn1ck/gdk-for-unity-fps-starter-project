@@ -42,13 +42,14 @@ public class BountyTickSystem : ComponentSystem
     {
         if (tickGroup.IsEmptyIgnoreFilter)
             return;
-        Entities.With(tickGroup).ForEach((Entity entity, ref RoomPlayer.Component RoomPlayer, ref BountyTickComponent.Component bountyTick) =>
+        Entities.With(tickGroup).ForEach((ref RoomPlayer.Component RoomPlayer, ref BountyTickComponent.Component bountyTick) =>
         {
-            if (bountyTick.IsActive)
+            if (!bountyTick.IsActive)
                 return;
             bountyTick.CurrentTickTime -= Time.DeltaTime;
             if(bountyTick.CurrentTickTime <= 0)
             {
+                Debug.Log("ticking bounty");
                 bountyTick.CurrentTickTime = bountyTick.TickInterval;
                 commandSystem.SendCommand<RoomGameModeManager.BountyTick.Request>(new RoomGameModeManager.BountyTick.Request
                 {

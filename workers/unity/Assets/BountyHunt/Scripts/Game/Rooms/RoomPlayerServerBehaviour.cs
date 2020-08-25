@@ -17,6 +17,8 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
     [Require] RoomManagerCommandSender RoomManagerCommandSender;
     [Require] public RoomPlayerWriter RoomPlayerWriter;
     [Require] public HealthComponentReader PlayerHealth;
+    [Require] BountyTickComponentWriter BountyTickComponentWriter;
+    [Require] BountyTickComponentCommandReceiver BountyTickComponentCommandReceiver;
     [Require] InterestWriter InterestWriter;
     [Require] EntityId EntityId;
     LinkedEntityComponent linkedEntityComponent;
@@ -29,6 +31,7 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         linkedEntityComponent = GetComponent<LinkedEntityComponent>();
         RoomPlayerCommandReceiver.OnUpdatePlayerRoomRequestReceived += OnUpdatePlayerRoom;
         RoomPlayerCommandReceiver.OnSendToCantinaRequestReceived += SendToCantina;
+        BountyTickComponentCommandReceiver.OnSetTickIntervalRequestReceived += BountyTickComponentCommandReceiver_OnSetTickIntervalRequestReceived;
         pubkey = RoomPlayerWriter.Data.Pubkey;
         JoinWorld();
 
@@ -36,7 +39,14 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         
     }
 
-    
+    private void BountyTickComponentCommandReceiver_OnSetTickIntervalRequestReceived(BountyTickComponent.SetTickInterval.ReceivedRequest obj)
+    {
+        BountyTickComponentWriter.SendUpdate(new BountyTickComponent.Update()
+        {
+            IsActive = obj.Payload.SetActive,
+            TickInterval = obj.Payload.TickInterval
+        });
+    }
 
     private void SendToCantina(RoomPlayer.SendToCantina.ReceivedRequest obj)
     {

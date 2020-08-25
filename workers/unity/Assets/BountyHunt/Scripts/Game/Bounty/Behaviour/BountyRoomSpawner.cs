@@ -4,11 +4,12 @@ using Improbable.Gdk.Subscriptions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Bountyhunt;
 public class BountyRoomSpawner : MonoBehaviour
 {
 
     [Require] private WorldCommandSender WorldCommandSender;
+    [Require] private RoomPlayerCommandSender RoomPlayerCommandSender;
     private SatsCubeSpawnPoint[] satsCubeSpawnPoints;
      
     public bool SpawnTrigger;
@@ -19,7 +20,6 @@ public class BountyRoomSpawner : MonoBehaviour
     private void OnEnable()
     {
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
-        Debug.Log(WorldCommandSender.IsValid);
     }
     public void Setup(SatsCubeSpawnPoint[] satsCubeSpawnPoints)
     {
@@ -48,5 +48,19 @@ public class BountyRoomSpawner : MonoBehaviour
        
         var bountypickup = DonnerEntityTemplates.BountyPickup(position, satAmount);
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountypickup));
+    }
+
+    public void SpawnCubeAtEntity(EntityId entity, long satAmount)
+    {
+        if (satAmount < 1)
+            return;
+        RoomPlayerCommandSender.SendGetPositionCommand(entity, new Bountyhunt.Empty(), (cb) =>
+        {
+            if(cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            {
+                return;
+            }
+            SpawnCube(cb.ResponsePayload.Value.ToUnityVector(), satAmount);
+        });
     }
 }

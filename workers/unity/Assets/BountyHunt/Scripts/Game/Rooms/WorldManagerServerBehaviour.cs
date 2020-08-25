@@ -93,11 +93,13 @@ public class WorldManagerServerBehaviour : MonoBehaviour
             return;
         }
         var playerPk = GetPlayerPKByEntity(obj.Payload.PlayerId);
-        if (room.PlayerInfo.ActivePlayers.Contains(playerPk))
+        if (room.PlayerInfo.ActivePlayers.ContainsKey(playerPk))
         {
             WorldManagerCommandReceiver.SendJoinRoomFailure(obj.RequestId, "already connected to room");
             return;
         }
+        var playerInfo = WorldManagerWriter.Data.ActivePlayers[playerPk];
+        RoomManagerCommandSender.SendRemovePlayerCommand(playerInfo.ActiveRoom, new RemovePlayerRequest(playerPk));
         // TODO queue management
         RoomManagerCommandSender.SendAddPlayerCommand(room.Info.EntityId, new AddPlayerRequest(playerPk, obj.Payload.PlayerId));
         WorldManagerCommandReceiver.SendJoinRoomResponse(obj.RequestId, new Bountyhunt.Empty());
@@ -271,7 +273,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             foreach(var playerString in room.PlayerInfo.ActivePlayers)
             {
-                if(WorldManagerWriter.Data.ActivePlayers.TryGetValue(playerString, out var player))
+                if(WorldManagerWriter.Data.ActivePlayers.TryGetValue(playerString.Key, out var player))
                 {
                     RoomPlayerCommandSender.SendSendToCantinaCommand(player.EntityId, new Bountyhunt.Empty());
                 }
@@ -308,7 +310,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             Info = new RoomBaseInfo(id, req.MapInfo, new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.StartTime),
             GameModeInfo = new RoomGameModeInfo(req.ModeRotation, req.Repetitions, 0),
-            PlayerInfo = new RoomPlayerInfo(new List<string>(), new List<string>(), req.MaxPlayers),
+            PlayerInfo = new RoomPlayerInfo(new Dictionary<string,EntityId>(), new Dictionary<string, EntityId>(), req.MaxPlayers),
             FinanceInfo = financeInfo
         };
         var roomManager = DonnerEntityTemplates.RoomManager(roomCenter, room);

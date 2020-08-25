@@ -38,5 +38,13 @@ public class LobbyGameMode : GameMode
     public override void GameModeUpdate(float deltaTime)
     {
     }
+
+    public override void OnPlayerJoin(string playerId)
+    {
+    }
+
+    public override void OnPlayerLeave(string playerId)
+    {
+    }
 }
 

@@ -2,7 +2,7 @@ package bountyhunt;
 
 import "bountyhunt/common.schema";
 import "bountyhunt/room.schema";
-
+import "improbable/standard_library.schema";
 
 component RoomPlayer {
     id = 430003;
@@ -14,6 +14,7 @@ component RoomPlayer {
     
     command bountyhunt.Empty update_player_room(UpdatePlayerRoomRequest);
     command bountyhunt.Empty send_to_cantina(bountyhunt.Empty);
+    command improbable.Coordinates get_position(bountyhunt.Empty);
 }
 
 

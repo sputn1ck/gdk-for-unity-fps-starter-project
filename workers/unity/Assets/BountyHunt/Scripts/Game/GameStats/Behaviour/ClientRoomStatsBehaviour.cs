@@ -71,6 +71,8 @@ public class ClientRoomStatsBehaviour : MonoBehaviour
         var scoreboardUIItems = new List<ScoreboardUIItem>();
         foreach(var playerStat in playerStats)
         {
+            if (!playerStat.Value.Active)
+                continue;
             if(playerStat.Key == RoomPlayerClientBehaviour.Instance.RoomPlayerReader.Data.Pubkey)
             {
                 SendPlayerRelatedEvents(playerStat.Value);
