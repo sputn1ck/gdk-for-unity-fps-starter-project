@@ -20,6 +20,15 @@ component BountyComponent {
     int64 bounty = 1;
 }
 
+component BountyTickComponent {
+    id = 420005;
+
+    bool is_active = 1;
+
+    float current_tick_time = 2;
+
+    float tick_interval = 3;
+}
 type SpawnBountyPickupRequest {
     int64 bounty_value = 1;
     bountyhunt.Vector3Float position = 2;

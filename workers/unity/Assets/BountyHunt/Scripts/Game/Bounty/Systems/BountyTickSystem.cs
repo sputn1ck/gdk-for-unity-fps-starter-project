@@ -27,9 +27,9 @@ public class BountyTickSystem : ComponentSystem
         componentUpdateSystem = World.GetExistingSystem<ComponentUpdateSystem>();
         entityManager = World.EntityManager;
         tickGroup = GetEntityQuery(
-            ComponentType.ReadWrite<HunterComponent.Component>(),
+            ComponentType.ReadOnly<RoomPlayer.Component>(),
             ComponentType.ReadOnly<SpatialEntityId>(),
-            ComponentType.ReadOnly<GunComponent.Component>()
+            ComponentType.ReadWrite<BountyTickComponent.Component>()
         );
 
         timeSum = 0;
@@ -40,6 +40,23 @@ public class BountyTickSystem : ComponentSystem
     //TODO für rooms überarbeiten
     protected override void OnUpdate()
     {
+        if (tickGroup.IsEmptyIgnoreFilter)
+            return;
+        Entities.With(tickGroup).ForEach((Entity entity, ref RoomPlayer.Component RoomPlayer, ref BountyTickComponent.Component bountyTick) =>
+        {
+            if (bountyTick.IsActive)
+                return;
+            bountyTick.CurrentTickTime -= Time.DeltaTime;
+            if(bountyTick.CurrentTickTime <= 0)
+            {
+                bountyTick.CurrentTickTime = bountyTick.TickInterval;
+                commandSystem.SendCommand<RoomGameModeManager.BountyTick.Request>(new RoomGameModeManager.BountyTick.Request
+                {
+                    TargetEntityId = RoomPlayer.RoomEntityid,
+                    Payload = new BountyTickRequest(RoomPlayer.Pubkey)
+                });
+            }
+        });
         /*
         if (ServerGameModeBehaviour.instance == null)
             return;

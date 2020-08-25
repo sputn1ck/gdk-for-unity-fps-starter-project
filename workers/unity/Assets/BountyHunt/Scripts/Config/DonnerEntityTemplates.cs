@@ -105,6 +105,10 @@ public class DonnerEntityTemplates
             Pubkey = loginData.Pubkey,
             ActiveRoom = new RoomBaseInfo(), 
         };
+        var tickComponent = new BountyTickComponent.Snapshot()
+        {
+            IsActive = false,
+        };
         /*
          * OLD STUFF
         var donnerinfocomponent = new Donner.DonnerInfo.Snapshot()
