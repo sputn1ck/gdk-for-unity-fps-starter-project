@@ -29,39 +29,36 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private UnityAction RotationFinished;
     private bool sendCallback;
     private bool rotationStarted = false;
+    private BountyRoomSpawner BountyRoomSpawner;
     
 
     private bool inGameMode;
     private Map mapInfo;
-    private void OnEnable()
+
+    private void Awake()
     {
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         ServerRoomGameStatsMap = GetComponent<ServerRoomGameStatsMap>();
+        BountyRoomSpawner = GetComponent<BountyRoomSpawner>();
+    }
+    private void OnEnable()
+    {
         RoomGameModeManagerCommandReceiver.OnAddBountyRequestReceived += RoomGameModeManagerCommandReceiver_OnAddBountyRequestReceived;
         RoomGameModeManagerCommandReceiver.OnAddKillRequestReceived += RoomGameModeManagerCommandReceiver_OnAddKillRequestReceived;
-        RoomGameModeManagerCommandReceiver.OnBountyTickRequestReceived += RoomGameModeManagerCommandReceiver_OnBountyTickRequestReceived;
         if (RoomManagerWriter.Data.RoomState == RoomState.STARTED)
         {
             StartRotation();
         }
     }
 
-    private void RoomGameModeManagerCommandReceiver_OnBountyTickRequestReceived(RoomGameModeManager.BountyTick.ReceivedRequest obj)
-    {
-
-        if (currentMode.GetType().IsSubclassOf(typeof(BountyGameMode)))
-        {
-            ((BountyGameMode)currentMode).BountyTick(obj.Payload.PlayerId);
-        }
-    }
 
     private void RoomGameModeManagerCommandReceiver_OnAddKillRequestReceived(RoomGameModeManager.AddKill.ReceivedRequest obj)
     {
 
         ServerRoomGameStatsMap.AddKill(obj.Payload.KillerId, obj.Payload.VictimId);
-        if (currentMode.GetType().IsSubclassOf(typeof(BountyGameMode)))
+        if (currentMode is IKillGameMode)
         {
-            ((BountyGameMode)currentMode).PlayerKill(obj.Payload.KillerId,obj.Payload.VictimId,obj.Payload.Coordinates.ToUnityVector());
+            (currentMode as IKillGameMode).PlayerKill(obj.Payload.KillerId,obj.Payload.VictimId,obj.Payload.Coordinates.ToUnityVector());
         }
     }
 
@@ -96,9 +93,9 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             sendCallback = false;
             RotationFinished?.Invoke();
         }
-        if (inGameMode)
+        if (currentMode is IUpdateGameMode)
         {
-            currentMode.GameModeUpdate(Time.deltaTime);
+            (currentMode as IUpdateGameMode).GameModeUpdate(Time.deltaTime);
         }
     }
     private async Task SafeGameMode()
@@ -166,7 +163,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             CurrentRound = RoundInfo
         });
         ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);*/
-        currentMode.ServerOnGameModeStart(this);
+        currentMode.ServerOnGameModeStart();
         var roundInfo = new RoundInfo(new GameModeInfo(currentGameModeInfo.GamemodeId, currentMode.name), new TimeInfo(DateTime.UtcNow.ToFileTime(), currentGameModeInfo.Duration));
         RoomGameModeManagerWriter.SendUpdate(new RoomGameModeManager.Update()
         {
@@ -188,7 +185,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         var gameModeInfo = GetCurrentRound();
         var gameMode = Instantiate(GameModeDictionary.Get(gameModeInfo.GamemodeId));
         var settings = await ServerServiceConnections.instance.BackendGameServerClient.GetGameModeSettings(gameMode.GameModeId);
-        gameMode.Initialize(settings, mapInfo, new GameModeFinancing() { totalSatAmount = subsidySats});
+        gameMode.Initialize(settings, mapInfo, new GameModeFinancing() { totalSatAmount = subsidySats}, ServerRoomGameStatsMap, BountyRoomSpawner, LinkedEntityComponent.Worker.Origin);
         currentMode = gameMode;
         currentGameModeInfo = gameModeInfo;
     }
@@ -202,7 +199,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         RoomGameModeManagerWriter.SendEndRoundEvent(new RoundInfo(new GameModeInfo("", gameModeInfo.GamemodeId), timeInfo));
 
         if(currentMode != null)
-            currentMode.ServerOnGameModeEnd(null);
+            currentMode.ServerOnGameModeEnd();
     }
     public void SendAdvertisers(Google.Protobuf.Collections.RepeatedField<Bbhrpc.AdvertiserInfo> advertiserInfos)
     {

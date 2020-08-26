@@ -40,6 +40,7 @@ public class BountyTickSystem : ComponentSystem
     //TODO für rooms überarbeiten
     protected override void OnUpdate()
     {
+        /*
         if (tickGroup.IsEmptyIgnoreFilter)
             return;
         Entities.With(tickGroup).ForEach((ref RoomPlayer.Component RoomPlayer, ref BountyTickComponent.Component bountyTick) =>
@@ -58,6 +59,7 @@ public class BountyTickSystem : ComponentSystem
                 });
             }
         });
+        */
         /*
         if (ServerGameModeBehaviour.instance == null)
             return;

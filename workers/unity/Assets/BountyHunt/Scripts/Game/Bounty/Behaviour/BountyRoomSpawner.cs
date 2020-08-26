@@ -5,13 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bountyhunt;
-public class BountyRoomSpawner : MonoBehaviour
+public class BountyRoomSpawner : MonoBehaviour, IBountyRoomSpawner
 {
 
     [Require] private WorldCommandSender WorldCommandSender;
     [Require] private RoomPlayerCommandSender RoomPlayerCommandSender;
     private SatsCubeSpawnPoint[] satsCubeSpawnPoints;
-     
+
     public bool SpawnTrigger;
     public long spawnAmount;
 
@@ -45,7 +45,7 @@ public class BountyRoomSpawner : MonoBehaviour
     {
         if (satAmount < 1)
             return;
-       
+
         var bountypickup = DonnerEntityTemplates.BountyPickup(position, satAmount);
         WorldCommandSender.SendCreateEntityCommand(new WorldCommands.CreateEntity.Request(bountypickup));
     }
@@ -56,7 +56,7 @@ public class BountyRoomSpawner : MonoBehaviour
             return;
         RoomPlayerCommandSender.SendGetPositionCommand(entity, new Bountyhunt.Empty(), (cb) =>
         {
-            if(cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
+            if (cb.StatusCode != Improbable.Worker.CInterop.StatusCode.Success)
             {
                 return;
             }

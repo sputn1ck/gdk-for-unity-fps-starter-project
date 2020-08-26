@@ -7,6 +7,12 @@ public class SatsCubeSpawnPoint : MonoBehaviour
     public float weighting = 1;
     public bool bountybossSpawn;
     public string bountybossName;
+
+    private Vector3 pos;
+    void Awake()
+    {
+        pos = transform.position;
+    }
     private void OnDrawGizmos()
     {
         Color c = Color.Lerp(Color.red, Color.green, weighting / 2);
@@ -16,5 +22,10 @@ public class SatsCubeSpawnPoint : MonoBehaviour
         Gizmos.color = c;
         Gizmos.DrawWireCube(new Vector3(0, 1, 0), new Vector3(0.5f, 0.5f, 0.5f));
 
+    }
+
+    public Vector3 GetPosition()
+    {
+        return pos;
     }
 }

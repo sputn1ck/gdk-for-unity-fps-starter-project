@@ -3,38 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using Bbhrpc;
 
-public abstract class GameMode : ScriptableObject
+public abstract class GameMode : ScriptableObject, IBaseGameMode
 {
     public string Name;
     public string GameModeId;
     public Sprite Icon;
     public GameModeSettings GameModeSettings;
-    public Map MapInfo;
+    public IBountySpawnPointer MapInfo;
     public GameModeFinancing Financing;
+    public IServerRoomGameStatsMap serverRoomGameStatsMap;
+    public IBountyRoomSpawner bountyRoomSpawner;
+    public Vector3 workerOrigin;
 
-    public void Initialize(GameModeSettings settings, Map mapInfo, GameModeFinancing financing)
+    public void Initialize(GameModeSettings settings, IBountySpawnPointer mapInfo, GameModeFinancing financing, IServerRoomGameStatsMap serverRoomGameStatsMap, IBountyRoomSpawner bountyRoomSpawner, Vector3 workerOrigin)
     {
         this.GameModeSettings = settings;
         this.MapInfo = mapInfo;
         this.Financing = financing;
-       
+        this.serverRoomGameStatsMap = serverRoomGameStatsMap;
+        this.bountyRoomSpawner = bountyRoomSpawner;
+        this.workerOrigin = workerOrigin;
     }
-    public abstract void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour);
-    public abstract void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour);
+    public abstract void ServerOnGameModeStart();
+    public abstract void ServerOnGameModeEnd();
 
-    public abstract void OnPlayerJoin(string playerId);
-
-    public abstract void OnPlayerLeave(string playerId);
-    public abstract void GameModeUpdate(float deltaTime);
 
 }
 
-public abstract class BountyGameMode : GameMode
-{ 
-    public abstract void PlayerKill(string killer, string victim, Vector3 position);
-
-    public abstract void BountyTick(string player);
+public interface IBaseGameMode
+{
+    void ServerOnGameModeStart();
+    void ServerOnGameModeEnd();
+    
 }
+
+public interface IPlayerJoinLeaveEvents
+{
+    void OnPlayerJoin(string playerId);
+
+    void OnPlayerLeave(string playerId);
+}
+
+public interface IUpdateGameMode
+{
+    void GameModeUpdate(float deltaTime);
+}
+
+public interface IKillGameMode
+{
+    void PlayerKill(string killer, string victim, Vector3 position);
+}
+
 
 public struct GameModeFinancing
 {

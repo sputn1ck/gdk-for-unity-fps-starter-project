@@ -123,17 +123,16 @@ public class RoomManagerServerBehaviour : MonoBehaviour
             }
         });
         RoomManagerCommandReceiver.SendReadyToJoinResponse(obj.RequestId, new Bountyhunt.Empty());
-        if(ServerRoomGameModeBehaviour.currentMode != null)
+        if(ServerRoomGameModeBehaviour.currentMode != null && ServerRoomGameModeBehaviour.currentMode is IPlayerJoinLeaveEvents)
         {
-            ServerRoomGameModeBehaviour.currentMode.OnPlayerJoin(obj.Payload.PlayerPubkey);
+            (ServerRoomGameModeBehaviour.currentMode as IPlayerJoinLeaveEvents).OnPlayerJoin(obj.Payload.PlayerPubkey);
         }
 
     }
 
     private void RemovePlayer(RoomManager.RemovePlayer.ReceivedRequest obj)
-    { 
-
-        ServerRoomGameModeBehaviour.currentMode.OnPlayerLeave(obj.Payload.PlayerPk);
+    {
+        (ServerRoomGameModeBehaviour.currentMode as IPlayerJoinLeaveEvents).OnPlayerLeave(obj.Payload.PlayerPk);
         statsMap.RemovePlayer(obj.Payload.PlayerPk);
         var room = RoomManagerWriter.Data.RoomInfo;
         if(room.PlayerInfo.ActivePlayers.Remove(obj.Payload.PlayerPk))

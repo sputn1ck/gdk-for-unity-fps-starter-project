@@ -72,12 +72,12 @@ public class BBHGameLogicWorkerConnector : DonnerWorkerConnectorBase
         //world.GetOrCreateSystem<ServerBountyCleanupSystem>();
         //world.GetOrCreateSystem<ServerPlayerDisconnectSystem>();
 
-        world.GetOrCreateSystem<BountyTickSystem>();
-        world.GetOrCreateSystem<BountyConversionSystem>();
+        //world.GetOrCreateSystem<BountyTickSystem>();
+        //world.GetOrCreateSystem<BountyConversionSystem>();
         world.GetOrCreateSystem<BountyKillSystem>();
        //world.GetOrCreateSystem<ServerScoreboardSystem>();
         world.GetOrCreateSystem<ServerDisconnectSystem>();
-        world.GetOrCreateSystem<ServerGameModeSystem>();
+        //world.GetOrCreateSystem<ServerGameModeSystem>();
 
         base.HandleWorkerConnectionEstablished();
     }

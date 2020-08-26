@@ -4,7 +4,8 @@ using UnityEngine;
 using Bountyhunt;
 using Improbable.Gdk.Subscriptions;
 
-public class ServerRoomGameStatsMap : MonoBehaviour
+
+public class ServerRoomGameStatsMap : MonoBehaviour, IServerRoomGameStatsMap
 {
     [Require] RoomStatsManagerWriter RoomStatsWriter;
     [Require] RoomStatsManagerCommandReceiver RoomStatsCommandReceiver;
@@ -64,7 +65,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         playerStats = new Dictionary<string, PlayerStats>();
         foreach (var player in room.PlayerInfo.ActivePlayers)
         {
-            playerStats.Add(player.Key, new PlayerStats(0, 0, 0, 0, false,0));
+            playerStats.Add(player.Key, new PlayerStats(0, 0, 0, 0, false, 0));
         }
         RoomStatsWriter.SendMapUpdateEvent(new PlayerStatsUpdate(playerStats, new List<string>(), true));
     }
@@ -72,7 +73,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
     public void Reset()
     {
         var newMap = new Dictionary<string, PlayerStats>();
-        foreach(var player in playerStats)
+        foreach (var player in playerStats)
         {
             newMap.Add(player.Key, new PlayerStats(0, 0, 0, 0, player.Value.Active, 0));
         }
@@ -83,7 +84,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
     public void AddKill(string killerId, string victimId)
     {
         var map = new Dictionary<string, PlayerStats>();
-        if(playerStats.TryGetValue(killerId, out var killerStats))
+        if (playerStats.TryGetValue(killerId, out var killerStats))
         {
             killerStats.Kills++;
             map[killerId] = killerStats;
@@ -119,7 +120,7 @@ public class ServerRoomGameStatsMap : MonoBehaviour
         }
         else
         {
-            map.Add(pubkey, new PlayerStats(0, 0, 0, 0, true,0));
+            map.Add(pubkey, new PlayerStats(0, 0, 0, 0, true, 0));
         }
         UpdateDictionary(map);
     }
@@ -134,7 +135,11 @@ public class ServerRoomGameStatsMap : MonoBehaviour
 
             UpdateDictionary(map);
         }
-        
+
+    }
+    public Dictionary<string, PlayerStats> GetPlayerDictionary()
+    {
+        return playerStats;
     }
     public void UpdateDictionary(Dictionary<string, PlayerStats> newMap)
     {

@@ -148,9 +148,9 @@ public class RoomPlayerServerBehaviour : MonoBehaviour
         var serverQuery = InterestQuery.Query(Constraint.Any(Constraint.RelativeCylinder(1),Constraint.Box(map.Settings.DimensionX, 200, map.Settings.DimensionZ, Coordinates.FromUnityVector(Utility.Vector3FloatToVector3(roomInfo.Info.Origin)))));
         var worldManager = InterestQuery.Query(Constraint.Component(Bountyhunt.WorldManager.ComponentId));
         var roomManager = InterestQuery.Query(Constraint.All(Constraint.Component(Bountyhunt.RoomManager.ComponentId), roomConstraint));
-        var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
+        //var gameManagerQuery = InterestQuery.Query(Constraint.Component(GameStats.ComponentId));
         var bountyTracerQuery = InterestQuery.Query(Constraint.All(Constraint.Component(TracerComponent.ComponentId), roomConstraint));
-        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverQuery).AddQueries<ClientMovement.Component>(checkoutQuery, bountyTracerQuery, worldManager,roomManager, gameManagerQuery);
+        var interestTemplate = InterestTemplate.Create().AddQueries<Position.Component>(serverQuery).AddQueries<ClientMovement.Component>(checkoutQuery, bountyTracerQuery, worldManager,roomManager);
         return interestTemplate;
     }
 

@@ -8,16 +8,15 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "BountyBossGameMode", menuName = "BBH/GameModes/BountyBoss", order = 3)]
-public class BountyBossGameMode : BountyGameMode
+public class BountyBossGameMode : GameMode
 {
 
     private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
     private string bountyBossId;
-    public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeStart()
     {
 
 
-        _serverGameModeBehaviour = serverGameModeBehaviour;
         // setting subsidy + resetting carryover sats
         /*
         var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
@@ -47,31 +46,8 @@ public class BountyBossGameMode : BountyGameMode
     }
 
 
-    public override void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour)
+    public override void ServerOnGameModeEnd()
     {
     }
 
-    public override void PlayerKill(string killer, string victim, Vector3 position)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void BountyTick(string player)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void GameModeUpdate(float deltaTime)
-    {
-    }
-
-    public override void OnPlayerJoin(string playerId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void OnPlayerLeave(string playerId)
-    {
-        throw new NotImplementedException();
-    }
 }

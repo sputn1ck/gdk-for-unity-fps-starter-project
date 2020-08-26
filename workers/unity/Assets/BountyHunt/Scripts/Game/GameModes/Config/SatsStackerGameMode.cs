@@ -11,70 +11,101 @@ using Fps.Respawning;
 using Bbhrpc;
 
 [CreateAssetMenu(fileName = "SatsStackerGameMode", menuName = "BBH/GameModes/SatsStacker", order = 2)]
-public class SatsStackerGameMode : BountyGameMode
+public class SatsStackerGameMode : GameMode, IKillGameMode, IUpdateGameMode, IPlayerJoinLeaveEvents
 {
-    private ServerRoomGameModeBehaviour _serverGameModeBehaviour;
-    private BountyRoomSpawner BountyRoomSpawner;
-    private ServerRoomGameStatsMap ServerRoomGameStatsMap;
-    private BountyTickComponentCommandSender BountyTickCommandSender;
+    // player ticks
+    private float timeSinceLastTick;
+
+    // bounty spawn ticks
     private float timeSinceLastSpawn;
-  
     private int currentTick;
     private long[] tickInfos;
-    public override void ServerOnGameModeStart(ServerRoomGameModeBehaviour serverGameModeBehaviour)
+
+    #region GameModeBase
+    public override void ServerOnGameModeStart()
     {
         Debug.Log("satsstacker started");
         
         // TODO implement bounty spawning
-        _serverGameModeBehaviour = serverGameModeBehaviour;
-        BountyTickCommandSender = _serverGameModeBehaviour.BountyTickComponentCommandSender;
-        BountyRoomSpawner = _serverGameModeBehaviour.gameObject.GetComponent<BountyRoomSpawner>();
-        ServerRoomGameStatsMap = _serverGameModeBehaviour.gameObject.GetComponent<ServerRoomGameStatsMap>();
-        BountyRoomSpawner.Setup(MapInfo.GetBountySpawnPoints());
-        timeSinceLastSpawn = 0;
+        bountyRoomSpawner.Setup(MapInfo.GetBountySpawnPoints());
+        
 
 
         var totalTicks = Mathf.FloorToInt(GameModeSettings.SecondDuration / GameModeSettings.SpawnSettings.TimeBetweenSpawns);
-
         tickInfos = GetSatDistribution(totalTicks, Financing.totalSatAmount, Distribution.UNIFORM);
         currentTick = 0;
+        timeSinceLastSpawn = 0;
         SpawnTick();
-
-        foreach (var player in serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers)
-        {
-            BountyTickCommandSender.SendSetTickIntervalCommand(player.Value, new TickIntervalRequest(true, GameModeSettings.BountySettings.BountyTickTimeSeconds));
-        }
-
-        /*
-        var totalSats = subsidy + serverGameModeBehaviour.GameStatsWriter.Data.CarryoverSats;
-        serverGameModeBehaviour.GameStatsWriter.SendUpdate(new GameStats.Update()
-        {
-            CarryoverSats = 0
-        });
-        
-        serverGameModeBehaviour.BountySpawnerCommandSender.SendStartSpawningCommand(new EntityId(2), new Bountyhunt.StartSpawningRequest()
-        {
-            TotalDuration = GameModeSettings.SecondDuration,
-            TimeBetweenTicks = GameModeSettings.SpawnSettings.TimeBetweenSpawns,
-            MinSpawns = GameModeSettings.SpawnSettings.MinSpawnsPerSpawn,
-            MaxSpawns = GameModeSettings.SpawnSettings.MaxSpawnsPerSpawn,
-            TotalBounty = totalSats,
-            Distribution = (Distribution)GameModeSettings.SpawnSettings.Distribution
-        });*/
-        //ServerEvents.instance.OnRandomInvoicePaid.AddListener(OnDonationPaid);
 
     }
 
-    public override void GameModeUpdate(float deltaTime)
+    public override void ServerOnGameModeEnd()
+    {
+
+        Debug.Log("end bbh");
+    }
+
+
+    #endregion
+    #region PlayerJoinLeave
+    public void OnPlayerJoin(string playerId)
+    {
+       
+    }
+
+    public void OnPlayerLeave(string playerId)
+    {
+        //var player = _serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers[playerId];
+        //BountyTickCommandSender.SendSetTickIntervalCommand(player, new TickIntervalRequest(false,0));
+
+        var playerStats = serverRoomGameStatsMap.GetStats(playerId);
+        if (playerStats.Bounty > 0)
+        {
+            Debug.Log("spawning cube at random position");
+            SpawnPickupAtRandomPosition(playerStats.Bounty);
+            serverRoomGameStatsMap.SetBounty(playerId, 0);
+
+        }
+    }
+    #endregion
+    #region KillGameMode
+    public void PlayerKill(string killer, string victim, Vector3 position)
+    {
+        DropBountyAtPlayer(victim, position, GameModeSettings.BountySettings.BountyDropPercentageDeath);
+    }
+    public void DropBountyAtPlayer(string playerId, Vector3 position, double dropPercentage)
+    {
+        var playerStats = serverRoomGameStatsMap.GetStats(playerId);
+
+        // spawn bountycube if victim has bounty
+        if (playerStats.Bounty > 0)
+        {
+            var res = Utility.GetBountyDropInfo(playerStats.Bounty, dropPercentage);
+            bountyRoomSpawner.SpawnCube(position, res.dropBounty);
+            serverRoomGameStatsMap.SetBounty(playerId, res.newBounty);
+        }
+    }
+    #endregion
+    #region UpdateGameMode
+    public void GameModeUpdate(float deltaTime)
     {
         timeSinceLastSpawn += deltaTime;
-        if(timeSinceLastSpawn >= GameModeSettings.SpawnSettings.TimeBetweenSpawns)
+        if (timeSinceLastSpawn >= GameModeSettings.SpawnSettings.TimeBetweenSpawns)
         {
             timeSinceLastSpawn = 0;
             SpawnTick();
         }
+        timeSinceLastTick += deltaTime;
+        if (timeSinceLastTick >= GameModeSettings.BountySettings.BountyTickTimeSeconds)
+        {
+            timeSinceLastTick = 0;
+            bountyTick();
+        }
     }
 
+
+    #endregion
+    #region CubeSpawning
     private void SpawnTick()
     {
         if(currentTick >= tickInfos.Length)
@@ -117,7 +148,7 @@ public class SatsStackerGameMode : BountyGameMode
         var pos = getRandomPosition();
 
         //pos.y = pos.y + 1f;
-        BountyRoomSpawner.SpawnCube(pos, sats);
+        bountyRoomSpawner.SpawnCube(pos, sats);
 
     }
 
@@ -126,7 +157,7 @@ public class SatsStackerGameMode : BountyGameMode
         var satsCubeSpawnPoints = MapInfo.GetBountySpawnPoints();
         var spawnIndex = UnityEngine.Random.Range(0, satsCubeSpawnPoints.Length);
 
-        var pos = satsCubeSpawnPoints[spawnIndex].transform.position - _serverGameModeBehaviour.LinkedEntityComponent.Worker.Origin;
+        var pos = satsCubeSpawnPoints[spawnIndex].GetPosition() - workerOrigin;
         return pos;
     }
     private long[] GetSatDistribution(int totalTicks, long totalSats, Distribution distribution)
@@ -149,73 +180,34 @@ public class SatsStackerGameMode : BountyGameMode
         }
         return tickInfo;
     }
-    public override void ServerOnGameModeEnd(ServerRoomGameModeBehaviour serverGameModeBehaviour)
+    #endregion
+    #region BountyTick
+    private void bountyTick()
     {
-        foreach(var player in serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers)
+        var playerDict = serverRoomGameStatsMap.GetPlayerDictionary();
+        var tmpDict = new Dictionary<string, Bountyhunt.PlayerStats>(playerDict.Count, playerDict.Comparer);
+        foreach (var player in playerDict)
         {
-            BountyTickCommandSender.SendSetTickIntervalCommand(player.Value, new TickIntervalRequest(false, 0));
-            bountyTick(player.Key, 1);
+            if (!player.Value.Active && player.Value.Bounty > 0)
+                continue;
+            var pStats = player.Value;
+            var tick = Utility.BountyTick(player.Value.Bounty, GameModeSettings.BountySettings.BountyTickConversion);
+            pStats.Bounty -= tick;
+            pStats.SessionEarnings += tick;
+            pStats.Score += tick;
+            tmpDict[player.Key] = pStats;
         }
-        Debug.Log("end bbh");
+        serverRoomGameStatsMap.UpdateDictionary(tmpDict);
     }
+    #endregion
 
-    public override void PlayerKill(string killer, string victim, Vector3 position)
-    {
-        DropBountyAtPlayer(victim, position, GameModeSettings.BountySettings.BountyDropPercentageDeath);
-    }
+    
 
-    public void DropBountyAtPlayer(string playerId, Vector3 position, double dropPercentage)
-    {
-        var playerStats = ServerRoomGameStatsMap.GetStats(playerId);
 
-        var player = _serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers[playerId];
-        // spawn bountycube if victim has bounty
-        if (playerStats.Bounty > 0)
-        {
-            var res = Utility.GetBountyDropInfo(playerStats.Bounty, dropPercentage);
-            BountyRoomSpawner.SpawnCube(position, res.dropBounty);
-            ServerRoomGameStatsMap.SetBounty(playerId, res.newBounty);
-        }
-    }
 
-    public override void BountyTick(string player)
-    {
-        bountyTick(player, GameModeSettings.BountySettings.BountyTickConversion);
-    }
+    
 
-    private void bountyTick(string player, double tickpercentage)
-    {
-        var playerStats = ServerRoomGameStatsMap.GetStats(player);
-
-        if (playerStats.Bounty > 0)
-        {
-            var tick = Utility.BountyTick(playerStats.Bounty, tickpercentage);
-            ServerRoomGameStatsMap.SetBounty(player, playerStats.Bounty - tick);
-            ServerRoomGameStatsMap.AddEarnings(player, tick);
-            ServerRoomGameStatsMap.AddScore(player, tick);
-        }
-    }
-
-    public override void OnPlayerJoin(string playerId)
-    {
-        var player = _serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers[playerId];
-        BountyTickCommandSender.SendSetTickIntervalCommand(player, new TickIntervalRequest(true, GameModeSettings.BountySettings.BountyTickTimeSeconds));
-    }
-
-    public override void OnPlayerLeave(string playerId)
-    {
-        //var player = _serverGameModeBehaviour.RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers[playerId];
-        //BountyTickCommandSender.SendSetTickIntervalCommand(player, new TickIntervalRequest(false,0));
-
-        var playerStats = ServerRoomGameStatsMap.GetStats(playerId);
-        if(playerStats.Bounty > 0)
-        {
-                Debug.Log("spawning cube at random position");
-                SpawnPickupAtRandomPosition(playerStats.Bounty);
-                ServerRoomGameStatsMap.SetBounty(playerId, 0);
-            
-        }
-    }
+    
 }
 
 [Serializable]
