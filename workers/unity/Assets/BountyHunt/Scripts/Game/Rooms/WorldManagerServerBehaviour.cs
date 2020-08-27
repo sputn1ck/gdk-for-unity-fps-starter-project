@@ -217,8 +217,8 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         {
             var rotation = new List<ModeRotationItem>()
            {
-               new ModeRotationItem("lobby", Utility.SecondsToNano(5)),
-               new ModeRotationItem("satsstacker",Utility.SecondsToNano(240))
+               new ModeRotationItem("lobby", Utility.SecondsToNano(2)),
+               new ModeRotationItem("satsstacker",Utility.SecondsToNano(2))
            };
             startGenerated = false;
             var startTime = System.DateTime.UtcNow.AddSeconds(10).ToFileTimeUtc();
@@ -309,7 +309,7 @@ public class WorldManagerServerBehaviour : MonoBehaviour
         var room = new Room()
         {
             Info = new RoomBaseInfo(id, req.MapInfo, new EntityId(), Utility.Vector3ToVector3Float(roomCenter), req.StartTime),
-            GameModeInfo = new RoomGameModeInfo(req.ModeRotation, req.Repetitions, 0),
+            GameModeInfo = new RoomGameModeInfo(req.ModeRotation, req.Repetitions, 0,0),
             PlayerInfo = new RoomPlayerInfo(new Dictionary<string,EntityId>(), new Dictionary<string, EntityId>(), req.MaxPlayers),
             FinanceInfo = financeInfo
         };

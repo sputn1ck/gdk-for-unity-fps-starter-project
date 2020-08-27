@@ -61,6 +61,7 @@ type RoomGameModeInfo {
     list<ModeRotationItem> mode_rotation = 1;
     int32 repetitions = 2;
     int32 current_mode = 3;
+    int64 current_mode_start = 4;
 }
 
 type RoomPlayerInfo {

@@ -24,6 +24,7 @@ public class RoomManagerServerBehaviour : MonoBehaviour
     private ServerRoomGameModeBehaviour ServerRoomGameModeBehaviour;
     private ServerRoomGameStatsMap statsMap;
     private UnityAction RotationEnded;
+
     private void OnEnable()
     {
 
@@ -139,7 +140,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         statsMap.RemovePlayer(obj.Payload.PlayerPk);
         var room = RoomManagerWriter.Data.RoomInfo;
         if(room.PlayerInfo.ActivePlayers.Remove(obj.Payload.PlayerPk))
+        {
             SendUpdates(room);
+        }
     }
 
     private void AddPlayer(RoomManager.AddPlayer.ReceivedRequest obj)
@@ -154,8 +157,9 @@ public class RoomManagerServerBehaviour : MonoBehaviour
         RoomPlayerCommandSender.SendUpdatePlayerRoomCommand(obj.Payload.PlayerId, new UpdatePlayerRoomRequest(room));
     }
    
-    private void SendUpdates(Room room)
+    public void SendUpdates(Room room)
     {
+        Debug.Log("Send updates called");
         RoomManagerWriter.SendUpdate(new RoomManager.Update()
         {
             RoomInfo = room

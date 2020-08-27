@@ -30,6 +30,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private bool sendCallback;
     private bool rotationStarted = false;
     private BountyRoomSpawner BountyRoomSpawner;
+    private RoomManagerServerBehaviour RoomManagerServerBehaviour;
     
 
     private bool inGameMode;
@@ -40,6 +41,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         LinkedEntityComponent = GetComponent<LinkedEntityComponent>();
         ServerRoomGameStatsMap = GetComponent<ServerRoomGameStatsMap>();
         BountyRoomSpawner = GetComponent<BountyRoomSpawner>();
+        RoomManagerServerBehaviour = GetComponent<RoomManagerServerBehaviour>();
     }
     private void OnEnable()
     {
@@ -96,6 +98,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         if (currentMode is IUpdateGameMode)
         {
             (currentMode as IUpdateGameMode).GameModeUpdate(Time.deltaTime);
+            
         }
     }
     private async Task SafeGameMode()
@@ -118,8 +121,11 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private async Task gameModeRoutine()
     {
         Debug.Log("gamemode routine starting");
+        await GetNextGameMode();
+        StartGameMode();
         while (!ServerServiceConnections.ct.IsCancellationRequested)
         {
+            
             if (gameModeHasEnded(DateTime.UtcNow.ToFileTime()))
             {
                 // ends game mode
@@ -133,8 +139,8 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
                     return;
                 }
                 await GetNextGameMode();
-                RoomGameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(currentGameModeInfo.GamemodeId, 5, currentMode.Name));
-                await Task.Delay(5000);
+                //RoomGameModeManagerWriter.SendStartCountdownEvent(new CoundDownInfo(currentGameModeInfo.GamemodeId, 5, currentMode.Name));
+                //await Task.Delay(5000);
                 StartGameMode();
 
             }
@@ -147,22 +153,6 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
     private void StartGameMode()
     {
         Debug.LogFormat("starting gamemode {0} ",currentGameModeInfo.GamemodeId, RoomManagerWriter.Data.RoomInfo.GameModeInfo.CurrentMode);
-        /*
-        currentGameMode.ServerOnGameModeStart(this, currentRoundInfo.Settings, currentRoundInfo.Subsidy);
-        var RoundInfo = new RoundInfo()
-        {
-            GameModeInfo = new GameModeInfo(currentRoundInfo.GameModeId, nextRoundInfo.GameModeName),
-            TimeInfo = new TimeInfo()
-            {
-                StartTime = DateTime.UtcNow.ToFileTime(),
-                Duration = currentRoundInfo.Settings.SecondDuration * 10000000,
-            }
-        };
-        GameModeManagerWriter.SendUpdate(new GameModeManager.Update()
-        {
-            CurrentRound = RoundInfo
-        });
-        ServerGameChat.instance.SendGlobalMessage("server", currentRoundInfo.GameModeName + " has started", MessageType.INFO_LOG);*/
         currentMode.ServerOnGameModeStart();
         var roundInfo = new RoundInfo(new GameModeInfo(currentGameModeInfo.GamemodeId, currentMode.name), new TimeInfo(DateTime.UtcNow.ToFileTime(), currentGameModeInfo.Duration));
         RoomGameModeManagerWriter.SendUpdate(new RoomGameModeManager.Update()
@@ -171,6 +161,9 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         });
         RoomGameModeManagerWriter.SendNewRoundEvent(roundInfo);
         inGameMode = true;
+        var room = RoomManagerWriter.Data.RoomInfo;
+        room.GameModeInfo.CurrentModeStart = DateTime.UtcNow.ToFileTimeUtc();
+        RoomManagerServerBehaviour.SendUpdates(room);
     }
     private async Task GetNextGameMode()
     {
@@ -181,7 +174,7 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
             var advertisers = await ServerServiceConnections.instance.BackendGameServerClient.GetAdvertisers(RoomManagerWriter.Data.RoomInfo.PlayerInfo.ActivePlayers.Count,0);
             SendAdvertisers(advertisers.Advertisers);
             subsidySats = advertisers.Subsidy;
-        } 
+        }
         var gameModeInfo = GetCurrentRound();
         var gameMode = Instantiate(GameModeDictionary.Get(gameModeInfo.GamemodeId));
         var settings = await ServerServiceConnections.instance.BackendGameServerClient.GetGameModeSettings(gameMode.GameModeId);
@@ -240,16 +233,10 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
 
     private ModeRotationItem GetCurrentRound()
     {
-        // Get Room Index
         var roomInfo = RoomManagerWriter.Data.RoomInfo.GameModeInfo;
-        int roomIndex;
-
-        roomIndex = roomInfo.CurrentMode % roomInfo.ModeRotation.Count;
-
-
-
-        return roomInfo.ModeRotation[roomIndex];
+        return Utility.GetCurrentRound(roomInfo.ModeRotation, roomInfo.CurrentMode);
     }
+
 
     private bool roationHasFinished()
     {
@@ -257,30 +244,15 @@ public class ServerRoomGameModeBehaviour : MonoBehaviour
         {
             return false;
         }
+
         var roomInfo = RoomManagerWriter.Data.RoomInfo.GameModeInfo;
-        var totalGameModes = roomInfo.ModeRotation.Count * roomInfo.Repetitions;
-        if(roomInfo.CurrentMode > totalGameModes)
-        {
-            return true;
-        }
-        Debug.LogFormat("Checkinf if room should end: totalGameModes: {0} currentMode: {1}, result: {2}",totalGameModes, roomInfo.CurrentMode, roomInfo.CurrentMode >= totalGameModes);
-        return false;
+        return Utility.roationHasFinished(roomInfo.ModeRotation, roomInfo.Repetitions, roomInfo.CurrentMode);
     }
     private void UpdateModeCounter()
     {
         var room = RoomManagerWriter.Data.RoomInfo;
         room.GameModeInfo.CurrentMode++;
-        SendUpdates(room);
+        RoomManagerServerBehaviour.SendUpdates(room);
     }
-    private void SendUpdates(Room room)
-    {
-        RoomManagerWriter.SendUpdate(new RoomManager.Update()
-        {
-            RoomInfo = room
-        });
-        WorldManagerCommandSender.SendUpdateRoomCommand(new EntityId(3), new UpdateRoomRequest()
-        {
-            Room = room
-        });
-    }
+    
 }

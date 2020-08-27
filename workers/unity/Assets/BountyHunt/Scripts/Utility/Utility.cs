@@ -293,4 +293,22 @@ public static class Utility
         var dropAmount = (long)Mathf.Ceil((float)(playerBounty * dropPercentage));
         return (playerBounty - dropAmount, dropAmount);
     }
+    public static ModeRotationItem GetCurrentRound(List<ModeRotationItem> modeRotationItems, int index)
+    {
+        // Get Room Index
+        int roomIndex;
+
+        roomIndex = index % modeRotationItems.Count;
+
+        return modeRotationItems[roomIndex];
+    }
+    public static bool roationHasFinished(List<ModeRotationItem> modeRotationItems, int repetitions, int index)
+    {
+        var totalGameModes = modeRotationItems.Count * repetitions;
+        if (index >= totalGameModes)
+        {
+            return true;
+        }
+        return false;
+    }
 }
