@@ -132,7 +132,10 @@ public class RoomManagerServerBehaviour : MonoBehaviour
 
     private void RemovePlayer(RoomManager.RemovePlayer.ReceivedRequest obj)
     {
-        (ServerRoomGameModeBehaviour.currentMode as IPlayerJoinLeaveEvents).OnPlayerLeave(obj.Payload.PlayerPk);
+        if(ServerRoomGameModeBehaviour.currentMode != null && ServerRoomGameModeBehaviour.currentMode is IPlayerJoinLeaveEvents)
+        {
+            (ServerRoomGameModeBehaviour.currentMode as IPlayerJoinLeaveEvents).OnPlayerLeave(obj.Payload.PlayerPk);
+        }
         statsMap.RemovePlayer(obj.Payload.PlayerPk);
         var room = RoomManagerWriter.Data.RoomInfo;
         if(room.PlayerInfo.ActivePlayers.Remove(obj.Payload.PlayerPk))

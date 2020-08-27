@@ -1,4 +1,4 @@
-﻿public interface IBountySpawnPointer
+public interface IMapBountySpawnPointer
 {
     SatsCubeSpawnPoint[] GetBountySpawnPoints();
 }

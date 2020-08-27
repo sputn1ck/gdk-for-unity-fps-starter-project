@@ -15,31 +15,45 @@ namespace Tests
         [Test]
         public void SatsStackerIntegrationTest()
         {
-
             // Setup
             var spawnPoints = new EmptySpawnPoints();
             var spawner = new EmptySpawner();
             var statMap = new TestGameStatsMap();
             var ss = new SatsStackerGameMode();
+
             ss.Initialize(GetDefaultSettings(), spawnPoints, GetFinancing(), statMap, spawner, new Vector3(0, 0, 0));
+            ss.ServerOnGameModeStart();
 
             // add player and bounty
             var p1 = "p1";
-            ss.ServerOnGameModeStart();
-
-
             statMap.AddPlayer(p1);
             statMap.AddBounty(p1, 100);
+
+            var alreadySpawned = spawner.cubesSpawned;
+            ss.PlayerKill(p1, p1, new Vector3(0, 0, 0));
+            Assert.AreEqual(alreadySpawned + 1,spawner.cubesSpawned);
+            var newStats = statMap.GetStats(p1);
+            Assert.AreEqual(0, newStats.Bounty);
+
+
+            statMap.AddBounty(p1, 100);
+
+            //Wait for 15 seconds
             ss.GameModeUpdate(15);
 
-            var newStats = statMap.GetStats(p1);
+            // We expect ticks here
+            newStats = statMap.GetStats(p1);
             Assert.AreEqual(95, newStats.Bounty);
             Assert.AreEqual(5, newStats.SessionEarnings);
 
+            //Wait for 20 seconds
             ss.GameModeUpdate(20);
-            Assert.GreaterOrEqual(spawner.cubesSpawned, 1);
+
+            //We expect a minimum of 2 cubes spawnned
+            Assert.GreaterOrEqual(spawner.cubesSpawned, 2);
 
         }
+        
 
 
         
@@ -81,7 +95,7 @@ namespace Tests
                 cubesSpawned++;
             }
         }
-        internal class EmptySpawnPoints : IBountySpawnPointer
+        internal class EmptySpawnPoints : IMapBountySpawnPointer
         {
             public SatsCubeSpawnPoint[] GetBountySpawnPoints()
             {

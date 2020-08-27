@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Map : ScriptableObject, IBountySpawnPointer
+public abstract class Map : ScriptableObject, IMapBountySpawnPointer
 {
     public string MapId;
     public EntityId EntityId;

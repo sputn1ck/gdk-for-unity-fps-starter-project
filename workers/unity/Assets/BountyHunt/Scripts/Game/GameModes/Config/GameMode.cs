@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bbhrpc;
+using UnityEngine.Events;
 
 public abstract class GameMode : ScriptableObject, IBaseGameMode
 {
@@ -9,13 +10,13 @@ public abstract class GameMode : ScriptableObject, IBaseGameMode
     public string GameModeId;
     public Sprite Icon;
     public GameModeSettings GameModeSettings;
-    public IBountySpawnPointer MapInfo;
+    public IMapBountySpawnPointer MapInfo;
     public GameModeFinancing Financing;
     public IServerRoomGameStatsMap serverRoomGameStatsMap;
     public IBountyRoomSpawner bountyRoomSpawner;
     public Vector3 workerOrigin;
 
-    public void Initialize(GameModeSettings settings, IBountySpawnPointer mapInfo, GameModeFinancing financing, IServerRoomGameStatsMap serverRoomGameStatsMap, IBountyRoomSpawner bountyRoomSpawner, Vector3 workerOrigin)
+    public void Initialize(GameModeSettings settings, IMapBountySpawnPointer mapInfo, GameModeFinancing financing, IServerRoomGameStatsMap serverRoomGameStatsMap, IBountyRoomSpawner bountyRoomSpawner, Vector3 workerOrigin)
     {
         this.GameModeSettings = settings;
         this.MapInfo = mapInfo;
